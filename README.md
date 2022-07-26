@@ -52,7 +52,7 @@ From the templated repository:
    This will do the following:
    - rename folders in `provider/cmd` to `pulumi-resource-foo` and `pulumi-tfgen-foo`
    - replace dependencies in `provider/go.mod` to reflect your repository name
-   - find and replace all instances of the boilerplate `xyz` with the `NAME` of your provider.
+   - find and replace all instances of the boilerplate `tencentcloud` with the `NAME` of your provider.
 
    Note for third-party providers:
    - Make sure to set the correct GitHub organization/username in all files referencing your provider as a dependency:
