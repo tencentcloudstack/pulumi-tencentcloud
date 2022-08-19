@@ -4,6 +4,33 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a VPN gateway route.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const route = new tencentcloud.Vpn.GatewayRoute("route", {
+ *     destinationCidrBlock: "10.0.0.0/16",
+ *     instanceId: "vpnx-5b5dmao3",
+ *     instanceType: "VPNCONN",
+ *     priority: 100,
+ *     status: "DISABLE",
+ *     vpnGatewayId: "vpngw-ak9sjem2",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * VPN gateway route can be imported using the id, the id format must be '{vpn_gateway_id}#{route_id}', e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Vpn/gatewayRoute:GatewayRoute route1 vpngw-ak9sjem2#vpngw-8ccsnclt
+ * ```
+ */
 export class GatewayRoute extends pulumi.CustomResource {
     /**
      * Get an existing GatewayRoute resource's state with the given name, ID, and optional extra

@@ -241,7 +241,71 @@ class Role(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a Role resource with the given unique name, props, and options.
+        Provides a resource to create a CAM role.
+
+        ## Example Usage
+
+        Create normally
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.Role("foo",
+            console_login=True,
+            description="test",
+            document=\"\"\"{
+          "version": "2.0",
+          "statement": [
+            {
+              "action": ["name/sts:AssumeRole"],
+              "effect": "allow",
+              "principal": {
+                "qcs": ["qcs::cam::uin/<your-account-id>:uin/<your-account-id>"]
+              }
+            }
+          ]
+        }
+
+        \"\"\",
+            tags={
+                "test": "tf-cam-role",
+            })
+        ```
+
+        Create with SAML provider
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        boo = tencentcloud.cam.Role("boo",
+            console_login=True,
+            description="test",
+            document=\"\"\"{
+          "version": "2.0",
+          "statement": [
+            {
+              "action": ["name/sts:AssumeRole", "name/sts:AssumeRoleWithWebIdentity"],
+              "effect": "allow",
+              "principal": {
+                "federated": ["qcs::cam::uin/<your-account-id>:saml-provider/<your-name>"]
+              }
+            }
+          ]
+        }
+
+        \"\"\")
+        ```
+
+        ## Import
+
+        CAM role can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/role:Role foo 4611686018427733635
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] console_login: Indicates whether the CAM role can login or not.
@@ -260,7 +324,71 @@ class Role(pulumi.CustomResource):
                  args: RoleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Role resource with the given unique name, props, and options.
+        Provides a resource to create a CAM role.
+
+        ## Example Usage
+
+        Create normally
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.Role("foo",
+            console_login=True,
+            description="test",
+            document=\"\"\"{
+          "version": "2.0",
+          "statement": [
+            {
+              "action": ["name/sts:AssumeRole"],
+              "effect": "allow",
+              "principal": {
+                "qcs": ["qcs::cam::uin/<your-account-id>:uin/<your-account-id>"]
+              }
+            }
+          ]
+        }
+
+        \"\"\",
+            tags={
+                "test": "tf-cam-role",
+            })
+        ```
+
+        Create with SAML provider
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        boo = tencentcloud.cam.Role("boo",
+            console_login=True,
+            description="test",
+            document=\"\"\"{
+          "version": "2.0",
+          "statement": [
+            {
+              "action": ["name/sts:AssumeRole", "name/sts:AssumeRoleWithWebIdentity"],
+              "effect": "allow",
+              "principal": {
+                "federated": ["qcs::cam::uin/<your-account-id>:saml-provider/<your-name>"]
+              }
+            }
+          ]
+        }
+
+        \"\"\")
+        ```
+
+        ## Import
+
+        CAM role can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/role:Role foo 4611686018427733635
+        ```
+
         :param str resource_name: The name of the resource.
         :param RoleArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

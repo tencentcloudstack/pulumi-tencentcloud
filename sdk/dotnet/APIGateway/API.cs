@@ -7,10 +7,82 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway
+namespace Pulumi.Tencentcloud.ApiGateway
 {
-    [TencentcloudResourceType("tencentcloud:APIGateway/aPI:API")]
-    public partial class API : Pulumi.CustomResource
+    /// <summary>
+    /// Use this resource to create API of API gateway.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         {
+    ///             ServiceName = "ck",
+    ///             Protocol = "http&amp;https",
+    ///             ServiceDesc = "your nice service",
+    ///             NetTypes = 
+    ///             {
+    ///                 "INNER",
+    ///                 "OUTER",
+    ///             },
+    ///             IpVersion = "IPv4",
+    ///         });
+    ///         var api = new Tencentcloud.ApiGateway.Api("api", new Tencentcloud.ApiGateway.ApiArgs
+    ///         {
+    ///             ServiceId = service.Id,
+    ///             ApiName = "hello",
+    ///             ApiDesc = "my hello api",
+    ///             AuthType = "NONE",
+    ///             Protocol = "HTTP",
+    ///             EnableCors = true,
+    ///             RequestConfigPath = "/user/info",
+    ///             RequestConfigMethod = "GET",
+    ///             RequestParameters = 
+    ///             {
+    ///                 new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
+    ///                 {
+    ///                     Name = "name",
+    ///                     Position = "QUERY",
+    ///                     Type = "string",
+    ///                     Desc = "who are you?",
+    ///                     DefaultValue = "tom",
+    ///                     Required = true,
+    ///                 },
+    ///             },
+    ///             ServiceConfigType = "HTTP",
+    ///             ServiceConfigTimeout = 15,
+    ///             ServiceConfigUrl = "http://www.qq.com",
+    ///             ServiceConfigPath = "/user",
+    ///             ServiceConfigMethod = "GET",
+    ///             ResponseType = "HTML",
+    ///             ResponseSuccessExample = "success",
+    ///             ResponseFailExample = "fail",
+    ///             ResponseErrorCodes = 
+    ///             {
+    ///                 new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
+    ///                 {
+    ///                     Code = 100,
+    ///                     Msg = "system error",
+    ///                     Desc = "system error code",
+    ///                     ConvertedCode = -100,
+    ///                     NeedConvert = true,
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:ApiGateway/api:Api")]
+    public partial class Api : Pulumi.CustomResource
     {
         /// <summary>
         /// Custom API description.
@@ -25,8 +97,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Output<string> ApiName { get; private set; } = null!;
 
         /// <summary>
-        /// API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-        /// `NONE`.
+        /// API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
         /// </summary>
         [Output("authType")]
         public Output<string?> AuthType { get; private set; } = null!;
@@ -77,13 +148,13 @@ namespace Pulumi.Tencentcloud.APIGateway
         /// Frontend request parameters.
         /// </summary>
         [Output("requestParameters")]
-        public Output<ImmutableArray<Outputs.APIRequestParameter>> RequestParameters { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.ApiRequestParameter>> RequestParameters { get; private set; } = null!;
 
         /// <summary>
         /// Custom error code configuration. Must keep at least one after set.
         /// </summary>
         [Output("responseErrorCodes")]
-        public Output<ImmutableArray<Outputs.APIResponseErrorCode>> ResponseErrorCodes { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.ApiResponseErrorCode>> ResponseErrorCodes { get; private set; } = null!;
 
         /// <summary>
         /// Response failure sample of custom response configuration.
@@ -104,8 +175,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Output<string> ResponseType { get; private set; } = null!;
 
         /// <summary>
-        /// API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-        /// The frontend `request_config_method` and backend method `service_config_method` can be different.
+        /// API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         /// </summary>
         [Output("serviceConfigMethod")]
         public Output<string?> ServiceConfigMethod { get; private set; } = null!;
@@ -117,8 +187,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Output<string?> ServiceConfigMockReturnMessage { get; private set; } = null!;
 
         /// <summary>
-        /// API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-        /// frontend `request_config_path` and backend path `service_config_path` can be different.
+        /// API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
         /// </summary>
         [Output("serviceConfigPath")]
         public Output<string?> ServiceConfigPath { get; private set; } = null!;
@@ -172,7 +241,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Output<string?> ServiceConfigVpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+        /// Which service this API belongs. Refer to resource `tencentcloud.ApiGateway.Service`.
         /// </summary>
         [Output("serviceId")]
         public Output<string> ServiceId { get; private set; } = null!;
@@ -191,19 +260,19 @@ namespace Pulumi.Tencentcloud.APIGateway
 
 
         /// <summary>
-        /// Create a API resource with the given unique name, arguments, and options.
+        /// Create a Api resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public API(string name, APIArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/aPI:API", name, args ?? new APIArgs(), MakeResourceOptions(options, ""))
+        public Api(string name, ApiArgs args, CustomResourceOptions? options = null)
+            : base("tencentcloud:ApiGateway/api:Api", name, args ?? new ApiArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private API(string name, Input<string> id, APIState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/aPI:API", name, state, MakeResourceOptions(options, id))
+        private Api(string name, Input<string> id, ApiState? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:ApiGateway/api:Api", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -219,7 +288,7 @@ namespace Pulumi.Tencentcloud.APIGateway
             return merged;
         }
         /// <summary>
-        /// Get an existing API resource's state with the given name, ID, and optional extra
+        /// Get an existing Api resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -227,13 +296,13 @@ namespace Pulumi.Tencentcloud.APIGateway
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static API Get(string name, Input<string> id, APIState? state = null, CustomResourceOptions? options = null)
+        public static Api Get(string name, Input<string> id, ApiState? state = null, CustomResourceOptions? options = null)
         {
-            return new API(name, id, state, options);
+            return new Api(name, id, state, options);
         }
     }
 
-    public sealed class APIArgs : Pulumi.ResourceArgs
+    public sealed class ApiArgs : Pulumi.ResourceArgs
     {
         /// <summary>
         /// Custom API description.
@@ -248,8 +317,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Input<string> ApiName { get; set; } = null!;
 
         /// <summary>
-        /// API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-        /// `NONE`.
+        /// API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
         /// </summary>
         [Input("authType")]
         public Input<string>? AuthType { get; set; }
@@ -291,26 +359,26 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Input<string> RequestConfigPath { get; set; } = null!;
 
         [Input("requestParameters")]
-        private InputList<Inputs.APIRequestParameterArgs>? _requestParameters;
+        private InputList<Inputs.ApiRequestParameterArgs>? _requestParameters;
 
         /// <summary>
         /// Frontend request parameters.
         /// </summary>
-        public InputList<Inputs.APIRequestParameterArgs> RequestParameters
+        public InputList<Inputs.ApiRequestParameterArgs> RequestParameters
         {
-            get => _requestParameters ?? (_requestParameters = new InputList<Inputs.APIRequestParameterArgs>());
+            get => _requestParameters ?? (_requestParameters = new InputList<Inputs.ApiRequestParameterArgs>());
             set => _requestParameters = value;
         }
 
         [Input("responseErrorCodes")]
-        private InputList<Inputs.APIResponseErrorCodeArgs>? _responseErrorCodes;
+        private InputList<Inputs.ApiResponseErrorCodeArgs>? _responseErrorCodes;
 
         /// <summary>
         /// Custom error code configuration. Must keep at least one after set.
         /// </summary>
-        public InputList<Inputs.APIResponseErrorCodeArgs> ResponseErrorCodes
+        public InputList<Inputs.ApiResponseErrorCodeArgs> ResponseErrorCodes
         {
-            get => _responseErrorCodes ?? (_responseErrorCodes = new InputList<Inputs.APIResponseErrorCodeArgs>());
+            get => _responseErrorCodes ?? (_responseErrorCodes = new InputList<Inputs.ApiResponseErrorCodeArgs>());
             set => _responseErrorCodes = value;
         }
 
@@ -333,8 +401,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Input<string>? ResponseType { get; set; }
 
         /// <summary>
-        /// API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-        /// The frontend `request_config_method` and backend method `service_config_method` can be different.
+        /// API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         /// </summary>
         [Input("serviceConfigMethod")]
         public Input<string>? ServiceConfigMethod { get; set; }
@@ -346,8 +413,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Input<string>? ServiceConfigMockReturnMessage { get; set; }
 
         /// <summary>
-        /// API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-        /// frontend `request_config_path` and backend path `service_config_path` can be different.
+        /// API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
         /// </summary>
         [Input("serviceConfigPath")]
         public Input<string>? ServiceConfigPath { get; set; }
@@ -401,7 +467,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Input<string>? ServiceConfigVpcId { get; set; }
 
         /// <summary>
-        /// Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+        /// Which service this API belongs. Refer to resource `tencentcloud.ApiGateway.Service`.
         /// </summary>
         [Input("serviceId", required: true)]
         public Input<string> ServiceId { get; set; } = null!;
@@ -412,12 +478,12 @@ namespace Pulumi.Tencentcloud.APIGateway
         [Input("testLimit")]
         public Input<int>? TestLimit { get; set; }
 
-        public APIArgs()
+        public ApiArgs()
         {
         }
     }
 
-    public sealed class APIState : Pulumi.ResourceArgs
+    public sealed class ApiState : Pulumi.ResourceArgs
     {
         /// <summary>
         /// Custom API description.
@@ -432,8 +498,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Input<string>? ApiName { get; set; }
 
         /// <summary>
-        /// API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-        /// `NONE`.
+        /// API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
         /// </summary>
         [Input("authType")]
         public Input<string>? AuthType { get; set; }
@@ -481,26 +546,26 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Input<string>? RequestConfigPath { get; set; }
 
         [Input("requestParameters")]
-        private InputList<Inputs.APIRequestParameterGetArgs>? _requestParameters;
+        private InputList<Inputs.ApiRequestParameterGetArgs>? _requestParameters;
 
         /// <summary>
         /// Frontend request parameters.
         /// </summary>
-        public InputList<Inputs.APIRequestParameterGetArgs> RequestParameters
+        public InputList<Inputs.ApiRequestParameterGetArgs> RequestParameters
         {
-            get => _requestParameters ?? (_requestParameters = new InputList<Inputs.APIRequestParameterGetArgs>());
+            get => _requestParameters ?? (_requestParameters = new InputList<Inputs.ApiRequestParameterGetArgs>());
             set => _requestParameters = value;
         }
 
         [Input("responseErrorCodes")]
-        private InputList<Inputs.APIResponseErrorCodeGetArgs>? _responseErrorCodes;
+        private InputList<Inputs.ApiResponseErrorCodeGetArgs>? _responseErrorCodes;
 
         /// <summary>
         /// Custom error code configuration. Must keep at least one after set.
         /// </summary>
-        public InputList<Inputs.APIResponseErrorCodeGetArgs> ResponseErrorCodes
+        public InputList<Inputs.ApiResponseErrorCodeGetArgs> ResponseErrorCodes
         {
-            get => _responseErrorCodes ?? (_responseErrorCodes = new InputList<Inputs.APIResponseErrorCodeGetArgs>());
+            get => _responseErrorCodes ?? (_responseErrorCodes = new InputList<Inputs.ApiResponseErrorCodeGetArgs>());
             set => _responseErrorCodes = value;
         }
 
@@ -523,8 +588,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Input<string>? ResponseType { get; set; }
 
         /// <summary>
-        /// API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-        /// The frontend `request_config_method` and backend method `service_config_method` can be different.
+        /// API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         /// </summary>
         [Input("serviceConfigMethod")]
         public Input<string>? ServiceConfigMethod { get; set; }
@@ -536,8 +600,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Input<string>? ServiceConfigMockReturnMessage { get; set; }
 
         /// <summary>
-        /// API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-        /// frontend `request_config_path` and backend path `service_config_path` can be different.
+        /// API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
         /// </summary>
         [Input("serviceConfigPath")]
         public Input<string>? ServiceConfigPath { get; set; }
@@ -591,7 +654,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Input<string>? ServiceConfigVpcId { get; set; }
 
         /// <summary>
-        /// Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+        /// Which service this API belongs. Refer to resource `tencentcloud.ApiGateway.Service`.
         /// </summary>
         [Input("serviceId")]
         public Input<string>? ServiceId { get; set; }
@@ -608,7 +671,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         [Input("updateTime")]
         public Input<string>? UpdateTime { get; set; }
 
-        public APIState()
+        public ApiState()
         {
         }
     }

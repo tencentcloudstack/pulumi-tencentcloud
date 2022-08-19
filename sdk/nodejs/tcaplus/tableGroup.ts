@@ -4,9 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-export class TableGroup extends pulumi.CustomResource {
+/**
+ * Use this resource to create TcaplusDB table group.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const test = new tencentcloud.tcaplus.Cluster("test", {
+ *     idlType: "PROTO",
+ *     clusterName: "tf_tcaplus_cluster_test",
+ *     vpcId: "vpc-7k6gzox6",
+ *     subnetId: "subnet-akwgvfa3",
+ *     password: "1qaA2k1wgvfa3ZZZ",
+ *     oldPasswordExpireLast: 3600,
+ * });
+ * const tablegroup = new tencentcloud.tcaplus.Tablegroup("tablegroup", {
+ *     clusterId: test.id,
+ *     tablegroupName: "tf_test_group_name",
+ * });
+ * ```
+ */
+export class Tablegroup extends pulumi.CustomResource {
     /**
-     * Get an existing TableGroup resource's state with the given name, ID, and optional extra
+     * Get an existing Tablegroup resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -14,22 +37,22 @@ export class TableGroup extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: TableGroupState, opts?: pulumi.CustomResourceOptions): TableGroup {
-        return new TableGroup(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: TablegroupState, opts?: pulumi.CustomResourceOptions): Tablegroup {
+        return new Tablegroup(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:Tcaplus/tableGroup:TableGroup';
+    public static readonly __pulumiType = 'tencentcloud:Tcaplus/tablegroup:Tablegroup';
 
     /**
-     * Returns true if the given object is an instance of TableGroup.  This is designed to work even
+     * Returns true if the given object is an instance of Tablegroup.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is TableGroup {
+    public static isInstance(obj: any): obj is Tablegroup {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === TableGroup.__pulumiType;
+        return obj['__pulumiType'] === Tablegroup.__pulumiType;
     }
 
     /**
@@ -54,25 +77,25 @@ export class TableGroup extends pulumi.CustomResource {
     public /*out*/ readonly totalSize!: pulumi.Output<number>;
 
     /**
-     * Create a TableGroup resource with the given unique name, arguments, and options.
+     * Create a Tablegroup resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: TableGroupArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: TableGroupArgs | TableGroupState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: TablegroupArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: TablegroupArgs | TablegroupState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as TableGroupState | undefined;
+            const state = argsOrState as TablegroupState | undefined;
             resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["tableCount"] = state ? state.tableCount : undefined;
             resourceInputs["tablegroupName"] = state ? state.tablegroupName : undefined;
             resourceInputs["totalSize"] = state ? state.totalSize : undefined;
         } else {
-            const args = argsOrState as TableGroupArgs | undefined;
+            const args = argsOrState as TablegroupArgs | undefined;
             if ((!args || args.clusterId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'clusterId'");
             }
@@ -86,14 +109,14 @@ export class TableGroup extends pulumi.CustomResource {
             resourceInputs["totalSize"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(TableGroup.__pulumiType, name, resourceInputs, opts);
+        super(Tablegroup.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering TableGroup resources.
+ * Input properties used for looking up and filtering Tablegroup resources.
  */
-export interface TableGroupState {
+export interface TablegroupState {
     /**
      * ID of the TcaplusDB cluster to which the table group belongs.
      */
@@ -117,9 +140,9 @@ export interface TableGroupState {
 }
 
 /**
- * The set of arguments for constructing a TableGroup resource.
+ * The set of arguments for constructing a Tablegroup resource.
  */
-export interface TableGroupArgs {
+export interface TablegroupArgs {
     /**
      * ID of the TcaplusDB cluster to which the table group belongs.
      */

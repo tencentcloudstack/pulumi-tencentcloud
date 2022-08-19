@@ -7,6 +7,6 @@ import typing
 # Export this package's modules as members:
 from .gateway import *
 from .gateway_snat import *
-from .gateway_snats import *
-from .gateways import *
+from .get_gateway_snats import *
+from .get_gateways import *
 from . import outputs

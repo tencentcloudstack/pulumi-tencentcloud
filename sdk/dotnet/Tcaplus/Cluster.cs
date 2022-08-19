@@ -9,6 +9,43 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Tcaplus
 {
+    /// <summary>
+    /// Use this resource to create TcaplusDB cluster.
+    /// 
+    /// &gt; **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var test = new Tencentcloud.Tcaplus.Cluster("test", new Tencentcloud.Tcaplus.ClusterArgs
+    ///         {
+    ///             ClusterName = "tf_tcaplus_cluster_test",
+    ///             IdlType = "PROTO",
+    ///             OldPasswordExpireLast = 3600,
+    ///             Password = "1qaA2k1wgvfa3ZZZ",
+    ///             SubnetId = "subnet-akwgvfa3",
+    ///             VpcId = "vpc-7k6gzox6",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// tcaplus cluster can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Tcaplus/cluster:Cluster test 26655801
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcaplus/cluster:Cluster")]
     public partial class Cluster : Pulumi.CustomResource
     {
@@ -61,22 +98,19 @@ namespace Pulumi.Tencentcloud.Tcaplus
         public Output<int?> OldPasswordExpireLast { get; private set; } = null!;
 
         /// <summary>
-        /// Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet
-        /// expired.
+        /// Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet expired.
         /// </summary>
         [Output("oldPasswordExpireTime")]
         public Output<string> OldPasswordExpireTime { get; private set; } = null!;
 
         /// <summary>
-        /// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-        /// uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        /// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
         /// </summary>
         [Output("password")]
         public Output<string> Password { get; private set; } = null!;
 
         /// <summary>
-        /// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the
-        /// password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
+        /// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
         /// </summary>
         [Output("passwordStatus")]
         public Output<string> PasswordStatus { get; private set; } = null!;
@@ -158,8 +192,7 @@ namespace Pulumi.Tencentcloud.Tcaplus
         public Input<int>? OldPasswordExpireLast { get; set; }
 
         /// <summary>
-        /// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-        /// uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        /// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
         /// </summary>
         [Input("password", required: true)]
         public Input<string> Password { get; set; } = null!;
@@ -232,22 +265,19 @@ namespace Pulumi.Tencentcloud.Tcaplus
         public Input<int>? OldPasswordExpireLast { get; set; }
 
         /// <summary>
-        /// Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet
-        /// expired.
+        /// Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet expired.
         /// </summary>
         [Input("oldPasswordExpireTime")]
         public Input<string>? OldPasswordExpireTime { get; set; }
 
         /// <summary>
-        /// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-        /// uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        /// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
         /// </summary>
         [Input("password")]
         public Input<string>? Password { get; set; }
 
         /// <summary>
-        /// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the
-        /// password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
+        /// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
         /// </summary>
         [Input("passwordStatus")]
         public Input<string>? PasswordStatus { get; set; }

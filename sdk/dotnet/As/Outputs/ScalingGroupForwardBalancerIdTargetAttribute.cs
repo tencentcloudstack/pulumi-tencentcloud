@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.As.Outputs
     [OutputType]
     public sealed class ScalingGroupForwardBalancerIdTargetAttribute
     {
+        /// <summary>
+        /// Port number.
+        /// </summary>
         public readonly int Port;
+        /// <summary>
+        /// Weight.
+        /// </summary>
         public readonly int Weight;
 
         [OutputConstructor]

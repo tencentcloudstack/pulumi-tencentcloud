@@ -9,6 +9,175 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Postgresql
 {
+    /// <summary>
+    /// Use this resource to create postgresql instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-1";
+    ///         // create vpc
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         // create vpc subnet
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = availabilityZone,
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.20.0/28",
+    ///             IsMulticast = false,
+    ///         });
+    ///         // create postgresql
+    ///         var foo = new Tencentcloud.Postgresql.Instance("foo", new Tencentcloud.Postgresql.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = availabilityZone,
+    ///             ChargeType = "POSTPAID_BY_HOUR",
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             EngineVersion = "10.4",
+    ///             RootUser = "root123",
+    ///             RootPassword = "Root123$",
+    ///             Charset = "UTF8",
+    ///             ProjectId = 0,
+    ///             Memory = 2,
+    ///             Storage = 10,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Create a multi available zone bucket
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    ///         var standbyAvailabilityZone = config.Get("standbyAvailabilityZone") ?? "ap-guangzhou-7";
+    ///         // create vpc
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         // create vpc subnet
+    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = availabilityZone,
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.0.20.0/28",
+    ///             IsMulticast = false,
+    ///         });
+    ///         // create postgresql
+    ///         var foo = new Tencentcloud.Postgresql.Instance("foo", new Tencentcloud.Postgresql.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = availabilityZone,
+    ///             ChargeType = "POSTPAID_BY_HOUR",
+    ///             VpcId = vpc.Id,
+    ///             SubnetId = subnet.Id,
+    ///             EngineVersion = "10.4",
+    ///             RootUser = "root123",
+    ///             RootPassword = "Root123$",
+    ///             Charset = "UTF8",
+    ///             ProjectId = 0,
+    ///             Memory = 2,
+    ///             Storage = 10,
+    ///             DbNodeSets = 
+    ///             {
+    ///                 new Tencentcloud.Postgresql.Inputs.InstanceDbNodeSetArgs
+    ///                 {
+    ///                     Role = "Primary",
+    ///                     Zone = availabilityZone,
+    ///                 },
+    ///                 new Tencentcloud.Postgresql.Inputs.InstanceDbNodeSetArgs
+    ///                 {
+    ///                     Zone = standbyAvailabilityZone,
+    ///                 },
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// create pgsql with kms key
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var pg = new Tencentcloud.Postgresql.Instance("pg", new Tencentcloud.Postgresql.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = "ap-guangzhou-6",
+    ///             BackupPlan = new Tencentcloud.Postgresql.Inputs.InstanceBackupPlanArgs
+    ///             {
+    ///                 BackupPeriods = 
+    ///                 {
+    ///                     "tuesday",
+    ///                     "wednesday",
+    ///                 },
+    ///                 BaseBackupRetentionPeriod = 7,
+    ///                 MaxBackupStartTime = "01:10:11",
+    ///                 MinBackupStartTime = "00:10:11",
+    ///             },
+    ///             ChargeType = "POSTPAID_BY_HOUR",
+    ///             Charset = "LATIN1",
+    ///             DbKernelVersion = "v11.12_r1.3",
+    ///             EngineVersion = "11.12",
+    ///             KmsKeyId = "788c606a-c7b7-11ec-82d1-5254001e5c4e",
+    ///             KmsRegion = "ap-guangzhou",
+    ///             Memory = 4,
+    ///             NeedSupportTde = 1,
+    ///             ProjectId = 0,
+    ///             RootPassword = "xxxxxxxxxx",
+    ///             Storage = 100,
+    ///             SubnetId = "subnet-enm92y0m",
+    ///             Tags = 
+    ///             {
+    ///                 { "tf", "test" },
+    ///             },
+    ///             VpcId = "vpc-86v957zb",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// postgresql instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Postgresql/instance:Instance foo postgres-cda1iex1
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
@@ -49,15 +218,13 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Output<string> DbKernelVersion { get; private set; } = null!;
 
         /// <summary>
-        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-        /// of PostgreSQL DBMajorVersion will be created.
+        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         /// </summary>
         [Output("dbMajorVersion")]
         public Output<string> DbMajorVersion { get; private set; } = null!;
 
         /// <summary>
-        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-        /// of PostgreSQL DBMajorVersion will be created.
+        /// `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         /// </summary>
         [Output("dbMajorVesion")]
         public Output<string> DbMajorVesion { get; private set; } = null!;
@@ -87,22 +254,19 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Output<string> KmsRegion { get; private set; } = null!;
 
         /// <summary>
-        /// max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are
-        /// milliseconds if not specified.
+        /// max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.
         /// </summary>
         [Output("maxStandbyArchiveDelay")]
         public Output<int> MaxStandbyArchiveDelay { get; private set; } = null!;
 
         /// <summary>
-        /// max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if
-        /// not specified.
+        /// max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
         /// </summary>
         [Output("maxStandbyStreamingDelay")]
         public Output<int> MaxStandbyStreamingDelay { get; private set; } = null!;
 
         /// <summary>
-        /// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-        /// provides.
+        /// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
         /// </summary>
         [Output("memory")]
         public Output<int> Memory { get; private set; } = null!;
@@ -156,8 +320,7 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Output<bool?> PublicAccessSwitch { get; private set; } = null!;
 
         /// <summary>
-        /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-        /// when you purchase read-only instances or disaster recovery instances.
+        /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         /// </summary>
         [Output("rootPassword")]
         public Output<string> RootPassword { get; private set; } = null!;
@@ -175,8 +338,7 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Output<ImmutableArray<string>> SecurityGroups { get; private set; } = null!;
 
         /// <summary>
-        /// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        /// `storage_max` which data source `tencentcloud_postgresql_specinfos` provides.
+        /// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud.Postgresql.getSpecinfos` provides.
         /// </summary>
         [Output("storage")]
         public Output<int> Storage { get; private set; } = null!;
@@ -282,15 +444,13 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Input<string>? DbKernelVersion { get; set; }
 
         /// <summary>
-        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-        /// of PostgreSQL DBMajorVersion will be created.
+        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         /// </summary>
         [Input("dbMajorVersion")]
         public Input<string>? DbMajorVersion { get; set; }
 
         /// <summary>
-        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-        /// of PostgreSQL DBMajorVersion will be created.
+        /// `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         /// </summary>
         [Input("dbMajorVesion")]
         public Input<string>? DbMajorVesion { get; set; }
@@ -326,22 +486,19 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Input<string>? KmsRegion { get; set; }
 
         /// <summary>
-        /// max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are
-        /// milliseconds if not specified.
+        /// max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.
         /// </summary>
         [Input("maxStandbyArchiveDelay")]
         public Input<int>? MaxStandbyArchiveDelay { get; set; }
 
         /// <summary>
-        /// max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if
-        /// not specified.
+        /// max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
         /// </summary>
         [Input("maxStandbyStreamingDelay")]
         public Input<int>? MaxStandbyStreamingDelay { get; set; }
 
         /// <summary>
-        /// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-        /// provides.
+        /// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
         /// </summary>
         [Input("memory", required: true)]
         public Input<int> Memory { get; set; } = null!;
@@ -371,8 +528,7 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Input<bool>? PublicAccessSwitch { get; set; }
 
         /// <summary>
-        /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-        /// when you purchase read-only instances or disaster recovery instances.
+        /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         /// </summary>
         [Input("rootPassword", required: true)]
         public Input<string> RootPassword { get; set; } = null!;
@@ -396,8 +552,7 @@ namespace Pulumi.Tencentcloud.Postgresql
         }
 
         /// <summary>
-        /// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        /// `storage_max` which data source `tencentcloud_postgresql_specinfos` provides.
+        /// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud.Postgresql.getSpecinfos` provides.
         /// </summary>
         [Input("storage", required: true)]
         public Input<int> Storage { get; set; } = null!;
@@ -470,15 +625,13 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Input<string>? DbKernelVersion { get; set; }
 
         /// <summary>
-        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-        /// of PostgreSQL DBMajorVersion will be created.
+        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         /// </summary>
         [Input("dbMajorVersion")]
         public Input<string>? DbMajorVersion { get; set; }
 
         /// <summary>
-        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel
-        /// of PostgreSQL DBMajorVersion will be created.
+        /// `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         /// </summary>
         [Input("dbMajorVesion")]
         public Input<string>? DbMajorVesion { get; set; }
@@ -514,22 +667,19 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Input<string>? KmsRegion { get; set; }
 
         /// <summary>
-        /// max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are
-        /// milliseconds if not specified.
+        /// max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.
         /// </summary>
         [Input("maxStandbyArchiveDelay")]
         public Input<int>? MaxStandbyArchiveDelay { get; set; }
 
         /// <summary>
-        /// max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if
-        /// not specified.
+        /// max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
         /// </summary>
         [Input("maxStandbyStreamingDelay")]
         public Input<int>? MaxStandbyStreamingDelay { get; set; }
 
         /// <summary>
-        /// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud_postgresql_specinfos`
-        /// provides.
+        /// Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
         /// </summary>
         [Input("memory")]
         public Input<int>? Memory { get; set; }
@@ -583,8 +733,7 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Input<bool>? PublicAccessSwitch { get; set; }
 
         /// <summary>
-        /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-        /// when you purchase read-only instances or disaster recovery instances.
+        /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         /// </summary>
         [Input("rootPassword")]
         public Input<string>? RootPassword { get; set; }
@@ -608,8 +757,7 @@ namespace Pulumi.Tencentcloud.Postgresql
         }
 
         /// <summary>
-        /// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        /// `storage_max` which data source `tencentcloud_postgresql_specinfos` provides.
+        /// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud.Postgresql.getSpecinfos` provides.
         /// </summary>
         [Input("storage")]
         public Input<int>? Storage { get; set; }

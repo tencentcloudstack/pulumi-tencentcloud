@@ -97,7 +97,27 @@ class SslClient(pulumi.CustomResource):
                  ssl_vpn_server_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a SslClient resource with the given unique name, props, and options.
+        Provide a resource to create a VPN SSL Client.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        client = tencentcloud.vpn.SslClient("client",
+            ssl_vpn_client_name="hello",
+            ssl_vpn_server_id="vpns-aog5xcjj")
+        ```
+
+        ## Import
+
+        VPN SSL Client can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpn/sslClient:SslClient client vpn-client-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] ssl_vpn_client_name: The name of ssl vpn client to be created.
@@ -110,7 +130,27 @@ class SslClient(pulumi.CustomResource):
                  args: SslClientArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a SslClient resource with the given unique name, props, and options.
+        Provide a resource to create a VPN SSL Client.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        client = tencentcloud.vpn.SslClient("client",
+            ssl_vpn_client_name="hello",
+            ssl_vpn_server_id="vpns-aog5xcjj")
+        ```
+
+        ## Import
+
+        VPN SSL Client can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpn/sslClient:SslClient client vpn-client-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param SslClientArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

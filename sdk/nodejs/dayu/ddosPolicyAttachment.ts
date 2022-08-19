@@ -4,6 +4,22 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a dayu DDoS policy attachment.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const dayuDdosPolicyAttachmentBasic = new tencentcloud.dayu.DdosPolicyAttachment("dayuDdosPolicyAttachmentBasic", {
+ *     resourceType: tencentcloud_dayu_ddos_policy.test_policy.resource_type,
+ *     resourceId: "bgpip-00000294",
+ *     policyId: tencentcloud_dayu_ddos_policy.test_policy.policy_id,
+ * });
+ * ```
+ */
 export class DdosPolicyAttachment extends pulumi.CustomResource {
     /**
      * Get an existing DdosPolicyAttachment resource's state with the given name, ID, and optional extra

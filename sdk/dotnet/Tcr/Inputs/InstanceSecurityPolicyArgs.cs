@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Tcr.Inputs
 
     public sealed class InstanceSecurityPolicyArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The public network IP address of the access source.
+        /// </summary>
         [Input("cidrBlock")]
         public Input<string>? CidrBlock { get; set; }
 
+        /// <summary>
+        /// Remarks of policy.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 

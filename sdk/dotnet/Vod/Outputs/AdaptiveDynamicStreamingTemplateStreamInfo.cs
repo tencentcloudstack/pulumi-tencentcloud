@@ -13,8 +13,17 @@ namespace Pulumi.Tencentcloud.Vod.Outputs
     [OutputType]
     public sealed class AdaptiveDynamicStreamingTemplateStreamInfo
     {
+        /// <summary>
+        /// Audio parameter information.
+        /// </summary>
         public readonly Outputs.AdaptiveDynamicStreamingTemplateStreamInfoAudio Audio;
+        /// <summary>
+        /// Whether to remove audio stream. Valid values: `false`: no, `true`: yes. `false` by default.
+        /// </summary>
         public readonly bool? RemoveAudio;
+        /// <summary>
+        /// Video parameter information.
+        /// </summary>
         public readonly Outputs.AdaptiveDynamicStreamingTemplateStreamInfoVideo Video;
 
         [OutputConstructor]

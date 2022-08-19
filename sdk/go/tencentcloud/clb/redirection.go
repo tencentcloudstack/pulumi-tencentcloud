@@ -11,17 +11,78 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CLB redirection.
+//
+// ## Example Usage
+//
+// Manual Rewrite
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewRedirection(ctx, "foo", &Clb.RedirectionArgs{
+// 			ClbId:            pulumi.String("lb-p7olt9e5"),
+// 			SourceListenerId: pulumi.String("lbl-jc1dx6ju"),
+// 			SourceRuleId:     pulumi.String("loc-ft8fmngv"),
+// 			TargetListenerId: pulumi.String("lbl-asj1hzuo"),
+// 			TargetRuleId:     pulumi.String("loc-4xxr2cy7"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// Auto Rewrite
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewRedirection(ctx, "foo", &Clb.RedirectionArgs{
+// 			ClbId:            pulumi.String("lb-p7olt9e5"),
+// 			IsAutoRewrite:    pulumi.Bool(true),
+// 			TargetListenerId: pulumi.String("lbl-asj1hzuo"),
+// 			TargetRuleId:     pulumi.String("loc-4xxr2cy7"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CLB redirection can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+// ```
 type Redirection struct {
 	pulumi.CustomResourceState
 
 	// ID of CLB instance.
 	ClbId pulumi.StringOutput `pulumi:"clbId"`
-	// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-	// auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-	// when this parameter set true.
+	// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
 	DeleteAllAutoRewrite pulumi.BoolPtrOutput `pulumi:"deleteAllAutoRewrite"`
-	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-	// should be empty, the target listener must be https protocol and port is 443.
+	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
 	IsAutoRewrite pulumi.BoolPtrOutput `pulumi:"isAutoRewrite"`
 	// ID of source listener.
 	SourceListenerId pulumi.StringOutput `pulumi:"sourceListenerId"`
@@ -73,12 +134,9 @@ func GetRedirection(ctx *pulumi.Context,
 type redirectionState struct {
 	// ID of CLB instance.
 	ClbId *string `pulumi:"clbId"`
-	// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-	// auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-	// when this parameter set true.
+	// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
 	DeleteAllAutoRewrite *bool `pulumi:"deleteAllAutoRewrite"`
-	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-	// should be empty, the target listener must be https protocol and port is 443.
+	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
 	IsAutoRewrite *bool `pulumi:"isAutoRewrite"`
 	// ID of source listener.
 	SourceListenerId *string `pulumi:"sourceListenerId"`
@@ -93,12 +151,9 @@ type redirectionState struct {
 type RedirectionState struct {
 	// ID of CLB instance.
 	ClbId pulumi.StringPtrInput
-	// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-	// auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-	// when this parameter set true.
+	// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
 	DeleteAllAutoRewrite pulumi.BoolPtrInput
-	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-	// should be empty, the target listener must be https protocol and port is 443.
+	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
 	IsAutoRewrite pulumi.BoolPtrInput
 	// ID of source listener.
 	SourceListenerId pulumi.StringPtrInput
@@ -117,12 +172,9 @@ func (RedirectionState) ElementType() reflect.Type {
 type redirectionArgs struct {
 	// ID of CLB instance.
 	ClbId string `pulumi:"clbId"`
-	// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-	// auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-	// when this parameter set true.
+	// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
 	DeleteAllAutoRewrite *bool `pulumi:"deleteAllAutoRewrite"`
-	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-	// should be empty, the target listener must be https protocol and port is 443.
+	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
 	IsAutoRewrite *bool `pulumi:"isAutoRewrite"`
 	// ID of source listener.
 	SourceListenerId *string `pulumi:"sourceListenerId"`
@@ -138,12 +190,9 @@ type redirectionArgs struct {
 type RedirectionArgs struct {
 	// ID of CLB instance.
 	ClbId pulumi.StringInput
-	// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-	// auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-	// when this parameter set true.
+	// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
 	DeleteAllAutoRewrite pulumi.BoolPtrInput
-	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-	// should be empty, the target listener must be https protocol and port is 443.
+	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
 	IsAutoRewrite pulumi.BoolPtrInput
 	// ID of source listener.
 	SourceListenerId pulumi.StringPtrInput
@@ -247,15 +296,12 @@ func (o RedirectionOutput) ClbId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Redirection) pulumi.StringOutput { return v.ClbId }).(pulumi.StringOutput)
 }
 
-// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is
-// auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted
-// when this parameter set true.
+// Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
 func (o RedirectionOutput) DeleteAllAutoRewrite() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Redirection) pulumi.BoolPtrOutput { return v.DeleteAllAutoRewrite }).(pulumi.BoolPtrOutput)
 }
 
-// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location
-// should be empty, the target listener must be https protocol and port is 443.
+// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
 func (o RedirectionOutput) IsAutoRewrite() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Redirection) pulumi.BoolPtrOutput { return v.IsAutoRewrite }).(pulumi.BoolPtrOutput)
 }

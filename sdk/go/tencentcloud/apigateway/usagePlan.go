@@ -11,6 +11,41 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create API gateway usage plan.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
+// 			MaxRequestNum:       pulumi.Int(100),
+// 			MaxRequestNumPreSec: pulumi.Int(10),
+// 			UsagePlanDesc:       pulumi.String("nice plan"),
+// 			UsagePlanName:       pulumi.String("my_plan"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// API gateway usage plan can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:ApiGateway/usagePlan:UsagePlan plan usagePlan-gyeafpab
+// ```
 type UsagePlan struct {
 	pulumi.CustomResourceState
 
@@ -43,7 +78,7 @@ func NewUsagePlan(ctx *pulumi.Context,
 		return nil, errors.New("invalid value for required argument 'UsagePlanName'")
 	}
 	var resource UsagePlan
-	err := ctx.RegisterResource("tencentcloud:APIGateway/usagePlan:UsagePlan", name, args, &resource, opts...)
+	err := ctx.RegisterResource("tencentcloud:ApiGateway/usagePlan:UsagePlan", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +90,7 @@ func NewUsagePlan(ctx *pulumi.Context,
 func GetUsagePlan(ctx *pulumi.Context,
 	name string, id pulumi.IDInput, state *UsagePlanState, opts ...pulumi.ResourceOption) (*UsagePlan, error) {
 	var resource UsagePlan
-	err := ctx.ReadResource("tencentcloud:APIGateway/usagePlan:UsagePlan", name, id, state, &resource, opts...)
+	err := ctx.ReadResource("tencentcloud:ApiGateway/usagePlan:UsagePlan", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}

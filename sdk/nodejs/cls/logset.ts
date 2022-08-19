@@ -4,6 +4,31 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a cls logset
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const logset = new tencentcloud.Cls.Logset("logset", {
+ *     logsetName: "logset",
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * cls logset can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cls/logset:Logset logset 5cd3a17e-fb0b-418c-afd7-77b365397426
+ * ```
+ */
 export class Logset extends pulumi.CustomResource {
     /**
      * Get an existing Logset resource's state with the given name, ID, and optional extra

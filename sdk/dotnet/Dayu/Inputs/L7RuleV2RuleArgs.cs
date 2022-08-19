@@ -12,27 +12,51 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
 
     public sealed class L7RuleV2RuleArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.
+        /// </summary>
         [Input("ccEnable")]
         public Input<int>? CcEnable { get; set; }
 
+        /// <summary>
+        /// The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.
+        /// </summary>
         [Input("certType")]
         public Input<int>? CertType { get; set; }
 
+        /// <summary>
+        /// Domain of the rule.
+        /// </summary>
         [Input("domain", required: true)]
         public Input<string> Domain { get; set; } = null!;
 
+        /// <summary>
+        /// Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.
+        /// </summary>
         [Input("httpsToHttpEnable")]
         public Input<int>? HttpsToHttpEnable { get; set; }
 
+        /// <summary>
+        /// session hold switch.
+        /// </summary>
         [Input("keepEnable", required: true)]
         public Input<int> KeepEnable { get; set; } = null!;
 
+        /// <summary>
+        /// The keeptime of the layer 4 rule.
+        /// </summary>
         [Input("keeptime", required: true)]
         public Input<int> Keeptime { get; set; } = null!;
 
+        /// <summary>
+        /// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+        /// </summary>
         [Input("lbType", required: true)]
         public Input<int> LbType { get; set; } = null!;
 
+        /// <summary>
+        /// Protocol of the rule.
+        /// </summary>
         [Input("protocol", required: true)]
         public Input<string> Protocol { get; set; } = null!;
 
@@ -44,9 +68,15 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
             set => _sourceLists = value;
         }
 
+        /// <summary>
+        /// Source type, `1` for source of host, `2` for source of IP.
+        /// </summary>
         [Input("sourceType", required: true)]
         public Input<int> SourceType { get; set; } = null!;
 
+        /// <summary>
+        /// When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.
+        /// </summary>
         [Input("sslId")]
         public Input<string>? SslId { get; set; }
 

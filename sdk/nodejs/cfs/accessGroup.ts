@@ -4,6 +4,28 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CFS access group.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Cfs.AccessGroup("foo", {
+ *     description: "test",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CFS access group can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup foo pgroup-7nx89k7l
+ * ```
+ */
 export class AccessGroup extends pulumi.CustomResource {
     /**
      * Get an existing AccessGroup resource's state with the given name, ID, and optional extra

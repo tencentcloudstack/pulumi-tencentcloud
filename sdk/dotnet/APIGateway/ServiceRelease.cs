@@ -7,9 +7,20 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway
+namespace Pulumi.Tencentcloud.ApiGateway
 {
-    [TencentcloudResourceType("tencentcloud:APIGateway/serviceRelease:ServiceRelease")]
+    /// <summary>
+    /// Use this resource to create API gateway service release.
+    /// 
+    /// ## Import
+    /// 
+    /// API gateway service release can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service service-jjt3fs3s#release#20201015121916d85fb161-eaec-4dda-a7e0-659aa5f401be
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:ApiGateway/serviceRelease:ServiceRelease")]
     public partial class ServiceRelease : Pulumi.CustomResource
     {
         /// <summary>
@@ -45,12 +56,12 @@ namespace Pulumi.Tencentcloud.APIGateway
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public ServiceRelease(string name, ServiceReleaseArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/serviceRelease:ServiceRelease", name, args ?? new ServiceReleaseArgs(), MakeResourceOptions(options, ""))
+            : base("tencentcloud:ApiGateway/serviceRelease:ServiceRelease", name, args ?? new ServiceReleaseArgs(), MakeResourceOptions(options, ""))
         {
         }
 
         private ServiceRelease(string name, Input<string> id, ServiceReleaseState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/serviceRelease:ServiceRelease", name, state, MakeResourceOptions(options, id))
+            : base("tencentcloud:ApiGateway/serviceRelease:ServiceRelease", name, state, MakeResourceOptions(options, id))
         {
         }
 

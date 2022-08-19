@@ -4,9 +4,40 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-export class ACL extends pulumi.CustomResource {
+/**
+ * Provide a resource to create a VPC ACL instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const default = tencentcloud.Vpc.getInstances({});
+ * const foo = new tencentcloud.vpc.Acl("foo", {
+ *     vpcId: _default.then(_default => _default.instanceLists?[0]?.vpcId),
+ *     ingresses: [
+ *         "ACCEPT#192.168.1.0/24#800#TCP",
+ *         "ACCEPT#192.168.1.0/24#800-900#TCP",
+ *     ],
+ *     egresses: [
+ *         "ACCEPT#192.168.1.0/24#800#TCP",
+ *         "ACCEPT#192.168.1.0/24#800-900#TCP",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Vpc ACL can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
+ * ```
+ */
+export class Acl extends pulumi.CustomResource {
     /**
-     * Get an existing ACL resource's state with the given name, ID, and optional extra
+     * Get an existing Acl resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -14,22 +45,22 @@ export class ACL extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: ACLState, opts?: pulumi.CustomResourceOptions): ACL {
-        return new ACL(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: AclState, opts?: pulumi.CustomResourceOptions): Acl {
+        return new Acl(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:Vpc/aCL:ACL';
+    public static readonly __pulumiType = 'tencentcloud:Vpc/acl:Acl';
 
     /**
-     * Returns true if the given object is an instance of ACL.  This is designed to work even
+     * Returns true if the given object is an instance of Acl.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is ACL {
+    public static isInstance(obj: any): obj is Acl {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === ACL.__pulumiType;
+        return obj['__pulumiType'] === Acl.__pulumiType;
     }
 
     /**
@@ -37,17 +68,11 @@ export class ACL extends pulumi.CustomResource {
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
-     * Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-     * 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-     * `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-     * is `ICMP` or `ALL`, the 'port' must be `ALL`.
+     * Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
      */
     public readonly egresses!: pulumi.Output<string[] | undefined>;
     /**
-     * Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-     * 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-     * `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-     * is `ICMP` or `ALL`, the 'port' must be `ALL`.
+     * Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
      */
     public readonly ingresses!: pulumi.Output<string[] | undefined>;
     /**
@@ -60,25 +85,25 @@ export class ACL extends pulumi.CustomResource {
     public readonly vpcId!: pulumi.Output<string>;
 
     /**
-     * Create a ACL resource with the given unique name, arguments, and options.
+     * Create a Acl resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ACLArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: ACLArgs | ACLState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: AclArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: AclArgs | AclState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as ACLState | undefined;
+            const state = argsOrState as AclState | undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["egresses"] = state ? state.egresses : undefined;
             resourceInputs["ingresses"] = state ? state.ingresses : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
         } else {
-            const args = argsOrState as ACLArgs | undefined;
+            const args = argsOrState as AclArgs | undefined;
             if ((!args || args.vpcId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'vpcId'");
             }
@@ -89,30 +114,24 @@ export class ACL extends pulumi.CustomResource {
             resourceInputs["createTime"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(ACL.__pulumiType, name, resourceInputs, opts);
+        super(Acl.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering ACL resources.
+ * Input properties used for looking up and filtering Acl resources.
  */
-export interface ACLState {
+export interface AclState {
     /**
      * Creation time of ACL.
      */
     createTime?: pulumi.Input<string>;
     /**
-     * Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-     * 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-     * `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-     * is `ICMP` or `ALL`, the 'port' must be `ALL`.
+     * Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
      */
     egresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-     * 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-     * `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-     * is `ICMP` or `ALL`, the 'port' must be `ALL`.
+     * Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
      */
     ingresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -126,21 +145,15 @@ export interface ACLState {
 }
 
 /**
- * The set of arguments for constructing a ACL resource.
+ * The set of arguments for constructing a Acl resource.
  */
-export interface ACLArgs {
+export interface AclArgs {
     /**
-     * Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-     * 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-     * `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-     * is `ICMP` or `ALL`, the 'port' must be `ALL`.
+     * Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
      */
     egresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of
-     * 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is
-     * `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol'
-     * is `ICMP` or `ALL`, the 'port' must be `ALL`.
+     * Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
      */
     ingresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**

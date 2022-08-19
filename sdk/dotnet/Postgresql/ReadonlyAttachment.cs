@@ -9,6 +9,29 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Postgresql
 {
+    /// <summary>
+    /// Use this resource to create postgresql readonly attachment.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var attach = new Tencentcloud.Postgresql.ReadonlyAttachment("attach", new Tencentcloud.Postgresql.ReadonlyAttachmentArgs
+    ///         {
+    ///             DbInstanceId = tencentcloud_postgresql_readonly_instance.Foo.Id,
+    ///             ReadOnlyGroupId = tencentcloud_postgresql_readonly_group.Group.Id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/readonlyAttachment:ReadonlyAttachment")]
     public partial class ReadonlyAttachment : Pulumi.CustomResource
     {

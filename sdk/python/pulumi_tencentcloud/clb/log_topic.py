@@ -129,7 +129,27 @@ class LogTopic(pulumi.CustomResource):
                  topic_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a LogTopic resource with the given unique name, props, and options.
+        Provides a resource to create a CLB instance topic.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        topic = tencentcloud.clb.LogTopic("topic",
+            log_set_id=tencentcloud_clb_log_set["set"]["id"],
+            topic_name="clb-topic")
+        ```
+
+        ## Import
+
+        CLB log topic can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/logTopic:LogTopic topic lb-7a0t6zqb
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] log_set_id: Log topic of CLB instance.
@@ -142,7 +162,27 @@ class LogTopic(pulumi.CustomResource):
                  args: LogTopicArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a LogTopic resource with the given unique name, props, and options.
+        Provides a resource to create a CLB instance topic.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        topic = tencentcloud.clb.LogTopic("topic",
+            log_set_id=tencentcloud_clb_log_set["set"]["id"],
+            topic_name="clb-topic")
+        ```
+
+        ## Import
+
+        CLB log topic can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/logTopic:LogTopic topic lb-7a0t6zqb
+        ```
+
         :param str resource_name: The name of the resource.
         :param LogTopicArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

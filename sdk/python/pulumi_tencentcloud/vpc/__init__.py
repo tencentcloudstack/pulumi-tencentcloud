@@ -7,13 +7,9 @@ import typing
 # Export this package's modules as members:
 from .acl import *
 from .acl_attachment import *
-from .acls import *
+from .get_acls import *
+from .get_instances import *
+from .get_route_tables import *
+from .get_subnets import *
 from .instance import *
-from .instances import *
-from .route_entry import *
-from .route_table import *
-from .route_tables import *
-from .subnet import *
-from .subnets import *
-from .vpc_instances import *
 from . import outputs

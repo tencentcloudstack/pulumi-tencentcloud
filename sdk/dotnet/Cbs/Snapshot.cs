@@ -9,6 +9,37 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cbs
 {
+    /// <summary>
+    /// Provides a resource to create a CBS snapshot.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var snapshot = new Tencentcloud.Cbs.Snapshot("snapshot", new Tencentcloud.Cbs.SnapshotArgs
+    ///         {
+    ///             SnapshotName = "unnamed",
+    ///             StorageId = "disk-kdt0sq6m",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CBS snapshot can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cbs/snapshot:Snapshot snapshot snap-3sa3f39b
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/snapshot:Snapshot")]
     public partial class Snapshot : Pulumi.CustomResource
     {

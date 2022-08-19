@@ -20,6 +20,12 @@ class HttpRuleRealserverArgs:
                  ip: pulumi.Input[str],
                  port: pulumi.Input[int],
                  weight: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] id: ID of the GAAP realserver.
+        :param pulumi.Input[str] ip: IP of the GAAP realserver.
+        :param pulumi.Input[int] port: Port of the GAAP realserver.
+        :param pulumi.Input[int] weight: Scheduling weight, default value is `1`. Valid value ranges: (1~100).
+        """
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "ip", ip)
         pulumi.set(__self__, "port", port)
@@ -29,6 +35,9 @@ class HttpRuleRealserverArgs:
     @property
     @pulumi.getter
     def id(self) -> pulumi.Input[str]:
+        """
+        ID of the GAAP realserver.
+        """
         return pulumi.get(self, "id")
 
     @id.setter
@@ -38,6 +47,9 @@ class HttpRuleRealserverArgs:
     @property
     @pulumi.getter
     def ip(self) -> pulumi.Input[str]:
+        """
+        IP of the GAAP realserver.
+        """
         return pulumi.get(self, "ip")
 
     @ip.setter
@@ -47,6 +59,9 @@ class HttpRuleRealserverArgs:
     @property
     @pulumi.getter
     def port(self) -> pulumi.Input[int]:
+        """
+        Port of the GAAP realserver.
+        """
         return pulumi.get(self, "port")
 
     @port.setter
@@ -56,6 +71,9 @@ class HttpRuleRealserverArgs:
     @property
     @pulumi.getter
     def weight(self) -> Optional[pulumi.Input[int]]:
+        """
+        Scheduling weight, default value is `1`. Valid value ranges: (1~100).
+        """
         return pulumi.get(self, "weight")
 
     @weight.setter
@@ -70,6 +88,12 @@ class Layer4ListenerRealserverBindSetArgs:
                  ip: pulumi.Input[str],
                  port: pulumi.Input[int],
                  weight: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] id: ID of the GAAP realserver.
+        :param pulumi.Input[str] ip: IP of the GAAP realserver.
+        :param pulumi.Input[int] port: Port of the GAAP realserver.
+        :param pulumi.Input[int] weight: Scheduling weight, default value is `1`. The range of values is [1,100].
+        """
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "ip", ip)
         pulumi.set(__self__, "port", port)
@@ -79,6 +103,9 @@ class Layer4ListenerRealserverBindSetArgs:
     @property
     @pulumi.getter
     def id(self) -> pulumi.Input[str]:
+        """
+        ID of the GAAP realserver.
+        """
         return pulumi.get(self, "id")
 
     @id.setter
@@ -88,6 +115,9 @@ class Layer4ListenerRealserverBindSetArgs:
     @property
     @pulumi.getter
     def ip(self) -> pulumi.Input[str]:
+        """
+        IP of the GAAP realserver.
+        """
         return pulumi.get(self, "ip")
 
     @ip.setter
@@ -97,6 +127,9 @@ class Layer4ListenerRealserverBindSetArgs:
     @property
     @pulumi.getter
     def port(self) -> pulumi.Input[int]:
+        """
+        Port of the GAAP realserver.
+        """
         return pulumi.get(self, "port")
 
     @port.setter
@@ -106,6 +139,9 @@ class Layer4ListenerRealserverBindSetArgs:
     @property
     @pulumi.getter
     def weight(self) -> Optional[pulumi.Input[int]]:
+        """
+        Scheduling weight, default value is `1`. The range of values is [1,100].
+        """
         return pulumi.get(self, "weight")
 
     @weight.setter

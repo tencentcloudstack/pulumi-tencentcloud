@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -31,6 +31,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Storage{}
 	case "tencentcloud:Cbs/storageAttachment:StorageAttachment":
 		r = &StorageAttachment{}
+	case "tencentcloud:Cbs/storageSet:StorageSet":
+		r = &StorageSet{}
+	case "tencentcloud:Cbs/storageSetAttachment:StorageSetAttachment":
+		r = &StorageSetAttachment{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -67,6 +71,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cbs/storageAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cbs/storageSet",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cbs/storageSetAttachment",
 		&module{version},
 	)
 }

@@ -162,7 +162,33 @@ class CustomizedConfig(pulumi.CustomResource):
                  load_balancer_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a CustomizedConfig resource with the given unique name, props, and options.
+        Provides a resource to create a CLB customized config.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.clb.CustomizedConfig("foo",
+            config_content=\"\"\"client_max_body_size 224M;
+        client_body_timeout 60s;
+        \"\"\",
+            config_name="helloWorld",
+            load_balancer_ids=[
+                tencentcloud_clb_instance["internal_clb"]["id"],
+                tencentcloud_clb_instance["internal_clb2"]["id"],
+            ])
+        ```
+
+        ## Import
+
+        CLB customized config can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/customizedConfig:CustomizedConfig foo pz-diowqstq
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] config_content: Content of Customized Config.
@@ -176,7 +202,33 @@ class CustomizedConfig(pulumi.CustomResource):
                  args: CustomizedConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a CustomizedConfig resource with the given unique name, props, and options.
+        Provides a resource to create a CLB customized config.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.clb.CustomizedConfig("foo",
+            config_content=\"\"\"client_max_body_size 224M;
+        client_body_timeout 60s;
+        \"\"\",
+            config_name="helloWorld",
+            load_balancer_ids=[
+                tencentcloud_clb_instance["internal_clb"]["id"],
+                tencentcloud_clb_instance["internal_clb2"]["id"],
+            ])
+        ```
+
+        ## Import
+
+        CLB customized config can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/customizedConfig:CustomizedConfig foo pz-diowqstq
+        ```
+
         :param str resource_name: The name of the resource.
         :param CustomizedConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

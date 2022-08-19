@@ -11,25 +11,54 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource for an AS (Auto scaling) policy.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := As.NewScalingPolicy(ctx, "scalingPolicy", &As.ScalingPolicyArgs{
+// 			AdjustmentType:     pulumi.String("EXACT_CAPACITY"),
+// 			AdjustmentValue:    pulumi.Int(0),
+// 			ComparisonOperator: pulumi.String("GREATER_THAN"),
+// 			ContinuousTime:     pulumi.Int(10),
+// 			Cooldown:           pulumi.Int(360),
+// 			MetricName:         pulumi.String("CPU_UTILIZATION"),
+// 			Period:             pulumi.Int(300),
+// 			PolicyName:         pulumi.String("tf-as-scaling-policy"),
+// 			ScalingGroupId:     pulumi.String("asg-n32ymck2"),
+// 			Statistic:          pulumi.String("AVERAGE"),
+// 			Threshold:          pulumi.Int(80),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type ScalingPolicy struct {
 	pulumi.CustomResourceState
 
-	// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-	// `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+	// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
 	AdjustmentType pulumi.StringOutput `pulumi:"adjustmentType"`
-	// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-	// increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-	// type, it defines an absolute number of the existing Auto Scaling group size.
+	// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
 	AdjustmentValue pulumi.IntOutput `pulumi:"adjustmentValue"`
-	// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-	// `EQUAL_TO` and `NOT_EQUAL_TO`.
+	// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
 	ComparisonOperator pulumi.StringOutput `pulumi:"comparisonOperator"`
 	// Retry times. Valid value ranges: (1~10).
 	ContinuousTime pulumi.IntOutput `pulumi:"continuousTime"`
 	// Cooldwon time in second. Default is `30`0.
 	Cooldown pulumi.IntPtrOutput `pulumi:"cooldown"`
-	// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-	// `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+	// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
 	MetricName pulumi.StringOutput `pulumi:"metricName"`
 	// An ID group of users to be notified when an alarm is triggered.
 	NotificationUserGroupIds pulumi.StringArrayOutput `pulumi:"notificationUserGroupIds"`
@@ -101,22 +130,17 @@ func GetScalingPolicy(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ScalingPolicy resources.
 type scalingPolicyState struct {
-	// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-	// `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+	// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
 	AdjustmentType *string `pulumi:"adjustmentType"`
-	// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-	// increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-	// type, it defines an absolute number of the existing Auto Scaling group size.
+	// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
 	AdjustmentValue *int `pulumi:"adjustmentValue"`
-	// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-	// `EQUAL_TO` and `NOT_EQUAL_TO`.
+	// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
 	ComparisonOperator *string `pulumi:"comparisonOperator"`
 	// Retry times. Valid value ranges: (1~10).
 	ContinuousTime *int `pulumi:"continuousTime"`
 	// Cooldwon time in second. Default is `30`0.
 	Cooldown *int `pulumi:"cooldown"`
-	// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-	// `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+	// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
 	MetricName *string `pulumi:"metricName"`
 	// An ID group of users to be notified when an alarm is triggered.
 	NotificationUserGroupIds []string `pulumi:"notificationUserGroupIds"`
@@ -133,22 +157,17 @@ type scalingPolicyState struct {
 }
 
 type ScalingPolicyState struct {
-	// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-	// `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+	// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
 	AdjustmentType pulumi.StringPtrInput
-	// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-	// increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-	// type, it defines an absolute number of the existing Auto Scaling group size.
+	// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
 	AdjustmentValue pulumi.IntPtrInput
-	// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-	// `EQUAL_TO` and `NOT_EQUAL_TO`.
+	// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
 	ComparisonOperator pulumi.StringPtrInput
 	// Retry times. Valid value ranges: (1~10).
 	ContinuousTime pulumi.IntPtrInput
 	// Cooldwon time in second. Default is `30`0.
 	Cooldown pulumi.IntPtrInput
-	// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-	// `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+	// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
 	MetricName pulumi.StringPtrInput
 	// An ID group of users to be notified when an alarm is triggered.
 	NotificationUserGroupIds pulumi.StringArrayInput
@@ -169,22 +188,17 @@ func (ScalingPolicyState) ElementType() reflect.Type {
 }
 
 type scalingPolicyArgs struct {
-	// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-	// `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+	// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
 	AdjustmentType string `pulumi:"adjustmentType"`
-	// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-	// increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-	// type, it defines an absolute number of the existing Auto Scaling group size.
+	// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
 	AdjustmentValue int `pulumi:"adjustmentValue"`
-	// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-	// `EQUAL_TO` and `NOT_EQUAL_TO`.
+	// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
 	ComparisonOperator string `pulumi:"comparisonOperator"`
 	// Retry times. Valid value ranges: (1~10).
 	ContinuousTime int `pulumi:"continuousTime"`
 	// Cooldwon time in second. Default is `30`0.
 	Cooldown *int `pulumi:"cooldown"`
-	// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-	// `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+	// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
 	MetricName string `pulumi:"metricName"`
 	// An ID group of users to be notified when an alarm is triggered.
 	NotificationUserGroupIds []string `pulumi:"notificationUserGroupIds"`
@@ -202,22 +216,17 @@ type scalingPolicyArgs struct {
 
 // The set of arguments for constructing a ScalingPolicy resource.
 type ScalingPolicyArgs struct {
-	// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-	// `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+	// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
 	AdjustmentType pulumi.StringInput
-	// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-	// increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-	// type, it defines an absolute number of the existing Auto Scaling group size.
+	// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
 	AdjustmentValue pulumi.IntInput
-	// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-	// `EQUAL_TO` and `NOT_EQUAL_TO`.
+	// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
 	ComparisonOperator pulumi.StringInput
 	// Retry times. Valid value ranges: (1~10).
 	ContinuousTime pulumi.IntInput
 	// Cooldwon time in second. Default is `30`0.
 	Cooldown pulumi.IntPtrInput
-	// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-	// `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+	// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
 	MetricName pulumi.StringInput
 	// An ID group of users to be notified when an alarm is triggered.
 	NotificationUserGroupIds pulumi.StringArrayInput
@@ -320,21 +329,17 @@ func (o ScalingPolicyOutput) ToScalingPolicyOutputWithContext(ctx context.Contex
 	return o
 }
 
-// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-// `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+// Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
 func (o ScalingPolicyOutput) AdjustmentType() pulumi.StringOutput {
 	return o.ApplyT(func(v *ScalingPolicy) pulumi.StringOutput { return v.AdjustmentType }).(pulumi.StringOutput)
 }
 
-// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-// increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-// type, it defines an absolute number of the existing Auto Scaling group size.
+// Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
 func (o ScalingPolicyOutput) AdjustmentValue() pulumi.IntOutput {
 	return o.ApplyT(func(v *ScalingPolicy) pulumi.IntOutput { return v.AdjustmentValue }).(pulumi.IntOutput)
 }
 
-// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-// `EQUAL_TO` and `NOT_EQUAL_TO`.
+// Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
 func (o ScalingPolicyOutput) ComparisonOperator() pulumi.StringOutput {
 	return o.ApplyT(func(v *ScalingPolicy) pulumi.StringOutput { return v.ComparisonOperator }).(pulumi.StringOutput)
 }
@@ -349,8 +354,7 @@ func (o ScalingPolicyOutput) Cooldown() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ScalingPolicy) pulumi.IntPtrOutput { return v.Cooldown }).(pulumi.IntPtrOutput)
 }
 
-// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-// `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+// Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
 func (o ScalingPolicyOutput) MetricName() pulumi.StringOutput {
 	return o.ApplyT(func(v *ScalingPolicy) pulumi.StringOutput { return v.MetricName }).(pulumi.StringOutput)
 }

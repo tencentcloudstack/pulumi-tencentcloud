@@ -7,17 +7,35 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
-    'APIRequestParameter',
-    'APIResponseErrorCode',
+    'ApiRequestParameter',
+    'ApiResponseErrorCode',
     'ServiceApiList',
     'ServiceUsagePlanList',
     'UsagePlanAttachList',
+    'GetApiKeysListResult',
+    'GetApisListResult',
+    'GetApisListRequestParameterResult',
+    'GetApisListResponseErrorCodeResult',
+    'GetCustomerDomainsListResult',
+    'GetCustomerDomainsListPathMappingResult',
+    'GetIpStrategiesListResult',
+    'GetIpStrategiesListAttachListResult',
+    'GetServicesListResult',
+    'GetServicesListUsagePlanListResult',
+    'GetThrottlingApisListResult',
+    'GetThrottlingApisListApiEnvironmentStrategyResult',
+    'GetThrottlingApisListApiEnvironmentStrategyStrategyListResult',
+    'GetThrottlingServicesListResult',
+    'GetThrottlingServicesListEnvironmentResult',
+    'GetUsagePlanEnvironmentsListResult',
+    'GetUsagePlansListResult',
 ]
 
 @pulumi.output_type
-class APIRequestParameter(dict):
+class ApiRequestParameter(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -25,14 +43,14 @@ class APIRequestParameter(dict):
             suggest = "default_value"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in APIRequestParameter. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in ApiRequestParameter. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        APIRequestParameter.__key_warning(key)
+        ApiRequestParameter.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        APIRequestParameter.__key_warning(key)
+        ApiRequestParameter.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -42,6 +60,14 @@ class APIRequestParameter(dict):
                  default_value: Optional[str] = None,
                  desc: Optional[str] = None,
                  required: Optional[bool] = None):
+        """
+        :param str name: Parameter name.
+        :param str position: Parameter location.
+        :param str type: Parameter type.
+        :param str default_value: Parameter default value.
+        :param str desc: Parameter description.
+        :param bool required: If this parameter required. Default value: `false`.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "position", position)
         pulumi.set(__self__, "type", type)
@@ -55,36 +81,54 @@ class APIRequestParameter(dict):
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Parameter name.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def position(self) -> str:
+        """
+        Parameter location.
+        """
         return pulumi.get(self, "position")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        Parameter type.
+        """
         return pulumi.get(self, "type")
 
     @property
     @pulumi.getter(name="defaultValue")
     def default_value(self) -> Optional[str]:
+        """
+        Parameter default value.
+        """
         return pulumi.get(self, "default_value")
 
     @property
     @pulumi.getter
     def desc(self) -> Optional[str]:
+        """
+        Parameter description.
+        """
         return pulumi.get(self, "desc")
 
     @property
     @pulumi.getter
     def required(self) -> Optional[bool]:
+        """
+        If this parameter required. Default value: `false`.
+        """
         return pulumi.get(self, "required")
 
 
 @pulumi.output_type
-class APIResponseErrorCode(dict):
+class ApiResponseErrorCode(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -94,14 +138,14 @@ class APIResponseErrorCode(dict):
             suggest = "need_convert"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in APIResponseErrorCode. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in ApiResponseErrorCode. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        APIResponseErrorCode.__key_warning(key)
+        ApiResponseErrorCode.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        APIResponseErrorCode.__key_warning(key)
+        ApiResponseErrorCode.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -110,6 +154,13 @@ class APIResponseErrorCode(dict):
                  converted_code: Optional[int] = None,
                  desc: Optional[str] = None,
                  need_convert: Optional[bool] = None):
+        """
+        :param int code: Custom response configuration error code.
+        :param str msg: Custom response configuration error message.
+        :param int converted_code: Custom error code conversion.
+        :param str desc: Parameter description.
+        :param bool need_convert: Whether to enable error code conversion. Default value: `false`.
+        """
         pulumi.set(__self__, "code", code)
         pulumi.set(__self__, "msg", msg)
         if converted_code is not None:
@@ -122,26 +173,41 @@ class APIResponseErrorCode(dict):
     @property
     @pulumi.getter
     def code(self) -> int:
+        """
+        Custom response configuration error code.
+        """
         return pulumi.get(self, "code")
 
     @property
     @pulumi.getter
     def msg(self) -> str:
+        """
+        Custom response configuration error message.
+        """
         return pulumi.get(self, "msg")
 
     @property
     @pulumi.getter(name="convertedCode")
     def converted_code(self) -> Optional[int]:
+        """
+        Custom error code conversion.
+        """
         return pulumi.get(self, "converted_code")
 
     @property
     @pulumi.getter
     def desc(self) -> Optional[str]:
+        """
+        Parameter description.
+        """
         return pulumi.get(self, "desc")
 
     @property
     @pulumi.getter(name="needConvert")
     def need_convert(self) -> Optional[bool]:
+        """
+        Whether to enable error code conversion. Default value: `false`.
+        """
         return pulumi.get(self, "need_convert")
 
 
@@ -174,6 +240,13 @@ class ServiceApiList(dict):
                  api_name: Optional[str] = None,
                  method: Optional[str] = None,
                  path: Optional[str] = None):
+        """
+        :param str api_desc: Description of the API.
+        :param str api_id: ID of the API.
+        :param str api_name: Name of the API.
+        :param str method: Method of the API.
+        :param str path: Path of the API.
+        """
         if api_desc is not None:
             pulumi.set(__self__, "api_desc", api_desc)
         if api_id is not None:
@@ -188,26 +261,41 @@ class ServiceApiList(dict):
     @property
     @pulumi.getter(name="apiDesc")
     def api_desc(self) -> Optional[str]:
+        """
+        Description of the API.
+        """
         return pulumi.get(self, "api_desc")
 
     @property
     @pulumi.getter(name="apiId")
     def api_id(self) -> Optional[str]:
+        """
+        ID of the API.
+        """
         return pulumi.get(self, "api_id")
 
     @property
     @pulumi.getter(name="apiName")
     def api_name(self) -> Optional[str]:
+        """
+        Name of the API.
+        """
         return pulumi.get(self, "api_name")
 
     @property
     @pulumi.getter
     def method(self) -> Optional[str]:
+        """
+        Method of the API.
+        """
         return pulumi.get(self, "method")
 
     @property
     @pulumi.getter
     def path(self) -> Optional[str]:
+        """
+        Path of the API.
+        """
         return pulumi.get(self, "path")
 
 
@@ -241,6 +329,12 @@ class ServiceUsagePlanList(dict):
                  bind_type: Optional[str] = None,
                  usage_plan_id: Optional[str] = None,
                  usage_plan_name: Optional[str] = None):
+        """
+        :param str api_id: ID of the API.
+        :param str bind_type: Binding type.
+        :param str usage_plan_id: ID of the usage plan.
+        :param str usage_plan_name: Name of the usage plan.
+        """
         if api_id is not None:
             pulumi.set(__self__, "api_id", api_id)
         if bind_type is not None:
@@ -253,21 +347,33 @@ class ServiceUsagePlanList(dict):
     @property
     @pulumi.getter(name="apiId")
     def api_id(self) -> Optional[str]:
+        """
+        ID of the API.
+        """
         return pulumi.get(self, "api_id")
 
     @property
     @pulumi.getter(name="bindType")
     def bind_type(self) -> Optional[str]:
+        """
+        Binding type.
+        """
         return pulumi.get(self, "bind_type")
 
     @property
     @pulumi.getter(name="usagePlanId")
     def usage_plan_id(self) -> Optional[str]:
+        """
+        ID of the usage plan.
+        """
         return pulumi.get(self, "usage_plan_id")
 
     @property
     @pulumi.getter(name="usagePlanName")
     def usage_plan_name(self) -> Optional[str]:
+        """
+        Name of the usage plan.
+        """
         return pulumi.get(self, "usage_plan_name")
 
 
@@ -310,6 +416,17 @@ class UsagePlanAttachList(dict):
                  path: Optional[str] = None,
                  service_id: Optional[str] = None,
                  service_name: Optional[str] = None):
+        """
+        :param str api_id: The API ID, this value is empty if attach service.
+        :param str api_name: The API name, this value is empty if attach service.
+        :param str create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param str environment: The environment name.
+        :param str method: The API method, this value is empty if attach service.
+        :param str modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param str path: The API path, this value is empty if attach service.
+        :param str service_id: The service ID.
+        :param str service_name: The service name.
+        """
         if api_id is not None:
             pulumi.set(__self__, "api_id", api_id)
         if api_name is not None:
@@ -332,46 +449,1600 @@ class UsagePlanAttachList(dict):
     @property
     @pulumi.getter(name="apiId")
     def api_id(self) -> Optional[str]:
+        """
+        The API ID, this value is empty if attach service.
+        """
         return pulumi.get(self, "api_id")
 
     @property
     @pulumi.getter(name="apiName")
     def api_name(self) -> Optional[str]:
+        """
+        The API name, this value is empty if attach service.
+        """
         return pulumi.get(self, "api_name")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> Optional[str]:
+        """
+        Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def environment(self) -> Optional[str]:
+        """
+        The environment name.
+        """
         return pulumi.get(self, "environment")
 
     @property
     @pulumi.getter
     def method(self) -> Optional[str]:
+        """
+        The API method, this value is empty if attach service.
+        """
         return pulumi.get(self, "method")
 
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> Optional[str]:
+        """
+        Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        """
         return pulumi.get(self, "modify_time")
 
     @property
     @pulumi.getter
     def path(self) -> Optional[str]:
+        """
+        The API path, this value is empty if attach service.
+        """
         return pulumi.get(self, "path")
 
     @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> Optional[str]:
+        """
+        The service ID.
+        """
         return pulumi.get(self, "service_id")
 
     @property
     @pulumi.getter(name="serviceName")
     def service_name(self) -> Optional[str]:
+        """
+        The service name.
+        """
         return pulumi.get(self, "service_name")
+
+
+@pulumi.output_type
+class GetApiKeysListResult(dict):
+    def __init__(__self__, *,
+                 access_key_secret: str,
+                 api_key_id: str,
+                 create_time: str,
+                 modify_time: str,
+                 status: str):
+        """
+        :param str access_key_secret: Created API key.
+        :param str api_key_id: Created API key ID, this field is exactly the same as ID.
+        :param str create_time: Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+        :param str modify_time: Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+        :param str status: Key status. Values: `on`, `off`.
+        """
+        pulumi.set(__self__, "access_key_secret", access_key_secret)
+        pulumi.set(__self__, "api_key_id", api_key_id)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="accessKeySecret")
+    def access_key_secret(self) -> str:
+        """
+        Created API key.
+        """
+        return pulumi.get(self, "access_key_secret")
+
+    @property
+    @pulumi.getter(name="apiKeyId")
+    def api_key_id(self) -> str:
+        """
+        Created API key ID, this field is exactly the same as ID.
+        """
+        return pulumi.get(self, "api_key_id")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Key status. Values: `on`, `off`.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetApisListResult(dict):
+    def __init__(__self__, *,
+                 api_desc: str,
+                 api_name: str,
+                 auth_type: str,
+                 create_time: str,
+                 enable_cors: bool,
+                 modify_time: str,
+                 protocol: str,
+                 request_config_method: str,
+                 request_config_path: str,
+                 request_parameters: Sequence['outputs.GetApisListRequestParameterResult'],
+                 response_error_codes: Sequence['outputs.GetApisListResponseErrorCodeResult'],
+                 response_fail_example: str,
+                 response_success_example: str,
+                 response_type: str,
+                 service_config_method: str,
+                 service_config_mock_return_message: str,
+                 service_config_path: str,
+                 service_config_product: str,
+                 service_config_scf_function_name: str,
+                 service_config_scf_function_namespace: str,
+                 service_config_scf_function_qualifier: str,
+                 service_config_timeout: int,
+                 service_config_type: str,
+                 service_config_url: str,
+                 service_config_vpc_id: str,
+                 service_id: str):
+        """
+        :param str api_desc: Custom API description.
+        :param str api_name: Custom API name.
+        :param str auth_type: API authentication type. Valid values: `SECRET`, `NONE`. `SECRET` means key pair authentication, `NONE` means no authentication.
+        :param str create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param bool enable_cors: Whether to enable CORS.
+        :param str modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param str protocol: API frontend request type, such as `HTTP`,`WEBSOCKET`.
+        :param str request_config_method: Request frontend method configuration. Like `GET`,`POST`,`PUT`,`DELETE`,`HEAD`,`ANY`.
+        :param str request_config_path: Request frontend path configuration. Like `/user/getinfo`.
+        :param Sequence['GetApisListRequestParameterArgs'] request_parameters: Frontend request parameters.
+        :param Sequence['GetApisListResponseErrorCodeArgs'] response_error_codes: Custom error code configuration. Must keep at least one after set.
+        :param str response_fail_example: Response failure sample of custom response configuration.
+        :param str response_success_example: Successful response sample of custom response configuration.
+        :param str response_type: Return type.
+        :param str service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
+        :param str service_config_mock_return_message: Returned information of API backend mocking.
+        :param str service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
+        :param str service_config_product: Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+        :param str service_config_scf_function_name: SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
+        :param str service_config_scf_function_namespace: SCF function namespace. This parameter takes effect when  `service_config_type` is `SCF`.
+        :param str service_config_scf_function_qualifier: SCF function version. This parameter takes effect when `service_config_type`  is `SCF`.
+        :param int service_config_timeout: API backend service timeout period in seconds.
+        :param str service_config_type: API backend service type.
+        :param str service_config_url: API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+        :param str service_config_vpc_id: Unique VPC ID.
+        :param str service_id: Service ID for query.
+        """
+        pulumi.set(__self__, "api_desc", api_desc)
+        pulumi.set(__self__, "api_name", api_name)
+        pulumi.set(__self__, "auth_type", auth_type)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "enable_cors", enable_cors)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "request_config_method", request_config_method)
+        pulumi.set(__self__, "request_config_path", request_config_path)
+        pulumi.set(__self__, "request_parameters", request_parameters)
+        pulumi.set(__self__, "response_error_codes", response_error_codes)
+        pulumi.set(__self__, "response_fail_example", response_fail_example)
+        pulumi.set(__self__, "response_success_example", response_success_example)
+        pulumi.set(__self__, "response_type", response_type)
+        pulumi.set(__self__, "service_config_method", service_config_method)
+        pulumi.set(__self__, "service_config_mock_return_message", service_config_mock_return_message)
+        pulumi.set(__self__, "service_config_path", service_config_path)
+        pulumi.set(__self__, "service_config_product", service_config_product)
+        pulumi.set(__self__, "service_config_scf_function_name", service_config_scf_function_name)
+        pulumi.set(__self__, "service_config_scf_function_namespace", service_config_scf_function_namespace)
+        pulumi.set(__self__, "service_config_scf_function_qualifier", service_config_scf_function_qualifier)
+        pulumi.set(__self__, "service_config_timeout", service_config_timeout)
+        pulumi.set(__self__, "service_config_type", service_config_type)
+        pulumi.set(__self__, "service_config_url", service_config_url)
+        pulumi.set(__self__, "service_config_vpc_id", service_config_vpc_id)
+        pulumi.set(__self__, "service_id", service_id)
+
+    @property
+    @pulumi.getter(name="apiDesc")
+    def api_desc(self) -> str:
+        """
+        Custom API description.
+        """
+        return pulumi.get(self, "api_desc")
+
+    @property
+    @pulumi.getter(name="apiName")
+    def api_name(self) -> str:
+        """
+        Custom API name.
+        """
+        return pulumi.get(self, "api_name")
+
+    @property
+    @pulumi.getter(name="authType")
+    def auth_type(self) -> str:
+        """
+        API authentication type. Valid values: `SECRET`, `NONE`. `SECRET` means key pair authentication, `NONE` means no authentication.
+        """
+        return pulumi.get(self, "auth_type")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="enableCors")
+    def enable_cors(self) -> bool:
+        """
+        Whether to enable CORS.
+        """
+        return pulumi.get(self, "enable_cors")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        API frontend request type, such as `HTTP`,`WEBSOCKET`.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="requestConfigMethod")
+    def request_config_method(self) -> str:
+        """
+        Request frontend method configuration. Like `GET`,`POST`,`PUT`,`DELETE`,`HEAD`,`ANY`.
+        """
+        return pulumi.get(self, "request_config_method")
+
+    @property
+    @pulumi.getter(name="requestConfigPath")
+    def request_config_path(self) -> str:
+        """
+        Request frontend path configuration. Like `/user/getinfo`.
+        """
+        return pulumi.get(self, "request_config_path")
+
+    @property
+    @pulumi.getter(name="requestParameters")
+    def request_parameters(self) -> Sequence['outputs.GetApisListRequestParameterResult']:
+        """
+        Frontend request parameters.
+        """
+        return pulumi.get(self, "request_parameters")
+
+    @property
+    @pulumi.getter(name="responseErrorCodes")
+    def response_error_codes(self) -> Sequence['outputs.GetApisListResponseErrorCodeResult']:
+        """
+        Custom error code configuration. Must keep at least one after set.
+        """
+        return pulumi.get(self, "response_error_codes")
+
+    @property
+    @pulumi.getter(name="responseFailExample")
+    def response_fail_example(self) -> str:
+        """
+        Response failure sample of custom response configuration.
+        """
+        return pulumi.get(self, "response_fail_example")
+
+    @property
+    @pulumi.getter(name="responseSuccessExample")
+    def response_success_example(self) -> str:
+        """
+        Successful response sample of custom response configuration.
+        """
+        return pulumi.get(self, "response_success_example")
+
+    @property
+    @pulumi.getter(name="responseType")
+    def response_type(self) -> str:
+        """
+        Return type.
+        """
+        return pulumi.get(self, "response_type")
+
+    @property
+    @pulumi.getter(name="serviceConfigMethod")
+    def service_config_method(self) -> str:
+        """
+        API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
+        """
+        return pulumi.get(self, "service_config_method")
+
+    @property
+    @pulumi.getter(name="serviceConfigMockReturnMessage")
+    def service_config_mock_return_message(self) -> str:
+        """
+        Returned information of API backend mocking.
+        """
+        return pulumi.get(self, "service_config_mock_return_message")
+
+    @property
+    @pulumi.getter(name="serviceConfigPath")
+    def service_config_path(self) -> str:
+        """
+        API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
+        """
+        return pulumi.get(self, "service_config_path")
+
+    @property
+    @pulumi.getter(name="serviceConfigProduct")
+    def service_config_product(self) -> str:
+        """
+        Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+        """
+        return pulumi.get(self, "service_config_product")
+
+    @property
+    @pulumi.getter(name="serviceConfigScfFunctionName")
+    def service_config_scf_function_name(self) -> str:
+        """
+        SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
+        """
+        return pulumi.get(self, "service_config_scf_function_name")
+
+    @property
+    @pulumi.getter(name="serviceConfigScfFunctionNamespace")
+    def service_config_scf_function_namespace(self) -> str:
+        """
+        SCF function namespace. This parameter takes effect when  `service_config_type` is `SCF`.
+        """
+        return pulumi.get(self, "service_config_scf_function_namespace")
+
+    @property
+    @pulumi.getter(name="serviceConfigScfFunctionQualifier")
+    def service_config_scf_function_qualifier(self) -> str:
+        """
+        SCF function version. This parameter takes effect when `service_config_type`  is `SCF`.
+        """
+        return pulumi.get(self, "service_config_scf_function_qualifier")
+
+    @property
+    @pulumi.getter(name="serviceConfigTimeout")
+    def service_config_timeout(self) -> int:
+        """
+        API backend service timeout period in seconds.
+        """
+        return pulumi.get(self, "service_config_timeout")
+
+    @property
+    @pulumi.getter(name="serviceConfigType")
+    def service_config_type(self) -> str:
+        """
+        API backend service type.
+        """
+        return pulumi.get(self, "service_config_type")
+
+    @property
+    @pulumi.getter(name="serviceConfigUrl")
+    def service_config_url(self) -> str:
+        """
+        API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+        """
+        return pulumi.get(self, "service_config_url")
+
+    @property
+    @pulumi.getter(name="serviceConfigVpcId")
+    def service_config_vpc_id(self) -> str:
+        """
+        Unique VPC ID.
+        """
+        return pulumi.get(self, "service_config_vpc_id")
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> str:
+        """
+        Service ID for query.
+        """
+        return pulumi.get(self, "service_id")
+
+
+@pulumi.output_type
+class GetApisListRequestParameterResult(dict):
+    def __init__(__self__, *,
+                 default_value: str,
+                 desc: str,
+                 name: str,
+                 position: str,
+                 required: bool,
+                 type: str):
+        """
+        :param str default_value: Parameter default value.
+        :param str desc: Parameter description.
+        :param str name: Parameter name.
+        :param str position: Parameter location.
+        :param bool required: If this parameter required.
+        :param str type: Parameter type.
+        """
+        pulumi.set(__self__, "default_value", default_value)
+        pulumi.set(__self__, "desc", desc)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "position", position)
+        pulumi.set(__self__, "required", required)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="defaultValue")
+    def default_value(self) -> str:
+        """
+        Parameter default value.
+        """
+        return pulumi.get(self, "default_value")
+
+    @property
+    @pulumi.getter
+    def desc(self) -> str:
+        """
+        Parameter description.
+        """
+        return pulumi.get(self, "desc")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Parameter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def position(self) -> str:
+        """
+        Parameter location.
+        """
+        return pulumi.get(self, "position")
+
+    @property
+    @pulumi.getter
+    def required(self) -> bool:
+        """
+        If this parameter required.
+        """
+        return pulumi.get(self, "required")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Parameter type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetApisListResponseErrorCodeResult(dict):
+    def __init__(__self__, *,
+                 code: int,
+                 converted_code: int,
+                 desc: str,
+                 msg: str,
+                 need_convert: bool):
+        """
+        :param int code: Custom response configuration error code.
+        :param int converted_code: Custom error code conversion.
+        :param str desc: Parameter description.
+        :param str msg: Custom response configuration error message.
+        :param bool need_convert: Whether to enable error code conversion. Default value: `false`.
+        """
+        pulumi.set(__self__, "code", code)
+        pulumi.set(__self__, "converted_code", converted_code)
+        pulumi.set(__self__, "desc", desc)
+        pulumi.set(__self__, "msg", msg)
+        pulumi.set(__self__, "need_convert", need_convert)
+
+    @property
+    @pulumi.getter
+    def code(self) -> int:
+        """
+        Custom response configuration error code.
+        """
+        return pulumi.get(self, "code")
+
+    @property
+    @pulumi.getter(name="convertedCode")
+    def converted_code(self) -> int:
+        """
+        Custom error code conversion.
+        """
+        return pulumi.get(self, "converted_code")
+
+    @property
+    @pulumi.getter
+    def desc(self) -> str:
+        """
+        Parameter description.
+        """
+        return pulumi.get(self, "desc")
+
+    @property
+    @pulumi.getter
+    def msg(self) -> str:
+        """
+        Custom response configuration error message.
+        """
+        return pulumi.get(self, "msg")
+
+    @property
+    @pulumi.getter(name="needConvert")
+    def need_convert(self) -> bool:
+        """
+        Whether to enable error code conversion. Default value: `false`.
+        """
+        return pulumi.get(self, "need_convert")
+
+
+@pulumi.output_type
+class GetCustomerDomainsListResult(dict):
+    def __init__(__self__, *,
+                 certificate_id: str,
+                 domain_name: str,
+                 is_default_mapping: bool,
+                 is_status_on: bool,
+                 net_type: str,
+                 path_mappings: Sequence['outputs.GetCustomerDomainsListPathMappingResult'],
+                 protocol: str):
+        """
+        :param str certificate_id: The certificate ID.
+        :param str domain_name: Domain name.
+        :param bool is_default_mapping: Whether to use default path mapping. Valid values: `true`, `false`. `true` means to use default path mapping, `false` means to use custom path mapping.
+        :param bool is_status_on: Domain name resolution status. Valid values: `true`, `false`. `true` means normal parsing, `false` means parsing failed.
+        :param str net_type: Network type.
+        :param Sequence['GetCustomerDomainsListPathMappingArgs'] path_mappings: Domain name mapping path and environment list.
+        :param str protocol: Custom domain name agreement type.
+        """
+        pulumi.set(__self__, "certificate_id", certificate_id)
+        pulumi.set(__self__, "domain_name", domain_name)
+        pulumi.set(__self__, "is_default_mapping", is_default_mapping)
+        pulumi.set(__self__, "is_status_on", is_status_on)
+        pulumi.set(__self__, "net_type", net_type)
+        pulumi.set(__self__, "path_mappings", path_mappings)
+        pulumi.set(__self__, "protocol", protocol)
+
+    @property
+    @pulumi.getter(name="certificateId")
+    def certificate_id(self) -> str:
+        """
+        The certificate ID.
+        """
+        return pulumi.get(self, "certificate_id")
+
+    @property
+    @pulumi.getter(name="domainName")
+    def domain_name(self) -> str:
+        """
+        Domain name.
+        """
+        return pulumi.get(self, "domain_name")
+
+    @property
+    @pulumi.getter(name="isDefaultMapping")
+    def is_default_mapping(self) -> bool:
+        """
+        Whether to use default path mapping. Valid values: `true`, `false`. `true` means to use default path mapping, `false` means to use custom path mapping.
+        """
+        return pulumi.get(self, "is_default_mapping")
+
+    @property
+    @pulumi.getter(name="isStatusOn")
+    def is_status_on(self) -> bool:
+        """
+        Domain name resolution status. Valid values: `true`, `false`. `true` means normal parsing, `false` means parsing failed.
+        """
+        return pulumi.get(self, "is_status_on")
+
+    @property
+    @pulumi.getter(name="netType")
+    def net_type(self) -> str:
+        """
+        Network type.
+        """
+        return pulumi.get(self, "net_type")
+
+    @property
+    @pulumi.getter(name="pathMappings")
+    def path_mappings(self) -> Sequence['outputs.GetCustomerDomainsListPathMappingResult']:
+        """
+        Domain name mapping path and environment list.
+        """
+        return pulumi.get(self, "path_mappings")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Custom domain name agreement type.
+        """
+        return pulumi.get(self, "protocol")
+
+
+@pulumi.output_type
+class GetCustomerDomainsListPathMappingResult(dict):
+    def __init__(__self__, *,
+                 environment: str,
+                 path: str):
+        """
+        :param str environment: Release environment.
+        :param str path: The domain mapping path.
+        """
+        pulumi.set(__self__, "environment", environment)
+        pulumi.set(__self__, "path", path)
+
+    @property
+    @pulumi.getter
+    def environment(self) -> str:
+        """
+        Release environment.
+        """
+        return pulumi.get(self, "environment")
+
+    @property
+    @pulumi.getter
+    def path(self) -> str:
+        """
+        The domain mapping path.
+        """
+        return pulumi.get(self, "path")
+
+
+@pulumi.output_type
+class GetIpStrategiesListResult(dict):
+    def __init__(__self__, *,
+                 attach_lists: Sequence['outputs.GetIpStrategiesListAttachListResult'],
+                 bind_api_total_count: int,
+                 create_time: str,
+                 ip_list: str,
+                 modify_time: str,
+                 service_id: str,
+                 strategy_id: str,
+                 strategy_name: str,
+                 strategy_type: str):
+        """
+        :param Sequence['GetIpStrategiesListAttachListArgs'] attach_lists: List of bound API details.
+        :param int bind_api_total_count: The number of API bound to the strategy.
+        :param str create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param str ip_list: The list of IP.
+        :param str modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param str service_id: The service ID to be queried.
+        :param str strategy_id: The strategy ID.
+        :param str strategy_name: Name of IP policy.
+        :param str strategy_type: Type of the strategy.
+        """
+        pulumi.set(__self__, "attach_lists", attach_lists)
+        pulumi.set(__self__, "bind_api_total_count", bind_api_total_count)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "ip_list", ip_list)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "service_id", service_id)
+        pulumi.set(__self__, "strategy_id", strategy_id)
+        pulumi.set(__self__, "strategy_name", strategy_name)
+        pulumi.set(__self__, "strategy_type", strategy_type)
+
+    @property
+    @pulumi.getter(name="attachLists")
+    def attach_lists(self) -> Sequence['outputs.GetIpStrategiesListAttachListResult']:
+        """
+        List of bound API details.
+        """
+        return pulumi.get(self, "attach_lists")
+
+    @property
+    @pulumi.getter(name="bindApiTotalCount")
+    def bind_api_total_count(self) -> int:
+        """
+        The number of API bound to the strategy.
+        """
+        return pulumi.get(self, "bind_api_total_count")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="ipList")
+    def ip_list(self) -> str:
+        """
+        The list of IP.
+        """
+        return pulumi.get(self, "ip_list")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> str:
+        """
+        The service ID to be queried.
+        """
+        return pulumi.get(self, "service_id")
+
+    @property
+    @pulumi.getter(name="strategyId")
+    def strategy_id(self) -> str:
+        """
+        The strategy ID.
+        """
+        return pulumi.get(self, "strategy_id")
+
+    @property
+    @pulumi.getter(name="strategyName")
+    def strategy_name(self) -> str:
+        """
+        Name of IP policy.
+        """
+        return pulumi.get(self, "strategy_name")
+
+    @property
+    @pulumi.getter(name="strategyType")
+    def strategy_type(self) -> str:
+        """
+        Type of the strategy.
+        """
+        return pulumi.get(self, "strategy_type")
+
+
+@pulumi.output_type
+class GetIpStrategiesListAttachListResult(dict):
+    def __init__(__self__, *,
+                 api_business_type: str,
+                 api_desc: str,
+                 api_id: str,
+                 api_name: str,
+                 api_type: str,
+                 auth_relation_api_id: str,
+                 auth_type: str,
+                 create_time: str,
+                 method: str,
+                 modify_time: str,
+                 oauth_config: Mapping[str, Any],
+                 path: str,
+                 protocol: str,
+                 relation_business_api_ids: Sequence[str],
+                 service_id: str,
+                 tags: Sequence[str],
+                 uniq_vpc_id: str,
+                 vpc_id: int):
+        """
+        :param str api_business_type: The type of oauth API. This field is valid when the `auth_type` is `OAUTH`, and the values are `NORMAL` (business API) and `OAUTH` (authorization API).
+        :param str api_desc: API interface description.
+        :param str api_id: The API ID.
+        :param str api_name: API name.
+        :param str api_type: API type. Valid values: `NORMAL`, `TSF`. `NORMAL` means common API, `TSF` means microservice API.
+        :param str auth_relation_api_id: The unique ID of the associated authorization API, which takes effect when the authType is `OAUTH` and `ApiBusinessType` is normal. Identifies the unique ID of the oauth2.0 authorization API bound to the business API.
+        :param str auth_type: API authentication type. Valid values: `SECRET`, `NONE`, `OAUTH`. `SECRET` means key pair authentication, `NONE` means no authentication.
+        :param str create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param str method: API request method.
+        :param str modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param Mapping[str, Any] oauth_config: OAUTH configuration information. It takes effect when authType is `OAUTH`.
+        :param str path: API path.
+        :param str protocol: API protocol.
+        :param Sequence[str] relation_business_api_ids: List of business API associated with authorized API.
+        :param str service_id: The service ID to be queried.
+        :param Sequence[str] tags: The label information associated with the API.
+        :param str uniq_vpc_id: VPC unique ID.
+        :param int vpc_id: VPC ID.
+        """
+        pulumi.set(__self__, "api_business_type", api_business_type)
+        pulumi.set(__self__, "api_desc", api_desc)
+        pulumi.set(__self__, "api_id", api_id)
+        pulumi.set(__self__, "api_name", api_name)
+        pulumi.set(__self__, "api_type", api_type)
+        pulumi.set(__self__, "auth_relation_api_id", auth_relation_api_id)
+        pulumi.set(__self__, "auth_type", auth_type)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "method", method)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "oauth_config", oauth_config)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "relation_business_api_ids", relation_business_api_ids)
+        pulumi.set(__self__, "service_id", service_id)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="apiBusinessType")
+    def api_business_type(self) -> str:
+        """
+        The type of oauth API. This field is valid when the `auth_type` is `OAUTH`, and the values are `NORMAL` (business API) and `OAUTH` (authorization API).
+        """
+        return pulumi.get(self, "api_business_type")
+
+    @property
+    @pulumi.getter(name="apiDesc")
+    def api_desc(self) -> str:
+        """
+        API interface description.
+        """
+        return pulumi.get(self, "api_desc")
+
+    @property
+    @pulumi.getter(name="apiId")
+    def api_id(self) -> str:
+        """
+        The API ID.
+        """
+        return pulumi.get(self, "api_id")
+
+    @property
+    @pulumi.getter(name="apiName")
+    def api_name(self) -> str:
+        """
+        API name.
+        """
+        return pulumi.get(self, "api_name")
+
+    @property
+    @pulumi.getter(name="apiType")
+    def api_type(self) -> str:
+        """
+        API type. Valid values: `NORMAL`, `TSF`. `NORMAL` means common API, `TSF` means microservice API.
+        """
+        return pulumi.get(self, "api_type")
+
+    @property
+    @pulumi.getter(name="authRelationApiId")
+    def auth_relation_api_id(self) -> str:
+        """
+        The unique ID of the associated authorization API, which takes effect when the authType is `OAUTH` and `ApiBusinessType` is normal. Identifies the unique ID of the oauth2.0 authorization API bound to the business API.
+        """
+        return pulumi.get(self, "auth_relation_api_id")
+
+    @property
+    @pulumi.getter(name="authType")
+    def auth_type(self) -> str:
+        """
+        API authentication type. Valid values: `SECRET`, `NONE`, `OAUTH`. `SECRET` means key pair authentication, `NONE` means no authentication.
+        """
+        return pulumi.get(self, "auth_type")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def method(self) -> str:
+        """
+        API request method.
+        """
+        return pulumi.get(self, "method")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter(name="oauthConfig")
+    def oauth_config(self) -> Mapping[str, Any]:
+        """
+        OAUTH configuration information. It takes effect when authType is `OAUTH`.
+        """
+        return pulumi.get(self, "oauth_config")
+
+    @property
+    @pulumi.getter
+    def path(self) -> str:
+        """
+        API path.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        API protocol.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="relationBusinessApiIds")
+    def relation_business_api_ids(self) -> Sequence[str]:
+        """
+        List of business API associated with authorized API.
+        """
+        return pulumi.get(self, "relation_business_api_ids")
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> str:
+        """
+        The service ID to be queried.
+        """
+        return pulumi.get(self, "service_id")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence[str]:
+        """
+        The label information associated with the API.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> str:
+        """
+        VPC unique ID.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> int:
+        """
+        VPC ID.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetServicesListResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 exclusive_set_name: str,
+                 inner_http_port: int,
+                 inner_https_port: int,
+                 internal_sub_domain: str,
+                 ip_version: str,
+                 modify_time: str,
+                 net_types: Sequence[str],
+                 outer_sub_domain: str,
+                 protocol: str,
+                 service_desc: str,
+                 service_id: str,
+                 service_name: str,
+                 usage_plan_lists: Sequence['outputs.GetServicesListUsagePlanListResult']):
+        """
+        :param str create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param str exclusive_set_name: Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        :param int inner_http_port: Port number for http access over private network.
+        :param int inner_https_port: Port number for https access over private network.
+        :param str internal_sub_domain: Private network access sub-domain name.
+        :param str ip_version: IP version number.
+        :param str modify_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        :param Sequence[str] net_types: Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
+        :param str outer_sub_domain: Public network access subdomain name.
+        :param str protocol: Service frontend request type. Valid values: `http`, `https`, `http&https`.
+        :param str service_desc: Custom service description.
+        :param str service_id: Service ID for query.
+        :param str service_name: Service name for query.
+        :param Sequence['GetServicesListUsagePlanListArgs'] usage_plan_lists: A list of attach usage plans. Each element contains the following attributes:
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "exclusive_set_name", exclusive_set_name)
+        pulumi.set(__self__, "inner_http_port", inner_http_port)
+        pulumi.set(__self__, "inner_https_port", inner_https_port)
+        pulumi.set(__self__, "internal_sub_domain", internal_sub_domain)
+        pulumi.set(__self__, "ip_version", ip_version)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "net_types", net_types)
+        pulumi.set(__self__, "outer_sub_domain", outer_sub_domain)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "service_desc", service_desc)
+        pulumi.set(__self__, "service_id", service_id)
+        pulumi.set(__self__, "service_name", service_name)
+        pulumi.set(__self__, "usage_plan_lists", usage_plan_lists)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="exclusiveSetName")
+    def exclusive_set_name(self) -> str:
+        """
+        Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+        """
+        return pulumi.get(self, "exclusive_set_name")
+
+    @property
+    @pulumi.getter(name="innerHttpPort")
+    def inner_http_port(self) -> int:
+        """
+        Port number for http access over private network.
+        """
+        return pulumi.get(self, "inner_http_port")
+
+    @property
+    @pulumi.getter(name="innerHttpsPort")
+    def inner_https_port(self) -> int:
+        """
+        Port number for https access over private network.
+        """
+        return pulumi.get(self, "inner_https_port")
+
+    @property
+    @pulumi.getter(name="internalSubDomain")
+    def internal_sub_domain(self) -> str:
+        """
+        Private network access sub-domain name.
+        """
+        return pulumi.get(self, "internal_sub_domain")
+
+    @property
+    @pulumi.getter(name="ipVersion")
+    def ip_version(self) -> str:
+        """
+        IP version number.
+        """
+        return pulumi.get(self, "ip_version")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter(name="netTypes")
+    def net_types(self) -> Sequence[str]:
+        """
+        Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
+        """
+        return pulumi.get(self, "net_types")
+
+    @property
+    @pulumi.getter(name="outerSubDomain")
+    def outer_sub_domain(self) -> str:
+        """
+        Public network access subdomain name.
+        """
+        return pulumi.get(self, "outer_sub_domain")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Service frontend request type. Valid values: `http`, `https`, `http&https`.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="serviceDesc")
+    def service_desc(self) -> str:
+        """
+        Custom service description.
+        """
+        return pulumi.get(self, "service_desc")
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> str:
+        """
+        Service ID for query.
+        """
+        return pulumi.get(self, "service_id")
+
+    @property
+    @pulumi.getter(name="serviceName")
+    def service_name(self) -> str:
+        """
+        Service name for query.
+        """
+        return pulumi.get(self, "service_name")
+
+    @property
+    @pulumi.getter(name="usagePlanLists")
+    def usage_plan_lists(self) -> Sequence['outputs.GetServicesListUsagePlanListResult']:
+        """
+        A list of attach usage plans. Each element contains the following attributes:
+        """
+        return pulumi.get(self, "usage_plan_lists")
+
+
+@pulumi.output_type
+class GetServicesListUsagePlanListResult(dict):
+    def __init__(__self__, *,
+                 api_id: str,
+                 bind_type: str,
+                 usage_plan_id: str,
+                 usage_plan_name: str):
+        """
+        :param str api_id: ID of the API.
+        :param str bind_type: Binding type.
+        :param str usage_plan_id: ID of the usage plan.
+        :param str usage_plan_name: Name of the usage plan.
+        """
+        pulumi.set(__self__, "api_id", api_id)
+        pulumi.set(__self__, "bind_type", bind_type)
+        pulumi.set(__self__, "usage_plan_id", usage_plan_id)
+        pulumi.set(__self__, "usage_plan_name", usage_plan_name)
+
+    @property
+    @pulumi.getter(name="apiId")
+    def api_id(self) -> str:
+        """
+        ID of the API.
+        """
+        return pulumi.get(self, "api_id")
+
+    @property
+    @pulumi.getter(name="bindType")
+    def bind_type(self) -> str:
+        """
+        Binding type.
+        """
+        return pulumi.get(self, "bind_type")
+
+    @property
+    @pulumi.getter(name="usagePlanId")
+    def usage_plan_id(self) -> str:
+        """
+        ID of the usage plan.
+        """
+        return pulumi.get(self, "usage_plan_id")
+
+    @property
+    @pulumi.getter(name="usagePlanName")
+    def usage_plan_name(self) -> str:
+        """
+        Name of the usage plan.
+        """
+        return pulumi.get(self, "usage_plan_name")
+
+
+@pulumi.output_type
+class GetThrottlingApisListResult(dict):
+    def __init__(__self__, *,
+                 api_environment_strategies: Sequence['outputs.GetThrottlingApisListApiEnvironmentStrategyResult'],
+                 service_id: str):
+        """
+        :param Sequence['GetThrottlingApisListApiEnvironmentStrategyArgs'] api_environment_strategies: List of throttling policies bound to API.
+        :param str service_id: Unique service ID of API.
+        """
+        pulumi.set(__self__, "api_environment_strategies", api_environment_strategies)
+        pulumi.set(__self__, "service_id", service_id)
+
+    @property
+    @pulumi.getter(name="apiEnvironmentStrategies")
+    def api_environment_strategies(self) -> Sequence['outputs.GetThrottlingApisListApiEnvironmentStrategyResult']:
+        """
+        List of throttling policies bound to API.
+        """
+        return pulumi.get(self, "api_environment_strategies")
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> str:
+        """
+        Unique service ID of API.
+        """
+        return pulumi.get(self, "service_id")
+
+
+@pulumi.output_type
+class GetThrottlingApisListApiEnvironmentStrategyResult(dict):
+    def __init__(__self__, *,
+                 api_id: str,
+                 api_name: str,
+                 method: str,
+                 path: str,
+                 strategy_lists: Sequence['outputs.GetThrottlingApisListApiEnvironmentStrategyStrategyListResult']):
+        """
+        :param str api_id: Unique API ID.
+        :param str api_name: Custom API name.
+        :param str method: API method.
+        :param str path: API path.
+        :param Sequence['GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs'] strategy_lists: Environment throttling information.
+        """
+        pulumi.set(__self__, "api_id", api_id)
+        pulumi.set(__self__, "api_name", api_name)
+        pulumi.set(__self__, "method", method)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "strategy_lists", strategy_lists)
+
+    @property
+    @pulumi.getter(name="apiId")
+    def api_id(self) -> str:
+        """
+        Unique API ID.
+        """
+        return pulumi.get(self, "api_id")
+
+    @property
+    @pulumi.getter(name="apiName")
+    def api_name(self) -> str:
+        """
+        Custom API name.
+        """
+        return pulumi.get(self, "api_name")
+
+    @property
+    @pulumi.getter
+    def method(self) -> str:
+        """
+        API method.
+        """
+        return pulumi.get(self, "method")
+
+    @property
+    @pulumi.getter
+    def path(self) -> str:
+        """
+        API path.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="strategyLists")
+    def strategy_lists(self) -> Sequence['outputs.GetThrottlingApisListApiEnvironmentStrategyStrategyListResult']:
+        """
+        Environment throttling information.
+        """
+        return pulumi.get(self, "strategy_lists")
+
+
+@pulumi.output_type
+class GetThrottlingApisListApiEnvironmentStrategyStrategyListResult(dict):
+    def __init__(__self__, *,
+                 environment_name: str,
+                 quota: int):
+        """
+        :param str environment_name: Environment name.
+        :param int quota: Throttling value.
+        """
+        pulumi.set(__self__, "environment_name", environment_name)
+        pulumi.set(__self__, "quota", quota)
+
+    @property
+    @pulumi.getter(name="environmentName")
+    def environment_name(self) -> str:
+        """
+        Environment name.
+        """
+        return pulumi.get(self, "environment_name")
+
+    @property
+    @pulumi.getter
+    def quota(self) -> int:
+        """
+        Throttling value.
+        """
+        return pulumi.get(self, "quota")
+
+
+@pulumi.output_type
+class GetThrottlingServicesListResult(dict):
+    def __init__(__self__, *,
+                 environments: Sequence['outputs.GetThrottlingServicesListEnvironmentResult'],
+                 service_id: str):
+        """
+        :param Sequence['GetThrottlingServicesListEnvironmentArgs'] environments: A list of Throttling policy.
+        :param str service_id: Service ID for query.
+        """
+        pulumi.set(__self__, "environments", environments)
+        pulumi.set(__self__, "service_id", service_id)
+
+    @property
+    @pulumi.getter
+    def environments(self) -> Sequence['outputs.GetThrottlingServicesListEnvironmentResult']:
+        """
+        A list of Throttling policy.
+        """
+        return pulumi.get(self, "environments")
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> str:
+        """
+        Service ID for query.
+        """
+        return pulumi.get(self, "service_id")
+
+
+@pulumi.output_type
+class GetThrottlingServicesListEnvironmentResult(dict):
+    def __init__(__self__, *,
+                 environment_name: str,
+                 status: int,
+                 strategy: int,
+                 url: str,
+                 version_name: str):
+        """
+        :param str environment_name: Environment name.
+        :param int status: Release status.
+        :param int strategy: Throttling value.
+        :param str url: Access service environment URL.
+        :param str version_name: Published version number.
+        """
+        pulumi.set(__self__, "environment_name", environment_name)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "strategy", strategy)
+        pulumi.set(__self__, "url", url)
+        pulumi.set(__self__, "version_name", version_name)
+
+    @property
+    @pulumi.getter(name="environmentName")
+    def environment_name(self) -> str:
+        """
+        Environment name.
+        """
+        return pulumi.get(self, "environment_name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Release status.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def strategy(self) -> int:
+        """
+        Throttling value.
+        """
+        return pulumi.get(self, "strategy")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        Access service environment URL.
+        """
+        return pulumi.get(self, "url")
+
+    @property
+    @pulumi.getter(name="versionName")
+    def version_name(self) -> str:
+        """
+        Published version number.
+        """
+        return pulumi.get(self, "version_name")
+
+
+@pulumi.output_type
+class GetUsagePlanEnvironmentsListResult(dict):
+    def __init__(__self__, *,
+                 api_id: str,
+                 api_name: str,
+                 create_time: str,
+                 environment: str,
+                 method: str,
+                 modify_time: str,
+                 path: str,
+                 service_id: str,
+                 service_name: str):
+        """
+        :param str api_id: The API ID, this value is empty if attach service.
+        :param str api_name: The API name, this value is empty if attach service.
+        :param str create_time: Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+        :param str environment: The environment name.
+        :param str method: The API method, this value is empty if attach service.
+        :param str modify_time: Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+        :param str path: The API path, this value is empty if attach service.
+        :param str service_id: The service ID.
+        :param str service_name: The service name.
+        """
+        pulumi.set(__self__, "api_id", api_id)
+        pulumi.set(__self__, "api_name", api_name)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "environment", environment)
+        pulumi.set(__self__, "method", method)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "service_id", service_id)
+        pulumi.set(__self__, "service_name", service_name)
+
+    @property
+    @pulumi.getter(name="apiId")
+    def api_id(self) -> str:
+        """
+        The API ID, this value is empty if attach service.
+        """
+        return pulumi.get(self, "api_id")
+
+    @property
+    @pulumi.getter(name="apiName")
+    def api_name(self) -> str:
+        """
+        The API name, this value is empty if attach service.
+        """
+        return pulumi.get(self, "api_name")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def environment(self) -> str:
+        """
+        The environment name.
+        """
+        return pulumi.get(self, "environment")
+
+    @property
+    @pulumi.getter
+    def method(self) -> str:
+        """
+        The API method, this value is empty if attach service.
+        """
+        return pulumi.get(self, "method")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter
+    def path(self) -> str:
+        """
+        The API path, this value is empty if attach service.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> str:
+        """
+        The service ID.
+        """
+        return pulumi.get(self, "service_id")
+
+    @property
+    @pulumi.getter(name="serviceName")
+    def service_name(self) -> str:
+        """
+        The service name.
+        """
+        return pulumi.get(self, "service_name")
+
+
+@pulumi.output_type
+class GetUsagePlansListResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 max_request_num: int,
+                 max_request_num_pre_sec: int,
+                 modify_time: str,
+                 usage_plan_desc: str,
+                 usage_plan_id: str,
+                 usage_plan_name: str):
+        """
+        :param str create_time: Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+        :param int max_request_num: Total number of requests allowed. Valid value formats: `-1`, `[1,99999999]`. The default value is -1, which indicates no limit.
+        :param int max_request_num_pre_sec: Limit of requests per second. Valid values formats: `-1`, `[1,2000]`. The default value is -1, which indicates no limit.
+        :param str modify_time: Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+        :param str usage_plan_desc: Custom usage plan description.
+        :param str usage_plan_id: ID of the usage plan.
+        :param str usage_plan_name: Name of the usage plan.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "max_request_num", max_request_num)
+        pulumi.set(__self__, "max_request_num_pre_sec", max_request_num_pre_sec)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "usage_plan_desc", usage_plan_desc)
+        pulumi.set(__self__, "usage_plan_id", usage_plan_id)
+        pulumi.set(__self__, "usage_plan_name", usage_plan_name)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="maxRequestNum")
+    def max_request_num(self) -> int:
+        """
+        Total number of requests allowed. Valid value formats: `-1`, `[1,99999999]`. The default value is -1, which indicates no limit.
+        """
+        return pulumi.get(self, "max_request_num")
+
+    @property
+    @pulumi.getter(name="maxRequestNumPreSec")
+    def max_request_num_pre_sec(self) -> int:
+        """
+        Limit of requests per second. Valid values formats: `-1`, `[1,2000]`. The default value is -1, which indicates no limit.
+        """
+        return pulumi.get(self, "max_request_num_pre_sec")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter(name="usagePlanDesc")
+    def usage_plan_desc(self) -> str:
+        """
+        Custom usage plan description.
+        """
+        return pulumi.get(self, "usage_plan_desc")
+
+    @property
+    @pulumi.getter(name="usagePlanId")
+    def usage_plan_id(self) -> str:
+        """
+        ID of the usage plan.
+        """
+        return pulumi.get(self, "usage_plan_id")
+
+    @property
+    @pulumi.getter(name="usagePlanName")
+    def usage_plan_name(self) -> str:
+        """
+        Name of the usage plan.
+        """
+        return pulumi.get(self, "usage_plan_name")
 
 

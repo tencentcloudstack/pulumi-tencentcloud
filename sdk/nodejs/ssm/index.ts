@@ -5,10 +5,10 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getSecretVersions";
+export * from "./getSecrets";
 export * from "./secret";
 export * from "./secretVersion";
-export * from "./secretVersions";
-export * from "./secrets";
 
 // Import resources to register:
 import { Secret } from "./secret";

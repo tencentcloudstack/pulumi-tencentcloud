@@ -9,6 +9,46 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cls
 {
+    /// <summary>
+    /// Provides a resource to create a cls topic.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var topic = new Tencentcloud.Cls.Topic("topic", new Tencentcloud.Cls.TopicArgs
+    ///         {
+    ///             AutoSplit = false,
+    ///             LogsetId = "5cd3a17e-fb0b-418c-afd7-77b365397426",
+    ///             MaxSplitPartitions = 20,
+    ///             PartitionCount = 1,
+    ///             Period = 10,
+    ///             StorageType = "hot",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///             TopicName = "topic",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// cls topic can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cls/topic:Topic topic 2f5764c1-c833-44c5-84c7-950979b2a278
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/topic:Topic")]
     public partial class Topic : Pulumi.CustomResource
     {
@@ -43,8 +83,7 @@ namespace Pulumi.Tencentcloud.Cls
         public Output<int> Period { get; private set; } = null!;
 
         /// <summary>
-        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-        /// passed in, please contact the customer service to add the log topic to the allowlist first..
+        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
         /// </summary>
         [Output("storageType")]
         public Output<string> StorageType { get; private set; } = null!;
@@ -138,8 +177,7 @@ namespace Pulumi.Tencentcloud.Cls
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-        /// passed in, please contact the customer service to add the log topic to the allowlist first..
+        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
         /// </summary>
         [Input("storageType")]
         public Input<string>? StorageType { get; set; }
@@ -200,8 +238,7 @@ namespace Pulumi.Tencentcloud.Cls
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-        /// passed in, please contact the customer service to add the log topic to the allowlist first..
+        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
         /// </summary>
         [Input("storageType")]
         public Input<string>? StorageType { get; set; }

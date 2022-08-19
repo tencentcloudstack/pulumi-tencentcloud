@@ -11,7 +11,9 @@ import (
 )
 
 type ConnectionSecurityGroupPolicy struct {
-	LocalCidrBlock   string   `pulumi:"localCidrBlock"`
+	// Local cidr block.
+	LocalCidrBlock string `pulumi:"localCidrBlock"`
+	// Remote cidr block list.
 	RemoteCidrBlocks []string `pulumi:"remoteCidrBlocks"`
 }
 
@@ -27,7 +29,9 @@ type ConnectionSecurityGroupPolicyInput interface {
 }
 
 type ConnectionSecurityGroupPolicyArgs struct {
-	LocalCidrBlock   pulumi.StringInput      `pulumi:"localCidrBlock"`
+	// Local cidr block.
+	LocalCidrBlock pulumi.StringInput `pulumi:"localCidrBlock"`
+	// Remote cidr block list.
 	RemoteCidrBlocks pulumi.StringArrayInput `pulumi:"remoteCidrBlocks"`
 }
 
@@ -82,10 +86,12 @@ func (o ConnectionSecurityGroupPolicyOutput) ToConnectionSecurityGroupPolicyOutp
 	return o
 }
 
+// Local cidr block.
 func (o ConnectionSecurityGroupPolicyOutput) LocalCidrBlock() pulumi.StringOutput {
 	return o.ApplyT(func(v ConnectionSecurityGroupPolicy) string { return v.LocalCidrBlock }).(pulumi.StringOutput)
 }
 
+// Remote cidr block list.
 func (o ConnectionSecurityGroupPolicyOutput) RemoteCidrBlocks() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ConnectionSecurityGroupPolicy) []string { return v.RemoteCidrBlocks }).(pulumi.StringArrayOutput)
 }
@@ -110,855 +116,1038 @@ func (o ConnectionSecurityGroupPolicyArrayOutput) Index(i pulumi.IntInput) Conne
 	}).(ConnectionSecurityGroupPolicyOutput)
 }
 
-type ConnectionsConnectionList struct {
-	CreateTime              string                                         `pulumi:"createTime"`
-	CustomerGatewayId       string                                         `pulumi:"customerGatewayId"`
-	EncryptProto            string                                         `pulumi:"encryptProto"`
-	Id                      string                                         `pulumi:"id"`
-	IkeDhGroupName          string                                         `pulumi:"ikeDhGroupName"`
-	IkeExchangeMode         string                                         `pulumi:"ikeExchangeMode"`
-	IkeLocalAddress         string                                         `pulumi:"ikeLocalAddress"`
-	IkeLocalFqdnName        string                                         `pulumi:"ikeLocalFqdnName"`
-	IkeLocalIdentity        string                                         `pulumi:"ikeLocalIdentity"`
-	IkeProtoAuthenAlgorithm string                                         `pulumi:"ikeProtoAuthenAlgorithm"`
-	IkeProtoEncryAlgorithm  string                                         `pulumi:"ikeProtoEncryAlgorithm"`
-	IkeRemoteAddress        string                                         `pulumi:"ikeRemoteAddress"`
-	IkeRemoteFqdnName       string                                         `pulumi:"ikeRemoteFqdnName"`
-	IkeRemoteIdentity       string                                         `pulumi:"ikeRemoteIdentity"`
-	IkeSaLifetimeSeconds    int                                            `pulumi:"ikeSaLifetimeSeconds"`
-	IkeVersion              string                                         `pulumi:"ikeVersion"`
-	IpsecEncryptAlgorithm   string                                         `pulumi:"ipsecEncryptAlgorithm"`
-	IpsecIntegrityAlgorithm string                                         `pulumi:"ipsecIntegrityAlgorithm"`
-	IpsecPfsDhGroup         string                                         `pulumi:"ipsecPfsDhGroup"`
-	IpsecSaLifetimeSeconds  int                                            `pulumi:"ipsecSaLifetimeSeconds"`
-	IpsecSaLifetimeTraffic  int                                            `pulumi:"ipsecSaLifetimeTraffic"`
-	Name                    string                                         `pulumi:"name"`
-	NetStatus               string                                         `pulumi:"netStatus"`
-	PreShareKey             string                                         `pulumi:"preShareKey"`
-	RouteType               string                                         `pulumi:"routeType"`
-	SecurityGroupPolicies   []ConnectionsConnectionListSecurityGroupPolicy `pulumi:"securityGroupPolicies"`
-	State                   string                                         `pulumi:"state"`
-	Tags                    map[string]interface{}                         `pulumi:"tags"`
-	VpcId                   string                                         `pulumi:"vpcId"`
-	VpnGatewayId            string                                         `pulumi:"vpnGatewayId"`
-	VpnProto                string                                         `pulumi:"vpnProto"`
+type GetConnectionsConnectionList struct {
+	// Create time of the VPN connection.
+	CreateTime string `pulumi:"createTime"`
+	// Customer gateway ID of the VPN connection.
+	CustomerGatewayId string `pulumi:"customerGatewayId"`
+	// Encrypt proto of the VPN connection.
+	EncryptProto string `pulumi:"encryptProto"`
+	// ID of the VPN connection.
+	Id string `pulumi:"id"`
+	// DH group name of the IKE operation specification.
+	IkeDhGroupName string `pulumi:"ikeDhGroupName"`
+	// Exchange mode of the IKE operation specification.
+	IkeExchangeMode string `pulumi:"ikeExchangeMode"`
+	// Local address of the IKE operation specification.
+	IkeLocalAddress string `pulumi:"ikeLocalAddress"`
+	// Local FQDN name of the IKE operation specification.
+	IkeLocalFqdnName string `pulumi:"ikeLocalFqdnName"`
+	// Local identity of the IKE operation specification.
+	IkeLocalIdentity string `pulumi:"ikeLocalIdentity"`
+	// Proto authenticate algorithm of the IKE operation specification.
+	IkeProtoAuthenAlgorithm string `pulumi:"ikeProtoAuthenAlgorithm"`
+	// Proto encrypt algorithm of the IKE operation specification.
+	IkeProtoEncryAlgorithm string `pulumi:"ikeProtoEncryAlgorithm"`
+	// Remote address of the IKE operation specification.
+	IkeRemoteAddress string `pulumi:"ikeRemoteAddress"`
+	// Remote FQDN name of the IKE operation specification.
+	IkeRemoteFqdnName string `pulumi:"ikeRemoteFqdnName"`
+	// Remote identity of the IKE operation specification.
+	IkeRemoteIdentity string `pulumi:"ikeRemoteIdentity"`
+	// SA lifetime of the IKE operation specification, unit is `second`.
+	IkeSaLifetimeSeconds int `pulumi:"ikeSaLifetimeSeconds"`
+	// Version of the IKE operation specification.
+	IkeVersion string `pulumi:"ikeVersion"`
+	// Encrypt algorithm of the IPSEC operation specification.
+	IpsecEncryptAlgorithm string `pulumi:"ipsecEncryptAlgorithm"`
+	// Integrity algorithm of the IPSEC operation specification.
+	IpsecIntegrityAlgorithm string `pulumi:"ipsecIntegrityAlgorithm"`
+	// PFS DH group name of the IPSEC operation specification.
+	IpsecPfsDhGroup string `pulumi:"ipsecPfsDhGroup"`
+	// SA lifetime of the IPSEC operation specification, unit is `second`.
+	IpsecSaLifetimeSeconds int `pulumi:"ipsecSaLifetimeSeconds"`
+	// SA lifetime traffic of the IPSEC operation specification, unit is `KB`.
+	IpsecSaLifetimeTraffic int `pulumi:"ipsecSaLifetimeTraffic"`
+	// Name of the VPN connection. The length of character is limited to 1-60.
+	Name string `pulumi:"name"`
+	// Net status of the VPN connection.
+	NetStatus string `pulumi:"netStatus"`
+	// Pre-shared key of the VPN connection.
+	PreShareKey string `pulumi:"preShareKey"`
+	// Route type of the VPN connection.
+	RouteType string `pulumi:"routeType"`
+	// Security group policy of the VPN connection.
+	SecurityGroupPolicies []GetConnectionsConnectionListSecurityGroupPolicy `pulumi:"securityGroupPolicies"`
+	// State of the VPN connection.
+	State string `pulumi:"state"`
+	// Tags of the VPN connection to be queried.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// ID of the VPC.
+	VpcId string `pulumi:"vpcId"`
+	// VPN gateway ID of the VPN connection.
+	VpnGatewayId string `pulumi:"vpnGatewayId"`
+	// Vpn proto of the VPN connection.
+	VpnProto string `pulumi:"vpnProto"`
 }
 
-// ConnectionsConnectionListInput is an input type that accepts ConnectionsConnectionListArgs and ConnectionsConnectionListOutput values.
-// You can construct a concrete instance of `ConnectionsConnectionListInput` via:
+// GetConnectionsConnectionListInput is an input type that accepts GetConnectionsConnectionListArgs and GetConnectionsConnectionListOutput values.
+// You can construct a concrete instance of `GetConnectionsConnectionListInput` via:
 //
-//          ConnectionsConnectionListArgs{...}
-type ConnectionsConnectionListInput interface {
+//          GetConnectionsConnectionListArgs{...}
+type GetConnectionsConnectionListInput interface {
 	pulumi.Input
 
-	ToConnectionsConnectionListOutput() ConnectionsConnectionListOutput
-	ToConnectionsConnectionListOutputWithContext(context.Context) ConnectionsConnectionListOutput
+	ToGetConnectionsConnectionListOutput() GetConnectionsConnectionListOutput
+	ToGetConnectionsConnectionListOutputWithContext(context.Context) GetConnectionsConnectionListOutput
 }
 
-type ConnectionsConnectionListArgs struct {
-	CreateTime              pulumi.StringInput                                     `pulumi:"createTime"`
-	CustomerGatewayId       pulumi.StringInput                                     `pulumi:"customerGatewayId"`
-	EncryptProto            pulumi.StringInput                                     `pulumi:"encryptProto"`
-	Id                      pulumi.StringInput                                     `pulumi:"id"`
-	IkeDhGroupName          pulumi.StringInput                                     `pulumi:"ikeDhGroupName"`
-	IkeExchangeMode         pulumi.StringInput                                     `pulumi:"ikeExchangeMode"`
-	IkeLocalAddress         pulumi.StringInput                                     `pulumi:"ikeLocalAddress"`
-	IkeLocalFqdnName        pulumi.StringInput                                     `pulumi:"ikeLocalFqdnName"`
-	IkeLocalIdentity        pulumi.StringInput                                     `pulumi:"ikeLocalIdentity"`
-	IkeProtoAuthenAlgorithm pulumi.StringInput                                     `pulumi:"ikeProtoAuthenAlgorithm"`
-	IkeProtoEncryAlgorithm  pulumi.StringInput                                     `pulumi:"ikeProtoEncryAlgorithm"`
-	IkeRemoteAddress        pulumi.StringInput                                     `pulumi:"ikeRemoteAddress"`
-	IkeRemoteFqdnName       pulumi.StringInput                                     `pulumi:"ikeRemoteFqdnName"`
-	IkeRemoteIdentity       pulumi.StringInput                                     `pulumi:"ikeRemoteIdentity"`
-	IkeSaLifetimeSeconds    pulumi.IntInput                                        `pulumi:"ikeSaLifetimeSeconds"`
-	IkeVersion              pulumi.StringInput                                     `pulumi:"ikeVersion"`
-	IpsecEncryptAlgorithm   pulumi.StringInput                                     `pulumi:"ipsecEncryptAlgorithm"`
-	IpsecIntegrityAlgorithm pulumi.StringInput                                     `pulumi:"ipsecIntegrityAlgorithm"`
-	IpsecPfsDhGroup         pulumi.StringInput                                     `pulumi:"ipsecPfsDhGroup"`
-	IpsecSaLifetimeSeconds  pulumi.IntInput                                        `pulumi:"ipsecSaLifetimeSeconds"`
-	IpsecSaLifetimeTraffic  pulumi.IntInput                                        `pulumi:"ipsecSaLifetimeTraffic"`
-	Name                    pulumi.StringInput                                     `pulumi:"name"`
-	NetStatus               pulumi.StringInput                                     `pulumi:"netStatus"`
-	PreShareKey             pulumi.StringInput                                     `pulumi:"preShareKey"`
-	RouteType               pulumi.StringInput                                     `pulumi:"routeType"`
-	SecurityGroupPolicies   ConnectionsConnectionListSecurityGroupPolicyArrayInput `pulumi:"securityGroupPolicies"`
-	State                   pulumi.StringInput                                     `pulumi:"state"`
-	Tags                    pulumi.MapInput                                        `pulumi:"tags"`
-	VpcId                   pulumi.StringInput                                     `pulumi:"vpcId"`
-	VpnGatewayId            pulumi.StringInput                                     `pulumi:"vpnGatewayId"`
-	VpnProto                pulumi.StringInput                                     `pulumi:"vpnProto"`
+type GetConnectionsConnectionListArgs struct {
+	// Create time of the VPN connection.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Customer gateway ID of the VPN connection.
+	CustomerGatewayId pulumi.StringInput `pulumi:"customerGatewayId"`
+	// Encrypt proto of the VPN connection.
+	EncryptProto pulumi.StringInput `pulumi:"encryptProto"`
+	// ID of the VPN connection.
+	Id pulumi.StringInput `pulumi:"id"`
+	// DH group name of the IKE operation specification.
+	IkeDhGroupName pulumi.StringInput `pulumi:"ikeDhGroupName"`
+	// Exchange mode of the IKE operation specification.
+	IkeExchangeMode pulumi.StringInput `pulumi:"ikeExchangeMode"`
+	// Local address of the IKE operation specification.
+	IkeLocalAddress pulumi.StringInput `pulumi:"ikeLocalAddress"`
+	// Local FQDN name of the IKE operation specification.
+	IkeLocalFqdnName pulumi.StringInput `pulumi:"ikeLocalFqdnName"`
+	// Local identity of the IKE operation specification.
+	IkeLocalIdentity pulumi.StringInput `pulumi:"ikeLocalIdentity"`
+	// Proto authenticate algorithm of the IKE operation specification.
+	IkeProtoAuthenAlgorithm pulumi.StringInput `pulumi:"ikeProtoAuthenAlgorithm"`
+	// Proto encrypt algorithm of the IKE operation specification.
+	IkeProtoEncryAlgorithm pulumi.StringInput `pulumi:"ikeProtoEncryAlgorithm"`
+	// Remote address of the IKE operation specification.
+	IkeRemoteAddress pulumi.StringInput `pulumi:"ikeRemoteAddress"`
+	// Remote FQDN name of the IKE operation specification.
+	IkeRemoteFqdnName pulumi.StringInput `pulumi:"ikeRemoteFqdnName"`
+	// Remote identity of the IKE operation specification.
+	IkeRemoteIdentity pulumi.StringInput `pulumi:"ikeRemoteIdentity"`
+	// SA lifetime of the IKE operation specification, unit is `second`.
+	IkeSaLifetimeSeconds pulumi.IntInput `pulumi:"ikeSaLifetimeSeconds"`
+	// Version of the IKE operation specification.
+	IkeVersion pulumi.StringInput `pulumi:"ikeVersion"`
+	// Encrypt algorithm of the IPSEC operation specification.
+	IpsecEncryptAlgorithm pulumi.StringInput `pulumi:"ipsecEncryptAlgorithm"`
+	// Integrity algorithm of the IPSEC operation specification.
+	IpsecIntegrityAlgorithm pulumi.StringInput `pulumi:"ipsecIntegrityAlgorithm"`
+	// PFS DH group name of the IPSEC operation specification.
+	IpsecPfsDhGroup pulumi.StringInput `pulumi:"ipsecPfsDhGroup"`
+	// SA lifetime of the IPSEC operation specification, unit is `second`.
+	IpsecSaLifetimeSeconds pulumi.IntInput `pulumi:"ipsecSaLifetimeSeconds"`
+	// SA lifetime traffic of the IPSEC operation specification, unit is `KB`.
+	IpsecSaLifetimeTraffic pulumi.IntInput `pulumi:"ipsecSaLifetimeTraffic"`
+	// Name of the VPN connection. The length of character is limited to 1-60.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Net status of the VPN connection.
+	NetStatus pulumi.StringInput `pulumi:"netStatus"`
+	// Pre-shared key of the VPN connection.
+	PreShareKey pulumi.StringInput `pulumi:"preShareKey"`
+	// Route type of the VPN connection.
+	RouteType pulumi.StringInput `pulumi:"routeType"`
+	// Security group policy of the VPN connection.
+	SecurityGroupPolicies GetConnectionsConnectionListSecurityGroupPolicyArrayInput `pulumi:"securityGroupPolicies"`
+	// State of the VPN connection.
+	State pulumi.StringInput `pulumi:"state"`
+	// Tags of the VPN connection to be queried.
+	Tags pulumi.MapInput `pulumi:"tags"`
+	// ID of the VPC.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// VPN gateway ID of the VPN connection.
+	VpnGatewayId pulumi.StringInput `pulumi:"vpnGatewayId"`
+	// Vpn proto of the VPN connection.
+	VpnProto pulumi.StringInput `pulumi:"vpnProto"`
 }
 
-func (ConnectionsConnectionListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConnectionsConnectionList)(nil)).Elem()
+func (GetConnectionsConnectionListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConnectionsConnectionList)(nil)).Elem()
 }
 
-func (i ConnectionsConnectionListArgs) ToConnectionsConnectionListOutput() ConnectionsConnectionListOutput {
-	return i.ToConnectionsConnectionListOutputWithContext(context.Background())
+func (i GetConnectionsConnectionListArgs) ToGetConnectionsConnectionListOutput() GetConnectionsConnectionListOutput {
+	return i.ToGetConnectionsConnectionListOutputWithContext(context.Background())
 }
 
-func (i ConnectionsConnectionListArgs) ToConnectionsConnectionListOutputWithContext(ctx context.Context) ConnectionsConnectionListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConnectionsConnectionListOutput)
+func (i GetConnectionsConnectionListArgs) ToGetConnectionsConnectionListOutputWithContext(ctx context.Context) GetConnectionsConnectionListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConnectionsConnectionListOutput)
 }
 
-// ConnectionsConnectionListArrayInput is an input type that accepts ConnectionsConnectionListArray and ConnectionsConnectionListArrayOutput values.
-// You can construct a concrete instance of `ConnectionsConnectionListArrayInput` via:
+// GetConnectionsConnectionListArrayInput is an input type that accepts GetConnectionsConnectionListArray and GetConnectionsConnectionListArrayOutput values.
+// You can construct a concrete instance of `GetConnectionsConnectionListArrayInput` via:
 //
-//          ConnectionsConnectionListArray{ ConnectionsConnectionListArgs{...} }
-type ConnectionsConnectionListArrayInput interface {
+//          GetConnectionsConnectionListArray{ GetConnectionsConnectionListArgs{...} }
+type GetConnectionsConnectionListArrayInput interface {
 	pulumi.Input
 
-	ToConnectionsConnectionListArrayOutput() ConnectionsConnectionListArrayOutput
-	ToConnectionsConnectionListArrayOutputWithContext(context.Context) ConnectionsConnectionListArrayOutput
+	ToGetConnectionsConnectionListArrayOutput() GetConnectionsConnectionListArrayOutput
+	ToGetConnectionsConnectionListArrayOutputWithContext(context.Context) GetConnectionsConnectionListArrayOutput
 }
 
-type ConnectionsConnectionListArray []ConnectionsConnectionListInput
+type GetConnectionsConnectionListArray []GetConnectionsConnectionListInput
 
-func (ConnectionsConnectionListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ConnectionsConnectionList)(nil)).Elem()
+func (GetConnectionsConnectionListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetConnectionsConnectionList)(nil)).Elem()
 }
 
-func (i ConnectionsConnectionListArray) ToConnectionsConnectionListArrayOutput() ConnectionsConnectionListArrayOutput {
-	return i.ToConnectionsConnectionListArrayOutputWithContext(context.Background())
+func (i GetConnectionsConnectionListArray) ToGetConnectionsConnectionListArrayOutput() GetConnectionsConnectionListArrayOutput {
+	return i.ToGetConnectionsConnectionListArrayOutputWithContext(context.Background())
 }
 
-func (i ConnectionsConnectionListArray) ToConnectionsConnectionListArrayOutputWithContext(ctx context.Context) ConnectionsConnectionListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConnectionsConnectionListArrayOutput)
+func (i GetConnectionsConnectionListArray) ToGetConnectionsConnectionListArrayOutputWithContext(ctx context.Context) GetConnectionsConnectionListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConnectionsConnectionListArrayOutput)
 }
 
-type ConnectionsConnectionListOutput struct{ *pulumi.OutputState }
+type GetConnectionsConnectionListOutput struct{ *pulumi.OutputState }
 
-func (ConnectionsConnectionListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConnectionsConnectionList)(nil)).Elem()
+func (GetConnectionsConnectionListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConnectionsConnectionList)(nil)).Elem()
 }
 
-func (o ConnectionsConnectionListOutput) ToConnectionsConnectionListOutput() ConnectionsConnectionListOutput {
+func (o GetConnectionsConnectionListOutput) ToGetConnectionsConnectionListOutput() GetConnectionsConnectionListOutput {
 	return o
 }
 
-func (o ConnectionsConnectionListOutput) ToConnectionsConnectionListOutputWithContext(ctx context.Context) ConnectionsConnectionListOutput {
+func (o GetConnectionsConnectionListOutput) ToGetConnectionsConnectionListOutputWithContext(ctx context.Context) GetConnectionsConnectionListOutput {
 	return o
 }
 
-func (o ConnectionsConnectionListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Create time of the VPN connection.
+func (o GetConnectionsConnectionListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) CustomerGatewayId() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.CustomerGatewayId }).(pulumi.StringOutput)
+// Customer gateway ID of the VPN connection.
+func (o GetConnectionsConnectionListOutput) CustomerGatewayId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.CustomerGatewayId }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) EncryptProto() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.EncryptProto }).(pulumi.StringOutput)
+// Encrypt proto of the VPN connection.
+func (o GetConnectionsConnectionListOutput) EncryptProto() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.EncryptProto }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.Id }).(pulumi.StringOutput)
+// ID of the VPN connection.
+func (o GetConnectionsConnectionListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IkeDhGroupName() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IkeDhGroupName }).(pulumi.StringOutput)
+// DH group name of the IKE operation specification.
+func (o GetConnectionsConnectionListOutput) IkeDhGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IkeDhGroupName }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IkeExchangeMode() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IkeExchangeMode }).(pulumi.StringOutput)
+// Exchange mode of the IKE operation specification.
+func (o GetConnectionsConnectionListOutput) IkeExchangeMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IkeExchangeMode }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IkeLocalAddress() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IkeLocalAddress }).(pulumi.StringOutput)
+// Local address of the IKE operation specification.
+func (o GetConnectionsConnectionListOutput) IkeLocalAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IkeLocalAddress }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IkeLocalFqdnName() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IkeLocalFqdnName }).(pulumi.StringOutput)
+// Local FQDN name of the IKE operation specification.
+func (o GetConnectionsConnectionListOutput) IkeLocalFqdnName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IkeLocalFqdnName }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IkeLocalIdentity() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IkeLocalIdentity }).(pulumi.StringOutput)
+// Local identity of the IKE operation specification.
+func (o GetConnectionsConnectionListOutput) IkeLocalIdentity() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IkeLocalIdentity }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IkeProtoAuthenAlgorithm() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IkeProtoAuthenAlgorithm }).(pulumi.StringOutput)
+// Proto authenticate algorithm of the IKE operation specification.
+func (o GetConnectionsConnectionListOutput) IkeProtoAuthenAlgorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IkeProtoAuthenAlgorithm }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IkeProtoEncryAlgorithm() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IkeProtoEncryAlgorithm }).(pulumi.StringOutput)
+// Proto encrypt algorithm of the IKE operation specification.
+func (o GetConnectionsConnectionListOutput) IkeProtoEncryAlgorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IkeProtoEncryAlgorithm }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IkeRemoteAddress() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IkeRemoteAddress }).(pulumi.StringOutput)
+// Remote address of the IKE operation specification.
+func (o GetConnectionsConnectionListOutput) IkeRemoteAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IkeRemoteAddress }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IkeRemoteFqdnName() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IkeRemoteFqdnName }).(pulumi.StringOutput)
+// Remote FQDN name of the IKE operation specification.
+func (o GetConnectionsConnectionListOutput) IkeRemoteFqdnName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IkeRemoteFqdnName }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IkeRemoteIdentity() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IkeRemoteIdentity }).(pulumi.StringOutput)
+// Remote identity of the IKE operation specification.
+func (o GetConnectionsConnectionListOutput) IkeRemoteIdentity() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IkeRemoteIdentity }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IkeSaLifetimeSeconds() pulumi.IntOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) int { return v.IkeSaLifetimeSeconds }).(pulumi.IntOutput)
+// SA lifetime of the IKE operation specification, unit is `second`.
+func (o GetConnectionsConnectionListOutput) IkeSaLifetimeSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) int { return v.IkeSaLifetimeSeconds }).(pulumi.IntOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IkeVersion() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IkeVersion }).(pulumi.StringOutput)
+// Version of the IKE operation specification.
+func (o GetConnectionsConnectionListOutput) IkeVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IkeVersion }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IpsecEncryptAlgorithm() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IpsecEncryptAlgorithm }).(pulumi.StringOutput)
+// Encrypt algorithm of the IPSEC operation specification.
+func (o GetConnectionsConnectionListOutput) IpsecEncryptAlgorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IpsecEncryptAlgorithm }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IpsecIntegrityAlgorithm() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IpsecIntegrityAlgorithm }).(pulumi.StringOutput)
+// Integrity algorithm of the IPSEC operation specification.
+func (o GetConnectionsConnectionListOutput) IpsecIntegrityAlgorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IpsecIntegrityAlgorithm }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IpsecPfsDhGroup() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.IpsecPfsDhGroup }).(pulumi.StringOutput)
+// PFS DH group name of the IPSEC operation specification.
+func (o GetConnectionsConnectionListOutput) IpsecPfsDhGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.IpsecPfsDhGroup }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IpsecSaLifetimeSeconds() pulumi.IntOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) int { return v.IpsecSaLifetimeSeconds }).(pulumi.IntOutput)
+// SA lifetime of the IPSEC operation specification, unit is `second`.
+func (o GetConnectionsConnectionListOutput) IpsecSaLifetimeSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) int { return v.IpsecSaLifetimeSeconds }).(pulumi.IntOutput)
 }
 
-func (o ConnectionsConnectionListOutput) IpsecSaLifetimeTraffic() pulumi.IntOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) int { return v.IpsecSaLifetimeTraffic }).(pulumi.IntOutput)
+// SA lifetime traffic of the IPSEC operation specification, unit is `KB`.
+func (o GetConnectionsConnectionListOutput) IpsecSaLifetimeTraffic() pulumi.IntOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) int { return v.IpsecSaLifetimeTraffic }).(pulumi.IntOutput)
 }
 
-func (o ConnectionsConnectionListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the VPN connection. The length of character is limited to 1-60.
+func (o GetConnectionsConnectionListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) NetStatus() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.NetStatus }).(pulumi.StringOutput)
+// Net status of the VPN connection.
+func (o GetConnectionsConnectionListOutput) NetStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.NetStatus }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) PreShareKey() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.PreShareKey }).(pulumi.StringOutput)
+// Pre-shared key of the VPN connection.
+func (o GetConnectionsConnectionListOutput) PreShareKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.PreShareKey }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) RouteType() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.RouteType }).(pulumi.StringOutput)
+// Route type of the VPN connection.
+func (o GetConnectionsConnectionListOutput) RouteType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.RouteType }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) SecurityGroupPolicies() ConnectionsConnectionListSecurityGroupPolicyArrayOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) []ConnectionsConnectionListSecurityGroupPolicy {
+// Security group policy of the VPN connection.
+func (o GetConnectionsConnectionListOutput) SecurityGroupPolicies() GetConnectionsConnectionListSecurityGroupPolicyArrayOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) []GetConnectionsConnectionListSecurityGroupPolicy {
 		return v.SecurityGroupPolicies
-	}).(ConnectionsConnectionListSecurityGroupPolicyArrayOutput)
+	}).(GetConnectionsConnectionListSecurityGroupPolicyArrayOutput)
 }
 
-func (o ConnectionsConnectionListOutput) State() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.State }).(pulumi.StringOutput)
+// State of the VPN connection.
+func (o GetConnectionsConnectionListOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.State }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+// Tags of the VPN connection to be queried.
+func (o GetConnectionsConnectionListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
 }
 
-func (o ConnectionsConnectionListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.VpcId }).(pulumi.StringOutput)
+// ID of the VPC.
+func (o GetConnectionsConnectionListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) VpnGatewayId() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.VpnGatewayId }).(pulumi.StringOutput)
+// VPN gateway ID of the VPN connection.
+func (o GetConnectionsConnectionListOutput) VpnGatewayId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.VpnGatewayId }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListOutput) VpnProto() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionList) string { return v.VpnProto }).(pulumi.StringOutput)
+// Vpn proto of the VPN connection.
+func (o GetConnectionsConnectionListOutput) VpnProto() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionList) string { return v.VpnProto }).(pulumi.StringOutput)
 }
 
-type ConnectionsConnectionListArrayOutput struct{ *pulumi.OutputState }
+type GetConnectionsConnectionListArrayOutput struct{ *pulumi.OutputState }
 
-func (ConnectionsConnectionListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ConnectionsConnectionList)(nil)).Elem()
+func (GetConnectionsConnectionListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetConnectionsConnectionList)(nil)).Elem()
 }
 
-func (o ConnectionsConnectionListArrayOutput) ToConnectionsConnectionListArrayOutput() ConnectionsConnectionListArrayOutput {
+func (o GetConnectionsConnectionListArrayOutput) ToGetConnectionsConnectionListArrayOutput() GetConnectionsConnectionListArrayOutput {
 	return o
 }
 
-func (o ConnectionsConnectionListArrayOutput) ToConnectionsConnectionListArrayOutputWithContext(ctx context.Context) ConnectionsConnectionListArrayOutput {
+func (o GetConnectionsConnectionListArrayOutput) ToGetConnectionsConnectionListArrayOutputWithContext(ctx context.Context) GetConnectionsConnectionListArrayOutput {
 	return o
 }
 
-func (o ConnectionsConnectionListArrayOutput) Index(i pulumi.IntInput) ConnectionsConnectionListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ConnectionsConnectionList {
-		return vs[0].([]ConnectionsConnectionList)[vs[1].(int)]
-	}).(ConnectionsConnectionListOutput)
+func (o GetConnectionsConnectionListArrayOutput) Index(i pulumi.IntInput) GetConnectionsConnectionListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetConnectionsConnectionList {
+		return vs[0].([]GetConnectionsConnectionList)[vs[1].(int)]
+	}).(GetConnectionsConnectionListOutput)
 }
 
-type ConnectionsConnectionListSecurityGroupPolicy struct {
-	LocalCidrBlock   string   `pulumi:"localCidrBlock"`
+type GetConnectionsConnectionListSecurityGroupPolicy struct {
+	// Local cidr block.
+	LocalCidrBlock string `pulumi:"localCidrBlock"`
+	// Remote cidr block list.
 	RemoteCidrBlocks []string `pulumi:"remoteCidrBlocks"`
 }
 
-// ConnectionsConnectionListSecurityGroupPolicyInput is an input type that accepts ConnectionsConnectionListSecurityGroupPolicyArgs and ConnectionsConnectionListSecurityGroupPolicyOutput values.
-// You can construct a concrete instance of `ConnectionsConnectionListSecurityGroupPolicyInput` via:
+// GetConnectionsConnectionListSecurityGroupPolicyInput is an input type that accepts GetConnectionsConnectionListSecurityGroupPolicyArgs and GetConnectionsConnectionListSecurityGroupPolicyOutput values.
+// You can construct a concrete instance of `GetConnectionsConnectionListSecurityGroupPolicyInput` via:
 //
-//          ConnectionsConnectionListSecurityGroupPolicyArgs{...}
-type ConnectionsConnectionListSecurityGroupPolicyInput interface {
+//          GetConnectionsConnectionListSecurityGroupPolicyArgs{...}
+type GetConnectionsConnectionListSecurityGroupPolicyInput interface {
 	pulumi.Input
 
-	ToConnectionsConnectionListSecurityGroupPolicyOutput() ConnectionsConnectionListSecurityGroupPolicyOutput
-	ToConnectionsConnectionListSecurityGroupPolicyOutputWithContext(context.Context) ConnectionsConnectionListSecurityGroupPolicyOutput
+	ToGetConnectionsConnectionListSecurityGroupPolicyOutput() GetConnectionsConnectionListSecurityGroupPolicyOutput
+	ToGetConnectionsConnectionListSecurityGroupPolicyOutputWithContext(context.Context) GetConnectionsConnectionListSecurityGroupPolicyOutput
 }
 
-type ConnectionsConnectionListSecurityGroupPolicyArgs struct {
-	LocalCidrBlock   pulumi.StringInput      `pulumi:"localCidrBlock"`
+type GetConnectionsConnectionListSecurityGroupPolicyArgs struct {
+	// Local cidr block.
+	LocalCidrBlock pulumi.StringInput `pulumi:"localCidrBlock"`
+	// Remote cidr block list.
 	RemoteCidrBlocks pulumi.StringArrayInput `pulumi:"remoteCidrBlocks"`
 }
 
-func (ConnectionsConnectionListSecurityGroupPolicyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConnectionsConnectionListSecurityGroupPolicy)(nil)).Elem()
+func (GetConnectionsConnectionListSecurityGroupPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConnectionsConnectionListSecurityGroupPolicy)(nil)).Elem()
 }
 
-func (i ConnectionsConnectionListSecurityGroupPolicyArgs) ToConnectionsConnectionListSecurityGroupPolicyOutput() ConnectionsConnectionListSecurityGroupPolicyOutput {
-	return i.ToConnectionsConnectionListSecurityGroupPolicyOutputWithContext(context.Background())
+func (i GetConnectionsConnectionListSecurityGroupPolicyArgs) ToGetConnectionsConnectionListSecurityGroupPolicyOutput() GetConnectionsConnectionListSecurityGroupPolicyOutput {
+	return i.ToGetConnectionsConnectionListSecurityGroupPolicyOutputWithContext(context.Background())
 }
 
-func (i ConnectionsConnectionListSecurityGroupPolicyArgs) ToConnectionsConnectionListSecurityGroupPolicyOutputWithContext(ctx context.Context) ConnectionsConnectionListSecurityGroupPolicyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConnectionsConnectionListSecurityGroupPolicyOutput)
+func (i GetConnectionsConnectionListSecurityGroupPolicyArgs) ToGetConnectionsConnectionListSecurityGroupPolicyOutputWithContext(ctx context.Context) GetConnectionsConnectionListSecurityGroupPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConnectionsConnectionListSecurityGroupPolicyOutput)
 }
 
-// ConnectionsConnectionListSecurityGroupPolicyArrayInput is an input type that accepts ConnectionsConnectionListSecurityGroupPolicyArray and ConnectionsConnectionListSecurityGroupPolicyArrayOutput values.
-// You can construct a concrete instance of `ConnectionsConnectionListSecurityGroupPolicyArrayInput` via:
+// GetConnectionsConnectionListSecurityGroupPolicyArrayInput is an input type that accepts GetConnectionsConnectionListSecurityGroupPolicyArray and GetConnectionsConnectionListSecurityGroupPolicyArrayOutput values.
+// You can construct a concrete instance of `GetConnectionsConnectionListSecurityGroupPolicyArrayInput` via:
 //
-//          ConnectionsConnectionListSecurityGroupPolicyArray{ ConnectionsConnectionListSecurityGroupPolicyArgs{...} }
-type ConnectionsConnectionListSecurityGroupPolicyArrayInput interface {
+//          GetConnectionsConnectionListSecurityGroupPolicyArray{ GetConnectionsConnectionListSecurityGroupPolicyArgs{...} }
+type GetConnectionsConnectionListSecurityGroupPolicyArrayInput interface {
 	pulumi.Input
 
-	ToConnectionsConnectionListSecurityGroupPolicyArrayOutput() ConnectionsConnectionListSecurityGroupPolicyArrayOutput
-	ToConnectionsConnectionListSecurityGroupPolicyArrayOutputWithContext(context.Context) ConnectionsConnectionListSecurityGroupPolicyArrayOutput
+	ToGetConnectionsConnectionListSecurityGroupPolicyArrayOutput() GetConnectionsConnectionListSecurityGroupPolicyArrayOutput
+	ToGetConnectionsConnectionListSecurityGroupPolicyArrayOutputWithContext(context.Context) GetConnectionsConnectionListSecurityGroupPolicyArrayOutput
 }
 
-type ConnectionsConnectionListSecurityGroupPolicyArray []ConnectionsConnectionListSecurityGroupPolicyInput
+type GetConnectionsConnectionListSecurityGroupPolicyArray []GetConnectionsConnectionListSecurityGroupPolicyInput
 
-func (ConnectionsConnectionListSecurityGroupPolicyArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ConnectionsConnectionListSecurityGroupPolicy)(nil)).Elem()
+func (GetConnectionsConnectionListSecurityGroupPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetConnectionsConnectionListSecurityGroupPolicy)(nil)).Elem()
 }
 
-func (i ConnectionsConnectionListSecurityGroupPolicyArray) ToConnectionsConnectionListSecurityGroupPolicyArrayOutput() ConnectionsConnectionListSecurityGroupPolicyArrayOutput {
-	return i.ToConnectionsConnectionListSecurityGroupPolicyArrayOutputWithContext(context.Background())
+func (i GetConnectionsConnectionListSecurityGroupPolicyArray) ToGetConnectionsConnectionListSecurityGroupPolicyArrayOutput() GetConnectionsConnectionListSecurityGroupPolicyArrayOutput {
+	return i.ToGetConnectionsConnectionListSecurityGroupPolicyArrayOutputWithContext(context.Background())
 }
 
-func (i ConnectionsConnectionListSecurityGroupPolicyArray) ToConnectionsConnectionListSecurityGroupPolicyArrayOutputWithContext(ctx context.Context) ConnectionsConnectionListSecurityGroupPolicyArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ConnectionsConnectionListSecurityGroupPolicyArrayOutput)
+func (i GetConnectionsConnectionListSecurityGroupPolicyArray) ToGetConnectionsConnectionListSecurityGroupPolicyArrayOutputWithContext(ctx context.Context) GetConnectionsConnectionListSecurityGroupPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConnectionsConnectionListSecurityGroupPolicyArrayOutput)
 }
 
-type ConnectionsConnectionListSecurityGroupPolicyOutput struct{ *pulumi.OutputState }
+type GetConnectionsConnectionListSecurityGroupPolicyOutput struct{ *pulumi.OutputState }
 
-func (ConnectionsConnectionListSecurityGroupPolicyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ConnectionsConnectionListSecurityGroupPolicy)(nil)).Elem()
+func (GetConnectionsConnectionListSecurityGroupPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConnectionsConnectionListSecurityGroupPolicy)(nil)).Elem()
 }
 
-func (o ConnectionsConnectionListSecurityGroupPolicyOutput) ToConnectionsConnectionListSecurityGroupPolicyOutput() ConnectionsConnectionListSecurityGroupPolicyOutput {
+func (o GetConnectionsConnectionListSecurityGroupPolicyOutput) ToGetConnectionsConnectionListSecurityGroupPolicyOutput() GetConnectionsConnectionListSecurityGroupPolicyOutput {
 	return o
 }
 
-func (o ConnectionsConnectionListSecurityGroupPolicyOutput) ToConnectionsConnectionListSecurityGroupPolicyOutputWithContext(ctx context.Context) ConnectionsConnectionListSecurityGroupPolicyOutput {
+func (o GetConnectionsConnectionListSecurityGroupPolicyOutput) ToGetConnectionsConnectionListSecurityGroupPolicyOutputWithContext(ctx context.Context) GetConnectionsConnectionListSecurityGroupPolicyOutput {
 	return o
 }
 
-func (o ConnectionsConnectionListSecurityGroupPolicyOutput) LocalCidrBlock() pulumi.StringOutput {
-	return o.ApplyT(func(v ConnectionsConnectionListSecurityGroupPolicy) string { return v.LocalCidrBlock }).(pulumi.StringOutput)
+// Local cidr block.
+func (o GetConnectionsConnectionListSecurityGroupPolicyOutput) LocalCidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionListSecurityGroupPolicy) string { return v.LocalCidrBlock }).(pulumi.StringOutput)
 }
 
-func (o ConnectionsConnectionListSecurityGroupPolicyOutput) RemoteCidrBlocks() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ConnectionsConnectionListSecurityGroupPolicy) []string { return v.RemoteCidrBlocks }).(pulumi.StringArrayOutput)
+// Remote cidr block list.
+func (o GetConnectionsConnectionListSecurityGroupPolicyOutput) RemoteCidrBlocks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetConnectionsConnectionListSecurityGroupPolicy) []string { return v.RemoteCidrBlocks }).(pulumi.StringArrayOutput)
 }
 
-type ConnectionsConnectionListSecurityGroupPolicyArrayOutput struct{ *pulumi.OutputState }
+type GetConnectionsConnectionListSecurityGroupPolicyArrayOutput struct{ *pulumi.OutputState }
 
-func (ConnectionsConnectionListSecurityGroupPolicyArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ConnectionsConnectionListSecurityGroupPolicy)(nil)).Elem()
+func (GetConnectionsConnectionListSecurityGroupPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetConnectionsConnectionListSecurityGroupPolicy)(nil)).Elem()
 }
 
-func (o ConnectionsConnectionListSecurityGroupPolicyArrayOutput) ToConnectionsConnectionListSecurityGroupPolicyArrayOutput() ConnectionsConnectionListSecurityGroupPolicyArrayOutput {
+func (o GetConnectionsConnectionListSecurityGroupPolicyArrayOutput) ToGetConnectionsConnectionListSecurityGroupPolicyArrayOutput() GetConnectionsConnectionListSecurityGroupPolicyArrayOutput {
 	return o
 }
 
-func (o ConnectionsConnectionListSecurityGroupPolicyArrayOutput) ToConnectionsConnectionListSecurityGroupPolicyArrayOutputWithContext(ctx context.Context) ConnectionsConnectionListSecurityGroupPolicyArrayOutput {
+func (o GetConnectionsConnectionListSecurityGroupPolicyArrayOutput) ToGetConnectionsConnectionListSecurityGroupPolicyArrayOutputWithContext(ctx context.Context) GetConnectionsConnectionListSecurityGroupPolicyArrayOutput {
 	return o
 }
 
-func (o ConnectionsConnectionListSecurityGroupPolicyArrayOutput) Index(i pulumi.IntInput) ConnectionsConnectionListSecurityGroupPolicyOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ConnectionsConnectionListSecurityGroupPolicy {
-		return vs[0].([]ConnectionsConnectionListSecurityGroupPolicy)[vs[1].(int)]
-	}).(ConnectionsConnectionListSecurityGroupPolicyOutput)
+func (o GetConnectionsConnectionListSecurityGroupPolicyArrayOutput) Index(i pulumi.IntInput) GetConnectionsConnectionListSecurityGroupPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetConnectionsConnectionListSecurityGroupPolicy {
+		return vs[0].([]GetConnectionsConnectionListSecurityGroupPolicy)[vs[1].(int)]
+	}).(GetConnectionsConnectionListSecurityGroupPolicyOutput)
 }
 
-type CustomerGatewaysGatewayList struct {
-	CreateTime      string                 `pulumi:"createTime"`
-	Id              string                 `pulumi:"id"`
-	Name            string                 `pulumi:"name"`
-	PublicIpAddress string                 `pulumi:"publicIpAddress"`
-	Tags            map[string]interface{} `pulumi:"tags"`
+type GetCustomerGatewaysGatewayList struct {
+	// Create time of the VPN customer gateway.
+	CreateTime string `pulumi:"createTime"`
+	// ID of the VPN customer gateway.
+	Id string `pulumi:"id"`
+	// Name of the customer gateway. The length of character is limited to 1-60.
+	Name string `pulumi:"name"`
+	// Public ip address of the VPN customer gateway.
+	PublicIpAddress string `pulumi:"publicIpAddress"`
+	// Tags of the VPN customer gateway to be queried.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
-// CustomerGatewaysGatewayListInput is an input type that accepts CustomerGatewaysGatewayListArgs and CustomerGatewaysGatewayListOutput values.
-// You can construct a concrete instance of `CustomerGatewaysGatewayListInput` via:
+// GetCustomerGatewaysGatewayListInput is an input type that accepts GetCustomerGatewaysGatewayListArgs and GetCustomerGatewaysGatewayListOutput values.
+// You can construct a concrete instance of `GetCustomerGatewaysGatewayListInput` via:
 //
-//          CustomerGatewaysGatewayListArgs{...}
-type CustomerGatewaysGatewayListInput interface {
+//          GetCustomerGatewaysGatewayListArgs{...}
+type GetCustomerGatewaysGatewayListInput interface {
 	pulumi.Input
 
-	ToCustomerGatewaysGatewayListOutput() CustomerGatewaysGatewayListOutput
-	ToCustomerGatewaysGatewayListOutputWithContext(context.Context) CustomerGatewaysGatewayListOutput
+	ToGetCustomerGatewaysGatewayListOutput() GetCustomerGatewaysGatewayListOutput
+	ToGetCustomerGatewaysGatewayListOutputWithContext(context.Context) GetCustomerGatewaysGatewayListOutput
 }
 
-type CustomerGatewaysGatewayListArgs struct {
-	CreateTime      pulumi.StringInput `pulumi:"createTime"`
-	Id              pulumi.StringInput `pulumi:"id"`
-	Name            pulumi.StringInput `pulumi:"name"`
+type GetCustomerGatewaysGatewayListArgs struct {
+	// Create time of the VPN customer gateway.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// ID of the VPN customer gateway.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Name of the customer gateway. The length of character is limited to 1-60.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Public ip address of the VPN customer gateway.
 	PublicIpAddress pulumi.StringInput `pulumi:"publicIpAddress"`
-	Tags            pulumi.MapInput    `pulumi:"tags"`
+	// Tags of the VPN customer gateway to be queried.
+	Tags pulumi.MapInput `pulumi:"tags"`
 }
 
-func (CustomerGatewaysGatewayListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomerGatewaysGatewayList)(nil)).Elem()
+func (GetCustomerGatewaysGatewayListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCustomerGatewaysGatewayList)(nil)).Elem()
 }
 
-func (i CustomerGatewaysGatewayListArgs) ToCustomerGatewaysGatewayListOutput() CustomerGatewaysGatewayListOutput {
-	return i.ToCustomerGatewaysGatewayListOutputWithContext(context.Background())
+func (i GetCustomerGatewaysGatewayListArgs) ToGetCustomerGatewaysGatewayListOutput() GetCustomerGatewaysGatewayListOutput {
+	return i.ToGetCustomerGatewaysGatewayListOutputWithContext(context.Background())
 }
 
-func (i CustomerGatewaysGatewayListArgs) ToCustomerGatewaysGatewayListOutputWithContext(ctx context.Context) CustomerGatewaysGatewayListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomerGatewaysGatewayListOutput)
+func (i GetCustomerGatewaysGatewayListArgs) ToGetCustomerGatewaysGatewayListOutputWithContext(ctx context.Context) GetCustomerGatewaysGatewayListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCustomerGatewaysGatewayListOutput)
 }
 
-// CustomerGatewaysGatewayListArrayInput is an input type that accepts CustomerGatewaysGatewayListArray and CustomerGatewaysGatewayListArrayOutput values.
-// You can construct a concrete instance of `CustomerGatewaysGatewayListArrayInput` via:
+// GetCustomerGatewaysGatewayListArrayInput is an input type that accepts GetCustomerGatewaysGatewayListArray and GetCustomerGatewaysGatewayListArrayOutput values.
+// You can construct a concrete instance of `GetCustomerGatewaysGatewayListArrayInput` via:
 //
-//          CustomerGatewaysGatewayListArray{ CustomerGatewaysGatewayListArgs{...} }
-type CustomerGatewaysGatewayListArrayInput interface {
+//          GetCustomerGatewaysGatewayListArray{ GetCustomerGatewaysGatewayListArgs{...} }
+type GetCustomerGatewaysGatewayListArrayInput interface {
 	pulumi.Input
 
-	ToCustomerGatewaysGatewayListArrayOutput() CustomerGatewaysGatewayListArrayOutput
-	ToCustomerGatewaysGatewayListArrayOutputWithContext(context.Context) CustomerGatewaysGatewayListArrayOutput
+	ToGetCustomerGatewaysGatewayListArrayOutput() GetCustomerGatewaysGatewayListArrayOutput
+	ToGetCustomerGatewaysGatewayListArrayOutputWithContext(context.Context) GetCustomerGatewaysGatewayListArrayOutput
 }
 
-type CustomerGatewaysGatewayListArray []CustomerGatewaysGatewayListInput
+type GetCustomerGatewaysGatewayListArray []GetCustomerGatewaysGatewayListInput
 
-func (CustomerGatewaysGatewayListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CustomerGatewaysGatewayList)(nil)).Elem()
+func (GetCustomerGatewaysGatewayListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCustomerGatewaysGatewayList)(nil)).Elem()
 }
 
-func (i CustomerGatewaysGatewayListArray) ToCustomerGatewaysGatewayListArrayOutput() CustomerGatewaysGatewayListArrayOutput {
-	return i.ToCustomerGatewaysGatewayListArrayOutputWithContext(context.Background())
+func (i GetCustomerGatewaysGatewayListArray) ToGetCustomerGatewaysGatewayListArrayOutput() GetCustomerGatewaysGatewayListArrayOutput {
+	return i.ToGetCustomerGatewaysGatewayListArrayOutputWithContext(context.Background())
 }
 
-func (i CustomerGatewaysGatewayListArray) ToCustomerGatewaysGatewayListArrayOutputWithContext(ctx context.Context) CustomerGatewaysGatewayListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomerGatewaysGatewayListArrayOutput)
+func (i GetCustomerGatewaysGatewayListArray) ToGetCustomerGatewaysGatewayListArrayOutputWithContext(ctx context.Context) GetCustomerGatewaysGatewayListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCustomerGatewaysGatewayListArrayOutput)
 }
 
-type CustomerGatewaysGatewayListOutput struct{ *pulumi.OutputState }
+type GetCustomerGatewaysGatewayListOutput struct{ *pulumi.OutputState }
 
-func (CustomerGatewaysGatewayListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomerGatewaysGatewayList)(nil)).Elem()
+func (GetCustomerGatewaysGatewayListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCustomerGatewaysGatewayList)(nil)).Elem()
 }
 
-func (o CustomerGatewaysGatewayListOutput) ToCustomerGatewaysGatewayListOutput() CustomerGatewaysGatewayListOutput {
+func (o GetCustomerGatewaysGatewayListOutput) ToGetCustomerGatewaysGatewayListOutput() GetCustomerGatewaysGatewayListOutput {
 	return o
 }
 
-func (o CustomerGatewaysGatewayListOutput) ToCustomerGatewaysGatewayListOutputWithContext(ctx context.Context) CustomerGatewaysGatewayListOutput {
+func (o GetCustomerGatewaysGatewayListOutput) ToGetCustomerGatewaysGatewayListOutputWithContext(ctx context.Context) GetCustomerGatewaysGatewayListOutput {
 	return o
 }
 
-func (o CustomerGatewaysGatewayListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomerGatewaysGatewayList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Create time of the VPN customer gateway.
+func (o GetCustomerGatewaysGatewayListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerGatewaysGatewayList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o CustomerGatewaysGatewayListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomerGatewaysGatewayList) string { return v.Id }).(pulumi.StringOutput)
+// ID of the VPN customer gateway.
+func (o GetCustomerGatewaysGatewayListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerGatewaysGatewayList) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o CustomerGatewaysGatewayListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomerGatewaysGatewayList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the customer gateway. The length of character is limited to 1-60.
+func (o GetCustomerGatewaysGatewayListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerGatewaysGatewayList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o CustomerGatewaysGatewayListOutput) PublicIpAddress() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomerGatewaysGatewayList) string { return v.PublicIpAddress }).(pulumi.StringOutput)
+// Public ip address of the VPN customer gateway.
+func (o GetCustomerGatewaysGatewayListOutput) PublicIpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerGatewaysGatewayList) string { return v.PublicIpAddress }).(pulumi.StringOutput)
 }
 
-func (o CustomerGatewaysGatewayListOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v CustomerGatewaysGatewayList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+// Tags of the VPN customer gateway to be queried.
+func (o GetCustomerGatewaysGatewayListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetCustomerGatewaysGatewayList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
 }
 
-type CustomerGatewaysGatewayListArrayOutput struct{ *pulumi.OutputState }
+type GetCustomerGatewaysGatewayListArrayOutput struct{ *pulumi.OutputState }
 
-func (CustomerGatewaysGatewayListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CustomerGatewaysGatewayList)(nil)).Elem()
+func (GetCustomerGatewaysGatewayListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCustomerGatewaysGatewayList)(nil)).Elem()
 }
 
-func (o CustomerGatewaysGatewayListArrayOutput) ToCustomerGatewaysGatewayListArrayOutput() CustomerGatewaysGatewayListArrayOutput {
+func (o GetCustomerGatewaysGatewayListArrayOutput) ToGetCustomerGatewaysGatewayListArrayOutput() GetCustomerGatewaysGatewayListArrayOutput {
 	return o
 }
 
-func (o CustomerGatewaysGatewayListArrayOutput) ToCustomerGatewaysGatewayListArrayOutputWithContext(ctx context.Context) CustomerGatewaysGatewayListArrayOutput {
+func (o GetCustomerGatewaysGatewayListArrayOutput) ToGetCustomerGatewaysGatewayListArrayOutputWithContext(ctx context.Context) GetCustomerGatewaysGatewayListArrayOutput {
 	return o
 }
 
-func (o CustomerGatewaysGatewayListArrayOutput) Index(i pulumi.IntInput) CustomerGatewaysGatewayListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomerGatewaysGatewayList {
-		return vs[0].([]CustomerGatewaysGatewayList)[vs[1].(int)]
-	}).(CustomerGatewaysGatewayListOutput)
+func (o GetCustomerGatewaysGatewayListArrayOutput) Index(i pulumi.IntInput) GetCustomerGatewaysGatewayListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCustomerGatewaysGatewayList {
+		return vs[0].([]GetCustomerGatewaysGatewayList)[vs[1].(int)]
+	}).(GetCustomerGatewaysGatewayListOutput)
 }
 
-type GatewayRoutesVpnGatewayRouteList struct {
+type GetGatewayRoutesVpnGatewayRouteList struct {
+	// Create time.
 	CreateTime           string `pulumi:"createTime"`
 	DestinationCidrBlock string `pulumi:"destinationCidrBlock"`
-	InstanceId           string `pulumi:"instanceId"`
-	InstanceType         string `pulumi:"instanceType"`
-	Priority             int    `pulumi:"priority"`
-	RouteId              string `pulumi:"routeId"`
-	Status               string `pulumi:"status"`
-	Type                 string `pulumi:"type"`
-	UpdateTime           string `pulumi:"updateTime"`
-	VpnGatewayId         string `pulumi:"vpnGatewayId"`
+	// Instance ID of the next hop.
+	InstanceId string `pulumi:"instanceId"`
+	// Next hop type (type of the associated instance). Valid values: VPNCONN (VPN tunnel) and CCN (CCN instance).
+	InstanceType string `pulumi:"instanceType"`
+	Priority     int    `pulumi:"priority"`
+	// Route ID.
+	RouteId string `pulumi:"routeId"`
+	Status  string `pulumi:"status"`
+	// Route type. Default value: Static.
+	Type string `pulumi:"type"`
+	// Update time.
+	UpdateTime string `pulumi:"updateTime"`
+	// VPN gateway ID.
+	VpnGatewayId string `pulumi:"vpnGatewayId"`
 }
 
-// GatewayRoutesVpnGatewayRouteListInput is an input type that accepts GatewayRoutesVpnGatewayRouteListArgs and GatewayRoutesVpnGatewayRouteListOutput values.
-// You can construct a concrete instance of `GatewayRoutesVpnGatewayRouteListInput` via:
+// GetGatewayRoutesVpnGatewayRouteListInput is an input type that accepts GetGatewayRoutesVpnGatewayRouteListArgs and GetGatewayRoutesVpnGatewayRouteListOutput values.
+// You can construct a concrete instance of `GetGatewayRoutesVpnGatewayRouteListInput` via:
 //
-//          GatewayRoutesVpnGatewayRouteListArgs{...}
-type GatewayRoutesVpnGatewayRouteListInput interface {
+//          GetGatewayRoutesVpnGatewayRouteListArgs{...}
+type GetGatewayRoutesVpnGatewayRouteListInput interface {
 	pulumi.Input
 
-	ToGatewayRoutesVpnGatewayRouteListOutput() GatewayRoutesVpnGatewayRouteListOutput
-	ToGatewayRoutesVpnGatewayRouteListOutputWithContext(context.Context) GatewayRoutesVpnGatewayRouteListOutput
+	ToGetGatewayRoutesVpnGatewayRouteListOutput() GetGatewayRoutesVpnGatewayRouteListOutput
+	ToGetGatewayRoutesVpnGatewayRouteListOutputWithContext(context.Context) GetGatewayRoutesVpnGatewayRouteListOutput
 }
 
-type GatewayRoutesVpnGatewayRouteListArgs struct {
+type GetGatewayRoutesVpnGatewayRouteListArgs struct {
+	// Create time.
 	CreateTime           pulumi.StringInput `pulumi:"createTime"`
 	DestinationCidrBlock pulumi.StringInput `pulumi:"destinationCidrBlock"`
-	InstanceId           pulumi.StringInput `pulumi:"instanceId"`
-	InstanceType         pulumi.StringInput `pulumi:"instanceType"`
-	Priority             pulumi.IntInput    `pulumi:"priority"`
-	RouteId              pulumi.StringInput `pulumi:"routeId"`
-	Status               pulumi.StringInput `pulumi:"status"`
-	Type                 pulumi.StringInput `pulumi:"type"`
-	UpdateTime           pulumi.StringInput `pulumi:"updateTime"`
-	VpnGatewayId         pulumi.StringInput `pulumi:"vpnGatewayId"`
+	// Instance ID of the next hop.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Next hop type (type of the associated instance). Valid values: VPNCONN (VPN tunnel) and CCN (CCN instance).
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	Priority     pulumi.IntInput    `pulumi:"priority"`
+	// Route ID.
+	RouteId pulumi.StringInput `pulumi:"routeId"`
+	Status  pulumi.StringInput `pulumi:"status"`
+	// Route type. Default value: Static.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// VPN gateway ID.
+	VpnGatewayId pulumi.StringInput `pulumi:"vpnGatewayId"`
 }
 
-func (GatewayRoutesVpnGatewayRouteListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GatewayRoutesVpnGatewayRouteList)(nil)).Elem()
+func (GetGatewayRoutesVpnGatewayRouteListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayRoutesVpnGatewayRouteList)(nil)).Elem()
 }
 
-func (i GatewayRoutesVpnGatewayRouteListArgs) ToGatewayRoutesVpnGatewayRouteListOutput() GatewayRoutesVpnGatewayRouteListOutput {
-	return i.ToGatewayRoutesVpnGatewayRouteListOutputWithContext(context.Background())
+func (i GetGatewayRoutesVpnGatewayRouteListArgs) ToGetGatewayRoutesVpnGatewayRouteListOutput() GetGatewayRoutesVpnGatewayRouteListOutput {
+	return i.ToGetGatewayRoutesVpnGatewayRouteListOutputWithContext(context.Background())
 }
 
-func (i GatewayRoutesVpnGatewayRouteListArgs) ToGatewayRoutesVpnGatewayRouteListOutputWithContext(ctx context.Context) GatewayRoutesVpnGatewayRouteListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GatewayRoutesVpnGatewayRouteListOutput)
+func (i GetGatewayRoutesVpnGatewayRouteListArgs) ToGetGatewayRoutesVpnGatewayRouteListOutputWithContext(ctx context.Context) GetGatewayRoutesVpnGatewayRouteListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayRoutesVpnGatewayRouteListOutput)
 }
 
-// GatewayRoutesVpnGatewayRouteListArrayInput is an input type that accepts GatewayRoutesVpnGatewayRouteListArray and GatewayRoutesVpnGatewayRouteListArrayOutput values.
-// You can construct a concrete instance of `GatewayRoutesVpnGatewayRouteListArrayInput` via:
+// GetGatewayRoutesVpnGatewayRouteListArrayInput is an input type that accepts GetGatewayRoutesVpnGatewayRouteListArray and GetGatewayRoutesVpnGatewayRouteListArrayOutput values.
+// You can construct a concrete instance of `GetGatewayRoutesVpnGatewayRouteListArrayInput` via:
 //
-//          GatewayRoutesVpnGatewayRouteListArray{ GatewayRoutesVpnGatewayRouteListArgs{...} }
-type GatewayRoutesVpnGatewayRouteListArrayInput interface {
+//          GetGatewayRoutesVpnGatewayRouteListArray{ GetGatewayRoutesVpnGatewayRouteListArgs{...} }
+type GetGatewayRoutesVpnGatewayRouteListArrayInput interface {
 	pulumi.Input
 
-	ToGatewayRoutesVpnGatewayRouteListArrayOutput() GatewayRoutesVpnGatewayRouteListArrayOutput
-	ToGatewayRoutesVpnGatewayRouteListArrayOutputWithContext(context.Context) GatewayRoutesVpnGatewayRouteListArrayOutput
+	ToGetGatewayRoutesVpnGatewayRouteListArrayOutput() GetGatewayRoutesVpnGatewayRouteListArrayOutput
+	ToGetGatewayRoutesVpnGatewayRouteListArrayOutputWithContext(context.Context) GetGatewayRoutesVpnGatewayRouteListArrayOutput
 }
 
-type GatewayRoutesVpnGatewayRouteListArray []GatewayRoutesVpnGatewayRouteListInput
+type GetGatewayRoutesVpnGatewayRouteListArray []GetGatewayRoutesVpnGatewayRouteListInput
 
-func (GatewayRoutesVpnGatewayRouteListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GatewayRoutesVpnGatewayRouteList)(nil)).Elem()
+func (GetGatewayRoutesVpnGatewayRouteListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayRoutesVpnGatewayRouteList)(nil)).Elem()
 }
 
-func (i GatewayRoutesVpnGatewayRouteListArray) ToGatewayRoutesVpnGatewayRouteListArrayOutput() GatewayRoutesVpnGatewayRouteListArrayOutput {
-	return i.ToGatewayRoutesVpnGatewayRouteListArrayOutputWithContext(context.Background())
+func (i GetGatewayRoutesVpnGatewayRouteListArray) ToGetGatewayRoutesVpnGatewayRouteListArrayOutput() GetGatewayRoutesVpnGatewayRouteListArrayOutput {
+	return i.ToGetGatewayRoutesVpnGatewayRouteListArrayOutputWithContext(context.Background())
 }
 
-func (i GatewayRoutesVpnGatewayRouteListArray) ToGatewayRoutesVpnGatewayRouteListArrayOutputWithContext(ctx context.Context) GatewayRoutesVpnGatewayRouteListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GatewayRoutesVpnGatewayRouteListArrayOutput)
+func (i GetGatewayRoutesVpnGatewayRouteListArray) ToGetGatewayRoutesVpnGatewayRouteListArrayOutputWithContext(ctx context.Context) GetGatewayRoutesVpnGatewayRouteListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewayRoutesVpnGatewayRouteListArrayOutput)
 }
 
-type GatewayRoutesVpnGatewayRouteListOutput struct{ *pulumi.OutputState }
+type GetGatewayRoutesVpnGatewayRouteListOutput struct{ *pulumi.OutputState }
 
-func (GatewayRoutesVpnGatewayRouteListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GatewayRoutesVpnGatewayRouteList)(nil)).Elem()
+func (GetGatewayRoutesVpnGatewayRouteListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewayRoutesVpnGatewayRouteList)(nil)).Elem()
 }
 
-func (o GatewayRoutesVpnGatewayRouteListOutput) ToGatewayRoutesVpnGatewayRouteListOutput() GatewayRoutesVpnGatewayRouteListOutput {
+func (o GetGatewayRoutesVpnGatewayRouteListOutput) ToGetGatewayRoutesVpnGatewayRouteListOutput() GetGatewayRoutesVpnGatewayRouteListOutput {
 	return o
 }
 
-func (o GatewayRoutesVpnGatewayRouteListOutput) ToGatewayRoutesVpnGatewayRouteListOutputWithContext(ctx context.Context) GatewayRoutesVpnGatewayRouteListOutput {
+func (o GetGatewayRoutesVpnGatewayRouteListOutput) ToGetGatewayRoutesVpnGatewayRouteListOutputWithContext(ctx context.Context) GetGatewayRoutesVpnGatewayRouteListOutput {
 	return o
 }
 
-func (o GatewayRoutesVpnGatewayRouteListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayRoutesVpnGatewayRouteList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Create time.
+func (o GetGatewayRoutesVpnGatewayRouteListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o GatewayRoutesVpnGatewayRouteListOutput) DestinationCidrBlock() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayRoutesVpnGatewayRouteList) string { return v.DestinationCidrBlock }).(pulumi.StringOutput)
+func (o GetGatewayRoutesVpnGatewayRouteListOutput) DestinationCidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.DestinationCidrBlock }).(pulumi.StringOutput)
 }
 
-func (o GatewayRoutesVpnGatewayRouteListOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayRoutesVpnGatewayRouteList) string { return v.InstanceId }).(pulumi.StringOutput)
+// Instance ID of the next hop.
+func (o GetGatewayRoutesVpnGatewayRouteListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.InstanceId }).(pulumi.StringOutput)
 }
 
-func (o GatewayRoutesVpnGatewayRouteListOutput) InstanceType() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayRoutesVpnGatewayRouteList) string { return v.InstanceType }).(pulumi.StringOutput)
+// Next hop type (type of the associated instance). Valid values: VPNCONN (VPN tunnel) and CCN (CCN instance).
+func (o GetGatewayRoutesVpnGatewayRouteListOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.InstanceType }).(pulumi.StringOutput)
 }
 
-func (o GatewayRoutesVpnGatewayRouteListOutput) Priority() pulumi.IntOutput {
-	return o.ApplyT(func(v GatewayRoutesVpnGatewayRouteList) int { return v.Priority }).(pulumi.IntOutput)
+func (o GetGatewayRoutesVpnGatewayRouteListOutput) Priority() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) int { return v.Priority }).(pulumi.IntOutput)
 }
 
-func (o GatewayRoutesVpnGatewayRouteListOutput) RouteId() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayRoutesVpnGatewayRouteList) string { return v.RouteId }).(pulumi.StringOutput)
+// Route ID.
+func (o GetGatewayRoutesVpnGatewayRouteListOutput) RouteId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.RouteId }).(pulumi.StringOutput)
 }
 
-func (o GatewayRoutesVpnGatewayRouteListOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayRoutesVpnGatewayRouteList) string { return v.Status }).(pulumi.StringOutput)
+func (o GetGatewayRoutesVpnGatewayRouteListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.Status }).(pulumi.StringOutput)
 }
 
-func (o GatewayRoutesVpnGatewayRouteListOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayRoutesVpnGatewayRouteList) string { return v.Type }).(pulumi.StringOutput)
+// Route type. Default value: Static.
+func (o GetGatewayRoutesVpnGatewayRouteListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.Type }).(pulumi.StringOutput)
 }
 
-func (o GatewayRoutesVpnGatewayRouteListOutput) UpdateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayRoutesVpnGatewayRouteList) string { return v.UpdateTime }).(pulumi.StringOutput)
+// Update time.
+func (o GetGatewayRoutesVpnGatewayRouteListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.UpdateTime }).(pulumi.StringOutput)
 }
 
-func (o GatewayRoutesVpnGatewayRouteListOutput) VpnGatewayId() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewayRoutesVpnGatewayRouteList) string { return v.VpnGatewayId }).(pulumi.StringOutput)
+// VPN gateway ID.
+func (o GetGatewayRoutesVpnGatewayRouteListOutput) VpnGatewayId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewayRoutesVpnGatewayRouteList) string { return v.VpnGatewayId }).(pulumi.StringOutput)
 }
 
-type GatewayRoutesVpnGatewayRouteListArrayOutput struct{ *pulumi.OutputState }
+type GetGatewayRoutesVpnGatewayRouteListArrayOutput struct{ *pulumi.OutputState }
 
-func (GatewayRoutesVpnGatewayRouteListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GatewayRoutesVpnGatewayRouteList)(nil)).Elem()
+func (GetGatewayRoutesVpnGatewayRouteListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewayRoutesVpnGatewayRouteList)(nil)).Elem()
 }
 
-func (o GatewayRoutesVpnGatewayRouteListArrayOutput) ToGatewayRoutesVpnGatewayRouteListArrayOutput() GatewayRoutesVpnGatewayRouteListArrayOutput {
+func (o GetGatewayRoutesVpnGatewayRouteListArrayOutput) ToGetGatewayRoutesVpnGatewayRouteListArrayOutput() GetGatewayRoutesVpnGatewayRouteListArrayOutput {
 	return o
 }
 
-func (o GatewayRoutesVpnGatewayRouteListArrayOutput) ToGatewayRoutesVpnGatewayRouteListArrayOutputWithContext(ctx context.Context) GatewayRoutesVpnGatewayRouteListArrayOutput {
+func (o GetGatewayRoutesVpnGatewayRouteListArrayOutput) ToGetGatewayRoutesVpnGatewayRouteListArrayOutputWithContext(ctx context.Context) GetGatewayRoutesVpnGatewayRouteListArrayOutput {
 	return o
 }
 
-func (o GatewayRoutesVpnGatewayRouteListArrayOutput) Index(i pulumi.IntInput) GatewayRoutesVpnGatewayRouteListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GatewayRoutesVpnGatewayRouteList {
-		return vs[0].([]GatewayRoutesVpnGatewayRouteList)[vs[1].(int)]
-	}).(GatewayRoutesVpnGatewayRouteListOutput)
+func (o GetGatewayRoutesVpnGatewayRouteListArrayOutput) Index(i pulumi.IntInput) GetGatewayRoutesVpnGatewayRouteListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewayRoutesVpnGatewayRouteList {
+		return vs[0].([]GetGatewayRoutesVpnGatewayRouteList)[vs[1].(int)]
+	}).(GetGatewayRoutesVpnGatewayRouteListOutput)
 }
 
-type GatewaysGatewayList struct {
-	Bandwidth        int                    `pulumi:"bandwidth"`
-	ChargeType       string                 `pulumi:"chargeType"`
-	CreateTime       string                 `pulumi:"createTime"`
-	ExpiredTime      string                 `pulumi:"expiredTime"`
-	Id               string                 `pulumi:"id"`
-	IsAddressBlocked bool                   `pulumi:"isAddressBlocked"`
-	Name             string                 `pulumi:"name"`
-	NewPurchasePlan  string                 `pulumi:"newPurchasePlan"`
-	PrepaidRenewFlag string                 `pulumi:"prepaidRenewFlag"`
-	PublicIpAddress  string                 `pulumi:"publicIpAddress"`
-	RestrictState    string                 `pulumi:"restrictState"`
-	State            string                 `pulumi:"state"`
-	Tags             map[string]interface{} `pulumi:"tags"`
-	Type             string                 `pulumi:"type"`
-	VpcId            string                 `pulumi:"vpcId"`
-	Zone             string                 `pulumi:"zone"`
+type GetGatewaysGatewayList struct {
+	// The maximum public network output bandwidth of VPN gateway (unit: Mbps).
+	Bandwidth int `pulumi:"bandwidth"`
+	// Charge Type of the VPN gateway.
+	ChargeType string `pulumi:"chargeType"`
+	// Create time of the VPN gateway.
+	CreateTime string `pulumi:"createTime"`
+	// Expired time of the VPN gateway when charge type is `PREPAID`.
+	ExpiredTime string `pulumi:"expiredTime"`
+	// ID of the VPN gateway.
+	Id string `pulumi:"id"`
+	// Indicates whether ip address is blocked.
+	IsAddressBlocked bool `pulumi:"isAddressBlocked"`
+	// Name of the VPN gateway. The length of character is limited to 1-60.
+	Name string `pulumi:"name"`
+	// The plan of new purchase.
+	NewPurchasePlan string `pulumi:"newPurchasePlan"`
+	// Flag indicates whether to renew or not.
+	PrepaidRenewFlag string `pulumi:"prepaidRenewFlag"`
+	// Public ip address of the VPN gateway.
+	PublicIpAddress string `pulumi:"publicIpAddress"`
+	// Restrict state of VPN gateway.
+	RestrictState string `pulumi:"restrictState"`
+	// State of the VPN gateway.
+	State string `pulumi:"state"`
+	// Tags of the VPN gateway to be queried.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// Type of gateway instance.
+	Type string `pulumi:"type"`
+	// ID of the VPC.
+	VpcId string `pulumi:"vpcId"`
+	// Zone of the VPN gateway.
+	Zone string `pulumi:"zone"`
 }
 
-// GatewaysGatewayListInput is an input type that accepts GatewaysGatewayListArgs and GatewaysGatewayListOutput values.
-// You can construct a concrete instance of `GatewaysGatewayListInput` via:
+// GetGatewaysGatewayListInput is an input type that accepts GetGatewaysGatewayListArgs and GetGatewaysGatewayListOutput values.
+// You can construct a concrete instance of `GetGatewaysGatewayListInput` via:
 //
-//          GatewaysGatewayListArgs{...}
-type GatewaysGatewayListInput interface {
+//          GetGatewaysGatewayListArgs{...}
+type GetGatewaysGatewayListInput interface {
 	pulumi.Input
 
-	ToGatewaysGatewayListOutput() GatewaysGatewayListOutput
-	ToGatewaysGatewayListOutputWithContext(context.Context) GatewaysGatewayListOutput
+	ToGetGatewaysGatewayListOutput() GetGatewaysGatewayListOutput
+	ToGetGatewaysGatewayListOutputWithContext(context.Context) GetGatewaysGatewayListOutput
 }
 
-type GatewaysGatewayListArgs struct {
-	Bandwidth        pulumi.IntInput    `pulumi:"bandwidth"`
-	ChargeType       pulumi.StringInput `pulumi:"chargeType"`
-	CreateTime       pulumi.StringInput `pulumi:"createTime"`
-	ExpiredTime      pulumi.StringInput `pulumi:"expiredTime"`
-	Id               pulumi.StringInput `pulumi:"id"`
-	IsAddressBlocked pulumi.BoolInput   `pulumi:"isAddressBlocked"`
-	Name             pulumi.StringInput `pulumi:"name"`
-	NewPurchasePlan  pulumi.StringInput `pulumi:"newPurchasePlan"`
+type GetGatewaysGatewayListArgs struct {
+	// The maximum public network output bandwidth of VPN gateway (unit: Mbps).
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// Charge Type of the VPN gateway.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// Create time of the VPN gateway.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Expired time of the VPN gateway when charge type is `PREPAID`.
+	ExpiredTime pulumi.StringInput `pulumi:"expiredTime"`
+	// ID of the VPN gateway.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Indicates whether ip address is blocked.
+	IsAddressBlocked pulumi.BoolInput `pulumi:"isAddressBlocked"`
+	// Name of the VPN gateway. The length of character is limited to 1-60.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The plan of new purchase.
+	NewPurchasePlan pulumi.StringInput `pulumi:"newPurchasePlan"`
+	// Flag indicates whether to renew or not.
 	PrepaidRenewFlag pulumi.StringInput `pulumi:"prepaidRenewFlag"`
-	PublicIpAddress  pulumi.StringInput `pulumi:"publicIpAddress"`
-	RestrictState    pulumi.StringInput `pulumi:"restrictState"`
-	State            pulumi.StringInput `pulumi:"state"`
-	Tags             pulumi.MapInput    `pulumi:"tags"`
-	Type             pulumi.StringInput `pulumi:"type"`
-	VpcId            pulumi.StringInput `pulumi:"vpcId"`
-	Zone             pulumi.StringInput `pulumi:"zone"`
+	// Public ip address of the VPN gateway.
+	PublicIpAddress pulumi.StringInput `pulumi:"publicIpAddress"`
+	// Restrict state of VPN gateway.
+	RestrictState pulumi.StringInput `pulumi:"restrictState"`
+	// State of the VPN gateway.
+	State pulumi.StringInput `pulumi:"state"`
+	// Tags of the VPN gateway to be queried.
+	Tags pulumi.MapInput `pulumi:"tags"`
+	// Type of gateway instance.
+	Type pulumi.StringInput `pulumi:"type"`
+	// ID of the VPC.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Zone of the VPN gateway.
+	Zone pulumi.StringInput `pulumi:"zone"`
 }
 
-func (GatewaysGatewayListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GatewaysGatewayList)(nil)).Elem()
+func (GetGatewaysGatewayListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysGatewayList)(nil)).Elem()
 }
 
-func (i GatewaysGatewayListArgs) ToGatewaysGatewayListOutput() GatewaysGatewayListOutput {
-	return i.ToGatewaysGatewayListOutputWithContext(context.Background())
+func (i GetGatewaysGatewayListArgs) ToGetGatewaysGatewayListOutput() GetGatewaysGatewayListOutput {
+	return i.ToGetGatewaysGatewayListOutputWithContext(context.Background())
 }
 
-func (i GatewaysGatewayListArgs) ToGatewaysGatewayListOutputWithContext(ctx context.Context) GatewaysGatewayListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GatewaysGatewayListOutput)
+func (i GetGatewaysGatewayListArgs) ToGetGatewaysGatewayListOutputWithContext(ctx context.Context) GetGatewaysGatewayListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysGatewayListOutput)
 }
 
-// GatewaysGatewayListArrayInput is an input type that accepts GatewaysGatewayListArray and GatewaysGatewayListArrayOutput values.
-// You can construct a concrete instance of `GatewaysGatewayListArrayInput` via:
+// GetGatewaysGatewayListArrayInput is an input type that accepts GetGatewaysGatewayListArray and GetGatewaysGatewayListArrayOutput values.
+// You can construct a concrete instance of `GetGatewaysGatewayListArrayInput` via:
 //
-//          GatewaysGatewayListArray{ GatewaysGatewayListArgs{...} }
-type GatewaysGatewayListArrayInput interface {
+//          GetGatewaysGatewayListArray{ GetGatewaysGatewayListArgs{...} }
+type GetGatewaysGatewayListArrayInput interface {
 	pulumi.Input
 
-	ToGatewaysGatewayListArrayOutput() GatewaysGatewayListArrayOutput
-	ToGatewaysGatewayListArrayOutputWithContext(context.Context) GatewaysGatewayListArrayOutput
+	ToGetGatewaysGatewayListArrayOutput() GetGatewaysGatewayListArrayOutput
+	ToGetGatewaysGatewayListArrayOutputWithContext(context.Context) GetGatewaysGatewayListArrayOutput
 }
 
-type GatewaysGatewayListArray []GatewaysGatewayListInput
+type GetGatewaysGatewayListArray []GetGatewaysGatewayListInput
 
-func (GatewaysGatewayListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GatewaysGatewayList)(nil)).Elem()
+func (GetGatewaysGatewayListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysGatewayList)(nil)).Elem()
 }
 
-func (i GatewaysGatewayListArray) ToGatewaysGatewayListArrayOutput() GatewaysGatewayListArrayOutput {
-	return i.ToGatewaysGatewayListArrayOutputWithContext(context.Background())
+func (i GetGatewaysGatewayListArray) ToGetGatewaysGatewayListArrayOutput() GetGatewaysGatewayListArrayOutput {
+	return i.ToGetGatewaysGatewayListArrayOutputWithContext(context.Background())
 }
 
-func (i GatewaysGatewayListArray) ToGatewaysGatewayListArrayOutputWithContext(ctx context.Context) GatewaysGatewayListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GatewaysGatewayListArrayOutput)
+func (i GetGatewaysGatewayListArray) ToGetGatewaysGatewayListArrayOutputWithContext(ctx context.Context) GetGatewaysGatewayListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGatewaysGatewayListArrayOutput)
 }
 
-type GatewaysGatewayListOutput struct{ *pulumi.OutputState }
+type GetGatewaysGatewayListOutput struct{ *pulumi.OutputState }
 
-func (GatewaysGatewayListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GatewaysGatewayList)(nil)).Elem()
+func (GetGatewaysGatewayListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGatewaysGatewayList)(nil)).Elem()
 }
 
-func (o GatewaysGatewayListOutput) ToGatewaysGatewayListOutput() GatewaysGatewayListOutput {
+func (o GetGatewaysGatewayListOutput) ToGetGatewaysGatewayListOutput() GetGatewaysGatewayListOutput {
 	return o
 }
 
-func (o GatewaysGatewayListOutput) ToGatewaysGatewayListOutputWithContext(ctx context.Context) GatewaysGatewayListOutput {
+func (o GetGatewaysGatewayListOutput) ToGetGatewaysGatewayListOutputWithContext(ctx context.Context) GetGatewaysGatewayListOutput {
 	return o
 }
 
-func (o GatewaysGatewayListOutput) Bandwidth() pulumi.IntOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) int { return v.Bandwidth }).(pulumi.IntOutput)
+// The maximum public network output bandwidth of VPN gateway (unit: Mbps).
+func (o GetGatewaysGatewayListOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) int { return v.Bandwidth }).(pulumi.IntOutput)
 }
 
-func (o GatewaysGatewayListOutput) ChargeType() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.ChargeType }).(pulumi.StringOutput)
+// Charge Type of the VPN gateway.
+func (o GetGatewaysGatewayListOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.ChargeType }).(pulumi.StringOutput)
 }
 
-func (o GatewaysGatewayListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Create time of the VPN gateway.
+func (o GetGatewaysGatewayListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o GatewaysGatewayListOutput) ExpiredTime() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.ExpiredTime }).(pulumi.StringOutput)
+// Expired time of the VPN gateway when charge type is `PREPAID`.
+func (o GetGatewaysGatewayListOutput) ExpiredTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.ExpiredTime }).(pulumi.StringOutput)
 }
 
-func (o GatewaysGatewayListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.Id }).(pulumi.StringOutput)
+// ID of the VPN gateway.
+func (o GetGatewaysGatewayListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o GatewaysGatewayListOutput) IsAddressBlocked() pulumi.BoolOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) bool { return v.IsAddressBlocked }).(pulumi.BoolOutput)
+// Indicates whether ip address is blocked.
+func (o GetGatewaysGatewayListOutput) IsAddressBlocked() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) bool { return v.IsAddressBlocked }).(pulumi.BoolOutput)
 }
 
-func (o GatewaysGatewayListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the VPN gateway. The length of character is limited to 1-60.
+func (o GetGatewaysGatewayListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o GatewaysGatewayListOutput) NewPurchasePlan() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.NewPurchasePlan }).(pulumi.StringOutput)
+// The plan of new purchase.
+func (o GetGatewaysGatewayListOutput) NewPurchasePlan() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.NewPurchasePlan }).(pulumi.StringOutput)
 }
 
-func (o GatewaysGatewayListOutput) PrepaidRenewFlag() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.PrepaidRenewFlag }).(pulumi.StringOutput)
+// Flag indicates whether to renew or not.
+func (o GetGatewaysGatewayListOutput) PrepaidRenewFlag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.PrepaidRenewFlag }).(pulumi.StringOutput)
 }
 
-func (o GatewaysGatewayListOutput) PublicIpAddress() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.PublicIpAddress }).(pulumi.StringOutput)
+// Public ip address of the VPN gateway.
+func (o GetGatewaysGatewayListOutput) PublicIpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.PublicIpAddress }).(pulumi.StringOutput)
 }
 
-func (o GatewaysGatewayListOutput) RestrictState() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.RestrictState }).(pulumi.StringOutput)
+// Restrict state of VPN gateway.
+func (o GetGatewaysGatewayListOutput) RestrictState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.RestrictState }).(pulumi.StringOutput)
 }
 
-func (o GatewaysGatewayListOutput) State() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.State }).(pulumi.StringOutput)
+// State of the VPN gateway.
+func (o GetGatewaysGatewayListOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.State }).(pulumi.StringOutput)
 }
 
-func (o GatewaysGatewayListOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+// Tags of the VPN gateway to be queried.
+func (o GetGatewaysGatewayListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
 }
 
-func (o GatewaysGatewayListOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.Type }).(pulumi.StringOutput)
+// Type of gateway instance.
+func (o GetGatewaysGatewayListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.Type }).(pulumi.StringOutput)
 }
 
-func (o GatewaysGatewayListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.VpcId }).(pulumi.StringOutput)
+// ID of the VPC.
+func (o GetGatewaysGatewayListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
-func (o GatewaysGatewayListOutput) Zone() pulumi.StringOutput {
-	return o.ApplyT(func(v GatewaysGatewayList) string { return v.Zone }).(pulumi.StringOutput)
+// Zone of the VPN gateway.
+func (o GetGatewaysGatewayListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGatewaysGatewayList) string { return v.Zone }).(pulumi.StringOutput)
 }
 
-type GatewaysGatewayListArrayOutput struct{ *pulumi.OutputState }
+type GetGatewaysGatewayListArrayOutput struct{ *pulumi.OutputState }
 
-func (GatewaysGatewayListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GatewaysGatewayList)(nil)).Elem()
+func (GetGatewaysGatewayListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGatewaysGatewayList)(nil)).Elem()
 }
 
-func (o GatewaysGatewayListArrayOutput) ToGatewaysGatewayListArrayOutput() GatewaysGatewayListArrayOutput {
+func (o GetGatewaysGatewayListArrayOutput) ToGetGatewaysGatewayListArrayOutput() GetGatewaysGatewayListArrayOutput {
 	return o
 }
 
-func (o GatewaysGatewayListArrayOutput) ToGatewaysGatewayListArrayOutputWithContext(ctx context.Context) GatewaysGatewayListArrayOutput {
+func (o GetGatewaysGatewayListArrayOutput) ToGetGatewaysGatewayListArrayOutputWithContext(ctx context.Context) GetGatewaysGatewayListArrayOutput {
 	return o
 }
 
-func (o GatewaysGatewayListArrayOutput) Index(i pulumi.IntInput) GatewaysGatewayListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GatewaysGatewayList {
-		return vs[0].([]GatewaysGatewayList)[vs[1].(int)]
-	}).(GatewaysGatewayListOutput)
+func (o GetGatewaysGatewayListArrayOutput) Index(i pulumi.IntInput) GetGatewaysGatewayListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGatewaysGatewayList {
+		return vs[0].([]GetGatewaysGatewayList)[vs[1].(int)]
+	}).(GetGatewaysGatewayListOutput)
 }
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionSecurityGroupPolicyInput)(nil)).Elem(), ConnectionSecurityGroupPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionSecurityGroupPolicyArrayInput)(nil)).Elem(), ConnectionSecurityGroupPolicyArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionsConnectionListInput)(nil)).Elem(), ConnectionsConnectionListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionsConnectionListArrayInput)(nil)).Elem(), ConnectionsConnectionListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionsConnectionListSecurityGroupPolicyInput)(nil)).Elem(), ConnectionsConnectionListSecurityGroupPolicyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionsConnectionListSecurityGroupPolicyArrayInput)(nil)).Elem(), ConnectionsConnectionListSecurityGroupPolicyArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomerGatewaysGatewayListInput)(nil)).Elem(), CustomerGatewaysGatewayListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomerGatewaysGatewayListArrayInput)(nil)).Elem(), CustomerGatewaysGatewayListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GatewayRoutesVpnGatewayRouteListInput)(nil)).Elem(), GatewayRoutesVpnGatewayRouteListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GatewayRoutesVpnGatewayRouteListArrayInput)(nil)).Elem(), GatewayRoutesVpnGatewayRouteListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GatewaysGatewayListInput)(nil)).Elem(), GatewaysGatewayListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GatewaysGatewayListArrayInput)(nil)).Elem(), GatewaysGatewayListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionsConnectionListInput)(nil)).Elem(), GetConnectionsConnectionListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionsConnectionListArrayInput)(nil)).Elem(), GetConnectionsConnectionListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionsConnectionListSecurityGroupPolicyInput)(nil)).Elem(), GetConnectionsConnectionListSecurityGroupPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionsConnectionListSecurityGroupPolicyArrayInput)(nil)).Elem(), GetConnectionsConnectionListSecurityGroupPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCustomerGatewaysGatewayListInput)(nil)).Elem(), GetCustomerGatewaysGatewayListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCustomerGatewaysGatewayListArrayInput)(nil)).Elem(), GetCustomerGatewaysGatewayListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayRoutesVpnGatewayRouteListInput)(nil)).Elem(), GetGatewayRoutesVpnGatewayRouteListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayRoutesVpnGatewayRouteListArrayInput)(nil)).Elem(), GetGatewayRoutesVpnGatewayRouteListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysGatewayListInput)(nil)).Elem(), GetGatewaysGatewayListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysGatewayListArrayInput)(nil)).Elem(), GetGatewaysGatewayListArray{})
 	pulumi.RegisterOutputType(ConnectionSecurityGroupPolicyOutput{})
 	pulumi.RegisterOutputType(ConnectionSecurityGroupPolicyArrayOutput{})
-	pulumi.RegisterOutputType(ConnectionsConnectionListOutput{})
-	pulumi.RegisterOutputType(ConnectionsConnectionListArrayOutput{})
-	pulumi.RegisterOutputType(ConnectionsConnectionListSecurityGroupPolicyOutput{})
-	pulumi.RegisterOutputType(ConnectionsConnectionListSecurityGroupPolicyArrayOutput{})
-	pulumi.RegisterOutputType(CustomerGatewaysGatewayListOutput{})
-	pulumi.RegisterOutputType(CustomerGatewaysGatewayListArrayOutput{})
-	pulumi.RegisterOutputType(GatewayRoutesVpnGatewayRouteListOutput{})
-	pulumi.RegisterOutputType(GatewayRoutesVpnGatewayRouteListArrayOutput{})
-	pulumi.RegisterOutputType(GatewaysGatewayListOutput{})
-	pulumi.RegisterOutputType(GatewaysGatewayListArrayOutput{})
+	pulumi.RegisterOutputType(GetConnectionsConnectionListOutput{})
+	pulumi.RegisterOutputType(GetConnectionsConnectionListArrayOutput{})
+	pulumi.RegisterOutputType(GetConnectionsConnectionListSecurityGroupPolicyOutput{})
+	pulumi.RegisterOutputType(GetConnectionsConnectionListSecurityGroupPolicyArrayOutput{})
+	pulumi.RegisterOutputType(GetCustomerGatewaysGatewayListOutput{})
+	pulumi.RegisterOutputType(GetCustomerGatewaysGatewayListArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewayRoutesVpnGatewayRouteListOutput{})
+	pulumi.RegisterOutputType(GetGatewayRoutesVpnGatewayRouteListArrayOutput{})
+	pulumi.RegisterOutputType(GetGatewaysGatewayListOutput{})
+	pulumi.RegisterOutputType(GetGatewaysGatewayListArrayOutput{})
 }

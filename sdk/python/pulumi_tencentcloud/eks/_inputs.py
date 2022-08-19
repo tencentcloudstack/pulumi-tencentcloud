@@ -28,6 +28,10 @@ class ClusterDnsServerArgs:
     def __init__(__self__, *,
                  domain: Optional[pulumi.Input[str]] = None,
                  servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] domain: DNS Server domain. Empty indicates all domain.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] servers: List of DNS Server IP address, pattern: "ip[:port]".
+        """
         if domain is not None:
             pulumi.set(__self__, "domain", domain)
         if servers is not None:
@@ -36,6 +40,9 @@ class ClusterDnsServerArgs:
     @property
     @pulumi.getter
     def domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        DNS Server domain. Empty indicates all domain.
+        """
         return pulumi.get(self, "domain")
 
     @domain.setter
@@ -45,6 +52,9 @@ class ClusterDnsServerArgs:
     @property
     @pulumi.getter
     def servers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of DNS Server IP address, pattern: "ip[:port]".
+        """
         return pulumi.get(self, "servers")
 
     @servers.setter
@@ -57,6 +67,10 @@ class ClusterInternalLbArgs:
     def __init__(__self__, *,
                  enabled: pulumi.Input[bool],
                  subnet_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] enabled: Indicates weather the internal access LB enabled.
+        :param pulumi.Input[str] subnet_id: ID of subnet which related to Internal LB.
+        """
         pulumi.set(__self__, "enabled", enabled)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
@@ -64,6 +78,9 @@ class ClusterInternalLbArgs:
     @property
     @pulumi.getter
     def enabled(self) -> pulumi.Input[bool]:
+        """
+        Indicates weather the internal access LB enabled.
+        """
         return pulumi.get(self, "enabled")
 
     @enabled.setter
@@ -73,6 +90,9 @@ class ClusterInternalLbArgs:
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of subnet which related to Internal LB.
+        """
         return pulumi.get(self, "subnet_id")
 
     @subnet_id.setter
@@ -88,6 +108,12 @@ class ClusterPublicLbArgs:
                  extra_param: Optional[pulumi.Input[str]] = None,
                  security_group: Optional[pulumi.Input[str]] = None,
                  security_policies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[bool] enabled: Indicates weather the public access LB enabled.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] allow_from_cidrs: List of CIDRs which allowed to access.
+        :param pulumi.Input[str] extra_param: Extra param text json.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_policies: List of security allow IP or CIDRs, default deny all.
+        """
         pulumi.set(__self__, "enabled", enabled)
         if allow_from_cidrs is not None:
             pulumi.set(__self__, "allow_from_cidrs", allow_from_cidrs)
@@ -101,6 +127,9 @@ class ClusterPublicLbArgs:
     @property
     @pulumi.getter
     def enabled(self) -> pulumi.Input[bool]:
+        """
+        Indicates weather the public access LB enabled.
+        """
         return pulumi.get(self, "enabled")
 
     @enabled.setter
@@ -110,6 +139,9 @@ class ClusterPublicLbArgs:
     @property
     @pulumi.getter(name="allowFromCidrs")
     def allow_from_cidrs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of CIDRs which allowed to access.
+        """
         return pulumi.get(self, "allow_from_cidrs")
 
     @allow_from_cidrs.setter
@@ -119,6 +151,9 @@ class ClusterPublicLbArgs:
     @property
     @pulumi.getter(name="extraParam")
     def extra_param(self) -> Optional[pulumi.Input[str]]:
+        """
+        Extra param text json.
+        """
         return pulumi.get(self, "extra_param")
 
     @extra_param.setter
@@ -137,6 +172,9 @@ class ClusterPublicLbArgs:
     @property
     @pulumi.getter(name="securityPolicies")
     def security_policies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of security allow IP or CIDRs, default deny all.
+        """
         return pulumi.get(self, "security_policies")
 
     @security_policies.setter
@@ -149,12 +187,19 @@ class ContainerInstanceCbsVolumeArgs:
     def __init__(__self__, *,
                  disk_id: pulumi.Input[str],
                  name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] disk_id: ID of CBS.
+        :param pulumi.Input[str] name: Name of CBS volume.
+        """
         pulumi.set(__self__, "disk_id", disk_id)
         pulumi.set(__self__, "name", name)
 
     @property
     @pulumi.getter(name="diskId")
     def disk_id(self) -> pulumi.Input[str]:
+        """
+        ID of CBS.
+        """
         return pulumi.get(self, "disk_id")
 
     @disk_id.setter
@@ -164,6 +209,9 @@ class ContainerInstanceCbsVolumeArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        Name of CBS volume.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -185,6 +233,19 @@ class ContainerInstanceContainerArgs:
                  readiness_probe: Optional[pulumi.Input['ContainerInstanceContainerReadinessProbeArgs']] = None,
                  volume_mounts: Optional[pulumi.Input[Sequence[pulumi.Input['ContainerInstanceContainerVolumeMountArgs']]]] = None,
                  working_dir: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] image: Image of Container.
+        :param pulumi.Input[str] name: Name of Container.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] args: Container launch argument list.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] commands: Container launch command list.
+        :param pulumi.Input[float] cpu: Number of cpu core of container.
+        :param pulumi.Input[Mapping[str, Any]] env_vars: Map of environment variables of container OS.
+        :param pulumi.Input['ContainerInstanceContainerLivenessProbeArgs'] liveness_probe: Configuration block of LivenessProbe.
+        :param pulumi.Input[float] memory: Memory size of container.
+        :param pulumi.Input['ContainerInstanceContainerReadinessProbeArgs'] readiness_probe: Configuration block of ReadinessProbe.
+        :param pulumi.Input[Sequence[pulumi.Input['ContainerInstanceContainerVolumeMountArgs']]] volume_mounts: List of volume mount informations.
+        :param pulumi.Input[str] working_dir: Container working directory.
+        """
         pulumi.set(__self__, "image", image)
         pulumi.set(__self__, "name", name)
         if args is not None:
@@ -209,6 +270,9 @@ class ContainerInstanceContainerArgs:
     @property
     @pulumi.getter
     def image(self) -> pulumi.Input[str]:
+        """
+        Image of Container.
+        """
         return pulumi.get(self, "image")
 
     @image.setter
@@ -218,6 +282,9 @@ class ContainerInstanceContainerArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        Name of Container.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -227,6 +294,9 @@ class ContainerInstanceContainerArgs:
     @property
     @pulumi.getter
     def args(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Container launch argument list.
+        """
         return pulumi.get(self, "args")
 
     @args.setter
@@ -236,6 +306,9 @@ class ContainerInstanceContainerArgs:
     @property
     @pulumi.getter
     def commands(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Container launch command list.
+        """
         return pulumi.get(self, "commands")
 
     @commands.setter
@@ -245,6 +318,9 @@ class ContainerInstanceContainerArgs:
     @property
     @pulumi.getter
     def cpu(self) -> Optional[pulumi.Input[float]]:
+        """
+        Number of cpu core of container.
+        """
         return pulumi.get(self, "cpu")
 
     @cpu.setter
@@ -254,6 +330,9 @@ class ContainerInstanceContainerArgs:
     @property
     @pulumi.getter(name="envVars")
     def env_vars(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Map of environment variables of container OS.
+        """
         return pulumi.get(self, "env_vars")
 
     @env_vars.setter
@@ -263,6 +342,9 @@ class ContainerInstanceContainerArgs:
     @property
     @pulumi.getter(name="livenessProbe")
     def liveness_probe(self) -> Optional[pulumi.Input['ContainerInstanceContainerLivenessProbeArgs']]:
+        """
+        Configuration block of LivenessProbe.
+        """
         return pulumi.get(self, "liveness_probe")
 
     @liveness_probe.setter
@@ -272,6 +354,9 @@ class ContainerInstanceContainerArgs:
     @property
     @pulumi.getter
     def memory(self) -> Optional[pulumi.Input[float]]:
+        """
+        Memory size of container.
+        """
         return pulumi.get(self, "memory")
 
     @memory.setter
@@ -281,6 +366,9 @@ class ContainerInstanceContainerArgs:
     @property
     @pulumi.getter(name="readinessProbe")
     def readiness_probe(self) -> Optional[pulumi.Input['ContainerInstanceContainerReadinessProbeArgs']]:
+        """
+        Configuration block of ReadinessProbe.
+        """
         return pulumi.get(self, "readiness_probe")
 
     @readiness_probe.setter
@@ -290,6 +378,9 @@ class ContainerInstanceContainerArgs:
     @property
     @pulumi.getter(name="volumeMounts")
     def volume_mounts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ContainerInstanceContainerVolumeMountArgs']]]]:
+        """
+        List of volume mount informations.
+        """
         return pulumi.get(self, "volume_mounts")
 
     @volume_mounts.setter
@@ -299,6 +390,9 @@ class ContainerInstanceContainerArgs:
     @property
     @pulumi.getter(name="workingDir")
     def working_dir(self) -> Optional[pulumi.Input[str]]:
+        """
+        Container working directory.
+        """
         return pulumi.get(self, "working_dir")
 
     @working_dir.setter
@@ -319,6 +413,19 @@ class ContainerInstanceContainerLivenessProbeArgs:
                  success_threshold: Optional[pulumi.Input[int]] = None,
                  tcp_socket_port: Optional[pulumi.Input[int]] = None,
                  timeout_seconds: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] exec_commands: List of execution commands.
+        :param pulumi.Input[int] failure_threshold: Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
+        :param pulumi.Input[str] http_get_path: HttpGet detection path.
+        :param pulumi.Input[int] http_get_port: HttpGet detection port.
+        :param pulumi.Input[str] http_get_scheme: HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
+        :param pulumi.Input[int] init_delay_seconds: Number of seconds after the container has started before probes are initiated.
+        :param pulumi.Input[int] period_seconds: How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
+        :param pulumi.Input[int] success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
+        :param pulumi.Input[int] tcp_socket_port: TCP Socket detection port.
+        :param pulumi.Input[int] timeout_seconds: Number of seconds after which the probe times out.
+               Defaults to 1 second. Minimum value is `1`.
+        """
         if exec_commands is not None:
             pulumi.set(__self__, "exec_commands", exec_commands)
         if failure_threshold is not None:
@@ -343,6 +450,9 @@ class ContainerInstanceContainerLivenessProbeArgs:
     @property
     @pulumi.getter(name="execCommands")
     def exec_commands(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of execution commands.
+        """
         return pulumi.get(self, "exec_commands")
 
     @exec_commands.setter
@@ -352,6 +462,9 @@ class ContainerInstanceContainerLivenessProbeArgs:
     @property
     @pulumi.getter(name="failureThreshold")
     def failure_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
+        """
         return pulumi.get(self, "failure_threshold")
 
     @failure_threshold.setter
@@ -361,6 +474,9 @@ class ContainerInstanceContainerLivenessProbeArgs:
     @property
     @pulumi.getter(name="httpGetPath")
     def http_get_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        HttpGet detection path.
+        """
         return pulumi.get(self, "http_get_path")
 
     @http_get_path.setter
@@ -370,6 +486,9 @@ class ContainerInstanceContainerLivenessProbeArgs:
     @property
     @pulumi.getter(name="httpGetPort")
     def http_get_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        HttpGet detection port.
+        """
         return pulumi.get(self, "http_get_port")
 
     @http_get_port.setter
@@ -379,6 +498,9 @@ class ContainerInstanceContainerLivenessProbeArgs:
     @property
     @pulumi.getter(name="httpGetScheme")
     def http_get_scheme(self) -> Optional[pulumi.Input[str]]:
+        """
+        HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
+        """
         return pulumi.get(self, "http_get_scheme")
 
     @http_get_scheme.setter
@@ -388,6 +510,9 @@ class ContainerInstanceContainerLivenessProbeArgs:
     @property
     @pulumi.getter(name="initDelaySeconds")
     def init_delay_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of seconds after the container has started before probes are initiated.
+        """
         return pulumi.get(self, "init_delay_seconds")
 
     @init_delay_seconds.setter
@@ -397,6 +522,9 @@ class ContainerInstanceContainerLivenessProbeArgs:
     @property
     @pulumi.getter(name="periodSeconds")
     def period_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
+        """
         return pulumi.get(self, "period_seconds")
 
     @period_seconds.setter
@@ -406,6 +534,9 @@ class ContainerInstanceContainerLivenessProbeArgs:
     @property
     @pulumi.getter(name="successThreshold")
     def success_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
+        """
         return pulumi.get(self, "success_threshold")
 
     @success_threshold.setter
@@ -415,6 +546,9 @@ class ContainerInstanceContainerLivenessProbeArgs:
     @property
     @pulumi.getter(name="tcpSocketPort")
     def tcp_socket_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        TCP Socket detection port.
+        """
         return pulumi.get(self, "tcp_socket_port")
 
     @tcp_socket_port.setter
@@ -424,6 +558,10 @@ class ContainerInstanceContainerLivenessProbeArgs:
     @property
     @pulumi.getter(name="timeoutSeconds")
     def timeout_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of seconds after which the probe times out.
+        Defaults to 1 second. Minimum value is `1`.
+        """
         return pulumi.get(self, "timeout_seconds")
 
     @timeout_seconds.setter
@@ -444,6 +582,19 @@ class ContainerInstanceContainerReadinessProbeArgs:
                  success_threshold: Optional[pulumi.Input[int]] = None,
                  tcp_socket_port: Optional[pulumi.Input[int]] = None,
                  timeout_seconds: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] exec_commands: List of execution commands.
+        :param pulumi.Input[int] failure_threshold: Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
+        :param pulumi.Input[str] http_get_path: HttpGet detection path.
+        :param pulumi.Input[int] http_get_port: HttpGet detection port.
+        :param pulumi.Input[str] http_get_scheme: HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
+        :param pulumi.Input[int] init_delay_seconds: Number of seconds after the container has started before probes are initiated.
+        :param pulumi.Input[int] period_seconds: How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
+        :param pulumi.Input[int] success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
+        :param pulumi.Input[int] tcp_socket_port: TCP Socket detection port.
+        :param pulumi.Input[int] timeout_seconds: Number of seconds after which the probe times out.
+               Defaults to 1 second. Minimum value is `1`.
+        """
         if exec_commands is not None:
             pulumi.set(__self__, "exec_commands", exec_commands)
         if failure_threshold is not None:
@@ -468,6 +619,9 @@ class ContainerInstanceContainerReadinessProbeArgs:
     @property
     @pulumi.getter(name="execCommands")
     def exec_commands(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of execution commands.
+        """
         return pulumi.get(self, "exec_commands")
 
     @exec_commands.setter
@@ -477,6 +631,9 @@ class ContainerInstanceContainerReadinessProbeArgs:
     @property
     @pulumi.getter(name="failureThreshold")
     def failure_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
+        """
         return pulumi.get(self, "failure_threshold")
 
     @failure_threshold.setter
@@ -486,6 +643,9 @@ class ContainerInstanceContainerReadinessProbeArgs:
     @property
     @pulumi.getter(name="httpGetPath")
     def http_get_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        HttpGet detection path.
+        """
         return pulumi.get(self, "http_get_path")
 
     @http_get_path.setter
@@ -495,6 +655,9 @@ class ContainerInstanceContainerReadinessProbeArgs:
     @property
     @pulumi.getter(name="httpGetPort")
     def http_get_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        HttpGet detection port.
+        """
         return pulumi.get(self, "http_get_port")
 
     @http_get_port.setter
@@ -504,6 +667,9 @@ class ContainerInstanceContainerReadinessProbeArgs:
     @property
     @pulumi.getter(name="httpGetScheme")
     def http_get_scheme(self) -> Optional[pulumi.Input[str]]:
+        """
+        HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
+        """
         return pulumi.get(self, "http_get_scheme")
 
     @http_get_scheme.setter
@@ -513,6 +679,9 @@ class ContainerInstanceContainerReadinessProbeArgs:
     @property
     @pulumi.getter(name="initDelaySeconds")
     def init_delay_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of seconds after the container has started before probes are initiated.
+        """
         return pulumi.get(self, "init_delay_seconds")
 
     @init_delay_seconds.setter
@@ -522,6 +691,9 @@ class ContainerInstanceContainerReadinessProbeArgs:
     @property
     @pulumi.getter(name="periodSeconds")
     def period_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
+        """
         return pulumi.get(self, "period_seconds")
 
     @period_seconds.setter
@@ -531,6 +703,9 @@ class ContainerInstanceContainerReadinessProbeArgs:
     @property
     @pulumi.getter(name="successThreshold")
     def success_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
+        """
         return pulumi.get(self, "success_threshold")
 
     @success_threshold.setter
@@ -540,6 +715,9 @@ class ContainerInstanceContainerReadinessProbeArgs:
     @property
     @pulumi.getter(name="tcpSocketPort")
     def tcp_socket_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        TCP Socket detection port.
+        """
         return pulumi.get(self, "tcp_socket_port")
 
     @tcp_socket_port.setter
@@ -549,6 +727,10 @@ class ContainerInstanceContainerReadinessProbeArgs:
     @property
     @pulumi.getter(name="timeoutSeconds")
     def timeout_seconds(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of seconds after which the probe times out.
+        Defaults to 1 second. Minimum value is `1`.
+        """
         return pulumi.get(self, "timeout_seconds")
 
     @timeout_seconds.setter
@@ -565,6 +747,14 @@ class ContainerInstanceContainerVolumeMountArgs:
                  read_only: Optional[pulumi.Input[bool]] = None,
                  sub_path: Optional[pulumi.Input[str]] = None,
                  sub_path_expr: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: Volume name.
+        :param pulumi.Input[str] path: Volume mount path.
+        :param pulumi.Input[str] mount_propagation: Volume mount propagation.
+        :param pulumi.Input[bool] read_only: Whether the volume is read-only.
+        :param pulumi.Input[str] sub_path: Volume mount sub-path.
+        :param pulumi.Input[str] sub_path_expr: Volume mount sub-path expression.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "path", path)
         if mount_propagation is not None:
@@ -579,6 +769,9 @@ class ContainerInstanceContainerVolumeMountArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        Volume name.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -588,6 +781,9 @@ class ContainerInstanceContainerVolumeMountArgs:
     @property
     @pulumi.getter
     def path(self) -> pulumi.Input[str]:
+        """
+        Volume mount path.
+        """
         return pulumi.get(self, "path")
 
     @path.setter
@@ -597,6 +793,9 @@ class ContainerInstanceContainerVolumeMountArgs:
     @property
     @pulumi.getter(name="mountPropagation")
     def mount_propagation(self) -> Optional[pulumi.Input[str]]:
+        """
+        Volume mount propagation.
+        """
         return pulumi.get(self, "mount_propagation")
 
     @mount_propagation.setter
@@ -606,6 +805,9 @@ class ContainerInstanceContainerVolumeMountArgs:
     @property
     @pulumi.getter(name="readOnly")
     def read_only(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the volume is read-only.
+        """
         return pulumi.get(self, "read_only")
 
     @read_only.setter
@@ -615,6 +817,9 @@ class ContainerInstanceContainerVolumeMountArgs:
     @property
     @pulumi.getter(name="subPath")
     def sub_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Volume mount sub-path.
+        """
         return pulumi.get(self, "sub_path")
 
     @sub_path.setter
@@ -624,6 +829,9 @@ class ContainerInstanceContainerVolumeMountArgs:
     @property
     @pulumi.getter(name="subPathExpr")
     def sub_path_expr(self) -> Optional[pulumi.Input[str]]:
+        """
+        Volume mount sub-path expression.
+        """
         return pulumi.get(self, "sub_path_expr")
 
     @sub_path_expr.setter
@@ -638,6 +846,12 @@ class ContainerInstanceImageRegistryCredentialArgs:
                  password: Optional[pulumi.Input[str]] = None,
                  server: Optional[pulumi.Input[str]] = None,
                  username: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: Name of credential.
+        :param pulumi.Input[str] password: Password.
+        :param pulumi.Input[str] server: Address of image registry.
+        :param pulumi.Input[str] username: Username.
+        """
         if name is not None:
             pulumi.set(__self__, "name", name)
         if password is not None:
@@ -650,6 +864,9 @@ class ContainerInstanceImageRegistryCredentialArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of credential.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -659,6 +876,9 @@ class ContainerInstanceImageRegistryCredentialArgs:
     @property
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        Password.
+        """
         return pulumi.get(self, "password")
 
     @password.setter
@@ -668,6 +888,9 @@ class ContainerInstanceImageRegistryCredentialArgs:
     @property
     @pulumi.getter
     def server(self) -> Optional[pulumi.Input[str]]:
+        """
+        Address of image registry.
+        """
         return pulumi.get(self, "server")
 
     @server.setter
@@ -677,6 +900,9 @@ class ContainerInstanceImageRegistryCredentialArgs:
     @property
     @pulumi.getter
     def username(self) -> Optional[pulumi.Input[str]]:
+        """
+        Username.
+        """
         return pulumi.get(self, "username")
 
     @username.setter
@@ -696,6 +922,17 @@ class ContainerInstanceInitContainerArgs:
                  memory: Optional[pulumi.Input[float]] = None,
                  volume_mounts: Optional[pulumi.Input[Sequence[pulumi.Input['ContainerInstanceInitContainerVolumeMountArgs']]]] = None,
                  working_dir: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] image: Image of Container.
+        :param pulumi.Input[str] name: Name of Container.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] args: Container launch argument list.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] commands: Container launch command list.
+        :param pulumi.Input[float] cpu: Number of cpu core of container.
+        :param pulumi.Input[Mapping[str, Any]] env_vars: Map of environment variables of container OS.
+        :param pulumi.Input[float] memory: Memory size of container.
+        :param pulumi.Input[Sequence[pulumi.Input['ContainerInstanceInitContainerVolumeMountArgs']]] volume_mounts: List of volume mount informations.
+        :param pulumi.Input[str] working_dir: Container working directory.
+        """
         pulumi.set(__self__, "image", image)
         pulumi.set(__self__, "name", name)
         if args is not None:
@@ -716,6 +953,9 @@ class ContainerInstanceInitContainerArgs:
     @property
     @pulumi.getter
     def image(self) -> pulumi.Input[str]:
+        """
+        Image of Container.
+        """
         return pulumi.get(self, "image")
 
     @image.setter
@@ -725,6 +965,9 @@ class ContainerInstanceInitContainerArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        Name of Container.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -734,6 +977,9 @@ class ContainerInstanceInitContainerArgs:
     @property
     @pulumi.getter
     def args(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Container launch argument list.
+        """
         return pulumi.get(self, "args")
 
     @args.setter
@@ -743,6 +989,9 @@ class ContainerInstanceInitContainerArgs:
     @property
     @pulumi.getter
     def commands(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Container launch command list.
+        """
         return pulumi.get(self, "commands")
 
     @commands.setter
@@ -752,6 +1001,9 @@ class ContainerInstanceInitContainerArgs:
     @property
     @pulumi.getter
     def cpu(self) -> Optional[pulumi.Input[float]]:
+        """
+        Number of cpu core of container.
+        """
         return pulumi.get(self, "cpu")
 
     @cpu.setter
@@ -761,6 +1013,9 @@ class ContainerInstanceInitContainerArgs:
     @property
     @pulumi.getter(name="envVars")
     def env_vars(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Map of environment variables of container OS.
+        """
         return pulumi.get(self, "env_vars")
 
     @env_vars.setter
@@ -770,6 +1025,9 @@ class ContainerInstanceInitContainerArgs:
     @property
     @pulumi.getter
     def memory(self) -> Optional[pulumi.Input[float]]:
+        """
+        Memory size of container.
+        """
         return pulumi.get(self, "memory")
 
     @memory.setter
@@ -779,6 +1037,9 @@ class ContainerInstanceInitContainerArgs:
     @property
     @pulumi.getter(name="volumeMounts")
     def volume_mounts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ContainerInstanceInitContainerVolumeMountArgs']]]]:
+        """
+        List of volume mount informations.
+        """
         return pulumi.get(self, "volume_mounts")
 
     @volume_mounts.setter
@@ -788,6 +1049,9 @@ class ContainerInstanceInitContainerArgs:
     @property
     @pulumi.getter(name="workingDir")
     def working_dir(self) -> Optional[pulumi.Input[str]]:
+        """
+        Container working directory.
+        """
         return pulumi.get(self, "working_dir")
 
     @working_dir.setter
@@ -804,6 +1068,14 @@ class ContainerInstanceInitContainerVolumeMountArgs:
                  read_only: Optional[pulumi.Input[bool]] = None,
                  sub_path: Optional[pulumi.Input[str]] = None,
                  sub_path_expr: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: Volume name.
+        :param pulumi.Input[str] path: Volume mount path.
+        :param pulumi.Input[str] mount_propagation: Volume mount propagation.
+        :param pulumi.Input[bool] read_only: Whether the volume is read-only.
+        :param pulumi.Input[str] sub_path: Volume mount sub-path.
+        :param pulumi.Input[str] sub_path_expr: Volume mount sub-path expression.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "path", path)
         if mount_propagation is not None:
@@ -818,6 +1090,9 @@ class ContainerInstanceInitContainerVolumeMountArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        Volume name.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -827,6 +1102,9 @@ class ContainerInstanceInitContainerVolumeMountArgs:
     @property
     @pulumi.getter
     def path(self) -> pulumi.Input[str]:
+        """
+        Volume mount path.
+        """
         return pulumi.get(self, "path")
 
     @path.setter
@@ -836,6 +1114,9 @@ class ContainerInstanceInitContainerVolumeMountArgs:
     @property
     @pulumi.getter(name="mountPropagation")
     def mount_propagation(self) -> Optional[pulumi.Input[str]]:
+        """
+        Volume mount propagation.
+        """
         return pulumi.get(self, "mount_propagation")
 
     @mount_propagation.setter
@@ -845,6 +1126,9 @@ class ContainerInstanceInitContainerVolumeMountArgs:
     @property
     @pulumi.getter(name="readOnly")
     def read_only(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the volume is read-only.
+        """
         return pulumi.get(self, "read_only")
 
     @read_only.setter
@@ -854,6 +1138,9 @@ class ContainerInstanceInitContainerVolumeMountArgs:
     @property
     @pulumi.getter(name="subPath")
     def sub_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Volume mount sub-path.
+        """
         return pulumi.get(self, "sub_path")
 
     @sub_path.setter
@@ -863,6 +1150,9 @@ class ContainerInstanceInitContainerVolumeMountArgs:
     @property
     @pulumi.getter(name="subPathExpr")
     def sub_path_expr(self) -> Optional[pulumi.Input[str]]:
+        """
+        Volume mount sub-path expression.
+        """
         return pulumi.get(self, "sub_path_expr")
 
     @sub_path_expr.setter
@@ -877,6 +1167,12 @@ class ContainerInstanceNfsVolumeArgs:
                  path: pulumi.Input[str],
                  server: pulumi.Input[str],
                  read_only: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] name: Name of NFS volume.
+        :param pulumi.Input[str] path: NFS volume path.
+        :param pulumi.Input[str] server: NFS server address.
+        :param pulumi.Input[bool] read_only: Indicates whether the volume is read only. Default is `false`.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "path", path)
         pulumi.set(__self__, "server", server)
@@ -886,6 +1182,9 @@ class ContainerInstanceNfsVolumeArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        Name of NFS volume.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -895,6 +1194,9 @@ class ContainerInstanceNfsVolumeArgs:
     @property
     @pulumi.getter
     def path(self) -> pulumi.Input[str]:
+        """
+        NFS volume path.
+        """
         return pulumi.get(self, "path")
 
     @path.setter
@@ -904,6 +1206,9 @@ class ContainerInstanceNfsVolumeArgs:
     @property
     @pulumi.getter
     def server(self) -> pulumi.Input[str]:
+        """
+        NFS server address.
+        """
         return pulumi.get(self, "server")
 
     @server.setter
@@ -913,6 +1218,9 @@ class ContainerInstanceNfsVolumeArgs:
     @property
     @pulumi.getter(name="readOnly")
     def read_only(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicates whether the volume is read only. Default is `false`.
+        """
         return pulumi.get(self, "read_only")
 
     @read_only.setter

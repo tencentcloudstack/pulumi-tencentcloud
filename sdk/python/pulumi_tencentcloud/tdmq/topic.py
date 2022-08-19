@@ -242,7 +242,39 @@ class Topic(pulumi.CustomResource):
                  topic_type: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a Topic resource with the given unique name, props, and options.
+        Provide a resource to create a TDMQ topic.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tdmq.Instance("foo",
+            cluster_name="example",
+            remark="this is description.")
+        bar_namespace = tencentcloud.tdmq.Namespace("barNamespace",
+            cluster_id=foo.id,
+            environ_name="example",
+            msg_ttl=300,
+            remark="this is description.")
+        bar_topic = tencentcloud.tdmq.Topic("barTopic",
+            cluster_id=foo.id,
+            environ_id=bar_namespace.id,
+            partitions=6,
+            remark="this is description.",
+            topic_name="example",
+            topic_type=0)
+        ```
+
+        ## Import
+
+        Tdmq Topic can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tdmq/topic:Topic test topic_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: The Dedicated Cluster Id.
@@ -259,7 +291,39 @@ class Topic(pulumi.CustomResource):
                  args: TopicArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Topic resource with the given unique name, props, and options.
+        Provide a resource to create a TDMQ topic.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tdmq.Instance("foo",
+            cluster_name="example",
+            remark="this is description.")
+        bar_namespace = tencentcloud.tdmq.Namespace("barNamespace",
+            cluster_id=foo.id,
+            environ_name="example",
+            msg_ttl=300,
+            remark="this is description.")
+        bar_topic = tencentcloud.tdmq.Topic("barTopic",
+            cluster_id=foo.id,
+            environ_id=bar_namespace.id,
+            partitions=6,
+            remark="this is description.",
+            topic_name="example",
+            topic_type=0)
+        ```
+
+        ## Import
+
+        Tdmq Topic can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tdmq/topic:Topic test topic_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param TopicArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

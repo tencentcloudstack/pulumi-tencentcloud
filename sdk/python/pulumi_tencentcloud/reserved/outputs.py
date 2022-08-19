@@ -9,11 +9,118 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'InstancesReservedInstanceListResult',
+    'GetInstanceConfigsConfigListResult',
+    'GetInstancesReservedInstanceListResult',
 ]
 
 @pulumi.output_type
-class InstancesReservedInstanceListResult(dict):
+class GetInstanceConfigsConfigListResult(dict):
+    def __init__(__self__, *,
+                 availability_zone: str,
+                 config_id: str,
+                 currency_code: str,
+                 duration: int,
+                 instance_type: str,
+                 offering_type: str,
+                 platform: str,
+                 price: float,
+                 usage_price: float):
+        """
+        :param str availability_zone: The available zone that the reserved instance locates at.
+        :param str config_id: Configuration ID of the purchasable reserved instance.
+        :param str currency_code: Settlement currency of the reserved instance, which is a standard currency code as listed in ISO 4217.
+        :param int duration: Validity period of the reserved instance. Valid values are `31536000`(1 year) and `94608000`(3 years).
+        :param str instance_type: The type of reserved instance.
+        :param str offering_type: Filter by Payment Type. Such as All Upfront.
+        :param str platform: Platform of the reserved instance.
+        :param float price: Purchase price of the reserved instance.
+        :param float usage_price: UsagePrice of the reserved instance.
+        """
+        pulumi.set(__self__, "availability_zone", availability_zone)
+        pulumi.set(__self__, "config_id", config_id)
+        pulumi.set(__self__, "currency_code", currency_code)
+        pulumi.set(__self__, "duration", duration)
+        pulumi.set(__self__, "instance_type", instance_type)
+        pulumi.set(__self__, "offering_type", offering_type)
+        pulumi.set(__self__, "platform", platform)
+        pulumi.set(__self__, "price", price)
+        pulumi.set(__self__, "usage_price", usage_price)
+
+    @property
+    @pulumi.getter(name="availabilityZone")
+    def availability_zone(self) -> str:
+        """
+        The available zone that the reserved instance locates at.
+        """
+        return pulumi.get(self, "availability_zone")
+
+    @property
+    @pulumi.getter(name="configId")
+    def config_id(self) -> str:
+        """
+        Configuration ID of the purchasable reserved instance.
+        """
+        return pulumi.get(self, "config_id")
+
+    @property
+    @pulumi.getter(name="currencyCode")
+    def currency_code(self) -> str:
+        """
+        Settlement currency of the reserved instance, which is a standard currency code as listed in ISO 4217.
+        """
+        return pulumi.get(self, "currency_code")
+
+    @property
+    @pulumi.getter
+    def duration(self) -> int:
+        """
+        Validity period of the reserved instance. Valid values are `31536000`(1 year) and `94608000`(3 years).
+        """
+        return pulumi.get(self, "duration")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> str:
+        """
+        The type of reserved instance.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter(name="offeringType")
+    def offering_type(self) -> str:
+        """
+        Filter by Payment Type. Such as All Upfront.
+        """
+        return pulumi.get(self, "offering_type")
+
+    @property
+    @pulumi.getter
+    def platform(self) -> str:
+        """
+        Platform of the reserved instance.
+        """
+        return pulumi.get(self, "platform")
+
+    @property
+    @pulumi.getter
+    def price(self) -> float:
+        """
+        Purchase price of the reserved instance.
+        """
+        return pulumi.get(self, "price")
+
+    @property
+    @pulumi.getter(name="usagePrice")
+    def usage_price(self) -> float:
+        """
+        UsagePrice of the reserved instance.
+        """
+        return pulumi.get(self, "usage_price")
+
+
+@pulumi.output_type
+class GetInstancesReservedInstanceListResult(dict):
     def __init__(__self__, *,
                  availability_zone: str,
                  end_time: str,
@@ -22,6 +129,15 @@ class InstancesReservedInstanceListResult(dict):
                  reserved_instance_id: str,
                  start_time: str,
                  status: str):
+        """
+        :param str availability_zone: The available zone that the reserved instance locates at.
+        :param str end_time: Expiry time of the reserved instance.
+        :param int instance_count: Number of reserved instance.
+        :param str instance_type: The type of reserved instance.
+        :param str reserved_instance_id: ID of the reserved instance to be query.
+        :param str start_time: Start time of the reserved instance.
+        :param str status: Status of the reserved instance.
+        """
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "end_time", end_time)
         pulumi.set(__self__, "instance_count", instance_count)
@@ -33,36 +149,57 @@ class InstancesReservedInstanceListResult(dict):
     @property
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> str:
+        """
+        The available zone that the reserved instance locates at.
+        """
         return pulumi.get(self, "availability_zone")
 
     @property
     @pulumi.getter(name="endTime")
     def end_time(self) -> str:
+        """
+        Expiry time of the reserved instance.
+        """
         return pulumi.get(self, "end_time")
 
     @property
     @pulumi.getter(name="instanceCount")
     def instance_count(self) -> int:
+        """
+        Number of reserved instance.
+        """
         return pulumi.get(self, "instance_count")
 
     @property
     @pulumi.getter(name="instanceType")
     def instance_type(self) -> str:
+        """
+        The type of reserved instance.
+        """
         return pulumi.get(self, "instance_type")
 
     @property
     @pulumi.getter(name="reservedInstanceId")
     def reserved_instance_id(self) -> str:
+        """
+        ID of the reserved instance to be query.
+        """
         return pulumi.get(self, "reserved_instance_id")
 
     @property
     @pulumi.getter(name="startTime")
     def start_time(self) -> str:
+        """
+        Start time of the reserved instance.
+        """
         return pulumi.get(self, "start_time")
 
     @property
     @pulumi.getter
     def status(self) -> str:
+        """
+        Status of the reserved instance.
+        """
         return pulumi.get(self, "status")
 
 

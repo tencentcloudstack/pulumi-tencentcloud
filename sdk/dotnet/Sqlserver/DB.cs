@@ -9,13 +9,43 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Sqlserver
 {
-    [TencentcloudResourceType("tencentcloud:Sqlserver/dB:DB")]
-    public partial class DB : Pulumi.CustomResource
+    /// <summary>
+    /// Provides a SQL Server DB resource belongs to SQL Server instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example = new Tencentcloud.Sqlserver.Db("example", new Tencentcloud.Sqlserver.DbArgs
+    ///         {
+    ///             InstanceId = tencentcloud_sqlserver_instance.Example.Id,
+    ///             Charset = "Chinese_PRC_BIN",
+    ///             Remark = "test-remark",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// SQL Server DB can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Sqlserver/db:Db foo mssql-3cdq7kx5#db_name
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:Sqlserver/db:Db")]
+    public partial class Db : Pulumi.CustomResource
     {
         /// <summary>
-        /// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-        /// `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-        /// `Chinese_PRC_CI_AS`.
+        /// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
         /// </summary>
         [Output("charset")]
         public Output<string?> Charset { get; private set; } = null!;
@@ -33,8 +63,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         public Output<string> InstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-        /// first one can not be underline.
+        /// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
@@ -53,19 +82,19 @@ namespace Pulumi.Tencentcloud.Sqlserver
 
 
         /// <summary>
-        /// Create a DB resource with the given unique name, arguments, and options.
+        /// Create a Db resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public DB(string name, DBArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:Sqlserver/dB:DB", name, args ?? new DBArgs(), MakeResourceOptions(options, ""))
+        public Db(string name, DbArgs args, CustomResourceOptions? options = null)
+            : base("tencentcloud:Sqlserver/db:Db", name, args ?? new DbArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private DB(string name, Input<string> id, DBState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:Sqlserver/dB:DB", name, state, MakeResourceOptions(options, id))
+        private Db(string name, Input<string> id, DbState? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:Sqlserver/db:Db", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -81,7 +110,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
             return merged;
         }
         /// <summary>
-        /// Get an existing DB resource's state with the given name, ID, and optional extra
+        /// Get an existing Db resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -89,18 +118,16 @@ namespace Pulumi.Tencentcloud.Sqlserver
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static DB Get(string name, Input<string> id, DBState? state = null, CustomResourceOptions? options = null)
+        public static Db Get(string name, Input<string> id, DbState? state = null, CustomResourceOptions? options = null)
         {
-            return new DB(name, id, state, options);
+            return new Db(name, id, state, options);
         }
     }
 
-    public sealed class DBArgs : Pulumi.ResourceArgs
+    public sealed class DbArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-        /// `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-        /// `Chinese_PRC_CI_AS`.
+        /// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
         /// </summary>
         [Input("charset")]
         public Input<string>? Charset { get; set; }
@@ -112,8 +139,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         public Input<string> InstanceId { get; set; } = null!;
 
         /// <summary>
-        /// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-        /// first one can not be underline.
+        /// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -124,17 +150,15 @@ namespace Pulumi.Tencentcloud.Sqlserver
         [Input("remark")]
         public Input<string>? Remark { get; set; }
 
-        public DBArgs()
+        public DbArgs()
         {
         }
     }
 
-    public sealed class DBState : Pulumi.ResourceArgs
+    public sealed class DbState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-        /// `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-        /// `Chinese_PRC_CI_AS`.
+        /// Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
         /// </summary>
         [Input("charset")]
         public Input<string>? Charset { get; set; }
@@ -152,8 +176,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         public Input<string>? InstanceId { get; set; }
 
         /// <summary>
-        /// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-        /// first one can not be underline.
+        /// Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -170,7 +193,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         [Input("status")]
         public Input<string>? Status { get; set; }
 
-        public DBState()
+        public DbState()
         {
         }
     }

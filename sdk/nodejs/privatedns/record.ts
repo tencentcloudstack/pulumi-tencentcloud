@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a Private Dns Record.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.PrivateDns.Record("foo", {
+ *     mx: 0,
+ *     recordType: "A",
+ *     recordValue: "192.168.1.2",
+ *     subDomain: "www",
+ *     ttl: 300,
+ *     weight: 1,
+ *     zoneId: "zone-rqndjnki",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Private Dns Record can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:PrivateDns/record:Record foo zone_id#record_id
+ * ```
+ */
 export class Record extends pulumi.CustomResource {
     /**
      * Get an existing Record resource's state with the given name, ID, and optional extra

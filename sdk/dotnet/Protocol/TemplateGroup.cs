@@ -9,6 +9,17 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Protocol
 {
+    /// <summary>
+    /// Provides a resource to manage protocol template group.
+    /// 
+    /// ## Import
+    /// 
+    /// Protocol template group can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Protocol/templateGroup:TemplateGroup foo ppmg-0np3u974
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Protocol/templateGroup:TemplateGroup")]
     public partial class TemplateGroup : Pulumi.CustomResource
     {

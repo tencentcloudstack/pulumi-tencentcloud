@@ -11,6 +11,42 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a cloud file system(CFS).
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cfs.NewFileSystem(ctx, "foo", &Cfs.FileSystemArgs{
+// 			AccessGroupId:    pulumi.String("pgroup-7nx89k7l"),
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+// 			Protocol:         pulumi.String("NFS"),
+// 			SubnetId:         pulumi.String("subnet-9mu2t9iw"),
+// 			VpcId:            pulumi.String("vpc-ah9fbkap"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Cloud file system can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
+// ```
 type FileSystem struct {
 	pulumi.CustomResourceState
 

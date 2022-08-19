@@ -11,6 +11,42 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a Ckafka user.
+//
+// ## Example Usage
+//
+// Ckafka User
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Ckafka.NewUser(ctx, "foo", &Ckafka.UserArgs{
+// 			AccountName: pulumi.String("tf-test"),
+// 			InstanceId:  pulumi.String("ckafka-f9ife4zz"),
+// 			Password:    pulumi.String("test1234"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Ckafka user can be imported using the instance_id#account_name, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Ckafka/user:User foo ckafka-f9ife4zz#tf-test
+// ```
 type User struct {
 	pulumi.CustomResourceState
 

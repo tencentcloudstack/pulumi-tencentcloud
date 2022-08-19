@@ -7,7 +7,6 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./association";
 export * from "./instance";
-export * from "./instances";
 
 // Import resources to register:
 import { Association } from "./association";

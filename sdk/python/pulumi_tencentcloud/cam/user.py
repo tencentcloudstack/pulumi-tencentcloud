@@ -29,13 +29,10 @@ class UserArgs:
         :param pulumi.Input[bool] console_login: Indicate whether the CAM user can login to the web console or not.
         :param pulumi.Input[str] country_code: Country code of the phone number, for example: '86'.
         :param pulumi.Input[str] email: Email of the CAM user.
-        :param pulumi.Input[bool] force_delete: Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-               otherwise the user will be deleted directly. Default is false.
+        :param pulumi.Input[bool] force_delete: Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
         :param pulumi.Input[str] name: Name of the CAM user.
         :param pulumi.Input[bool] need_reset_password: Indicate whether the CAM user need to reset the password when first logins.
-        :param pulumi.Input[str] password: The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-               uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-               set, a random password will be automatically generated.
+        :param pulumi.Input[str] password: The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not set, a random password will be automatically generated.
         :param pulumi.Input[str] phone_num: Phone number of the CAM user.
         :param pulumi.Input[str] remark: Remark of the CAM user.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
@@ -104,8 +101,7 @@ class UserArgs:
     @pulumi.getter(name="forceDelete")
     def force_delete(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-        otherwise the user will be deleted directly. Default is false.
+        Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
         """
         return pulumi.get(self, "force_delete")
 
@@ -141,9 +137,7 @@ class UserArgs:
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
         """
-        The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-        uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-        set, a random password will be automatically generated.
+        The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not set, a random password will be automatically generated.
         """
         return pulumi.get(self, "password")
 
@@ -223,13 +217,10 @@ class _UserState:
         :param pulumi.Input[bool] console_login: Indicate whether the CAM user can login to the web console or not.
         :param pulumi.Input[str] country_code: Country code of the phone number, for example: '86'.
         :param pulumi.Input[str] email: Email of the CAM user.
-        :param pulumi.Input[bool] force_delete: Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-               otherwise the user will be deleted directly. Default is false.
+        :param pulumi.Input[bool] force_delete: Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
         :param pulumi.Input[str] name: Name of the CAM user.
         :param pulumi.Input[bool] need_reset_password: Indicate whether the CAM user need to reset the password when first logins.
-        :param pulumi.Input[str] password: The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-               uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-               set, a random password will be automatically generated.
+        :param pulumi.Input[str] password: The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not set, a random password will be automatically generated.
         :param pulumi.Input[str] phone_num: Phone number of the CAM user.
         :param pulumi.Input[str] remark: Remark of the CAM user.
         :param pulumi.Input[str] secret_id: Secret ID of the CAM user.
@@ -310,8 +301,7 @@ class _UserState:
     @pulumi.getter(name="forceDelete")
     def force_delete(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-        otherwise the user will be deleted directly. Default is false.
+        Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
         """
         return pulumi.get(self, "force_delete")
 
@@ -347,9 +337,7 @@ class _UserState:
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
         """
-        The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-        uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-        set, a random password will be automatically generated.
+        The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not set, a random password will be automatically generated.
         """
         return pulumi.get(self, "password")
 
@@ -472,19 +460,46 @@ class User(pulumi.CustomResource):
                  use_api: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a User resource with the given unique name, props, and options.
+        Provides a resource to manage CAM user.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.User("foo",
+            console_login=True,
+            country_code="86",
+            email="hello@test.com",
+            force_delete=True,
+            need_reset_password=True,
+            password="Gail@1234",
+            phone_num="12345678910",
+            remark="test",
+            tags={
+                "test": "tf-cam-user",
+            },
+            use_api=True)
+        ```
+
+        ## Import
+
+        CAM user can be imported using the user name, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/user:User foo cam-user-test
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] console_login: Indicate whether the CAM user can login to the web console or not.
         :param pulumi.Input[str] country_code: Country code of the phone number, for example: '86'.
         :param pulumi.Input[str] email: Email of the CAM user.
-        :param pulumi.Input[bool] force_delete: Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-               otherwise the user will be deleted directly. Default is false.
+        :param pulumi.Input[bool] force_delete: Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
         :param pulumi.Input[str] name: Name of the CAM user.
         :param pulumi.Input[bool] need_reset_password: Indicate whether the CAM user need to reset the password when first logins.
-        :param pulumi.Input[str] password: The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-               uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-               set, a random password will be automatically generated.
+        :param pulumi.Input[str] password: The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not set, a random password will be automatically generated.
         :param pulumi.Input[str] phone_num: Phone number of the CAM user.
         :param pulumi.Input[str] remark: Remark of the CAM user.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
@@ -497,7 +512,37 @@ class User(pulumi.CustomResource):
                  args: Optional[UserArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a User resource with the given unique name, props, and options.
+        Provides a resource to manage CAM user.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.User("foo",
+            console_login=True,
+            country_code="86",
+            email="hello@test.com",
+            force_delete=True,
+            need_reset_password=True,
+            password="Gail@1234",
+            phone_num="12345678910",
+            remark="test",
+            tags={
+                "test": "tf-cam-user",
+            },
+            use_api=True)
+        ```
+
+        ## Import
+
+        CAM user can be imported using the user name, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/user:User foo cam-user-test
+        ```
+
         :param str resource_name: The name of the resource.
         :param UserArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -586,13 +631,10 @@ class User(pulumi.CustomResource):
         :param pulumi.Input[bool] console_login: Indicate whether the CAM user can login to the web console or not.
         :param pulumi.Input[str] country_code: Country code of the phone number, for example: '86'.
         :param pulumi.Input[str] email: Email of the CAM user.
-        :param pulumi.Input[bool] force_delete: Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-               otherwise the user will be deleted directly. Default is false.
+        :param pulumi.Input[bool] force_delete: Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
         :param pulumi.Input[str] name: Name of the CAM user.
         :param pulumi.Input[bool] need_reset_password: Indicate whether the CAM user need to reset the password when first logins.
-        :param pulumi.Input[str] password: The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-               uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-               set, a random password will be automatically generated.
+        :param pulumi.Input[str] password: The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not set, a random password will be automatically generated.
         :param pulumi.Input[str] phone_num: Phone number of the CAM user.
         :param pulumi.Input[str] remark: Remark of the CAM user.
         :param pulumi.Input[str] secret_id: Secret ID of the CAM user.
@@ -651,8 +693,7 @@ class User(pulumi.CustomResource):
     @pulumi.getter(name="forceDelete")
     def force_delete(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-        otherwise the user will be deleted directly. Default is false.
+        Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
         """
         return pulumi.get(self, "force_delete")
 
@@ -676,9 +717,7 @@ class User(pulumi.CustomResource):
     @pulumi.getter
     def password(self) -> pulumi.Output[str]:
         """
-        The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-        uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-        set, a random password will be automatically generated.
+        The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not set, a random password will be automatically generated.
         """
         return pulumi.get(self, "password")
 

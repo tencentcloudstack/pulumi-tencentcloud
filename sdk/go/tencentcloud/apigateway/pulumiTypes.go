@@ -10,254 +10,292 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type APIRequestParameter struct {
+type ApiRequestParameter struct {
+	// Parameter default value.
 	DefaultValue *string `pulumi:"defaultValue"`
-	Desc         *string `pulumi:"desc"`
-	Name         string  `pulumi:"name"`
-	Position     string  `pulumi:"position"`
-	Required     *bool   `pulumi:"required"`
-	Type         string  `pulumi:"type"`
+	// Parameter description.
+	Desc *string `pulumi:"desc"`
+	// Parameter name.
+	Name string `pulumi:"name"`
+	// Parameter location.
+	Position string `pulumi:"position"`
+	// If this parameter required. Default value: `false`.
+	Required *bool `pulumi:"required"`
+	// Parameter type.
+	Type string `pulumi:"type"`
 }
 
-// APIRequestParameterInput is an input type that accepts APIRequestParameterArgs and APIRequestParameterOutput values.
-// You can construct a concrete instance of `APIRequestParameterInput` via:
+// ApiRequestParameterInput is an input type that accepts ApiRequestParameterArgs and ApiRequestParameterOutput values.
+// You can construct a concrete instance of `ApiRequestParameterInput` via:
 //
-//          APIRequestParameterArgs{...}
-type APIRequestParameterInput interface {
+//          ApiRequestParameterArgs{...}
+type ApiRequestParameterInput interface {
 	pulumi.Input
 
-	ToAPIRequestParameterOutput() APIRequestParameterOutput
-	ToAPIRequestParameterOutputWithContext(context.Context) APIRequestParameterOutput
+	ToApiRequestParameterOutput() ApiRequestParameterOutput
+	ToApiRequestParameterOutputWithContext(context.Context) ApiRequestParameterOutput
 }
 
-type APIRequestParameterArgs struct {
+type ApiRequestParameterArgs struct {
+	// Parameter default value.
 	DefaultValue pulumi.StringPtrInput `pulumi:"defaultValue"`
-	Desc         pulumi.StringPtrInput `pulumi:"desc"`
-	Name         pulumi.StringInput    `pulumi:"name"`
-	Position     pulumi.StringInput    `pulumi:"position"`
-	Required     pulumi.BoolPtrInput   `pulumi:"required"`
-	Type         pulumi.StringInput    `pulumi:"type"`
+	// Parameter description.
+	Desc pulumi.StringPtrInput `pulumi:"desc"`
+	// Parameter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Parameter location.
+	Position pulumi.StringInput `pulumi:"position"`
+	// If this parameter required. Default value: `false`.
+	Required pulumi.BoolPtrInput `pulumi:"required"`
+	// Parameter type.
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
-func (APIRequestParameterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*APIRequestParameter)(nil)).Elem()
+func (ApiRequestParameterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiRequestParameter)(nil)).Elem()
 }
 
-func (i APIRequestParameterArgs) ToAPIRequestParameterOutput() APIRequestParameterOutput {
-	return i.ToAPIRequestParameterOutputWithContext(context.Background())
+func (i ApiRequestParameterArgs) ToApiRequestParameterOutput() ApiRequestParameterOutput {
+	return i.ToApiRequestParameterOutputWithContext(context.Background())
 }
 
-func (i APIRequestParameterArgs) ToAPIRequestParameterOutputWithContext(ctx context.Context) APIRequestParameterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(APIRequestParameterOutput)
+func (i ApiRequestParameterArgs) ToApiRequestParameterOutputWithContext(ctx context.Context) ApiRequestParameterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiRequestParameterOutput)
 }
 
-// APIRequestParameterArrayInput is an input type that accepts APIRequestParameterArray and APIRequestParameterArrayOutput values.
-// You can construct a concrete instance of `APIRequestParameterArrayInput` via:
+// ApiRequestParameterArrayInput is an input type that accepts ApiRequestParameterArray and ApiRequestParameterArrayOutput values.
+// You can construct a concrete instance of `ApiRequestParameterArrayInput` via:
 //
-//          APIRequestParameterArray{ APIRequestParameterArgs{...} }
-type APIRequestParameterArrayInput interface {
+//          ApiRequestParameterArray{ ApiRequestParameterArgs{...} }
+type ApiRequestParameterArrayInput interface {
 	pulumi.Input
 
-	ToAPIRequestParameterArrayOutput() APIRequestParameterArrayOutput
-	ToAPIRequestParameterArrayOutputWithContext(context.Context) APIRequestParameterArrayOutput
+	ToApiRequestParameterArrayOutput() ApiRequestParameterArrayOutput
+	ToApiRequestParameterArrayOutputWithContext(context.Context) ApiRequestParameterArrayOutput
 }
 
-type APIRequestParameterArray []APIRequestParameterInput
+type ApiRequestParameterArray []ApiRequestParameterInput
 
-func (APIRequestParameterArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]APIRequestParameter)(nil)).Elem()
+func (ApiRequestParameterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiRequestParameter)(nil)).Elem()
 }
 
-func (i APIRequestParameterArray) ToAPIRequestParameterArrayOutput() APIRequestParameterArrayOutput {
-	return i.ToAPIRequestParameterArrayOutputWithContext(context.Background())
+func (i ApiRequestParameterArray) ToApiRequestParameterArrayOutput() ApiRequestParameterArrayOutput {
+	return i.ToApiRequestParameterArrayOutputWithContext(context.Background())
 }
 
-func (i APIRequestParameterArray) ToAPIRequestParameterArrayOutputWithContext(ctx context.Context) APIRequestParameterArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(APIRequestParameterArrayOutput)
+func (i ApiRequestParameterArray) ToApiRequestParameterArrayOutputWithContext(ctx context.Context) ApiRequestParameterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiRequestParameterArrayOutput)
 }
 
-type APIRequestParameterOutput struct{ *pulumi.OutputState }
+type ApiRequestParameterOutput struct{ *pulumi.OutputState }
 
-func (APIRequestParameterOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*APIRequestParameter)(nil)).Elem()
+func (ApiRequestParameterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiRequestParameter)(nil)).Elem()
 }
 
-func (o APIRequestParameterOutput) ToAPIRequestParameterOutput() APIRequestParameterOutput {
+func (o ApiRequestParameterOutput) ToApiRequestParameterOutput() ApiRequestParameterOutput {
 	return o
 }
 
-func (o APIRequestParameterOutput) ToAPIRequestParameterOutputWithContext(ctx context.Context) APIRequestParameterOutput {
+func (o ApiRequestParameterOutput) ToApiRequestParameterOutputWithContext(ctx context.Context) ApiRequestParameterOutput {
 	return o
 }
 
-func (o APIRequestParameterOutput) DefaultValue() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v APIRequestParameter) *string { return v.DefaultValue }).(pulumi.StringPtrOutput)
+// Parameter default value.
+func (o ApiRequestParameterOutput) DefaultValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiRequestParameter) *string { return v.DefaultValue }).(pulumi.StringPtrOutput)
 }
 
-func (o APIRequestParameterOutput) Desc() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v APIRequestParameter) *string { return v.Desc }).(pulumi.StringPtrOutput)
+// Parameter description.
+func (o ApiRequestParameterOutput) Desc() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiRequestParameter) *string { return v.Desc }).(pulumi.StringPtrOutput)
 }
 
-func (o APIRequestParameterOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v APIRequestParameter) string { return v.Name }).(pulumi.StringOutput)
+// Parameter name.
+func (o ApiRequestParameterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ApiRequestParameter) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o APIRequestParameterOutput) Position() pulumi.StringOutput {
-	return o.ApplyT(func(v APIRequestParameter) string { return v.Position }).(pulumi.StringOutput)
+// Parameter location.
+func (o ApiRequestParameterOutput) Position() pulumi.StringOutput {
+	return o.ApplyT(func(v ApiRequestParameter) string { return v.Position }).(pulumi.StringOutput)
 }
 
-func (o APIRequestParameterOutput) Required() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v APIRequestParameter) *bool { return v.Required }).(pulumi.BoolPtrOutput)
+// If this parameter required. Default value: `false`.
+func (o ApiRequestParameterOutput) Required() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ApiRequestParameter) *bool { return v.Required }).(pulumi.BoolPtrOutput)
 }
 
-func (o APIRequestParameterOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v APIRequestParameter) string { return v.Type }).(pulumi.StringOutput)
+// Parameter type.
+func (o ApiRequestParameterOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v ApiRequestParameter) string { return v.Type }).(pulumi.StringOutput)
 }
 
-type APIRequestParameterArrayOutput struct{ *pulumi.OutputState }
+type ApiRequestParameterArrayOutput struct{ *pulumi.OutputState }
 
-func (APIRequestParameterArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]APIRequestParameter)(nil)).Elem()
+func (ApiRequestParameterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiRequestParameter)(nil)).Elem()
 }
 
-func (o APIRequestParameterArrayOutput) ToAPIRequestParameterArrayOutput() APIRequestParameterArrayOutput {
+func (o ApiRequestParameterArrayOutput) ToApiRequestParameterArrayOutput() ApiRequestParameterArrayOutput {
 	return o
 }
 
-func (o APIRequestParameterArrayOutput) ToAPIRequestParameterArrayOutputWithContext(ctx context.Context) APIRequestParameterArrayOutput {
+func (o ApiRequestParameterArrayOutput) ToApiRequestParameterArrayOutputWithContext(ctx context.Context) ApiRequestParameterArrayOutput {
 	return o
 }
 
-func (o APIRequestParameterArrayOutput) Index(i pulumi.IntInput) APIRequestParameterOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) APIRequestParameter {
-		return vs[0].([]APIRequestParameter)[vs[1].(int)]
-	}).(APIRequestParameterOutput)
+func (o ApiRequestParameterArrayOutput) Index(i pulumi.IntInput) ApiRequestParameterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiRequestParameter {
+		return vs[0].([]ApiRequestParameter)[vs[1].(int)]
+	}).(ApiRequestParameterOutput)
 }
 
-type APIResponseErrorCode struct {
-	Code          int     `pulumi:"code"`
-	ConvertedCode *int    `pulumi:"convertedCode"`
-	Desc          *string `pulumi:"desc"`
-	Msg           string  `pulumi:"msg"`
-	NeedConvert   *bool   `pulumi:"needConvert"`
+type ApiResponseErrorCode struct {
+	// Custom response configuration error code.
+	Code int `pulumi:"code"`
+	// Custom error code conversion.
+	ConvertedCode *int `pulumi:"convertedCode"`
+	// Parameter description.
+	Desc *string `pulumi:"desc"`
+	// Custom response configuration error message.
+	Msg string `pulumi:"msg"`
+	// Whether to enable error code conversion. Default value: `false`.
+	NeedConvert *bool `pulumi:"needConvert"`
 }
 
-// APIResponseErrorCodeInput is an input type that accepts APIResponseErrorCodeArgs and APIResponseErrorCodeOutput values.
-// You can construct a concrete instance of `APIResponseErrorCodeInput` via:
+// ApiResponseErrorCodeInput is an input type that accepts ApiResponseErrorCodeArgs and ApiResponseErrorCodeOutput values.
+// You can construct a concrete instance of `ApiResponseErrorCodeInput` via:
 //
-//          APIResponseErrorCodeArgs{...}
-type APIResponseErrorCodeInput interface {
+//          ApiResponseErrorCodeArgs{...}
+type ApiResponseErrorCodeInput interface {
 	pulumi.Input
 
-	ToAPIResponseErrorCodeOutput() APIResponseErrorCodeOutput
-	ToAPIResponseErrorCodeOutputWithContext(context.Context) APIResponseErrorCodeOutput
+	ToApiResponseErrorCodeOutput() ApiResponseErrorCodeOutput
+	ToApiResponseErrorCodeOutputWithContext(context.Context) ApiResponseErrorCodeOutput
 }
 
-type APIResponseErrorCodeArgs struct {
-	Code          pulumi.IntInput       `pulumi:"code"`
-	ConvertedCode pulumi.IntPtrInput    `pulumi:"convertedCode"`
-	Desc          pulumi.StringPtrInput `pulumi:"desc"`
-	Msg           pulumi.StringInput    `pulumi:"msg"`
-	NeedConvert   pulumi.BoolPtrInput   `pulumi:"needConvert"`
+type ApiResponseErrorCodeArgs struct {
+	// Custom response configuration error code.
+	Code pulumi.IntInput `pulumi:"code"`
+	// Custom error code conversion.
+	ConvertedCode pulumi.IntPtrInput `pulumi:"convertedCode"`
+	// Parameter description.
+	Desc pulumi.StringPtrInput `pulumi:"desc"`
+	// Custom response configuration error message.
+	Msg pulumi.StringInput `pulumi:"msg"`
+	// Whether to enable error code conversion. Default value: `false`.
+	NeedConvert pulumi.BoolPtrInput `pulumi:"needConvert"`
 }
 
-func (APIResponseErrorCodeArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*APIResponseErrorCode)(nil)).Elem()
+func (ApiResponseErrorCodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiResponseErrorCode)(nil)).Elem()
 }
 
-func (i APIResponseErrorCodeArgs) ToAPIResponseErrorCodeOutput() APIResponseErrorCodeOutput {
-	return i.ToAPIResponseErrorCodeOutputWithContext(context.Background())
+func (i ApiResponseErrorCodeArgs) ToApiResponseErrorCodeOutput() ApiResponseErrorCodeOutput {
+	return i.ToApiResponseErrorCodeOutputWithContext(context.Background())
 }
 
-func (i APIResponseErrorCodeArgs) ToAPIResponseErrorCodeOutputWithContext(ctx context.Context) APIResponseErrorCodeOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(APIResponseErrorCodeOutput)
+func (i ApiResponseErrorCodeArgs) ToApiResponseErrorCodeOutputWithContext(ctx context.Context) ApiResponseErrorCodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiResponseErrorCodeOutput)
 }
 
-// APIResponseErrorCodeArrayInput is an input type that accepts APIResponseErrorCodeArray and APIResponseErrorCodeArrayOutput values.
-// You can construct a concrete instance of `APIResponseErrorCodeArrayInput` via:
+// ApiResponseErrorCodeArrayInput is an input type that accepts ApiResponseErrorCodeArray and ApiResponseErrorCodeArrayOutput values.
+// You can construct a concrete instance of `ApiResponseErrorCodeArrayInput` via:
 //
-//          APIResponseErrorCodeArray{ APIResponseErrorCodeArgs{...} }
-type APIResponseErrorCodeArrayInput interface {
+//          ApiResponseErrorCodeArray{ ApiResponseErrorCodeArgs{...} }
+type ApiResponseErrorCodeArrayInput interface {
 	pulumi.Input
 
-	ToAPIResponseErrorCodeArrayOutput() APIResponseErrorCodeArrayOutput
-	ToAPIResponseErrorCodeArrayOutputWithContext(context.Context) APIResponseErrorCodeArrayOutput
+	ToApiResponseErrorCodeArrayOutput() ApiResponseErrorCodeArrayOutput
+	ToApiResponseErrorCodeArrayOutputWithContext(context.Context) ApiResponseErrorCodeArrayOutput
 }
 
-type APIResponseErrorCodeArray []APIResponseErrorCodeInput
+type ApiResponseErrorCodeArray []ApiResponseErrorCodeInput
 
-func (APIResponseErrorCodeArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]APIResponseErrorCode)(nil)).Elem()
+func (ApiResponseErrorCodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiResponseErrorCode)(nil)).Elem()
 }
 
-func (i APIResponseErrorCodeArray) ToAPIResponseErrorCodeArrayOutput() APIResponseErrorCodeArrayOutput {
-	return i.ToAPIResponseErrorCodeArrayOutputWithContext(context.Background())
+func (i ApiResponseErrorCodeArray) ToApiResponseErrorCodeArrayOutput() ApiResponseErrorCodeArrayOutput {
+	return i.ToApiResponseErrorCodeArrayOutputWithContext(context.Background())
 }
 
-func (i APIResponseErrorCodeArray) ToAPIResponseErrorCodeArrayOutputWithContext(ctx context.Context) APIResponseErrorCodeArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(APIResponseErrorCodeArrayOutput)
+func (i ApiResponseErrorCodeArray) ToApiResponseErrorCodeArrayOutputWithContext(ctx context.Context) ApiResponseErrorCodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiResponseErrorCodeArrayOutput)
 }
 
-type APIResponseErrorCodeOutput struct{ *pulumi.OutputState }
+type ApiResponseErrorCodeOutput struct{ *pulumi.OutputState }
 
-func (APIResponseErrorCodeOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*APIResponseErrorCode)(nil)).Elem()
+func (ApiResponseErrorCodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiResponseErrorCode)(nil)).Elem()
 }
 
-func (o APIResponseErrorCodeOutput) ToAPIResponseErrorCodeOutput() APIResponseErrorCodeOutput {
+func (o ApiResponseErrorCodeOutput) ToApiResponseErrorCodeOutput() ApiResponseErrorCodeOutput {
 	return o
 }
 
-func (o APIResponseErrorCodeOutput) ToAPIResponseErrorCodeOutputWithContext(ctx context.Context) APIResponseErrorCodeOutput {
+func (o ApiResponseErrorCodeOutput) ToApiResponseErrorCodeOutputWithContext(ctx context.Context) ApiResponseErrorCodeOutput {
 	return o
 }
 
-func (o APIResponseErrorCodeOutput) Code() pulumi.IntOutput {
-	return o.ApplyT(func(v APIResponseErrorCode) int { return v.Code }).(pulumi.IntOutput)
+// Custom response configuration error code.
+func (o ApiResponseErrorCodeOutput) Code() pulumi.IntOutput {
+	return o.ApplyT(func(v ApiResponseErrorCode) int { return v.Code }).(pulumi.IntOutput)
 }
 
-func (o APIResponseErrorCodeOutput) ConvertedCode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v APIResponseErrorCode) *int { return v.ConvertedCode }).(pulumi.IntPtrOutput)
+// Custom error code conversion.
+func (o ApiResponseErrorCodeOutput) ConvertedCode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ApiResponseErrorCode) *int { return v.ConvertedCode }).(pulumi.IntPtrOutput)
 }
 
-func (o APIResponseErrorCodeOutput) Desc() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v APIResponseErrorCode) *string { return v.Desc }).(pulumi.StringPtrOutput)
+// Parameter description.
+func (o ApiResponseErrorCodeOutput) Desc() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiResponseErrorCode) *string { return v.Desc }).(pulumi.StringPtrOutput)
 }
 
-func (o APIResponseErrorCodeOutput) Msg() pulumi.StringOutput {
-	return o.ApplyT(func(v APIResponseErrorCode) string { return v.Msg }).(pulumi.StringOutput)
+// Custom response configuration error message.
+func (o ApiResponseErrorCodeOutput) Msg() pulumi.StringOutput {
+	return o.ApplyT(func(v ApiResponseErrorCode) string { return v.Msg }).(pulumi.StringOutput)
 }
 
-func (o APIResponseErrorCodeOutput) NeedConvert() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v APIResponseErrorCode) *bool { return v.NeedConvert }).(pulumi.BoolPtrOutput)
+// Whether to enable error code conversion. Default value: `false`.
+func (o ApiResponseErrorCodeOutput) NeedConvert() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ApiResponseErrorCode) *bool { return v.NeedConvert }).(pulumi.BoolPtrOutput)
 }
 
-type APIResponseErrorCodeArrayOutput struct{ *pulumi.OutputState }
+type ApiResponseErrorCodeArrayOutput struct{ *pulumi.OutputState }
 
-func (APIResponseErrorCodeArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]APIResponseErrorCode)(nil)).Elem()
+func (ApiResponseErrorCodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiResponseErrorCode)(nil)).Elem()
 }
 
-func (o APIResponseErrorCodeArrayOutput) ToAPIResponseErrorCodeArrayOutput() APIResponseErrorCodeArrayOutput {
+func (o ApiResponseErrorCodeArrayOutput) ToApiResponseErrorCodeArrayOutput() ApiResponseErrorCodeArrayOutput {
 	return o
 }
 
-func (o APIResponseErrorCodeArrayOutput) ToAPIResponseErrorCodeArrayOutputWithContext(ctx context.Context) APIResponseErrorCodeArrayOutput {
+func (o ApiResponseErrorCodeArrayOutput) ToApiResponseErrorCodeArrayOutputWithContext(ctx context.Context) ApiResponseErrorCodeArrayOutput {
 	return o
 }
 
-func (o APIResponseErrorCodeArrayOutput) Index(i pulumi.IntInput) APIResponseErrorCodeOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) APIResponseErrorCode {
-		return vs[0].([]APIResponseErrorCode)[vs[1].(int)]
-	}).(APIResponseErrorCodeOutput)
+func (o ApiResponseErrorCodeArrayOutput) Index(i pulumi.IntInput) ApiResponseErrorCodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiResponseErrorCode {
+		return vs[0].([]ApiResponseErrorCode)[vs[1].(int)]
+	}).(ApiResponseErrorCodeOutput)
 }
 
 type ServiceApiList struct {
+	// Description of the API.
 	ApiDesc *string `pulumi:"apiDesc"`
-	ApiId   *string `pulumi:"apiId"`
+	// ID of the API.
+	ApiId *string `pulumi:"apiId"`
+	// Name of the API.
 	ApiName *string `pulumi:"apiName"`
-	Method  *string `pulumi:"method"`
-	Path    *string `pulumi:"path"`
+	// Method of the API.
+	Method *string `pulumi:"method"`
+	// Path of the API.
+	Path *string `pulumi:"path"`
 }
 
 // ServiceApiListInput is an input type that accepts ServiceApiListArgs and ServiceApiListOutput values.
@@ -272,11 +310,16 @@ type ServiceApiListInput interface {
 }
 
 type ServiceApiListArgs struct {
+	// Description of the API.
 	ApiDesc pulumi.StringPtrInput `pulumi:"apiDesc"`
-	ApiId   pulumi.StringPtrInput `pulumi:"apiId"`
+	// ID of the API.
+	ApiId pulumi.StringPtrInput `pulumi:"apiId"`
+	// Name of the API.
 	ApiName pulumi.StringPtrInput `pulumi:"apiName"`
-	Method  pulumi.StringPtrInput `pulumi:"method"`
-	Path    pulumi.StringPtrInput `pulumi:"path"`
+	// Method of the API.
+	Method pulumi.StringPtrInput `pulumi:"method"`
+	// Path of the API.
+	Path pulumi.StringPtrInput `pulumi:"path"`
 }
 
 func (ServiceApiListArgs) ElementType() reflect.Type {
@@ -330,22 +373,27 @@ func (o ServiceApiListOutput) ToServiceApiListOutputWithContext(ctx context.Cont
 	return o
 }
 
+// Description of the API.
 func (o ServiceApiListOutput) ApiDesc() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ServiceApiList) *string { return v.ApiDesc }).(pulumi.StringPtrOutput)
 }
 
+// ID of the API.
 func (o ServiceApiListOutput) ApiId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ServiceApiList) *string { return v.ApiId }).(pulumi.StringPtrOutput)
 }
 
+// Name of the API.
 func (o ServiceApiListOutput) ApiName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ServiceApiList) *string { return v.ApiName }).(pulumi.StringPtrOutput)
 }
 
+// Method of the API.
 func (o ServiceApiListOutput) Method() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ServiceApiList) *string { return v.Method }).(pulumi.StringPtrOutput)
 }
 
+// Path of the API.
 func (o ServiceApiListOutput) Path() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ServiceApiList) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
@@ -371,9 +419,13 @@ func (o ServiceApiListArrayOutput) Index(i pulumi.IntInput) ServiceApiListOutput
 }
 
 type ServiceUsagePlanList struct {
-	ApiId         *string `pulumi:"apiId"`
-	BindType      *string `pulumi:"bindType"`
-	UsagePlanId   *string `pulumi:"usagePlanId"`
+	// ID of the API.
+	ApiId *string `pulumi:"apiId"`
+	// Binding type.
+	BindType *string `pulumi:"bindType"`
+	// ID of the usage plan.
+	UsagePlanId *string `pulumi:"usagePlanId"`
+	// Name of the usage plan.
 	UsagePlanName *string `pulumi:"usagePlanName"`
 }
 
@@ -389,9 +441,13 @@ type ServiceUsagePlanListInput interface {
 }
 
 type ServiceUsagePlanListArgs struct {
-	ApiId         pulumi.StringPtrInput `pulumi:"apiId"`
-	BindType      pulumi.StringPtrInput `pulumi:"bindType"`
-	UsagePlanId   pulumi.StringPtrInput `pulumi:"usagePlanId"`
+	// ID of the API.
+	ApiId pulumi.StringPtrInput `pulumi:"apiId"`
+	// Binding type.
+	BindType pulumi.StringPtrInput `pulumi:"bindType"`
+	// ID of the usage plan.
+	UsagePlanId pulumi.StringPtrInput `pulumi:"usagePlanId"`
+	// Name of the usage plan.
 	UsagePlanName pulumi.StringPtrInput `pulumi:"usagePlanName"`
 }
 
@@ -446,18 +502,22 @@ func (o ServiceUsagePlanListOutput) ToServiceUsagePlanListOutputWithContext(ctx 
 	return o
 }
 
+// ID of the API.
 func (o ServiceUsagePlanListOutput) ApiId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ServiceUsagePlanList) *string { return v.ApiId }).(pulumi.StringPtrOutput)
 }
 
+// Binding type.
 func (o ServiceUsagePlanListOutput) BindType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ServiceUsagePlanList) *string { return v.BindType }).(pulumi.StringPtrOutput)
 }
 
+// ID of the usage plan.
 func (o ServiceUsagePlanListOutput) UsagePlanId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ServiceUsagePlanList) *string { return v.UsagePlanId }).(pulumi.StringPtrOutput)
 }
 
+// Name of the usage plan.
 func (o ServiceUsagePlanListOutput) UsagePlanName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ServiceUsagePlanList) *string { return v.UsagePlanName }).(pulumi.StringPtrOutput)
 }
@@ -483,14 +543,23 @@ func (o ServiceUsagePlanListArrayOutput) Index(i pulumi.IntInput) ServiceUsagePl
 }
 
 type UsagePlanAttachList struct {
-	ApiId       *string `pulumi:"apiId"`
-	ApiName     *string `pulumi:"apiName"`
-	CreateTime  *string `pulumi:"createTime"`
+	// The API ID, this value is empty if attach service.
+	ApiId *string `pulumi:"apiId"`
+	// The API name, this value is empty if attach service.
+	ApiName *string `pulumi:"apiName"`
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	CreateTime *string `pulumi:"createTime"`
+	// The environment name.
 	Environment *string `pulumi:"environment"`
-	Method      *string `pulumi:"method"`
-	ModifyTime  *string `pulumi:"modifyTime"`
-	Path        *string `pulumi:"path"`
-	ServiceId   *string `pulumi:"serviceId"`
+	// The API method, this value is empty if attach service.
+	Method *string `pulumi:"method"`
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	ModifyTime *string `pulumi:"modifyTime"`
+	// The API path, this value is empty if attach service.
+	Path *string `pulumi:"path"`
+	// The service ID.
+	ServiceId *string `pulumi:"serviceId"`
+	// The service name.
 	ServiceName *string `pulumi:"serviceName"`
 }
 
@@ -506,14 +575,23 @@ type UsagePlanAttachListInput interface {
 }
 
 type UsagePlanAttachListArgs struct {
-	ApiId       pulumi.StringPtrInput `pulumi:"apiId"`
-	ApiName     pulumi.StringPtrInput `pulumi:"apiName"`
-	CreateTime  pulumi.StringPtrInput `pulumi:"createTime"`
+	// The API ID, this value is empty if attach service.
+	ApiId pulumi.StringPtrInput `pulumi:"apiId"`
+	// The API name, this value is empty if attach service.
+	ApiName pulumi.StringPtrInput `pulumi:"apiName"`
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// The environment name.
 	Environment pulumi.StringPtrInput `pulumi:"environment"`
-	Method      pulumi.StringPtrInput `pulumi:"method"`
-	ModifyTime  pulumi.StringPtrInput `pulumi:"modifyTime"`
-	Path        pulumi.StringPtrInput `pulumi:"path"`
-	ServiceId   pulumi.StringPtrInput `pulumi:"serviceId"`
+	// The API method, this value is empty if attach service.
+	Method pulumi.StringPtrInput `pulumi:"method"`
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	ModifyTime pulumi.StringPtrInput `pulumi:"modifyTime"`
+	// The API path, this value is empty if attach service.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// The service ID.
+	ServiceId pulumi.StringPtrInput `pulumi:"serviceId"`
+	// The service name.
 	ServiceName pulumi.StringPtrInput `pulumi:"serviceName"`
 }
 
@@ -568,38 +646,47 @@ func (o UsagePlanAttachListOutput) ToUsagePlanAttachListOutputWithContext(ctx co
 	return o
 }
 
+// The API ID, this value is empty if attach service.
 func (o UsagePlanAttachListOutput) ApiId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UsagePlanAttachList) *string { return v.ApiId }).(pulumi.StringPtrOutput)
 }
 
+// The API name, this value is empty if attach service.
 func (o UsagePlanAttachListOutput) ApiName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UsagePlanAttachList) *string { return v.ApiName }).(pulumi.StringPtrOutput)
 }
 
+// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 func (o UsagePlanAttachListOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UsagePlanAttachList) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
+// The environment name.
 func (o UsagePlanAttachListOutput) Environment() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UsagePlanAttachList) *string { return v.Environment }).(pulumi.StringPtrOutput)
 }
 
+// The API method, this value is empty if attach service.
 func (o UsagePlanAttachListOutput) Method() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UsagePlanAttachList) *string { return v.Method }).(pulumi.StringPtrOutput)
 }
 
+// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 func (o UsagePlanAttachListOutput) ModifyTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UsagePlanAttachList) *string { return v.ModifyTime }).(pulumi.StringPtrOutput)
 }
 
+// The API path, this value is empty if attach service.
 func (o UsagePlanAttachListOutput) Path() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UsagePlanAttachList) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
+// The service ID.
 func (o UsagePlanAttachListOutput) ServiceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UsagePlanAttachList) *string { return v.ServiceId }).(pulumi.StringPtrOutput)
 }
 
+// The service name.
 func (o UsagePlanAttachListOutput) ServiceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UsagePlanAttachList) *string { return v.ServiceName }).(pulumi.StringPtrOutput)
 }
@@ -624,25 +711,2745 @@ func (o UsagePlanAttachListArrayOutput) Index(i pulumi.IntInput) UsagePlanAttach
 	}).(UsagePlanAttachListOutput)
 }
 
+type GetApiKeysList struct {
+	// Created API key.
+	AccessKeySecret string `pulumi:"accessKeySecret"`
+	// Created API key ID, this field is exactly the same as ID.
+	ApiKeyId string `pulumi:"apiKeyId"`
+	// Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	CreateTime string `pulumi:"createTime"`
+	// Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	ModifyTime string `pulumi:"modifyTime"`
+	// Key status. Values: `on`, `off`.
+	Status string `pulumi:"status"`
+}
+
+// GetApiKeysListInput is an input type that accepts GetApiKeysListArgs and GetApiKeysListOutput values.
+// You can construct a concrete instance of `GetApiKeysListInput` via:
+//
+//          GetApiKeysListArgs{...}
+type GetApiKeysListInput interface {
+	pulumi.Input
+
+	ToGetApiKeysListOutput() GetApiKeysListOutput
+	ToGetApiKeysListOutputWithContext(context.Context) GetApiKeysListOutput
+}
+
+type GetApiKeysListArgs struct {
+	// Created API key.
+	AccessKeySecret pulumi.StringInput `pulumi:"accessKeySecret"`
+	// Created API key ID, this field is exactly the same as ID.
+	ApiKeyId pulumi.StringInput `pulumi:"apiKeyId"`
+	// Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// Key status. Values: `on`, `off`.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetApiKeysListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiKeysList)(nil)).Elem()
+}
+
+func (i GetApiKeysListArgs) ToGetApiKeysListOutput() GetApiKeysListOutput {
+	return i.ToGetApiKeysListOutputWithContext(context.Background())
+}
+
+func (i GetApiKeysListArgs) ToGetApiKeysListOutputWithContext(ctx context.Context) GetApiKeysListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiKeysListOutput)
+}
+
+// GetApiKeysListArrayInput is an input type that accepts GetApiKeysListArray and GetApiKeysListArrayOutput values.
+// You can construct a concrete instance of `GetApiKeysListArrayInput` via:
+//
+//          GetApiKeysListArray{ GetApiKeysListArgs{...} }
+type GetApiKeysListArrayInput interface {
+	pulumi.Input
+
+	ToGetApiKeysListArrayOutput() GetApiKeysListArrayOutput
+	ToGetApiKeysListArrayOutputWithContext(context.Context) GetApiKeysListArrayOutput
+}
+
+type GetApiKeysListArray []GetApiKeysListInput
+
+func (GetApiKeysListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiKeysList)(nil)).Elem()
+}
+
+func (i GetApiKeysListArray) ToGetApiKeysListArrayOutput() GetApiKeysListArrayOutput {
+	return i.ToGetApiKeysListArrayOutputWithContext(context.Background())
+}
+
+func (i GetApiKeysListArray) ToGetApiKeysListArrayOutputWithContext(ctx context.Context) GetApiKeysListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApiKeysListArrayOutput)
+}
+
+type GetApiKeysListOutput struct{ *pulumi.OutputState }
+
+func (GetApiKeysListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApiKeysList)(nil)).Elem()
+}
+
+func (o GetApiKeysListOutput) ToGetApiKeysListOutput() GetApiKeysListOutput {
+	return o
+}
+
+func (o GetApiKeysListOutput) ToGetApiKeysListOutputWithContext(ctx context.Context) GetApiKeysListOutput {
+	return o
+}
+
+// Created API key.
+func (o GetApiKeysListOutput) AccessKeySecret() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiKeysList) string { return v.AccessKeySecret }).(pulumi.StringOutput)
+}
+
+// Created API key ID, this field is exactly the same as ID.
+func (o GetApiKeysListOutput) ApiKeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiKeysList) string { return v.ApiKeyId }).(pulumi.StringOutput)
+}
+
+// Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+func (o GetApiKeysListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiKeysList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+func (o GetApiKeysListOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiKeysList) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// Key status. Values: `on`, `off`.
+func (o GetApiKeysListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApiKeysList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetApiKeysListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApiKeysListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApiKeysList)(nil)).Elem()
+}
+
+func (o GetApiKeysListArrayOutput) ToGetApiKeysListArrayOutput() GetApiKeysListArrayOutput {
+	return o
+}
+
+func (o GetApiKeysListArrayOutput) ToGetApiKeysListArrayOutputWithContext(ctx context.Context) GetApiKeysListArrayOutput {
+	return o
+}
+
+func (o GetApiKeysListArrayOutput) Index(i pulumi.IntInput) GetApiKeysListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApiKeysList {
+		return vs[0].([]GetApiKeysList)[vs[1].(int)]
+	}).(GetApiKeysListOutput)
+}
+
+type GetApisList struct {
+	// Custom API description.
+	ApiDesc string `pulumi:"apiDesc"`
+	// Custom API name.
+	ApiName string `pulumi:"apiName"`
+	// API authentication type. Valid values: `SECRET`, `NONE`. `SECRET` means key pair authentication, `NONE` means no authentication.
+	AuthType string `pulumi:"authType"`
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	CreateTime string `pulumi:"createTime"`
+	// Whether to enable CORS.
+	EnableCors bool `pulumi:"enableCors"`
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	ModifyTime string `pulumi:"modifyTime"`
+	// API frontend request type, such as `HTTP`,`WEBSOCKET`.
+	Protocol string `pulumi:"protocol"`
+	// Request frontend method configuration. Like `GET`,`POST`,`PUT`,`DELETE`,`HEAD`,`ANY`.
+	RequestConfigMethod string `pulumi:"requestConfigMethod"`
+	// Request frontend path configuration. Like `/user/getinfo`.
+	RequestConfigPath string `pulumi:"requestConfigPath"`
+	// Frontend request parameters.
+	RequestParameters []GetApisListRequestParameter `pulumi:"requestParameters"`
+	// Custom error code configuration. Must keep at least one after set.
+	ResponseErrorCodes []GetApisListResponseErrorCode `pulumi:"responseErrorCodes"`
+	// Response failure sample of custom response configuration.
+	ResponseFailExample string `pulumi:"responseFailExample"`
+	// Successful response sample of custom response configuration.
+	ResponseSuccessExample string `pulumi:"responseSuccessExample"`
+	// Return type.
+	ResponseType string `pulumi:"responseType"`
+	// API backend service request method, such as `GET`. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigMethod` and backend method `serviceConfigMethod` can be different.
+	ServiceConfigMethod string `pulumi:"serviceConfigMethod"`
+	// Returned information of API backend mocking.
+	ServiceConfigMockReturnMessage string `pulumi:"serviceConfigMockReturnMessage"`
+	// API backend service path, such as /path. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigPath` and backend path `serviceConfigPath` can be different.
+	ServiceConfigPath string `pulumi:"serviceConfigPath"`
+	// Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+	ServiceConfigProduct string `pulumi:"serviceConfigProduct"`
+	// SCF function name. This parameter takes effect when `serviceConfigType` is `SCF`.
+	ServiceConfigScfFunctionName string `pulumi:"serviceConfigScfFunctionName"`
+	// SCF function namespace. This parameter takes effect when  `serviceConfigType` is `SCF`.
+	ServiceConfigScfFunctionNamespace string `pulumi:"serviceConfigScfFunctionNamespace"`
+	// SCF function version. This parameter takes effect when `serviceConfigType`  is `SCF`.
+	ServiceConfigScfFunctionQualifier string `pulumi:"serviceConfigScfFunctionQualifier"`
+	// API backend service timeout period in seconds.
+	ServiceConfigTimeout int `pulumi:"serviceConfigTimeout"`
+	// API backend service type.
+	ServiceConfigType string `pulumi:"serviceConfigType"`
+	// API backend service url. This parameter is required when `serviceConfigType` is `HTTP`.
+	ServiceConfigUrl string `pulumi:"serviceConfigUrl"`
+	// Unique VPC ID.
+	ServiceConfigVpcId string `pulumi:"serviceConfigVpcId"`
+	// Service ID for query.
+	ServiceId string `pulumi:"serviceId"`
+}
+
+// GetApisListInput is an input type that accepts GetApisListArgs and GetApisListOutput values.
+// You can construct a concrete instance of `GetApisListInput` via:
+//
+//          GetApisListArgs{...}
+type GetApisListInput interface {
+	pulumi.Input
+
+	ToGetApisListOutput() GetApisListOutput
+	ToGetApisListOutputWithContext(context.Context) GetApisListOutput
+}
+
+type GetApisListArgs struct {
+	// Custom API description.
+	ApiDesc pulumi.StringInput `pulumi:"apiDesc"`
+	// Custom API name.
+	ApiName pulumi.StringInput `pulumi:"apiName"`
+	// API authentication type. Valid values: `SECRET`, `NONE`. `SECRET` means key pair authentication, `NONE` means no authentication.
+	AuthType pulumi.StringInput `pulumi:"authType"`
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Whether to enable CORS.
+	EnableCors pulumi.BoolInput `pulumi:"enableCors"`
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// API frontend request type, such as `HTTP`,`WEBSOCKET`.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Request frontend method configuration. Like `GET`,`POST`,`PUT`,`DELETE`,`HEAD`,`ANY`.
+	RequestConfigMethod pulumi.StringInput `pulumi:"requestConfigMethod"`
+	// Request frontend path configuration. Like `/user/getinfo`.
+	RequestConfigPath pulumi.StringInput `pulumi:"requestConfigPath"`
+	// Frontend request parameters.
+	RequestParameters GetApisListRequestParameterArrayInput `pulumi:"requestParameters"`
+	// Custom error code configuration. Must keep at least one after set.
+	ResponseErrorCodes GetApisListResponseErrorCodeArrayInput `pulumi:"responseErrorCodes"`
+	// Response failure sample of custom response configuration.
+	ResponseFailExample pulumi.StringInput `pulumi:"responseFailExample"`
+	// Successful response sample of custom response configuration.
+	ResponseSuccessExample pulumi.StringInput `pulumi:"responseSuccessExample"`
+	// Return type.
+	ResponseType pulumi.StringInput `pulumi:"responseType"`
+	// API backend service request method, such as `GET`. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigMethod` and backend method `serviceConfigMethod` can be different.
+	ServiceConfigMethod pulumi.StringInput `pulumi:"serviceConfigMethod"`
+	// Returned information of API backend mocking.
+	ServiceConfigMockReturnMessage pulumi.StringInput `pulumi:"serviceConfigMockReturnMessage"`
+	// API backend service path, such as /path. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigPath` and backend path `serviceConfigPath` can be different.
+	ServiceConfigPath pulumi.StringInput `pulumi:"serviceConfigPath"`
+	// Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+	ServiceConfigProduct pulumi.StringInput `pulumi:"serviceConfigProduct"`
+	// SCF function name. This parameter takes effect when `serviceConfigType` is `SCF`.
+	ServiceConfigScfFunctionName pulumi.StringInput `pulumi:"serviceConfigScfFunctionName"`
+	// SCF function namespace. This parameter takes effect when  `serviceConfigType` is `SCF`.
+	ServiceConfigScfFunctionNamespace pulumi.StringInput `pulumi:"serviceConfigScfFunctionNamespace"`
+	// SCF function version. This parameter takes effect when `serviceConfigType`  is `SCF`.
+	ServiceConfigScfFunctionQualifier pulumi.StringInput `pulumi:"serviceConfigScfFunctionQualifier"`
+	// API backend service timeout period in seconds.
+	ServiceConfigTimeout pulumi.IntInput `pulumi:"serviceConfigTimeout"`
+	// API backend service type.
+	ServiceConfigType pulumi.StringInput `pulumi:"serviceConfigType"`
+	// API backend service url. This parameter is required when `serviceConfigType` is `HTTP`.
+	ServiceConfigUrl pulumi.StringInput `pulumi:"serviceConfigUrl"`
+	// Unique VPC ID.
+	ServiceConfigVpcId pulumi.StringInput `pulumi:"serviceConfigVpcId"`
+	// Service ID for query.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+}
+
+func (GetApisListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApisList)(nil)).Elem()
+}
+
+func (i GetApisListArgs) ToGetApisListOutput() GetApisListOutput {
+	return i.ToGetApisListOutputWithContext(context.Background())
+}
+
+func (i GetApisListArgs) ToGetApisListOutputWithContext(ctx context.Context) GetApisListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApisListOutput)
+}
+
+// GetApisListArrayInput is an input type that accepts GetApisListArray and GetApisListArrayOutput values.
+// You can construct a concrete instance of `GetApisListArrayInput` via:
+//
+//          GetApisListArray{ GetApisListArgs{...} }
+type GetApisListArrayInput interface {
+	pulumi.Input
+
+	ToGetApisListArrayOutput() GetApisListArrayOutput
+	ToGetApisListArrayOutputWithContext(context.Context) GetApisListArrayOutput
+}
+
+type GetApisListArray []GetApisListInput
+
+func (GetApisListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApisList)(nil)).Elem()
+}
+
+func (i GetApisListArray) ToGetApisListArrayOutput() GetApisListArrayOutput {
+	return i.ToGetApisListArrayOutputWithContext(context.Background())
+}
+
+func (i GetApisListArray) ToGetApisListArrayOutputWithContext(ctx context.Context) GetApisListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApisListArrayOutput)
+}
+
+type GetApisListOutput struct{ *pulumi.OutputState }
+
+func (GetApisListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApisList)(nil)).Elem()
+}
+
+func (o GetApisListOutput) ToGetApisListOutput() GetApisListOutput {
+	return o
+}
+
+func (o GetApisListOutput) ToGetApisListOutputWithContext(ctx context.Context) GetApisListOutput {
+	return o
+}
+
+// Custom API description.
+func (o GetApisListOutput) ApiDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ApiDesc }).(pulumi.StringOutput)
+}
+
+// Custom API name.
+func (o GetApisListOutput) ApiName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ApiName }).(pulumi.StringOutput)
+}
+
+// API authentication type. Valid values: `SECRET`, `NONE`. `SECRET` means key pair authentication, `NONE` means no authentication.
+func (o GetApisListOutput) AuthType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.AuthType }).(pulumi.StringOutput)
+}
+
+// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+func (o GetApisListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Whether to enable CORS.
+func (o GetApisListOutput) EnableCors() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetApisList) bool { return v.EnableCors }).(pulumi.BoolOutput)
+}
+
+// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+func (o GetApisListOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// API frontend request type, such as `HTTP`,`WEBSOCKET`.
+func (o GetApisListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Request frontend method configuration. Like `GET`,`POST`,`PUT`,`DELETE`,`HEAD`,`ANY`.
+func (o GetApisListOutput) RequestConfigMethod() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.RequestConfigMethod }).(pulumi.StringOutput)
+}
+
+// Request frontend path configuration. Like `/user/getinfo`.
+func (o GetApisListOutput) RequestConfigPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.RequestConfigPath }).(pulumi.StringOutput)
+}
+
+// Frontend request parameters.
+func (o GetApisListOutput) RequestParameters() GetApisListRequestParameterArrayOutput {
+	return o.ApplyT(func(v GetApisList) []GetApisListRequestParameter { return v.RequestParameters }).(GetApisListRequestParameterArrayOutput)
+}
+
+// Custom error code configuration. Must keep at least one after set.
+func (o GetApisListOutput) ResponseErrorCodes() GetApisListResponseErrorCodeArrayOutput {
+	return o.ApplyT(func(v GetApisList) []GetApisListResponseErrorCode { return v.ResponseErrorCodes }).(GetApisListResponseErrorCodeArrayOutput)
+}
+
+// Response failure sample of custom response configuration.
+func (o GetApisListOutput) ResponseFailExample() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ResponseFailExample }).(pulumi.StringOutput)
+}
+
+// Successful response sample of custom response configuration.
+func (o GetApisListOutput) ResponseSuccessExample() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ResponseSuccessExample }).(pulumi.StringOutput)
+}
+
+// Return type.
+func (o GetApisListOutput) ResponseType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ResponseType }).(pulumi.StringOutput)
+}
+
+// API backend service request method, such as `GET`. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigMethod` and backend method `serviceConfigMethod` can be different.
+func (o GetApisListOutput) ServiceConfigMethod() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ServiceConfigMethod }).(pulumi.StringOutput)
+}
+
+// Returned information of API backend mocking.
+func (o GetApisListOutput) ServiceConfigMockReturnMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ServiceConfigMockReturnMessage }).(pulumi.StringOutput)
+}
+
+// API backend service path, such as /path. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigPath` and backend path `serviceConfigPath` can be different.
+func (o GetApisListOutput) ServiceConfigPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ServiceConfigPath }).(pulumi.StringOutput)
+}
+
+// Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+func (o GetApisListOutput) ServiceConfigProduct() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ServiceConfigProduct }).(pulumi.StringOutput)
+}
+
+// SCF function name. This parameter takes effect when `serviceConfigType` is `SCF`.
+func (o GetApisListOutput) ServiceConfigScfFunctionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ServiceConfigScfFunctionName }).(pulumi.StringOutput)
+}
+
+// SCF function namespace. This parameter takes effect when  `serviceConfigType` is `SCF`.
+func (o GetApisListOutput) ServiceConfigScfFunctionNamespace() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ServiceConfigScfFunctionNamespace }).(pulumi.StringOutput)
+}
+
+// SCF function version. This parameter takes effect when `serviceConfigType`  is `SCF`.
+func (o GetApisListOutput) ServiceConfigScfFunctionQualifier() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ServiceConfigScfFunctionQualifier }).(pulumi.StringOutput)
+}
+
+// API backend service timeout period in seconds.
+func (o GetApisListOutput) ServiceConfigTimeout() pulumi.IntOutput {
+	return o.ApplyT(func(v GetApisList) int { return v.ServiceConfigTimeout }).(pulumi.IntOutput)
+}
+
+// API backend service type.
+func (o GetApisListOutput) ServiceConfigType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ServiceConfigType }).(pulumi.StringOutput)
+}
+
+// API backend service url. This parameter is required when `serviceConfigType` is `HTTP`.
+func (o GetApisListOutput) ServiceConfigUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ServiceConfigUrl }).(pulumi.StringOutput)
+}
+
+// Unique VPC ID.
+func (o GetApisListOutput) ServiceConfigVpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ServiceConfigVpcId }).(pulumi.StringOutput)
+}
+
+// Service ID for query.
+func (o GetApisListOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisList) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+type GetApisListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApisListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApisList)(nil)).Elem()
+}
+
+func (o GetApisListArrayOutput) ToGetApisListArrayOutput() GetApisListArrayOutput {
+	return o
+}
+
+func (o GetApisListArrayOutput) ToGetApisListArrayOutputWithContext(ctx context.Context) GetApisListArrayOutput {
+	return o
+}
+
+func (o GetApisListArrayOutput) Index(i pulumi.IntInput) GetApisListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApisList {
+		return vs[0].([]GetApisList)[vs[1].(int)]
+	}).(GetApisListOutput)
+}
+
+type GetApisListRequestParameter struct {
+	// Parameter default value.
+	DefaultValue string `pulumi:"defaultValue"`
+	// Parameter description.
+	Desc string `pulumi:"desc"`
+	// Parameter name.
+	Name string `pulumi:"name"`
+	// Parameter location.
+	Position string `pulumi:"position"`
+	// If this parameter required.
+	Required bool `pulumi:"required"`
+	// Parameter type.
+	Type string `pulumi:"type"`
+}
+
+// GetApisListRequestParameterInput is an input type that accepts GetApisListRequestParameterArgs and GetApisListRequestParameterOutput values.
+// You can construct a concrete instance of `GetApisListRequestParameterInput` via:
+//
+//          GetApisListRequestParameterArgs{...}
+type GetApisListRequestParameterInput interface {
+	pulumi.Input
+
+	ToGetApisListRequestParameterOutput() GetApisListRequestParameterOutput
+	ToGetApisListRequestParameterOutputWithContext(context.Context) GetApisListRequestParameterOutput
+}
+
+type GetApisListRequestParameterArgs struct {
+	// Parameter default value.
+	DefaultValue pulumi.StringInput `pulumi:"defaultValue"`
+	// Parameter description.
+	Desc pulumi.StringInput `pulumi:"desc"`
+	// Parameter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Parameter location.
+	Position pulumi.StringInput `pulumi:"position"`
+	// If this parameter required.
+	Required pulumi.BoolInput `pulumi:"required"`
+	// Parameter type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetApisListRequestParameterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApisListRequestParameter)(nil)).Elem()
+}
+
+func (i GetApisListRequestParameterArgs) ToGetApisListRequestParameterOutput() GetApisListRequestParameterOutput {
+	return i.ToGetApisListRequestParameterOutputWithContext(context.Background())
+}
+
+func (i GetApisListRequestParameterArgs) ToGetApisListRequestParameterOutputWithContext(ctx context.Context) GetApisListRequestParameterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApisListRequestParameterOutput)
+}
+
+// GetApisListRequestParameterArrayInput is an input type that accepts GetApisListRequestParameterArray and GetApisListRequestParameterArrayOutput values.
+// You can construct a concrete instance of `GetApisListRequestParameterArrayInput` via:
+//
+//          GetApisListRequestParameterArray{ GetApisListRequestParameterArgs{...} }
+type GetApisListRequestParameterArrayInput interface {
+	pulumi.Input
+
+	ToGetApisListRequestParameterArrayOutput() GetApisListRequestParameterArrayOutput
+	ToGetApisListRequestParameterArrayOutputWithContext(context.Context) GetApisListRequestParameterArrayOutput
+}
+
+type GetApisListRequestParameterArray []GetApisListRequestParameterInput
+
+func (GetApisListRequestParameterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApisListRequestParameter)(nil)).Elem()
+}
+
+func (i GetApisListRequestParameterArray) ToGetApisListRequestParameterArrayOutput() GetApisListRequestParameterArrayOutput {
+	return i.ToGetApisListRequestParameterArrayOutputWithContext(context.Background())
+}
+
+func (i GetApisListRequestParameterArray) ToGetApisListRequestParameterArrayOutputWithContext(ctx context.Context) GetApisListRequestParameterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApisListRequestParameterArrayOutput)
+}
+
+type GetApisListRequestParameterOutput struct{ *pulumi.OutputState }
+
+func (GetApisListRequestParameterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApisListRequestParameter)(nil)).Elem()
+}
+
+func (o GetApisListRequestParameterOutput) ToGetApisListRequestParameterOutput() GetApisListRequestParameterOutput {
+	return o
+}
+
+func (o GetApisListRequestParameterOutput) ToGetApisListRequestParameterOutputWithContext(ctx context.Context) GetApisListRequestParameterOutput {
+	return o
+}
+
+// Parameter default value.
+func (o GetApisListRequestParameterOutput) DefaultValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisListRequestParameter) string { return v.DefaultValue }).(pulumi.StringOutput)
+}
+
+// Parameter description.
+func (o GetApisListRequestParameterOutput) Desc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisListRequestParameter) string { return v.Desc }).(pulumi.StringOutput)
+}
+
+// Parameter name.
+func (o GetApisListRequestParameterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisListRequestParameter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Parameter location.
+func (o GetApisListRequestParameterOutput) Position() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisListRequestParameter) string { return v.Position }).(pulumi.StringOutput)
+}
+
+// If this parameter required.
+func (o GetApisListRequestParameterOutput) Required() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetApisListRequestParameter) bool { return v.Required }).(pulumi.BoolOutput)
+}
+
+// Parameter type.
+func (o GetApisListRequestParameterOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisListRequestParameter) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetApisListRequestParameterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApisListRequestParameterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApisListRequestParameter)(nil)).Elem()
+}
+
+func (o GetApisListRequestParameterArrayOutput) ToGetApisListRequestParameterArrayOutput() GetApisListRequestParameterArrayOutput {
+	return o
+}
+
+func (o GetApisListRequestParameterArrayOutput) ToGetApisListRequestParameterArrayOutputWithContext(ctx context.Context) GetApisListRequestParameterArrayOutput {
+	return o
+}
+
+func (o GetApisListRequestParameterArrayOutput) Index(i pulumi.IntInput) GetApisListRequestParameterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApisListRequestParameter {
+		return vs[0].([]GetApisListRequestParameter)[vs[1].(int)]
+	}).(GetApisListRequestParameterOutput)
+}
+
+type GetApisListResponseErrorCode struct {
+	// Custom response configuration error code.
+	Code int `pulumi:"code"`
+	// Custom error code conversion.
+	ConvertedCode int `pulumi:"convertedCode"`
+	// Parameter description.
+	Desc string `pulumi:"desc"`
+	// Custom response configuration error message.
+	Msg string `pulumi:"msg"`
+	// Whether to enable error code conversion. Default value: `false`.
+	NeedConvert bool `pulumi:"needConvert"`
+}
+
+// GetApisListResponseErrorCodeInput is an input type that accepts GetApisListResponseErrorCodeArgs and GetApisListResponseErrorCodeOutput values.
+// You can construct a concrete instance of `GetApisListResponseErrorCodeInput` via:
+//
+//          GetApisListResponseErrorCodeArgs{...}
+type GetApisListResponseErrorCodeInput interface {
+	pulumi.Input
+
+	ToGetApisListResponseErrorCodeOutput() GetApisListResponseErrorCodeOutput
+	ToGetApisListResponseErrorCodeOutputWithContext(context.Context) GetApisListResponseErrorCodeOutput
+}
+
+type GetApisListResponseErrorCodeArgs struct {
+	// Custom response configuration error code.
+	Code pulumi.IntInput `pulumi:"code"`
+	// Custom error code conversion.
+	ConvertedCode pulumi.IntInput `pulumi:"convertedCode"`
+	// Parameter description.
+	Desc pulumi.StringInput `pulumi:"desc"`
+	// Custom response configuration error message.
+	Msg pulumi.StringInput `pulumi:"msg"`
+	// Whether to enable error code conversion. Default value: `false`.
+	NeedConvert pulumi.BoolInput `pulumi:"needConvert"`
+}
+
+func (GetApisListResponseErrorCodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApisListResponseErrorCode)(nil)).Elem()
+}
+
+func (i GetApisListResponseErrorCodeArgs) ToGetApisListResponseErrorCodeOutput() GetApisListResponseErrorCodeOutput {
+	return i.ToGetApisListResponseErrorCodeOutputWithContext(context.Background())
+}
+
+func (i GetApisListResponseErrorCodeArgs) ToGetApisListResponseErrorCodeOutputWithContext(ctx context.Context) GetApisListResponseErrorCodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApisListResponseErrorCodeOutput)
+}
+
+// GetApisListResponseErrorCodeArrayInput is an input type that accepts GetApisListResponseErrorCodeArray and GetApisListResponseErrorCodeArrayOutput values.
+// You can construct a concrete instance of `GetApisListResponseErrorCodeArrayInput` via:
+//
+//          GetApisListResponseErrorCodeArray{ GetApisListResponseErrorCodeArgs{...} }
+type GetApisListResponseErrorCodeArrayInput interface {
+	pulumi.Input
+
+	ToGetApisListResponseErrorCodeArrayOutput() GetApisListResponseErrorCodeArrayOutput
+	ToGetApisListResponseErrorCodeArrayOutputWithContext(context.Context) GetApisListResponseErrorCodeArrayOutput
+}
+
+type GetApisListResponseErrorCodeArray []GetApisListResponseErrorCodeInput
+
+func (GetApisListResponseErrorCodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApisListResponseErrorCode)(nil)).Elem()
+}
+
+func (i GetApisListResponseErrorCodeArray) ToGetApisListResponseErrorCodeArrayOutput() GetApisListResponseErrorCodeArrayOutput {
+	return i.ToGetApisListResponseErrorCodeArrayOutputWithContext(context.Background())
+}
+
+func (i GetApisListResponseErrorCodeArray) ToGetApisListResponseErrorCodeArrayOutputWithContext(ctx context.Context) GetApisListResponseErrorCodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetApisListResponseErrorCodeArrayOutput)
+}
+
+type GetApisListResponseErrorCodeOutput struct{ *pulumi.OutputState }
+
+func (GetApisListResponseErrorCodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetApisListResponseErrorCode)(nil)).Elem()
+}
+
+func (o GetApisListResponseErrorCodeOutput) ToGetApisListResponseErrorCodeOutput() GetApisListResponseErrorCodeOutput {
+	return o
+}
+
+func (o GetApisListResponseErrorCodeOutput) ToGetApisListResponseErrorCodeOutputWithContext(ctx context.Context) GetApisListResponseErrorCodeOutput {
+	return o
+}
+
+// Custom response configuration error code.
+func (o GetApisListResponseErrorCodeOutput) Code() pulumi.IntOutput {
+	return o.ApplyT(func(v GetApisListResponseErrorCode) int { return v.Code }).(pulumi.IntOutput)
+}
+
+// Custom error code conversion.
+func (o GetApisListResponseErrorCodeOutput) ConvertedCode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetApisListResponseErrorCode) int { return v.ConvertedCode }).(pulumi.IntOutput)
+}
+
+// Parameter description.
+func (o GetApisListResponseErrorCodeOutput) Desc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisListResponseErrorCode) string { return v.Desc }).(pulumi.StringOutput)
+}
+
+// Custom response configuration error message.
+func (o GetApisListResponseErrorCodeOutput) Msg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetApisListResponseErrorCode) string { return v.Msg }).(pulumi.StringOutput)
+}
+
+// Whether to enable error code conversion. Default value: `false`.
+func (o GetApisListResponseErrorCodeOutput) NeedConvert() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetApisListResponseErrorCode) bool { return v.NeedConvert }).(pulumi.BoolOutput)
+}
+
+type GetApisListResponseErrorCodeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetApisListResponseErrorCodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetApisListResponseErrorCode)(nil)).Elem()
+}
+
+func (o GetApisListResponseErrorCodeArrayOutput) ToGetApisListResponseErrorCodeArrayOutput() GetApisListResponseErrorCodeArrayOutput {
+	return o
+}
+
+func (o GetApisListResponseErrorCodeArrayOutput) ToGetApisListResponseErrorCodeArrayOutputWithContext(ctx context.Context) GetApisListResponseErrorCodeArrayOutput {
+	return o
+}
+
+func (o GetApisListResponseErrorCodeArrayOutput) Index(i pulumi.IntInput) GetApisListResponseErrorCodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetApisListResponseErrorCode {
+		return vs[0].([]GetApisListResponseErrorCode)[vs[1].(int)]
+	}).(GetApisListResponseErrorCodeOutput)
+}
+
+type GetCustomerDomainsList struct {
+	// The certificate ID.
+	CertificateId string `pulumi:"certificateId"`
+	// Domain name.
+	DomainName string `pulumi:"domainName"`
+	// Whether to use default path mapping. Valid values: `true`, `false`. `true` means to use default path mapping, `false` means to use custom path mapping.
+	IsDefaultMapping bool `pulumi:"isDefaultMapping"`
+	// Domain name resolution status. Valid values: `true`, `false`. `true` means normal parsing, `false` means parsing failed.
+	IsStatusOn bool `pulumi:"isStatusOn"`
+	// Network type.
+	NetType string `pulumi:"netType"`
+	// Domain name mapping path and environment list.
+	PathMappings []GetCustomerDomainsListPathMapping `pulumi:"pathMappings"`
+	// Custom domain name agreement type.
+	Protocol string `pulumi:"protocol"`
+}
+
+// GetCustomerDomainsListInput is an input type that accepts GetCustomerDomainsListArgs and GetCustomerDomainsListOutput values.
+// You can construct a concrete instance of `GetCustomerDomainsListInput` via:
+//
+//          GetCustomerDomainsListArgs{...}
+type GetCustomerDomainsListInput interface {
+	pulumi.Input
+
+	ToGetCustomerDomainsListOutput() GetCustomerDomainsListOutput
+	ToGetCustomerDomainsListOutputWithContext(context.Context) GetCustomerDomainsListOutput
+}
+
+type GetCustomerDomainsListArgs struct {
+	// The certificate ID.
+	CertificateId pulumi.StringInput `pulumi:"certificateId"`
+	// Domain name.
+	DomainName pulumi.StringInput `pulumi:"domainName"`
+	// Whether to use default path mapping. Valid values: `true`, `false`. `true` means to use default path mapping, `false` means to use custom path mapping.
+	IsDefaultMapping pulumi.BoolInput `pulumi:"isDefaultMapping"`
+	// Domain name resolution status. Valid values: `true`, `false`. `true` means normal parsing, `false` means parsing failed.
+	IsStatusOn pulumi.BoolInput `pulumi:"isStatusOn"`
+	// Network type.
+	NetType pulumi.StringInput `pulumi:"netType"`
+	// Domain name mapping path and environment list.
+	PathMappings GetCustomerDomainsListPathMappingArrayInput `pulumi:"pathMappings"`
+	// Custom domain name agreement type.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+}
+
+func (GetCustomerDomainsListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCustomerDomainsList)(nil)).Elem()
+}
+
+func (i GetCustomerDomainsListArgs) ToGetCustomerDomainsListOutput() GetCustomerDomainsListOutput {
+	return i.ToGetCustomerDomainsListOutputWithContext(context.Background())
+}
+
+func (i GetCustomerDomainsListArgs) ToGetCustomerDomainsListOutputWithContext(ctx context.Context) GetCustomerDomainsListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCustomerDomainsListOutput)
+}
+
+// GetCustomerDomainsListArrayInput is an input type that accepts GetCustomerDomainsListArray and GetCustomerDomainsListArrayOutput values.
+// You can construct a concrete instance of `GetCustomerDomainsListArrayInput` via:
+//
+//          GetCustomerDomainsListArray{ GetCustomerDomainsListArgs{...} }
+type GetCustomerDomainsListArrayInput interface {
+	pulumi.Input
+
+	ToGetCustomerDomainsListArrayOutput() GetCustomerDomainsListArrayOutput
+	ToGetCustomerDomainsListArrayOutputWithContext(context.Context) GetCustomerDomainsListArrayOutput
+}
+
+type GetCustomerDomainsListArray []GetCustomerDomainsListInput
+
+func (GetCustomerDomainsListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCustomerDomainsList)(nil)).Elem()
+}
+
+func (i GetCustomerDomainsListArray) ToGetCustomerDomainsListArrayOutput() GetCustomerDomainsListArrayOutput {
+	return i.ToGetCustomerDomainsListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCustomerDomainsListArray) ToGetCustomerDomainsListArrayOutputWithContext(ctx context.Context) GetCustomerDomainsListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCustomerDomainsListArrayOutput)
+}
+
+type GetCustomerDomainsListOutput struct{ *pulumi.OutputState }
+
+func (GetCustomerDomainsListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCustomerDomainsList)(nil)).Elem()
+}
+
+func (o GetCustomerDomainsListOutput) ToGetCustomerDomainsListOutput() GetCustomerDomainsListOutput {
+	return o
+}
+
+func (o GetCustomerDomainsListOutput) ToGetCustomerDomainsListOutputWithContext(ctx context.Context) GetCustomerDomainsListOutput {
+	return o
+}
+
+// The certificate ID.
+func (o GetCustomerDomainsListOutput) CertificateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerDomainsList) string { return v.CertificateId }).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetCustomerDomainsListOutput) DomainName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerDomainsList) string { return v.DomainName }).(pulumi.StringOutput)
+}
+
+// Whether to use default path mapping. Valid values: `true`, `false`. `true` means to use default path mapping, `false` means to use custom path mapping.
+func (o GetCustomerDomainsListOutput) IsDefaultMapping() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetCustomerDomainsList) bool { return v.IsDefaultMapping }).(pulumi.BoolOutput)
+}
+
+// Domain name resolution status. Valid values: `true`, `false`. `true` means normal parsing, `false` means parsing failed.
+func (o GetCustomerDomainsListOutput) IsStatusOn() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetCustomerDomainsList) bool { return v.IsStatusOn }).(pulumi.BoolOutput)
+}
+
+// Network type.
+func (o GetCustomerDomainsListOutput) NetType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerDomainsList) string { return v.NetType }).(pulumi.StringOutput)
+}
+
+// Domain name mapping path and environment list.
+func (o GetCustomerDomainsListOutput) PathMappings() GetCustomerDomainsListPathMappingArrayOutput {
+	return o.ApplyT(func(v GetCustomerDomainsList) []GetCustomerDomainsListPathMapping { return v.PathMappings }).(GetCustomerDomainsListPathMappingArrayOutput)
+}
+
+// Custom domain name agreement type.
+func (o GetCustomerDomainsListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerDomainsList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+type GetCustomerDomainsListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCustomerDomainsListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCustomerDomainsList)(nil)).Elem()
+}
+
+func (o GetCustomerDomainsListArrayOutput) ToGetCustomerDomainsListArrayOutput() GetCustomerDomainsListArrayOutput {
+	return o
+}
+
+func (o GetCustomerDomainsListArrayOutput) ToGetCustomerDomainsListArrayOutputWithContext(ctx context.Context) GetCustomerDomainsListArrayOutput {
+	return o
+}
+
+func (o GetCustomerDomainsListArrayOutput) Index(i pulumi.IntInput) GetCustomerDomainsListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCustomerDomainsList {
+		return vs[0].([]GetCustomerDomainsList)[vs[1].(int)]
+	}).(GetCustomerDomainsListOutput)
+}
+
+type GetCustomerDomainsListPathMapping struct {
+	// Release environment.
+	Environment string `pulumi:"environment"`
+	// The domain mapping path.
+	Path string `pulumi:"path"`
+}
+
+// GetCustomerDomainsListPathMappingInput is an input type that accepts GetCustomerDomainsListPathMappingArgs and GetCustomerDomainsListPathMappingOutput values.
+// You can construct a concrete instance of `GetCustomerDomainsListPathMappingInput` via:
+//
+//          GetCustomerDomainsListPathMappingArgs{...}
+type GetCustomerDomainsListPathMappingInput interface {
+	pulumi.Input
+
+	ToGetCustomerDomainsListPathMappingOutput() GetCustomerDomainsListPathMappingOutput
+	ToGetCustomerDomainsListPathMappingOutputWithContext(context.Context) GetCustomerDomainsListPathMappingOutput
+}
+
+type GetCustomerDomainsListPathMappingArgs struct {
+	// Release environment.
+	Environment pulumi.StringInput `pulumi:"environment"`
+	// The domain mapping path.
+	Path pulumi.StringInput `pulumi:"path"`
+}
+
+func (GetCustomerDomainsListPathMappingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCustomerDomainsListPathMapping)(nil)).Elem()
+}
+
+func (i GetCustomerDomainsListPathMappingArgs) ToGetCustomerDomainsListPathMappingOutput() GetCustomerDomainsListPathMappingOutput {
+	return i.ToGetCustomerDomainsListPathMappingOutputWithContext(context.Background())
+}
+
+func (i GetCustomerDomainsListPathMappingArgs) ToGetCustomerDomainsListPathMappingOutputWithContext(ctx context.Context) GetCustomerDomainsListPathMappingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCustomerDomainsListPathMappingOutput)
+}
+
+// GetCustomerDomainsListPathMappingArrayInput is an input type that accepts GetCustomerDomainsListPathMappingArray and GetCustomerDomainsListPathMappingArrayOutput values.
+// You can construct a concrete instance of `GetCustomerDomainsListPathMappingArrayInput` via:
+//
+//          GetCustomerDomainsListPathMappingArray{ GetCustomerDomainsListPathMappingArgs{...} }
+type GetCustomerDomainsListPathMappingArrayInput interface {
+	pulumi.Input
+
+	ToGetCustomerDomainsListPathMappingArrayOutput() GetCustomerDomainsListPathMappingArrayOutput
+	ToGetCustomerDomainsListPathMappingArrayOutputWithContext(context.Context) GetCustomerDomainsListPathMappingArrayOutput
+}
+
+type GetCustomerDomainsListPathMappingArray []GetCustomerDomainsListPathMappingInput
+
+func (GetCustomerDomainsListPathMappingArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCustomerDomainsListPathMapping)(nil)).Elem()
+}
+
+func (i GetCustomerDomainsListPathMappingArray) ToGetCustomerDomainsListPathMappingArrayOutput() GetCustomerDomainsListPathMappingArrayOutput {
+	return i.ToGetCustomerDomainsListPathMappingArrayOutputWithContext(context.Background())
+}
+
+func (i GetCustomerDomainsListPathMappingArray) ToGetCustomerDomainsListPathMappingArrayOutputWithContext(ctx context.Context) GetCustomerDomainsListPathMappingArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCustomerDomainsListPathMappingArrayOutput)
+}
+
+type GetCustomerDomainsListPathMappingOutput struct{ *pulumi.OutputState }
+
+func (GetCustomerDomainsListPathMappingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCustomerDomainsListPathMapping)(nil)).Elem()
+}
+
+func (o GetCustomerDomainsListPathMappingOutput) ToGetCustomerDomainsListPathMappingOutput() GetCustomerDomainsListPathMappingOutput {
+	return o
+}
+
+func (o GetCustomerDomainsListPathMappingOutput) ToGetCustomerDomainsListPathMappingOutputWithContext(ctx context.Context) GetCustomerDomainsListPathMappingOutput {
+	return o
+}
+
+// Release environment.
+func (o GetCustomerDomainsListPathMappingOutput) Environment() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerDomainsListPathMapping) string { return v.Environment }).(pulumi.StringOutput)
+}
+
+// The domain mapping path.
+func (o GetCustomerDomainsListPathMappingOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCustomerDomainsListPathMapping) string { return v.Path }).(pulumi.StringOutput)
+}
+
+type GetCustomerDomainsListPathMappingArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCustomerDomainsListPathMappingArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCustomerDomainsListPathMapping)(nil)).Elem()
+}
+
+func (o GetCustomerDomainsListPathMappingArrayOutput) ToGetCustomerDomainsListPathMappingArrayOutput() GetCustomerDomainsListPathMappingArrayOutput {
+	return o
+}
+
+func (o GetCustomerDomainsListPathMappingArrayOutput) ToGetCustomerDomainsListPathMappingArrayOutputWithContext(ctx context.Context) GetCustomerDomainsListPathMappingArrayOutput {
+	return o
+}
+
+func (o GetCustomerDomainsListPathMappingArrayOutput) Index(i pulumi.IntInput) GetCustomerDomainsListPathMappingOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCustomerDomainsListPathMapping {
+		return vs[0].([]GetCustomerDomainsListPathMapping)[vs[1].(int)]
+	}).(GetCustomerDomainsListPathMappingOutput)
+}
+
+type GetIpStrategiesList struct {
+	// List of bound API details.
+	AttachLists []GetIpStrategiesListAttachList `pulumi:"attachLists"`
+	// The number of API bound to the strategy.
+	BindApiTotalCount int `pulumi:"bindApiTotalCount"`
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	CreateTime string `pulumi:"createTime"`
+	// The list of IP.
+	IpList string `pulumi:"ipList"`
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	ModifyTime string `pulumi:"modifyTime"`
+	// The service ID to be queried.
+	ServiceId string `pulumi:"serviceId"`
+	// The strategy ID.
+	StrategyId string `pulumi:"strategyId"`
+	// Name of IP policy.
+	StrategyName string `pulumi:"strategyName"`
+	// Type of the strategy.
+	StrategyType string `pulumi:"strategyType"`
+}
+
+// GetIpStrategiesListInput is an input type that accepts GetIpStrategiesListArgs and GetIpStrategiesListOutput values.
+// You can construct a concrete instance of `GetIpStrategiesListInput` via:
+//
+//          GetIpStrategiesListArgs{...}
+type GetIpStrategiesListInput interface {
+	pulumi.Input
+
+	ToGetIpStrategiesListOutput() GetIpStrategiesListOutput
+	ToGetIpStrategiesListOutputWithContext(context.Context) GetIpStrategiesListOutput
+}
+
+type GetIpStrategiesListArgs struct {
+	// List of bound API details.
+	AttachLists GetIpStrategiesListAttachListArrayInput `pulumi:"attachLists"`
+	// The number of API bound to the strategy.
+	BindApiTotalCount pulumi.IntInput `pulumi:"bindApiTotalCount"`
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// The list of IP.
+	IpList pulumi.StringInput `pulumi:"ipList"`
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// The service ID to be queried.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+	// The strategy ID.
+	StrategyId pulumi.StringInput `pulumi:"strategyId"`
+	// Name of IP policy.
+	StrategyName pulumi.StringInput `pulumi:"strategyName"`
+	// Type of the strategy.
+	StrategyType pulumi.StringInput `pulumi:"strategyType"`
+}
+
+func (GetIpStrategiesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetIpStrategiesList)(nil)).Elem()
+}
+
+func (i GetIpStrategiesListArgs) ToGetIpStrategiesListOutput() GetIpStrategiesListOutput {
+	return i.ToGetIpStrategiesListOutputWithContext(context.Background())
+}
+
+func (i GetIpStrategiesListArgs) ToGetIpStrategiesListOutputWithContext(ctx context.Context) GetIpStrategiesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetIpStrategiesListOutput)
+}
+
+// GetIpStrategiesListArrayInput is an input type that accepts GetIpStrategiesListArray and GetIpStrategiesListArrayOutput values.
+// You can construct a concrete instance of `GetIpStrategiesListArrayInput` via:
+//
+//          GetIpStrategiesListArray{ GetIpStrategiesListArgs{...} }
+type GetIpStrategiesListArrayInput interface {
+	pulumi.Input
+
+	ToGetIpStrategiesListArrayOutput() GetIpStrategiesListArrayOutput
+	ToGetIpStrategiesListArrayOutputWithContext(context.Context) GetIpStrategiesListArrayOutput
+}
+
+type GetIpStrategiesListArray []GetIpStrategiesListInput
+
+func (GetIpStrategiesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetIpStrategiesList)(nil)).Elem()
+}
+
+func (i GetIpStrategiesListArray) ToGetIpStrategiesListArrayOutput() GetIpStrategiesListArrayOutput {
+	return i.ToGetIpStrategiesListArrayOutputWithContext(context.Background())
+}
+
+func (i GetIpStrategiesListArray) ToGetIpStrategiesListArrayOutputWithContext(ctx context.Context) GetIpStrategiesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetIpStrategiesListArrayOutput)
+}
+
+type GetIpStrategiesListOutput struct{ *pulumi.OutputState }
+
+func (GetIpStrategiesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetIpStrategiesList)(nil)).Elem()
+}
+
+func (o GetIpStrategiesListOutput) ToGetIpStrategiesListOutput() GetIpStrategiesListOutput {
+	return o
+}
+
+func (o GetIpStrategiesListOutput) ToGetIpStrategiesListOutputWithContext(ctx context.Context) GetIpStrategiesListOutput {
+	return o
+}
+
+// List of bound API details.
+func (o GetIpStrategiesListOutput) AttachLists() GetIpStrategiesListAttachListArrayOutput {
+	return o.ApplyT(func(v GetIpStrategiesList) []GetIpStrategiesListAttachList { return v.AttachLists }).(GetIpStrategiesListAttachListArrayOutput)
+}
+
+// The number of API bound to the strategy.
+func (o GetIpStrategiesListOutput) BindApiTotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetIpStrategiesList) int { return v.BindApiTotalCount }).(pulumi.IntOutput)
+}
+
+// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+func (o GetIpStrategiesListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// The list of IP.
+func (o GetIpStrategiesListOutput) IpList() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesList) string { return v.IpList }).(pulumi.StringOutput)
+}
+
+// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+func (o GetIpStrategiesListOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesList) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// The service ID to be queried.
+func (o GetIpStrategiesListOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesList) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+// The strategy ID.
+func (o GetIpStrategiesListOutput) StrategyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesList) string { return v.StrategyId }).(pulumi.StringOutput)
+}
+
+// Name of IP policy.
+func (o GetIpStrategiesListOutput) StrategyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesList) string { return v.StrategyName }).(pulumi.StringOutput)
+}
+
+// Type of the strategy.
+func (o GetIpStrategiesListOutput) StrategyType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesList) string { return v.StrategyType }).(pulumi.StringOutput)
+}
+
+type GetIpStrategiesListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetIpStrategiesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetIpStrategiesList)(nil)).Elem()
+}
+
+func (o GetIpStrategiesListArrayOutput) ToGetIpStrategiesListArrayOutput() GetIpStrategiesListArrayOutput {
+	return o
+}
+
+func (o GetIpStrategiesListArrayOutput) ToGetIpStrategiesListArrayOutputWithContext(ctx context.Context) GetIpStrategiesListArrayOutput {
+	return o
+}
+
+func (o GetIpStrategiesListArrayOutput) Index(i pulumi.IntInput) GetIpStrategiesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetIpStrategiesList {
+		return vs[0].([]GetIpStrategiesList)[vs[1].(int)]
+	}).(GetIpStrategiesListOutput)
+}
+
+type GetIpStrategiesListAttachList struct {
+	// The type of oauth API. This field is valid when the `authType` is `OAUTH`, and the values are `NORMAL` (business API) and `OAUTH` (authorization API).
+	ApiBusinessType string `pulumi:"apiBusinessType"`
+	// API interface description.
+	ApiDesc string `pulumi:"apiDesc"`
+	// The API ID.
+	ApiId string `pulumi:"apiId"`
+	// API name.
+	ApiName string `pulumi:"apiName"`
+	// API type. Valid values: `NORMAL`, `TSF`. `NORMAL` means common API, `TSF` means microservice API.
+	ApiType string `pulumi:"apiType"`
+	// The unique ID of the associated authorization API, which takes effect when the authType is `OAUTH` and `ApiBusinessType` is normal. Identifies the unique ID of the oauth2.0 authorization API bound to the business API.
+	AuthRelationApiId string `pulumi:"authRelationApiId"`
+	// API authentication type. Valid values: `SECRET`, `NONE`, `OAUTH`. `SECRET` means key pair authentication, `NONE` means no authentication.
+	AuthType string `pulumi:"authType"`
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	CreateTime string `pulumi:"createTime"`
+	// API request method.
+	Method string `pulumi:"method"`
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	ModifyTime string `pulumi:"modifyTime"`
+	// OAUTH configuration information. It takes effect when authType is `OAUTH`.
+	OauthConfig map[string]interface{} `pulumi:"oauthConfig"`
+	// API path.
+	Path string `pulumi:"path"`
+	// API protocol.
+	Protocol string `pulumi:"protocol"`
+	// List of business API associated with authorized API.
+	RelationBusinessApiIds []string `pulumi:"relationBusinessApiIds"`
+	// The service ID to be queried.
+	ServiceId string `pulumi:"serviceId"`
+	// The label information associated with the API.
+	Tags []string `pulumi:"tags"`
+	// VPC unique ID.
+	UniqVpcId string `pulumi:"uniqVpcId"`
+	// VPC ID.
+	VpcId int `pulumi:"vpcId"`
+}
+
+// GetIpStrategiesListAttachListInput is an input type that accepts GetIpStrategiesListAttachListArgs and GetIpStrategiesListAttachListOutput values.
+// You can construct a concrete instance of `GetIpStrategiesListAttachListInput` via:
+//
+//          GetIpStrategiesListAttachListArgs{...}
+type GetIpStrategiesListAttachListInput interface {
+	pulumi.Input
+
+	ToGetIpStrategiesListAttachListOutput() GetIpStrategiesListAttachListOutput
+	ToGetIpStrategiesListAttachListOutputWithContext(context.Context) GetIpStrategiesListAttachListOutput
+}
+
+type GetIpStrategiesListAttachListArgs struct {
+	// The type of oauth API. This field is valid when the `authType` is `OAUTH`, and the values are `NORMAL` (business API) and `OAUTH` (authorization API).
+	ApiBusinessType pulumi.StringInput `pulumi:"apiBusinessType"`
+	// API interface description.
+	ApiDesc pulumi.StringInput `pulumi:"apiDesc"`
+	// The API ID.
+	ApiId pulumi.StringInput `pulumi:"apiId"`
+	// API name.
+	ApiName pulumi.StringInput `pulumi:"apiName"`
+	// API type. Valid values: `NORMAL`, `TSF`. `NORMAL` means common API, `TSF` means microservice API.
+	ApiType pulumi.StringInput `pulumi:"apiType"`
+	// The unique ID of the associated authorization API, which takes effect when the authType is `OAUTH` and `ApiBusinessType` is normal. Identifies the unique ID of the oauth2.0 authorization API bound to the business API.
+	AuthRelationApiId pulumi.StringInput `pulumi:"authRelationApiId"`
+	// API authentication type. Valid values: `SECRET`, `NONE`, `OAUTH`. `SECRET` means key pair authentication, `NONE` means no authentication.
+	AuthType pulumi.StringInput `pulumi:"authType"`
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// API request method.
+	Method pulumi.StringInput `pulumi:"method"`
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// OAUTH configuration information. It takes effect when authType is `OAUTH`.
+	OauthConfig pulumi.MapInput `pulumi:"oauthConfig"`
+	// API path.
+	Path pulumi.StringInput `pulumi:"path"`
+	// API protocol.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// List of business API associated with authorized API.
+	RelationBusinessApiIds pulumi.StringArrayInput `pulumi:"relationBusinessApiIds"`
+	// The service ID to be queried.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+	// The label information associated with the API.
+	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	// VPC unique ID.
+	UniqVpcId pulumi.StringInput `pulumi:"uniqVpcId"`
+	// VPC ID.
+	VpcId pulumi.IntInput `pulumi:"vpcId"`
+}
+
+func (GetIpStrategiesListAttachListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetIpStrategiesListAttachList)(nil)).Elem()
+}
+
+func (i GetIpStrategiesListAttachListArgs) ToGetIpStrategiesListAttachListOutput() GetIpStrategiesListAttachListOutput {
+	return i.ToGetIpStrategiesListAttachListOutputWithContext(context.Background())
+}
+
+func (i GetIpStrategiesListAttachListArgs) ToGetIpStrategiesListAttachListOutputWithContext(ctx context.Context) GetIpStrategiesListAttachListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetIpStrategiesListAttachListOutput)
+}
+
+// GetIpStrategiesListAttachListArrayInput is an input type that accepts GetIpStrategiesListAttachListArray and GetIpStrategiesListAttachListArrayOutput values.
+// You can construct a concrete instance of `GetIpStrategiesListAttachListArrayInput` via:
+//
+//          GetIpStrategiesListAttachListArray{ GetIpStrategiesListAttachListArgs{...} }
+type GetIpStrategiesListAttachListArrayInput interface {
+	pulumi.Input
+
+	ToGetIpStrategiesListAttachListArrayOutput() GetIpStrategiesListAttachListArrayOutput
+	ToGetIpStrategiesListAttachListArrayOutputWithContext(context.Context) GetIpStrategiesListAttachListArrayOutput
+}
+
+type GetIpStrategiesListAttachListArray []GetIpStrategiesListAttachListInput
+
+func (GetIpStrategiesListAttachListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetIpStrategiesListAttachList)(nil)).Elem()
+}
+
+func (i GetIpStrategiesListAttachListArray) ToGetIpStrategiesListAttachListArrayOutput() GetIpStrategiesListAttachListArrayOutput {
+	return i.ToGetIpStrategiesListAttachListArrayOutputWithContext(context.Background())
+}
+
+func (i GetIpStrategiesListAttachListArray) ToGetIpStrategiesListAttachListArrayOutputWithContext(ctx context.Context) GetIpStrategiesListAttachListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetIpStrategiesListAttachListArrayOutput)
+}
+
+type GetIpStrategiesListAttachListOutput struct{ *pulumi.OutputState }
+
+func (GetIpStrategiesListAttachListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetIpStrategiesListAttachList)(nil)).Elem()
+}
+
+func (o GetIpStrategiesListAttachListOutput) ToGetIpStrategiesListAttachListOutput() GetIpStrategiesListAttachListOutput {
+	return o
+}
+
+func (o GetIpStrategiesListAttachListOutput) ToGetIpStrategiesListAttachListOutputWithContext(ctx context.Context) GetIpStrategiesListAttachListOutput {
+	return o
+}
+
+// The type of oauth API. This field is valid when the `authType` is `OAUTH`, and the values are `NORMAL` (business API) and `OAUTH` (authorization API).
+func (o GetIpStrategiesListAttachListOutput) ApiBusinessType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.ApiBusinessType }).(pulumi.StringOutput)
+}
+
+// API interface description.
+func (o GetIpStrategiesListAttachListOutput) ApiDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.ApiDesc }).(pulumi.StringOutput)
+}
+
+// The API ID.
+func (o GetIpStrategiesListAttachListOutput) ApiId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.ApiId }).(pulumi.StringOutput)
+}
+
+// API name.
+func (o GetIpStrategiesListAttachListOutput) ApiName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.ApiName }).(pulumi.StringOutput)
+}
+
+// API type. Valid values: `NORMAL`, `TSF`. `NORMAL` means common API, `TSF` means microservice API.
+func (o GetIpStrategiesListAttachListOutput) ApiType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.ApiType }).(pulumi.StringOutput)
+}
+
+// The unique ID of the associated authorization API, which takes effect when the authType is `OAUTH` and `ApiBusinessType` is normal. Identifies the unique ID of the oauth2.0 authorization API bound to the business API.
+func (o GetIpStrategiesListAttachListOutput) AuthRelationApiId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.AuthRelationApiId }).(pulumi.StringOutput)
+}
+
+// API authentication type. Valid values: `SECRET`, `NONE`, `OAUTH`. `SECRET` means key pair authentication, `NONE` means no authentication.
+func (o GetIpStrategiesListAttachListOutput) AuthType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.AuthType }).(pulumi.StringOutput)
+}
+
+// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+func (o GetIpStrategiesListAttachListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// API request method.
+func (o GetIpStrategiesListAttachListOutput) Method() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.Method }).(pulumi.StringOutput)
+}
+
+// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+func (o GetIpStrategiesListAttachListOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// OAUTH configuration information. It takes effect when authType is `OAUTH`.
+func (o GetIpStrategiesListAttachListOutput) OauthConfig() pulumi.MapOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) map[string]interface{} { return v.OauthConfig }).(pulumi.MapOutput)
+}
+
+// API path.
+func (o GetIpStrategiesListAttachListOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// API protocol.
+func (o GetIpStrategiesListAttachListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// List of business API associated with authorized API.
+func (o GetIpStrategiesListAttachListOutput) RelationBusinessApiIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) []string { return v.RelationBusinessApiIds }).(pulumi.StringArrayOutput)
+}
+
+// The service ID to be queried.
+func (o GetIpStrategiesListAttachListOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+// The label information associated with the API.
+func (o GetIpStrategiesListAttachListOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// VPC unique ID.
+func (o GetIpStrategiesListAttachListOutput) UniqVpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) string { return v.UniqVpcId }).(pulumi.StringOutput)
+}
+
+// VPC ID.
+func (o GetIpStrategiesListAttachListOutput) VpcId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetIpStrategiesListAttachList) int { return v.VpcId }).(pulumi.IntOutput)
+}
+
+type GetIpStrategiesListAttachListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetIpStrategiesListAttachListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetIpStrategiesListAttachList)(nil)).Elem()
+}
+
+func (o GetIpStrategiesListAttachListArrayOutput) ToGetIpStrategiesListAttachListArrayOutput() GetIpStrategiesListAttachListArrayOutput {
+	return o
+}
+
+func (o GetIpStrategiesListAttachListArrayOutput) ToGetIpStrategiesListAttachListArrayOutputWithContext(ctx context.Context) GetIpStrategiesListAttachListArrayOutput {
+	return o
+}
+
+func (o GetIpStrategiesListAttachListArrayOutput) Index(i pulumi.IntInput) GetIpStrategiesListAttachListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetIpStrategiesListAttachList {
+		return vs[0].([]GetIpStrategiesListAttachList)[vs[1].(int)]
+	}).(GetIpStrategiesListAttachListOutput)
+}
+
+type GetServicesList struct {
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	CreateTime string `pulumi:"createTime"`
+	// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	ExclusiveSetName string `pulumi:"exclusiveSetName"`
+	// Port number for http access over private network.
+	InnerHttpPort int `pulumi:"innerHttpPort"`
+	// Port number for https access over private network.
+	InnerHttpsPort int `pulumi:"innerHttpsPort"`
+	// Private network access sub-domain name.
+	InternalSubDomain string `pulumi:"internalSubDomain"`
+	// IP version number.
+	IpVersion string `pulumi:"ipVersion"`
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	ModifyTime string `pulumi:"modifyTime"`
+	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
+	NetTypes []string `pulumi:"netTypes"`
+	// Public network access subdomain name.
+	OuterSubDomain string `pulumi:"outerSubDomain"`
+	// Service frontend request type. Valid values: `http`, `https`, `http&https`.
+	Protocol string `pulumi:"protocol"`
+	// Custom service description.
+	ServiceDesc string `pulumi:"serviceDesc"`
+	// Service ID for query.
+	ServiceId string `pulumi:"serviceId"`
+	// Service name for query.
+	ServiceName string `pulumi:"serviceName"`
+	// A list of attach usage plans. Each element contains the following attributes:
+	UsagePlanLists []GetServicesListUsagePlanList `pulumi:"usagePlanLists"`
+}
+
+// GetServicesListInput is an input type that accepts GetServicesListArgs and GetServicesListOutput values.
+// You can construct a concrete instance of `GetServicesListInput` via:
+//
+//          GetServicesListArgs{...}
+type GetServicesListInput interface {
+	pulumi.Input
+
+	ToGetServicesListOutput() GetServicesListOutput
+	ToGetServicesListOutputWithContext(context.Context) GetServicesListOutput
+}
+
+type GetServicesListArgs struct {
+	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+	ExclusiveSetName pulumi.StringInput `pulumi:"exclusiveSetName"`
+	// Port number for http access over private network.
+	InnerHttpPort pulumi.IntInput `pulumi:"innerHttpPort"`
+	// Port number for https access over private network.
+	InnerHttpsPort pulumi.IntInput `pulumi:"innerHttpsPort"`
+	// Private network access sub-domain name.
+	InternalSubDomain pulumi.StringInput `pulumi:"internalSubDomain"`
+	// IP version number.
+	IpVersion pulumi.StringInput `pulumi:"ipVersion"`
+	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
+	NetTypes pulumi.StringArrayInput `pulumi:"netTypes"`
+	// Public network access subdomain name.
+	OuterSubDomain pulumi.StringInput `pulumi:"outerSubDomain"`
+	// Service frontend request type. Valid values: `http`, `https`, `http&https`.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Custom service description.
+	ServiceDesc pulumi.StringInput `pulumi:"serviceDesc"`
+	// Service ID for query.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+	// Service name for query.
+	ServiceName pulumi.StringInput `pulumi:"serviceName"`
+	// A list of attach usage plans. Each element contains the following attributes:
+	UsagePlanLists GetServicesListUsagePlanListArrayInput `pulumi:"usagePlanLists"`
+}
+
+func (GetServicesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetServicesList)(nil)).Elem()
+}
+
+func (i GetServicesListArgs) ToGetServicesListOutput() GetServicesListOutput {
+	return i.ToGetServicesListOutputWithContext(context.Background())
+}
+
+func (i GetServicesListArgs) ToGetServicesListOutputWithContext(ctx context.Context) GetServicesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetServicesListOutput)
+}
+
+// GetServicesListArrayInput is an input type that accepts GetServicesListArray and GetServicesListArrayOutput values.
+// You can construct a concrete instance of `GetServicesListArrayInput` via:
+//
+//          GetServicesListArray{ GetServicesListArgs{...} }
+type GetServicesListArrayInput interface {
+	pulumi.Input
+
+	ToGetServicesListArrayOutput() GetServicesListArrayOutput
+	ToGetServicesListArrayOutputWithContext(context.Context) GetServicesListArrayOutput
+}
+
+type GetServicesListArray []GetServicesListInput
+
+func (GetServicesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetServicesList)(nil)).Elem()
+}
+
+func (i GetServicesListArray) ToGetServicesListArrayOutput() GetServicesListArrayOutput {
+	return i.ToGetServicesListArrayOutputWithContext(context.Background())
+}
+
+func (i GetServicesListArray) ToGetServicesListArrayOutputWithContext(ctx context.Context) GetServicesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetServicesListArrayOutput)
+}
+
+type GetServicesListOutput struct{ *pulumi.OutputState }
+
+func (GetServicesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetServicesList)(nil)).Elem()
+}
+
+func (o GetServicesListOutput) ToGetServicesListOutput() GetServicesListOutput {
+	return o
+}
+
+func (o GetServicesListOutput) ToGetServicesListOutputWithContext(ctx context.Context) GetServicesListOutput {
+	return o
+}
+
+// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+func (o GetServicesListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+func (o GetServicesListOutput) ExclusiveSetName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesList) string { return v.ExclusiveSetName }).(pulumi.StringOutput)
+}
+
+// Port number for http access over private network.
+func (o GetServicesListOutput) InnerHttpPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesList) int { return v.InnerHttpPort }).(pulumi.IntOutput)
+}
+
+// Port number for https access over private network.
+func (o GetServicesListOutput) InnerHttpsPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesList) int { return v.InnerHttpsPort }).(pulumi.IntOutput)
+}
+
+// Private network access sub-domain name.
+func (o GetServicesListOutput) InternalSubDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesList) string { return v.InternalSubDomain }).(pulumi.StringOutput)
+}
+
+// IP version number.
+func (o GetServicesListOutput) IpVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesList) string { return v.IpVersion }).(pulumi.StringOutput)
+}
+
+// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+func (o GetServicesListOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesList) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
+func (o GetServicesListOutput) NetTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetServicesList) []string { return v.NetTypes }).(pulumi.StringArrayOutput)
+}
+
+// Public network access subdomain name.
+func (o GetServicesListOutput) OuterSubDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesList) string { return v.OuterSubDomain }).(pulumi.StringOutput)
+}
+
+// Service frontend request type. Valid values: `http`, `https`, `http&https`.
+func (o GetServicesListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Custom service description.
+func (o GetServicesListOutput) ServiceDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesList) string { return v.ServiceDesc }).(pulumi.StringOutput)
+}
+
+// Service ID for query.
+func (o GetServicesListOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesList) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+// Service name for query.
+func (o GetServicesListOutput) ServiceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesList) string { return v.ServiceName }).(pulumi.StringOutput)
+}
+
+// A list of attach usage plans. Each element contains the following attributes:
+func (o GetServicesListOutput) UsagePlanLists() GetServicesListUsagePlanListArrayOutput {
+	return o.ApplyT(func(v GetServicesList) []GetServicesListUsagePlanList { return v.UsagePlanLists }).(GetServicesListUsagePlanListArrayOutput)
+}
+
+type GetServicesListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetServicesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetServicesList)(nil)).Elem()
+}
+
+func (o GetServicesListArrayOutput) ToGetServicesListArrayOutput() GetServicesListArrayOutput {
+	return o
+}
+
+func (o GetServicesListArrayOutput) ToGetServicesListArrayOutputWithContext(ctx context.Context) GetServicesListArrayOutput {
+	return o
+}
+
+func (o GetServicesListArrayOutput) Index(i pulumi.IntInput) GetServicesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetServicesList {
+		return vs[0].([]GetServicesList)[vs[1].(int)]
+	}).(GetServicesListOutput)
+}
+
+type GetServicesListUsagePlanList struct {
+	// ID of the API.
+	ApiId string `pulumi:"apiId"`
+	// Binding type.
+	BindType string `pulumi:"bindType"`
+	// ID of the usage plan.
+	UsagePlanId string `pulumi:"usagePlanId"`
+	// Name of the usage plan.
+	UsagePlanName string `pulumi:"usagePlanName"`
+}
+
+// GetServicesListUsagePlanListInput is an input type that accepts GetServicesListUsagePlanListArgs and GetServicesListUsagePlanListOutput values.
+// You can construct a concrete instance of `GetServicesListUsagePlanListInput` via:
+//
+//          GetServicesListUsagePlanListArgs{...}
+type GetServicesListUsagePlanListInput interface {
+	pulumi.Input
+
+	ToGetServicesListUsagePlanListOutput() GetServicesListUsagePlanListOutput
+	ToGetServicesListUsagePlanListOutputWithContext(context.Context) GetServicesListUsagePlanListOutput
+}
+
+type GetServicesListUsagePlanListArgs struct {
+	// ID of the API.
+	ApiId pulumi.StringInput `pulumi:"apiId"`
+	// Binding type.
+	BindType pulumi.StringInput `pulumi:"bindType"`
+	// ID of the usage plan.
+	UsagePlanId pulumi.StringInput `pulumi:"usagePlanId"`
+	// Name of the usage plan.
+	UsagePlanName pulumi.StringInput `pulumi:"usagePlanName"`
+}
+
+func (GetServicesListUsagePlanListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetServicesListUsagePlanList)(nil)).Elem()
+}
+
+func (i GetServicesListUsagePlanListArgs) ToGetServicesListUsagePlanListOutput() GetServicesListUsagePlanListOutput {
+	return i.ToGetServicesListUsagePlanListOutputWithContext(context.Background())
+}
+
+func (i GetServicesListUsagePlanListArgs) ToGetServicesListUsagePlanListOutputWithContext(ctx context.Context) GetServicesListUsagePlanListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetServicesListUsagePlanListOutput)
+}
+
+// GetServicesListUsagePlanListArrayInput is an input type that accepts GetServicesListUsagePlanListArray and GetServicesListUsagePlanListArrayOutput values.
+// You can construct a concrete instance of `GetServicesListUsagePlanListArrayInput` via:
+//
+//          GetServicesListUsagePlanListArray{ GetServicesListUsagePlanListArgs{...} }
+type GetServicesListUsagePlanListArrayInput interface {
+	pulumi.Input
+
+	ToGetServicesListUsagePlanListArrayOutput() GetServicesListUsagePlanListArrayOutput
+	ToGetServicesListUsagePlanListArrayOutputWithContext(context.Context) GetServicesListUsagePlanListArrayOutput
+}
+
+type GetServicesListUsagePlanListArray []GetServicesListUsagePlanListInput
+
+func (GetServicesListUsagePlanListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetServicesListUsagePlanList)(nil)).Elem()
+}
+
+func (i GetServicesListUsagePlanListArray) ToGetServicesListUsagePlanListArrayOutput() GetServicesListUsagePlanListArrayOutput {
+	return i.ToGetServicesListUsagePlanListArrayOutputWithContext(context.Background())
+}
+
+func (i GetServicesListUsagePlanListArray) ToGetServicesListUsagePlanListArrayOutputWithContext(ctx context.Context) GetServicesListUsagePlanListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetServicesListUsagePlanListArrayOutput)
+}
+
+type GetServicesListUsagePlanListOutput struct{ *pulumi.OutputState }
+
+func (GetServicesListUsagePlanListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetServicesListUsagePlanList)(nil)).Elem()
+}
+
+func (o GetServicesListUsagePlanListOutput) ToGetServicesListUsagePlanListOutput() GetServicesListUsagePlanListOutput {
+	return o
+}
+
+func (o GetServicesListUsagePlanListOutput) ToGetServicesListUsagePlanListOutputWithContext(ctx context.Context) GetServicesListUsagePlanListOutput {
+	return o
+}
+
+// ID of the API.
+func (o GetServicesListUsagePlanListOutput) ApiId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesListUsagePlanList) string { return v.ApiId }).(pulumi.StringOutput)
+}
+
+// Binding type.
+func (o GetServicesListUsagePlanListOutput) BindType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesListUsagePlanList) string { return v.BindType }).(pulumi.StringOutput)
+}
+
+// ID of the usage plan.
+func (o GetServicesListUsagePlanListOutput) UsagePlanId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesListUsagePlanList) string { return v.UsagePlanId }).(pulumi.StringOutput)
+}
+
+// Name of the usage plan.
+func (o GetServicesListUsagePlanListOutput) UsagePlanName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesListUsagePlanList) string { return v.UsagePlanName }).(pulumi.StringOutput)
+}
+
+type GetServicesListUsagePlanListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetServicesListUsagePlanListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetServicesListUsagePlanList)(nil)).Elem()
+}
+
+func (o GetServicesListUsagePlanListArrayOutput) ToGetServicesListUsagePlanListArrayOutput() GetServicesListUsagePlanListArrayOutput {
+	return o
+}
+
+func (o GetServicesListUsagePlanListArrayOutput) ToGetServicesListUsagePlanListArrayOutputWithContext(ctx context.Context) GetServicesListUsagePlanListArrayOutput {
+	return o
+}
+
+func (o GetServicesListUsagePlanListArrayOutput) Index(i pulumi.IntInput) GetServicesListUsagePlanListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetServicesListUsagePlanList {
+		return vs[0].([]GetServicesListUsagePlanList)[vs[1].(int)]
+	}).(GetServicesListUsagePlanListOutput)
+}
+
+type GetThrottlingApisList struct {
+	// List of throttling policies bound to API.
+	ApiEnvironmentStrategies []GetThrottlingApisListApiEnvironmentStrategy `pulumi:"apiEnvironmentStrategies"`
+	// Unique service ID of API.
+	ServiceId string `pulumi:"serviceId"`
+}
+
+// GetThrottlingApisListInput is an input type that accepts GetThrottlingApisListArgs and GetThrottlingApisListOutput values.
+// You can construct a concrete instance of `GetThrottlingApisListInput` via:
+//
+//          GetThrottlingApisListArgs{...}
+type GetThrottlingApisListInput interface {
+	pulumi.Input
+
+	ToGetThrottlingApisListOutput() GetThrottlingApisListOutput
+	ToGetThrottlingApisListOutputWithContext(context.Context) GetThrottlingApisListOutput
+}
+
+type GetThrottlingApisListArgs struct {
+	// List of throttling policies bound to API.
+	ApiEnvironmentStrategies GetThrottlingApisListApiEnvironmentStrategyArrayInput `pulumi:"apiEnvironmentStrategies"`
+	// Unique service ID of API.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+}
+
+func (GetThrottlingApisListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetThrottlingApisList)(nil)).Elem()
+}
+
+func (i GetThrottlingApisListArgs) ToGetThrottlingApisListOutput() GetThrottlingApisListOutput {
+	return i.ToGetThrottlingApisListOutputWithContext(context.Background())
+}
+
+func (i GetThrottlingApisListArgs) ToGetThrottlingApisListOutputWithContext(ctx context.Context) GetThrottlingApisListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetThrottlingApisListOutput)
+}
+
+// GetThrottlingApisListArrayInput is an input type that accepts GetThrottlingApisListArray and GetThrottlingApisListArrayOutput values.
+// You can construct a concrete instance of `GetThrottlingApisListArrayInput` via:
+//
+//          GetThrottlingApisListArray{ GetThrottlingApisListArgs{...} }
+type GetThrottlingApisListArrayInput interface {
+	pulumi.Input
+
+	ToGetThrottlingApisListArrayOutput() GetThrottlingApisListArrayOutput
+	ToGetThrottlingApisListArrayOutputWithContext(context.Context) GetThrottlingApisListArrayOutput
+}
+
+type GetThrottlingApisListArray []GetThrottlingApisListInput
+
+func (GetThrottlingApisListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetThrottlingApisList)(nil)).Elem()
+}
+
+func (i GetThrottlingApisListArray) ToGetThrottlingApisListArrayOutput() GetThrottlingApisListArrayOutput {
+	return i.ToGetThrottlingApisListArrayOutputWithContext(context.Background())
+}
+
+func (i GetThrottlingApisListArray) ToGetThrottlingApisListArrayOutputWithContext(ctx context.Context) GetThrottlingApisListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetThrottlingApisListArrayOutput)
+}
+
+type GetThrottlingApisListOutput struct{ *pulumi.OutputState }
+
+func (GetThrottlingApisListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetThrottlingApisList)(nil)).Elem()
+}
+
+func (o GetThrottlingApisListOutput) ToGetThrottlingApisListOutput() GetThrottlingApisListOutput {
+	return o
+}
+
+func (o GetThrottlingApisListOutput) ToGetThrottlingApisListOutputWithContext(ctx context.Context) GetThrottlingApisListOutput {
+	return o
+}
+
+// List of throttling policies bound to API.
+func (o GetThrottlingApisListOutput) ApiEnvironmentStrategies() GetThrottlingApisListApiEnvironmentStrategyArrayOutput {
+	return o.ApplyT(func(v GetThrottlingApisList) []GetThrottlingApisListApiEnvironmentStrategy {
+		return v.ApiEnvironmentStrategies
+	}).(GetThrottlingApisListApiEnvironmentStrategyArrayOutput)
+}
+
+// Unique service ID of API.
+func (o GetThrottlingApisListOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetThrottlingApisList) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+type GetThrottlingApisListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetThrottlingApisListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetThrottlingApisList)(nil)).Elem()
+}
+
+func (o GetThrottlingApisListArrayOutput) ToGetThrottlingApisListArrayOutput() GetThrottlingApisListArrayOutput {
+	return o
+}
+
+func (o GetThrottlingApisListArrayOutput) ToGetThrottlingApisListArrayOutputWithContext(ctx context.Context) GetThrottlingApisListArrayOutput {
+	return o
+}
+
+func (o GetThrottlingApisListArrayOutput) Index(i pulumi.IntInput) GetThrottlingApisListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetThrottlingApisList {
+		return vs[0].([]GetThrottlingApisList)[vs[1].(int)]
+	}).(GetThrottlingApisListOutput)
+}
+
+type GetThrottlingApisListApiEnvironmentStrategy struct {
+	// Unique API ID.
+	ApiId string `pulumi:"apiId"`
+	// Custom API name.
+	ApiName string `pulumi:"apiName"`
+	// API method.
+	Method string `pulumi:"method"`
+	// API path.
+	Path string `pulumi:"path"`
+	// Environment throttling information.
+	StrategyLists []GetThrottlingApisListApiEnvironmentStrategyStrategyList `pulumi:"strategyLists"`
+}
+
+// GetThrottlingApisListApiEnvironmentStrategyInput is an input type that accepts GetThrottlingApisListApiEnvironmentStrategyArgs and GetThrottlingApisListApiEnvironmentStrategyOutput values.
+// You can construct a concrete instance of `GetThrottlingApisListApiEnvironmentStrategyInput` via:
+//
+//          GetThrottlingApisListApiEnvironmentStrategyArgs{...}
+type GetThrottlingApisListApiEnvironmentStrategyInput interface {
+	pulumi.Input
+
+	ToGetThrottlingApisListApiEnvironmentStrategyOutput() GetThrottlingApisListApiEnvironmentStrategyOutput
+	ToGetThrottlingApisListApiEnvironmentStrategyOutputWithContext(context.Context) GetThrottlingApisListApiEnvironmentStrategyOutput
+}
+
+type GetThrottlingApisListApiEnvironmentStrategyArgs struct {
+	// Unique API ID.
+	ApiId pulumi.StringInput `pulumi:"apiId"`
+	// Custom API name.
+	ApiName pulumi.StringInput `pulumi:"apiName"`
+	// API method.
+	Method pulumi.StringInput `pulumi:"method"`
+	// API path.
+	Path pulumi.StringInput `pulumi:"path"`
+	// Environment throttling information.
+	StrategyLists GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayInput `pulumi:"strategyLists"`
+}
+
+func (GetThrottlingApisListApiEnvironmentStrategyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetThrottlingApisListApiEnvironmentStrategy)(nil)).Elem()
+}
+
+func (i GetThrottlingApisListApiEnvironmentStrategyArgs) ToGetThrottlingApisListApiEnvironmentStrategyOutput() GetThrottlingApisListApiEnvironmentStrategyOutput {
+	return i.ToGetThrottlingApisListApiEnvironmentStrategyOutputWithContext(context.Background())
+}
+
+func (i GetThrottlingApisListApiEnvironmentStrategyArgs) ToGetThrottlingApisListApiEnvironmentStrategyOutputWithContext(ctx context.Context) GetThrottlingApisListApiEnvironmentStrategyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetThrottlingApisListApiEnvironmentStrategyOutput)
+}
+
+// GetThrottlingApisListApiEnvironmentStrategyArrayInput is an input type that accepts GetThrottlingApisListApiEnvironmentStrategyArray and GetThrottlingApisListApiEnvironmentStrategyArrayOutput values.
+// You can construct a concrete instance of `GetThrottlingApisListApiEnvironmentStrategyArrayInput` via:
+//
+//          GetThrottlingApisListApiEnvironmentStrategyArray{ GetThrottlingApisListApiEnvironmentStrategyArgs{...} }
+type GetThrottlingApisListApiEnvironmentStrategyArrayInput interface {
+	pulumi.Input
+
+	ToGetThrottlingApisListApiEnvironmentStrategyArrayOutput() GetThrottlingApisListApiEnvironmentStrategyArrayOutput
+	ToGetThrottlingApisListApiEnvironmentStrategyArrayOutputWithContext(context.Context) GetThrottlingApisListApiEnvironmentStrategyArrayOutput
+}
+
+type GetThrottlingApisListApiEnvironmentStrategyArray []GetThrottlingApisListApiEnvironmentStrategyInput
+
+func (GetThrottlingApisListApiEnvironmentStrategyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetThrottlingApisListApiEnvironmentStrategy)(nil)).Elem()
+}
+
+func (i GetThrottlingApisListApiEnvironmentStrategyArray) ToGetThrottlingApisListApiEnvironmentStrategyArrayOutput() GetThrottlingApisListApiEnvironmentStrategyArrayOutput {
+	return i.ToGetThrottlingApisListApiEnvironmentStrategyArrayOutputWithContext(context.Background())
+}
+
+func (i GetThrottlingApisListApiEnvironmentStrategyArray) ToGetThrottlingApisListApiEnvironmentStrategyArrayOutputWithContext(ctx context.Context) GetThrottlingApisListApiEnvironmentStrategyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetThrottlingApisListApiEnvironmentStrategyArrayOutput)
+}
+
+type GetThrottlingApisListApiEnvironmentStrategyOutput struct{ *pulumi.OutputState }
+
+func (GetThrottlingApisListApiEnvironmentStrategyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetThrottlingApisListApiEnvironmentStrategy)(nil)).Elem()
+}
+
+func (o GetThrottlingApisListApiEnvironmentStrategyOutput) ToGetThrottlingApisListApiEnvironmentStrategyOutput() GetThrottlingApisListApiEnvironmentStrategyOutput {
+	return o
+}
+
+func (o GetThrottlingApisListApiEnvironmentStrategyOutput) ToGetThrottlingApisListApiEnvironmentStrategyOutputWithContext(ctx context.Context) GetThrottlingApisListApiEnvironmentStrategyOutput {
+	return o
+}
+
+// Unique API ID.
+func (o GetThrottlingApisListApiEnvironmentStrategyOutput) ApiId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetThrottlingApisListApiEnvironmentStrategy) string { return v.ApiId }).(pulumi.StringOutput)
+}
+
+// Custom API name.
+func (o GetThrottlingApisListApiEnvironmentStrategyOutput) ApiName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetThrottlingApisListApiEnvironmentStrategy) string { return v.ApiName }).(pulumi.StringOutput)
+}
+
+// API method.
+func (o GetThrottlingApisListApiEnvironmentStrategyOutput) Method() pulumi.StringOutput {
+	return o.ApplyT(func(v GetThrottlingApisListApiEnvironmentStrategy) string { return v.Method }).(pulumi.StringOutput)
+}
+
+// API path.
+func (o GetThrottlingApisListApiEnvironmentStrategyOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetThrottlingApisListApiEnvironmentStrategy) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// Environment throttling information.
+func (o GetThrottlingApisListApiEnvironmentStrategyOutput) StrategyLists() GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput {
+	return o.ApplyT(func(v GetThrottlingApisListApiEnvironmentStrategy) []GetThrottlingApisListApiEnvironmentStrategyStrategyList {
+		return v.StrategyLists
+	}).(GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput)
+}
+
+type GetThrottlingApisListApiEnvironmentStrategyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetThrottlingApisListApiEnvironmentStrategyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetThrottlingApisListApiEnvironmentStrategy)(nil)).Elem()
+}
+
+func (o GetThrottlingApisListApiEnvironmentStrategyArrayOutput) ToGetThrottlingApisListApiEnvironmentStrategyArrayOutput() GetThrottlingApisListApiEnvironmentStrategyArrayOutput {
+	return o
+}
+
+func (o GetThrottlingApisListApiEnvironmentStrategyArrayOutput) ToGetThrottlingApisListApiEnvironmentStrategyArrayOutputWithContext(ctx context.Context) GetThrottlingApisListApiEnvironmentStrategyArrayOutput {
+	return o
+}
+
+func (o GetThrottlingApisListApiEnvironmentStrategyArrayOutput) Index(i pulumi.IntInput) GetThrottlingApisListApiEnvironmentStrategyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetThrottlingApisListApiEnvironmentStrategy {
+		return vs[0].([]GetThrottlingApisListApiEnvironmentStrategy)[vs[1].(int)]
+	}).(GetThrottlingApisListApiEnvironmentStrategyOutput)
+}
+
+type GetThrottlingApisListApiEnvironmentStrategyStrategyList struct {
+	// Environment name.
+	EnvironmentName string `pulumi:"environmentName"`
+	// Throttling value.
+	Quota int `pulumi:"quota"`
+}
+
+// GetThrottlingApisListApiEnvironmentStrategyStrategyListInput is an input type that accepts GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs and GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput values.
+// You can construct a concrete instance of `GetThrottlingApisListApiEnvironmentStrategyStrategyListInput` via:
+//
+//          GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs{...}
+type GetThrottlingApisListApiEnvironmentStrategyStrategyListInput interface {
+	pulumi.Input
+
+	ToGetThrottlingApisListApiEnvironmentStrategyStrategyListOutput() GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput
+	ToGetThrottlingApisListApiEnvironmentStrategyStrategyListOutputWithContext(context.Context) GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput
+}
+
+type GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs struct {
+	// Environment name.
+	EnvironmentName pulumi.StringInput `pulumi:"environmentName"`
+	// Throttling value.
+	Quota pulumi.IntInput `pulumi:"quota"`
+}
+
+func (GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetThrottlingApisListApiEnvironmentStrategyStrategyList)(nil)).Elem()
+}
+
+func (i GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs) ToGetThrottlingApisListApiEnvironmentStrategyStrategyListOutput() GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput {
+	return i.ToGetThrottlingApisListApiEnvironmentStrategyStrategyListOutputWithContext(context.Background())
+}
+
+func (i GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs) ToGetThrottlingApisListApiEnvironmentStrategyStrategyListOutputWithContext(ctx context.Context) GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput)
+}
+
+// GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayInput is an input type that accepts GetThrottlingApisListApiEnvironmentStrategyStrategyListArray and GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput values.
+// You can construct a concrete instance of `GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayInput` via:
+//
+//          GetThrottlingApisListApiEnvironmentStrategyStrategyListArray{ GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs{...} }
+type GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayInput interface {
+	pulumi.Input
+
+	ToGetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput() GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput
+	ToGetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutputWithContext(context.Context) GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput
+}
+
+type GetThrottlingApisListApiEnvironmentStrategyStrategyListArray []GetThrottlingApisListApiEnvironmentStrategyStrategyListInput
+
+func (GetThrottlingApisListApiEnvironmentStrategyStrategyListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetThrottlingApisListApiEnvironmentStrategyStrategyList)(nil)).Elem()
+}
+
+func (i GetThrottlingApisListApiEnvironmentStrategyStrategyListArray) ToGetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput() GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput {
+	return i.ToGetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutputWithContext(context.Background())
+}
+
+func (i GetThrottlingApisListApiEnvironmentStrategyStrategyListArray) ToGetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutputWithContext(ctx context.Context) GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput)
+}
+
+type GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput struct{ *pulumi.OutputState }
+
+func (GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetThrottlingApisListApiEnvironmentStrategyStrategyList)(nil)).Elem()
+}
+
+func (o GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput) ToGetThrottlingApisListApiEnvironmentStrategyStrategyListOutput() GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput {
+	return o
+}
+
+func (o GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput) ToGetThrottlingApisListApiEnvironmentStrategyStrategyListOutputWithContext(ctx context.Context) GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput {
+	return o
+}
+
+// Environment name.
+func (o GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput) EnvironmentName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetThrottlingApisListApiEnvironmentStrategyStrategyList) string { return v.EnvironmentName }).(pulumi.StringOutput)
+}
+
+// Throttling value.
+func (o GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput) Quota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetThrottlingApisListApiEnvironmentStrategyStrategyList) int { return v.Quota }).(pulumi.IntOutput)
+}
+
+type GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetThrottlingApisListApiEnvironmentStrategyStrategyList)(nil)).Elem()
+}
+
+func (o GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput) ToGetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput() GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput {
+	return o
+}
+
+func (o GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput) ToGetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutputWithContext(ctx context.Context) GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput {
+	return o
+}
+
+func (o GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput) Index(i pulumi.IntInput) GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetThrottlingApisListApiEnvironmentStrategyStrategyList {
+		return vs[0].([]GetThrottlingApisListApiEnvironmentStrategyStrategyList)[vs[1].(int)]
+	}).(GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput)
+}
+
+type GetThrottlingServicesList struct {
+	// A list of Throttling policy.
+	Environments []GetThrottlingServicesListEnvironment `pulumi:"environments"`
+	// Service ID for query.
+	ServiceId string `pulumi:"serviceId"`
+}
+
+// GetThrottlingServicesListInput is an input type that accepts GetThrottlingServicesListArgs and GetThrottlingServicesListOutput values.
+// You can construct a concrete instance of `GetThrottlingServicesListInput` via:
+//
+//          GetThrottlingServicesListArgs{...}
+type GetThrottlingServicesListInput interface {
+	pulumi.Input
+
+	ToGetThrottlingServicesListOutput() GetThrottlingServicesListOutput
+	ToGetThrottlingServicesListOutputWithContext(context.Context) GetThrottlingServicesListOutput
+}
+
+type GetThrottlingServicesListArgs struct {
+	// A list of Throttling policy.
+	Environments GetThrottlingServicesListEnvironmentArrayInput `pulumi:"environments"`
+	// Service ID for query.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+}
+
+func (GetThrottlingServicesListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetThrottlingServicesList)(nil)).Elem()
+}
+
+func (i GetThrottlingServicesListArgs) ToGetThrottlingServicesListOutput() GetThrottlingServicesListOutput {
+	return i.ToGetThrottlingServicesListOutputWithContext(context.Background())
+}
+
+func (i GetThrottlingServicesListArgs) ToGetThrottlingServicesListOutputWithContext(ctx context.Context) GetThrottlingServicesListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetThrottlingServicesListOutput)
+}
+
+// GetThrottlingServicesListArrayInput is an input type that accepts GetThrottlingServicesListArray and GetThrottlingServicesListArrayOutput values.
+// You can construct a concrete instance of `GetThrottlingServicesListArrayInput` via:
+//
+//          GetThrottlingServicesListArray{ GetThrottlingServicesListArgs{...} }
+type GetThrottlingServicesListArrayInput interface {
+	pulumi.Input
+
+	ToGetThrottlingServicesListArrayOutput() GetThrottlingServicesListArrayOutput
+	ToGetThrottlingServicesListArrayOutputWithContext(context.Context) GetThrottlingServicesListArrayOutput
+}
+
+type GetThrottlingServicesListArray []GetThrottlingServicesListInput
+
+func (GetThrottlingServicesListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetThrottlingServicesList)(nil)).Elem()
+}
+
+func (i GetThrottlingServicesListArray) ToGetThrottlingServicesListArrayOutput() GetThrottlingServicesListArrayOutput {
+	return i.ToGetThrottlingServicesListArrayOutputWithContext(context.Background())
+}
+
+func (i GetThrottlingServicesListArray) ToGetThrottlingServicesListArrayOutputWithContext(ctx context.Context) GetThrottlingServicesListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetThrottlingServicesListArrayOutput)
+}
+
+type GetThrottlingServicesListOutput struct{ *pulumi.OutputState }
+
+func (GetThrottlingServicesListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetThrottlingServicesList)(nil)).Elem()
+}
+
+func (o GetThrottlingServicesListOutput) ToGetThrottlingServicesListOutput() GetThrottlingServicesListOutput {
+	return o
+}
+
+func (o GetThrottlingServicesListOutput) ToGetThrottlingServicesListOutputWithContext(ctx context.Context) GetThrottlingServicesListOutput {
+	return o
+}
+
+// A list of Throttling policy.
+func (o GetThrottlingServicesListOutput) Environments() GetThrottlingServicesListEnvironmentArrayOutput {
+	return o.ApplyT(func(v GetThrottlingServicesList) []GetThrottlingServicesListEnvironment { return v.Environments }).(GetThrottlingServicesListEnvironmentArrayOutput)
+}
+
+// Service ID for query.
+func (o GetThrottlingServicesListOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetThrottlingServicesList) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+type GetThrottlingServicesListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetThrottlingServicesListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetThrottlingServicesList)(nil)).Elem()
+}
+
+func (o GetThrottlingServicesListArrayOutput) ToGetThrottlingServicesListArrayOutput() GetThrottlingServicesListArrayOutput {
+	return o
+}
+
+func (o GetThrottlingServicesListArrayOutput) ToGetThrottlingServicesListArrayOutputWithContext(ctx context.Context) GetThrottlingServicesListArrayOutput {
+	return o
+}
+
+func (o GetThrottlingServicesListArrayOutput) Index(i pulumi.IntInput) GetThrottlingServicesListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetThrottlingServicesList {
+		return vs[0].([]GetThrottlingServicesList)[vs[1].(int)]
+	}).(GetThrottlingServicesListOutput)
+}
+
+type GetThrottlingServicesListEnvironment struct {
+	// Environment name.
+	EnvironmentName string `pulumi:"environmentName"`
+	// Release status.
+	Status int `pulumi:"status"`
+	// Throttling value.
+	Strategy int `pulumi:"strategy"`
+	// Access service environment URL.
+	Url string `pulumi:"url"`
+	// Published version number.
+	VersionName string `pulumi:"versionName"`
+}
+
+// GetThrottlingServicesListEnvironmentInput is an input type that accepts GetThrottlingServicesListEnvironmentArgs and GetThrottlingServicesListEnvironmentOutput values.
+// You can construct a concrete instance of `GetThrottlingServicesListEnvironmentInput` via:
+//
+//          GetThrottlingServicesListEnvironmentArgs{...}
+type GetThrottlingServicesListEnvironmentInput interface {
+	pulumi.Input
+
+	ToGetThrottlingServicesListEnvironmentOutput() GetThrottlingServicesListEnvironmentOutput
+	ToGetThrottlingServicesListEnvironmentOutputWithContext(context.Context) GetThrottlingServicesListEnvironmentOutput
+}
+
+type GetThrottlingServicesListEnvironmentArgs struct {
+	// Environment name.
+	EnvironmentName pulumi.StringInput `pulumi:"environmentName"`
+	// Release status.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Throttling value.
+	Strategy pulumi.IntInput `pulumi:"strategy"`
+	// Access service environment URL.
+	Url pulumi.StringInput `pulumi:"url"`
+	// Published version number.
+	VersionName pulumi.StringInput `pulumi:"versionName"`
+}
+
+func (GetThrottlingServicesListEnvironmentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetThrottlingServicesListEnvironment)(nil)).Elem()
+}
+
+func (i GetThrottlingServicesListEnvironmentArgs) ToGetThrottlingServicesListEnvironmentOutput() GetThrottlingServicesListEnvironmentOutput {
+	return i.ToGetThrottlingServicesListEnvironmentOutputWithContext(context.Background())
+}
+
+func (i GetThrottlingServicesListEnvironmentArgs) ToGetThrottlingServicesListEnvironmentOutputWithContext(ctx context.Context) GetThrottlingServicesListEnvironmentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetThrottlingServicesListEnvironmentOutput)
+}
+
+// GetThrottlingServicesListEnvironmentArrayInput is an input type that accepts GetThrottlingServicesListEnvironmentArray and GetThrottlingServicesListEnvironmentArrayOutput values.
+// You can construct a concrete instance of `GetThrottlingServicesListEnvironmentArrayInput` via:
+//
+//          GetThrottlingServicesListEnvironmentArray{ GetThrottlingServicesListEnvironmentArgs{...} }
+type GetThrottlingServicesListEnvironmentArrayInput interface {
+	pulumi.Input
+
+	ToGetThrottlingServicesListEnvironmentArrayOutput() GetThrottlingServicesListEnvironmentArrayOutput
+	ToGetThrottlingServicesListEnvironmentArrayOutputWithContext(context.Context) GetThrottlingServicesListEnvironmentArrayOutput
+}
+
+type GetThrottlingServicesListEnvironmentArray []GetThrottlingServicesListEnvironmentInput
+
+func (GetThrottlingServicesListEnvironmentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetThrottlingServicesListEnvironment)(nil)).Elem()
+}
+
+func (i GetThrottlingServicesListEnvironmentArray) ToGetThrottlingServicesListEnvironmentArrayOutput() GetThrottlingServicesListEnvironmentArrayOutput {
+	return i.ToGetThrottlingServicesListEnvironmentArrayOutputWithContext(context.Background())
+}
+
+func (i GetThrottlingServicesListEnvironmentArray) ToGetThrottlingServicesListEnvironmentArrayOutputWithContext(ctx context.Context) GetThrottlingServicesListEnvironmentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetThrottlingServicesListEnvironmentArrayOutput)
+}
+
+type GetThrottlingServicesListEnvironmentOutput struct{ *pulumi.OutputState }
+
+func (GetThrottlingServicesListEnvironmentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetThrottlingServicesListEnvironment)(nil)).Elem()
+}
+
+func (o GetThrottlingServicesListEnvironmentOutput) ToGetThrottlingServicesListEnvironmentOutput() GetThrottlingServicesListEnvironmentOutput {
+	return o
+}
+
+func (o GetThrottlingServicesListEnvironmentOutput) ToGetThrottlingServicesListEnvironmentOutputWithContext(ctx context.Context) GetThrottlingServicesListEnvironmentOutput {
+	return o
+}
+
+// Environment name.
+func (o GetThrottlingServicesListEnvironmentOutput) EnvironmentName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetThrottlingServicesListEnvironment) string { return v.EnvironmentName }).(pulumi.StringOutput)
+}
+
+// Release status.
+func (o GetThrottlingServicesListEnvironmentOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetThrottlingServicesListEnvironment) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Throttling value.
+func (o GetThrottlingServicesListEnvironmentOutput) Strategy() pulumi.IntOutput {
+	return o.ApplyT(func(v GetThrottlingServicesListEnvironment) int { return v.Strategy }).(pulumi.IntOutput)
+}
+
+// Access service environment URL.
+func (o GetThrottlingServicesListEnvironmentOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetThrottlingServicesListEnvironment) string { return v.Url }).(pulumi.StringOutput)
+}
+
+// Published version number.
+func (o GetThrottlingServicesListEnvironmentOutput) VersionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetThrottlingServicesListEnvironment) string { return v.VersionName }).(pulumi.StringOutput)
+}
+
+type GetThrottlingServicesListEnvironmentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetThrottlingServicesListEnvironmentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetThrottlingServicesListEnvironment)(nil)).Elem()
+}
+
+func (o GetThrottlingServicesListEnvironmentArrayOutput) ToGetThrottlingServicesListEnvironmentArrayOutput() GetThrottlingServicesListEnvironmentArrayOutput {
+	return o
+}
+
+func (o GetThrottlingServicesListEnvironmentArrayOutput) ToGetThrottlingServicesListEnvironmentArrayOutputWithContext(ctx context.Context) GetThrottlingServicesListEnvironmentArrayOutput {
+	return o
+}
+
+func (o GetThrottlingServicesListEnvironmentArrayOutput) Index(i pulumi.IntInput) GetThrottlingServicesListEnvironmentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetThrottlingServicesListEnvironment {
+		return vs[0].([]GetThrottlingServicesListEnvironment)[vs[1].(int)]
+	}).(GetThrottlingServicesListEnvironmentOutput)
+}
+
+type GetUsagePlanEnvironmentsList struct {
+	// The API ID, this value is empty if attach service.
+	ApiId string `pulumi:"apiId"`
+	// The API name, this value is empty if attach service.
+	ApiName string `pulumi:"apiName"`
+	// Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	CreateTime string `pulumi:"createTime"`
+	// The environment name.
+	Environment string `pulumi:"environment"`
+	// The API method, this value is empty if attach service.
+	Method string `pulumi:"method"`
+	// Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	ModifyTime string `pulumi:"modifyTime"`
+	// The API path, this value is empty if attach service.
+	Path string `pulumi:"path"`
+	// The service ID.
+	ServiceId string `pulumi:"serviceId"`
+	// The service name.
+	ServiceName string `pulumi:"serviceName"`
+}
+
+// GetUsagePlanEnvironmentsListInput is an input type that accepts GetUsagePlanEnvironmentsListArgs and GetUsagePlanEnvironmentsListOutput values.
+// You can construct a concrete instance of `GetUsagePlanEnvironmentsListInput` via:
+//
+//          GetUsagePlanEnvironmentsListArgs{...}
+type GetUsagePlanEnvironmentsListInput interface {
+	pulumi.Input
+
+	ToGetUsagePlanEnvironmentsListOutput() GetUsagePlanEnvironmentsListOutput
+	ToGetUsagePlanEnvironmentsListOutputWithContext(context.Context) GetUsagePlanEnvironmentsListOutput
+}
+
+type GetUsagePlanEnvironmentsListArgs struct {
+	// The API ID, this value is empty if attach service.
+	ApiId pulumi.StringInput `pulumi:"apiId"`
+	// The API name, this value is empty if attach service.
+	ApiName pulumi.StringInput `pulumi:"apiName"`
+	// Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// The environment name.
+	Environment pulumi.StringInput `pulumi:"environment"`
+	// The API method, this value is empty if attach service.
+	Method pulumi.StringInput `pulumi:"method"`
+	// Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// The API path, this value is empty if attach service.
+	Path pulumi.StringInput `pulumi:"path"`
+	// The service ID.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+	// The service name.
+	ServiceName pulumi.StringInput `pulumi:"serviceName"`
+}
+
+func (GetUsagePlanEnvironmentsListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsagePlanEnvironmentsList)(nil)).Elem()
+}
+
+func (i GetUsagePlanEnvironmentsListArgs) ToGetUsagePlanEnvironmentsListOutput() GetUsagePlanEnvironmentsListOutput {
+	return i.ToGetUsagePlanEnvironmentsListOutputWithContext(context.Background())
+}
+
+func (i GetUsagePlanEnvironmentsListArgs) ToGetUsagePlanEnvironmentsListOutputWithContext(ctx context.Context) GetUsagePlanEnvironmentsListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsagePlanEnvironmentsListOutput)
+}
+
+// GetUsagePlanEnvironmentsListArrayInput is an input type that accepts GetUsagePlanEnvironmentsListArray and GetUsagePlanEnvironmentsListArrayOutput values.
+// You can construct a concrete instance of `GetUsagePlanEnvironmentsListArrayInput` via:
+//
+//          GetUsagePlanEnvironmentsListArray{ GetUsagePlanEnvironmentsListArgs{...} }
+type GetUsagePlanEnvironmentsListArrayInput interface {
+	pulumi.Input
+
+	ToGetUsagePlanEnvironmentsListArrayOutput() GetUsagePlanEnvironmentsListArrayOutput
+	ToGetUsagePlanEnvironmentsListArrayOutputWithContext(context.Context) GetUsagePlanEnvironmentsListArrayOutput
+}
+
+type GetUsagePlanEnvironmentsListArray []GetUsagePlanEnvironmentsListInput
+
+func (GetUsagePlanEnvironmentsListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsagePlanEnvironmentsList)(nil)).Elem()
+}
+
+func (i GetUsagePlanEnvironmentsListArray) ToGetUsagePlanEnvironmentsListArrayOutput() GetUsagePlanEnvironmentsListArrayOutput {
+	return i.ToGetUsagePlanEnvironmentsListArrayOutputWithContext(context.Background())
+}
+
+func (i GetUsagePlanEnvironmentsListArray) ToGetUsagePlanEnvironmentsListArrayOutputWithContext(ctx context.Context) GetUsagePlanEnvironmentsListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsagePlanEnvironmentsListArrayOutput)
+}
+
+type GetUsagePlanEnvironmentsListOutput struct{ *pulumi.OutputState }
+
+func (GetUsagePlanEnvironmentsListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsagePlanEnvironmentsList)(nil)).Elem()
+}
+
+func (o GetUsagePlanEnvironmentsListOutput) ToGetUsagePlanEnvironmentsListOutput() GetUsagePlanEnvironmentsListOutput {
+	return o
+}
+
+func (o GetUsagePlanEnvironmentsListOutput) ToGetUsagePlanEnvironmentsListOutputWithContext(ctx context.Context) GetUsagePlanEnvironmentsListOutput {
+	return o
+}
+
+// The API ID, this value is empty if attach service.
+func (o GetUsagePlanEnvironmentsListOutput) ApiId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlanEnvironmentsList) string { return v.ApiId }).(pulumi.StringOutput)
+}
+
+// The API name, this value is empty if attach service.
+func (o GetUsagePlanEnvironmentsListOutput) ApiName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlanEnvironmentsList) string { return v.ApiName }).(pulumi.StringOutput)
+}
+
+// Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+func (o GetUsagePlanEnvironmentsListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlanEnvironmentsList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// The environment name.
+func (o GetUsagePlanEnvironmentsListOutput) Environment() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlanEnvironmentsList) string { return v.Environment }).(pulumi.StringOutput)
+}
+
+// The API method, this value is empty if attach service.
+func (o GetUsagePlanEnvironmentsListOutput) Method() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlanEnvironmentsList) string { return v.Method }).(pulumi.StringOutput)
+}
+
+// Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+func (o GetUsagePlanEnvironmentsListOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlanEnvironmentsList) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// The API path, this value is empty if attach service.
+func (o GetUsagePlanEnvironmentsListOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlanEnvironmentsList) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// The service ID.
+func (o GetUsagePlanEnvironmentsListOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlanEnvironmentsList) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+// The service name.
+func (o GetUsagePlanEnvironmentsListOutput) ServiceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlanEnvironmentsList) string { return v.ServiceName }).(pulumi.StringOutput)
+}
+
+type GetUsagePlanEnvironmentsListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetUsagePlanEnvironmentsListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsagePlanEnvironmentsList)(nil)).Elem()
+}
+
+func (o GetUsagePlanEnvironmentsListArrayOutput) ToGetUsagePlanEnvironmentsListArrayOutput() GetUsagePlanEnvironmentsListArrayOutput {
+	return o
+}
+
+func (o GetUsagePlanEnvironmentsListArrayOutput) ToGetUsagePlanEnvironmentsListArrayOutputWithContext(ctx context.Context) GetUsagePlanEnvironmentsListArrayOutput {
+	return o
+}
+
+func (o GetUsagePlanEnvironmentsListArrayOutput) Index(i pulumi.IntInput) GetUsagePlanEnvironmentsListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetUsagePlanEnvironmentsList {
+		return vs[0].([]GetUsagePlanEnvironmentsList)[vs[1].(int)]
+	}).(GetUsagePlanEnvironmentsListOutput)
+}
+
+type GetUsagePlansList struct {
+	// Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	CreateTime string `pulumi:"createTime"`
+	// Total number of requests allowed. Valid value formats: `-1`, `[1,99999999]`. The default value is -1, which indicates no limit.
+	MaxRequestNum int `pulumi:"maxRequestNum"`
+	// Limit of requests per second. Valid values formats: `-1`, `[1,2000]`. The default value is -1, which indicates no limit.
+	MaxRequestNumPreSec int `pulumi:"maxRequestNumPreSec"`
+	// Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	ModifyTime string `pulumi:"modifyTime"`
+	// Custom usage plan description.
+	UsagePlanDesc string `pulumi:"usagePlanDesc"`
+	// ID of the usage plan.
+	UsagePlanId string `pulumi:"usagePlanId"`
+	// Name of the usage plan.
+	UsagePlanName string `pulumi:"usagePlanName"`
+}
+
+// GetUsagePlansListInput is an input type that accepts GetUsagePlansListArgs and GetUsagePlansListOutput values.
+// You can construct a concrete instance of `GetUsagePlansListInput` via:
+//
+//          GetUsagePlansListArgs{...}
+type GetUsagePlansListInput interface {
+	pulumi.Input
+
+	ToGetUsagePlansListOutput() GetUsagePlansListOutput
+	ToGetUsagePlansListOutputWithContext(context.Context) GetUsagePlansListOutput
+}
+
+type GetUsagePlansListArgs struct {
+	// Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Total number of requests allowed. Valid value formats: `-1`, `[1,99999999]`. The default value is -1, which indicates no limit.
+	MaxRequestNum pulumi.IntInput `pulumi:"maxRequestNum"`
+	// Limit of requests per second. Valid values formats: `-1`, `[1,2000]`. The default value is -1, which indicates no limit.
+	MaxRequestNumPreSec pulumi.IntInput `pulumi:"maxRequestNumPreSec"`
+	// Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// Custom usage plan description.
+	UsagePlanDesc pulumi.StringInput `pulumi:"usagePlanDesc"`
+	// ID of the usage plan.
+	UsagePlanId pulumi.StringInput `pulumi:"usagePlanId"`
+	// Name of the usage plan.
+	UsagePlanName pulumi.StringInput `pulumi:"usagePlanName"`
+}
+
+func (GetUsagePlansListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsagePlansList)(nil)).Elem()
+}
+
+func (i GetUsagePlansListArgs) ToGetUsagePlansListOutput() GetUsagePlansListOutput {
+	return i.ToGetUsagePlansListOutputWithContext(context.Background())
+}
+
+func (i GetUsagePlansListArgs) ToGetUsagePlansListOutputWithContext(ctx context.Context) GetUsagePlansListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsagePlansListOutput)
+}
+
+// GetUsagePlansListArrayInput is an input type that accepts GetUsagePlansListArray and GetUsagePlansListArrayOutput values.
+// You can construct a concrete instance of `GetUsagePlansListArrayInput` via:
+//
+//          GetUsagePlansListArray{ GetUsagePlansListArgs{...} }
+type GetUsagePlansListArrayInput interface {
+	pulumi.Input
+
+	ToGetUsagePlansListArrayOutput() GetUsagePlansListArrayOutput
+	ToGetUsagePlansListArrayOutputWithContext(context.Context) GetUsagePlansListArrayOutput
+}
+
+type GetUsagePlansListArray []GetUsagePlansListInput
+
+func (GetUsagePlansListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsagePlansList)(nil)).Elem()
+}
+
+func (i GetUsagePlansListArray) ToGetUsagePlansListArrayOutput() GetUsagePlansListArrayOutput {
+	return i.ToGetUsagePlansListArrayOutputWithContext(context.Background())
+}
+
+func (i GetUsagePlansListArray) ToGetUsagePlansListArrayOutputWithContext(ctx context.Context) GetUsagePlansListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsagePlansListArrayOutput)
+}
+
+type GetUsagePlansListOutput struct{ *pulumi.OutputState }
+
+func (GetUsagePlansListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsagePlansList)(nil)).Elem()
+}
+
+func (o GetUsagePlansListOutput) ToGetUsagePlansListOutput() GetUsagePlansListOutput {
+	return o
+}
+
+func (o GetUsagePlansListOutput) ToGetUsagePlansListOutputWithContext(ctx context.Context) GetUsagePlansListOutput {
+	return o
+}
+
+// Creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+func (o GetUsagePlansListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlansList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Total number of requests allowed. Valid value formats: `-1`, `[1,99999999]`. The default value is -1, which indicates no limit.
+func (o GetUsagePlansListOutput) MaxRequestNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUsagePlansList) int { return v.MaxRequestNum }).(pulumi.IntOutput)
+}
+
+// Limit of requests per second. Valid values formats: `-1`, `[1,2000]`. The default value is -1, which indicates no limit.
+func (o GetUsagePlansListOutput) MaxRequestNumPreSec() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUsagePlansList) int { return v.MaxRequestNumPreSec }).(pulumi.IntOutput)
+}
+
+// Last modified time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+func (o GetUsagePlansListOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlansList) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// Custom usage plan description.
+func (o GetUsagePlansListOutput) UsagePlanDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlansList) string { return v.UsagePlanDesc }).(pulumi.StringOutput)
+}
+
+// ID of the usage plan.
+func (o GetUsagePlansListOutput) UsagePlanId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlansList) string { return v.UsagePlanId }).(pulumi.StringOutput)
+}
+
+// Name of the usage plan.
+func (o GetUsagePlansListOutput) UsagePlanName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsagePlansList) string { return v.UsagePlanName }).(pulumi.StringOutput)
+}
+
+type GetUsagePlansListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetUsagePlansListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsagePlansList)(nil)).Elem()
+}
+
+func (o GetUsagePlansListArrayOutput) ToGetUsagePlansListArrayOutput() GetUsagePlansListArrayOutput {
+	return o
+}
+
+func (o GetUsagePlansListArrayOutput) ToGetUsagePlansListArrayOutputWithContext(ctx context.Context) GetUsagePlansListArrayOutput {
+	return o
+}
+
+func (o GetUsagePlansListArrayOutput) Index(i pulumi.IntInput) GetUsagePlansListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetUsagePlansList {
+		return vs[0].([]GetUsagePlansList)[vs[1].(int)]
+	}).(GetUsagePlansListOutput)
+}
+
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*APIRequestParameterInput)(nil)).Elem(), APIRequestParameterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*APIRequestParameterArrayInput)(nil)).Elem(), APIRequestParameterArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*APIResponseErrorCodeInput)(nil)).Elem(), APIResponseErrorCodeArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*APIResponseErrorCodeArrayInput)(nil)).Elem(), APIResponseErrorCodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiRequestParameterInput)(nil)).Elem(), ApiRequestParameterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiRequestParameterArrayInput)(nil)).Elem(), ApiRequestParameterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiResponseErrorCodeInput)(nil)).Elem(), ApiResponseErrorCodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiResponseErrorCodeArrayInput)(nil)).Elem(), ApiResponseErrorCodeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceApiListInput)(nil)).Elem(), ServiceApiListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceApiListArrayInput)(nil)).Elem(), ServiceApiListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceUsagePlanListInput)(nil)).Elem(), ServiceUsagePlanListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceUsagePlanListArrayInput)(nil)).Elem(), ServiceUsagePlanListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UsagePlanAttachListInput)(nil)).Elem(), UsagePlanAttachListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UsagePlanAttachListArrayInput)(nil)).Elem(), UsagePlanAttachListArray{})
-	pulumi.RegisterOutputType(APIRequestParameterOutput{})
-	pulumi.RegisterOutputType(APIRequestParameterArrayOutput{})
-	pulumi.RegisterOutputType(APIResponseErrorCodeOutput{})
-	pulumi.RegisterOutputType(APIResponseErrorCodeArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiKeysListInput)(nil)).Elem(), GetApiKeysListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApiKeysListArrayInput)(nil)).Elem(), GetApiKeysListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApisListInput)(nil)).Elem(), GetApisListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApisListArrayInput)(nil)).Elem(), GetApisListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApisListRequestParameterInput)(nil)).Elem(), GetApisListRequestParameterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApisListRequestParameterArrayInput)(nil)).Elem(), GetApisListRequestParameterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApisListResponseErrorCodeInput)(nil)).Elem(), GetApisListResponseErrorCodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetApisListResponseErrorCodeArrayInput)(nil)).Elem(), GetApisListResponseErrorCodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCustomerDomainsListInput)(nil)).Elem(), GetCustomerDomainsListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCustomerDomainsListArrayInput)(nil)).Elem(), GetCustomerDomainsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCustomerDomainsListPathMappingInput)(nil)).Elem(), GetCustomerDomainsListPathMappingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCustomerDomainsListPathMappingArrayInput)(nil)).Elem(), GetCustomerDomainsListPathMappingArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIpStrategiesListInput)(nil)).Elem(), GetIpStrategiesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIpStrategiesListArrayInput)(nil)).Elem(), GetIpStrategiesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIpStrategiesListAttachListInput)(nil)).Elem(), GetIpStrategiesListAttachListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIpStrategiesListAttachListArrayInput)(nil)).Elem(), GetIpStrategiesListAttachListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServicesListInput)(nil)).Elem(), GetServicesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServicesListArrayInput)(nil)).Elem(), GetServicesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServicesListUsagePlanListInput)(nil)).Elem(), GetServicesListUsagePlanListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServicesListUsagePlanListArrayInput)(nil)).Elem(), GetServicesListUsagePlanListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetThrottlingApisListInput)(nil)).Elem(), GetThrottlingApisListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetThrottlingApisListArrayInput)(nil)).Elem(), GetThrottlingApisListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetThrottlingApisListApiEnvironmentStrategyInput)(nil)).Elem(), GetThrottlingApisListApiEnvironmentStrategyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetThrottlingApisListApiEnvironmentStrategyArrayInput)(nil)).Elem(), GetThrottlingApisListApiEnvironmentStrategyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetThrottlingApisListApiEnvironmentStrategyStrategyListInput)(nil)).Elem(), GetThrottlingApisListApiEnvironmentStrategyStrategyListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayInput)(nil)).Elem(), GetThrottlingApisListApiEnvironmentStrategyStrategyListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetThrottlingServicesListInput)(nil)).Elem(), GetThrottlingServicesListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetThrottlingServicesListArrayInput)(nil)).Elem(), GetThrottlingServicesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetThrottlingServicesListEnvironmentInput)(nil)).Elem(), GetThrottlingServicesListEnvironmentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetThrottlingServicesListEnvironmentArrayInput)(nil)).Elem(), GetThrottlingServicesListEnvironmentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsagePlanEnvironmentsListInput)(nil)).Elem(), GetUsagePlanEnvironmentsListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsagePlanEnvironmentsListArrayInput)(nil)).Elem(), GetUsagePlanEnvironmentsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsagePlansListInput)(nil)).Elem(), GetUsagePlansListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsagePlansListArrayInput)(nil)).Elem(), GetUsagePlansListArray{})
+	pulumi.RegisterOutputType(ApiRequestParameterOutput{})
+	pulumi.RegisterOutputType(ApiRequestParameterArrayOutput{})
+	pulumi.RegisterOutputType(ApiResponseErrorCodeOutput{})
+	pulumi.RegisterOutputType(ApiResponseErrorCodeArrayOutput{})
 	pulumi.RegisterOutputType(ServiceApiListOutput{})
 	pulumi.RegisterOutputType(ServiceApiListArrayOutput{})
 	pulumi.RegisterOutputType(ServiceUsagePlanListOutput{})
 	pulumi.RegisterOutputType(ServiceUsagePlanListArrayOutput{})
 	pulumi.RegisterOutputType(UsagePlanAttachListOutput{})
 	pulumi.RegisterOutputType(UsagePlanAttachListArrayOutput{})
+	pulumi.RegisterOutputType(GetApiKeysListOutput{})
+	pulumi.RegisterOutputType(GetApiKeysListArrayOutput{})
+	pulumi.RegisterOutputType(GetApisListOutput{})
+	pulumi.RegisterOutputType(GetApisListArrayOutput{})
+	pulumi.RegisterOutputType(GetApisListRequestParameterOutput{})
+	pulumi.RegisterOutputType(GetApisListRequestParameterArrayOutput{})
+	pulumi.RegisterOutputType(GetApisListResponseErrorCodeOutput{})
+	pulumi.RegisterOutputType(GetApisListResponseErrorCodeArrayOutput{})
+	pulumi.RegisterOutputType(GetCustomerDomainsListOutput{})
+	pulumi.RegisterOutputType(GetCustomerDomainsListArrayOutput{})
+	pulumi.RegisterOutputType(GetCustomerDomainsListPathMappingOutput{})
+	pulumi.RegisterOutputType(GetCustomerDomainsListPathMappingArrayOutput{})
+	pulumi.RegisterOutputType(GetIpStrategiesListOutput{})
+	pulumi.RegisterOutputType(GetIpStrategiesListArrayOutput{})
+	pulumi.RegisterOutputType(GetIpStrategiesListAttachListOutput{})
+	pulumi.RegisterOutputType(GetIpStrategiesListAttachListArrayOutput{})
+	pulumi.RegisterOutputType(GetServicesListOutput{})
+	pulumi.RegisterOutputType(GetServicesListArrayOutput{})
+	pulumi.RegisterOutputType(GetServicesListUsagePlanListOutput{})
+	pulumi.RegisterOutputType(GetServicesListUsagePlanListArrayOutput{})
+	pulumi.RegisterOutputType(GetThrottlingApisListOutput{})
+	pulumi.RegisterOutputType(GetThrottlingApisListArrayOutput{})
+	pulumi.RegisterOutputType(GetThrottlingApisListApiEnvironmentStrategyOutput{})
+	pulumi.RegisterOutputType(GetThrottlingApisListApiEnvironmentStrategyArrayOutput{})
+	pulumi.RegisterOutputType(GetThrottlingApisListApiEnvironmentStrategyStrategyListOutput{})
+	pulumi.RegisterOutputType(GetThrottlingApisListApiEnvironmentStrategyStrategyListArrayOutput{})
+	pulumi.RegisterOutputType(GetThrottlingServicesListOutput{})
+	pulumi.RegisterOutputType(GetThrottlingServicesListArrayOutput{})
+	pulumi.RegisterOutputType(GetThrottlingServicesListEnvironmentOutput{})
+	pulumi.RegisterOutputType(GetThrottlingServicesListEnvironmentArrayOutput{})
+	pulumi.RegisterOutputType(GetUsagePlanEnvironmentsListOutput{})
+	pulumi.RegisterOutputType(GetUsagePlanEnvironmentsListArrayOutput{})
+	pulumi.RegisterOutputType(GetUsagePlansListOutput{})
+	pulumi.RegisterOutputType(GetUsagePlansListArrayOutput{})
 }

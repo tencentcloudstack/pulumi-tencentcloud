@@ -6,27 +6,27 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./account";
-export * from "./accountDBAttachment";
-export * from "./accountDBAttachments";
-export * from "./accounts";
-export * from "./backups";
+export * from "./accountDbAttachment";
 export * from "./basicInstance";
-export * from "./basicInstances";
 export * from "./db";
-export * from "./dbs";
+export * from "./getAccountDbAttachments";
+export * from "./getAccounts";
+export * from "./getBackups";
+export * from "./getBasicInstances";
+export * from "./getDbs";
+export * from "./getInstances";
+export * from "./getPublishSubscribes";
+export * from "./getReadonlyGroups";
+export * from "./getZoneConfig";
 export * from "./instance";
-export * from "./instances";
 export * from "./publishSubscribe";
-export * from "./publishSubscribes";
-export * from "./readonlyGroups";
 export * from "./readonlyInstance";
-export * from "./zoneConfig";
 
 // Import resources to register:
 import { Account } from "./account";
-import { AccountDBAttachment } from "./accountDBAttachment";
+import { AccountDbAttachment } from "./accountDbAttachment";
 import { BasicInstance } from "./basicInstance";
-import { DB } from "./db";
+import { Db } from "./db";
 import { Instance } from "./instance";
 import { PublishSubscribe } from "./publishSubscribe";
 import { ReadonlyInstance } from "./readonlyInstance";
@@ -37,12 +37,12 @@ const _module = {
         switch (type) {
             case "tencentcloud:Sqlserver/account:Account":
                 return new Account(name, <any>undefined, { urn })
-            case "tencentcloud:Sqlserver/accountDBAttachment:AccountDBAttachment":
-                return new AccountDBAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment":
+                return new AccountDbAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/basicInstance:BasicInstance":
                 return new BasicInstance(name, <any>undefined, { urn })
-            case "tencentcloud:Sqlserver/dB:DB":
-                return new DB(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/db:Db":
+                return new Db(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe":
@@ -55,9 +55,9 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/account", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/accountDBAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/accountDbAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/basicInstance", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/dB", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/db", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/publishSubscribe", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/readonlyInstance", _module)

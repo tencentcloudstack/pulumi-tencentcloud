@@ -16,15 +16,23 @@ __all__ = [
     'AlarmPolicyEventConditionFilterArgs',
     'AlarmPolicyPolicyTagArgs',
     'AlarmPolicyTriggerTaskArgs',
-    'BindingAlarmReceiverReceiversArgs',
-    'BindingObjectDimensionArgs',
-    'DataDimensionArgs',
+    'BindingReceiverReceiversArgs',
     'PolicyBindingObjectDimensionArgs',
-    'PolicyGroupBindingObjectArgs',
-    'PolicyGroupConditionArgs',
-    'PolicyGroupEventConditionArgs',
-    'PolicyGroupReceiverArgs',
-    'ProductEventDimensionArgs',
+    'TmpAlertRuleAnnotationArgs',
+    'TmpAlertRuleLabelArgs',
+    'TmpTkeAlertPolicyAlertRuleArgs',
+    'TmpTkeAlertPolicyAlertRuleNotificationArgs',
+    'TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs',
+    'TmpTkeAlertPolicyAlertRuleRuleArgs',
+    'TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs',
+    'TmpTkeAlertPolicyAlertRuleRuleLabelArgs',
+    'TmpTkeTemplateTemplateArgs',
+    'TmpTkeTemplateTemplatePodMonitorArgs',
+    'TmpTkeTemplateTemplateRawJobArgs',
+    'TmpTkeTemplateTemplateRecordRuleArgs',
+    'TmpTkeTemplateTemplateServiceMonitorArgs',
+    'GetDataDimensionArgs',
+    'GetProductEventDimensionArgs',
 ]
 
 @pulumi.input_type
@@ -32,6 +40,10 @@ class AlarmPolicyConditionsArgs:
     def __init__(__self__, *,
                  is_union_rule: Optional[pulumi.Input[int]] = None,
                  rules: Optional[pulumi.Input[Sequence[pulumi.Input['AlarmPolicyConditionsRuleArgs']]]] = None):
+        """
+        :param pulumi.Input[int] is_union_rule: The and or relation of indicator alarm rule.
+        :param pulumi.Input[Sequence[pulumi.Input['AlarmPolicyConditionsRuleArgs']]] rules: A list of metric trigger condition.
+        """
         if is_union_rule is not None:
             pulumi.set(__self__, "is_union_rule", is_union_rule)
         if rules is not None:
@@ -40,6 +52,9 @@ class AlarmPolicyConditionsArgs:
     @property
     @pulumi.getter(name="isUnionRule")
     def is_union_rule(self) -> Optional[pulumi.Input[int]]:
+        """
+        The and or relation of indicator alarm rule.
+        """
         return pulumi.get(self, "is_union_rule")
 
     @is_union_rule.setter
@@ -49,6 +64,9 @@ class AlarmPolicyConditionsArgs:
     @property
     @pulumi.getter
     def rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AlarmPolicyConditionsRuleArgs']]]]:
+        """
+        A list of metric trigger condition.
+        """
         return pulumi.get(self, "rules")
 
     @rules.setter
@@ -70,6 +88,19 @@ class AlarmPolicyConditionsRuleArgs:
                  rule_type: Optional[pulumi.Input[str]] = None,
                  unit: Optional[pulumi.Input[str]] = None,
                  value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] continue_period: Number of periods.
+        :param pulumi.Input[str] description: Metric display name, which is used in the output parameter.
+        :param pulumi.Input['AlarmPolicyConditionsRuleFilterArgs'] filter: Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+        :param pulumi.Input[int] is_power_notice: Whether the alarm frequency increases exponentially.
+        :param pulumi.Input[str] metric_name: Metric name or event name.
+        :param pulumi.Input[int] notice_frequency: Alarm interval in seconds.
+        :param pulumi.Input[str] operator: Operator.
+        :param pulumi.Input[int] period: Statistical period in seconds.
+        :param pulumi.Input[str] rule_type: Trigger condition type.
+        :param pulumi.Input[str] unit: Unit, which is used in the output parameter.
+        :param pulumi.Input[str] value: Threshold.
+        """
         if continue_period is not None:
             pulumi.set(__self__, "continue_period", continue_period)
         if description is not None:
@@ -96,6 +127,9 @@ class AlarmPolicyConditionsRuleArgs:
     @property
     @pulumi.getter(name="continuePeriod")
     def continue_period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of periods.
+        """
         return pulumi.get(self, "continue_period")
 
     @continue_period.setter
@@ -105,6 +139,9 @@ class AlarmPolicyConditionsRuleArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Metric display name, which is used in the output parameter.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -114,6 +151,9 @@ class AlarmPolicyConditionsRuleArgs:
     @property
     @pulumi.getter
     def filter(self) -> Optional[pulumi.Input['AlarmPolicyConditionsRuleFilterArgs']]:
+        """
+        Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+        """
         return pulumi.get(self, "filter")
 
     @filter.setter
@@ -123,6 +163,9 @@ class AlarmPolicyConditionsRuleArgs:
     @property
     @pulumi.getter(name="isPowerNotice")
     def is_power_notice(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether the alarm frequency increases exponentially.
+        """
         return pulumi.get(self, "is_power_notice")
 
     @is_power_notice.setter
@@ -132,6 +175,9 @@ class AlarmPolicyConditionsRuleArgs:
     @property
     @pulumi.getter(name="metricName")
     def metric_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Metric name or event name.
+        """
         return pulumi.get(self, "metric_name")
 
     @metric_name.setter
@@ -141,6 +187,9 @@ class AlarmPolicyConditionsRuleArgs:
     @property
     @pulumi.getter(name="noticeFrequency")
     def notice_frequency(self) -> Optional[pulumi.Input[int]]:
+        """
+        Alarm interval in seconds.
+        """
         return pulumi.get(self, "notice_frequency")
 
     @notice_frequency.setter
@@ -150,6 +199,9 @@ class AlarmPolicyConditionsRuleArgs:
     @property
     @pulumi.getter
     def operator(self) -> Optional[pulumi.Input[str]]:
+        """
+        Operator.
+        """
         return pulumi.get(self, "operator")
 
     @operator.setter
@@ -159,6 +211,9 @@ class AlarmPolicyConditionsRuleArgs:
     @property
     @pulumi.getter
     def period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Statistical period in seconds.
+        """
         return pulumi.get(self, "period")
 
     @period.setter
@@ -168,6 +223,9 @@ class AlarmPolicyConditionsRuleArgs:
     @property
     @pulumi.getter(name="ruleType")
     def rule_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Trigger condition type.
+        """
         return pulumi.get(self, "rule_type")
 
     @rule_type.setter
@@ -177,6 +235,9 @@ class AlarmPolicyConditionsRuleArgs:
     @property
     @pulumi.getter
     def unit(self) -> Optional[pulumi.Input[str]]:
+        """
+        Unit, which is used in the output parameter.
+        """
         return pulumi.get(self, "unit")
 
     @unit.setter
@@ -186,6 +247,9 @@ class AlarmPolicyConditionsRuleArgs:
     @property
     @pulumi.getter
     def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Threshold.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -198,6 +262,10 @@ class AlarmPolicyConditionsRuleFilterArgs:
     def __init__(__self__, *,
                  dimensions: Optional[pulumi.Input[str]] = None,
                  type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] dimensions: JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
+        :param pulumi.Input[str] type: Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+        """
         if dimensions is not None:
             pulumi.set(__self__, "dimensions", dimensions)
         if type is not None:
@@ -206,6 +274,9 @@ class AlarmPolicyConditionsRuleFilterArgs:
     @property
     @pulumi.getter
     def dimensions(self) -> Optional[pulumi.Input[str]]:
+        """
+        JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
+        """
         return pulumi.get(self, "dimensions")
 
     @dimensions.setter
@@ -215,6 +286,9 @@ class AlarmPolicyConditionsRuleFilterArgs:
     @property
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -236,6 +310,19 @@ class AlarmPolicyEventConditionArgs:
                  rule_type: Optional[pulumi.Input[str]] = None,
                  unit: Optional[pulumi.Input[str]] = None,
                  value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] continue_period: Number of periods.
+        :param pulumi.Input[str] description: Metric display name, which is used in the output parameter.
+        :param pulumi.Input['AlarmPolicyEventConditionFilterArgs'] filter: Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+        :param pulumi.Input[int] is_power_notice: Whether the alarm frequency increases exponentially.
+        :param pulumi.Input[str] metric_name: Metric name or event name.
+        :param pulumi.Input[int] notice_frequency: Alarm interval in seconds.
+        :param pulumi.Input[str] operator: Operator.
+        :param pulumi.Input[int] period: Statistical period in seconds.
+        :param pulumi.Input[str] rule_type: Trigger condition type.
+        :param pulumi.Input[str] unit: Unit, which is used in the output parameter.
+        :param pulumi.Input[str] value: Threshold.
+        """
         if continue_period is not None:
             pulumi.set(__self__, "continue_period", continue_period)
         if description is not None:
@@ -262,6 +349,9 @@ class AlarmPolicyEventConditionArgs:
     @property
     @pulumi.getter(name="continuePeriod")
     def continue_period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of periods.
+        """
         return pulumi.get(self, "continue_period")
 
     @continue_period.setter
@@ -271,6 +361,9 @@ class AlarmPolicyEventConditionArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Metric display name, which is used in the output parameter.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -280,6 +373,9 @@ class AlarmPolicyEventConditionArgs:
     @property
     @pulumi.getter
     def filter(self) -> Optional[pulumi.Input['AlarmPolicyEventConditionFilterArgs']]:
+        """
+        Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+        """
         return pulumi.get(self, "filter")
 
     @filter.setter
@@ -289,6 +385,9 @@ class AlarmPolicyEventConditionArgs:
     @property
     @pulumi.getter(name="isPowerNotice")
     def is_power_notice(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether the alarm frequency increases exponentially.
+        """
         return pulumi.get(self, "is_power_notice")
 
     @is_power_notice.setter
@@ -298,6 +397,9 @@ class AlarmPolicyEventConditionArgs:
     @property
     @pulumi.getter(name="metricName")
     def metric_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Metric name or event name.
+        """
         return pulumi.get(self, "metric_name")
 
     @metric_name.setter
@@ -307,6 +409,9 @@ class AlarmPolicyEventConditionArgs:
     @property
     @pulumi.getter(name="noticeFrequency")
     def notice_frequency(self) -> Optional[pulumi.Input[int]]:
+        """
+        Alarm interval in seconds.
+        """
         return pulumi.get(self, "notice_frequency")
 
     @notice_frequency.setter
@@ -316,6 +421,9 @@ class AlarmPolicyEventConditionArgs:
     @property
     @pulumi.getter
     def operator(self) -> Optional[pulumi.Input[str]]:
+        """
+        Operator.
+        """
         return pulumi.get(self, "operator")
 
     @operator.setter
@@ -325,6 +433,9 @@ class AlarmPolicyEventConditionArgs:
     @property
     @pulumi.getter
     def period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Statistical period in seconds.
+        """
         return pulumi.get(self, "period")
 
     @period.setter
@@ -334,6 +445,9 @@ class AlarmPolicyEventConditionArgs:
     @property
     @pulumi.getter(name="ruleType")
     def rule_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Trigger condition type.
+        """
         return pulumi.get(self, "rule_type")
 
     @rule_type.setter
@@ -343,6 +457,9 @@ class AlarmPolicyEventConditionArgs:
     @property
     @pulumi.getter
     def unit(self) -> Optional[pulumi.Input[str]]:
+        """
+        Unit, which is used in the output parameter.
+        """
         return pulumi.get(self, "unit")
 
     @unit.setter
@@ -352,6 +469,9 @@ class AlarmPolicyEventConditionArgs:
     @property
     @pulumi.getter
     def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Threshold.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -364,6 +484,10 @@ class AlarmPolicyEventConditionFilterArgs:
     def __init__(__self__, *,
                  dimensions: Optional[pulumi.Input[str]] = None,
                  type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] dimensions: JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
+        :param pulumi.Input[str] type: Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+        """
         if dimensions is not None:
             pulumi.set(__self__, "dimensions", dimensions)
         if type is not None:
@@ -372,6 +496,9 @@ class AlarmPolicyEventConditionFilterArgs:
     @property
     @pulumi.getter
     def dimensions(self) -> Optional[pulumi.Input[str]]:
+        """
+        JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
+        """
         return pulumi.get(self, "dimensions")
 
     @dimensions.setter
@@ -381,6 +508,9 @@ class AlarmPolicyEventConditionFilterArgs:
     @property
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -393,12 +523,19 @@ class AlarmPolicyPolicyTagArgs:
     def __init__(__self__, *,
                  key: pulumi.Input[str],
                  value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: Tag key.
+        :param pulumi.Input[str] value: Tag value.
+        """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "value", value)
 
     @property
     @pulumi.getter
     def key(self) -> pulumi.Input[str]:
+        """
+        Tag key.
+        """
         return pulumi.get(self, "key")
 
     @key.setter
@@ -408,6 +545,9 @@ class AlarmPolicyPolicyTagArgs:
     @property
     @pulumi.getter
     def value(self) -> pulumi.Input[str]:
+        """
+        Tag value.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -420,12 +560,19 @@ class AlarmPolicyTriggerTaskArgs:
     def __init__(__self__, *,
                  task_config: pulumi.Input[str],
                  type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] task_config: Configuration information in JSON format.
+        :param pulumi.Input[str] type: Triggered task type.
+        """
         pulumi.set(__self__, "task_config", task_config)
         pulumi.set(__self__, "type", type)
 
     @property
     @pulumi.getter(name="taskConfig")
     def task_config(self) -> pulumi.Input[str]:
+        """
+        Configuration information in JSON format.
+        """
         return pulumi.get(self, "task_config")
 
     @task_config.setter
@@ -435,6 +582,9 @@ class AlarmPolicyTriggerTaskArgs:
     @property
     @pulumi.getter
     def type(self) -> pulumi.Input[str]:
+        """
+        Triggered task type.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -443,7 +593,7 @@ class AlarmPolicyTriggerTaskArgs:
 
 
 @pulumi.input_type
-class BindingAlarmReceiverReceiversArgs:
+class BindingReceiverReceiversArgs:
     def __init__(__self__, *,
                  notify_ways: pulumi.Input[Sequence[pulumi.Input[str]]],
                  receiver_type: pulumi.Input[str],
@@ -452,6 +602,15 @@ class BindingAlarmReceiverReceiversArgs:
                  receiver_group_lists: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  receiver_user_lists: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  start_time: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] notify_ways: Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+        :param pulumi.Input[str] receiver_type: Receive type. Optional `group`,`user`.
+        :param pulumi.Input[int] end_time: End of alarm period. Meaning with `start_time`.
+        :param pulumi.Input[str] receive_language: Alert sending language. Optional `en-US`,`zh-CN`.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] receiver_group_lists: Alarm receive group ID list.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] receiver_user_lists: Alarm receiver ID list.
+        :param pulumi.Input[int] start_time: Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+        """
         pulumi.set(__self__, "notify_ways", notify_ways)
         pulumi.set(__self__, "receiver_type", receiver_type)
         if end_time is not None:
@@ -468,6 +627,9 @@ class BindingAlarmReceiverReceiversArgs:
     @property
     @pulumi.getter(name="notifyWays")
     def notify_ways(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+        """
         return pulumi.get(self, "notify_ways")
 
     @notify_ways.setter
@@ -477,6 +639,9 @@ class BindingAlarmReceiverReceiversArgs:
     @property
     @pulumi.getter(name="receiverType")
     def receiver_type(self) -> pulumi.Input[str]:
+        """
+        Receive type. Optional `group`,`user`.
+        """
         return pulumi.get(self, "receiver_type")
 
     @receiver_type.setter
@@ -486,6 +651,9 @@ class BindingAlarmReceiverReceiversArgs:
     @property
     @pulumi.getter(name="endTime")
     def end_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        End of alarm period. Meaning with `start_time`.
+        """
         return pulumi.get(self, "end_time")
 
     @end_time.setter
@@ -495,6 +663,9 @@ class BindingAlarmReceiverReceiversArgs:
     @property
     @pulumi.getter(name="receiveLanguage")
     def receive_language(self) -> Optional[pulumi.Input[str]]:
+        """
+        Alert sending language. Optional `en-US`,`zh-CN`.
+        """
         return pulumi.get(self, "receive_language")
 
     @receive_language.setter
@@ -504,6 +675,9 @@ class BindingAlarmReceiverReceiversArgs:
     @property
     @pulumi.getter(name="receiverGroupLists")
     def receiver_group_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        Alarm receive group ID list.
+        """
         return pulumi.get(self, "receiver_group_lists")
 
     @receiver_group_lists.setter
@@ -513,6 +687,9 @@ class BindingAlarmReceiverReceiversArgs:
     @property
     @pulumi.getter(name="receiverUserLists")
     def receiver_user_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        Alarm receiver ID list.
+        """
         return pulumi.get(self, "receiver_user_lists")
 
     @receiver_user_lists.setter
@@ -522,6 +699,9 @@ class BindingAlarmReceiverReceiversArgs:
     @property
     @pulumi.getter(name="startTime")
     def start_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+        """
         return pulumi.get(self, "start_time")
 
     @start_time.setter
@@ -530,10 +710,13 @@ class BindingAlarmReceiverReceiversArgs:
 
 
 @pulumi.input_type
-class BindingObjectDimensionArgs:
+class PolicyBindingObjectDimensionArgs:
     def __init__(__self__, *,
                  dimensions_json: pulumi.Input[str],
                  unique_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] dimensions_json: Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
+        """
         pulumi.set(__self__, "dimensions_json", dimensions_json)
         if unique_id is not None:
             pulumi.set(__self__, "unique_id", unique_id)
@@ -541,6 +724,9 @@ class BindingObjectDimensionArgs:
     @property
     @pulumi.getter(name="dimensionsJson")
     def dimensions_json(self) -> pulumi.Input[str]:
+        """
+        Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
+        """
         return pulumi.get(self, "dimensions_json")
 
     @dimensions_json.setter
@@ -558,16 +744,1094 @@ class BindingObjectDimensionArgs:
 
 
 @pulumi.input_type
-class DataDimensionArgs:
+class TmpAlertRuleAnnotationArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: key.
+        :param pulumi.Input[str] value: value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class TmpAlertRuleLabelArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: key.
+        :param pulumi.Input[str] value: value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class TmpTkeAlertPolicyAlertRuleArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 rules: pulumi.Input[Sequence[pulumi.Input['TmpTkeAlertPolicyAlertRuleRuleArgs']]],
+                 cluster_id: Optional[pulumi.Input[str]] = None,
+                 id: Optional[pulumi.Input[str]] = None,
+                 notification: Optional[pulumi.Input['TmpTkeAlertPolicyAlertRuleNotificationArgs']] = None,
+                 template_id: Optional[pulumi.Input[str]] = None,
+                 updated_at: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: Policy name.
+        :param pulumi.Input[Sequence[pulumi.Input['TmpTkeAlertPolicyAlertRuleRuleArgs']]] rules: A list of rules.
+        :param pulumi.Input[str] cluster_id: If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.
+        :param pulumi.Input[str] id: Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.
+        :param pulumi.Input['TmpTkeAlertPolicyAlertRuleNotificationArgs'] notification: Alarm channels, which may be returned using null in the template.
+        :param pulumi.Input[str] template_id: If the alarm is sent from a template, the TemplateId is the template id.
+        :param pulumi.Input[str] updated_at: Last modified time.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "rules", rules)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if notification is not None:
+            pulumi.set(__self__, "notification", notification)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+        if updated_at is not None:
+            pulumi.set(__self__, "updated_at", updated_at)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Policy name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def rules(self) -> pulumi.Input[Sequence[pulumi.Input['TmpTkeAlertPolicyAlertRuleRuleArgs']]]:
+        """
+        A list of rules.
+        """
+        return pulumi.get(self, "rules")
+
+    @rules.setter
+    def rules(self, value: pulumi.Input[Sequence[pulumi.Input['TmpTkeAlertPolicyAlertRuleRuleArgs']]]):
+        pulumi.set(self, "rules", value)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter
+    def notification(self) -> Optional[pulumi.Input['TmpTkeAlertPolicyAlertRuleNotificationArgs']]:
+        """
+        Alarm channels, which may be returned using null in the template.
+        """
+        return pulumi.get(self, "notification")
+
+    @notification.setter
+    def notification(self, value: Optional[pulumi.Input['TmpTkeAlertPolicyAlertRuleNotificationArgs']]):
+        pulumi.set(self, "notification", value)
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        If the alarm is sent from a template, the TemplateId is the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+    @template_id.setter
+    def template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "template_id", value)
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> Optional[pulumi.Input[str]]:
+        """
+        Last modified time.
+        """
+        return pulumi.get(self, "updated_at")
+
+    @updated_at.setter
+    def updated_at(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "updated_at", value)
+
+
+@pulumi.input_type
+class TmpTkeAlertPolicyAlertRuleNotificationArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool],
+                 type: pulumi.Input[str],
+                 alert_manager: Optional[pulumi.Input['TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs']] = None,
+                 notify_ways: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 phone_arrive_notice: Optional[pulumi.Input[bool]] = None,
+                 phone_circle_interval: Optional[pulumi.Input[int]] = None,
+                 phone_circle_times: Optional[pulumi.Input[int]] = None,
+                 phone_inner_interval: Optional[pulumi.Input[int]] = None,
+                 phone_notify_orders: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
+                 receiver_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 repeat_interval: Optional[pulumi.Input[str]] = None,
+                 time_range_end: Optional[pulumi.Input[str]] = None,
+                 time_range_start: Optional[pulumi.Input[str]] = None,
+                 web_hook: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] enabled: Whether it is enabled.
+        :param pulumi.Input[str] type: The channel type, which defaults to amp, supports the following `amp`, `webhook`, `alertmanager`.
+        :param pulumi.Input['TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs'] alert_manager: If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] notify_ways: Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.
+        :param pulumi.Input[bool] phone_arrive_notice: Telephone alerts reach notifications.
+        :param pulumi.Input[int] phone_circle_interval: Effective end timeTelephone alarm wheel interval. Units: Seconds.
+        :param pulumi.Input[int] phone_circle_times: PhoneCircleTimes.
+        :param pulumi.Input[int] phone_inner_interval: Telephone alarm wheel intervals. Units: Seconds.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] phone_notify_orders: Telephone alarm sequence.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] receiver_groups: Alert Receiving Group (User Group).
+        :param pulumi.Input[str] repeat_interval: Convergence time.
+        :param pulumi.Input[str] time_range_end: Effective end time.
+        :param pulumi.Input[str] time_range_start: The time from which it takes effect.
+        :param pulumi.Input[str] web_hook: If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "type", type)
+        if alert_manager is not None:
+            pulumi.set(__self__, "alert_manager", alert_manager)
+        if notify_ways is not None:
+            pulumi.set(__self__, "notify_ways", notify_ways)
+        if phone_arrive_notice is not None:
+            pulumi.set(__self__, "phone_arrive_notice", phone_arrive_notice)
+        if phone_circle_interval is not None:
+            pulumi.set(__self__, "phone_circle_interval", phone_circle_interval)
+        if phone_circle_times is not None:
+            pulumi.set(__self__, "phone_circle_times", phone_circle_times)
+        if phone_inner_interval is not None:
+            pulumi.set(__self__, "phone_inner_interval", phone_inner_interval)
+        if phone_notify_orders is not None:
+            pulumi.set(__self__, "phone_notify_orders", phone_notify_orders)
+        if receiver_groups is not None:
+            pulumi.set(__self__, "receiver_groups", receiver_groups)
+        if repeat_interval is not None:
+            pulumi.set(__self__, "repeat_interval", repeat_interval)
+        if time_range_end is not None:
+            pulumi.set(__self__, "time_range_end", time_range_end)
+        if time_range_start is not None:
+            pulumi.set(__self__, "time_range_start", time_range_start)
+        if web_hook is not None:
+            pulumi.set(__self__, "web_hook", web_hook)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        Whether it is enabled.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The channel type, which defaults to amp, supports the following `amp`, `webhook`, `alertmanager`.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="alertManager")
+    def alert_manager(self) -> Optional[pulumi.Input['TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs']]:
+        """
+        If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..
+        """
+        return pulumi.get(self, "alert_manager")
+
+    @alert_manager.setter
+    def alert_manager(self, value: Optional[pulumi.Input['TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs']]):
+        pulumi.set(self, "alert_manager", value)
+
+    @property
+    @pulumi.getter(name="notifyWays")
+    def notify_ways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.
+        """
+        return pulumi.get(self, "notify_ways")
+
+    @notify_ways.setter
+    def notify_ways(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "notify_ways", value)
+
+    @property
+    @pulumi.getter(name="phoneArriveNotice")
+    def phone_arrive_notice(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Telephone alerts reach notifications.
+        """
+        return pulumi.get(self, "phone_arrive_notice")
+
+    @phone_arrive_notice.setter
+    def phone_arrive_notice(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "phone_arrive_notice", value)
+
+    @property
+    @pulumi.getter(name="phoneCircleInterval")
+    def phone_circle_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        Effective end timeTelephone alarm wheel interval. Units: Seconds.
+        """
+        return pulumi.get(self, "phone_circle_interval")
+
+    @phone_circle_interval.setter
+    def phone_circle_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "phone_circle_interval", value)
+
+    @property
+    @pulumi.getter(name="phoneCircleTimes")
+    def phone_circle_times(self) -> Optional[pulumi.Input[int]]:
+        """
+        PhoneCircleTimes.
+        """
+        return pulumi.get(self, "phone_circle_times")
+
+    @phone_circle_times.setter
+    def phone_circle_times(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "phone_circle_times", value)
+
+    @property
+    @pulumi.getter(name="phoneInnerInterval")
+    def phone_inner_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        Telephone alarm wheel intervals. Units: Seconds.
+        """
+        return pulumi.get(self, "phone_inner_interval")
+
+    @phone_inner_interval.setter
+    def phone_inner_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "phone_inner_interval", value)
+
+    @property
+    @pulumi.getter(name="phoneNotifyOrders")
+    def phone_notify_orders(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        Telephone alarm sequence.
+        """
+        return pulumi.get(self, "phone_notify_orders")
+
+    @phone_notify_orders.setter
+    def phone_notify_orders(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "phone_notify_orders", value)
+
+    @property
+    @pulumi.getter(name="receiverGroups")
+    def receiver_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Alert Receiving Group (User Group).
+        """
+        return pulumi.get(self, "receiver_groups")
+
+    @receiver_groups.setter
+    def receiver_groups(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "receiver_groups", value)
+
+    @property
+    @pulumi.getter(name="repeatInterval")
+    def repeat_interval(self) -> Optional[pulumi.Input[str]]:
+        """
+        Convergence time.
+        """
+        return pulumi.get(self, "repeat_interval")
+
+    @repeat_interval.setter
+    def repeat_interval(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "repeat_interval", value)
+
+    @property
+    @pulumi.getter(name="timeRangeEnd")
+    def time_range_end(self) -> Optional[pulumi.Input[str]]:
+        """
+        Effective end time.
+        """
+        return pulumi.get(self, "time_range_end")
+
+    @time_range_end.setter
+    def time_range_end(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_range_end", value)
+
+    @property
+    @pulumi.getter(name="timeRangeStart")
+    def time_range_start(self) -> Optional[pulumi.Input[str]]:
+        """
+        The time from which it takes effect.
+        """
+        return pulumi.get(self, "time_range_start")
+
+    @time_range_start.setter
+    def time_range_start(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_range_start", value)
+
+    @property
+    @pulumi.getter(name="webHook")
+    def web_hook(self) -> Optional[pulumi.Input[str]]:
+        """
+        If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
+        return pulumi.get(self, "web_hook")
+
+    @web_hook.setter
+    def web_hook(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "web_hook", value)
+
+
+@pulumi.input_type
+class TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str],
+                 cluster_id: Optional[pulumi.Input[str]] = None,
+                 cluster_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] url: Alertmanager url.
+        :param pulumi.Input[str] cluster_id: The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.
+        :param pulumi.Input[str] cluster_type: Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
+        pulumi.set(__self__, "url", url)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
+        if cluster_type is not None:
+            pulumi.set(__self__, "cluster_type", cluster_type)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        Alertmanager url.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
+        return pulumi.get(self, "cluster_type")
+
+    @cluster_type.setter
+    def cluster_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_type", value)
+
+
+@pulumi.input_type
+class TmpTkeAlertPolicyAlertRuleRuleArgs:
+    def __init__(__self__, *,
+                 for_: pulumi.Input[str],
+                 labels: pulumi.Input[Sequence[pulumi.Input['TmpTkeAlertPolicyAlertRuleRuleLabelArgs']]],
+                 name: pulumi.Input[str],
+                 rule: pulumi.Input[str],
+                 template: pulumi.Input[str],
+                 annotations: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs']]]] = None,
+                 describe: Optional[pulumi.Input[str]] = None,
+                 rule_state: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] for_: Time of duration.
+        :param pulumi.Input[Sequence[pulumi.Input['TmpTkeAlertPolicyAlertRuleRuleLabelArgs']]] labels: Extra labels.
+        :param pulumi.Input[str] name: Rule name.
+        :param pulumi.Input[str] rule: Prometheus statement.
+        :param pulumi.Input[str] template: Alert sending template.
+        :param pulumi.Input[Sequence[pulumi.Input['TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs']]] annotations: Refer to annotations in prometheus rule.
+        :param pulumi.Input[str] describe: A description of the rule.
+        :param pulumi.Input[int] rule_state: Alarm rule status.
+        """
+        pulumi.set(__self__, "for_", for_)
+        pulumi.set(__self__, "labels", labels)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "rule", rule)
+        pulumi.set(__self__, "template", template)
+        if annotations is not None:
+            pulumi.set(__self__, "annotations", annotations)
+        if describe is not None:
+            pulumi.set(__self__, "describe", describe)
+        if rule_state is not None:
+            pulumi.set(__self__, "rule_state", rule_state)
+
+    @property
+    @pulumi.getter(name="for")
+    def for_(self) -> pulumi.Input[str]:
+        """
+        Time of duration.
+        """
+        return pulumi.get(self, "for_")
+
+    @for_.setter
+    def for_(self, value: pulumi.Input[str]):
+        pulumi.set(self, "for_", value)
+
+    @property
+    @pulumi.getter
+    def labels(self) -> pulumi.Input[Sequence[pulumi.Input['TmpTkeAlertPolicyAlertRuleRuleLabelArgs']]]:
+        """
+        Extra labels.
+        """
+        return pulumi.get(self, "labels")
+
+    @labels.setter
+    def labels(self, value: pulumi.Input[Sequence[pulumi.Input['TmpTkeAlertPolicyAlertRuleRuleLabelArgs']]]):
+        pulumi.set(self, "labels", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Rule name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def rule(self) -> pulumi.Input[str]:
+        """
+        Prometheus statement.
+        """
+        return pulumi.get(self, "rule")
+
+    @rule.setter
+    def rule(self, value: pulumi.Input[str]):
+        pulumi.set(self, "rule", value)
+
+    @property
+    @pulumi.getter
+    def template(self) -> pulumi.Input[str]:
+        """
+        Alert sending template.
+        """
+        return pulumi.get(self, "template")
+
+    @template.setter
+    def template(self, value: pulumi.Input[str]):
+        pulumi.set(self, "template", value)
+
+    @property
+    @pulumi.getter
+    def annotations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs']]]]:
+        """
+        Refer to annotations in prometheus rule.
+        """
+        return pulumi.get(self, "annotations")
+
+    @annotations.setter
+    def annotations(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs']]]]):
+        pulumi.set(self, "annotations", value)
+
+    @property
+    @pulumi.getter
+    def describe(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of the rule.
+        """
+        return pulumi.get(self, "describe")
+
+    @describe.setter
+    def describe(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "describe", value)
+
+    @property
+    @pulumi.getter(name="ruleState")
+    def rule_state(self) -> Optional[pulumi.Input[int]]:
+        """
+        Alarm rule status.
+        """
+        return pulumi.get(self, "rule_state")
+
+    @rule_state.setter
+    def rule_state(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "rule_state", value)
+
+
+@pulumi.input_type
+class TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] name: Name of map.
+        :param pulumi.Input[str] value: Value of map.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Name of map.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        Value of map.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class TmpTkeAlertPolicyAlertRuleRuleLabelArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] name: Name of map.
+        :param pulumi.Input[str] value: Value of map.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Name of map.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        Value of map.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class TmpTkeTemplateTemplateArgs:
+    def __init__(__self__, *,
+                 level: pulumi.Input[str],
+                 name: pulumi.Input[str],
+                 describe: Optional[pulumi.Input[str]] = None,
+                 is_default: Optional[pulumi.Input[bool]] = None,
+                 pod_monitors: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplatePodMonitorArgs']]]] = None,
+                 raw_jobs: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplateRawJobArgs']]]] = None,
+                 record_rules: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplateRecordRuleArgs']]]] = None,
+                 service_monitors: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplateServiceMonitorArgs']]]] = None,
+                 template_id: Optional[pulumi.Input[str]] = None,
+                 update_time: Optional[pulumi.Input[str]] = None,
+                 version: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] level: Template dimensions, the following types are supported `instance` instance level, `cluster` cluster level.
+        :param pulumi.Input[str] name: Template name.
+        :param pulumi.Input[str] describe: Template description.
+        :param pulumi.Input[bool] is_default: Whether the system-supplied default template is used for outgoing references.
+        :param pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplatePodMonitorArgs']]] pod_monitors: Effective when Level is a cluster, A list of PodMonitors rules in the template.
+        :param pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplateRawJobArgs']]] raw_jobs: Effective when Level is a cluster, A list of RawJobs rules in the template.
+        :param pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplateRecordRuleArgs']]] record_rules: Effective when Level is instance, A list of aggregation rules in the template.
+        :param pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplateServiceMonitorArgs']]] service_monitors: Effective when Level is a cluster, A list of ServiceMonitor rules in the template.
+        :param pulumi.Input[str] template_id: The ID of the template, which is used for the outgoing reference.
+        :param pulumi.Input[str] update_time: Last updated, for outgoing references.
+        :param pulumi.Input[str] version: Whether the system-supplied default template is used for outgoing references.
+        """
+        pulumi.set(__self__, "level", level)
+        pulumi.set(__self__, "name", name)
+        if describe is not None:
+            pulumi.set(__self__, "describe", describe)
+        if is_default is not None:
+            pulumi.set(__self__, "is_default", is_default)
+        if pod_monitors is not None:
+            pulumi.set(__self__, "pod_monitors", pod_monitors)
+        if raw_jobs is not None:
+            pulumi.set(__self__, "raw_jobs", raw_jobs)
+        if record_rules is not None:
+            pulumi.set(__self__, "record_rules", record_rules)
+        if service_monitors is not None:
+            pulumi.set(__self__, "service_monitors", service_monitors)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+        if update_time is not None:
+            pulumi.set(__self__, "update_time", update_time)
+        if version is not None:
+            pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter
+    def level(self) -> pulumi.Input[str]:
+        """
+        Template dimensions, the following types are supported `instance` instance level, `cluster` cluster level.
+        """
+        return pulumi.get(self, "level")
+
+    @level.setter
+    def level(self, value: pulumi.Input[str]):
+        pulumi.set(self, "level", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Template name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def describe(self) -> Optional[pulumi.Input[str]]:
+        """
+        Template description.
+        """
+        return pulumi.get(self, "describe")
+
+    @describe.setter
+    def describe(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "describe", value)
+
+    @property
+    @pulumi.getter(name="isDefault")
+    def is_default(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the system-supplied default template is used for outgoing references.
+        """
+        return pulumi.get(self, "is_default")
+
+    @is_default.setter
+    def is_default(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_default", value)
+
+    @property
+    @pulumi.getter(name="podMonitors")
+    def pod_monitors(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplatePodMonitorArgs']]]]:
+        """
+        Effective when Level is a cluster, A list of PodMonitors rules in the template.
+        """
+        return pulumi.get(self, "pod_monitors")
+
+    @pod_monitors.setter
+    def pod_monitors(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplatePodMonitorArgs']]]]):
+        pulumi.set(self, "pod_monitors", value)
+
+    @property
+    @pulumi.getter(name="rawJobs")
+    def raw_jobs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplateRawJobArgs']]]]:
+        """
+        Effective when Level is a cluster, A list of RawJobs rules in the template.
+        """
+        return pulumi.get(self, "raw_jobs")
+
+    @raw_jobs.setter
+    def raw_jobs(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplateRawJobArgs']]]]):
+        pulumi.set(self, "raw_jobs", value)
+
+    @property
+    @pulumi.getter(name="recordRules")
+    def record_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplateRecordRuleArgs']]]]:
+        """
+        Effective when Level is instance, A list of aggregation rules in the template.
+        """
+        return pulumi.get(self, "record_rules")
+
+    @record_rules.setter
+    def record_rules(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplateRecordRuleArgs']]]]):
+        pulumi.set(self, "record_rules", value)
+
+    @property
+    @pulumi.getter(name="serviceMonitors")
+    def service_monitors(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplateServiceMonitorArgs']]]]:
+        """
+        Effective when Level is a cluster, A list of ServiceMonitor rules in the template.
+        """
+        return pulumi.get(self, "service_monitors")
+
+    @service_monitors.setter
+    def service_monitors(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TmpTkeTemplateTemplateServiceMonitorArgs']]]]):
+        pulumi.set(self, "service_monitors", value)
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the template, which is used for the outgoing reference.
+        """
+        return pulumi.get(self, "template_id")
+
+    @template_id.setter
+    def template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "template_id", value)
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Last updated, for outgoing references.
+        """
+        return pulumi.get(self, "update_time")
+
+    @update_time.setter
+    def update_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "update_time", value)
+
+    @property
+    @pulumi.getter
+    def version(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether the system-supplied default template is used for outgoing references.
+        """
+        return pulumi.get(self, "version")
+
+    @version.setter
+    def version(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "version", value)
+
+
+@pulumi.input_type
+class TmpTkeTemplateTemplatePodMonitorArgs:
+    def __init__(__self__, *,
+                 config: pulumi.Input[str],
+                 name: pulumi.Input[str],
+                 template_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] config: Config.
+        :param pulumi.Input[str] name: Name.
+        :param pulumi.Input[str] template_id: Used for the argument, if the configuration comes to the template, the template id.
+        """
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "name", name)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter
+    def config(self) -> pulumi.Input[str]:
+        """
+        Config.
+        """
+        return pulumi.get(self, "config")
+
+    @config.setter
+    def config(self, value: pulumi.Input[str]):
+        pulumi.set(self, "config", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used for the argument, if the configuration comes to the template, the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+    @template_id.setter
+    def template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "template_id", value)
+
+
+@pulumi.input_type
+class TmpTkeTemplateTemplateRawJobArgs:
+    def __init__(__self__, *,
+                 config: pulumi.Input[str],
+                 name: pulumi.Input[str],
+                 template_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] config: Config.
+        :param pulumi.Input[str] name: Name.
+        :param pulumi.Input[str] template_id: Used for the argument, if the configuration comes to the template, the template id.
+        """
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "name", name)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter
+    def config(self) -> pulumi.Input[str]:
+        """
+        Config.
+        """
+        return pulumi.get(self, "config")
+
+    @config.setter
+    def config(self, value: pulumi.Input[str]):
+        pulumi.set(self, "config", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used for the argument, if the configuration comes to the template, the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+    @template_id.setter
+    def template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "template_id", value)
+
+
+@pulumi.input_type
+class TmpTkeTemplateTemplateRecordRuleArgs:
+    def __init__(__self__, *,
+                 config: pulumi.Input[str],
+                 name: pulumi.Input[str],
+                 template_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] config: Config.
+        :param pulumi.Input[str] name: Name.
+        :param pulumi.Input[str] template_id: Used for the argument, if the configuration comes to the template, the template id.
+        """
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "name", name)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter
+    def config(self) -> pulumi.Input[str]:
+        """
+        Config.
+        """
+        return pulumi.get(self, "config")
+
+    @config.setter
+    def config(self, value: pulumi.Input[str]):
+        pulumi.set(self, "config", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used for the argument, if the configuration comes to the template, the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+    @template_id.setter
+    def template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "template_id", value)
+
+
+@pulumi.input_type
+class TmpTkeTemplateTemplateServiceMonitorArgs:
+    def __init__(__self__, *,
+                 config: pulumi.Input[str],
+                 name: pulumi.Input[str],
+                 template_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] config: Config.
+        :param pulumi.Input[str] name: Name.
+        :param pulumi.Input[str] template_id: Used for the argument, if the configuration comes to the template, the template id.
+        """
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "name", name)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter
+    def config(self) -> pulumi.Input[str]:
+        """
+        Config.
+        """
+        return pulumi.get(self, "config")
+
+    @config.setter
+    def config(self, value: pulumi.Input[str]):
+        pulumi.set(self, "config", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used for the argument, if the configuration comes to the template, the template id.
+        """
+        return pulumi.get(self, "template_id")
+
+    @template_id.setter
+    def template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "template_id", value)
+
+
+@pulumi.input_type
+class GetDataDimensionArgs:
     def __init__(__self__, *,
                  name: str,
                  value: str):
+        """
+        :param str name: Instance dimension name, eg: `InstanceId` for cvm.
+        :param str value: Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "value", value)
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Instance dimension name, eg: `InstanceId` for cvm.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -577,6 +1841,9 @@ class DataDimensionArgs:
     @property
     @pulumi.getter
     def value(self) -> str:
+        """
+        Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -585,388 +1852,14 @@ class DataDimensionArgs:
 
 
 @pulumi.input_type
-class PolicyBindingObjectDimensionArgs:
-    def __init__(__self__, *,
-                 dimensions_json: pulumi.Input[str],
-                 unique_id: Optional[pulumi.Input[str]] = None):
-        pulumi.set(__self__, "dimensions_json", dimensions_json)
-        if unique_id is not None:
-            pulumi.set(__self__, "unique_id", unique_id)
-
-    @property
-    @pulumi.getter(name="dimensionsJson")
-    def dimensions_json(self) -> pulumi.Input[str]:
-        return pulumi.get(self, "dimensions_json")
-
-    @dimensions_json.setter
-    def dimensions_json(self, value: pulumi.Input[str]):
-        pulumi.set(self, "dimensions_json", value)
-
-    @property
-    @pulumi.getter(name="uniqueId")
-    def unique_id(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "unique_id")
-
-    @unique_id.setter
-    def unique_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "unique_id", value)
-
-
-@pulumi.input_type
-class PolicyGroupBindingObjectArgs:
-    def __init__(__self__, *,
-                 dimensions_json: Optional[pulumi.Input[str]] = None,
-                 is_shielded: Optional[pulumi.Input[int]] = None,
-                 region: Optional[pulumi.Input[str]] = None,
-                 unique_id: Optional[pulumi.Input[str]] = None):
-        if dimensions_json is not None:
-            pulumi.set(__self__, "dimensions_json", dimensions_json)
-        if is_shielded is not None:
-            pulumi.set(__self__, "is_shielded", is_shielded)
-        if region is not None:
-            pulumi.set(__self__, "region", region)
-        if unique_id is not None:
-            pulumi.set(__self__, "unique_id", unique_id)
-
-    @property
-    @pulumi.getter(name="dimensionsJson")
-    def dimensions_json(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "dimensions_json")
-
-    @dimensions_json.setter
-    def dimensions_json(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "dimensions_json", value)
-
-    @property
-    @pulumi.getter(name="isShielded")
-    def is_shielded(self) -> Optional[pulumi.Input[int]]:
-        return pulumi.get(self, "is_shielded")
-
-    @is_shielded.setter
-    def is_shielded(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "is_shielded", value)
-
-    @property
-    @pulumi.getter
-    def region(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "region")
-
-    @region.setter
-    def region(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "region", value)
-
-    @property
-    @pulumi.getter(name="uniqueId")
-    def unique_id(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "unique_id")
-
-    @unique_id.setter
-    def unique_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "unique_id", value)
-
-
-@pulumi.input_type
-class PolicyGroupConditionArgs:
-    def __init__(__self__, *,
-                 alarm_notify_period: pulumi.Input[int],
-                 alarm_notify_type: pulumi.Input[int],
-                 metric_id: pulumi.Input[int],
-                 calc_period: Optional[pulumi.Input[int]] = None,
-                 calc_type: Optional[pulumi.Input[int]] = None,
-                 calc_value: Optional[pulumi.Input[float]] = None,
-                 continue_period: Optional[pulumi.Input[int]] = None):
-        pulumi.set(__self__, "alarm_notify_period", alarm_notify_period)
-        pulumi.set(__self__, "alarm_notify_type", alarm_notify_type)
-        pulumi.set(__self__, "metric_id", metric_id)
-        if calc_period is not None:
-            pulumi.set(__self__, "calc_period", calc_period)
-        if calc_type is not None:
-            pulumi.set(__self__, "calc_type", calc_type)
-        if calc_value is not None:
-            pulumi.set(__self__, "calc_value", calc_value)
-        if continue_period is not None:
-            pulumi.set(__self__, "continue_period", continue_period)
-
-    @property
-    @pulumi.getter(name="alarmNotifyPeriod")
-    def alarm_notify_period(self) -> pulumi.Input[int]:
-        return pulumi.get(self, "alarm_notify_period")
-
-    @alarm_notify_period.setter
-    def alarm_notify_period(self, value: pulumi.Input[int]):
-        pulumi.set(self, "alarm_notify_period", value)
-
-    @property
-    @pulumi.getter(name="alarmNotifyType")
-    def alarm_notify_type(self) -> pulumi.Input[int]:
-        return pulumi.get(self, "alarm_notify_type")
-
-    @alarm_notify_type.setter
-    def alarm_notify_type(self, value: pulumi.Input[int]):
-        pulumi.set(self, "alarm_notify_type", value)
-
-    @property
-    @pulumi.getter(name="metricId")
-    def metric_id(self) -> pulumi.Input[int]:
-        return pulumi.get(self, "metric_id")
-
-    @metric_id.setter
-    def metric_id(self, value: pulumi.Input[int]):
-        pulumi.set(self, "metric_id", value)
-
-    @property
-    @pulumi.getter(name="calcPeriod")
-    def calc_period(self) -> Optional[pulumi.Input[int]]:
-        return pulumi.get(self, "calc_period")
-
-    @calc_period.setter
-    def calc_period(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "calc_period", value)
-
-    @property
-    @pulumi.getter(name="calcType")
-    def calc_type(self) -> Optional[pulumi.Input[int]]:
-        return pulumi.get(self, "calc_type")
-
-    @calc_type.setter
-    def calc_type(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "calc_type", value)
-
-    @property
-    @pulumi.getter(name="calcValue")
-    def calc_value(self) -> Optional[pulumi.Input[float]]:
-        return pulumi.get(self, "calc_value")
-
-    @calc_value.setter
-    def calc_value(self, value: Optional[pulumi.Input[float]]):
-        pulumi.set(self, "calc_value", value)
-
-    @property
-    @pulumi.getter(name="continuePeriod")
-    def continue_period(self) -> Optional[pulumi.Input[int]]:
-        return pulumi.get(self, "continue_period")
-
-    @continue_period.setter
-    def continue_period(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "continue_period", value)
-
-
-@pulumi.input_type
-class PolicyGroupEventConditionArgs:
-    def __init__(__self__, *,
-                 alarm_notify_period: pulumi.Input[int],
-                 alarm_notify_type: pulumi.Input[int],
-                 event_id: pulumi.Input[int]):
-        pulumi.set(__self__, "alarm_notify_period", alarm_notify_period)
-        pulumi.set(__self__, "alarm_notify_type", alarm_notify_type)
-        pulumi.set(__self__, "event_id", event_id)
-
-    @property
-    @pulumi.getter(name="alarmNotifyPeriod")
-    def alarm_notify_period(self) -> pulumi.Input[int]:
-        return pulumi.get(self, "alarm_notify_period")
-
-    @alarm_notify_period.setter
-    def alarm_notify_period(self, value: pulumi.Input[int]):
-        pulumi.set(self, "alarm_notify_period", value)
-
-    @property
-    @pulumi.getter(name="alarmNotifyType")
-    def alarm_notify_type(self) -> pulumi.Input[int]:
-        return pulumi.get(self, "alarm_notify_type")
-
-    @alarm_notify_type.setter
-    def alarm_notify_type(self, value: pulumi.Input[int]):
-        pulumi.set(self, "alarm_notify_type", value)
-
-    @property
-    @pulumi.getter(name="eventId")
-    def event_id(self) -> pulumi.Input[int]:
-        return pulumi.get(self, "event_id")
-
-    @event_id.setter
-    def event_id(self, value: pulumi.Input[int]):
-        pulumi.set(self, "event_id", value)
-
-
-@pulumi.input_type
-class PolicyGroupReceiverArgs:
-    def __init__(__self__, *,
-                 end_time: Optional[pulumi.Input[int]] = None,
-                 need_send_notice: Optional[pulumi.Input[int]] = None,
-                 notify_ways: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 person_interval: Optional[pulumi.Input[int]] = None,
-                 receive_language: Optional[pulumi.Input[str]] = None,
-                 receiver_group_lists: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
-                 receiver_type: Optional[pulumi.Input[str]] = None,
-                 receiver_user_lists: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
-                 recover_notifies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 round_interval: Optional[pulumi.Input[int]] = None,
-                 round_number: Optional[pulumi.Input[int]] = None,
-                 send_fors: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 start_time: Optional[pulumi.Input[int]] = None,
-                 uid_lists: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None):
-        if end_time is not None:
-            pulumi.set(__self__, "end_time", end_time)
-        if need_send_notice is not None:
-            pulumi.set(__self__, "need_send_notice", need_send_notice)
-        if notify_ways is not None:
-            pulumi.set(__self__, "notify_ways", notify_ways)
-        if person_interval is not None:
-            pulumi.set(__self__, "person_interval", person_interval)
-        if receive_language is not None:
-            pulumi.set(__self__, "receive_language", receive_language)
-        if receiver_group_lists is not None:
-            pulumi.set(__self__, "receiver_group_lists", receiver_group_lists)
-        if receiver_type is not None:
-            pulumi.set(__self__, "receiver_type", receiver_type)
-        if receiver_user_lists is not None:
-            pulumi.set(__self__, "receiver_user_lists", receiver_user_lists)
-        if recover_notifies is not None:
-            pulumi.set(__self__, "recover_notifies", recover_notifies)
-        if round_interval is not None:
-            pulumi.set(__self__, "round_interval", round_interval)
-        if round_number is not None:
-            pulumi.set(__self__, "round_number", round_number)
-        if send_fors is not None:
-            pulumi.set(__self__, "send_fors", send_fors)
-        if start_time is not None:
-            pulumi.set(__self__, "start_time", start_time)
-        if uid_lists is not None:
-            pulumi.set(__self__, "uid_lists", uid_lists)
-
-    @property
-    @pulumi.getter(name="endTime")
-    def end_time(self) -> Optional[pulumi.Input[int]]:
-        return pulumi.get(self, "end_time")
-
-    @end_time.setter
-    def end_time(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "end_time", value)
-
-    @property
-    @pulumi.getter(name="needSendNotice")
-    def need_send_notice(self) -> Optional[pulumi.Input[int]]:
-        return pulumi.get(self, "need_send_notice")
-
-    @need_send_notice.setter
-    def need_send_notice(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "need_send_notice", value)
-
-    @property
-    @pulumi.getter(name="notifyWays")
-    def notify_ways(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
-        return pulumi.get(self, "notify_ways")
-
-    @notify_ways.setter
-    def notify_ways(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
-        pulumi.set(self, "notify_ways", value)
-
-    @property
-    @pulumi.getter(name="personInterval")
-    def person_interval(self) -> Optional[pulumi.Input[int]]:
-        return pulumi.get(self, "person_interval")
-
-    @person_interval.setter
-    def person_interval(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "person_interval", value)
-
-    @property
-    @pulumi.getter(name="receiveLanguage")
-    def receive_language(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "receive_language")
-
-    @receive_language.setter
-    def receive_language(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "receive_language", value)
-
-    @property
-    @pulumi.getter(name="receiverGroupLists")
-    def receiver_group_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        return pulumi.get(self, "receiver_group_lists")
-
-    @receiver_group_lists.setter
-    def receiver_group_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
-        pulumi.set(self, "receiver_group_lists", value)
-
-    @property
-    @pulumi.getter(name="receiverType")
-    def receiver_type(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "receiver_type")
-
-    @receiver_type.setter
-    def receiver_type(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "receiver_type", value)
-
-    @property
-    @pulumi.getter(name="receiverUserLists")
-    def receiver_user_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        return pulumi.get(self, "receiver_user_lists")
-
-    @receiver_user_lists.setter
-    def receiver_user_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
-        pulumi.set(self, "receiver_user_lists", value)
-
-    @property
-    @pulumi.getter(name="recoverNotifies")
-    def recover_notifies(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
-        return pulumi.get(self, "recover_notifies")
-
-    @recover_notifies.setter
-    def recover_notifies(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
-        pulumi.set(self, "recover_notifies", value)
-
-    @property
-    @pulumi.getter(name="roundInterval")
-    def round_interval(self) -> Optional[pulumi.Input[int]]:
-        return pulumi.get(self, "round_interval")
-
-    @round_interval.setter
-    def round_interval(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "round_interval", value)
-
-    @property
-    @pulumi.getter(name="roundNumber")
-    def round_number(self) -> Optional[pulumi.Input[int]]:
-        return pulumi.get(self, "round_number")
-
-    @round_number.setter
-    def round_number(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "round_number", value)
-
-    @property
-    @pulumi.getter(name="sendFors")
-    def send_fors(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
-        return pulumi.get(self, "send_fors")
-
-    @send_fors.setter
-    def send_fors(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
-        pulumi.set(self, "send_fors", value)
-
-    @property
-    @pulumi.getter(name="startTime")
-    def start_time(self) -> Optional[pulumi.Input[int]]:
-        return pulumi.get(self, "start_time")
-
-    @start_time.setter
-    def start_time(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "start_time", value)
-
-    @property
-    @pulumi.getter(name="uidLists")
-    def uid_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
-        return pulumi.get(self, "uid_lists")
-
-    @uid_lists.setter
-    def uid_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
-        pulumi.set(self, "uid_lists", value)
-
-
-@pulumi.input_type
-class ProductEventDimensionArgs:
+class GetProductEventDimensionArgs:
     def __init__(__self__, *,
                  name: Optional[str] = None,
                  value: Optional[str] = None):
+        """
+        :param str name: Instance dimension name, eg: `deviceWanIp` for internet ip.
+        :param str value: Instance dimension value, eg: `119.119.119.119` for internet ip.
+        """
         if name is not None:
             pulumi.set(__self__, "name", name)
         if value is not None:
@@ -975,6 +1868,9 @@ class ProductEventDimensionArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[str]:
+        """
+        Instance dimension name, eg: `deviceWanIp` for internet ip.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -984,6 +1880,9 @@ class ProductEventDimensionArgs:
     @property
     @pulumi.getter
     def value(self) -> Optional[str]:
+        """
+        Instance dimension value, eg: `119.119.119.119` for internet ip.
+        """
         return pulumi.get(self, "value")
 
     @value.setter

@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a CBS storage attachment resource.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const attachment = new tencentcloud.Cbs.StorageAttachment("attachment", {
+ *     instanceId: "ins-jqlegd42",
+ *     storageId: "disk-kdt0sq6m",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CBS storage attachment can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cbs/storageAttachment:StorageAttachment attachment disk-41s6jwy4
+ * ```
+ */
 export class StorageAttachment extends pulumi.CustomResource {
     /**
      * Get an existing StorageAttachment resource's state with the given name, ID, and optional extra

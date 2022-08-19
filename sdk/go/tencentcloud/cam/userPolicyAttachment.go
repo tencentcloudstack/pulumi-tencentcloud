@@ -11,11 +11,43 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CAM user policy attachment.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cam.NewUserPolicyAttachment(ctx, "foo", &Cam.UserPolicyAttachmentArgs{
+// 			UserId:   pulumi.Any(tencentcloud_cam_user.Foo.Id),
+// 			PolicyId: pulumi.Any(tencentcloud_cam_policy.Foo.Id),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CAM user policy attachment can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
+// ```
 type UserPolicyAttachment struct {
 	pulumi.CustomResourceState
 
-	// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and
-	// the others indicate syntax strategy ways.
+	// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
 	CreateMode pulumi.IntOutput `pulumi:"createMode"`
 	// Create time of the CAM user policy attachment.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
@@ -25,7 +57,7 @@ type UserPolicyAttachment struct {
 	PolicyName pulumi.StringOutput `pulumi:"policyName"`
 	// Type of the policy strategy. `User` means customer strategy and `QCS` means preset strategy.
 	PolicyType pulumi.StringOutput `pulumi:"policyType"`
-	// ID of the attached CAM user.
+	// It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
 	//
 	// Deprecated: It has been deprecated from version 1.59.5. Use `user_name` instead.
 	UserId pulumi.StringPtrOutput `pulumi:"userId"`
@@ -65,8 +97,7 @@ func GetUserPolicyAttachment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering UserPolicyAttachment resources.
 type userPolicyAttachmentState struct {
-	// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and
-	// the others indicate syntax strategy ways.
+	// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
 	CreateMode *int `pulumi:"createMode"`
 	// Create time of the CAM user policy attachment.
 	CreateTime *string `pulumi:"createTime"`
@@ -76,7 +107,7 @@ type userPolicyAttachmentState struct {
 	PolicyName *string `pulumi:"policyName"`
 	// Type of the policy strategy. `User` means customer strategy and `QCS` means preset strategy.
 	PolicyType *string `pulumi:"policyType"`
-	// ID of the attached CAM user.
+	// It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
 	//
 	// Deprecated: It has been deprecated from version 1.59.5. Use `user_name` instead.
 	UserId *string `pulumi:"userId"`
@@ -85,8 +116,7 @@ type userPolicyAttachmentState struct {
 }
 
 type UserPolicyAttachmentState struct {
-	// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and
-	// the others indicate syntax strategy ways.
+	// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
 	CreateMode pulumi.IntPtrInput
 	// Create time of the CAM user policy attachment.
 	CreateTime pulumi.StringPtrInput
@@ -96,7 +126,7 @@ type UserPolicyAttachmentState struct {
 	PolicyName pulumi.StringPtrInput
 	// Type of the policy strategy. `User` means customer strategy and `QCS` means preset strategy.
 	PolicyType pulumi.StringPtrInput
-	// ID of the attached CAM user.
+	// It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
 	//
 	// Deprecated: It has been deprecated from version 1.59.5. Use `user_name` instead.
 	UserId pulumi.StringPtrInput
@@ -111,7 +141,7 @@ func (UserPolicyAttachmentState) ElementType() reflect.Type {
 type userPolicyAttachmentArgs struct {
 	// ID of the policy.
 	PolicyId string `pulumi:"policyId"`
-	// ID of the attached CAM user.
+	// It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
 	//
 	// Deprecated: It has been deprecated from version 1.59.5. Use `user_name` instead.
 	UserId *string `pulumi:"userId"`
@@ -123,7 +153,7 @@ type userPolicyAttachmentArgs struct {
 type UserPolicyAttachmentArgs struct {
 	// ID of the policy.
 	PolicyId pulumi.StringInput
-	// ID of the attached CAM user.
+	// It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
 	//
 	// Deprecated: It has been deprecated from version 1.59.5. Use `user_name` instead.
 	UserId pulumi.StringPtrInput
@@ -218,8 +248,7 @@ func (o UserPolicyAttachmentOutput) ToUserPolicyAttachmentOutputWithContext(ctx 
 	return o
 }
 
-// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and
-// the others indicate syntax strategy ways.
+// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
 func (o UserPolicyAttachmentOutput) CreateMode() pulumi.IntOutput {
 	return o.ApplyT(func(v *UserPolicyAttachment) pulumi.IntOutput { return v.CreateMode }).(pulumi.IntOutput)
 }
@@ -244,7 +273,7 @@ func (o UserPolicyAttachmentOutput) PolicyType() pulumi.StringOutput {
 	return o.ApplyT(func(v *UserPolicyAttachment) pulumi.StringOutput { return v.PolicyType }).(pulumi.StringOutput)
 }
 
-// ID of the attached CAM user.
+// It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
 //
 // Deprecated: It has been deprecated from version 1.59.5. Use `user_name` instead.
 func (o UserPolicyAttachmentOutput) UserId() pulumi.StringPtrOutput {

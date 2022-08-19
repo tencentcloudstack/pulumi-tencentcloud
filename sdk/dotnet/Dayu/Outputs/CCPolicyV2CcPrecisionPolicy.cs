@@ -11,17 +11,32 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
 {
 
     [OutputType]
-    public sealed class CCPolicyV2CcPrecisionPolicy
+    public sealed class CcPolicyV2CcPrecisionPolicy
     {
+        /// <summary>
+        /// Domain.
+        /// </summary>
         public readonly string Domain;
+        /// <summary>
+        /// Ip address.
+        /// </summary>
         public readonly string Ip;
+        /// <summary>
+        /// Policy mode (discard or captcha).
+        /// </summary>
         public readonly string PolicyAction;
         public readonly string? PolicyId;
-        public readonly ImmutableArray<Outputs.CCPolicyV2CcPrecisionPolicyPolicy> Policys;
+        /// <summary>
+        /// A list of policies.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.CcPolicyV2CcPrecisionPolicyPolicy> Policys;
+        /// <summary>
+        /// Protocol.
+        /// </summary>
         public readonly string Protocol;
 
         [OutputConstructor]
-        private CCPolicyV2CcPrecisionPolicy(
+        private CcPolicyV2CcPrecisionPolicy(
             string domain,
 
             string ip,
@@ -30,7 +45,7 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
 
             string? policyId,
 
-            ImmutableArray<Outputs.CCPolicyV2CcPrecisionPolicyPolicy> policys,
+            ImmutableArray<Outputs.CcPolicyV2CcPrecisionPolicyPolicy> policys,
 
             string protocol)
         {

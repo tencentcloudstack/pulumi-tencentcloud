@@ -19,14 +19,8 @@ class GroupLiteRuleArgs:
         """
         The set of arguments for constructing a GroupLiteRule resource.
         :param pulumi.Input[str] security_group_id: ID of the security group.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] egresses: Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-               'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-               Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-               `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] ingresses: Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-               'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-               Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-               `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] egresses: Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ingresses: Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         """
         pulumi.set(__self__, "security_group_id", security_group_id)
         if egresses is not None:
@@ -50,10 +44,7 @@ class GroupLiteRuleArgs:
     @pulumi.getter
     def egresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-        'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-        Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-        `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         """
         return pulumi.get(self, "egresses")
 
@@ -65,10 +56,7 @@ class GroupLiteRuleArgs:
     @pulumi.getter
     def ingresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-        'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-        Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-        `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         """
         return pulumi.get(self, "ingresses")
 
@@ -85,14 +73,8 @@ class _GroupLiteRuleState:
                  security_group_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering GroupLiteRule resources.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] egresses: Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-               'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-               Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-               `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] ingresses: Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-               'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-               Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-               `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] egresses: Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ingresses: Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         :param pulumi.Input[str] security_group_id: ID of the security group.
         """
         if egresses is not None:
@@ -106,10 +88,7 @@ class _GroupLiteRuleState:
     @pulumi.getter
     def egresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-        'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-        Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-        `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         """
         return pulumi.get(self, "egresses")
 
@@ -121,10 +100,7 @@ class _GroupLiteRuleState:
     @pulumi.getter
     def ingresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-        'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-        Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-        `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         """
         return pulumi.get(self, "ingresses")
 
@@ -155,17 +131,46 @@ class GroupLiteRule(pulumi.CustomResource):
                  security_group_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a GroupLiteRule resource with the given unique name, props, and options.
+        Provide a resource to create security group some lite rules quickly.
+
+        > **NOTE:** It can't be used with tencentcloud_security_group_rule, and don't create multiple Security.GroupRule resources, otherwise it may cause problems.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_group = tencentcloud.security.Group("fooGroup")
+        foo_group_lite_rule = tencentcloud.security.GroupLiteRule("fooGroupLiteRule",
+            security_group_id=foo_group.id,
+            ingresses=[
+                "ACCEPT#192.168.1.0/24#80#TCP",
+                "DROP#8.8.8.8#80,90#UDP",
+                "ACCEPT#0.0.0.0/0#80-90#TCP",
+                "ACCEPT#sg-7ixn3foj#80-90#TCP",
+                "ACCEPT#ipm-epjq5kn0#80-90#TCP",
+                "ACCEPT#ipmg-3loavam6#80-90#TCP",
+            ],
+            egresses=[
+                "ACCEPT#192.168.0.0/16#ALL#TCP",
+                "ACCEPT#10.0.0.0/8#ALL#ICMP",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ])
+        ```
+
+        ## Import
+
+        Security group lite rule can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Security/groupLiteRule:GroupLiteRule tencentcloud_security_group_lite_rule.foo sg-ey3wmiz1
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] egresses: Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-               'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-               Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-               `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] ingresses: Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-               'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-               Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-               `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] egresses: Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ingresses: Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         :param pulumi.Input[str] security_group_id: ID of the security group.
         """
         ...
@@ -175,7 +180,42 @@ class GroupLiteRule(pulumi.CustomResource):
                  args: GroupLiteRuleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a GroupLiteRule resource with the given unique name, props, and options.
+        Provide a resource to create security group some lite rules quickly.
+
+        > **NOTE:** It can't be used with tencentcloud_security_group_rule, and don't create multiple Security.GroupRule resources, otherwise it may cause problems.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_group = tencentcloud.security.Group("fooGroup")
+        foo_group_lite_rule = tencentcloud.security.GroupLiteRule("fooGroupLiteRule",
+            security_group_id=foo_group.id,
+            ingresses=[
+                "ACCEPT#192.168.1.0/24#80#TCP",
+                "DROP#8.8.8.8#80,90#UDP",
+                "ACCEPT#0.0.0.0/0#80-90#TCP",
+                "ACCEPT#sg-7ixn3foj#80-90#TCP",
+                "ACCEPT#ipm-epjq5kn0#80-90#TCP",
+                "ACCEPT#ipmg-3loavam6#80-90#TCP",
+            ],
+            egresses=[
+                "ACCEPT#192.168.0.0/16#ALL#TCP",
+                "ACCEPT#10.0.0.0/8#ALL#ICMP",
+                "DROP#0.0.0.0/0#ALL#ALL",
+            ])
+        ```
+
+        ## Import
+
+        Security group lite rule can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Security/groupLiteRule:GroupLiteRule tencentcloud_security_group_lite_rule.foo sg-ey3wmiz1
+        ```
+
         :param str resource_name: The name of the resource.
         :param GroupLiteRuleArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -231,14 +271,8 @@ class GroupLiteRule(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] egresses: Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-               'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-               Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-               `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] ingresses: Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-               'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-               Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-               `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] egresses: Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ingresses: Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         :param pulumi.Input[str] security_group_id: ID of the security group.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -254,10 +288,7 @@ class GroupLiteRule(pulumi.CustomResource):
     @pulumi.getter
     def egresses(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-        'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-        Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-        `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         """
         return pulumi.get(self, "egresses")
 
@@ -265,10 +296,7 @@ class GroupLiteRule(pulumi.CustomResource):
     @pulumi.getter
     def ingresses(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-        'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-        Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-        `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+        Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
         """
         return pulumi.get(self, "ingresses")
 

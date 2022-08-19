@@ -10,6 +10,11 @@ from .. import _utilities
 
 __all__ = [
     'InstanceSecurityPolicy',
+    'GetInstancesInstanceListResult',
+    'GetNamespacesNamespaceListResult',
+    'GetRepositoriesRepositoryListResult',
+    'GetTokensTokenListResult',
+    'GetVpcAttachmentsVpcAttachmentListResult',
 ]
 
 @pulumi.output_type
@@ -36,6 +41,10 @@ class InstanceSecurityPolicy(dict):
                  description: Optional[str] = None,
                  index: Optional[int] = None,
                  version: Optional[str] = None):
+        """
+        :param str cidr_block: The public network IP address of the access source.
+        :param str description: Remarks of policy.
+        """
         if cidr_block is not None:
             pulumi.set(__self__, "cidr_block", cidr_block)
         if description is not None:
@@ -48,11 +57,17 @@ class InstanceSecurityPolicy(dict):
     @property
     @pulumi.getter(name="cidrBlock")
     def cidr_block(self) -> Optional[str]:
+        """
+        The public network IP address of the access source.
+        """
         return pulumi.get(self, "cidr_block")
 
     @property
     @pulumi.getter
     def description(self) -> Optional[str]:
+        """
+        Remarks of policy.
+        """
         return pulumi.get(self, "description")
 
     @property
@@ -64,5 +79,337 @@ class InstanceSecurityPolicy(dict):
     @pulumi.getter
     def version(self) -> Optional[str]:
         return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetInstancesInstanceListResult(dict):
+    def __init__(__self__, *,
+                 id: str,
+                 instance_type: str,
+                 internal_end_point: str,
+                 name: str,
+                 public_domain: str,
+                 status: str,
+                 tags: Mapping[str, Any]):
+        """
+        :param str id: ID of the TCR instance.
+        :param str instance_type: Instance type.
+        :param str internal_end_point: Internal address for access of the TCR instance.
+        :param str name: Name of the TCR instance to query.
+        :param str public_domain: Public address for access of the TCR instance.
+        :param str status: Status of the TCR instance.
+        :param Mapping[str, Any] tags: Tags of the TCR instance.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "instance_type", instance_type)
+        pulumi.set(__self__, "internal_end_point", internal_end_point)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "public_domain", public_domain)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        ID of the TCR instance.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> str:
+        """
+        Instance type.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter(name="internalEndPoint")
+    def internal_end_point(self) -> str:
+        """
+        Internal address for access of the TCR instance.
+        """
+        return pulumi.get(self, "internal_end_point")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of the TCR instance to query.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="publicDomain")
+    def public_domain(self) -> str:
+        """
+        Public address for access of the TCR instance.
+        """
+        return pulumi.get(self, "public_domain")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Status of the TCR instance.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the TCR instance.
+        """
+        return pulumi.get(self, "tags")
+
+
+@pulumi.output_type
+class GetNamespacesNamespaceListResult(dict):
+    def __init__(__self__, *,
+                 is_public: bool,
+                 name: str):
+        """
+        :param bool is_public: Indicate that the namespace is public or not.
+        :param str name: Name of TCR namespace.
+        """
+        pulumi.set(__self__, "is_public", is_public)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="isPublic")
+    def is_public(self) -> bool:
+        """
+        Indicate that the namespace is public or not.
+        """
+        return pulumi.get(self, "is_public")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of TCR namespace.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetRepositoriesRepositoryListResult(dict):
+    def __init__(__self__, *,
+                 brief_desc: str,
+                 create_time: str,
+                 description: str,
+                 is_public: bool,
+                 name: str,
+                 namespace_name: str,
+                 update_time: str,
+                 url: str):
+        """
+        :param str brief_desc: Brief description of the repository.
+        :param str create_time: Create time.
+        :param str description: Description of the repository.
+        :param bool is_public: Indicate that the repository is public or not.
+        :param str name: Name of repository.
+        :param str namespace_name: Name of the namespace that the repository belongs to.
+        :param str update_time: Last update time.
+        :param str url: URL of the repository.
+        """
+        pulumi.set(__self__, "brief_desc", brief_desc)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "is_public", is_public)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "namespace_name", namespace_name)
+        pulumi.set(__self__, "update_time", update_time)
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter(name="briefDesc")
+    def brief_desc(self) -> str:
+        """
+        Brief description of the repository.
+        """
+        return pulumi.get(self, "brief_desc")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Description of the repository.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="isPublic")
+    def is_public(self) -> bool:
+        """
+        Indicate that the repository is public or not.
+        """
+        return pulumi.get(self, "is_public")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of repository.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="namespaceName")
+    def namespace_name(self) -> str:
+        """
+        Name of the namespace that the repository belongs to.
+        """
+        return pulumi.get(self, "namespace_name")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Last update time.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        URL of the repository.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class GetTokensTokenListResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 description: str,
+                 enable: bool,
+                 token_id: str):
+        """
+        :param str create_time: Create time.
+        :param str description: Description of the token.
+        :param bool enable: Indicate that the token is enabled or not.
+        :param str token_id: ID of the TCR token to query.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "enable", enable)
+        pulumi.set(__self__, "token_id", token_id)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Description of the token.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def enable(self) -> bool:
+        """
+        Indicate that the token is enabled or not.
+        """
+        return pulumi.get(self, "enable")
+
+    @property
+    @pulumi.getter(name="tokenId")
+    def token_id(self) -> str:
+        """
+        ID of the TCR token to query.
+        """
+        return pulumi.get(self, "token_id")
+
+
+@pulumi.output_type
+class GetVpcAttachmentsVpcAttachmentListResult(dict):
+    def __init__(__self__, *,
+                 access_ip: str,
+                 enable_public_domain_dns: bool,
+                 enable_vpc_domain_dns: bool,
+                 status: str,
+                 subnet_id: str,
+                 vpc_id: str):
+        """
+        :param str access_ip: IP address of this VPC access.
+        :param bool enable_public_domain_dns: Whether to enable public domain dns.
+        :param bool enable_vpc_domain_dns: Whether to enable vpc domain dns.
+        :param str status: Status of this VPC access.
+        :param str subnet_id: ID of subnet to query.
+        :param str vpc_id: ID of VPC to query.
+        """
+        pulumi.set(__self__, "access_ip", access_ip)
+        pulumi.set(__self__, "enable_public_domain_dns", enable_public_domain_dns)
+        pulumi.set(__self__, "enable_vpc_domain_dns", enable_vpc_domain_dns)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="accessIp")
+    def access_ip(self) -> str:
+        """
+        IP address of this VPC access.
+        """
+        return pulumi.get(self, "access_ip")
+
+    @property
+    @pulumi.getter(name="enablePublicDomainDns")
+    def enable_public_domain_dns(self) -> bool:
+        """
+        Whether to enable public domain dns.
+        """
+        return pulumi.get(self, "enable_public_domain_dns")
+
+    @property
+    @pulumi.getter(name="enableVpcDomainDns")
+    def enable_vpc_domain_dns(self) -> bool:
+        """
+        Whether to enable vpc domain dns.
+        """
+        return pulumi.get(self, "enable_vpc_domain_dns")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Status of this VPC access.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        ID of subnet to query.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        ID of VPC to query.
+        """
+        return pulumi.get(self, "vpc_id")
 
 

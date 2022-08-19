@@ -15,11 +15,11 @@ __all__ = [
     'FunctionLayer',
     'FunctionTrigger',
     'FunctionTriggerInfo',
-    'FunctionsFunctionResult',
-    'FunctionsFunctionTriggerInfoResult',
     'LayerContent',
-    'LogsLogResult',
-    'NamespacesNamespaceResult',
+    'GetFunctionsFunctionResult',
+    'GetFunctionsFunctionTriggerInfoResult',
+    'GetLogsLogResult',
+    'GetNamespacesNamespaceResult',
 ]
 
 @pulumi.output_type
@@ -67,6 +67,14 @@ class FunctionCfsConfig(dict):
                  ip_address: Optional[str] = None,
                  mount_subnet_id: Optional[str] = None,
                  mount_vpc_id: Optional[str] = None):
+        """
+        :param str cfs_id: File system instance ID.
+        :param str local_mount_dir: Local mount directory.
+        :param str mount_ins_id: File system mount instance ID.
+        :param str remote_mount_dir: Remote mount directory.
+        :param str user_group_id: ID of user group.
+        :param str user_id: ID of user.
+        """
         pulumi.set(__self__, "cfs_id", cfs_id)
         pulumi.set(__self__, "local_mount_dir", local_mount_dir)
         pulumi.set(__self__, "mount_ins_id", mount_ins_id)
@@ -83,31 +91,49 @@ class FunctionCfsConfig(dict):
     @property
     @pulumi.getter(name="cfsId")
     def cfs_id(self) -> str:
+        """
+        File system instance ID.
+        """
         return pulumi.get(self, "cfs_id")
 
     @property
     @pulumi.getter(name="localMountDir")
     def local_mount_dir(self) -> str:
+        """
+        Local mount directory.
+        """
         return pulumi.get(self, "local_mount_dir")
 
     @property
     @pulumi.getter(name="mountInsId")
     def mount_ins_id(self) -> str:
+        """
+        File system mount instance ID.
+        """
         return pulumi.get(self, "mount_ins_id")
 
     @property
     @pulumi.getter(name="remoteMountDir")
     def remote_mount_dir(self) -> str:
+        """
+        Remote mount directory.
+        """
         return pulumi.get(self, "remote_mount_dir")
 
     @property
     @pulumi.getter(name="userGroupId")
     def user_group_id(self) -> str:
+        """
+        ID of user group.
+        """
         return pulumi.get(self, "user_group_id")
 
     @property
     @pulumi.getter(name="userId")
     def user_id(self) -> str:
+        """
+        ID of user.
+        """
         return pulumi.get(self, "user_id")
 
     @property
@@ -158,6 +184,14 @@ class FunctionImageConfig(dict):
                  command: Optional[str] = None,
                  entry_point: Optional[str] = None,
                  registry_id: Optional[str] = None):
+        """
+        :param str image_type: The image type. personal or enterprise.
+        :param str image_uri: The uri of image.
+        :param str args: the parameters of command.
+        :param str command: The command of entrypoint.
+        :param str entry_point: The entrypoint of app.
+        :param str registry_id: The registry id of TCR. When image type is enterprise, it must be set.
+        """
         pulumi.set(__self__, "image_type", image_type)
         pulumi.set(__self__, "image_uri", image_uri)
         if args is not None:
@@ -172,31 +206,49 @@ class FunctionImageConfig(dict):
     @property
     @pulumi.getter(name="imageType")
     def image_type(self) -> str:
+        """
+        The image type. personal or enterprise.
+        """
         return pulumi.get(self, "image_type")
 
     @property
     @pulumi.getter(name="imageUri")
     def image_uri(self) -> str:
+        """
+        The uri of image.
+        """
         return pulumi.get(self, "image_uri")
 
     @property
     @pulumi.getter
     def args(self) -> Optional[str]:
+        """
+        the parameters of command.
+        """
         return pulumi.get(self, "args")
 
     @property
     @pulumi.getter
     def command(self) -> Optional[str]:
+        """
+        The command of entrypoint.
+        """
         return pulumi.get(self, "command")
 
     @property
     @pulumi.getter(name="entryPoint")
     def entry_point(self) -> Optional[str]:
+        """
+        The entrypoint of app.
+        """
         return pulumi.get(self, "entry_point")
 
     @property
     @pulumi.getter(name="registryId")
     def registry_id(self) -> Optional[str]:
+        """
+        The registry id of TCR. When image type is enterprise, it must be set.
+        """
         return pulumi.get(self, "registry_id")
 
 
@@ -224,17 +276,27 @@ class FunctionLayer(dict):
     def __init__(__self__, *,
                  layer_name: str,
                  layer_version: int):
+        """
+        :param str layer_name: The name of Layer.
+        :param int layer_version: The version of layer.
+        """
         pulumi.set(__self__, "layer_name", layer_name)
         pulumi.set(__self__, "layer_version", layer_version)
 
     @property
     @pulumi.getter(name="layerName")
     def layer_name(self) -> str:
+        """
+        The name of Layer.
+        """
         return pulumi.get(self, "layer_name")
 
     @property
     @pulumi.getter(name="layerVersion")
     def layer_version(self) -> int:
+        """
+        The version of layer.
+        """
         return pulumi.get(self, "layer_version")
 
 
@@ -264,6 +326,12 @@ class FunctionTrigger(dict):
                  trigger_desc: str,
                  type: str,
                  cos_region: Optional[str] = None):
+        """
+        :param str name: Name of the SCF function trigger, if `type` is `ckafka`, the format of name must be `<ckafkaInstanceId>-<topicId>`; if `type` is `cos`, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.
+        :param str trigger_desc: TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
+        :param str type: Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        :param str cos_region: Region of cos bucket. if `type` is `cos`, `cos_region` is required.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "trigger_desc", trigger_desc)
         pulumi.set(__self__, "type", type)
@@ -273,21 +341,33 @@ class FunctionTrigger(dict):
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the SCF function trigger, if `type` is `ckafka`, the format of name must be `<ckafkaInstanceId>-<topicId>`; if `type` is `cos`, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="triggerDesc")
     def trigger_desc(self) -> str:
+        """
+        TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
+        """
         return pulumi.get(self, "trigger_desc")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        """
         return pulumi.get(self, "type")
 
     @property
     @pulumi.getter(name="cosRegion")
     def cos_region(self) -> Optional[str]:
+        """
+        Region of cos bucket. if `type` is `cos`, `cos_region` is required.
+        """
         return pulumi.get(self, "cos_region")
 
 
@@ -324,6 +404,15 @@ class FunctionTriggerInfo(dict):
                  name: Optional[str] = None,
                  trigger_desc: Optional[str] = None,
                  type: Optional[str] = None):
+        """
+        :param str create_time: Create time of SCF function trigger.
+        :param str custom_argument: User-defined parameters of SCF function trigger.
+        :param bool enable: Whether SCF function trigger is enable.
+        :param str modify_time: Modify time of SCF function trigger.
+        :param str name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        :param str trigger_desc: TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
+        :param str type: Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        """
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
         if custom_argument is not None:
@@ -342,41 +431,140 @@ class FunctionTriggerInfo(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> Optional[str]:
+        """
+        Create time of SCF function trigger.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="customArgument")
     def custom_argument(self) -> Optional[str]:
+        """
+        User-defined parameters of SCF function trigger.
+        """
         return pulumi.get(self, "custom_argument")
 
     @property
     @pulumi.getter
     def enable(self) -> Optional[bool]:
+        """
+        Whether SCF function trigger is enable.
+        """
         return pulumi.get(self, "enable")
 
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> Optional[str]:
+        """
+        Modify time of SCF function trigger.
+        """
         return pulumi.get(self, "modify_time")
 
     @property
     @pulumi.getter
     def name(self) -> Optional[str]:
+        """
+        Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="triggerDesc")
     def trigger_desc(self) -> Optional[str]:
+        """
+        TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
+        """
         return pulumi.get(self, "trigger_desc")
 
     @property
     @pulumi.getter
     def type(self) -> Optional[str]:
+        """
+        Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        """
         return pulumi.get(self, "type")
 
 
 @pulumi.output_type
-class FunctionsFunctionResult(dict):
+class LayerContent(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "cosBucketName":
+            suggest = "cos_bucket_name"
+        elif key == "cosBucketRegion":
+            suggest = "cos_bucket_region"
+        elif key == "cosObjectName":
+            suggest = "cos_object_name"
+        elif key == "zipFile":
+            suggest = "zip_file"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in LayerContent. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        LayerContent.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        LayerContent.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cos_bucket_name: Optional[str] = None,
+                 cos_bucket_region: Optional[str] = None,
+                 cos_object_name: Optional[str] = None,
+                 zip_file: Optional[str] = None):
+        """
+        :param str cos_bucket_name: Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zip_file`.
+        :param str cos_bucket_region: Cos bucket region of the SCF layer, conflict with `zip_file`.
+        :param str cos_object_name: Cos object name of the SCF layer, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
+        :param str zip_file: Zip file of the SCF layer, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
+        """
+        if cos_bucket_name is not None:
+            pulumi.set(__self__, "cos_bucket_name", cos_bucket_name)
+        if cos_bucket_region is not None:
+            pulumi.set(__self__, "cos_bucket_region", cos_bucket_region)
+        if cos_object_name is not None:
+            pulumi.set(__self__, "cos_object_name", cos_object_name)
+        if zip_file is not None:
+            pulumi.set(__self__, "zip_file", zip_file)
+
+    @property
+    @pulumi.getter(name="cosBucketName")
+    def cos_bucket_name(self) -> Optional[str]:
+        """
+        Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zip_file`.
+        """
+        return pulumi.get(self, "cos_bucket_name")
+
+    @property
+    @pulumi.getter(name="cosBucketRegion")
+    def cos_bucket_region(self) -> Optional[str]:
+        """
+        Cos bucket region of the SCF layer, conflict with `zip_file`.
+        """
+        return pulumi.get(self, "cos_bucket_region")
+
+    @property
+    @pulumi.getter(name="cosObjectName")
+    def cos_object_name(self) -> Optional[str]:
+        """
+        Cos object name of the SCF layer, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
+        """
+        return pulumi.get(self, "cos_object_name")
+
+    @property
+    @pulumi.getter(name="zipFile")
+    def zip_file(self) -> Optional[str]:
+        """
+        Zip file of the SCF layer, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
+        """
+        return pulumi.get(self, "zip_file")
+
+
+@pulumi.output_type
+class GetFunctionsFunctionResult(dict):
     def __init__(__self__, *,
                  cls_logset_id: str,
                  cls_topic_id: str,
@@ -406,9 +594,42 @@ class FunctionsFunctionResult(dict):
                  subnet_id: str,
                  tags: Mapping[str, Any],
                  timeout: int,
-                 trigger_infos: Sequence['outputs.FunctionsFunctionTriggerInfoResult'],
+                 trigger_infos: Sequence['outputs.GetFunctionsFunctionTriggerInfoResult'],
                  vip: str,
                  vpc_id: str):
+        """
+        :param str cls_logset_id: CLS logset ID of the SCF function.
+        :param str cls_topic_id: CLS topic ID of the SCF function.
+        :param str code_error: Code error of the SCF function.
+        :param str code_result: Code result of the SCF function.
+        :param int code_size: Code size of the SCF function.
+        :param str create_time: Create time of the SCF function trigger.
+        :param str description: Description of the SCF function to be queried.
+        :param bool eip_fixed: Whether EIP is a fixed IP.
+        :param Sequence[str] eips: EIP list of the SCF function.
+        :param bool enable_eip_config: Whether the EIP enabled.
+        :param bool enable_public_net: Whether the public net enabled.
+        :param Mapping[str, Any] environment: Environment variable of the SCF function.
+        :param int err_no: Errno of the SCF function.
+        :param str handler: Handler of the SCF function.
+        :param str host: Host of the SCF function.
+        :param bool install_dependency: Whether to automatically install dependencies.
+        :param bool l5_enable: Whether to enable L5.
+        :param int mem_size: Memory size of the SCF function runtime, unit is M.
+        :param str modify_time: Modify time of the SCF function trigger.
+        :param str name: Name of the SCF function to be queried.
+        :param str namespace: Namespace of the SCF function to be queried.
+        :param str role: CAM role of the SCF function.
+        :param str runtime: Runtime of the SCF function.
+        :param str status: Status of the SCF function.
+        :param str status_desc: Status description of the SCF function.
+        :param str subnet_id: Subnet ID of the SCF function.
+        :param Mapping[str, Any] tags: Tags of the SCF function to be queried, can use up to 10 tags.
+        :param int timeout: Timeout of the SCF function maximum execution time, unit is second.
+        :param Sequence['GetFunctionsFunctionTriggerInfoArgs'] trigger_infos: Trigger details list the SCF function. Each element contains the following attributes:
+        :param str vip: Vip of the SCF function.
+        :param str vpc_id: VPC ID of the SCF function.
+        """
         pulumi.set(__self__, "cls_logset_id", cls_logset_id)
         pulumi.set(__self__, "cls_topic_id", cls_topic_id)
         pulumi.set(__self__, "code_error", code_error)
@@ -444,161 +665,254 @@ class FunctionsFunctionResult(dict):
     @property
     @pulumi.getter(name="clsLogsetId")
     def cls_logset_id(self) -> str:
+        """
+        CLS logset ID of the SCF function.
+        """
         return pulumi.get(self, "cls_logset_id")
 
     @property
     @pulumi.getter(name="clsTopicId")
     def cls_topic_id(self) -> str:
+        """
+        CLS topic ID of the SCF function.
+        """
         return pulumi.get(self, "cls_topic_id")
 
     @property
     @pulumi.getter(name="codeError")
     def code_error(self) -> str:
+        """
+        Code error of the SCF function.
+        """
         return pulumi.get(self, "code_error")
 
     @property
     @pulumi.getter(name="codeResult")
     def code_result(self) -> str:
+        """
+        Code result of the SCF function.
+        """
         return pulumi.get(self, "code_result")
 
     @property
     @pulumi.getter(name="codeSize")
     def code_size(self) -> int:
+        """
+        Code size of the SCF function.
+        """
         return pulumi.get(self, "code_size")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the SCF function trigger.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Description of the SCF function to be queried.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter(name="eipFixed")
     def eip_fixed(self) -> bool:
+        """
+        Whether EIP is a fixed IP.
+        """
         return pulumi.get(self, "eip_fixed")
 
     @property
     @pulumi.getter
     def eips(self) -> Sequence[str]:
+        """
+        EIP list of the SCF function.
+        """
         return pulumi.get(self, "eips")
 
     @property
     @pulumi.getter(name="enableEipConfig")
     def enable_eip_config(self) -> bool:
+        """
+        Whether the EIP enabled.
+        """
         return pulumi.get(self, "enable_eip_config")
 
     @property
     @pulumi.getter(name="enablePublicNet")
     def enable_public_net(self) -> bool:
+        """
+        Whether the public net enabled.
+        """
         return pulumi.get(self, "enable_public_net")
 
     @property
     @pulumi.getter
     def environment(self) -> Mapping[str, Any]:
+        """
+        Environment variable of the SCF function.
+        """
         return pulumi.get(self, "environment")
 
     @property
     @pulumi.getter(name="errNo")
     def err_no(self) -> int:
+        """
+        Errno of the SCF function.
+        """
         return pulumi.get(self, "err_no")
 
     @property
     @pulumi.getter
     def handler(self) -> str:
+        """
+        Handler of the SCF function.
+        """
         return pulumi.get(self, "handler")
 
     @property
     @pulumi.getter
     def host(self) -> str:
+        """
+        Host of the SCF function.
+        """
         return pulumi.get(self, "host")
 
     @property
     @pulumi.getter(name="installDependency")
     def install_dependency(self) -> bool:
+        """
+        Whether to automatically install dependencies.
+        """
         return pulumi.get(self, "install_dependency")
 
     @property
     @pulumi.getter(name="l5Enable")
     def l5_enable(self) -> bool:
+        """
+        Whether to enable L5.
+        """
         return pulumi.get(self, "l5_enable")
 
     @property
     @pulumi.getter(name="memSize")
     def mem_size(self) -> int:
+        """
+        Memory size of the SCF function runtime, unit is M.
+        """
         return pulumi.get(self, "mem_size")
 
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> str:
+        """
+        Modify time of the SCF function trigger.
+        """
         return pulumi.get(self, "modify_time")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the SCF function to be queried.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def namespace(self) -> str:
+        """
+        Namespace of the SCF function to be queried.
+        """
         return pulumi.get(self, "namespace")
 
     @property
     @pulumi.getter
     def role(self) -> str:
+        """
+        CAM role of the SCF function.
+        """
         return pulumi.get(self, "role")
 
     @property
     @pulumi.getter
     def runtime(self) -> str:
+        """
+        Runtime of the SCF function.
+        """
         return pulumi.get(self, "runtime")
 
     @property
     @pulumi.getter
     def status(self) -> str:
+        """
+        Status of the SCF function.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="statusDesc")
     def status_desc(self) -> str:
+        """
+        Status description of the SCF function.
+        """
         return pulumi.get(self, "status_desc")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        Subnet ID of the SCF function.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the SCF function to be queried, can use up to 10 tags.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter
     def timeout(self) -> int:
+        """
+        Timeout of the SCF function maximum execution time, unit is second.
+        """
         return pulumi.get(self, "timeout")
 
     @property
     @pulumi.getter(name="triggerInfos")
-    def trigger_infos(self) -> Sequence['outputs.FunctionsFunctionTriggerInfoResult']:
+    def trigger_infos(self) -> Sequence['outputs.GetFunctionsFunctionTriggerInfoResult']:
+        """
+        Trigger details list the SCF function. Each element contains the following attributes:
+        """
         return pulumi.get(self, "trigger_infos")
 
     @property
     @pulumi.getter
     def vip(self) -> str:
+        """
+        Vip of the SCF function.
+        """
         return pulumi.get(self, "vip")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        VPC ID of the SCF function.
+        """
         return pulumi.get(self, "vpc_id")
 
 
 @pulumi.output_type
-class FunctionsFunctionTriggerInfoResult(dict):
+class GetFunctionsFunctionTriggerInfoResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  custom_argument: str,
@@ -607,6 +921,15 @@ class FunctionsFunctionTriggerInfoResult(dict):
                  name: str,
                  trigger_desc: str,
                  type: str):
+        """
+        :param str create_time: Create time of the SCF function trigger.
+        :param str custom_argument: user-defined parameter of the SCF function trigger.
+        :param bool enable: Whether to enable SCF function trigger.
+        :param str modify_time: Modify time of the SCF function trigger.
+        :param str name: Name of the SCF function to be queried.
+        :param str trigger_desc: TriggerDesc of the SCF function trigger.
+        :param str type: Type of the SCF function trigger.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "custom_argument", custom_argument)
         pulumi.set(__self__, "enable", enable)
@@ -618,101 +941,62 @@ class FunctionsFunctionTriggerInfoResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the SCF function trigger.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="customArgument")
     def custom_argument(self) -> str:
+        """
+        user-defined parameter of the SCF function trigger.
+        """
         return pulumi.get(self, "custom_argument")
 
     @property
     @pulumi.getter
     def enable(self) -> bool:
+        """
+        Whether to enable SCF function trigger.
+        """
         return pulumi.get(self, "enable")
 
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> str:
+        """
+        Modify time of the SCF function trigger.
+        """
         return pulumi.get(self, "modify_time")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the SCF function to be queried.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="triggerDesc")
     def trigger_desc(self) -> str:
+        """
+        TriggerDesc of the SCF function trigger.
+        """
         return pulumi.get(self, "trigger_desc")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        Type of the SCF function trigger.
+        """
         return pulumi.get(self, "type")
 
 
 @pulumi.output_type
-class LayerContent(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "cosBucketName":
-            suggest = "cos_bucket_name"
-        elif key == "cosBucketRegion":
-            suggest = "cos_bucket_region"
-        elif key == "cosObjectName":
-            suggest = "cos_object_name"
-        elif key == "zipFile":
-            suggest = "zip_file"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in LayerContent. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        LayerContent.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        LayerContent.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 cos_bucket_name: Optional[str] = None,
-                 cos_bucket_region: Optional[str] = None,
-                 cos_object_name: Optional[str] = None,
-                 zip_file: Optional[str] = None):
-        if cos_bucket_name is not None:
-            pulumi.set(__self__, "cos_bucket_name", cos_bucket_name)
-        if cos_bucket_region is not None:
-            pulumi.set(__self__, "cos_bucket_region", cos_bucket_region)
-        if cos_object_name is not None:
-            pulumi.set(__self__, "cos_object_name", cos_object_name)
-        if zip_file is not None:
-            pulumi.set(__self__, "zip_file", zip_file)
-
-    @property
-    @pulumi.getter(name="cosBucketName")
-    def cos_bucket_name(self) -> Optional[str]:
-        return pulumi.get(self, "cos_bucket_name")
-
-    @property
-    @pulumi.getter(name="cosBucketRegion")
-    def cos_bucket_region(self) -> Optional[str]:
-        return pulumi.get(self, "cos_bucket_region")
-
-    @property
-    @pulumi.getter(name="cosObjectName")
-    def cos_object_name(self) -> Optional[str]:
-        return pulumi.get(self, "cos_object_name")
-
-    @property
-    @pulumi.getter(name="zipFile")
-    def zip_file(self) -> Optional[str]:
-        return pulumi.get(self, "zip_file")
-
-
-@pulumi.output_type
-class LogsLogResult(dict):
+class GetLogsLogResult(dict):
     def __init__(__self__, *,
                  bill_duration: int,
                  duration: float,
@@ -726,6 +1010,20 @@ class LogsLogResult(dict):
                  ret_msg: str,
                  source: str,
                  start_time: str):
+        """
+        :param int bill_duration: Function billing time, according to duration up to the last 100ms, unit is ms.
+        :param float duration: Function execution time-consuming, unit is ms.
+        :param str function_name: Name of the SCF function to be queried.
+        :param int invoke_finished: Whether the function call ends, `1` means the execution ends, other values indicate the call exception.
+        :param str level: Log level.
+        :param str log: Log output during function execution.
+        :param int mem_usage: The actual memory size consumed in the execution of the function, unit is Byte.
+        :param str request_id: Execute the requestId corresponding to the function.
+        :param int ret_code: Use to filter log, optional value: `not0` only returns the error log. `is0` only returns the correct log. `TimeLimitExceeded` returns the log of the function call timeout. `ResourceLimitExceeded` returns the function call generation resource overrun log. `UserCodeException` returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.
+        :param str ret_msg: Return value after function execution is completed.
+        :param str source: Log source.
+        :param str start_time: The start time of the query, the format is `2017-05-16 20:00:00`, which can only be within one day from `end_time`.
+        """
         pulumi.set(__self__, "bill_duration", bill_duration)
         pulumi.set(__self__, "duration", duration)
         pulumi.set(__self__, "function_name", function_name)
@@ -742,72 +1040,115 @@ class LogsLogResult(dict):
     @property
     @pulumi.getter(name="billDuration")
     def bill_duration(self) -> int:
+        """
+        Function billing time, according to duration up to the last 100ms, unit is ms.
+        """
         return pulumi.get(self, "bill_duration")
 
     @property
     @pulumi.getter
     def duration(self) -> float:
+        """
+        Function execution time-consuming, unit is ms.
+        """
         return pulumi.get(self, "duration")
 
     @property
     @pulumi.getter(name="functionName")
     def function_name(self) -> str:
+        """
+        Name of the SCF function to be queried.
+        """
         return pulumi.get(self, "function_name")
 
     @property
     @pulumi.getter(name="invokeFinished")
     def invoke_finished(self) -> int:
+        """
+        Whether the function call ends, `1` means the execution ends, other values indicate the call exception.
+        """
         return pulumi.get(self, "invoke_finished")
 
     @property
     @pulumi.getter
     def level(self) -> str:
+        """
+        Log level.
+        """
         return pulumi.get(self, "level")
 
     @property
     @pulumi.getter
     def log(self) -> str:
+        """
+        Log output during function execution.
+        """
         return pulumi.get(self, "log")
 
     @property
     @pulumi.getter(name="memUsage")
     def mem_usage(self) -> int:
+        """
+        The actual memory size consumed in the execution of the function, unit is Byte.
+        """
         return pulumi.get(self, "mem_usage")
 
     @property
     @pulumi.getter(name="requestId")
     def request_id(self) -> str:
+        """
+        Execute the requestId corresponding to the function.
+        """
         return pulumi.get(self, "request_id")
 
     @property
     @pulumi.getter(name="retCode")
     def ret_code(self) -> int:
+        """
+        Use to filter log, optional value: `not0` only returns the error log. `is0` only returns the correct log. `TimeLimitExceeded` returns the log of the function call timeout. `ResourceLimitExceeded` returns the function call generation resource overrun log. `UserCodeException` returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.
+        """
         return pulumi.get(self, "ret_code")
 
     @property
     @pulumi.getter(name="retMsg")
     def ret_msg(self) -> str:
+        """
+        Return value after function execution is completed.
+        """
         return pulumi.get(self, "ret_msg")
 
     @property
     @pulumi.getter
     def source(self) -> str:
+        """
+        Log source.
+        """
         return pulumi.get(self, "source")
 
     @property
     @pulumi.getter(name="startTime")
     def start_time(self) -> str:
+        """
+        The start time of the query, the format is `2017-05-16 20:00:00`, which can only be within one day from `end_time`.
+        """
         return pulumi.get(self, "start_time")
 
 
 @pulumi.output_type
-class NamespacesNamespaceResult(dict):
+class GetNamespacesNamespaceResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  description: str,
                  modify_time: str,
                  namespace: str,
                  type: str):
+        """
+        :param str create_time: Create time of the SCF namespace.
+        :param str description: Description of the SCF namespace to be queried.
+        :param str modify_time: Modify time of the SCF namespace.
+        :param str namespace: Name of the SCF namespace to be queried.
+        :param str type: Type of the SCF namespace.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "modify_time", modify_time)
@@ -817,26 +1158,41 @@ class NamespacesNamespaceResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the SCF namespace.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Description of the SCF namespace to be queried.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> str:
+        """
+        Modify time of the SCF namespace.
+        """
         return pulumi.get(self, "modify_time")
 
     @property
     @pulumi.getter
     def namespace(self) -> str:
+        """
+        Name of the SCF namespace to be queried.
+        """
         return pulumi.get(self, "namespace")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        Type of the SCF namespace.
+        """
         return pulumi.get(self, "type")
 
 

@@ -11,6 +11,34 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a DnsPod record.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dnspod.NewRecord(ctx, "demo", &Dnspod.RecordArgs{
+// 			Domain:     pulumi.String("mikatong.com"),
+// 			RecordLine: pulumi.String("默认"),
+// 			RecordType: pulumi.String("A"),
+// 			SubDomain:  pulumi.String("demo"),
+// 			Value:      pulumi.String("1.2.3.9"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type Record struct {
 	pulumi.CustomResourceState
 
@@ -24,8 +52,7 @@ type Record struct {
 	RecordLine pulumi.StringOutput `pulumi:"recordLine"`
 	// The record type.
 	RecordType pulumi.StringOutput `pulumi:"recordType"`
-	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-	// in, resolution will not take effect and the limits of load balancing will not be verified.
+	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
 	Status pulumi.StringPtrOutput `pulumi:"status"`
 	// The host records, default value is `@`.
 	SubDomain pulumi.StringPtrOutput `pulumi:"subDomain"`
@@ -33,8 +60,7 @@ type Record struct {
 	Ttl pulumi.IntPtrOutput `pulumi:"ttl"`
 	// The record value.
 	Value pulumi.StringOutput `pulumi:"value"`
-	// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-	// this parameter, means that the weight information is not set. Default is 0.
+	// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
 	Weight pulumi.IntPtrOutput `pulumi:"weight"`
 }
 
@@ -89,8 +115,7 @@ type recordState struct {
 	RecordLine *string `pulumi:"recordLine"`
 	// The record type.
 	RecordType *string `pulumi:"recordType"`
-	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-	// in, resolution will not take effect and the limits of load balancing will not be verified.
+	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
 	Status *string `pulumi:"status"`
 	// The host records, default value is `@`.
 	SubDomain *string `pulumi:"subDomain"`
@@ -98,8 +123,7 @@ type recordState struct {
 	Ttl *int `pulumi:"ttl"`
 	// The record value.
 	Value *string `pulumi:"value"`
-	// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-	// this parameter, means that the weight information is not set. Default is 0.
+	// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
 	Weight *int `pulumi:"weight"`
 }
 
@@ -114,8 +138,7 @@ type RecordState struct {
 	RecordLine pulumi.StringPtrInput
 	// The record type.
 	RecordType pulumi.StringPtrInput
-	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-	// in, resolution will not take effect and the limits of load balancing will not be verified.
+	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
 	Status pulumi.StringPtrInput
 	// The host records, default value is `@`.
 	SubDomain pulumi.StringPtrInput
@@ -123,8 +146,7 @@ type RecordState struct {
 	Ttl pulumi.IntPtrInput
 	// The record value.
 	Value pulumi.StringPtrInput
-	// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-	// this parameter, means that the weight information is not set. Default is 0.
+	// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
 	Weight pulumi.IntPtrInput
 }
 
@@ -141,8 +163,7 @@ type recordArgs struct {
 	RecordLine string `pulumi:"recordLine"`
 	// The record type.
 	RecordType string `pulumi:"recordType"`
-	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-	// in, resolution will not take effect and the limits of load balancing will not be verified.
+	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
 	Status *string `pulumi:"status"`
 	// The host records, default value is `@`.
 	SubDomain *string `pulumi:"subDomain"`
@@ -150,8 +171,7 @@ type recordArgs struct {
 	Ttl *int `pulumi:"ttl"`
 	// The record value.
 	Value string `pulumi:"value"`
-	// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-	// this parameter, means that the weight information is not set. Default is 0.
+	// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
 	Weight *int `pulumi:"weight"`
 }
 
@@ -165,8 +185,7 @@ type RecordArgs struct {
 	RecordLine pulumi.StringInput
 	// The record type.
 	RecordType pulumi.StringInput
-	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-	// in, resolution will not take effect and the limits of load balancing will not be verified.
+	// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
 	Status pulumi.StringPtrInput
 	// The host records, default value is `@`.
 	SubDomain pulumi.StringPtrInput
@@ -174,8 +193,7 @@ type RecordArgs struct {
 	Ttl pulumi.IntPtrInput
 	// The record value.
 	Value pulumi.StringInput
-	// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-	// this parameter, means that the weight information is not set. Default is 0.
+	// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
 	Weight pulumi.IntPtrInput
 }
 
@@ -291,8 +309,7 @@ func (o RecordOutput) RecordType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.RecordType }).(pulumi.StringOutput)
 }
 
-// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-// in, resolution will not take effect and the limits of load balancing will not be verified.
+// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
 func (o RecordOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Record) pulumi.StringPtrOutput { return v.Status }).(pulumi.StringPtrOutput)
 }
@@ -312,8 +329,7 @@ func (o RecordOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.Value }).(pulumi.StringOutput)
 }
 
-// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-// this parameter, means that the weight information is not set. Default is 0.
+// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
 func (o RecordOutput) Weight() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Record) pulumi.IntPtrOutput { return v.Weight }).(pulumi.IntPtrOutput)
 }

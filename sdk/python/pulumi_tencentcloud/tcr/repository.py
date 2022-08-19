@@ -24,9 +24,7 @@ class RepositoryArgs:
         :param pulumi.Input[str] namespace_name: Name of the TCR namespace.
         :param pulumi.Input[str] brief_desc: Brief description of the repository. Valid length is [1~100].
         :param pulumi.Input[str] description: Description of the repository. Valid length is [1~1000].
-        :param pulumi.Input[str] name: Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-               `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-               as `sub1/sub2/repo`.
+        :param pulumi.Input[str] name: Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
         """
         pulumi.set(__self__, "instance_id", instance_id)
         pulumi.set(__self__, "namespace_name", namespace_name)
@@ -89,9 +87,7 @@ class RepositoryArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-        `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-        as `sub1/sub2/repo`.
+        Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
         """
         return pulumi.get(self, "name")
 
@@ -119,9 +115,7 @@ class _RepositoryState:
         :param pulumi.Input[str] description: Description of the repository. Valid length is [1~1000].
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
         :param pulumi.Input[bool] is_public: Indicate the repository is public or not.
-        :param pulumi.Input[str] name: Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-               `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-               as `sub1/sub2/repo`.
+        :param pulumi.Input[str] name: Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
         :param pulumi.Input[str] namespace_name: Name of the TCR namespace.
         :param pulumi.Input[str] update_time: Last updated time.
         :param pulumi.Input[str] url: URL of the repository.
@@ -209,9 +203,7 @@ class _RepositoryState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-        `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-        as `sub1/sub2/repo`.
+        Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
         """
         return pulumi.get(self, "name")
 
@@ -268,15 +260,34 @@ class Repository(pulumi.CustomResource):
                  namespace_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Repository resource with the given unique name, props, and options.
+        Use this resource to create tcr repository.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test = tencentcloud.Tcr.get_instances(name="test")
+        foo = tencentcloud.tcr.Repository("foo",
+            instance_id=test.instance_lists[0].id,
+            namespace_name="exampleNamespace")
+        ```
+
+        ## Import
+
+        tcr repository can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tcr/repository:Repository foo cls-cda1iex1#namespace#repository
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] brief_desc: Brief description of the repository. Valid length is [1~100].
         :param pulumi.Input[str] description: Description of the repository. Valid length is [1~1000].
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
-        :param pulumi.Input[str] name: Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-               `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-               as `sub1/sub2/repo`.
+        :param pulumi.Input[str] name: Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
         :param pulumi.Input[str] namespace_name: Name of the TCR namespace.
         """
         ...
@@ -286,7 +297,28 @@ class Repository(pulumi.CustomResource):
                  args: RepositoryArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Repository resource with the given unique name, props, and options.
+        Use this resource to create tcr repository.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test = tencentcloud.Tcr.get_instances(name="test")
+        foo = tencentcloud.tcr.Repository("foo",
+            instance_id=test.instance_lists[0].id,
+            namespace_name="exampleNamespace")
+        ```
+
+        ## Import
+
+        tcr repository can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tcr/repository:Repository foo cls-cda1iex1#namespace#repository
+        ```
+
         :param str resource_name: The name of the resource.
         :param RepositoryArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -363,9 +395,7 @@ class Repository(pulumi.CustomResource):
         :param pulumi.Input[str] description: Description of the repository. Valid length is [1~1000].
         :param pulumi.Input[str] instance_id: ID of the TCR instance.
         :param pulumi.Input[bool] is_public: Indicate the repository is public or not.
-        :param pulumi.Input[str] name: Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-               `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-               as `sub1/sub2/repo`.
+        :param pulumi.Input[str] name: Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
         :param pulumi.Input[str] namespace_name: Name of the TCR namespace.
         :param pulumi.Input[str] update_time: Last updated time.
         :param pulumi.Input[str] url: URL of the repository.
@@ -429,9 +459,7 @@ class Repository(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-        `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-        as `sub1/sub2/repo`.
+        Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
         """
         return pulumi.get(self, "name")
 

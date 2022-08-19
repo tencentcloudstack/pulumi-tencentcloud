@@ -11,12 +11,57 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create ckafka topic.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Ckafka.NewTopic(ctx, "foo", &Ckafka.TopicArgs{
+// 			CleanUpPolicy:   pulumi.String("delete"),
+// 			EnableWhiteList: pulumi.Bool(true),
+// 			InstanceId:      pulumi.String("ckafka-f9ife4zz"),
+// 			IpWhiteLists: pulumi.StringArray{
+// 				pulumi.String("ip1"),
+// 				pulumi.String("ip2"),
+// 			},
+// 			MaxMessageBytes:             pulumi.Int(0),
+// 			Note:                        pulumi.String("topic note"),
+// 			PartitionNum:                pulumi.Int(1),
+// 			ReplicaNum:                  pulumi.Int(2),
+// 			Retention:                   pulumi.Int(60000),
+// 			Segment:                     pulumi.Int(3600000),
+// 			SyncReplicaMinNum:           pulumi.Int(1),
+// 			TopicName:                   pulumi.String("example"),
+// 			UncleanLeaderElectionEnable: pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// ckafka topic can be imported using the instance_id#topic_name, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
+// ```
 type Topic struct {
 	pulumi.CustomResourceState
 
-	// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-	// `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-	// will be deleted according to the storage time.
+	// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
 	CleanUpPolicy pulumi.StringPtrOutput `pulumi:"cleanUpPolicy"`
 	// Create time of the CKafka topic.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
@@ -52,8 +97,7 @@ type Topic struct {
 	SyncReplicaMinNum pulumi.IntPtrOutput `pulumi:"syncReplicaMinNum"`
 	// Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).
 	TopicName pulumi.StringOutput `pulumi:"topicName"`
-	// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not
-	// allowed.
+	// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not allowed.
 	UncleanLeaderElectionEnable pulumi.BoolPtrOutput `pulumi:"uncleanLeaderElectionEnable"`
 }
 
@@ -98,9 +142,7 @@ func GetTopic(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Topic resources.
 type topicState struct {
-	// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-	// `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-	// will be deleted according to the storage time.
+	// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
 	CleanUpPolicy *string `pulumi:"cleanUpPolicy"`
 	// Create time of the CKafka topic.
 	CreateTime *string `pulumi:"createTime"`
@@ -136,15 +178,12 @@ type topicState struct {
 	SyncReplicaMinNum *int `pulumi:"syncReplicaMinNum"`
 	// Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).
 	TopicName *string `pulumi:"topicName"`
-	// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not
-	// allowed.
+	// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not allowed.
 	UncleanLeaderElectionEnable *bool `pulumi:"uncleanLeaderElectionEnable"`
 }
 
 type TopicState struct {
-	// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-	// `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-	// will be deleted according to the storage time.
+	// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
 	CleanUpPolicy pulumi.StringPtrInput
 	// Create time of the CKafka topic.
 	CreateTime pulumi.StringPtrInput
@@ -180,8 +219,7 @@ type TopicState struct {
 	SyncReplicaMinNum pulumi.IntPtrInput
 	// Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).
 	TopicName pulumi.StringPtrInput
-	// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not
-	// allowed.
+	// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not allowed.
 	UncleanLeaderElectionEnable pulumi.BoolPtrInput
 }
 
@@ -190,9 +228,7 @@ func (TopicState) ElementType() reflect.Type {
 }
 
 type topicArgs struct {
-	// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-	// `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-	// will be deleted according to the storage time.
+	// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
 	CleanUpPolicy *string `pulumi:"cleanUpPolicy"`
 	// Whether to open the ip whitelist, `true`: open, `false`: close.
 	EnableWhiteList *bool `pulumi:"enableWhiteList"`
@@ -216,16 +252,13 @@ type topicArgs struct {
 	SyncReplicaMinNum *int `pulumi:"syncReplicaMinNum"`
 	// Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).
 	TopicName string `pulumi:"topicName"`
-	// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not
-	// allowed.
+	// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not allowed.
 	UncleanLeaderElectionEnable *bool `pulumi:"uncleanLeaderElectionEnable"`
 }
 
 // The set of arguments for constructing a Topic resource.
 type TopicArgs struct {
-	// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-	// `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-	// will be deleted according to the storage time.
+	// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
 	CleanUpPolicy pulumi.StringPtrInput
 	// Whether to open the ip whitelist, `true`: open, `false`: close.
 	EnableWhiteList pulumi.BoolPtrInput
@@ -249,8 +282,7 @@ type TopicArgs struct {
 	SyncReplicaMinNum pulumi.IntPtrInput
 	// Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).
 	TopicName pulumi.StringInput
-	// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not
-	// allowed.
+	// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not allowed.
 	UncleanLeaderElectionEnable pulumi.BoolPtrInput
 }
 
@@ -341,9 +373,7 @@ func (o TopicOutput) ToTopicOutputWithContext(ctx context.Context) TopicOutput {
 	return o
 }
 
-// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time.
-// `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and
-// will be deleted according to the storage time.
+// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
 func (o TopicOutput) CleanUpPolicy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringPtrOutput { return v.CleanUpPolicy }).(pulumi.StringPtrOutput)
 }
@@ -433,8 +463,7 @@ func (o TopicOutput) TopicName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringOutput { return v.TopicName }).(pulumi.StringOutput)
 }
 
-// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not
-// allowed.
+// Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not allowed.
 func (o TopicOutput) UncleanLeaderElectionEnable() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Topic) pulumi.BoolPtrOutput { return v.UncleanLeaderElectionEnable }).(pulumi.BoolPtrOutput)
 }

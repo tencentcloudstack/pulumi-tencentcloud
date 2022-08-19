@@ -4,6 +4,26 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides an EIP resource.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Eip.Instance("foo", {});
+ * ```
+ *
+ * ## Import
+ *
+ * EIP can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -37,7 +57,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly anycastZone!: pulumi.Output<string | undefined>;
     /**
-     * Indicates whether the anycast eip can be associated to a CLB.
+     * It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
      *
      * @deprecated It has been deprecated from version 1.27.0.
      */
@@ -71,7 +91,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
-     * The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
      */
     public readonly type!: pulumi.Output<string | undefined>;
 
@@ -125,7 +145,7 @@ export interface InstanceState {
      */
     anycastZone?: pulumi.Input<string>;
     /**
-     * Indicates whether the anycast eip can be associated to a CLB.
+     * It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
      *
      * @deprecated It has been deprecated from version 1.27.0.
      */
@@ -159,7 +179,7 @@ export interface InstanceState {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
      */
     type?: pulumi.Input<string>;
 }
@@ -173,7 +193,7 @@ export interface InstanceArgs {
      */
     anycastZone?: pulumi.Input<string>;
     /**
-     * Indicates whether the anycast eip can be associated to a CLB.
+     * It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
      *
      * @deprecated It has been deprecated from version 1.27.0.
      */
@@ -199,7 +219,7 @@ export interface InstanceArgs {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * The type of eip. Valid value: `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
+     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP`. Default is `EIP`.
      */
     type?: pulumi.Input<string>;
 }

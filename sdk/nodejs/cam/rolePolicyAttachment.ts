@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CAM role policy attachment.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.cam.RolePolicyAttachment("foo", {
+ *     roleId: tencentcloud_cam_role.foo.id,
+ *     policyId: tencentcloud_cam_policy.foo.id,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CAM role policy attachment can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cam/rolePolicyAttachment:RolePolicyAttachment foo 4611686018427922725#26800353
+ * ```
+ */
 export class RolePolicyAttachment extends pulumi.CustomResource {
     /**
      * Get an existing RolePolicyAttachment resource's state with the given name, ID, and optional extra
@@ -33,8 +56,7 @@ export class RolePolicyAttachment extends pulumi.CustomResource {
     }
 
     /**
-     * Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-     * the others indicate syntax strategy ways.
+     * Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
      */
     public /*out*/ readonly createMode!: pulumi.Output<number>;
     /**
@@ -102,8 +124,7 @@ export class RolePolicyAttachment extends pulumi.CustomResource {
  */
 export interface RolePolicyAttachmentState {
     /**
-     * Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-     * the others indicate syntax strategy ways.
+     * Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
      */
     createMode?: pulumi.Input<number>;
     /**

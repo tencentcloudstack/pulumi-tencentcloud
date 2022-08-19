@@ -9,6 +9,41 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cam
 {
+    /// <summary>
+    /// Provides a resource to create a CAM group membership.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cam.GroupMembership("foo", new Tencentcloud.Cam.GroupMembershipArgs
+    ///         {
+    ///             GroupId = tencentcloud_cam_group.Foo.Id,
+    ///             UserNames = 
+    ///             {
+    ///                 tencentcloud_cam_user.Foo.Name,
+    ///                 tencentcloud_cam_user.Bar.Name,
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CAM group membership can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cam/groupMembership:GroupMembership foo 12515263
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/groupMembership:GroupMembership")]
     public partial class GroupMembership : Pulumi.CustomResource
     {
@@ -19,7 +54,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Output<string> GroupId { get; private set; } = null!;
 
         /// <summary>
-        /// ID set of the CAM group members.
+        /// It has been deprecated from version 1.59.5. Use `user_names` instead. ID set of the CAM group members.
         /// </summary>
         [Output("userIds")]
         public Output<ImmutableArray<string>> UserIds { get; private set; } = null!;
@@ -86,7 +121,7 @@ namespace Pulumi.Tencentcloud.Cam
         private InputList<string>? _userIds;
 
         /// <summary>
-        /// ID set of the CAM group members.
+        /// It has been deprecated from version 1.59.5. Use `user_names` instead. ID set of the CAM group members.
         /// </summary>
         [Obsolete(@"It has been deprecated from version 1.59.5. Use `user_names` instead.")]
         public InputList<string> UserIds
@@ -124,7 +159,7 @@ namespace Pulumi.Tencentcloud.Cam
         private InputList<string>? _userIds;
 
         /// <summary>
-        /// ID set of the CAM group members.
+        /// It has been deprecated from version 1.59.5. Use `user_names` instead. ID set of the CAM group members.
         /// </summary>
         [Obsolete(@"It has been deprecated from version 1.59.5. Use `user_names` instead.")]
         public InputList<string> UserIds

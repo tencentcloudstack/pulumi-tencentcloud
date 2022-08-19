@@ -10,33 +10,57 @@ using Pulumi.Serialization;
 namespace Pulumi.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CCPolicyV2CcPrecisionReqLimitPolicyGetArgs : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2CcPrecisionReqLimitPolicyGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.
+        /// </summary>
         [Input("action", required: true)]
         public Input<string> Action { get; set; } = null!;
 
+        /// <summary>
+        /// Cookies, one of the three policy entries can only be filled in.
+        /// </summary>
         [Input("cookie")]
         public Input<string>? Cookie { get; set; }
 
+        /// <summary>
+        /// The duration of the frequency limit policy can be taken from 1 to 86400 per second.
+        /// </summary>
         [Input("executeDuration", required: true)]
         public Input<int> ExecuteDuration { get; set; } = null!;
 
+        /// <summary>
+        /// The policy item is compared, and the optional value include indicates inclusion, and equal means equal.
+        /// </summary>
         [Input("mode", required: true)]
         public Input<string> Mode { get; set; } = null!;
 
+        /// <summary>
+        /// Statistical period, take values 1, 10, 30, 60, in seconds.
+        /// </summary>
         [Input("period", required: true)]
         public Input<int> Period { get; set; } = null!;
 
+        /// <summary>
+        /// The number of requests, the value is 1 to 20000.
+        /// </summary>
         [Input("requestNum", required: true)]
         public Input<int> RequestNum { get; set; } = null!;
 
+        /// <summary>
+        /// Uri, one of the three policy entries can only be filled in.
+        /// </summary>
         [Input("uri")]
         public Input<string>? Uri { get; set; }
 
+        /// <summary>
+        /// User-Agent, only one of the three policy entries can be filled in.
+        /// </summary>
         [Input("userAgent")]
         public Input<string>? UserAgent { get; set; }
 
-        public CCPolicyV2CcPrecisionReqLimitPolicyGetArgs()
+        public CcPolicyV2CcPrecisionReqLimitPolicyGetArgs()
         {
         }
     }

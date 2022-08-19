@@ -5,6 +5,35 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to manage CDH instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+ * const foo = new tencentcloud.cdh.Instance("foo", {
+ *     availabilityZone: availabilityZone,
+ *     hostType: "HC20",
+ *     chargeType: "PREPAID",
+ *     prepaidPeriod: 1,
+ *     hostName: "test",
+ *     prepaidRenewFlag: "NOTIFY_AND_MANUAL_RENEW",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CDH instance can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cdh/instance:Instance foo host-d6s7i5q4
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -54,7 +83,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly expiredTime!: pulumi.Output<string>;
     /**
-     * The name of the CDH instance. The max length of host_name is 60.
+     * The name of the CDH instance. The max length of hostName is 60.
      */
     public readonly hostName!: pulumi.Output<string>;
     /**
@@ -70,16 +99,11 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly hostType!: pulumi.Output<string | undefined>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-     * Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
      */
     public readonly prepaidPeriod!: pulumi.Output<number | undefined>;
     /**
-     * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-     * `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-     * neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-     * specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-     * balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
+     * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     public readonly prepaidRenewFlag!: pulumi.Output<string>;
     /**
@@ -160,7 +184,7 @@ export interface InstanceState {
      */
     expiredTime?: pulumi.Input<string>;
     /**
-     * The name of the CDH instance. The max length of host_name is 60.
+     * The name of the CDH instance. The max length of hostName is 60.
      */
     hostName?: pulumi.Input<string>;
     /**
@@ -176,16 +200,11 @@ export interface InstanceState {
      */
     hostType?: pulumi.Input<string>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-     * Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
-     * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-     * `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-     * neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-     * specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-     * balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
+     * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     prepaidRenewFlag?: pulumi.Input<string>;
     /**
@@ -207,7 +226,7 @@ export interface InstanceArgs {
      */
     chargeType?: pulumi.Input<string>;
     /**
-     * The name of the CDH instance. The max length of host_name is 60.
+     * The name of the CDH instance. The max length of hostName is 60.
      */
     hostName?: pulumi.Input<string>;
     /**
@@ -215,16 +234,11 @@ export interface InstanceArgs {
      */
     hostType?: pulumi.Input<string>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-     * Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
-     * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-     * `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-     * neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-     * specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-     * balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
+     * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     prepaidRenewFlag?: pulumi.Input<string>;
     /**

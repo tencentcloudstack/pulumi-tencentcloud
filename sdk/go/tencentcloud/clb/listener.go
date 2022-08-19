@@ -11,30 +11,275 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CLB listener.
+//
+// ## Example Usage
+//
+// HTTP Listener
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewListener(ctx, "hTTPListener", &Clb.ListenerArgs{
+// 			ClbId:        pulumi.String("lb-0lh5au7v"),
+// 			ListenerName: pulumi.String("test_listener"),
+// 			Port:         pulumi.Int(80),
+// 			Protocol:     pulumi.String("HTTP"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// TCP/UDP Listener
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewListener(ctx, "tCPListener", &Clb.ListenerArgs{
+// 			ClbId:                   pulumi.String("lb-0lh5au7v"),
+// 			HealthCheckHealthNum:    pulumi.Int(3),
+// 			HealthCheckHttpCode:     pulumi.Int(2),
+// 			HealthCheckHttpMethod:   pulumi.String("GET"),
+// 			HealthCheckHttpVersion:  pulumi.String("HTTP/1.0"),
+// 			HealthCheckIntervalTime: pulumi.Int(5),
+// 			HealthCheckPort:         pulumi.Int(200),
+// 			HealthCheckSwitch:       pulumi.Bool(true),
+// 			HealthCheckTimeOut:      pulumi.Int(2),
+// 			HealthCheckType:         pulumi.String("HTTP"),
+// 			HealthCheckUnhealthNum:  pulumi.Int(3),
+// 			ListenerName:            pulumi.String("test_listener"),
+// 			Port:                    pulumi.Int(80),
+// 			Protocol:                pulumi.String("TCP"),
+// 			Scheduler:               pulumi.String("WRR"),
+// 			SessionExpireTime:       pulumi.Int(30),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// TCP/UDP Listener with tcp health check
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewListener(ctx, "listenerTcp", &Clb.ListenerArgs{
+// 			ClbId:                   pulumi.Any(tencentcloud_clb_instance.Clb_basic.Id),
+// 			ListenerName:            pulumi.String("listener_tcp"),
+// 			Port:                    pulumi.Int(44),
+// 			Protocol:                pulumi.String("TCP"),
+// 			HealthCheckSwitch:       pulumi.Bool(true),
+// 			HealthCheckTimeOut:      pulumi.Int(30),
+// 			HealthCheckIntervalTime: pulumi.Int(100),
+// 			HealthCheckHealthNum:    pulumi.Int(2),
+// 			HealthCheckUnhealthNum:  pulumi.Int(2),
+// 			SessionExpireTime:       pulumi.Int(30),
+// 			Scheduler:               pulumi.String("WRR"),
+// 			HealthCheckType:         pulumi.String("TCP"),
+// 			HealthCheckPort:         pulumi.Int(200),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// TCP/UDP Listener with http health check
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewListener(ctx, "listenerTcp", &Clb.ListenerArgs{
+// 			ClbId:                   pulumi.Any(tencentcloud_clb_instance.Clb_basic.Id),
+// 			ListenerName:            pulumi.String("listener_tcp"),
+// 			Port:                    pulumi.Int(44),
+// 			Protocol:                pulumi.String("TCP"),
+// 			HealthCheckSwitch:       pulumi.Bool(true),
+// 			HealthCheckTimeOut:      pulumi.Int(30),
+// 			HealthCheckIntervalTime: pulumi.Int(100),
+// 			HealthCheckHealthNum:    pulumi.Int(2),
+// 			HealthCheckUnhealthNum:  pulumi.Int(2),
+// 			SessionExpireTime:       pulumi.Int(30),
+// 			Scheduler:               pulumi.String("WRR"),
+// 			HealthCheckType:         pulumi.String("HTTP"),
+// 			HealthCheckHttpDomain:   pulumi.String("www.tencent.com"),
+// 			HealthCheckHttpCode:     pulumi.Int(16),
+// 			HealthCheckHttpVersion:  pulumi.String("HTTP/1.1"),
+// 			HealthCheckHttpMethod:   pulumi.String("HEAD"),
+// 			HealthCheckHttpPath:     pulumi.String("/"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// TCP/UDP Listener with customer health check
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewListener(ctx, "listenerTcp", &Clb.ListenerArgs{
+// 			ClbId:                   pulumi.Any(tencentcloud_clb_instance.Clb_basic.Id),
+// 			ListenerName:            pulumi.String("listener_tcp"),
+// 			Port:                    pulumi.Int(44),
+// 			Protocol:                pulumi.String("TCP"),
+// 			HealthCheckSwitch:       pulumi.Bool(true),
+// 			HealthCheckTimeOut:      pulumi.Int(30),
+// 			HealthCheckIntervalTime: pulumi.Int(100),
+// 			HealthCheckHealthNum:    pulumi.Int(2),
+// 			HealthCheckUnhealthNum:  pulumi.Int(2),
+// 			SessionExpireTime:       pulumi.Int(30),
+// 			Scheduler:               pulumi.String("WRR"),
+// 			HealthCheckType:         pulumi.String("CUSTOM"),
+// 			HealthCheckContextType:  pulumi.String("HEX"),
+// 			HealthCheckSendContext:  pulumi.String("0123456789ABCDEF"),
+// 			HealthCheckRecvContext:  pulumi.String("ABCD"),
+// 			TargetType:              pulumi.String("TARGETGROUP"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// HTTPS Listener
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewListener(ctx, "hTTPSListener", &Clb.ListenerArgs{
+// 			CertificateCaId:    pulumi.String("VfqO4zkB"),
+// 			CertificateId:      pulumi.String("VjANRdz8"),
+// 			CertificateSslMode: pulumi.String("MUTUAL"),
+// 			ClbId:              pulumi.String("lb-0lh5au7v"),
+// 			ListenerName:       pulumi.String("test_listener"),
+// 			Port:               pulumi.Int(80),
+// 			Protocol:           pulumi.String("HTTPS"),
+// 			SniSwitch:          pulumi.Bool(true),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// TCP SSL Listener
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewListener(ctx, "tCPSSLListener", &Clb.ListenerArgs{
+// 			CertificateCaId:         pulumi.String("VfqO4zkB"),
+// 			CertificateId:           pulumi.String("VjANRdz8"),
+// 			CertificateSslMode:      pulumi.String("MUTUAL"),
+// 			ClbId:                   pulumi.String("lb-0lh5au7v"),
+// 			HealthCheckHealthNum:    pulumi.Int(3),
+// 			HealthCheckIntervalTime: pulumi.Int(5),
+// 			HealthCheckSwitch:       pulumi.Bool(true),
+// 			HealthCheckTimeOut:      pulumi.Int(2),
+// 			HealthCheckUnhealthNum:  pulumi.Int(3),
+// 			ListenerName:            pulumi.String("test_listener"),
+// 			Port:                    pulumi.Int(80),
+// 			Protocol:                pulumi.String("TCP_SSL"),
+// 			Scheduler:               pulumi.String("WRR"),
+// 			TargetType:              pulumi.String("TARGETGROUP"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CLB listener can be imported using the id (version >= 1.47.0), e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Clb/listener:Listener foo lb-7a0t6zqb#lbl-hh141sn9
+// ```
 type Listener struct {
 	pulumi.CustomResourceState
 
-	// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the
-	// ssl mode is `MUTUAL`.
+	// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the ssl mode is `MUTUAL`.
 	CertificateCaId pulumi.StringPtrOutput `pulumi:"certificateCaId"`
-	// ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it
-	// is available.
+	// ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
 	CertificateId pulumi.StringPtrOutput `pulumi:"certificateId"`
-	// Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL`
-	// protocol and must be set when it is available.
+	// Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
 	CertificateSslMode pulumi.StringPtrOutput `pulumi:"certificateSslMode"`
 	// ID of the CLB.
 	ClbId pulumi.StringOutput `pulumi:"clbId"`
-	// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is
-	// required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
+	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType pulumi.StringPtrOutput `pulumi:"healthCheckContextType"`
-	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3
-	// consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener
-	// allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckHealthNum pulumi.IntOutput `pulumi:"healthCheckHealthNum"`
-	// HTTP health check code of TCP listener. When the value of `health_check_type` of the health check protocol is `HTTP`,
-	// this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means
-	// http_3xx, `8` means http_4xx, `16` means http_5xx.
+	// HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
 	HealthCheckHttpCode pulumi.IntPtrOutput `pulumi:"healthCheckHttpCode"`
 	// HTTP health check domain of TCP listener.
 	HealthCheckHttpDomain pulumi.StringPtrOutput `pulumi:"healthCheckHttpDomain"`
@@ -42,59 +287,39 @@ type Listener struct {
 	HealthCheckHttpMethod pulumi.StringOutput `pulumi:"healthCheckHttpMethod"`
 	// HTTP health check path of TCP listener.
 	HealthCheckHttpPath pulumi.StringPtrOutput `pulumi:"healthCheckHttpPath"`
-	// The HTTP version of the backend service. When the value of `health_check_type` of the health check protocol is `HTTP`,
-	// this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
+	// The HTTP version of the backend service. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
 	HealthCheckHttpVersion pulumi.StringPtrOutput `pulumi:"healthCheckHttpVersion"`
-	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL
-	// listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime pulumi.IntOutput `pulumi:"healthCheckIntervalTime"`
-	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is
-	// recommended to leave it blank. Only applicable to TCP/UDP listener.
+	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
 	HealthCheckPort pulumi.IntPtrOutput `pulumi:"healthCheckPort"`
-	// It represents the result returned by the health check. When the value of `health_check_type` of the health check
-	// protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500.
-	// When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected in
-	// `0123456789ABCDEF` and the length must be even digits.
+	// It represents the result returned by the health check. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When `healthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
 	HealthCheckRecvContext pulumi.StringPtrOutput `pulumi:"healthCheckRecvContext"`
-	// It represents the content of the request sent by the health check. When the value of `health_check_type` of the health
-	// check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is
-	// 500. When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected
-	// in `0123456789ABCDEF` and the length must be even digits.
+	// It represents the content of the request sent by the health check. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `healthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
 	HealthCheckSendContext pulumi.StringPtrOutput `pulumi:"healthCheckSendContext"`
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch pulumi.BoolOutput `pulumi:"healthCheckSwitch"`
-	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less
-	// than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
+	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
 	HealthCheckTimeOut pulumi.IntOutput `pulumi:"healthCheckTimeOut"`
 	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
 	HealthCheckType pulumi.StringOutput `pulumi:"healthCheckType"`
-	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-	// consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows
-	// direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum pulumi.IntOutput `pulumi:"healthCheckUnhealthNum"`
 	// ID of this CLB listener.
 	ListenerId pulumi.StringOutput `pulumi:"listenerId"`
-	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and
-	// hyphen '-'.
+	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
 	ListenerName pulumi.StringOutput `pulumi:"listenerName"`
 	// Port of the CLB listener.
 	Port pulumi.IntPtrOutput `pulumi:"port"`
 	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
 	Protocol pulumi.StringOutput `pulumi:"protocol"`
-	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The
-	// listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener
-	// allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler pulumi.StringPtrOutput `pulumi:"scheduler"`
-	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not
-	// available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS
-	// listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	SessionExpireTime pulumi.IntPtrOutput `pulumi:"sessionExpireTime"`
-	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for
-	// each rule in `tencentcloud_clb_listener_rule`, otherwise all rules have a certificate.
+	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
 	SniSwitch pulumi.BoolPtrOutput `pulumi:"sniSwitch"`
-	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to
-	// bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in
-	// tencentcloud_clb_listener_rule.
+	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	TargetType pulumi.StringOutput `pulumi:"targetType"`
 }
 
@@ -136,27 +361,19 @@ func GetListener(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Listener resources.
 type listenerState struct {
-	// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the
-	// ssl mode is `MUTUAL`.
+	// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the ssl mode is `MUTUAL`.
 	CertificateCaId *string `pulumi:"certificateCaId"`
-	// ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it
-	// is available.
+	// ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
 	CertificateId *string `pulumi:"certificateId"`
-	// Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL`
-	// protocol and must be set when it is available.
+	// Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
 	CertificateSslMode *string `pulumi:"certificateSslMode"`
 	// ID of the CLB.
 	ClbId *string `pulumi:"clbId"`
-	// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is
-	// required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
+	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType *string `pulumi:"healthCheckContextType"`
-	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3
-	// consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener
-	// allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckHealthNum *int `pulumi:"healthCheckHealthNum"`
-	// HTTP health check code of TCP listener. When the value of `health_check_type` of the health check protocol is `HTTP`,
-	// this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means
-	// http_3xx, `8` means http_4xx, `16` means http_5xx.
+	// HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
 	HealthCheckHttpCode *int `pulumi:"healthCheckHttpCode"`
 	// HTTP health check domain of TCP listener.
 	HealthCheckHttpDomain *string `pulumi:"healthCheckHttpDomain"`
@@ -164,84 +381,56 @@ type listenerState struct {
 	HealthCheckHttpMethod *string `pulumi:"healthCheckHttpMethod"`
 	// HTTP health check path of TCP listener.
 	HealthCheckHttpPath *string `pulumi:"healthCheckHttpPath"`
-	// The HTTP version of the backend service. When the value of `health_check_type` of the health check protocol is `HTTP`,
-	// this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
+	// The HTTP version of the backend service. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
 	HealthCheckHttpVersion *string `pulumi:"healthCheckHttpVersion"`
-	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL
-	// listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime *int `pulumi:"healthCheckIntervalTime"`
-	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is
-	// recommended to leave it blank. Only applicable to TCP/UDP listener.
+	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
 	HealthCheckPort *int `pulumi:"healthCheckPort"`
-	// It represents the result returned by the health check. When the value of `health_check_type` of the health check
-	// protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500.
-	// When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected in
-	// `0123456789ABCDEF` and the length must be even digits.
+	// It represents the result returned by the health check. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When `healthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
 	HealthCheckRecvContext *string `pulumi:"healthCheckRecvContext"`
-	// It represents the content of the request sent by the health check. When the value of `health_check_type` of the health
-	// check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is
-	// 500. When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected
-	// in `0123456789ABCDEF` and the length must be even digits.
+	// It represents the content of the request sent by the health check. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `healthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
 	HealthCheckSendContext *string `pulumi:"healthCheckSendContext"`
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch *bool `pulumi:"healthCheckSwitch"`
-	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less
-	// than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
+	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
 	HealthCheckTimeOut *int `pulumi:"healthCheckTimeOut"`
 	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
 	HealthCheckType *string `pulumi:"healthCheckType"`
-	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-	// consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows
-	// direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum *int `pulumi:"healthCheckUnhealthNum"`
 	// ID of this CLB listener.
 	ListenerId *string `pulumi:"listenerId"`
-	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and
-	// hyphen '-'.
+	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
 	ListenerName *string `pulumi:"listenerName"`
 	// Port of the CLB listener.
 	Port *int `pulumi:"port"`
 	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
 	Protocol *string `pulumi:"protocol"`
-	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The
-	// listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener
-	// allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler *string `pulumi:"scheduler"`
-	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not
-	// available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS
-	// listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	SessionExpireTime *int `pulumi:"sessionExpireTime"`
-	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for
-	// each rule in `tencentcloud_clb_listener_rule`, otherwise all rules have a certificate.
+	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
 	SniSwitch *bool `pulumi:"sniSwitch"`
-	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to
-	// bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in
-	// tencentcloud_clb_listener_rule.
+	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	TargetType *string `pulumi:"targetType"`
 }
 
 type ListenerState struct {
-	// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the
-	// ssl mode is `MUTUAL`.
+	// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the ssl mode is `MUTUAL`.
 	CertificateCaId pulumi.StringPtrInput
-	// ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it
-	// is available.
+	// ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
 	CertificateId pulumi.StringPtrInput
-	// Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL`
-	// protocol and must be set when it is available.
+	// Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
 	CertificateSslMode pulumi.StringPtrInput
 	// ID of the CLB.
 	ClbId pulumi.StringPtrInput
-	// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is
-	// required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
+	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType pulumi.StringPtrInput
-	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3
-	// consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener
-	// allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckHealthNum pulumi.IntPtrInput
-	// HTTP health check code of TCP listener. When the value of `health_check_type` of the health check protocol is `HTTP`,
-	// this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means
-	// http_3xx, `8` means http_4xx, `16` means http_5xx.
+	// HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
 	HealthCheckHttpCode pulumi.IntPtrInput
 	// HTTP health check domain of TCP listener.
 	HealthCheckHttpDomain pulumi.StringPtrInput
@@ -249,59 +438,39 @@ type ListenerState struct {
 	HealthCheckHttpMethod pulumi.StringPtrInput
 	// HTTP health check path of TCP listener.
 	HealthCheckHttpPath pulumi.StringPtrInput
-	// The HTTP version of the backend service. When the value of `health_check_type` of the health check protocol is `HTTP`,
-	// this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
+	// The HTTP version of the backend service. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
 	HealthCheckHttpVersion pulumi.StringPtrInput
-	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL
-	// listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime pulumi.IntPtrInput
-	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is
-	// recommended to leave it blank. Only applicable to TCP/UDP listener.
+	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
 	HealthCheckPort pulumi.IntPtrInput
-	// It represents the result returned by the health check. When the value of `health_check_type` of the health check
-	// protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500.
-	// When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected in
-	// `0123456789ABCDEF` and the length must be even digits.
+	// It represents the result returned by the health check. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When `healthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
 	HealthCheckRecvContext pulumi.StringPtrInput
-	// It represents the content of the request sent by the health check. When the value of `health_check_type` of the health
-	// check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is
-	// 500. When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected
-	// in `0123456789ABCDEF` and the length must be even digits.
+	// It represents the content of the request sent by the health check. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `healthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
 	HealthCheckSendContext pulumi.StringPtrInput
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch pulumi.BoolPtrInput
-	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less
-	// than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
+	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
 	HealthCheckTimeOut pulumi.IntPtrInput
 	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
 	HealthCheckType pulumi.StringPtrInput
-	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-	// consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows
-	// direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum pulumi.IntPtrInput
 	// ID of this CLB listener.
 	ListenerId pulumi.StringPtrInput
-	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and
-	// hyphen '-'.
+	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
 	ListenerName pulumi.StringPtrInput
 	// Port of the CLB listener.
 	Port pulumi.IntPtrInput
 	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
 	Protocol pulumi.StringPtrInput
-	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The
-	// listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener
-	// allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler pulumi.StringPtrInput
-	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not
-	// available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS
-	// listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	SessionExpireTime pulumi.IntPtrInput
-	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for
-	// each rule in `tencentcloud_clb_listener_rule`, otherwise all rules have a certificate.
+	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
 	SniSwitch pulumi.BoolPtrInput
-	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to
-	// bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in
-	// tencentcloud_clb_listener_rule.
+	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	TargetType pulumi.StringPtrInput
 }
 
@@ -310,27 +479,19 @@ func (ListenerState) ElementType() reflect.Type {
 }
 
 type listenerArgs struct {
-	// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the
-	// ssl mode is `MUTUAL`.
+	// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the ssl mode is `MUTUAL`.
 	CertificateCaId *string `pulumi:"certificateCaId"`
-	// ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it
-	// is available.
+	// ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
 	CertificateId *string `pulumi:"certificateId"`
-	// Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL`
-	// protocol and must be set when it is available.
+	// Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
 	CertificateSslMode *string `pulumi:"certificateSslMode"`
 	// ID of the CLB.
 	ClbId string `pulumi:"clbId"`
-	// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is
-	// required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
+	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType *string `pulumi:"healthCheckContextType"`
-	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3
-	// consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener
-	// allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckHealthNum *int `pulumi:"healthCheckHealthNum"`
-	// HTTP health check code of TCP listener. When the value of `health_check_type` of the health check protocol is `HTTP`,
-	// this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means
-	// http_3xx, `8` means http_4xx, `16` means http_5xx.
+	// HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
 	HealthCheckHttpCode *int `pulumi:"healthCheckHttpCode"`
 	// HTTP health check domain of TCP listener.
 	HealthCheckHttpDomain *string `pulumi:"healthCheckHttpDomain"`
@@ -338,83 +499,55 @@ type listenerArgs struct {
 	HealthCheckHttpMethod *string `pulumi:"healthCheckHttpMethod"`
 	// HTTP health check path of TCP listener.
 	HealthCheckHttpPath *string `pulumi:"healthCheckHttpPath"`
-	// The HTTP version of the backend service. When the value of `health_check_type` of the health check protocol is `HTTP`,
-	// this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
+	// The HTTP version of the backend service. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
 	HealthCheckHttpVersion *string `pulumi:"healthCheckHttpVersion"`
-	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL
-	// listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime *int `pulumi:"healthCheckIntervalTime"`
-	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is
-	// recommended to leave it blank. Only applicable to TCP/UDP listener.
+	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
 	HealthCheckPort *int `pulumi:"healthCheckPort"`
-	// It represents the result returned by the health check. When the value of `health_check_type` of the health check
-	// protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500.
-	// When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected in
-	// `0123456789ABCDEF` and the length must be even digits.
+	// It represents the result returned by the health check. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When `healthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
 	HealthCheckRecvContext *string `pulumi:"healthCheckRecvContext"`
-	// It represents the content of the request sent by the health check. When the value of `health_check_type` of the health
-	// check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is
-	// 500. When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected
-	// in `0123456789ABCDEF` and the length must be even digits.
+	// It represents the content of the request sent by the health check. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `healthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
 	HealthCheckSendContext *string `pulumi:"healthCheckSendContext"`
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch *bool `pulumi:"healthCheckSwitch"`
-	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less
-	// than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
+	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
 	HealthCheckTimeOut *int `pulumi:"healthCheckTimeOut"`
 	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
 	HealthCheckType *string `pulumi:"healthCheckType"`
-	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-	// consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows
-	// direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum *int `pulumi:"healthCheckUnhealthNum"`
-	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and
-	// hyphen '-'.
+	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
 	ListenerName string `pulumi:"listenerName"`
 	// Port of the CLB listener.
 	Port *int `pulumi:"port"`
 	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
 	Protocol string `pulumi:"protocol"`
-	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The
-	// listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener
-	// allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler *string `pulumi:"scheduler"`
-	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not
-	// available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS
-	// listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	SessionExpireTime *int `pulumi:"sessionExpireTime"`
-	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for
-	// each rule in `tencentcloud_clb_listener_rule`, otherwise all rules have a certificate.
+	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
 	SniSwitch *bool `pulumi:"sniSwitch"`
-	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to
-	// bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in
-	// tencentcloud_clb_listener_rule.
+	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	TargetType *string `pulumi:"targetType"`
 }
 
 // The set of arguments for constructing a Listener resource.
 type ListenerArgs struct {
-	// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the
-	// ssl mode is `MUTUAL`.
+	// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the ssl mode is `MUTUAL`.
 	CertificateCaId pulumi.StringPtrInput
-	// ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it
-	// is available.
+	// ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
 	CertificateId pulumi.StringPtrInput
-	// Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL`
-	// protocol and must be set when it is available.
+	// Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
 	CertificateSslMode pulumi.StringPtrInput
 	// ID of the CLB.
 	ClbId pulumi.StringInput
-	// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is
-	// required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
+	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType pulumi.StringPtrInput
-	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3
-	// consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener
-	// allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckHealthNum pulumi.IntPtrInput
-	// HTTP health check code of TCP listener. When the value of `health_check_type` of the health check protocol is `HTTP`,
-	// this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means
-	// http_3xx, `8` means http_4xx, `16` means http_5xx.
+	// HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
 	HealthCheckHttpCode pulumi.IntPtrInput
 	// HTTP health check domain of TCP listener.
 	HealthCheckHttpDomain pulumi.StringPtrInput
@@ -422,57 +555,37 @@ type ListenerArgs struct {
 	HealthCheckHttpMethod pulumi.StringPtrInput
 	// HTTP health check path of TCP listener.
 	HealthCheckHttpPath pulumi.StringPtrInput
-	// The HTTP version of the backend service. When the value of `health_check_type` of the health check protocol is `HTTP`,
-	// this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
+	// The HTTP version of the backend service. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
 	HealthCheckHttpVersion pulumi.StringPtrInput
-	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL
-	// listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckIntervalTime pulumi.IntPtrInput
-	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is
-	// recommended to leave it blank. Only applicable to TCP/UDP listener.
+	// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
 	HealthCheckPort pulumi.IntPtrInput
-	// It represents the result returned by the health check. When the value of `health_check_type` of the health check
-	// protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500.
-	// When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected in
-	// `0123456789ABCDEF` and the length must be even digits.
+	// It represents the result returned by the health check. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When `healthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
 	HealthCheckRecvContext pulumi.StringPtrInput
-	// It represents the content of the request sent by the health check. When the value of `health_check_type` of the health
-	// check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is
-	// 500. When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected
-	// in `0123456789ABCDEF` and the length must be even digits.
+	// It represents the content of the request sent by the health check. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `healthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
 	HealthCheckSendContext pulumi.StringPtrInput
 	// Indicates whether health check is enabled.
 	HealthCheckSwitch pulumi.BoolPtrInput
-	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less
-	// than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
+	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
 	HealthCheckTimeOut pulumi.IntPtrInput
 	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
 	HealthCheckType pulumi.StringPtrInput
-	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-	// consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows
-	// direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum pulumi.IntPtrInput
-	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and
-	// hyphen '-'.
+	// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
 	ListenerName pulumi.StringInput
 	// Port of the CLB listener.
 	Port pulumi.IntPtrInput
 	// Type of protocol within the listener. Valid values: `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
 	Protocol pulumi.StringInput
-	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The
-	// listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener
-	// allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler pulumi.StringPtrInput
-	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not
-	// available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS
-	// listener needs to be configured in `tencentcloud_clb_listener_rule`.
+	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	SessionExpireTime pulumi.IntPtrInput
-	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for
-	// each rule in `tencentcloud_clb_listener_rule`, otherwise all rules have a certificate.
+	// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
 	SniSwitch pulumi.BoolPtrInput
-	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to
-	// bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in
-	// tencentcloud_clb_listener_rule.
+	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	TargetType pulumi.StringPtrInput
 }
 
@@ -563,20 +676,17 @@ func (o ListenerOutput) ToListenerOutputWithContext(ctx context.Context) Listene
 	return o
 }
 
-// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the
-// ssl mode is `MUTUAL`.
+// ID of the client certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when the ssl mode is `MUTUAL`.
 func (o ListenerOutput) CertificateCaId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringPtrOutput { return v.CertificateCaId }).(pulumi.StringPtrOutput)
 }
 
-// ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it
-// is available.
+// ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
 func (o ListenerOutput) CertificateId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringPtrOutput { return v.CertificateId }).(pulumi.StringPtrOutput)
 }
 
-// Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL`
-// protocol and must be set when it is available.
+// Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
 func (o ListenerOutput) CertificateSslMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringPtrOutput { return v.CertificateSslMode }).(pulumi.StringPtrOutput)
 }
@@ -586,22 +696,17 @@ func (o ListenerOutput) ClbId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringOutput { return v.ClbId }).(pulumi.StringOutput)
 }
 
-// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is
-// required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
+// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 func (o ListenerOutput) HealthCheckContextType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringPtrOutput { return v.HealthCheckContextType }).(pulumi.StringPtrOutput)
 }
 
-// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3
-// consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener
-// allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 func (o ListenerOutput) HealthCheckHealthNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntOutput { return v.HealthCheckHealthNum }).(pulumi.IntOutput)
 }
 
-// HTTP health check code of TCP listener. When the value of `health_check_type` of the health check protocol is `HTTP`,
-// this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means
-// http_3xx, `8` means http_4xx, `16` means http_5xx.
+// HTTP health check code of TCP listener. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.
 func (o ListenerOutput) HealthCheckHttpCode() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntPtrOutput { return v.HealthCheckHttpCode }).(pulumi.IntPtrOutput)
 }
@@ -621,36 +726,27 @@ func (o ListenerOutput) HealthCheckHttpPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringPtrOutput { return v.HealthCheckHttpPath }).(pulumi.StringPtrOutput)
 }
 
-// The HTTP version of the backend service. When the value of `health_check_type` of the health check protocol is `HTTP`,
-// this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
+// The HTTP version of the backend service. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
 func (o ListenerOutput) HealthCheckHttpVersion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringPtrOutput { return v.HealthCheckHttpVersion }).(pulumi.StringPtrOutput)
 }
 
-// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL
-// listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+// Interval time of health check. Valid value ranges: [5~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 func (o ListenerOutput) HealthCheckIntervalTime() pulumi.IntOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntOutput { return v.HealthCheckIntervalTime }).(pulumi.IntOutput)
 }
 
-// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is
-// recommended to leave it blank. Only applicable to TCP/UDP listener.
+// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
 func (o ListenerOutput) HealthCheckPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntPtrOutput { return v.HealthCheckPort }).(pulumi.IntPtrOutput)
 }
 
-// It represents the result returned by the health check. When the value of `health_check_type` of the health check
-// protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500.
-// When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected in
-// `0123456789ABCDEF` and the length must be even digits.
+// It represents the result returned by the health check. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When `healthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
 func (o ListenerOutput) HealthCheckRecvContext() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringPtrOutput { return v.HealthCheckRecvContext }).(pulumi.StringPtrOutput)
 }
 
-// It represents the content of the request sent by the health check. When the value of `health_check_type` of the health
-// check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is
-// 500. When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected
-// in `0123456789ABCDEF` and the length must be even digits.
+// It represents the content of the request sent by the health check. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `healthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
 func (o ListenerOutput) HealthCheckSendContext() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringPtrOutput { return v.HealthCheckSendContext }).(pulumi.StringPtrOutput)
 }
@@ -660,8 +756,7 @@ func (o ListenerOutput) HealthCheckSwitch() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Listener) pulumi.BoolOutput { return v.HealthCheckSwitch }).(pulumi.BoolOutput)
 }
 
-// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less
-// than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
+// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
 func (o ListenerOutput) HealthCheckTimeOut() pulumi.IntOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntOutput { return v.HealthCheckTimeOut }).(pulumi.IntOutput)
 }
@@ -671,9 +766,7 @@ func (o ListenerOutput) HealthCheckType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringOutput { return v.HealthCheckType }).(pulumi.StringOutput)
 }
 
-// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-// consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows
-// direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 func (o ListenerOutput) HealthCheckUnhealthNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntOutput { return v.HealthCheckUnhealthNum }).(pulumi.IntOutput)
 }
@@ -683,8 +776,7 @@ func (o ListenerOutput) ListenerId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringOutput { return v.ListenerId }).(pulumi.StringOutput)
 }
 
-// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and
-// hyphen '-'.
+// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
 func (o ListenerOutput) ListenerName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringOutput { return v.ListenerName }).(pulumi.StringOutput)
 }
@@ -699,29 +791,22 @@ func (o ListenerOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringOutput { return v.Protocol }).(pulumi.StringOutput)
 }
 
-// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The
-// listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener
-// allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud_clb_listener_rule`.
+// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 func (o ListenerOutput) Scheduler() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringPtrOutput { return v.Scheduler }).(pulumi.StringPtrOutput)
 }
 
-// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not
-// available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS
-// listener needs to be configured in `tencentcloud_clb_listener_rule`.
+// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 func (o ListenerOutput) SessionExpireTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntPtrOutput { return v.SessionExpireTime }).(pulumi.IntPtrOutput)
 }
 
-// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for
-// each rule in `tencentcloud_clb_listener_rule`, otherwise all rules have a certificate.
+// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `Clb.ListenerRule`, otherwise all rules have a certificate.
 func (o ListenerOutput) SniSwitch() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Listener) pulumi.BoolPtrOutput { return v.SniSwitch }).(pulumi.BoolPtrOutput)
 }
 
-// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to
-// bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in
-// tencentcloud_clb_listener_rule.
+// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 func (o ListenerOutput) TargetType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringOutput { return v.TargetType }).(pulumi.StringOutput)
 }

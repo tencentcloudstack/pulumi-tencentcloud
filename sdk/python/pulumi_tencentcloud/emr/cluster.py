@@ -33,24 +33,22 @@ class ClusterArgs:
         """
         The set of arguments for constructing a Cluster resource.
         :param pulumi.Input[str] display_strategy: Display strategy of EMR instance.
-        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-               underscores(_).
+        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings.
         :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
         :param pulumi.Input[Mapping[str, Any]] placement: The location of the instance.
         :param pulumi.Input[int] product_id: The product id of EMR instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
         :param pulumi.Input[int] support_ha: The flag whether the instance support high availability.(0=>not support, 1=>support).
-        :param pulumi.Input[int] time_span: The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-               at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-               length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
-        :param pulumi.Input[str] time_unit: The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-               When PayMode is 1, TimeUnit can only take the value m(month).
+        :param pulumi.Input[int] time_span: The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+               When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+        :param pulumi.Input[str] time_unit: The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         :param pulumi.Input[Mapping[str, Any]] vpc_settings: The private net config of EMR instance.
         :param pulumi.Input[str] extend_fs_field: Access the external file system.
-        :param pulumi.Input[str] need_master_wan: Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-               Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-               cluster Master node internet is enabled.
+        :param pulumi.Input[str] need_master_wan: Whether to enable the cluster Master node public network. Value range:
+               - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+               - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+               By default, the cluster Master node internet is enabled.
         :param pulumi.Input['ClusterResourceSpecArgs'] resource_spec: Resource specification of EMR instance.
         :param pulumi.Input[str] sg_id: The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
         """
@@ -90,8 +88,7 @@ class ClusterArgs:
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> pulumi.Input[str]:
         """
-        Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-        underscores(_).
+        Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         """
         return pulumi.get(self, "instance_name")
 
@@ -175,9 +172,8 @@ class ClusterArgs:
     @pulumi.getter(name="timeSpan")
     def time_span(self) -> pulumi.Input[int]:
         """
-        The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-        at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-        length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+        The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+        When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
         """
         return pulumi.get(self, "time_span")
 
@@ -189,8 +185,7 @@ class ClusterArgs:
     @pulumi.getter(name="timeUnit")
     def time_unit(self) -> pulumi.Input[str]:
         """
-        The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-        When PayMode is 1, TimeUnit can only take the value m(month).
+        The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         """
         return pulumi.get(self, "time_unit")
 
@@ -226,9 +221,10 @@ class ClusterArgs:
     @pulumi.getter(name="needMasterWan")
     def need_master_wan(self) -> Optional[pulumi.Input[str]]:
         """
-        Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-        Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-        cluster Master node internet is enabled.
+        Whether to enable the cluster Master node public network. Value range:
+        - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+        - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+        By default, the cluster Master node internet is enabled.
         """
         return pulumi.get(self, "need_master_wan")
 
@@ -285,12 +281,12 @@ class _ClusterState:
         :param pulumi.Input[str] display_strategy: Display strategy of EMR instance.
         :param pulumi.Input[str] extend_fs_field: Access the external file system.
         :param pulumi.Input[str] instance_id: Created EMR instance id.
-        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-               underscores(_).
+        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings.
-        :param pulumi.Input[str] need_master_wan: Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-               Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-               cluster Master node internet is enabled.
+        :param pulumi.Input[str] need_master_wan: Whether to enable the cluster Master node public network. Value range:
+               - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+               - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+               By default, the cluster Master node internet is enabled.
         :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
         :param pulumi.Input[Mapping[str, Any]] placement: The location of the instance.
         :param pulumi.Input[int] product_id: The product id of EMR instance.
@@ -298,11 +294,9 @@ class _ClusterState:
         :param pulumi.Input[str] sg_id: The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
         :param pulumi.Input[int] support_ha: The flag whether the instance support high availability.(0=>not support, 1=>support).
-        :param pulumi.Input[int] time_span: The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-               at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-               length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
-        :param pulumi.Input[str] time_unit: The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-               When PayMode is 1, TimeUnit can only take the value m(month).
+        :param pulumi.Input[int] time_span: The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+               When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+        :param pulumi.Input[str] time_unit: The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         :param pulumi.Input[Mapping[str, Any]] vpc_settings: The private net config of EMR instance.
         """
         if display_strategy is not None:
@@ -378,8 +372,7 @@ class _ClusterState:
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-        underscores(_).
+        Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         """
         return pulumi.get(self, "instance_name")
 
@@ -403,9 +396,10 @@ class _ClusterState:
     @pulumi.getter(name="needMasterWan")
     def need_master_wan(self) -> Optional[pulumi.Input[str]]:
         """
-        Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-        Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-        cluster Master node internet is enabled.
+        Whether to enable the cluster Master node public network. Value range:
+        - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+        - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+        By default, the cluster Master node internet is enabled.
         """
         return pulumi.get(self, "need_master_wan")
 
@@ -501,9 +495,8 @@ class _ClusterState:
     @pulumi.getter(name="timeSpan")
     def time_span(self) -> Optional[pulumi.Input[int]]:
         """
-        The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-        at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-        length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+        The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+        When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
         """
         return pulumi.get(self, "time_span")
 
@@ -515,8 +508,7 @@ class _ClusterState:
     @pulumi.getter(name="timeUnit")
     def time_unit(self) -> Optional[pulumi.Input[str]]:
         """
-        The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-        When PayMode is 1, TimeUnit can only take the value m(month).
+        The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         """
         return pulumi.get(self, "time_unit")
 
@@ -559,17 +551,69 @@ class Cluster(pulumi.CustomResource):
                  vpc_settings: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a Cluster resource with the given unique name, props, and options.
+        Provide a resource to create a emr cluster.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        emrrrr = tencentcloud.emr.Cluster("emrrrr",
+            product_id=4,
+            display_strategy="clusterList",
+            vpc_settings={
+                "vpc_id": "vpc-fuwly8x5",
+                "subnet_id": "subnet-d830wfso",
+            },
+            softwares=[
+                "hadoop-2.8.4",
+                "zookeeper-3.4.9",
+            ],
+            support_ha=0,
+            instance_name="emr-test",
+            resource_spec=tencentcloud.emr.ClusterResourceSpecArgs(
+                master_resource_spec=tencentcloud.emr.ClusterResourceSpecMasterResourceSpecArgs(
+                    mem_size=8192,
+                    cpu=4,
+                    disk_size=100,
+                    disk_type="CLOUD_PREMIUM",
+                    spec="CVM.S2",
+                    storage_type=5,
+                ),
+                core_resource_spec=tencentcloud.emr.ClusterResourceSpecCoreResourceSpecArgs(
+                    mem_size=8192,
+                    cpu=4,
+                    disk_size=100,
+                    disk_type="CLOUD_PREMIUM",
+                    spec="CVM.S2",
+                    storage_type=5,
+                ),
+                master_count=1,
+                core_count=2,
+            ),
+            login_settings={
+                "password": "Tencent@cloud123",
+            },
+            time_span=1,
+            time_unit="m",
+            pay_mode=1,
+            placement={
+                "zone": "ap-guangzhou-3",
+                "project_id": 0,
+            })
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] display_strategy: Display strategy of EMR instance.
         :param pulumi.Input[str] extend_fs_field: Access the external file system.
-        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-               underscores(_).
+        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings.
-        :param pulumi.Input[str] need_master_wan: Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-               Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-               cluster Master node internet is enabled.
+        :param pulumi.Input[str] need_master_wan: Whether to enable the cluster Master node public network. Value range:
+               - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+               - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+               By default, the cluster Master node internet is enabled.
         :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
         :param pulumi.Input[Mapping[str, Any]] placement: The location of the instance.
         :param pulumi.Input[int] product_id: The product id of EMR instance.
@@ -577,11 +621,9 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] sg_id: The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
         :param pulumi.Input[int] support_ha: The flag whether the instance support high availability.(0=>not support, 1=>support).
-        :param pulumi.Input[int] time_span: The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-               at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-               length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
-        :param pulumi.Input[str] time_unit: The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-               When PayMode is 1, TimeUnit can only take the value m(month).
+        :param pulumi.Input[int] time_span: The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+               When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+        :param pulumi.Input[str] time_unit: The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         :param pulumi.Input[Mapping[str, Any]] vpc_settings: The private net config of EMR instance.
         """
         ...
@@ -591,7 +633,59 @@ class Cluster(pulumi.CustomResource):
                  args: ClusterArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Cluster resource with the given unique name, props, and options.
+        Provide a resource to create a emr cluster.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        emrrrr = tencentcloud.emr.Cluster("emrrrr",
+            product_id=4,
+            display_strategy="clusterList",
+            vpc_settings={
+                "vpc_id": "vpc-fuwly8x5",
+                "subnet_id": "subnet-d830wfso",
+            },
+            softwares=[
+                "hadoop-2.8.4",
+                "zookeeper-3.4.9",
+            ],
+            support_ha=0,
+            instance_name="emr-test",
+            resource_spec=tencentcloud.emr.ClusterResourceSpecArgs(
+                master_resource_spec=tencentcloud.emr.ClusterResourceSpecMasterResourceSpecArgs(
+                    mem_size=8192,
+                    cpu=4,
+                    disk_size=100,
+                    disk_type="CLOUD_PREMIUM",
+                    spec="CVM.S2",
+                    storage_type=5,
+                ),
+                core_resource_spec=tencentcloud.emr.ClusterResourceSpecCoreResourceSpecArgs(
+                    mem_size=8192,
+                    cpu=4,
+                    disk_size=100,
+                    disk_type="CLOUD_PREMIUM",
+                    spec="CVM.S2",
+                    storage_type=5,
+                ),
+                master_count=1,
+                core_count=2,
+            ),
+            login_settings={
+                "password": "Tencent@cloud123",
+            },
+            time_span=1,
+            time_unit="m",
+            pay_mode=1,
+            placement={
+                "zone": "ap-guangzhou-3",
+                "project_id": 0,
+            })
+        ```
+
         :param str resource_name: The name of the resource.
         :param ClusterArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -708,12 +802,12 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] display_strategy: Display strategy of EMR instance.
         :param pulumi.Input[str] extend_fs_field: Access the external file system.
         :param pulumi.Input[str] instance_id: Created EMR instance id.
-        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-               underscores(_).
+        :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings.
-        :param pulumi.Input[str] need_master_wan: Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-               Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-               cluster Master node internet is enabled.
+        :param pulumi.Input[str] need_master_wan: Whether to enable the cluster Master node public network. Value range:
+               - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+               - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+               By default, the cluster Master node internet is enabled.
         :param pulumi.Input[int] pay_mode: The pay mode of instance. 0 is pay on an annual basis, 1 is pay on a measure basis.
         :param pulumi.Input[Mapping[str, Any]] placement: The location of the instance.
         :param pulumi.Input[int] product_id: The product id of EMR instance.
@@ -721,11 +815,9 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] sg_id: The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
         :param pulumi.Input[int] support_ha: The flag whether the instance support high availability.(0=>not support, 1=>support).
-        :param pulumi.Input[int] time_span: The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-               at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-               length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
-        :param pulumi.Input[str] time_unit: The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-               When PayMode is 1, TimeUnit can only take the value m(month).
+        :param pulumi.Input[int] time_span: The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+               When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+        :param pulumi.Input[str] time_unit: The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         :param pulumi.Input[Mapping[str, Any]] vpc_settings: The private net config of EMR instance.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -778,8 +870,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> pulumi.Output[str]:
         """
-        Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or
-        underscores(_).
+        Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         """
         return pulumi.get(self, "instance_name")
 
@@ -795,9 +886,10 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="needMasterWan")
     def need_master_wan(self) -> pulumi.Output[Optional[str]]:
         """
-        Whether to enable the cluster Master node public network. Value range: - NEED_MASTER_WAN: Indicates that the cluster
-        Master node public network is enabled. - NOT_NEED_MASTER_WAN: Indicates that it is not turned on. By default, the
-        cluster Master node internet is enabled.
+        Whether to enable the cluster Master node public network. Value range:
+        - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
+        - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
+        By default, the cluster Master node internet is enabled.
         """
         return pulumi.get(self, "need_master_wan")
 
@@ -861,9 +953,8 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="timeSpan")
     def time_span(self) -> pulumi.Output[int]:
         """
-        The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in
-        at 3600, representing a metered instance. When TimeUnit is m, the number filled in by this parameter indicates the
-        length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
+        The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
+        When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
         """
         return pulumi.get(self, "time_span")
 
@@ -871,8 +962,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="timeUnit")
     def time_unit(self) -> pulumi.Output[str]:
         """
-        The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second).
-        When PayMode is 1, TimeUnit can only take the value m(month).
+        The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         """
         return pulumi.get(self, "time_unit")
 

@@ -9,6 +9,37 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Tdmq
 {
+    /// <summary>
+    /// Provide a resource to create a TDMQ instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Tdmq.Instance("foo", new Tencentcloud.Tdmq.InstanceArgs
+    ///         {
+    ///             ClusterName = "example",
+    ///             Remark = "this is description.",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Tdmq instance can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {

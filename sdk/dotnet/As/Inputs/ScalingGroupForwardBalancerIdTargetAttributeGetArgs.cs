@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.As.Inputs
 
     public sealed class ScalingGroupForwardBalancerIdTargetAttributeGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Port number.
+        /// </summary>
         [Input("port", required: true)]
         public Input<int> Port { get; set; } = null!;
 
+        /// <summary>
+        /// Weight.
+        /// </summary>
         [Input("weight", required: true)]
         public Input<int> Weight { get; set; } = null!;
 

@@ -11,36 +11,65 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a KMS external key.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Kms.NewExternalKey(ctx, "foo", &Kms.ExternalKeyArgs{
+// 			Alias:             pulumi.String("test"),
+// 			Description:       pulumi.String("describe key test message."),
+// 			IsEnabled:         pulumi.Bool(true),
+// 			KeyMaterialBase64: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
+// 			ValidTo:           pulumi.Int(2147443200),
+// 			WrappingAlgorithm: pulumi.String("RSAES_PKCS1_V1_5"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// KMS external keys can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Kms/externalKey:ExternalKey foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+// ```
 type ExternalKey struct {
 	pulumi.CustomResourceState
 
-	// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-	// a letter or number.
+	// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	Alias pulumi.StringOutput `pulumi:"alias"`
 	// Description of CMK. The maximum is 1024 bytes.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	// Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-	// is `Enabled`, `Disabled`, `Archived`.
+	// Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
 	IsArchived pulumi.BoolPtrOutput `pulumi:"isArchived"`
-	// Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-	// is `Enabled`, `Disabled`, `Archived`.
+	// Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
 	IsEnabled pulumi.BoolPtrOutput `pulumi:"isEnabled"`
-	// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-	// of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-	// imported key material is required to be 256 bits.
+	// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
 	KeyMaterialBase64 pulumi.StringPtrOutput `pulumi:"keyMaterialBase64"`
 	// State of CMK.
 	KeyState pulumi.StringOutput `pulumi:"keyState"`
-	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-	// Defaults to 7 days.
+	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
 	PendingDeleteWindowInDays pulumi.IntPtrOutput `pulumi:"pendingDeleteWindowInDays"`
 	// Tags of CMK.
 	Tags pulumi.MapOutput `pulumi:"tags"`
-	// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-	// current timestamp, the maximum support is 2147443200.
+	// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
 	ValidTo pulumi.IntPtrOutput `pulumi:"validTo"`
-	// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-	// `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+	// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
 	WrappingAlgorithm pulumi.StringPtrOutput `pulumi:"wrappingAlgorithm"`
 }
 
@@ -76,64 +105,48 @@ func GetExternalKey(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ExternalKey resources.
 type externalKeyState struct {
-	// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-	// a letter or number.
+	// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	Alias *string `pulumi:"alias"`
 	// Description of CMK. The maximum is 1024 bytes.
 	Description *string `pulumi:"description"`
-	// Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-	// is `Enabled`, `Disabled`, `Archived`.
+	// Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
 	IsArchived *bool `pulumi:"isArchived"`
-	// Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-	// is `Enabled`, `Disabled`, `Archived`.
+	// Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
 	IsEnabled *bool `pulumi:"isEnabled"`
-	// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-	// of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-	// imported key material is required to be 256 bits.
+	// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
 	KeyMaterialBase64 *string `pulumi:"keyMaterialBase64"`
 	// State of CMK.
 	KeyState *string `pulumi:"keyState"`
-	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-	// Defaults to 7 days.
+	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
 	PendingDeleteWindowInDays *int `pulumi:"pendingDeleteWindowInDays"`
 	// Tags of CMK.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-	// current timestamp, the maximum support is 2147443200.
+	// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
 	ValidTo *int `pulumi:"validTo"`
-	// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-	// `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+	// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
 	WrappingAlgorithm *string `pulumi:"wrappingAlgorithm"`
 }
 
 type ExternalKeyState struct {
-	// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-	// a letter or number.
+	// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	Alias pulumi.StringPtrInput
 	// Description of CMK. The maximum is 1024 bytes.
 	Description pulumi.StringPtrInput
-	// Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-	// is `Enabled`, `Disabled`, `Archived`.
+	// Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
 	IsArchived pulumi.BoolPtrInput
-	// Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-	// is `Enabled`, `Disabled`, `Archived`.
+	// Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
 	IsEnabled pulumi.BoolPtrInput
-	// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-	// of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-	// imported key material is required to be 256 bits.
+	// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
 	KeyMaterialBase64 pulumi.StringPtrInput
 	// State of CMK.
 	KeyState pulumi.StringPtrInput
-	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-	// Defaults to 7 days.
+	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
 	PendingDeleteWindowInDays pulumi.IntPtrInput
 	// Tags of CMK.
 	Tags pulumi.MapInput
-	// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-	// current timestamp, the maximum support is 2147443200.
+	// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
 	ValidTo pulumi.IntPtrInput
-	// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-	// `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+	// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
 	WrappingAlgorithm pulumi.StringPtrInput
 }
 
@@ -142,61 +155,45 @@ func (ExternalKeyState) ElementType() reflect.Type {
 }
 
 type externalKeyArgs struct {
-	// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-	// a letter or number.
+	// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	Alias string `pulumi:"alias"`
 	// Description of CMK. The maximum is 1024 bytes.
 	Description *string `pulumi:"description"`
-	// Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-	// is `Enabled`, `Disabled`, `Archived`.
+	// Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
 	IsArchived *bool `pulumi:"isArchived"`
-	// Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-	// is `Enabled`, `Disabled`, `Archived`.
+	// Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
 	IsEnabled *bool `pulumi:"isEnabled"`
-	// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-	// of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-	// imported key material is required to be 256 bits.
+	// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
 	KeyMaterialBase64 *string `pulumi:"keyMaterialBase64"`
-	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-	// Defaults to 7 days.
+	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
 	PendingDeleteWindowInDays *int `pulumi:"pendingDeleteWindowInDays"`
 	// Tags of CMK.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-	// current timestamp, the maximum support is 2147443200.
+	// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
 	ValidTo *int `pulumi:"validTo"`
-	// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-	// `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+	// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
 	WrappingAlgorithm *string `pulumi:"wrappingAlgorithm"`
 }
 
 // The set of arguments for constructing a ExternalKey resource.
 type ExternalKeyArgs struct {
-	// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-	// a letter or number.
+	// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	Alias pulumi.StringInput
 	// Description of CMK. The maximum is 1024 bytes.
 	Description pulumi.StringPtrInput
-	// Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-	// is `Enabled`, `Disabled`, `Archived`.
+	// Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
 	IsArchived pulumi.BoolPtrInput
-	// Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-	// is `Enabled`, `Disabled`, `Archived`.
+	// Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
 	IsEnabled pulumi.BoolPtrInput
-	// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-	// of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-	// imported key material is required to be 256 bits.
+	// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
 	KeyMaterialBase64 pulumi.StringPtrInput
-	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-	// Defaults to 7 days.
+	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
 	PendingDeleteWindowInDays pulumi.IntPtrInput
 	// Tags of CMK.
 	Tags pulumi.MapInput
-	// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-	// current timestamp, the maximum support is 2147443200.
+	// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
 	ValidTo pulumi.IntPtrInput
-	// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-	// `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+	// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
 	WrappingAlgorithm pulumi.StringPtrInput
 }
 
@@ -287,8 +284,7 @@ func (o ExternalKeyOutput) ToExternalKeyOutputWithContext(ctx context.Context) E
 	return o
 }
 
-// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-// a letter or number.
+// Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 func (o ExternalKeyOutput) Alias() pulumi.StringOutput {
 	return o.ApplyT(func(v *ExternalKey) pulumi.StringOutput { return v.Alias }).(pulumi.StringOutput)
 }
@@ -298,21 +294,17 @@ func (o ExternalKeyOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ExternalKey) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-// is `Enabled`, `Disabled`, `Archived`.
+// Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
 func (o ExternalKeyOutput) IsArchived() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ExternalKey) pulumi.BoolPtrOutput { return v.IsArchived }).(pulumi.BoolPtrOutput)
 }
 
-// Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-// is `Enabled`, `Disabled`, `Archived`.
+// Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
 func (o ExternalKeyOutput) IsEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ExternalKey) pulumi.BoolPtrOutput { return v.IsEnabled }).(pulumi.BoolPtrOutput)
 }
 
-// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-// of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-// imported key material is required to be 256 bits.
+// The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
 func (o ExternalKeyOutput) KeyMaterialBase64() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ExternalKey) pulumi.StringPtrOutput { return v.KeyMaterialBase64 }).(pulumi.StringPtrOutput)
 }
@@ -322,8 +314,7 @@ func (o ExternalKeyOutput) KeyState() pulumi.StringOutput {
 	return o.ApplyT(func(v *ExternalKey) pulumi.StringOutput { return v.KeyState }).(pulumi.StringOutput)
 }
 
-// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-// Defaults to 7 days.
+// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
 func (o ExternalKeyOutput) PendingDeleteWindowInDays() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ExternalKey) pulumi.IntPtrOutput { return v.PendingDeleteWindowInDays }).(pulumi.IntPtrOutput)
 }
@@ -333,14 +324,12 @@ func (o ExternalKeyOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *ExternalKey) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
-// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-// current timestamp, the maximum support is 2147443200.
+// This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
 func (o ExternalKeyOutput) ValidTo() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ExternalKey) pulumi.IntPtrOutput { return v.ValidTo }).(pulumi.IntPtrOutput)
 }
 
-// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-// `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+// The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
 func (o ExternalKeyOutput) WrappingAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ExternalKey) pulumi.StringPtrOutput { return v.WrappingAlgorithm }).(pulumi.StringPtrOutput)
 }

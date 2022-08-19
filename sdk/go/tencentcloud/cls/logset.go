@@ -11,6 +11,41 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a cls logset
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cls.NewLogset(ctx, "logset", &Cls.LogsetArgs{
+// 			LogsetName: pulumi.String("logset"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// cls logset can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cls/logset:Logset logset 5cd3a17e-fb0b-418c-afd7-77b365397426
+// ```
 type Logset struct {
 	pulumi.CustomResourceState
 

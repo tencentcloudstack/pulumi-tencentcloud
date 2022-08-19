@@ -10,15 +10,21 @@ using Pulumi.Serialization;
 namespace Pulumi.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CCPolicyV2ThresholdGetArgs : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2ThresholdGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// domain.
+        /// </summary>
         [Input("domain", required: true)]
         public Input<string> Domain { get; set; } = null!;
 
+        /// <summary>
+        /// Cleaning threshold, -1 indicates that the `default` mode is turned on.
+        /// </summary>
         [Input("threshold", required: true)]
         public Input<int> Threshold { get; set; } = null!;
 
-        public CCPolicyV2ThresholdGetArgs()
+        public CcPolicyV2ThresholdGetArgs()
         {
         }
     }

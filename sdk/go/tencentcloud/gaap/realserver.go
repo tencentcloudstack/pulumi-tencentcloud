@@ -10,6 +10,41 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a GAAP realserver.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Gaap.NewRealserver(ctx, "foo", &Gaap.RealserverArgs{
+// 			Ip: pulumi.String("1.1.1.1"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// GAAP realserver can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Gaap/realserver:Realserver tencentcloud_gaap_realserver.foo rs-4ftghy6
+// ```
 type Realserver struct {
 	pulumi.CustomResourceState
 

@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.PrivateDns.Outputs
     [OutputType]
     public sealed class ZoneTagSet
     {
+        /// <summary>
+        /// Key of Tag.
+        /// </summary>
         public readonly string TagKey;
+        /// <summary>
+        /// Value of Tag.
+        /// </summary>
         public readonly string TagValue;
 
         [OutputConstructor]

@@ -9,6 +9,33 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.As
 {
+    /// <summary>
+    /// Provides a resource to attach or detach CVM instances to a specified scaling group.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var attachment = new Tencentcloud.As.Attachment("attachment", new Tencentcloud.As.AttachmentArgs
+    ///         {
+    ///             InstanceIds = 
+    ///             {
+    ///                 "ins-01",
+    ///                 "ins-02",
+    ///             },
+    ///             ScalingGroupId = "sg-afasfa",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:As/attachment:Attachment")]
     public partial class Attachment : Pulumi.CustomResource
     {

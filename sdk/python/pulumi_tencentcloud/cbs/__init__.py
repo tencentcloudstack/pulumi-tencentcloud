@@ -5,12 +5,15 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .get_snapshot_policies import *
+from .get_snapshots import *
+from .get_storages import *
+from .get_storages_set import *
 from .snapshot import *
-from .snapshot_policies import *
 from .snapshot_policy import *
 from .snapshot_policy_attachment import *
-from .snapshots import *
 from .storage import *
 from .storage_attachment import *
-from .storages import *
+from .storage_set import *
+from .storage_set_attachment import *
 from . import outputs

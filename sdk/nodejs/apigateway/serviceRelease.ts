@@ -4,6 +4,17 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create API gateway service release.
+ *
+ * ## Import
+ *
+ * API gateway service release can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service service-jjt3fs3s#release#20201015121916d85fb161-eaec-4dda-a7e0-659aa5f401be
+ * ```
+ */
 export class ServiceRelease extends pulumi.CustomResource {
     /**
      * Get an existing ServiceRelease resource's state with the given name, ID, and optional extra
@@ -19,7 +30,7 @@ export class ServiceRelease extends pulumi.CustomResource {
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:APIGateway/serviceRelease:ServiceRelease';
+    public static readonly __pulumiType = 'tencentcloud:ApiGateway/serviceRelease:ServiceRelease';
 
     /**
      * Returns true if the given object is an instance of ServiceRelease.  This is designed to work even

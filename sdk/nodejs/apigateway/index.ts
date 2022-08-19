@@ -6,10 +6,19 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./api";
-export * from "./apikey";
-export * from "./apikeyAttachment";
+export * from "./apiKey";
+export * from "./apiKeyAttachment";
 export * from "./customDomain";
-export * from "./ipstrategy";
+export * from "./getApiKeys";
+export * from "./getApis";
+export * from "./getCustomerDomains";
+export * from "./getIpStrategies";
+export * from "./getServices";
+export * from "./getThrottlingApis";
+export * from "./getThrottlingServices";
+export * from "./getUsagePlanEnvironments";
+export * from "./getUsagePlans";
+export * from "./ipStrategy";
 export * from "./service";
 export * from "./serviceRelease";
 export * from "./strategyAttachment";
@@ -17,11 +26,11 @@ export * from "./usagePlan";
 export * from "./usagePlanAttachment";
 
 // Import resources to register:
-import { API } from "./api";
-import { APIKey } from "./apikey";
-import { APIKeyAttachment } from "./apikeyAttachment";
+import { Api } from "./api";
+import { ApiKey } from "./apiKey";
+import { ApiKeyAttachment } from "./apiKeyAttachment";
 import { CustomDomain } from "./customDomain";
-import { IPStrategy } from "./ipstrategy";
+import { IpStrategy } from "./ipStrategy";
 import { Service } from "./service";
 import { ServiceRelease } from "./serviceRelease";
 import { StrategyAttachment } from "./strategyAttachment";
@@ -32,38 +41,38 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "tencentcloud:APIGateway/aPI:API":
-                return new API(name, <any>undefined, { urn })
-            case "tencentcloud:APIGateway/aPIKey:APIKey":
-                return new APIKey(name, <any>undefined, { urn })
-            case "tencentcloud:APIGateway/aPIKeyAttachment:APIKeyAttachment":
-                return new APIKeyAttachment(name, <any>undefined, { urn })
-            case "tencentcloud:APIGateway/customDomain:CustomDomain":
+            case "tencentcloud:ApiGateway/api:Api":
+                return new Api(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/apiKey:ApiKey":
+                return new ApiKey(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment":
+                return new ApiKeyAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/customDomain:CustomDomain":
                 return new CustomDomain(name, <any>undefined, { urn })
-            case "tencentcloud:APIGateway/iPStrategy:IPStrategy":
-                return new IPStrategy(name, <any>undefined, { urn })
-            case "tencentcloud:APIGateway/service:Service":
+            case "tencentcloud:ApiGateway/ipStrategy:IpStrategy":
+                return new IpStrategy(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/service:Service":
                 return new Service(name, <any>undefined, { urn })
-            case "tencentcloud:APIGateway/serviceRelease:ServiceRelease":
+            case "tencentcloud:ApiGateway/serviceRelease:ServiceRelease":
                 return new ServiceRelease(name, <any>undefined, { urn })
-            case "tencentcloud:APIGateway/strategyAttachment:StrategyAttachment":
+            case "tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment":
                 return new StrategyAttachment(name, <any>undefined, { urn })
-            case "tencentcloud:APIGateway/usagePlan:UsagePlan":
+            case "tencentcloud:ApiGateway/usagePlan:UsagePlan":
                 return new UsagePlan(name, <any>undefined, { urn })
-            case "tencentcloud:APIGateway/usagePlanAttachment:UsagePlanAttachment":
+            case "tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment":
                 return new UsagePlanAttachment(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
-pulumi.runtime.registerResourceModule("tencentcloud", "APIGateway/aPI", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "APIGateway/aPIKey", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "APIGateway/aPIKeyAttachment", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "APIGateway/customDomain", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "APIGateway/iPStrategy", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "APIGateway/service", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "APIGateway/serviceRelease", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "APIGateway/strategyAttachment", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "APIGateway/usagePlan", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "APIGateway/usagePlanAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/api", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/apiKey", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/apiKeyAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/customDomain", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/ipStrategy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/service", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/serviceRelease", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/strategyAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/usagePlan", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/usagePlanAttachment", _module)

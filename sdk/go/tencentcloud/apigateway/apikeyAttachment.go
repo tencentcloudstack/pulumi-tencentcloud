@@ -11,7 +11,56 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type APIKeyAttachment struct {
+// Use this resource to API gateway attach access key to usage plan.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		key, err := ApiGateway.NewApiKey(ctx, "key", &ApiGateway.ApiKeyArgs{
+// 			SecretName: pulumi.String("my_api_key"),
+// 			Status:     pulumi.String("on"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		plan, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
+// 			UsagePlanName:       pulumi.String("my_plan"),
+// 			UsagePlanDesc:       pulumi.String("nice plan"),
+// 			MaxRequestNum:       pulumi.Int(100),
+// 			MaxRequestNumPreSec: pulumi.Int(10),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = ApiGateway.NewApiKeyAttachment(ctx, "attach", &ApiGateway.ApiKeyAttachmentArgs{
+// 			ApiKeyId:    key.ID(),
+// 			UsagePlanId: plan.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// API gateway attach access key can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment attach AKID110b8Rmuw7t0fP1N8bi809n327023Is7xN8f#usagePlan-gyeafpab
+// ```
+type ApiKeyAttachment struct {
 	pulumi.CustomResourceState
 
 	// ID of API key.
@@ -20,9 +69,9 @@ type APIKeyAttachment struct {
 	UsagePlanId pulumi.StringOutput `pulumi:"usagePlanId"`
 }
 
-// NewAPIKeyAttachment registers a new resource with the given unique name, arguments, and options.
-func NewAPIKeyAttachment(ctx *pulumi.Context,
-	name string, args *APIKeyAttachmentArgs, opts ...pulumi.ResourceOption) (*APIKeyAttachment, error) {
+// NewApiKeyAttachment registers a new resource with the given unique name, arguments, and options.
+func NewApiKeyAttachment(ctx *pulumi.Context,
+	name string, args *ApiKeyAttachmentArgs, opts ...pulumi.ResourceOption) (*ApiKeyAttachment, error) {
 	if args == nil {
 		return nil, errors.New("missing one or more required arguments")
 	}
@@ -33,202 +82,202 @@ func NewAPIKeyAttachment(ctx *pulumi.Context,
 	if args.UsagePlanId == nil {
 		return nil, errors.New("invalid value for required argument 'UsagePlanId'")
 	}
-	var resource APIKeyAttachment
-	err := ctx.RegisterResource("tencentcloud:APIGateway/aPIKeyAttachment:APIKeyAttachment", name, args, &resource, opts...)
+	var resource ApiKeyAttachment
+	err := ctx.RegisterResource("tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// GetAPIKeyAttachment gets an existing APIKeyAttachment resource's state with the given name, ID, and optional
+// GetApiKeyAttachment gets an existing ApiKeyAttachment resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetAPIKeyAttachment(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *APIKeyAttachmentState, opts ...pulumi.ResourceOption) (*APIKeyAttachment, error) {
-	var resource APIKeyAttachment
-	err := ctx.ReadResource("tencentcloud:APIGateway/aPIKeyAttachment:APIKeyAttachment", name, id, state, &resource, opts...)
+func GetApiKeyAttachment(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *ApiKeyAttachmentState, opts ...pulumi.ResourceOption) (*ApiKeyAttachment, error) {
+	var resource ApiKeyAttachment
+	err := ctx.ReadResource("tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// Input properties used for looking up and filtering APIKeyAttachment resources.
-type apikeyAttachmentState struct {
+// Input properties used for looking up and filtering ApiKeyAttachment resources.
+type apiKeyAttachmentState struct {
 	// ID of API key.
 	ApiKeyId *string `pulumi:"apiKeyId"`
 	// ID of the usage plan.
 	UsagePlanId *string `pulumi:"usagePlanId"`
 }
 
-type APIKeyAttachmentState struct {
+type ApiKeyAttachmentState struct {
 	// ID of API key.
 	ApiKeyId pulumi.StringPtrInput
 	// ID of the usage plan.
 	UsagePlanId pulumi.StringPtrInput
 }
 
-func (APIKeyAttachmentState) ElementType() reflect.Type {
-	return reflect.TypeOf((*apikeyAttachmentState)(nil)).Elem()
+func (ApiKeyAttachmentState) ElementType() reflect.Type {
+	return reflect.TypeOf((*apiKeyAttachmentState)(nil)).Elem()
 }
 
-type apikeyAttachmentArgs struct {
+type apiKeyAttachmentArgs struct {
 	// ID of API key.
 	ApiKeyId string `pulumi:"apiKeyId"`
 	// ID of the usage plan.
 	UsagePlanId string `pulumi:"usagePlanId"`
 }
 
-// The set of arguments for constructing a APIKeyAttachment resource.
-type APIKeyAttachmentArgs struct {
+// The set of arguments for constructing a ApiKeyAttachment resource.
+type ApiKeyAttachmentArgs struct {
 	// ID of API key.
 	ApiKeyId pulumi.StringInput
 	// ID of the usage plan.
 	UsagePlanId pulumi.StringInput
 }
 
-func (APIKeyAttachmentArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*apikeyAttachmentArgs)(nil)).Elem()
+func (ApiKeyAttachmentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*apiKeyAttachmentArgs)(nil)).Elem()
 }
 
-type APIKeyAttachmentInput interface {
+type ApiKeyAttachmentInput interface {
 	pulumi.Input
 
-	ToAPIKeyAttachmentOutput() APIKeyAttachmentOutput
-	ToAPIKeyAttachmentOutputWithContext(ctx context.Context) APIKeyAttachmentOutput
+	ToApiKeyAttachmentOutput() ApiKeyAttachmentOutput
+	ToApiKeyAttachmentOutputWithContext(ctx context.Context) ApiKeyAttachmentOutput
 }
 
-func (*APIKeyAttachment) ElementType() reflect.Type {
-	return reflect.TypeOf((**APIKeyAttachment)(nil)).Elem()
+func (*ApiKeyAttachment) ElementType() reflect.Type {
+	return reflect.TypeOf((**ApiKeyAttachment)(nil)).Elem()
 }
 
-func (i *APIKeyAttachment) ToAPIKeyAttachmentOutput() APIKeyAttachmentOutput {
-	return i.ToAPIKeyAttachmentOutputWithContext(context.Background())
+func (i *ApiKeyAttachment) ToApiKeyAttachmentOutput() ApiKeyAttachmentOutput {
+	return i.ToApiKeyAttachmentOutputWithContext(context.Background())
 }
 
-func (i *APIKeyAttachment) ToAPIKeyAttachmentOutputWithContext(ctx context.Context) APIKeyAttachmentOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(APIKeyAttachmentOutput)
+func (i *ApiKeyAttachment) ToApiKeyAttachmentOutputWithContext(ctx context.Context) ApiKeyAttachmentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiKeyAttachmentOutput)
 }
 
-// APIKeyAttachmentArrayInput is an input type that accepts APIKeyAttachmentArray and APIKeyAttachmentArrayOutput values.
-// You can construct a concrete instance of `APIKeyAttachmentArrayInput` via:
+// ApiKeyAttachmentArrayInput is an input type that accepts ApiKeyAttachmentArray and ApiKeyAttachmentArrayOutput values.
+// You can construct a concrete instance of `ApiKeyAttachmentArrayInput` via:
 //
-//          APIKeyAttachmentArray{ APIKeyAttachmentArgs{...} }
-type APIKeyAttachmentArrayInput interface {
+//          ApiKeyAttachmentArray{ ApiKeyAttachmentArgs{...} }
+type ApiKeyAttachmentArrayInput interface {
 	pulumi.Input
 
-	ToAPIKeyAttachmentArrayOutput() APIKeyAttachmentArrayOutput
-	ToAPIKeyAttachmentArrayOutputWithContext(context.Context) APIKeyAttachmentArrayOutput
+	ToApiKeyAttachmentArrayOutput() ApiKeyAttachmentArrayOutput
+	ToApiKeyAttachmentArrayOutputWithContext(context.Context) ApiKeyAttachmentArrayOutput
 }
 
-type APIKeyAttachmentArray []APIKeyAttachmentInput
+type ApiKeyAttachmentArray []ApiKeyAttachmentInput
 
-func (APIKeyAttachmentArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*APIKeyAttachment)(nil)).Elem()
+func (ApiKeyAttachmentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*ApiKeyAttachment)(nil)).Elem()
 }
 
-func (i APIKeyAttachmentArray) ToAPIKeyAttachmentArrayOutput() APIKeyAttachmentArrayOutput {
-	return i.ToAPIKeyAttachmentArrayOutputWithContext(context.Background())
+func (i ApiKeyAttachmentArray) ToApiKeyAttachmentArrayOutput() ApiKeyAttachmentArrayOutput {
+	return i.ToApiKeyAttachmentArrayOutputWithContext(context.Background())
 }
 
-func (i APIKeyAttachmentArray) ToAPIKeyAttachmentArrayOutputWithContext(ctx context.Context) APIKeyAttachmentArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(APIKeyAttachmentArrayOutput)
+func (i ApiKeyAttachmentArray) ToApiKeyAttachmentArrayOutputWithContext(ctx context.Context) ApiKeyAttachmentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiKeyAttachmentArrayOutput)
 }
 
-// APIKeyAttachmentMapInput is an input type that accepts APIKeyAttachmentMap and APIKeyAttachmentMapOutput values.
-// You can construct a concrete instance of `APIKeyAttachmentMapInput` via:
+// ApiKeyAttachmentMapInput is an input type that accepts ApiKeyAttachmentMap and ApiKeyAttachmentMapOutput values.
+// You can construct a concrete instance of `ApiKeyAttachmentMapInput` via:
 //
-//          APIKeyAttachmentMap{ "key": APIKeyAttachmentArgs{...} }
-type APIKeyAttachmentMapInput interface {
+//          ApiKeyAttachmentMap{ "key": ApiKeyAttachmentArgs{...} }
+type ApiKeyAttachmentMapInput interface {
 	pulumi.Input
 
-	ToAPIKeyAttachmentMapOutput() APIKeyAttachmentMapOutput
-	ToAPIKeyAttachmentMapOutputWithContext(context.Context) APIKeyAttachmentMapOutput
+	ToApiKeyAttachmentMapOutput() ApiKeyAttachmentMapOutput
+	ToApiKeyAttachmentMapOutputWithContext(context.Context) ApiKeyAttachmentMapOutput
 }
 
-type APIKeyAttachmentMap map[string]APIKeyAttachmentInput
+type ApiKeyAttachmentMap map[string]ApiKeyAttachmentInput
 
-func (APIKeyAttachmentMap) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*APIKeyAttachment)(nil)).Elem()
+func (ApiKeyAttachmentMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*ApiKeyAttachment)(nil)).Elem()
 }
 
-func (i APIKeyAttachmentMap) ToAPIKeyAttachmentMapOutput() APIKeyAttachmentMapOutput {
-	return i.ToAPIKeyAttachmentMapOutputWithContext(context.Background())
+func (i ApiKeyAttachmentMap) ToApiKeyAttachmentMapOutput() ApiKeyAttachmentMapOutput {
+	return i.ToApiKeyAttachmentMapOutputWithContext(context.Background())
 }
 
-func (i APIKeyAttachmentMap) ToAPIKeyAttachmentMapOutputWithContext(ctx context.Context) APIKeyAttachmentMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(APIKeyAttachmentMapOutput)
+func (i ApiKeyAttachmentMap) ToApiKeyAttachmentMapOutputWithContext(ctx context.Context) ApiKeyAttachmentMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiKeyAttachmentMapOutput)
 }
 
-type APIKeyAttachmentOutput struct{ *pulumi.OutputState }
+type ApiKeyAttachmentOutput struct{ *pulumi.OutputState }
 
-func (APIKeyAttachmentOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**APIKeyAttachment)(nil)).Elem()
+func (ApiKeyAttachmentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ApiKeyAttachment)(nil)).Elem()
 }
 
-func (o APIKeyAttachmentOutput) ToAPIKeyAttachmentOutput() APIKeyAttachmentOutput {
+func (o ApiKeyAttachmentOutput) ToApiKeyAttachmentOutput() ApiKeyAttachmentOutput {
 	return o
 }
 
-func (o APIKeyAttachmentOutput) ToAPIKeyAttachmentOutputWithContext(ctx context.Context) APIKeyAttachmentOutput {
+func (o ApiKeyAttachmentOutput) ToApiKeyAttachmentOutputWithContext(ctx context.Context) ApiKeyAttachmentOutput {
 	return o
 }
 
 // ID of API key.
-func (o APIKeyAttachmentOutput) ApiKeyId() pulumi.StringOutput {
-	return o.ApplyT(func(v *APIKeyAttachment) pulumi.StringOutput { return v.ApiKeyId }).(pulumi.StringOutput)
+func (o ApiKeyAttachmentOutput) ApiKeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ApiKeyAttachment) pulumi.StringOutput { return v.ApiKeyId }).(pulumi.StringOutput)
 }
 
 // ID of the usage plan.
-func (o APIKeyAttachmentOutput) UsagePlanId() pulumi.StringOutput {
-	return o.ApplyT(func(v *APIKeyAttachment) pulumi.StringOutput { return v.UsagePlanId }).(pulumi.StringOutput)
+func (o ApiKeyAttachmentOutput) UsagePlanId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ApiKeyAttachment) pulumi.StringOutput { return v.UsagePlanId }).(pulumi.StringOutput)
 }
 
-type APIKeyAttachmentArrayOutput struct{ *pulumi.OutputState }
+type ApiKeyAttachmentArrayOutput struct{ *pulumi.OutputState }
 
-func (APIKeyAttachmentArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*APIKeyAttachment)(nil)).Elem()
+func (ApiKeyAttachmentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*ApiKeyAttachment)(nil)).Elem()
 }
 
-func (o APIKeyAttachmentArrayOutput) ToAPIKeyAttachmentArrayOutput() APIKeyAttachmentArrayOutput {
+func (o ApiKeyAttachmentArrayOutput) ToApiKeyAttachmentArrayOutput() ApiKeyAttachmentArrayOutput {
 	return o
 }
 
-func (o APIKeyAttachmentArrayOutput) ToAPIKeyAttachmentArrayOutputWithContext(ctx context.Context) APIKeyAttachmentArrayOutput {
+func (o ApiKeyAttachmentArrayOutput) ToApiKeyAttachmentArrayOutputWithContext(ctx context.Context) ApiKeyAttachmentArrayOutput {
 	return o
 }
 
-func (o APIKeyAttachmentArrayOutput) Index(i pulumi.IntInput) APIKeyAttachmentOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *APIKeyAttachment {
-		return vs[0].([]*APIKeyAttachment)[vs[1].(int)]
-	}).(APIKeyAttachmentOutput)
+func (o ApiKeyAttachmentArrayOutput) Index(i pulumi.IntInput) ApiKeyAttachmentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ApiKeyAttachment {
+		return vs[0].([]*ApiKeyAttachment)[vs[1].(int)]
+	}).(ApiKeyAttachmentOutput)
 }
 
-type APIKeyAttachmentMapOutput struct{ *pulumi.OutputState }
+type ApiKeyAttachmentMapOutput struct{ *pulumi.OutputState }
 
-func (APIKeyAttachmentMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*APIKeyAttachment)(nil)).Elem()
+func (ApiKeyAttachmentMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*ApiKeyAttachment)(nil)).Elem()
 }
 
-func (o APIKeyAttachmentMapOutput) ToAPIKeyAttachmentMapOutput() APIKeyAttachmentMapOutput {
+func (o ApiKeyAttachmentMapOutput) ToApiKeyAttachmentMapOutput() ApiKeyAttachmentMapOutput {
 	return o
 }
 
-func (o APIKeyAttachmentMapOutput) ToAPIKeyAttachmentMapOutputWithContext(ctx context.Context) APIKeyAttachmentMapOutput {
+func (o ApiKeyAttachmentMapOutput) ToApiKeyAttachmentMapOutputWithContext(ctx context.Context) ApiKeyAttachmentMapOutput {
 	return o
 }
 
-func (o APIKeyAttachmentMapOutput) MapIndex(k pulumi.StringInput) APIKeyAttachmentOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *APIKeyAttachment {
-		return vs[0].(map[string]*APIKeyAttachment)[vs[1].(string)]
-	}).(APIKeyAttachmentOutput)
+func (o ApiKeyAttachmentMapOutput) MapIndex(k pulumi.StringInput) ApiKeyAttachmentOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *ApiKeyAttachment {
+		return vs[0].(map[string]*ApiKeyAttachment)[vs[1].(string)]
+	}).(ApiKeyAttachmentOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*APIKeyAttachmentInput)(nil)).Elem(), &APIKeyAttachment{})
-	pulumi.RegisterInputType(reflect.TypeOf((*APIKeyAttachmentArrayInput)(nil)).Elem(), APIKeyAttachmentArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*APIKeyAttachmentMapInput)(nil)).Elem(), APIKeyAttachmentMap{})
-	pulumi.RegisterOutputType(APIKeyAttachmentOutput{})
-	pulumi.RegisterOutputType(APIKeyAttachmentArrayOutput{})
-	pulumi.RegisterOutputType(APIKeyAttachmentMapOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiKeyAttachmentInput)(nil)).Elem(), &ApiKeyAttachment{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiKeyAttachmentArrayInput)(nil)).Elem(), ApiKeyAttachmentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiKeyAttachmentMapInput)(nil)).Elem(), ApiKeyAttachmentMap{})
+	pulumi.RegisterOutputType(ApiKeyAttachmentOutput{})
+	pulumi.RegisterOutputType(ApiKeyAttachmentArrayOutput{})
+	pulumi.RegisterOutputType(ApiKeyAttachmentMapOutput{})
 }

@@ -11,7 +11,9 @@ import (
 )
 
 type InstanceSecurityPolicy struct {
-	CidrBlock   *string `pulumi:"cidrBlock"`
+	// The public network IP address of the access source.
+	CidrBlock *string `pulumi:"cidrBlock"`
+	// Remarks of policy.
 	Description *string `pulumi:"description"`
 	Index       *int    `pulumi:"index"`
 	Version     *string `pulumi:"version"`
@@ -29,7 +31,9 @@ type InstanceSecurityPolicyInput interface {
 }
 
 type InstanceSecurityPolicyArgs struct {
-	CidrBlock   pulumi.StringPtrInput `pulumi:"cidrBlock"`
+	// The public network IP address of the access source.
+	CidrBlock pulumi.StringPtrInput `pulumi:"cidrBlock"`
+	// Remarks of policy.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Index       pulumi.IntPtrInput    `pulumi:"index"`
 	Version     pulumi.StringPtrInput `pulumi:"version"`
@@ -86,10 +90,12 @@ func (o InstanceSecurityPolicyOutput) ToInstanceSecurityPolicyOutputWithContext(
 	return o
 }
 
+// The public network IP address of the access source.
 func (o InstanceSecurityPolicyOutput) CidrBlock() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceSecurityPolicy) *string { return v.CidrBlock }).(pulumi.StringPtrOutput)
 }
 
+// Remarks of policy.
 func (o InstanceSecurityPolicyOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceSecurityPolicy) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -122,9 +128,712 @@ func (o InstanceSecurityPolicyArrayOutput) Index(i pulumi.IntInput) InstanceSecu
 	}).(InstanceSecurityPolicyOutput)
 }
 
+type GetInstancesInstanceList struct {
+	// ID of the TCR instance.
+	Id string `pulumi:"id"`
+	// Instance type.
+	InstanceType string `pulumi:"instanceType"`
+	// Internal address for access of the TCR instance.
+	InternalEndPoint string `pulumi:"internalEndPoint"`
+	// Name of the TCR instance to query.
+	Name string `pulumi:"name"`
+	// Public address for access of the TCR instance.
+	PublicDomain string `pulumi:"publicDomain"`
+	// Status of the TCR instance.
+	Status string `pulumi:"status"`
+	// Tags of the TCR instance.
+	Tags map[string]interface{} `pulumi:"tags"`
+}
+
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
+//
+//          GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
+}
+
+type GetInstancesInstanceListArgs struct {
+	// ID of the TCR instance.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Instance type.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// Internal address for access of the TCR instance.
+	InternalEndPoint pulumi.StringInput `pulumi:"internalEndPoint"`
+	// Name of the TCR instance to query.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Public address for access of the TCR instance.
+	PublicDomain pulumi.StringInput `pulumi:"publicDomain"`
+	// Status of the TCR instance.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Tags of the TCR instance.
+	Tags pulumi.MapInput `pulumi:"tags"`
+}
+
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
+}
+
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
+//
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
+}
+
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
+
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
+}
+
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return o
+}
+
+// ID of the TCR instance.
+func (o GetInstancesInstanceListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Instance type.
+func (o GetInstancesInstanceListOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// Internal address for access of the TCR instance.
+func (o GetInstancesInstanceListOutput) InternalEndPoint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InternalEndPoint }).(pulumi.StringOutput)
+}
+
+// Name of the TCR instance to query.
+func (o GetInstancesInstanceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Public address for access of the TCR instance.
+func (o GetInstancesInstanceListOutput) PublicDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.PublicDomain }).(pulumi.StringOutput)
+}
+
+// Status of the TCR instance.
+func (o GetInstancesInstanceListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Tags of the TCR instance.
+func (o GetInstancesInstanceListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+}
+
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
+}
+
+type GetNamespacesNamespaceList struct {
+	// Indicate that the namespace is public or not.
+	IsPublic bool `pulumi:"isPublic"`
+	// Name of TCR namespace.
+	Name string `pulumi:"name"`
+}
+
+// GetNamespacesNamespaceListInput is an input type that accepts GetNamespacesNamespaceListArgs and GetNamespacesNamespaceListOutput values.
+// You can construct a concrete instance of `GetNamespacesNamespaceListInput` via:
+//
+//          GetNamespacesNamespaceListArgs{...}
+type GetNamespacesNamespaceListInput interface {
+	pulumi.Input
+
+	ToGetNamespacesNamespaceListOutput() GetNamespacesNamespaceListOutput
+	ToGetNamespacesNamespaceListOutputWithContext(context.Context) GetNamespacesNamespaceListOutput
+}
+
+type GetNamespacesNamespaceListArgs struct {
+	// Indicate that the namespace is public or not.
+	IsPublic pulumi.BoolInput `pulumi:"isPublic"`
+	// Name of TCR namespace.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetNamespacesNamespaceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNamespacesNamespaceList)(nil)).Elem()
+}
+
+func (i GetNamespacesNamespaceListArgs) ToGetNamespacesNamespaceListOutput() GetNamespacesNamespaceListOutput {
+	return i.ToGetNamespacesNamespaceListOutputWithContext(context.Background())
+}
+
+func (i GetNamespacesNamespaceListArgs) ToGetNamespacesNamespaceListOutputWithContext(ctx context.Context) GetNamespacesNamespaceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNamespacesNamespaceListOutput)
+}
+
+// GetNamespacesNamespaceListArrayInput is an input type that accepts GetNamespacesNamespaceListArray and GetNamespacesNamespaceListArrayOutput values.
+// You can construct a concrete instance of `GetNamespacesNamespaceListArrayInput` via:
+//
+//          GetNamespacesNamespaceListArray{ GetNamespacesNamespaceListArgs{...} }
+type GetNamespacesNamespaceListArrayInput interface {
+	pulumi.Input
+
+	ToGetNamespacesNamespaceListArrayOutput() GetNamespacesNamespaceListArrayOutput
+	ToGetNamespacesNamespaceListArrayOutputWithContext(context.Context) GetNamespacesNamespaceListArrayOutput
+}
+
+type GetNamespacesNamespaceListArray []GetNamespacesNamespaceListInput
+
+func (GetNamespacesNamespaceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNamespacesNamespaceList)(nil)).Elem()
+}
+
+func (i GetNamespacesNamespaceListArray) ToGetNamespacesNamespaceListArrayOutput() GetNamespacesNamespaceListArrayOutput {
+	return i.ToGetNamespacesNamespaceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetNamespacesNamespaceListArray) ToGetNamespacesNamespaceListArrayOutputWithContext(ctx context.Context) GetNamespacesNamespaceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNamespacesNamespaceListArrayOutput)
+}
+
+type GetNamespacesNamespaceListOutput struct{ *pulumi.OutputState }
+
+func (GetNamespacesNamespaceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNamespacesNamespaceList)(nil)).Elem()
+}
+
+func (o GetNamespacesNamespaceListOutput) ToGetNamespacesNamespaceListOutput() GetNamespacesNamespaceListOutput {
+	return o
+}
+
+func (o GetNamespacesNamespaceListOutput) ToGetNamespacesNamespaceListOutputWithContext(ctx context.Context) GetNamespacesNamespaceListOutput {
+	return o
+}
+
+// Indicate that the namespace is public or not.
+func (o GetNamespacesNamespaceListOutput) IsPublic() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetNamespacesNamespaceList) bool { return v.IsPublic }).(pulumi.BoolOutput)
+}
+
+// Name of TCR namespace.
+func (o GetNamespacesNamespaceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNamespacesNamespaceList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetNamespacesNamespaceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNamespacesNamespaceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNamespacesNamespaceList)(nil)).Elem()
+}
+
+func (o GetNamespacesNamespaceListArrayOutput) ToGetNamespacesNamespaceListArrayOutput() GetNamespacesNamespaceListArrayOutput {
+	return o
+}
+
+func (o GetNamespacesNamespaceListArrayOutput) ToGetNamespacesNamespaceListArrayOutputWithContext(ctx context.Context) GetNamespacesNamespaceListArrayOutput {
+	return o
+}
+
+func (o GetNamespacesNamespaceListArrayOutput) Index(i pulumi.IntInput) GetNamespacesNamespaceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNamespacesNamespaceList {
+		return vs[0].([]GetNamespacesNamespaceList)[vs[1].(int)]
+	}).(GetNamespacesNamespaceListOutput)
+}
+
+type GetRepositoriesRepositoryList struct {
+	// Brief description of the repository.
+	BriefDesc string `pulumi:"briefDesc"`
+	// Create time.
+	CreateTime string `pulumi:"createTime"`
+	// Description of the repository.
+	Description string `pulumi:"description"`
+	// Indicate that the repository is public or not.
+	IsPublic bool `pulumi:"isPublic"`
+	// Name of repository.
+	Name string `pulumi:"name"`
+	// Name of the namespace that the repository belongs to.
+	NamespaceName string `pulumi:"namespaceName"`
+	// Last update time.
+	UpdateTime string `pulumi:"updateTime"`
+	// URL of the repository.
+	Url string `pulumi:"url"`
+}
+
+// GetRepositoriesRepositoryListInput is an input type that accepts GetRepositoriesRepositoryListArgs and GetRepositoriesRepositoryListOutput values.
+// You can construct a concrete instance of `GetRepositoriesRepositoryListInput` via:
+//
+//          GetRepositoriesRepositoryListArgs{...}
+type GetRepositoriesRepositoryListInput interface {
+	pulumi.Input
+
+	ToGetRepositoriesRepositoryListOutput() GetRepositoriesRepositoryListOutput
+	ToGetRepositoriesRepositoryListOutputWithContext(context.Context) GetRepositoriesRepositoryListOutput
+}
+
+type GetRepositoriesRepositoryListArgs struct {
+	// Brief description of the repository.
+	BriefDesc pulumi.StringInput `pulumi:"briefDesc"`
+	// Create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Description of the repository.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Indicate that the repository is public or not.
+	IsPublic pulumi.BoolInput `pulumi:"isPublic"`
+	// Name of repository.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Name of the namespace that the repository belongs to.
+	NamespaceName pulumi.StringInput `pulumi:"namespaceName"`
+	// Last update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// URL of the repository.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (GetRepositoriesRepositoryListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRepositoriesRepositoryList)(nil)).Elem()
+}
+
+func (i GetRepositoriesRepositoryListArgs) ToGetRepositoriesRepositoryListOutput() GetRepositoriesRepositoryListOutput {
+	return i.ToGetRepositoriesRepositoryListOutputWithContext(context.Background())
+}
+
+func (i GetRepositoriesRepositoryListArgs) ToGetRepositoriesRepositoryListOutputWithContext(ctx context.Context) GetRepositoriesRepositoryListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRepositoriesRepositoryListOutput)
+}
+
+// GetRepositoriesRepositoryListArrayInput is an input type that accepts GetRepositoriesRepositoryListArray and GetRepositoriesRepositoryListArrayOutput values.
+// You can construct a concrete instance of `GetRepositoriesRepositoryListArrayInput` via:
+//
+//          GetRepositoriesRepositoryListArray{ GetRepositoriesRepositoryListArgs{...} }
+type GetRepositoriesRepositoryListArrayInput interface {
+	pulumi.Input
+
+	ToGetRepositoriesRepositoryListArrayOutput() GetRepositoriesRepositoryListArrayOutput
+	ToGetRepositoriesRepositoryListArrayOutputWithContext(context.Context) GetRepositoriesRepositoryListArrayOutput
+}
+
+type GetRepositoriesRepositoryListArray []GetRepositoriesRepositoryListInput
+
+func (GetRepositoriesRepositoryListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRepositoriesRepositoryList)(nil)).Elem()
+}
+
+func (i GetRepositoriesRepositoryListArray) ToGetRepositoriesRepositoryListArrayOutput() GetRepositoriesRepositoryListArrayOutput {
+	return i.ToGetRepositoriesRepositoryListArrayOutputWithContext(context.Background())
+}
+
+func (i GetRepositoriesRepositoryListArray) ToGetRepositoriesRepositoryListArrayOutputWithContext(ctx context.Context) GetRepositoriesRepositoryListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRepositoriesRepositoryListArrayOutput)
+}
+
+type GetRepositoriesRepositoryListOutput struct{ *pulumi.OutputState }
+
+func (GetRepositoriesRepositoryListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRepositoriesRepositoryList)(nil)).Elem()
+}
+
+func (o GetRepositoriesRepositoryListOutput) ToGetRepositoriesRepositoryListOutput() GetRepositoriesRepositoryListOutput {
+	return o
+}
+
+func (o GetRepositoriesRepositoryListOutput) ToGetRepositoriesRepositoryListOutputWithContext(ctx context.Context) GetRepositoriesRepositoryListOutput {
+	return o
+}
+
+// Brief description of the repository.
+func (o GetRepositoriesRepositoryListOutput) BriefDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoriesRepositoryList) string { return v.BriefDesc }).(pulumi.StringOutput)
+}
+
+// Create time.
+func (o GetRepositoriesRepositoryListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoriesRepositoryList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Description of the repository.
+func (o GetRepositoriesRepositoryListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoriesRepositoryList) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Indicate that the repository is public or not.
+func (o GetRepositoriesRepositoryListOutput) IsPublic() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetRepositoriesRepositoryList) bool { return v.IsPublic }).(pulumi.BoolOutput)
+}
+
+// Name of repository.
+func (o GetRepositoriesRepositoryListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoriesRepositoryList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Name of the namespace that the repository belongs to.
+func (o GetRepositoriesRepositoryListOutput) NamespaceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoriesRepositoryList) string { return v.NamespaceName }).(pulumi.StringOutput)
+}
+
+// Last update time.
+func (o GetRepositoriesRepositoryListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoriesRepositoryList) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// URL of the repository.
+func (o GetRepositoriesRepositoryListOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepositoriesRepositoryList) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type GetRepositoriesRepositoryListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRepositoriesRepositoryListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRepositoriesRepositoryList)(nil)).Elem()
+}
+
+func (o GetRepositoriesRepositoryListArrayOutput) ToGetRepositoriesRepositoryListArrayOutput() GetRepositoriesRepositoryListArrayOutput {
+	return o
+}
+
+func (o GetRepositoriesRepositoryListArrayOutput) ToGetRepositoriesRepositoryListArrayOutputWithContext(ctx context.Context) GetRepositoriesRepositoryListArrayOutput {
+	return o
+}
+
+func (o GetRepositoriesRepositoryListArrayOutput) Index(i pulumi.IntInput) GetRepositoriesRepositoryListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRepositoriesRepositoryList {
+		return vs[0].([]GetRepositoriesRepositoryList)[vs[1].(int)]
+	}).(GetRepositoriesRepositoryListOutput)
+}
+
+type GetTokensTokenList struct {
+	// Create time.
+	CreateTime string `pulumi:"createTime"`
+	// Description of the token.
+	Description string `pulumi:"description"`
+	// Indicate that the token is enabled or not.
+	Enable bool `pulumi:"enable"`
+	// ID of the TCR token to query.
+	TokenId string `pulumi:"tokenId"`
+}
+
+// GetTokensTokenListInput is an input type that accepts GetTokensTokenListArgs and GetTokensTokenListOutput values.
+// You can construct a concrete instance of `GetTokensTokenListInput` via:
+//
+//          GetTokensTokenListArgs{...}
+type GetTokensTokenListInput interface {
+	pulumi.Input
+
+	ToGetTokensTokenListOutput() GetTokensTokenListOutput
+	ToGetTokensTokenListOutputWithContext(context.Context) GetTokensTokenListOutput
+}
+
+type GetTokensTokenListArgs struct {
+	// Create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Description of the token.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Indicate that the token is enabled or not.
+	Enable pulumi.BoolInput `pulumi:"enable"`
+	// ID of the TCR token to query.
+	TokenId pulumi.StringInput `pulumi:"tokenId"`
+}
+
+func (GetTokensTokenListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTokensTokenList)(nil)).Elem()
+}
+
+func (i GetTokensTokenListArgs) ToGetTokensTokenListOutput() GetTokensTokenListOutput {
+	return i.ToGetTokensTokenListOutputWithContext(context.Background())
+}
+
+func (i GetTokensTokenListArgs) ToGetTokensTokenListOutputWithContext(ctx context.Context) GetTokensTokenListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTokensTokenListOutput)
+}
+
+// GetTokensTokenListArrayInput is an input type that accepts GetTokensTokenListArray and GetTokensTokenListArrayOutput values.
+// You can construct a concrete instance of `GetTokensTokenListArrayInput` via:
+//
+//          GetTokensTokenListArray{ GetTokensTokenListArgs{...} }
+type GetTokensTokenListArrayInput interface {
+	pulumi.Input
+
+	ToGetTokensTokenListArrayOutput() GetTokensTokenListArrayOutput
+	ToGetTokensTokenListArrayOutputWithContext(context.Context) GetTokensTokenListArrayOutput
+}
+
+type GetTokensTokenListArray []GetTokensTokenListInput
+
+func (GetTokensTokenListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTokensTokenList)(nil)).Elem()
+}
+
+func (i GetTokensTokenListArray) ToGetTokensTokenListArrayOutput() GetTokensTokenListArrayOutput {
+	return i.ToGetTokensTokenListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTokensTokenListArray) ToGetTokensTokenListArrayOutputWithContext(ctx context.Context) GetTokensTokenListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTokensTokenListArrayOutput)
+}
+
+type GetTokensTokenListOutput struct{ *pulumi.OutputState }
+
+func (GetTokensTokenListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTokensTokenList)(nil)).Elem()
+}
+
+func (o GetTokensTokenListOutput) ToGetTokensTokenListOutput() GetTokensTokenListOutput {
+	return o
+}
+
+func (o GetTokensTokenListOutput) ToGetTokensTokenListOutputWithContext(ctx context.Context) GetTokensTokenListOutput {
+	return o
+}
+
+// Create time.
+func (o GetTokensTokenListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTokensTokenList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Description of the token.
+func (o GetTokensTokenListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTokensTokenList) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Indicate that the token is enabled or not.
+func (o GetTokensTokenListOutput) Enable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTokensTokenList) bool { return v.Enable }).(pulumi.BoolOutput)
+}
+
+// ID of the TCR token to query.
+func (o GetTokensTokenListOutput) TokenId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTokensTokenList) string { return v.TokenId }).(pulumi.StringOutput)
+}
+
+type GetTokensTokenListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTokensTokenListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTokensTokenList)(nil)).Elem()
+}
+
+func (o GetTokensTokenListArrayOutput) ToGetTokensTokenListArrayOutput() GetTokensTokenListArrayOutput {
+	return o
+}
+
+func (o GetTokensTokenListArrayOutput) ToGetTokensTokenListArrayOutputWithContext(ctx context.Context) GetTokensTokenListArrayOutput {
+	return o
+}
+
+func (o GetTokensTokenListArrayOutput) Index(i pulumi.IntInput) GetTokensTokenListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTokensTokenList {
+		return vs[0].([]GetTokensTokenList)[vs[1].(int)]
+	}).(GetTokensTokenListOutput)
+}
+
+type GetVpcAttachmentsVpcAttachmentList struct {
+	// IP address of this VPC access.
+	AccessIp string `pulumi:"accessIp"`
+	// Whether to enable public domain dns.
+	EnablePublicDomainDns bool `pulumi:"enablePublicDomainDns"`
+	// Whether to enable vpc domain dns.
+	EnableVpcDomainDns bool `pulumi:"enableVpcDomainDns"`
+	// Status of this VPC access.
+	Status string `pulumi:"status"`
+	// ID of subnet to query.
+	SubnetId string `pulumi:"subnetId"`
+	// ID of VPC to query.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetVpcAttachmentsVpcAttachmentListInput is an input type that accepts GetVpcAttachmentsVpcAttachmentListArgs and GetVpcAttachmentsVpcAttachmentListOutput values.
+// You can construct a concrete instance of `GetVpcAttachmentsVpcAttachmentListInput` via:
+//
+//          GetVpcAttachmentsVpcAttachmentListArgs{...}
+type GetVpcAttachmentsVpcAttachmentListInput interface {
+	pulumi.Input
+
+	ToGetVpcAttachmentsVpcAttachmentListOutput() GetVpcAttachmentsVpcAttachmentListOutput
+	ToGetVpcAttachmentsVpcAttachmentListOutputWithContext(context.Context) GetVpcAttachmentsVpcAttachmentListOutput
+}
+
+type GetVpcAttachmentsVpcAttachmentListArgs struct {
+	// IP address of this VPC access.
+	AccessIp pulumi.StringInput `pulumi:"accessIp"`
+	// Whether to enable public domain dns.
+	EnablePublicDomainDns pulumi.BoolInput `pulumi:"enablePublicDomainDns"`
+	// Whether to enable vpc domain dns.
+	EnableVpcDomainDns pulumi.BoolInput `pulumi:"enableVpcDomainDns"`
+	// Status of this VPC access.
+	Status pulumi.StringInput `pulumi:"status"`
+	// ID of subnet to query.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// ID of VPC to query.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetVpcAttachmentsVpcAttachmentListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVpcAttachmentsVpcAttachmentList)(nil)).Elem()
+}
+
+func (i GetVpcAttachmentsVpcAttachmentListArgs) ToGetVpcAttachmentsVpcAttachmentListOutput() GetVpcAttachmentsVpcAttachmentListOutput {
+	return i.ToGetVpcAttachmentsVpcAttachmentListOutputWithContext(context.Background())
+}
+
+func (i GetVpcAttachmentsVpcAttachmentListArgs) ToGetVpcAttachmentsVpcAttachmentListOutputWithContext(ctx context.Context) GetVpcAttachmentsVpcAttachmentListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVpcAttachmentsVpcAttachmentListOutput)
+}
+
+// GetVpcAttachmentsVpcAttachmentListArrayInput is an input type that accepts GetVpcAttachmentsVpcAttachmentListArray and GetVpcAttachmentsVpcAttachmentListArrayOutput values.
+// You can construct a concrete instance of `GetVpcAttachmentsVpcAttachmentListArrayInput` via:
+//
+//          GetVpcAttachmentsVpcAttachmentListArray{ GetVpcAttachmentsVpcAttachmentListArgs{...} }
+type GetVpcAttachmentsVpcAttachmentListArrayInput interface {
+	pulumi.Input
+
+	ToGetVpcAttachmentsVpcAttachmentListArrayOutput() GetVpcAttachmentsVpcAttachmentListArrayOutput
+	ToGetVpcAttachmentsVpcAttachmentListArrayOutputWithContext(context.Context) GetVpcAttachmentsVpcAttachmentListArrayOutput
+}
+
+type GetVpcAttachmentsVpcAttachmentListArray []GetVpcAttachmentsVpcAttachmentListInput
+
+func (GetVpcAttachmentsVpcAttachmentListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVpcAttachmentsVpcAttachmentList)(nil)).Elem()
+}
+
+func (i GetVpcAttachmentsVpcAttachmentListArray) ToGetVpcAttachmentsVpcAttachmentListArrayOutput() GetVpcAttachmentsVpcAttachmentListArrayOutput {
+	return i.ToGetVpcAttachmentsVpcAttachmentListArrayOutputWithContext(context.Background())
+}
+
+func (i GetVpcAttachmentsVpcAttachmentListArray) ToGetVpcAttachmentsVpcAttachmentListArrayOutputWithContext(ctx context.Context) GetVpcAttachmentsVpcAttachmentListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVpcAttachmentsVpcAttachmentListArrayOutput)
+}
+
+type GetVpcAttachmentsVpcAttachmentListOutput struct{ *pulumi.OutputState }
+
+func (GetVpcAttachmentsVpcAttachmentListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVpcAttachmentsVpcAttachmentList)(nil)).Elem()
+}
+
+func (o GetVpcAttachmentsVpcAttachmentListOutput) ToGetVpcAttachmentsVpcAttachmentListOutput() GetVpcAttachmentsVpcAttachmentListOutput {
+	return o
+}
+
+func (o GetVpcAttachmentsVpcAttachmentListOutput) ToGetVpcAttachmentsVpcAttachmentListOutputWithContext(ctx context.Context) GetVpcAttachmentsVpcAttachmentListOutput {
+	return o
+}
+
+// IP address of this VPC access.
+func (o GetVpcAttachmentsVpcAttachmentListOutput) AccessIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVpcAttachmentsVpcAttachmentList) string { return v.AccessIp }).(pulumi.StringOutput)
+}
+
+// Whether to enable public domain dns.
+func (o GetVpcAttachmentsVpcAttachmentListOutput) EnablePublicDomainDns() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetVpcAttachmentsVpcAttachmentList) bool { return v.EnablePublicDomainDns }).(pulumi.BoolOutput)
+}
+
+// Whether to enable vpc domain dns.
+func (o GetVpcAttachmentsVpcAttachmentListOutput) EnableVpcDomainDns() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetVpcAttachmentsVpcAttachmentList) bool { return v.EnableVpcDomainDns }).(pulumi.BoolOutput)
+}
+
+// Status of this VPC access.
+func (o GetVpcAttachmentsVpcAttachmentListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVpcAttachmentsVpcAttachmentList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// ID of subnet to query.
+func (o GetVpcAttachmentsVpcAttachmentListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVpcAttachmentsVpcAttachmentList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// ID of VPC to query.
+func (o GetVpcAttachmentsVpcAttachmentListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVpcAttachmentsVpcAttachmentList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetVpcAttachmentsVpcAttachmentListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetVpcAttachmentsVpcAttachmentListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVpcAttachmentsVpcAttachmentList)(nil)).Elem()
+}
+
+func (o GetVpcAttachmentsVpcAttachmentListArrayOutput) ToGetVpcAttachmentsVpcAttachmentListArrayOutput() GetVpcAttachmentsVpcAttachmentListArrayOutput {
+	return o
+}
+
+func (o GetVpcAttachmentsVpcAttachmentListArrayOutput) ToGetVpcAttachmentsVpcAttachmentListArrayOutputWithContext(ctx context.Context) GetVpcAttachmentsVpcAttachmentListArrayOutput {
+	return o
+}
+
+func (o GetVpcAttachmentsVpcAttachmentListArrayOutput) Index(i pulumi.IntInput) GetVpcAttachmentsVpcAttachmentListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVpcAttachmentsVpcAttachmentList {
+		return vs[0].([]GetVpcAttachmentsVpcAttachmentList)[vs[1].(int)]
+	}).(GetVpcAttachmentsVpcAttachmentListOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSecurityPolicyInput)(nil)).Elem(), InstanceSecurityPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSecurityPolicyArrayInput)(nil)).Elem(), InstanceSecurityPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNamespacesNamespaceListInput)(nil)).Elem(), GetNamespacesNamespaceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNamespacesNamespaceListArrayInput)(nil)).Elem(), GetNamespacesNamespaceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRepositoriesRepositoryListInput)(nil)).Elem(), GetRepositoriesRepositoryListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRepositoriesRepositoryListArrayInput)(nil)).Elem(), GetRepositoriesRepositoryListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTokensTokenListInput)(nil)).Elem(), GetTokensTokenListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTokensTokenListArrayInput)(nil)).Elem(), GetTokensTokenListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVpcAttachmentsVpcAttachmentListInput)(nil)).Elem(), GetVpcAttachmentsVpcAttachmentListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVpcAttachmentsVpcAttachmentListArrayInput)(nil)).Elem(), GetVpcAttachmentsVpcAttachmentListArray{})
 	pulumi.RegisterOutputType(InstanceSecurityPolicyOutput{})
 	pulumi.RegisterOutputType(InstanceSecurityPolicyArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetNamespacesNamespaceListOutput{})
+	pulumi.RegisterOutputType(GetNamespacesNamespaceListArrayOutput{})
+	pulumi.RegisterOutputType(GetRepositoriesRepositoryListOutput{})
+	pulumi.RegisterOutputType(GetRepositoriesRepositoryListArrayOutput{})
+	pulumi.RegisterOutputType(GetTokensTokenListOutput{})
+	pulumi.RegisterOutputType(GetTokensTokenListArrayOutput{})
+	pulumi.RegisterOutputType(GetVpcAttachmentsVpcAttachmentListOutput{})
+	pulumi.RegisterOutputType(GetVpcAttachmentsVpcAttachmentListArrayOutput{})
 }

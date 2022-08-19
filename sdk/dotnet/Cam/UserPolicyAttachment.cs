@@ -9,12 +9,42 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cam
 {
+    /// <summary>
+    /// Provides a resource to create a CAM user policy attachment.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cam.UserPolicyAttachment("foo", new Tencentcloud.Cam.UserPolicyAttachmentArgs
+    ///         {
+    ///             UserId = tencentcloud_cam_user.Foo.Id,
+    ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CAM user policy attachment can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment")]
     public partial class UserPolicyAttachment : Pulumi.CustomResource
     {
         /// <summary>
-        /// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and
-        /// the others indicate syntax strategy ways.
+        /// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
         /// </summary>
         [Output("createMode")]
         public Output<int> CreateMode { get; private set; } = null!;
@@ -44,7 +74,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Output<string> PolicyType { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the attached CAM user.
+        /// It has been deprecated from version 1.59.5. Use `user_name` instead. ID of the attached CAM user.
         /// </summary>
         [Output("userId")]
         public Output<string?> UserId { get; private set; } = null!;
@@ -108,7 +138,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Input<string> PolicyId { get; set; } = null!;
 
         /// <summary>
-        /// ID of the attached CAM user.
+        /// It has been deprecated from version 1.59.5. Use `user_name` instead. ID of the attached CAM user.
         /// </summary>
         [Input("userId")]
         public Input<string>? UserId { get; set; }
@@ -127,8 +157,7 @@ namespace Pulumi.Tencentcloud.Cam
     public sealed class UserPolicyAttachmentState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and
-        /// the others indicate syntax strategy ways.
+        /// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
         /// </summary>
         [Input("createMode")]
         public Input<int>? CreateMode { get; set; }
@@ -158,7 +187,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Input<string>? PolicyType { get; set; }
 
         /// <summary>
-        /// ID of the attached CAM user.
+        /// It has been deprecated from version 1.59.5. Use `user_name` instead. ID of the attached CAM user.
         /// </summary>
         [Input("userId")]
         public Input<string>? UserId { get; set; }

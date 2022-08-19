@@ -9,6 +9,78 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Eks
 {
+    /// <summary>
+    /// Provides an elastic kubernetes cluster resource.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.2.0.0/16",
+    ///         });
+    ///         var sub = new Tencentcloud.Subnet.Instance("sub", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.2.11.0/24",
+    ///             AvailabilityZone = "ap-guangzhou-3",
+    ///         });
+    ///         var sub2 = new Tencentcloud.Subnet.Instance("sub2", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             VpcId = vpc.Id,
+    ///             CidrBlock = "10.2.10.0/24",
+    ///             AvailabilityZone = "ap-guangzhou-3",
+    ///         });
+    ///         var foo = new Tencentcloud.Eks.Cluster("foo", new Tencentcloud.Eks.ClusterArgs
+    ///         {
+    ///             ClusterName = "tf-test-eks",
+    ///             K8sVersion = "1.18.4",
+    ///             VpcId = vpc.Id,
+    ///             SubnetIds = 
+    ///             {
+    ///                 sub.Id,
+    ///                 sub2.Id,
+    ///             },
+    ///             ClusterDesc = "test eks cluster created by terraform",
+    ///             ServiceSubnetId = sub.Id,
+    ///             DnsServers = 
+    ///             {
+    ///                 new Tencentcloud.Eks.Inputs.ClusterDnsServerArgs
+    ///                 {
+    ///                     Domain = "www.example1.com",
+    ///                     Servers = 
+    ///                     {
+    ///                         "1.1.1.1:8080",
+    ///                         "1.1.1.1:8081",
+    ///                         "1.1.1.1:8082",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             EnableVpcCoreDns = true,
+    ///             NeedDeleteCbs = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "hello", "world" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Eks/cluster:Cluster foo cluster-id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Eks/cluster:Cluster")]
     public partial class Cluster : Pulumi.CustomResource
     {

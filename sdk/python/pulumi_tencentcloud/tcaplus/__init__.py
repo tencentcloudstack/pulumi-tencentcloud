@@ -6,12 +6,12 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .cluster import *
-from .clusters import *
+from .get_clusters import *
+from .get_idls import *
+from .get_tablegroups import *
+from .get_tables import *
 from .idl import *
-from .idls import *
 from .table import *
-from .table_group import *
-from .table_groups import *
-from .tables import *
+from .tablegroup import *
 from ._inputs import *
 from . import outputs

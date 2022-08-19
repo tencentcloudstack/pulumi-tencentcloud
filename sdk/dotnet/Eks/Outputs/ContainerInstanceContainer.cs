@@ -13,16 +13,49 @@ namespace Pulumi.Tencentcloud.Eks.Outputs
     [OutputType]
     public sealed class ContainerInstanceContainer
     {
+        /// <summary>
+        /// Container launch argument list.
+        /// </summary>
         public readonly ImmutableArray<string> Args;
+        /// <summary>
+        /// Container launch command list.
+        /// </summary>
         public readonly ImmutableArray<string> Commands;
+        /// <summary>
+        /// Number of cpu core of container.
+        /// </summary>
         public readonly double? Cpu;
+        /// <summary>
+        /// Map of environment variables of container OS.
+        /// </summary>
         public readonly ImmutableDictionary<string, object>? EnvVars;
+        /// <summary>
+        /// Image of Container.
+        /// </summary>
         public readonly string Image;
+        /// <summary>
+        /// Configuration block of LivenessProbe.
+        /// </summary>
         public readonly Outputs.ContainerInstanceContainerLivenessProbe? LivenessProbe;
+        /// <summary>
+        /// Memory size of container.
+        /// </summary>
         public readonly double? Memory;
+        /// <summary>
+        /// Name of Container.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Configuration block of ReadinessProbe.
+        /// </summary>
         public readonly Outputs.ContainerInstanceContainerReadinessProbe? ReadinessProbe;
+        /// <summary>
+        /// List of volume mount informations.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ContainerInstanceContainerVolumeMount> VolumeMounts;
+        /// <summary>
+        /// Container working directory.
+        /// </summary>
         public readonly string? WorkingDir;
 
         [OutputConstructor]

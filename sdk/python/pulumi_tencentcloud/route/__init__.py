@@ -5,6 +5,5 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
-from .entry import *
 from .table import *
-from . import outputs
+from .table_entry import *

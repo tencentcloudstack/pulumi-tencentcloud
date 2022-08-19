@@ -9,6 +9,48 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cam
 {
+    /// <summary>
+    /// Provides a resource to manage CAM user.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cam.User("foo", new Tencentcloud.Cam.UserArgs
+    ///         {
+    ///             ConsoleLogin = true,
+    ///             CountryCode = "86",
+    ///             Email = "hello@test.com",
+    ///             ForceDelete = true,
+    ///             NeedResetPassword = true,
+    ///             Password = "Gail@1234",
+    ///             PhoneNum = "12345678910",
+    ///             Remark = "test",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf-cam-user" },
+    ///             },
+    ///             UseApi = true,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CAM user can be imported using the user name, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cam/user:User foo cam-user-test
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/user:User")]
     public partial class User : Pulumi.CustomResource
     {
@@ -31,8 +73,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Output<string?> Email { get; private set; } = null!;
 
         /// <summary>
-        /// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-        /// otherwise the user will be deleted directly. Default is false.
+        /// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
         /// </summary>
         [Output("forceDelete")]
         public Output<bool?> ForceDelete { get; private set; } = null!;
@@ -50,9 +91,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Output<bool?> NeedResetPassword { get; private set; } = null!;
 
         /// <summary>
-        /// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-        /// uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-        /// set, a random password will be automatically generated.
+        /// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not set, a random password will be automatically generated.
         /// </summary>
         [Output("password")]
         public Output<string> Password { get; private set; } = null!;
@@ -170,8 +209,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Input<string>? Email { get; set; }
 
         /// <summary>
-        /// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-        /// otherwise the user will be deleted directly. Default is false.
+        /// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
@@ -189,9 +227,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Input<bool>? NeedResetPassword { get; set; }
 
         /// <summary>
-        /// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-        /// uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-        /// set, a random password will be automatically generated.
+        /// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not set, a random password will be automatically generated.
         /// </summary>
         [Input("password")]
         public Input<string>? Password { get; set; }
@@ -252,8 +288,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Input<string>? Email { get; set; }
 
         /// <summary>
-        /// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-        /// otherwise the user will be deleted directly. Default is false.
+        /// Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
@@ -271,9 +306,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Input<bool>? NeedResetPassword { get; set; }
 
         /// <summary>
-        /// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-        /// uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-        /// set, a random password will be automatically generated.
+        /// The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not set, a random password will be automatically generated.
         /// </summary>
         [Input("password")]
         public Input<string>? Password { get; set; }

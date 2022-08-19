@@ -5,13 +5,13 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getInstances";
+export * from "./getSpecinfos";
+export * from "./getXlogs";
 export * from "./instance";
-export * from "./instances";
 export * from "./readonlyAttachment";
 export * from "./readonlyGroup";
 export * from "./readonlyInstance";
-export * from "./specinfos";
-export * from "./xlogs";
 
 // Import resources to register:
 import { Instance } from "./instance";

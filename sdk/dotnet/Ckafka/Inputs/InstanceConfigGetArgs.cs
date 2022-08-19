@@ -12,12 +12,21 @@ namespace Pulumi.Tencentcloud.Ckafka.Inputs
 
     public sealed class InstanceConfigGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Automatic creation. true: enabled, false: not enabled.
+        /// </summary>
         [Input("autoCreateTopicEnable", required: true)]
         public Input<bool> AutoCreateTopicEnable { get; set; } = null!;
 
+        /// <summary>
+        /// If auto.create.topic.enable is set to true and this value is not set, 3 will be used by default.
+        /// </summary>
         [Input("defaultNumPartitions", required: true)]
         public Input<int> DefaultNumPartitions { get; set; } = null!;
 
+        /// <summary>
+        /// If auto.create.topic.enable is set to true but this value is not set, 2 will be used by default.
+        /// </summary>
         [Input("defaultReplicationFactor", required: true)]
         public Input<int> DefaultReplicationFactor { get; set; } = null!;
 

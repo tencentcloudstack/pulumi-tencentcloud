@@ -13,6 +13,9 @@ namespace Pulumi.Tencentcloud.Monitor.Outputs
     [OutputType]
     public sealed class PolicyBindingObjectDimension
     {
+        /// <summary>
+        /// Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
+        /// </summary>
         public readonly string DimensionsJson;
         public readonly string? UniqueId;
 

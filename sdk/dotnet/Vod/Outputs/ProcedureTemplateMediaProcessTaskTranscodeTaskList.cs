@@ -13,8 +13,17 @@ namespace Pulumi.Tencentcloud.Vod.Outputs
     [OutputType]
     public sealed class ProcedureTemplateMediaProcessTaskTranscodeTaskList
     {
+        /// <summary>
+        /// Video transcoding template ID.
+        /// </summary>
         public readonly string Definition;
+        /// <summary>
+        /// List of blurs. Up to 10 ones can be supported.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicList> MosaicLists;
+        /// <summary>
+        /// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkList> WatermarkLists;
 
         [OutputConstructor]

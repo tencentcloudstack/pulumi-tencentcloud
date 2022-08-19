@@ -9,19 +9,54 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Image
 {
+    /// <summary>
+    /// Provide a resource to manage image.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var imageSnap = new Tencentcloud.Image.Instance("imageSnap", new Tencentcloud.Image.InstanceArgs
+    ///         {
+    ///             ForcePoweroff = true,
+    ///             ImageDescription = "create image with snapshot",
+    ///             ImageName = "image-snapshot-keep",
+    ///             SnapshotIds = 
+    ///             {
+    ///                 "snap-nbp3xy1d",
+    ///                 "snap-nvzu3dmh",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// image instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Image/instance:Instance image_snap img-gf7jspk6
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Image/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
         /// <summary>
-        /// Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-        /// image.
+        /// Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
         /// </summary>
         [Output("dataDiskIds")]
         public Output<ImmutableArray<string>> DataDiskIds { get; private set; } = null!;
 
         /// <summary>
-        /// Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-        /// will be made after shutdown.
+        /// Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
         /// </summary>
         [Output("forcePoweroff")]
         public Output<bool?> ForcePoweroff { get; private set; } = null!;
@@ -45,15 +80,13 @@ namespace Pulumi.Tencentcloud.Image
         public Output<string?> InstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-        /// passed in simultaneously with InstanceId.
+        /// Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
         /// </summary>
         [Output("snapshotIds")]
         public Output<ImmutableArray<string>> SnapshotIds { get; private set; } = null!;
 
         /// <summary>
-        /// Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-        /// Syspre function.
+        /// Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
         /// </summary>
         [Output("sysprep")]
         public Output<bool?> Sysprep { get; private set; } = null!;
@@ -108,8 +141,7 @@ namespace Pulumi.Tencentcloud.Image
         private InputList<string>? _dataDiskIds;
 
         /// <summary>
-        /// Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-        /// image.
+        /// Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
         /// </summary>
         public InputList<string> DataDiskIds
         {
@@ -118,8 +150,7 @@ namespace Pulumi.Tencentcloud.Image
         }
 
         /// <summary>
-        /// Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-        /// will be made after shutdown.
+        /// Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
         /// </summary>
         [Input("forcePoweroff")]
         public Input<bool>? ForcePoweroff { get; set; }
@@ -146,8 +177,7 @@ namespace Pulumi.Tencentcloud.Image
         private InputList<string>? _snapshotIds;
 
         /// <summary>
-        /// Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-        /// passed in simultaneously with InstanceId.
+        /// Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
         /// </summary>
         public InputList<string> SnapshotIds
         {
@@ -156,8 +186,7 @@ namespace Pulumi.Tencentcloud.Image
         }
 
         /// <summary>
-        /// Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-        /// Syspre function.
+        /// Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
         /// </summary>
         [Input("sysprep")]
         public Input<bool>? Sysprep { get; set; }
@@ -173,8 +202,7 @@ namespace Pulumi.Tencentcloud.Image
         private InputList<string>? _dataDiskIds;
 
         /// <summary>
-        /// Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-        /// image.
+        /// Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
         /// </summary>
         public InputList<string> DataDiskIds
         {
@@ -183,8 +211,7 @@ namespace Pulumi.Tencentcloud.Image
         }
 
         /// <summary>
-        /// Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-        /// will be made after shutdown.
+        /// Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
         /// </summary>
         [Input("forcePoweroff")]
         public Input<bool>? ForcePoweroff { get; set; }
@@ -211,8 +238,7 @@ namespace Pulumi.Tencentcloud.Image
         private InputList<string>? _snapshotIds;
 
         /// <summary>
-        /// Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-        /// passed in simultaneously with InstanceId.
+        /// Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
         /// </summary>
         public InputList<string> SnapshotIds
         {
@@ -221,8 +247,7 @@ namespace Pulumi.Tencentcloud.Image
         }
 
         /// <summary>
-        /// Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-        /// Syspre function.
+        /// Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
         /// </summary>
         [Input("sysprep")]
         public Input<bool>? Sysprep { get; set; }

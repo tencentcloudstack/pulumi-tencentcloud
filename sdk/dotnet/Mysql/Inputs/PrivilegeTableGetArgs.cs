@@ -12,17 +12,27 @@ namespace Pulumi.Tencentcloud.Mysql.Inputs
 
     public sealed class PrivilegeTableGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Database name.
+        /// </summary>
         [Input("databaseName", required: true)]
         public Input<string> DatabaseName { get; set; } = null!;
 
         [Input("privileges", required: true)]
         private InputList<string>? _privileges;
+
+        /// <summary>
+        /// Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.
+        /// </summary>
         public InputList<string> Privileges
         {
             get => _privileges ?? (_privileges = new InputList<string>());
             set => _privileges = value;
         }
 
+        /// <summary>
+        /// Table name.
+        /// </summary>
         [Input("tableName", required: true)]
         public Input<string> TableName { get; set; } = null!;
 

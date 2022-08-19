@@ -9,16 +9,21 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'TemplateGroupsGroupListResult',
-    'TemplatesTemplateListResult',
+    'GetTemplateGroupsGroupListResult',
+    'GetTemplatesTemplateListResult',
 ]
 
 @pulumi.output_type
-class TemplateGroupsGroupListResult(dict):
+class GetTemplateGroupsGroupListResult(dict):
     def __init__(__self__, *,
                  id: str,
                  name: str,
                  template_ids: Sequence[str]):
+        """
+        :param str id: Id of the address template group to query.
+        :param str name: Name of the address template group to query.
+        :param Sequence[str] template_ids: ID set of the address template.
+        """
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template_ids", template_ids)
@@ -26,25 +31,39 @@ class TemplateGroupsGroupListResult(dict):
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        Id of the address template group to query.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the address template group to query.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="templateIds")
     def template_ids(self) -> Sequence[str]:
+        """
+        ID set of the address template.
+        """
         return pulumi.get(self, "template_ids")
 
 
 @pulumi.output_type
-class TemplatesTemplateListResult(dict):
+class GetTemplatesTemplateListResult(dict):
     def __init__(__self__, *,
                  addresses: Sequence[str],
                  id: str,
                  name: str):
+        """
+        :param Sequence[str] addresses: Set of the addresses.
+        :param str id: ID of the address template to query.
+        :param str name: Name of the address template to query.
+        """
         pulumi.set(__self__, "addresses", addresses)
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "name", name)
@@ -52,16 +71,25 @@ class TemplatesTemplateListResult(dict):
     @property
     @pulumi.getter
     def addresses(self) -> Sequence[str]:
+        """
+        Set of the addresses.
+        """
         return pulumi.get(self, "addresses")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the address template to query.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the address template to query.
+        """
         return pulumi.get(self, "name")
 
 

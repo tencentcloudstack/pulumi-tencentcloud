@@ -161,7 +161,79 @@ class StrategyAttachment(pulumi.CustomResource):
                  strategy_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a StrategyAttachment resource with the given unique name, props, and options.
+        Use this resource to create IP strategy attachment of API gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        service_service = tencentcloud.api_gateway.Service("serviceService",
+            service_name="niceservice",
+            protocol="http&https",
+            service_desc="your nice service",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            ip_version="IPv4")
+        test_ip_strategy = tencentcloud.api_gateway.IpStrategy("testIpStrategy",
+            service_id=service_service.id,
+            strategy_name="tf_test",
+            strategy_type="BLACK",
+            strategy_data="9.9.9.9")
+        api = tencentcloud.api_gateway.Api("api",
+            service_id=service_service.id,
+            api_name="hello_update",
+            api_desc="my hello api update",
+            auth_type="SECRET",
+            protocol="HTTP",
+            enable_cors=True,
+            request_config_path="/user/info",
+            request_config_method="POST",
+            request_parameters=[tencentcloud.api.gateway.ApiRequestParameterArgs(
+                name="email",
+                position="QUERY",
+                type="string",
+                desc="your email please?",
+                default_value="tom@qq.com",
+                required=True,
+            )],
+            service_config_type="HTTP",
+            service_config_timeout=10,
+            service_config_url="http://www.tencent.com",
+            service_config_path="/user",
+            service_config_method="POST",
+            response_type="XML",
+            response_success_example="<note>success</note>",
+            response_fail_example="<note>fail</note>",
+            response_error_codes=[tencentcloud.api.gateway.ApiResponseErrorCodeArgs(
+                code=10,
+                msg="system error",
+                desc="system error code",
+                converted_code=-10,
+                need_convert=True,
+            )])
+        service_service_release = tencentcloud.api_gateway.ServiceRelease("serviceServiceRelease",
+            service_id=service_service.id,
+            environment_name="release",
+            release_desc="test service release")
+        test_strategy_attachment = tencentcloud.api_gateway.StrategyAttachment("testStrategyAttachment",
+            service_id=service_service_release.service_id,
+            strategy_id=test_ip_strategy.strategy_id,
+            environment_name="release",
+            bind_api_id=api.id)
+        ```
+
+        ## Import
+
+        IP strategy attachment of API gateway can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment test service-pk2r6bcc#IPStrategy-4kz2ljfi#api-h3wc5r0s#release
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bind_api_id: The API that needs to be bound.
@@ -176,7 +248,79 @@ class StrategyAttachment(pulumi.CustomResource):
                  args: StrategyAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a StrategyAttachment resource with the given unique name, props, and options.
+        Use this resource to create IP strategy attachment of API gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        service_service = tencentcloud.api_gateway.Service("serviceService",
+            service_name="niceservice",
+            protocol="http&https",
+            service_desc="your nice service",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            ip_version="IPv4")
+        test_ip_strategy = tencentcloud.api_gateway.IpStrategy("testIpStrategy",
+            service_id=service_service.id,
+            strategy_name="tf_test",
+            strategy_type="BLACK",
+            strategy_data="9.9.9.9")
+        api = tencentcloud.api_gateway.Api("api",
+            service_id=service_service.id,
+            api_name="hello_update",
+            api_desc="my hello api update",
+            auth_type="SECRET",
+            protocol="HTTP",
+            enable_cors=True,
+            request_config_path="/user/info",
+            request_config_method="POST",
+            request_parameters=[tencentcloud.api.gateway.ApiRequestParameterArgs(
+                name="email",
+                position="QUERY",
+                type="string",
+                desc="your email please?",
+                default_value="tom@qq.com",
+                required=True,
+            )],
+            service_config_type="HTTP",
+            service_config_timeout=10,
+            service_config_url="http://www.tencent.com",
+            service_config_path="/user",
+            service_config_method="POST",
+            response_type="XML",
+            response_success_example="<note>success</note>",
+            response_fail_example="<note>fail</note>",
+            response_error_codes=[tencentcloud.api.gateway.ApiResponseErrorCodeArgs(
+                code=10,
+                msg="system error",
+                desc="system error code",
+                converted_code=-10,
+                need_convert=True,
+            )])
+        service_service_release = tencentcloud.api_gateway.ServiceRelease("serviceServiceRelease",
+            service_id=service_service.id,
+            environment_name="release",
+            release_desc="test service release")
+        test_strategy_attachment = tencentcloud.api_gateway.StrategyAttachment("testStrategyAttachment",
+            service_id=service_service_release.service_id,
+            strategy_id=test_ip_strategy.strategy_id,
+            environment_name="release",
+            bind_api_id=api.id)
+        ```
+
+        ## Import
+
+        IP strategy attachment of API gateway can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment test service-pk2r6bcc#IPStrategy-4kz2ljfi#api-h3wc5r0s#release
+        ```
+
         :param str resource_name: The name of the resource.
         :param StrategyAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -221,7 +365,7 @@ class StrategyAttachment(pulumi.CustomResource):
                 raise TypeError("Missing required property 'strategy_id'")
             __props__.__dict__["strategy_id"] = strategy_id
         super(StrategyAttachment, __self__).__init__(
-            'tencentcloud:APIGateway/strategyAttachment:StrategyAttachment',
+            'tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment',
             resource_name,
             __props__,
             opts)

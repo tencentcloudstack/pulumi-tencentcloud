@@ -11,6 +11,50 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a cls config extra
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cls.NewConfigExtra(ctx, "extra", &Cls.ConfigExtraArgs{
+// 			TopicId:    pulumi.Any(tencentcloud_cls_topic.Topic.Id),
+// 			Type:       pulumi.String("container_file"),
+// 			LogType:    pulumi.String("json_log"),
+// 			ConfigFlag: pulumi.String("label_k8s"),
+// 			LogsetId:   pulumi.Any(tencentcloud_cls_logset.Logset.Id),
+// 			LogsetName: pulumi.Any(tencentcloud_cls_logset.Logset.Logset_name),
+// 			TopicName:  pulumi.Any(tencentcloud_cls_topic.Topic.Topic_name),
+// 			ContainerFile: &cls.ConfigExtraContainerFileArgs{
+// 				Container:   pulumi.String("nginx"),
+// 				FilePattern: pulumi.String("log"),
+// 				LogPath:     pulumi.String("/nginx"),
+// 				Namespace:   pulumi.String("default"),
+// 				Workload: &cls.ConfigExtraContainerFileWorkloadArgs{
+// 					Container: pulumi.String("nginx"),
+// 					Kind:      pulumi.String("deployment"),
+// 					Name:      pulumi.String("nginx"),
+// 					Namespace: pulumi.String("default"),
+// 				},
+// 			},
+// 			GroupId: pulumi.String("27752a9b-9918-440a-8ee7-9c84a14a47ed"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type ConfigExtra struct {
 	pulumi.CustomResourceState
 
@@ -30,9 +74,7 @@ type ConfigExtra struct {
 	GroupIds pulumi.StringArrayOutput `pulumi:"groupIds"`
 	// Node file config info.
 	HostFile ConfigExtraHostFilePtrOutput `pulumi:"hostFile"`
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-	// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-	// Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
 	LogType pulumi.StringOutput `pulumi:"logType"`
 	// Logset Id.
 	LogsetId pulumi.StringOutput `pulumi:"logsetId"`
@@ -116,9 +158,7 @@ type configExtraState struct {
 	GroupIds []string `pulumi:"groupIds"`
 	// Node file config info.
 	HostFile *ConfigExtraHostFile `pulumi:"hostFile"`
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-	// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-	// Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
 	LogType *string `pulumi:"logType"`
 	// Logset Id.
 	LogsetId *string `pulumi:"logsetId"`
@@ -153,9 +193,7 @@ type ConfigExtraState struct {
 	GroupIds pulumi.StringArrayInput
 	// Node file config info.
 	HostFile ConfigExtraHostFilePtrInput
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-	// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-	// Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
 	LogType pulumi.StringPtrInput
 	// Logset Id.
 	LogsetId pulumi.StringPtrInput
@@ -194,9 +232,7 @@ type configExtraArgs struct {
 	GroupIds []string `pulumi:"groupIds"`
 	// Node file config info.
 	HostFile *ConfigExtraHostFile `pulumi:"hostFile"`
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-	// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-	// Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
 	LogType string `pulumi:"logType"`
 	// Logset Id.
 	LogsetId string `pulumi:"logsetId"`
@@ -232,9 +268,7 @@ type ConfigExtraArgs struct {
 	GroupIds pulumi.StringArrayInput
 	// Node file config info.
 	HostFile ConfigExtraHostFilePtrInput
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-	// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-	// Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
 	LogType pulumi.StringInput
 	// Logset Id.
 	LogsetId pulumi.StringInput
@@ -379,9 +413,7 @@ func (o ConfigExtraOutput) HostFile() ConfigExtraHostFilePtrOutput {
 	return o.ApplyT(func(v *ConfigExtra) ConfigExtraHostFilePtrOutput { return v.HostFile }).(ConfigExtraHostFilePtrOutput)
 }
 
-// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-// Default value: minimalist_log.
+// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
 func (o ConfigExtraOutput) LogType() pulumi.StringOutput {
 	return o.ApplyT(func(v *ConfigExtra) pulumi.StringOutput { return v.LogType }).(pulumi.StringOutput)
 }

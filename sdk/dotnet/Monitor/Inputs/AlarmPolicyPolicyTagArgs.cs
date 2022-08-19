@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Monitor.Inputs
 
     public sealed class AlarmPolicyPolicyTagArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Tag key.
+        /// </summary>
         [Input("key", required: true)]
         public Input<string> Key { get; set; } = null!;
 
+        /// <summary>
+        /// Tag value.
+        /// </summary>
         [Input("value", required: true)]
         public Input<string> Value { get; set; } = null!;
 

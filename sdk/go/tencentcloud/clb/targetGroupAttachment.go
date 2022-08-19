@@ -11,6 +11,75 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CLB target group attachment is bound to the load balancing listener or forwarding rule.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		clbBasic, err := Clb.NewInstance(ctx, "clbBasic", &Clb.InstanceArgs{
+// 			NetworkType: pulumi.String("OPEN"),
+// 			ClbName:     pulumi.String("tf-clb-rule-basic"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		listenerBasic, err := Clb.NewListener(ctx, "listenerBasic", &Clb.ListenerArgs{
+// 			ClbId:        clbBasic.ID(),
+// 			Port:         pulumi.Int(1),
+// 			Protocol:     pulumi.String("HTTP"),
+// 			ListenerName: pulumi.String("listener_basic"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		ruleBasic, err := Clb.NewListenerRule(ctx, "ruleBasic", &Clb.ListenerRuleArgs{
+// 			ClbId:             clbBasic.ID(),
+// 			ListenerId:        listenerBasic.ListenerId,
+// 			Domain:            pulumi.String("abc.com"),
+// 			Url:               pulumi.String("/"),
+// 			SessionExpireTime: pulumi.Int(30),
+// 			Scheduler:         pulumi.String("WRR"),
+// 			TargetType:        pulumi.String("TARGETGROUP"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		test, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
+// 			TargetGroupName: pulumi.String("test-target-keep-1"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Clb.NewTargetGroupAttachment(ctx, "group", &Clb.TargetGroupAttachmentArgs{
+// 			ClbId:         clbBasic.ID(),
+// 			ListenerId:    listenerBasic.ListenerId,
+// 			RuleId:        ruleBasic.RuleId,
+// 			TargetGroupId: test.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CLB target group attachment can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment group lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
+// ```
 type TargetGroupAttachment struct {
 	pulumi.CustomResourceState
 
@@ -22,7 +91,7 @@ type TargetGroupAttachment struct {
 	RuleId pulumi.StringPtrOutput `pulumi:"ruleId"`
 	// ID of the CLB target group.
 	TargetGroupId pulumi.StringPtrOutput `pulumi:"targetGroupId"`
-	// ID of the CLB target group.
+	// It has been deprecated from version 1.47.1. Use `targetGroupId` instead. ID of the CLB target group.
 	//
 	// Deprecated: It has been deprecated from version 1.47.1. Use `target_group_id` instead.
 	TargrtGroupId pulumi.StringPtrOutput `pulumi:"targrtGroupId"`
@@ -71,7 +140,7 @@ type targetGroupAttachmentState struct {
 	RuleId *string `pulumi:"ruleId"`
 	// ID of the CLB target group.
 	TargetGroupId *string `pulumi:"targetGroupId"`
-	// ID of the CLB target group.
+	// It has been deprecated from version 1.47.1. Use `targetGroupId` instead. ID of the CLB target group.
 	//
 	// Deprecated: It has been deprecated from version 1.47.1. Use `target_group_id` instead.
 	TargrtGroupId *string `pulumi:"targrtGroupId"`
@@ -86,7 +155,7 @@ type TargetGroupAttachmentState struct {
 	RuleId pulumi.StringPtrInput
 	// ID of the CLB target group.
 	TargetGroupId pulumi.StringPtrInput
-	// ID of the CLB target group.
+	// It has been deprecated from version 1.47.1. Use `targetGroupId` instead. ID of the CLB target group.
 	//
 	// Deprecated: It has been deprecated from version 1.47.1. Use `target_group_id` instead.
 	TargrtGroupId pulumi.StringPtrInput
@@ -105,7 +174,7 @@ type targetGroupAttachmentArgs struct {
 	RuleId *string `pulumi:"ruleId"`
 	// ID of the CLB target group.
 	TargetGroupId *string `pulumi:"targetGroupId"`
-	// ID of the CLB target group.
+	// It has been deprecated from version 1.47.1. Use `targetGroupId` instead. ID of the CLB target group.
 	//
 	// Deprecated: It has been deprecated from version 1.47.1. Use `target_group_id` instead.
 	TargrtGroupId *string `pulumi:"targrtGroupId"`
@@ -121,7 +190,7 @@ type TargetGroupAttachmentArgs struct {
 	RuleId pulumi.StringPtrInput
 	// ID of the CLB target group.
 	TargetGroupId pulumi.StringPtrInput
-	// ID of the CLB target group.
+	// It has been deprecated from version 1.47.1. Use `targetGroupId` instead. ID of the CLB target group.
 	//
 	// Deprecated: It has been deprecated from version 1.47.1. Use `target_group_id` instead.
 	TargrtGroupId pulumi.StringPtrInput
@@ -234,7 +303,7 @@ func (o TargetGroupAttachmentOutput) TargetGroupId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *TargetGroupAttachment) pulumi.StringPtrOutput { return v.TargetGroupId }).(pulumi.StringPtrOutput)
 }
 
-// ID of the CLB target group.
+// It has been deprecated from version 1.47.1. Use `targetGroupId` instead. ID of the CLB target group.
 //
 // Deprecated: It has been deprecated from version 1.47.1. Use `target_group_id` instead.
 func (o TargetGroupAttachmentOutput) TargrtGroupId() pulumi.StringPtrOutput {

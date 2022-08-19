@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Postgresql.Outputs
     [OutputType]
     public sealed class InstanceDbNodeSet
     {
+        /// <summary>
+        /// Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
+        /// </summary>
         public readonly string? Role;
+        /// <summary>
+        /// Indicates the node available zone.
+        /// </summary>
         public readonly string Zone;
 
         [OutputConstructor]

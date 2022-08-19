@@ -12,15 +12,27 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
 
     public sealed class DdosPolicyV2ProtocolBlockConfigGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// ICMP block, value [0 (block off), 1 (block on)].
+        /// </summary>
         [Input("dropIcmp", required: true)]
         public Input<int> DropIcmp { get; set; } = null!;
 
+        /// <summary>
+        /// Other block, value [0 (block off), 1 (block on)].
+        /// </summary>
         [Input("dropOther", required: true)]
         public Input<int> DropOther { get; set; } = null!;
 
+        /// <summary>
+        /// TCP block, value [0 (block off), 1 (block on)].
+        /// </summary>
         [Input("dropTcp", required: true)]
         public Input<int> DropTcp { get; set; } = null!;
 
+        /// <summary>
+        /// UDP block, value [0 (block off), 1 (block on)].
+        /// </summary>
         [Input("dropUdp", required: true)]
         public Input<int> DropUdp { get; set; } = null!;
 

@@ -11,6 +11,39 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a VPN SSL Client.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewSslClient(ctx, "client", &Vpn.SslClientArgs{
+// 			SslVpnClientName: pulumi.String("hello"),
+// 			SslVpnServerId:   pulumi.String("vpns-aog5xcjj"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// VPN SSL Client can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Vpn/sslClient:SslClient client vpn-client-id
+// ```
 type SslClient struct {
 	pulumi.CustomResourceState
 

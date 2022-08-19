@@ -12,15 +12,27 @@ namespace Pulumi.Tencentcloud.Eks.Inputs
 
     public sealed class ContainerInstanceNfsVolumeGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Name of NFS volume.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// NFS volume path.
+        /// </summary>
         [Input("path", required: true)]
         public Input<string> Path { get; set; } = null!;
 
+        /// <summary>
+        /// Indicates whether the volume is read only. Default is `false`.
+        /// </summary>
         [Input("readOnly")]
         public Input<bool>? ReadOnly { get; set; }
 
+        /// <summary>
+        /// NFS server address.
+        /// </summary>
         [Input("server", required: true)]
         public Input<string> Server { get; set; } = null!;
 

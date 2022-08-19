@@ -10,332 +10,10 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type ClusterCredentialAddress struct {
-	Ip   string `pulumi:"ip"`
-	Port string `pulumi:"port"`
-	Type string `pulumi:"type"`
-}
-
-// ClusterCredentialAddressInput is an input type that accepts ClusterCredentialAddressArgs and ClusterCredentialAddressOutput values.
-// You can construct a concrete instance of `ClusterCredentialAddressInput` via:
-//
-//          ClusterCredentialAddressArgs{...}
-type ClusterCredentialAddressInput interface {
-	pulumi.Input
-
-	ToClusterCredentialAddressOutput() ClusterCredentialAddressOutput
-	ToClusterCredentialAddressOutputWithContext(context.Context) ClusterCredentialAddressOutput
-}
-
-type ClusterCredentialAddressArgs struct {
-	Ip   pulumi.StringInput `pulumi:"ip"`
-	Port pulumi.StringInput `pulumi:"port"`
-	Type pulumi.StringInput `pulumi:"type"`
-}
-
-func (ClusterCredentialAddressArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClusterCredentialAddress)(nil)).Elem()
-}
-
-func (i ClusterCredentialAddressArgs) ToClusterCredentialAddressOutput() ClusterCredentialAddressOutput {
-	return i.ToClusterCredentialAddressOutputWithContext(context.Background())
-}
-
-func (i ClusterCredentialAddressArgs) ToClusterCredentialAddressOutputWithContext(ctx context.Context) ClusterCredentialAddressOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClusterCredentialAddressOutput)
-}
-
-// ClusterCredentialAddressArrayInput is an input type that accepts ClusterCredentialAddressArray and ClusterCredentialAddressArrayOutput values.
-// You can construct a concrete instance of `ClusterCredentialAddressArrayInput` via:
-//
-//          ClusterCredentialAddressArray{ ClusterCredentialAddressArgs{...} }
-type ClusterCredentialAddressArrayInput interface {
-	pulumi.Input
-
-	ToClusterCredentialAddressArrayOutput() ClusterCredentialAddressArrayOutput
-	ToClusterCredentialAddressArrayOutputWithContext(context.Context) ClusterCredentialAddressArrayOutput
-}
-
-type ClusterCredentialAddressArray []ClusterCredentialAddressInput
-
-func (ClusterCredentialAddressArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClusterCredentialAddress)(nil)).Elem()
-}
-
-func (i ClusterCredentialAddressArray) ToClusterCredentialAddressArrayOutput() ClusterCredentialAddressArrayOutput {
-	return i.ToClusterCredentialAddressArrayOutputWithContext(context.Background())
-}
-
-func (i ClusterCredentialAddressArray) ToClusterCredentialAddressArrayOutputWithContext(ctx context.Context) ClusterCredentialAddressArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClusterCredentialAddressArrayOutput)
-}
-
-type ClusterCredentialAddressOutput struct{ *pulumi.OutputState }
-
-func (ClusterCredentialAddressOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClusterCredentialAddress)(nil)).Elem()
-}
-
-func (o ClusterCredentialAddressOutput) ToClusterCredentialAddressOutput() ClusterCredentialAddressOutput {
-	return o
-}
-
-func (o ClusterCredentialAddressOutput) ToClusterCredentialAddressOutputWithContext(ctx context.Context) ClusterCredentialAddressOutput {
-	return o
-}
-
-func (o ClusterCredentialAddressOutput) Ip() pulumi.StringOutput {
-	return o.ApplyT(func(v ClusterCredentialAddress) string { return v.Ip }).(pulumi.StringOutput)
-}
-
-func (o ClusterCredentialAddressOutput) Port() pulumi.StringOutput {
-	return o.ApplyT(func(v ClusterCredentialAddress) string { return v.Port }).(pulumi.StringOutput)
-}
-
-func (o ClusterCredentialAddressOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v ClusterCredentialAddress) string { return v.Type }).(pulumi.StringOutput)
-}
-
-type ClusterCredentialAddressArrayOutput struct{ *pulumi.OutputState }
-
-func (ClusterCredentialAddressArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClusterCredentialAddress)(nil)).Elem()
-}
-
-func (o ClusterCredentialAddressArrayOutput) ToClusterCredentialAddressArrayOutput() ClusterCredentialAddressArrayOutput {
-	return o
-}
-
-func (o ClusterCredentialAddressArrayOutput) ToClusterCredentialAddressArrayOutputWithContext(ctx context.Context) ClusterCredentialAddressArrayOutput {
-	return o
-}
-
-func (o ClusterCredentialAddressArrayOutput) Index(i pulumi.IntInput) ClusterCredentialAddressOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterCredentialAddress {
-		return vs[0].([]ClusterCredentialAddress)[vs[1].(int)]
-	}).(ClusterCredentialAddressOutput)
-}
-
-type ClusterCredentialInternalLb struct {
-	Enabled  bool   `pulumi:"enabled"`
-	SubnetId string `pulumi:"subnetId"`
-}
-
-// ClusterCredentialInternalLbInput is an input type that accepts ClusterCredentialInternalLbArgs and ClusterCredentialInternalLbOutput values.
-// You can construct a concrete instance of `ClusterCredentialInternalLbInput` via:
-//
-//          ClusterCredentialInternalLbArgs{...}
-type ClusterCredentialInternalLbInput interface {
-	pulumi.Input
-
-	ToClusterCredentialInternalLbOutput() ClusterCredentialInternalLbOutput
-	ToClusterCredentialInternalLbOutputWithContext(context.Context) ClusterCredentialInternalLbOutput
-}
-
-type ClusterCredentialInternalLbArgs struct {
-	Enabled  pulumi.BoolInput   `pulumi:"enabled"`
-	SubnetId pulumi.StringInput `pulumi:"subnetId"`
-}
-
-func (ClusterCredentialInternalLbArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClusterCredentialInternalLb)(nil)).Elem()
-}
-
-func (i ClusterCredentialInternalLbArgs) ToClusterCredentialInternalLbOutput() ClusterCredentialInternalLbOutput {
-	return i.ToClusterCredentialInternalLbOutputWithContext(context.Background())
-}
-
-func (i ClusterCredentialInternalLbArgs) ToClusterCredentialInternalLbOutputWithContext(ctx context.Context) ClusterCredentialInternalLbOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClusterCredentialInternalLbOutput)
-}
-
-// ClusterCredentialInternalLbArrayInput is an input type that accepts ClusterCredentialInternalLbArray and ClusterCredentialInternalLbArrayOutput values.
-// You can construct a concrete instance of `ClusterCredentialInternalLbArrayInput` via:
-//
-//          ClusterCredentialInternalLbArray{ ClusterCredentialInternalLbArgs{...} }
-type ClusterCredentialInternalLbArrayInput interface {
-	pulumi.Input
-
-	ToClusterCredentialInternalLbArrayOutput() ClusterCredentialInternalLbArrayOutput
-	ToClusterCredentialInternalLbArrayOutputWithContext(context.Context) ClusterCredentialInternalLbArrayOutput
-}
-
-type ClusterCredentialInternalLbArray []ClusterCredentialInternalLbInput
-
-func (ClusterCredentialInternalLbArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClusterCredentialInternalLb)(nil)).Elem()
-}
-
-func (i ClusterCredentialInternalLbArray) ToClusterCredentialInternalLbArrayOutput() ClusterCredentialInternalLbArrayOutput {
-	return i.ToClusterCredentialInternalLbArrayOutputWithContext(context.Background())
-}
-
-func (i ClusterCredentialInternalLbArray) ToClusterCredentialInternalLbArrayOutputWithContext(ctx context.Context) ClusterCredentialInternalLbArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClusterCredentialInternalLbArrayOutput)
-}
-
-type ClusterCredentialInternalLbOutput struct{ *pulumi.OutputState }
-
-func (ClusterCredentialInternalLbOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClusterCredentialInternalLb)(nil)).Elem()
-}
-
-func (o ClusterCredentialInternalLbOutput) ToClusterCredentialInternalLbOutput() ClusterCredentialInternalLbOutput {
-	return o
-}
-
-func (o ClusterCredentialInternalLbOutput) ToClusterCredentialInternalLbOutputWithContext(ctx context.Context) ClusterCredentialInternalLbOutput {
-	return o
-}
-
-func (o ClusterCredentialInternalLbOutput) Enabled() pulumi.BoolOutput {
-	return o.ApplyT(func(v ClusterCredentialInternalLb) bool { return v.Enabled }).(pulumi.BoolOutput)
-}
-
-func (o ClusterCredentialInternalLbOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v ClusterCredentialInternalLb) string { return v.SubnetId }).(pulumi.StringOutput)
-}
-
-type ClusterCredentialInternalLbArrayOutput struct{ *pulumi.OutputState }
-
-func (ClusterCredentialInternalLbArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClusterCredentialInternalLb)(nil)).Elem()
-}
-
-func (o ClusterCredentialInternalLbArrayOutput) ToClusterCredentialInternalLbArrayOutput() ClusterCredentialInternalLbArrayOutput {
-	return o
-}
-
-func (o ClusterCredentialInternalLbArrayOutput) ToClusterCredentialInternalLbArrayOutputWithContext(ctx context.Context) ClusterCredentialInternalLbArrayOutput {
-	return o
-}
-
-func (o ClusterCredentialInternalLbArrayOutput) Index(i pulumi.IntInput) ClusterCredentialInternalLbOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterCredentialInternalLb {
-		return vs[0].([]ClusterCredentialInternalLb)[vs[1].(int)]
-	}).(ClusterCredentialInternalLbOutput)
-}
-
-type ClusterCredentialPublicLb struct {
-	AllowFromCidrs   []string `pulumi:"allowFromCidrs"`
-	Enabled          bool     `pulumi:"enabled"`
-	ExtraParam       string   `pulumi:"extraParam"`
-	SecurityGroup    string   `pulumi:"securityGroup"`
-	SecurityPolicies []string `pulumi:"securityPolicies"`
-}
-
-// ClusterCredentialPublicLbInput is an input type that accepts ClusterCredentialPublicLbArgs and ClusterCredentialPublicLbOutput values.
-// You can construct a concrete instance of `ClusterCredentialPublicLbInput` via:
-//
-//          ClusterCredentialPublicLbArgs{...}
-type ClusterCredentialPublicLbInput interface {
-	pulumi.Input
-
-	ToClusterCredentialPublicLbOutput() ClusterCredentialPublicLbOutput
-	ToClusterCredentialPublicLbOutputWithContext(context.Context) ClusterCredentialPublicLbOutput
-}
-
-type ClusterCredentialPublicLbArgs struct {
-	AllowFromCidrs   pulumi.StringArrayInput `pulumi:"allowFromCidrs"`
-	Enabled          pulumi.BoolInput        `pulumi:"enabled"`
-	ExtraParam       pulumi.StringInput      `pulumi:"extraParam"`
-	SecurityGroup    pulumi.StringInput      `pulumi:"securityGroup"`
-	SecurityPolicies pulumi.StringArrayInput `pulumi:"securityPolicies"`
-}
-
-func (ClusterCredentialPublicLbArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClusterCredentialPublicLb)(nil)).Elem()
-}
-
-func (i ClusterCredentialPublicLbArgs) ToClusterCredentialPublicLbOutput() ClusterCredentialPublicLbOutput {
-	return i.ToClusterCredentialPublicLbOutputWithContext(context.Background())
-}
-
-func (i ClusterCredentialPublicLbArgs) ToClusterCredentialPublicLbOutputWithContext(ctx context.Context) ClusterCredentialPublicLbOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClusterCredentialPublicLbOutput)
-}
-
-// ClusterCredentialPublicLbArrayInput is an input type that accepts ClusterCredentialPublicLbArray and ClusterCredentialPublicLbArrayOutput values.
-// You can construct a concrete instance of `ClusterCredentialPublicLbArrayInput` via:
-//
-//          ClusterCredentialPublicLbArray{ ClusterCredentialPublicLbArgs{...} }
-type ClusterCredentialPublicLbArrayInput interface {
-	pulumi.Input
-
-	ToClusterCredentialPublicLbArrayOutput() ClusterCredentialPublicLbArrayOutput
-	ToClusterCredentialPublicLbArrayOutputWithContext(context.Context) ClusterCredentialPublicLbArrayOutput
-}
-
-type ClusterCredentialPublicLbArray []ClusterCredentialPublicLbInput
-
-func (ClusterCredentialPublicLbArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClusterCredentialPublicLb)(nil)).Elem()
-}
-
-func (i ClusterCredentialPublicLbArray) ToClusterCredentialPublicLbArrayOutput() ClusterCredentialPublicLbArrayOutput {
-	return i.ToClusterCredentialPublicLbArrayOutputWithContext(context.Background())
-}
-
-func (i ClusterCredentialPublicLbArray) ToClusterCredentialPublicLbArrayOutputWithContext(ctx context.Context) ClusterCredentialPublicLbArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClusterCredentialPublicLbArrayOutput)
-}
-
-type ClusterCredentialPublicLbOutput struct{ *pulumi.OutputState }
-
-func (ClusterCredentialPublicLbOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClusterCredentialPublicLb)(nil)).Elem()
-}
-
-func (o ClusterCredentialPublicLbOutput) ToClusterCredentialPublicLbOutput() ClusterCredentialPublicLbOutput {
-	return o
-}
-
-func (o ClusterCredentialPublicLbOutput) ToClusterCredentialPublicLbOutputWithContext(ctx context.Context) ClusterCredentialPublicLbOutput {
-	return o
-}
-
-func (o ClusterCredentialPublicLbOutput) AllowFromCidrs() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ClusterCredentialPublicLb) []string { return v.AllowFromCidrs }).(pulumi.StringArrayOutput)
-}
-
-func (o ClusterCredentialPublicLbOutput) Enabled() pulumi.BoolOutput {
-	return o.ApplyT(func(v ClusterCredentialPublicLb) bool { return v.Enabled }).(pulumi.BoolOutput)
-}
-
-func (o ClusterCredentialPublicLbOutput) ExtraParam() pulumi.StringOutput {
-	return o.ApplyT(func(v ClusterCredentialPublicLb) string { return v.ExtraParam }).(pulumi.StringOutput)
-}
-
-func (o ClusterCredentialPublicLbOutput) SecurityGroup() pulumi.StringOutput {
-	return o.ApplyT(func(v ClusterCredentialPublicLb) string { return v.SecurityGroup }).(pulumi.StringOutput)
-}
-
-func (o ClusterCredentialPublicLbOutput) SecurityPolicies() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ClusterCredentialPublicLb) []string { return v.SecurityPolicies }).(pulumi.StringArrayOutput)
-}
-
-type ClusterCredentialPublicLbArrayOutput struct{ *pulumi.OutputState }
-
-func (ClusterCredentialPublicLbArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClusterCredentialPublicLb)(nil)).Elem()
-}
-
-func (o ClusterCredentialPublicLbArrayOutput) ToClusterCredentialPublicLbArrayOutput() ClusterCredentialPublicLbArrayOutput {
-	return o
-}
-
-func (o ClusterCredentialPublicLbArrayOutput) ToClusterCredentialPublicLbArrayOutputWithContext(ctx context.Context) ClusterCredentialPublicLbArrayOutput {
-	return o
-}
-
-func (o ClusterCredentialPublicLbArrayOutput) Index(i pulumi.IntInput) ClusterCredentialPublicLbOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterCredentialPublicLb {
-		return vs[0].([]ClusterCredentialPublicLb)[vs[1].(int)]
-	}).(ClusterCredentialPublicLbOutput)
-}
-
 type ClusterDnsServer struct {
-	Domain  *string  `pulumi:"domain"`
+	// DNS Server domain. Empty indicates all domain.
+	Domain *string `pulumi:"domain"`
+	// List of DNS Server IP address, pattern: "ip[:port]".
 	Servers []string `pulumi:"servers"`
 }
 
@@ -351,7 +29,9 @@ type ClusterDnsServerInput interface {
 }
 
 type ClusterDnsServerArgs struct {
-	Domain  pulumi.StringPtrInput   `pulumi:"domain"`
+	// DNS Server domain. Empty indicates all domain.
+	Domain pulumi.StringPtrInput `pulumi:"domain"`
+	// List of DNS Server IP address, pattern: "ip[:port]".
 	Servers pulumi.StringArrayInput `pulumi:"servers"`
 }
 
@@ -406,10 +86,12 @@ func (o ClusterDnsServerOutput) ToClusterDnsServerOutputWithContext(ctx context.
 	return o
 }
 
+// DNS Server domain. Empty indicates all domain.
 func (o ClusterDnsServerOutput) Domain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterDnsServer) *string { return v.Domain }).(pulumi.StringPtrOutput)
 }
 
+// List of DNS Server IP address, pattern: "ip[:port]".
 func (o ClusterDnsServerOutput) Servers() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ClusterDnsServer) []string { return v.Servers }).(pulumi.StringArrayOutput)
 }
@@ -435,7 +117,9 @@ func (o ClusterDnsServerArrayOutput) Index(i pulumi.IntInput) ClusterDnsServerOu
 }
 
 type ClusterInternalLb struct {
-	Enabled  bool    `pulumi:"enabled"`
+	// Indicates weather the internal access LB enabled.
+	Enabled bool `pulumi:"enabled"`
+	// ID of subnet which related to Internal LB.
 	SubnetId *string `pulumi:"subnetId"`
 }
 
@@ -451,7 +135,9 @@ type ClusterInternalLbInput interface {
 }
 
 type ClusterInternalLbArgs struct {
-	Enabled  pulumi.BoolInput      `pulumi:"enabled"`
+	// Indicates weather the internal access LB enabled.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// ID of subnet which related to Internal LB.
 	SubnetId pulumi.StringPtrInput `pulumi:"subnetId"`
 }
 
@@ -532,10 +218,12 @@ func (o ClusterInternalLbOutput) ToClusterInternalLbPtrOutputWithContext(ctx con
 	}).(ClusterInternalLbPtrOutput)
 }
 
+// Indicates weather the internal access LB enabled.
 func (o ClusterInternalLbOutput) Enabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v ClusterInternalLb) bool { return v.Enabled }).(pulumi.BoolOutput)
 }
 
+// ID of subnet which related to Internal LB.
 func (o ClusterInternalLbOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterInternalLb) *string { return v.SubnetId }).(pulumi.StringPtrOutput)
 }
@@ -564,6 +252,7 @@ func (o ClusterInternalLbPtrOutput) Elem() ClusterInternalLbOutput {
 	}).(ClusterInternalLbOutput)
 }
 
+// Indicates weather the internal access LB enabled.
 func (o ClusterInternalLbPtrOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterInternalLb) *bool {
 		if v == nil {
@@ -573,6 +262,7 @@ func (o ClusterInternalLbPtrOutput) Enabled() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// ID of subnet which related to Internal LB.
 func (o ClusterInternalLbPtrOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterInternalLb) *string {
 		if v == nil {
@@ -583,10 +273,14 @@ func (o ClusterInternalLbPtrOutput) SubnetId() pulumi.StringPtrOutput {
 }
 
 type ClusterPublicLb struct {
-	AllowFromCidrs   []string `pulumi:"allowFromCidrs"`
-	Enabled          bool     `pulumi:"enabled"`
-	ExtraParam       *string  `pulumi:"extraParam"`
-	SecurityGroup    *string  `pulumi:"securityGroup"`
+	// List of CIDRs which allowed to access.
+	AllowFromCidrs []string `pulumi:"allowFromCidrs"`
+	// Indicates weather the public access LB enabled.
+	Enabled bool `pulumi:"enabled"`
+	// Extra param text json.
+	ExtraParam    *string `pulumi:"extraParam"`
+	SecurityGroup *string `pulumi:"securityGroup"`
+	// List of security allow IP or CIDRs, default deny all.
 	SecurityPolicies []string `pulumi:"securityPolicies"`
 }
 
@@ -602,10 +296,14 @@ type ClusterPublicLbInput interface {
 }
 
 type ClusterPublicLbArgs struct {
-	AllowFromCidrs   pulumi.StringArrayInput `pulumi:"allowFromCidrs"`
-	Enabled          pulumi.BoolInput        `pulumi:"enabled"`
-	ExtraParam       pulumi.StringPtrInput   `pulumi:"extraParam"`
-	SecurityGroup    pulumi.StringPtrInput   `pulumi:"securityGroup"`
+	// List of CIDRs which allowed to access.
+	AllowFromCidrs pulumi.StringArrayInput `pulumi:"allowFromCidrs"`
+	// Indicates weather the public access LB enabled.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// Extra param text json.
+	ExtraParam    pulumi.StringPtrInput `pulumi:"extraParam"`
+	SecurityGroup pulumi.StringPtrInput `pulumi:"securityGroup"`
+	// List of security allow IP or CIDRs, default deny all.
 	SecurityPolicies pulumi.StringArrayInput `pulumi:"securityPolicies"`
 }
 
@@ -686,14 +384,17 @@ func (o ClusterPublicLbOutput) ToClusterPublicLbPtrOutputWithContext(ctx context
 	}).(ClusterPublicLbPtrOutput)
 }
 
+// List of CIDRs which allowed to access.
 func (o ClusterPublicLbOutput) AllowFromCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ClusterPublicLb) []string { return v.AllowFromCidrs }).(pulumi.StringArrayOutput)
 }
 
+// Indicates weather the public access LB enabled.
 func (o ClusterPublicLbOutput) Enabled() pulumi.BoolOutput {
 	return o.ApplyT(func(v ClusterPublicLb) bool { return v.Enabled }).(pulumi.BoolOutput)
 }
 
+// Extra param text json.
 func (o ClusterPublicLbOutput) ExtraParam() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterPublicLb) *string { return v.ExtraParam }).(pulumi.StringPtrOutput)
 }
@@ -702,6 +403,7 @@ func (o ClusterPublicLbOutput) SecurityGroup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterPublicLb) *string { return v.SecurityGroup }).(pulumi.StringPtrOutput)
 }
 
+// List of security allow IP or CIDRs, default deny all.
 func (o ClusterPublicLbOutput) SecurityPolicies() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ClusterPublicLb) []string { return v.SecurityPolicies }).(pulumi.StringArrayOutput)
 }
@@ -730,6 +432,7 @@ func (o ClusterPublicLbPtrOutput) Elem() ClusterPublicLbOutput {
 	}).(ClusterPublicLbOutput)
 }
 
+// List of CIDRs which allowed to access.
 func (o ClusterPublicLbPtrOutput) AllowFromCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ClusterPublicLb) []string {
 		if v == nil {
@@ -739,6 +442,7 @@ func (o ClusterPublicLbPtrOutput) AllowFromCidrs() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
+// Indicates weather the public access LB enabled.
 func (o ClusterPublicLbPtrOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterPublicLb) *bool {
 		if v == nil {
@@ -748,6 +452,7 @@ func (o ClusterPublicLbPtrOutput) Enabled() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Extra param text json.
 func (o ClusterPublicLbPtrOutput) ExtraParam() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterPublicLb) *string {
 		if v == nil {
@@ -766,6 +471,7 @@ func (o ClusterPublicLbPtrOutput) SecurityGroup() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// List of security allow IP or CIDRs, default deny all.
 func (o ClusterPublicLbPtrOutput) SecurityPolicies() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ClusterPublicLb) []string {
 		if v == nil {
@@ -775,275 +481,11 @@ func (o ClusterPublicLbPtrOutput) SecurityPolicies() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
-type ClustersList struct {
-	ClusterDesc      string                  `pulumi:"clusterDesc"`
-	ClusterId        string                  `pulumi:"clusterId"`
-	ClusterName      string                  `pulumi:"clusterName"`
-	CreatedTime      string                  `pulumi:"createdTime"`
-	DnsServers       []ClustersListDnsServer `pulumi:"dnsServers"`
-	EnableVpcCoreDns bool                    `pulumi:"enableVpcCoreDns"`
-	K8sVersion       string                  `pulumi:"k8sVersion"`
-	NeedDeleteCbs    bool                    `pulumi:"needDeleteCbs"`
-	ServiceSubnetId  string                  `pulumi:"serviceSubnetId"`
-	Status           string                  `pulumi:"status"`
-	SubnetIds        []string                `pulumi:"subnetIds"`
-	Tags             map[string]interface{}  `pulumi:"tags"`
-	VpcId            string                  `pulumi:"vpcId"`
-}
-
-// ClustersListInput is an input type that accepts ClustersListArgs and ClustersListOutput values.
-// You can construct a concrete instance of `ClustersListInput` via:
-//
-//          ClustersListArgs{...}
-type ClustersListInput interface {
-	pulumi.Input
-
-	ToClustersListOutput() ClustersListOutput
-	ToClustersListOutputWithContext(context.Context) ClustersListOutput
-}
-
-type ClustersListArgs struct {
-	ClusterDesc      pulumi.StringInput              `pulumi:"clusterDesc"`
-	ClusterId        pulumi.StringInput              `pulumi:"clusterId"`
-	ClusterName      pulumi.StringInput              `pulumi:"clusterName"`
-	CreatedTime      pulumi.StringInput              `pulumi:"createdTime"`
-	DnsServers       ClustersListDnsServerArrayInput `pulumi:"dnsServers"`
-	EnableVpcCoreDns pulumi.BoolInput                `pulumi:"enableVpcCoreDns"`
-	K8sVersion       pulumi.StringInput              `pulumi:"k8sVersion"`
-	NeedDeleteCbs    pulumi.BoolInput                `pulumi:"needDeleteCbs"`
-	ServiceSubnetId  pulumi.StringInput              `pulumi:"serviceSubnetId"`
-	Status           pulumi.StringInput              `pulumi:"status"`
-	SubnetIds        pulumi.StringArrayInput         `pulumi:"subnetIds"`
-	Tags             pulumi.MapInput                 `pulumi:"tags"`
-	VpcId            pulumi.StringInput              `pulumi:"vpcId"`
-}
-
-func (ClustersListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClustersList)(nil)).Elem()
-}
-
-func (i ClustersListArgs) ToClustersListOutput() ClustersListOutput {
-	return i.ToClustersListOutputWithContext(context.Background())
-}
-
-func (i ClustersListArgs) ToClustersListOutputWithContext(ctx context.Context) ClustersListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClustersListOutput)
-}
-
-// ClustersListArrayInput is an input type that accepts ClustersListArray and ClustersListArrayOutput values.
-// You can construct a concrete instance of `ClustersListArrayInput` via:
-//
-//          ClustersListArray{ ClustersListArgs{...} }
-type ClustersListArrayInput interface {
-	pulumi.Input
-
-	ToClustersListArrayOutput() ClustersListArrayOutput
-	ToClustersListArrayOutputWithContext(context.Context) ClustersListArrayOutput
-}
-
-type ClustersListArray []ClustersListInput
-
-func (ClustersListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClustersList)(nil)).Elem()
-}
-
-func (i ClustersListArray) ToClustersListArrayOutput() ClustersListArrayOutput {
-	return i.ToClustersListArrayOutputWithContext(context.Background())
-}
-
-func (i ClustersListArray) ToClustersListArrayOutputWithContext(ctx context.Context) ClustersListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClustersListArrayOutput)
-}
-
-type ClustersListOutput struct{ *pulumi.OutputState }
-
-func (ClustersListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClustersList)(nil)).Elem()
-}
-
-func (o ClustersListOutput) ToClustersListOutput() ClustersListOutput {
-	return o
-}
-
-func (o ClustersListOutput) ToClustersListOutputWithContext(ctx context.Context) ClustersListOutput {
-	return o
-}
-
-func (o ClustersListOutput) ClusterDesc() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.ClusterDesc }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) ClusterId() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.ClusterId }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) ClusterName() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.ClusterName }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) CreatedTime() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.CreatedTime }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) DnsServers() ClustersListDnsServerArrayOutput {
-	return o.ApplyT(func(v ClustersList) []ClustersListDnsServer { return v.DnsServers }).(ClustersListDnsServerArrayOutput)
-}
-
-func (o ClustersListOutput) EnableVpcCoreDns() pulumi.BoolOutput {
-	return o.ApplyT(func(v ClustersList) bool { return v.EnableVpcCoreDns }).(pulumi.BoolOutput)
-}
-
-func (o ClustersListOutput) K8sVersion() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.K8sVersion }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) NeedDeleteCbs() pulumi.BoolOutput {
-	return o.ApplyT(func(v ClustersList) bool { return v.NeedDeleteCbs }).(pulumi.BoolOutput)
-}
-
-func (o ClustersListOutput) ServiceSubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.ServiceSubnetId }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.Status }).(pulumi.StringOutput)
-}
-
-func (o ClustersListOutput) SubnetIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ClustersList) []string { return v.SubnetIds }).(pulumi.StringArrayOutput)
-}
-
-func (o ClustersListOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v ClustersList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
-}
-
-func (o ClustersListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersList) string { return v.VpcId }).(pulumi.StringOutput)
-}
-
-type ClustersListArrayOutput struct{ *pulumi.OutputState }
-
-func (ClustersListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClustersList)(nil)).Elem()
-}
-
-func (o ClustersListArrayOutput) ToClustersListArrayOutput() ClustersListArrayOutput {
-	return o
-}
-
-func (o ClustersListArrayOutput) ToClustersListArrayOutputWithContext(ctx context.Context) ClustersListArrayOutput {
-	return o
-}
-
-func (o ClustersListArrayOutput) Index(i pulumi.IntInput) ClustersListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClustersList {
-		return vs[0].([]ClustersList)[vs[1].(int)]
-	}).(ClustersListOutput)
-}
-
-type ClustersListDnsServer struct {
-	Domain  string   `pulumi:"domain"`
-	Servers []string `pulumi:"servers"`
-}
-
-// ClustersListDnsServerInput is an input type that accepts ClustersListDnsServerArgs and ClustersListDnsServerOutput values.
-// You can construct a concrete instance of `ClustersListDnsServerInput` via:
-//
-//          ClustersListDnsServerArgs{...}
-type ClustersListDnsServerInput interface {
-	pulumi.Input
-
-	ToClustersListDnsServerOutput() ClustersListDnsServerOutput
-	ToClustersListDnsServerOutputWithContext(context.Context) ClustersListDnsServerOutput
-}
-
-type ClustersListDnsServerArgs struct {
-	Domain  pulumi.StringInput      `pulumi:"domain"`
-	Servers pulumi.StringArrayInput `pulumi:"servers"`
-}
-
-func (ClustersListDnsServerArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClustersListDnsServer)(nil)).Elem()
-}
-
-func (i ClustersListDnsServerArgs) ToClustersListDnsServerOutput() ClustersListDnsServerOutput {
-	return i.ToClustersListDnsServerOutputWithContext(context.Background())
-}
-
-func (i ClustersListDnsServerArgs) ToClustersListDnsServerOutputWithContext(ctx context.Context) ClustersListDnsServerOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClustersListDnsServerOutput)
-}
-
-// ClustersListDnsServerArrayInput is an input type that accepts ClustersListDnsServerArray and ClustersListDnsServerArrayOutput values.
-// You can construct a concrete instance of `ClustersListDnsServerArrayInput` via:
-//
-//          ClustersListDnsServerArray{ ClustersListDnsServerArgs{...} }
-type ClustersListDnsServerArrayInput interface {
-	pulumi.Input
-
-	ToClustersListDnsServerArrayOutput() ClustersListDnsServerArrayOutput
-	ToClustersListDnsServerArrayOutputWithContext(context.Context) ClustersListDnsServerArrayOutput
-}
-
-type ClustersListDnsServerArray []ClustersListDnsServerInput
-
-func (ClustersListDnsServerArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClustersListDnsServer)(nil)).Elem()
-}
-
-func (i ClustersListDnsServerArray) ToClustersListDnsServerArrayOutput() ClustersListDnsServerArrayOutput {
-	return i.ToClustersListDnsServerArrayOutputWithContext(context.Background())
-}
-
-func (i ClustersListDnsServerArray) ToClustersListDnsServerArrayOutputWithContext(ctx context.Context) ClustersListDnsServerArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ClustersListDnsServerArrayOutput)
-}
-
-type ClustersListDnsServerOutput struct{ *pulumi.OutputState }
-
-func (ClustersListDnsServerOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ClustersListDnsServer)(nil)).Elem()
-}
-
-func (o ClustersListDnsServerOutput) ToClustersListDnsServerOutput() ClustersListDnsServerOutput {
-	return o
-}
-
-func (o ClustersListDnsServerOutput) ToClustersListDnsServerOutputWithContext(ctx context.Context) ClustersListDnsServerOutput {
-	return o
-}
-
-func (o ClustersListDnsServerOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v ClustersListDnsServer) string { return v.Domain }).(pulumi.StringOutput)
-}
-
-func (o ClustersListDnsServerOutput) Servers() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ClustersListDnsServer) []string { return v.Servers }).(pulumi.StringArrayOutput)
-}
-
-type ClustersListDnsServerArrayOutput struct{ *pulumi.OutputState }
-
-func (ClustersListDnsServerArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ClustersListDnsServer)(nil)).Elem()
-}
-
-func (o ClustersListDnsServerArrayOutput) ToClustersListDnsServerArrayOutput() ClustersListDnsServerArrayOutput {
-	return o
-}
-
-func (o ClustersListDnsServerArrayOutput) ToClustersListDnsServerArrayOutputWithContext(ctx context.Context) ClustersListDnsServerArrayOutput {
-	return o
-}
-
-func (o ClustersListDnsServerArrayOutput) Index(i pulumi.IntInput) ClustersListDnsServerOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClustersListDnsServer {
-		return vs[0].([]ClustersListDnsServer)[vs[1].(int)]
-	}).(ClustersListDnsServerOutput)
-}
-
 type ContainerInstanceCbsVolume struct {
+	// ID of CBS.
 	DiskId string `pulumi:"diskId"`
-	Name   string `pulumi:"name"`
+	// Name of CBS volume.
+	Name string `pulumi:"name"`
 }
 
 // ContainerInstanceCbsVolumeInput is an input type that accepts ContainerInstanceCbsVolumeArgs and ContainerInstanceCbsVolumeOutput values.
@@ -1058,8 +500,10 @@ type ContainerInstanceCbsVolumeInput interface {
 }
 
 type ContainerInstanceCbsVolumeArgs struct {
+	// ID of CBS.
 	DiskId pulumi.StringInput `pulumi:"diskId"`
-	Name   pulumi.StringInput `pulumi:"name"`
+	// Name of CBS volume.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
 func (ContainerInstanceCbsVolumeArgs) ElementType() reflect.Type {
@@ -1113,10 +557,12 @@ func (o ContainerInstanceCbsVolumeOutput) ToContainerInstanceCbsVolumeOutputWith
 	return o
 }
 
+// ID of CBS.
 func (o ContainerInstanceCbsVolumeOutput) DiskId() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceCbsVolume) string { return v.DiskId }).(pulumi.StringOutput)
 }
 
+// Name of CBS volume.
 func (o ContainerInstanceCbsVolumeOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceCbsVolume) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -1142,17 +588,28 @@ func (o ContainerInstanceCbsVolumeArrayOutput) Index(i pulumi.IntInput) Containe
 }
 
 type ContainerInstanceContainer struct {
-	Args           []string                                  `pulumi:"args"`
-	Commands       []string                                  `pulumi:"commands"`
-	Cpu            *float64                                  `pulumi:"cpu"`
-	EnvVars        map[string]interface{}                    `pulumi:"envVars"`
-	Image          string                                    `pulumi:"image"`
-	LivenessProbe  *ContainerInstanceContainerLivenessProbe  `pulumi:"livenessProbe"`
-	Memory         *float64                                  `pulumi:"memory"`
-	Name           string                                    `pulumi:"name"`
+	// Container launch argument list.
+	Args []string `pulumi:"args"`
+	// Container launch command list.
+	Commands []string `pulumi:"commands"`
+	// Number of cpu core of container.
+	Cpu *float64 `pulumi:"cpu"`
+	// Map of environment variables of container OS.
+	EnvVars map[string]interface{} `pulumi:"envVars"`
+	// Image of Container.
+	Image string `pulumi:"image"`
+	// Configuration block of LivenessProbe.
+	LivenessProbe *ContainerInstanceContainerLivenessProbe `pulumi:"livenessProbe"`
+	// Memory size of container.
+	Memory *float64 `pulumi:"memory"`
+	// Name of Container.
+	Name string `pulumi:"name"`
+	// Configuration block of ReadinessProbe.
 	ReadinessProbe *ContainerInstanceContainerReadinessProbe `pulumi:"readinessProbe"`
-	VolumeMounts   []ContainerInstanceContainerVolumeMount   `pulumi:"volumeMounts"`
-	WorkingDir     *string                                   `pulumi:"workingDir"`
+	// List of volume mount informations.
+	VolumeMounts []ContainerInstanceContainerVolumeMount `pulumi:"volumeMounts"`
+	// Container working directory.
+	WorkingDir *string `pulumi:"workingDir"`
 }
 
 // ContainerInstanceContainerInput is an input type that accepts ContainerInstanceContainerArgs and ContainerInstanceContainerOutput values.
@@ -1167,17 +624,28 @@ type ContainerInstanceContainerInput interface {
 }
 
 type ContainerInstanceContainerArgs struct {
-	Args           pulumi.StringArrayInput                          `pulumi:"args"`
-	Commands       pulumi.StringArrayInput                          `pulumi:"commands"`
-	Cpu            pulumi.Float64PtrInput                           `pulumi:"cpu"`
-	EnvVars        pulumi.MapInput                                  `pulumi:"envVars"`
-	Image          pulumi.StringInput                               `pulumi:"image"`
-	LivenessProbe  ContainerInstanceContainerLivenessProbePtrInput  `pulumi:"livenessProbe"`
-	Memory         pulumi.Float64PtrInput                           `pulumi:"memory"`
-	Name           pulumi.StringInput                               `pulumi:"name"`
+	// Container launch argument list.
+	Args pulumi.StringArrayInput `pulumi:"args"`
+	// Container launch command list.
+	Commands pulumi.StringArrayInput `pulumi:"commands"`
+	// Number of cpu core of container.
+	Cpu pulumi.Float64PtrInput `pulumi:"cpu"`
+	// Map of environment variables of container OS.
+	EnvVars pulumi.MapInput `pulumi:"envVars"`
+	// Image of Container.
+	Image pulumi.StringInput `pulumi:"image"`
+	// Configuration block of LivenessProbe.
+	LivenessProbe ContainerInstanceContainerLivenessProbePtrInput `pulumi:"livenessProbe"`
+	// Memory size of container.
+	Memory pulumi.Float64PtrInput `pulumi:"memory"`
+	// Name of Container.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Configuration block of ReadinessProbe.
 	ReadinessProbe ContainerInstanceContainerReadinessProbePtrInput `pulumi:"readinessProbe"`
-	VolumeMounts   ContainerInstanceContainerVolumeMountArrayInput  `pulumi:"volumeMounts"`
-	WorkingDir     pulumi.StringPtrInput                            `pulumi:"workingDir"`
+	// List of volume mount informations.
+	VolumeMounts ContainerInstanceContainerVolumeMountArrayInput `pulumi:"volumeMounts"`
+	// Container working directory.
+	WorkingDir pulumi.StringPtrInput `pulumi:"workingDir"`
 }
 
 func (ContainerInstanceContainerArgs) ElementType() reflect.Type {
@@ -1231,46 +699,57 @@ func (o ContainerInstanceContainerOutput) ToContainerInstanceContainerOutputWith
 	return o
 }
 
+// Container launch argument list.
 func (o ContainerInstanceContainerOutput) Args() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ContainerInstanceContainer) []string { return v.Args }).(pulumi.StringArrayOutput)
 }
 
+// Container launch command list.
 func (o ContainerInstanceContainerOutput) Commands() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ContainerInstanceContainer) []string { return v.Commands }).(pulumi.StringArrayOutput)
 }
 
+// Number of cpu core of container.
 func (o ContainerInstanceContainerOutput) Cpu() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainer) *float64 { return v.Cpu }).(pulumi.Float64PtrOutput)
 }
 
+// Map of environment variables of container OS.
 func (o ContainerInstanceContainerOutput) EnvVars() pulumi.MapOutput {
 	return o.ApplyT(func(v ContainerInstanceContainer) map[string]interface{} { return v.EnvVars }).(pulumi.MapOutput)
 }
 
+// Image of Container.
 func (o ContainerInstanceContainerOutput) Image() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceContainer) string { return v.Image }).(pulumi.StringOutput)
 }
 
+// Configuration block of LivenessProbe.
 func (o ContainerInstanceContainerOutput) LivenessProbe() ContainerInstanceContainerLivenessProbePtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainer) *ContainerInstanceContainerLivenessProbe { return v.LivenessProbe }).(ContainerInstanceContainerLivenessProbePtrOutput)
 }
 
+// Memory size of container.
 func (o ContainerInstanceContainerOutput) Memory() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainer) *float64 { return v.Memory }).(pulumi.Float64PtrOutput)
 }
 
+// Name of Container.
 func (o ContainerInstanceContainerOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceContainer) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Configuration block of ReadinessProbe.
 func (o ContainerInstanceContainerOutput) ReadinessProbe() ContainerInstanceContainerReadinessProbePtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainer) *ContainerInstanceContainerReadinessProbe { return v.ReadinessProbe }).(ContainerInstanceContainerReadinessProbePtrOutput)
 }
 
+// List of volume mount informations.
 func (o ContainerInstanceContainerOutput) VolumeMounts() ContainerInstanceContainerVolumeMountArrayOutput {
 	return o.ApplyT(func(v ContainerInstanceContainer) []ContainerInstanceContainerVolumeMount { return v.VolumeMounts }).(ContainerInstanceContainerVolumeMountArrayOutput)
 }
 
+// Container working directory.
 func (o ContainerInstanceContainerOutput) WorkingDir() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainer) *string { return v.WorkingDir }).(pulumi.StringPtrOutput)
 }
@@ -1296,16 +775,27 @@ func (o ContainerInstanceContainerArrayOutput) Index(i pulumi.IntInput) Containe
 }
 
 type ContainerInstanceContainerLivenessProbe struct {
-	ExecCommands     []string `pulumi:"execCommands"`
-	FailureThreshold *int     `pulumi:"failureThreshold"`
-	HttpGetPath      *string  `pulumi:"httpGetPath"`
-	HttpGetPort      *int     `pulumi:"httpGetPort"`
-	HttpGetScheme    *string  `pulumi:"httpGetScheme"`
-	InitDelaySeconds *int     `pulumi:"initDelaySeconds"`
-	PeriodSeconds    *int     `pulumi:"periodSeconds"`
-	SuccessThreshold *int     `pulumi:"successThreshold"`
-	TcpSocketPort    *int     `pulumi:"tcpSocketPort"`
-	TimeoutSeconds   *int     `pulumi:"timeoutSeconds"`
+	// List of execution commands.
+	ExecCommands []string `pulumi:"execCommands"`
+	// Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
+	FailureThreshold *int `pulumi:"failureThreshold"`
+	// HttpGet detection path.
+	HttpGetPath *string `pulumi:"httpGetPath"`
+	// HttpGet detection port.
+	HttpGetPort *int `pulumi:"httpGetPort"`
+	// HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
+	HttpGetScheme *string `pulumi:"httpGetScheme"`
+	// Number of seconds after the container has started before probes are initiated.
+	InitDelaySeconds *int `pulumi:"initDelaySeconds"`
+	// How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
+	PeriodSeconds *int `pulumi:"periodSeconds"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
+	SuccessThreshold *int `pulumi:"successThreshold"`
+	// TCP Socket detection port.
+	TcpSocketPort *int `pulumi:"tcpSocketPort"`
+	// Number of seconds after which the probe times out.
+	// Defaults to 1 second. Minimum value is `1`.
+	TimeoutSeconds *int `pulumi:"timeoutSeconds"`
 }
 
 // ContainerInstanceContainerLivenessProbeInput is an input type that accepts ContainerInstanceContainerLivenessProbeArgs and ContainerInstanceContainerLivenessProbeOutput values.
@@ -1320,16 +810,27 @@ type ContainerInstanceContainerLivenessProbeInput interface {
 }
 
 type ContainerInstanceContainerLivenessProbeArgs struct {
-	ExecCommands     pulumi.StringArrayInput `pulumi:"execCommands"`
-	FailureThreshold pulumi.IntPtrInput      `pulumi:"failureThreshold"`
-	HttpGetPath      pulumi.StringPtrInput   `pulumi:"httpGetPath"`
-	HttpGetPort      pulumi.IntPtrInput      `pulumi:"httpGetPort"`
-	HttpGetScheme    pulumi.StringPtrInput   `pulumi:"httpGetScheme"`
-	InitDelaySeconds pulumi.IntPtrInput      `pulumi:"initDelaySeconds"`
-	PeriodSeconds    pulumi.IntPtrInput      `pulumi:"periodSeconds"`
-	SuccessThreshold pulumi.IntPtrInput      `pulumi:"successThreshold"`
-	TcpSocketPort    pulumi.IntPtrInput      `pulumi:"tcpSocketPort"`
-	TimeoutSeconds   pulumi.IntPtrInput      `pulumi:"timeoutSeconds"`
+	// List of execution commands.
+	ExecCommands pulumi.StringArrayInput `pulumi:"execCommands"`
+	// Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
+	FailureThreshold pulumi.IntPtrInput `pulumi:"failureThreshold"`
+	// HttpGet detection path.
+	HttpGetPath pulumi.StringPtrInput `pulumi:"httpGetPath"`
+	// HttpGet detection port.
+	HttpGetPort pulumi.IntPtrInput `pulumi:"httpGetPort"`
+	// HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
+	HttpGetScheme pulumi.StringPtrInput `pulumi:"httpGetScheme"`
+	// Number of seconds after the container has started before probes are initiated.
+	InitDelaySeconds pulumi.IntPtrInput `pulumi:"initDelaySeconds"`
+	// How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
+	PeriodSeconds pulumi.IntPtrInput `pulumi:"periodSeconds"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
+	SuccessThreshold pulumi.IntPtrInput `pulumi:"successThreshold"`
+	// TCP Socket detection port.
+	TcpSocketPort pulumi.IntPtrInput `pulumi:"tcpSocketPort"`
+	// Number of seconds after which the probe times out.
+	// Defaults to 1 second. Minimum value is `1`.
+	TimeoutSeconds pulumi.IntPtrInput `pulumi:"timeoutSeconds"`
 }
 
 func (ContainerInstanceContainerLivenessProbeArgs) ElementType() reflect.Type {
@@ -1409,42 +910,53 @@ func (o ContainerInstanceContainerLivenessProbeOutput) ToContainerInstanceContai
 	}).(ContainerInstanceContainerLivenessProbePtrOutput)
 }
 
+// List of execution commands.
 func (o ContainerInstanceContainerLivenessProbeOutput) ExecCommands() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerLivenessProbe) []string { return v.ExecCommands }).(pulumi.StringArrayOutput)
 }
 
+// Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
 func (o ContainerInstanceContainerLivenessProbeOutput) FailureThreshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerLivenessProbe) *int { return v.FailureThreshold }).(pulumi.IntPtrOutput)
 }
 
+// HttpGet detection path.
 func (o ContainerInstanceContainerLivenessProbeOutput) HttpGetPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerLivenessProbe) *string { return v.HttpGetPath }).(pulumi.StringPtrOutput)
 }
 
+// HttpGet detection port.
 func (o ContainerInstanceContainerLivenessProbeOutput) HttpGetPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerLivenessProbe) *int { return v.HttpGetPort }).(pulumi.IntPtrOutput)
 }
 
+// HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
 func (o ContainerInstanceContainerLivenessProbeOutput) HttpGetScheme() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerLivenessProbe) *string { return v.HttpGetScheme }).(pulumi.StringPtrOutput)
 }
 
+// Number of seconds after the container has started before probes are initiated.
 func (o ContainerInstanceContainerLivenessProbeOutput) InitDelaySeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerLivenessProbe) *int { return v.InitDelaySeconds }).(pulumi.IntPtrOutput)
 }
 
+// How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
 func (o ContainerInstanceContainerLivenessProbeOutput) PeriodSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerLivenessProbe) *int { return v.PeriodSeconds }).(pulumi.IntPtrOutput)
 }
 
+// Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
 func (o ContainerInstanceContainerLivenessProbeOutput) SuccessThreshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerLivenessProbe) *int { return v.SuccessThreshold }).(pulumi.IntPtrOutput)
 }
 
+// TCP Socket detection port.
 func (o ContainerInstanceContainerLivenessProbeOutput) TcpSocketPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerLivenessProbe) *int { return v.TcpSocketPort }).(pulumi.IntPtrOutput)
 }
 
+// Number of seconds after which the probe times out.
+// Defaults to 1 second. Minimum value is `1`.
 func (o ContainerInstanceContainerLivenessProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerLivenessProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
 }
@@ -1473,6 +985,7 @@ func (o ContainerInstanceContainerLivenessProbePtrOutput) Elem() ContainerInstan
 	}).(ContainerInstanceContainerLivenessProbeOutput)
 }
 
+// List of execution commands.
 func (o ContainerInstanceContainerLivenessProbePtrOutput) ExecCommands() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerLivenessProbe) []string {
 		if v == nil {
@@ -1482,6 +995,7 @@ func (o ContainerInstanceContainerLivenessProbePtrOutput) ExecCommands() pulumi.
 	}).(pulumi.StringArrayOutput)
 }
 
+// Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
 func (o ContainerInstanceContainerLivenessProbePtrOutput) FailureThreshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerLivenessProbe) *int {
 		if v == nil {
@@ -1491,6 +1005,7 @@ func (o ContainerInstanceContainerLivenessProbePtrOutput) FailureThreshold() pul
 	}).(pulumi.IntPtrOutput)
 }
 
+// HttpGet detection path.
 func (o ContainerInstanceContainerLivenessProbePtrOutput) HttpGetPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerLivenessProbe) *string {
 		if v == nil {
@@ -1500,6 +1015,7 @@ func (o ContainerInstanceContainerLivenessProbePtrOutput) HttpGetPath() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
+// HttpGet detection port.
 func (o ContainerInstanceContainerLivenessProbePtrOutput) HttpGetPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerLivenessProbe) *int {
 		if v == nil {
@@ -1509,6 +1025,7 @@ func (o ContainerInstanceContainerLivenessProbePtrOutput) HttpGetPort() pulumi.I
 	}).(pulumi.IntPtrOutput)
 }
 
+// HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
 func (o ContainerInstanceContainerLivenessProbePtrOutput) HttpGetScheme() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerLivenessProbe) *string {
 		if v == nil {
@@ -1518,6 +1035,7 @@ func (o ContainerInstanceContainerLivenessProbePtrOutput) HttpGetScheme() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
+// Number of seconds after the container has started before probes are initiated.
 func (o ContainerInstanceContainerLivenessProbePtrOutput) InitDelaySeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerLivenessProbe) *int {
 		if v == nil {
@@ -1527,6 +1045,7 @@ func (o ContainerInstanceContainerLivenessProbePtrOutput) InitDelaySeconds() pul
 	}).(pulumi.IntPtrOutput)
 }
 
+// How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
 func (o ContainerInstanceContainerLivenessProbePtrOutput) PeriodSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerLivenessProbe) *int {
 		if v == nil {
@@ -1536,6 +1055,7 @@ func (o ContainerInstanceContainerLivenessProbePtrOutput) PeriodSeconds() pulumi
 	}).(pulumi.IntPtrOutput)
 }
 
+// Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
 func (o ContainerInstanceContainerLivenessProbePtrOutput) SuccessThreshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerLivenessProbe) *int {
 		if v == nil {
@@ -1545,6 +1065,7 @@ func (o ContainerInstanceContainerLivenessProbePtrOutput) SuccessThreshold() pul
 	}).(pulumi.IntPtrOutput)
 }
 
+// TCP Socket detection port.
 func (o ContainerInstanceContainerLivenessProbePtrOutput) TcpSocketPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerLivenessProbe) *int {
 		if v == nil {
@@ -1554,6 +1075,8 @@ func (o ContainerInstanceContainerLivenessProbePtrOutput) TcpSocketPort() pulumi
 	}).(pulumi.IntPtrOutput)
 }
 
+// Number of seconds after which the probe times out.
+// Defaults to 1 second. Minimum value is `1`.
 func (o ContainerInstanceContainerLivenessProbePtrOutput) TimeoutSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerLivenessProbe) *int {
 		if v == nil {
@@ -1564,16 +1087,27 @@ func (o ContainerInstanceContainerLivenessProbePtrOutput) TimeoutSeconds() pulum
 }
 
 type ContainerInstanceContainerReadinessProbe struct {
-	ExecCommands     []string `pulumi:"execCommands"`
-	FailureThreshold *int     `pulumi:"failureThreshold"`
-	HttpGetPath      *string  `pulumi:"httpGetPath"`
-	HttpGetPort      *int     `pulumi:"httpGetPort"`
-	HttpGetScheme    *string  `pulumi:"httpGetScheme"`
-	InitDelaySeconds *int     `pulumi:"initDelaySeconds"`
-	PeriodSeconds    *int     `pulumi:"periodSeconds"`
-	SuccessThreshold *int     `pulumi:"successThreshold"`
-	TcpSocketPort    *int     `pulumi:"tcpSocketPort"`
-	TimeoutSeconds   *int     `pulumi:"timeoutSeconds"`
+	// List of execution commands.
+	ExecCommands []string `pulumi:"execCommands"`
+	// Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
+	FailureThreshold *int `pulumi:"failureThreshold"`
+	// HttpGet detection path.
+	HttpGetPath *string `pulumi:"httpGetPath"`
+	// HttpGet detection port.
+	HttpGetPort *int `pulumi:"httpGetPort"`
+	// HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
+	HttpGetScheme *string `pulumi:"httpGetScheme"`
+	// Number of seconds after the container has started before probes are initiated.
+	InitDelaySeconds *int `pulumi:"initDelaySeconds"`
+	// How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
+	PeriodSeconds *int `pulumi:"periodSeconds"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
+	SuccessThreshold *int `pulumi:"successThreshold"`
+	// TCP Socket detection port.
+	TcpSocketPort *int `pulumi:"tcpSocketPort"`
+	// Number of seconds after which the probe times out.
+	// Defaults to 1 second. Minimum value is `1`.
+	TimeoutSeconds *int `pulumi:"timeoutSeconds"`
 }
 
 // ContainerInstanceContainerReadinessProbeInput is an input type that accepts ContainerInstanceContainerReadinessProbeArgs and ContainerInstanceContainerReadinessProbeOutput values.
@@ -1588,16 +1122,27 @@ type ContainerInstanceContainerReadinessProbeInput interface {
 }
 
 type ContainerInstanceContainerReadinessProbeArgs struct {
-	ExecCommands     pulumi.StringArrayInput `pulumi:"execCommands"`
-	FailureThreshold pulumi.IntPtrInput      `pulumi:"failureThreshold"`
-	HttpGetPath      pulumi.StringPtrInput   `pulumi:"httpGetPath"`
-	HttpGetPort      pulumi.IntPtrInput      `pulumi:"httpGetPort"`
-	HttpGetScheme    pulumi.StringPtrInput   `pulumi:"httpGetScheme"`
-	InitDelaySeconds pulumi.IntPtrInput      `pulumi:"initDelaySeconds"`
-	PeriodSeconds    pulumi.IntPtrInput      `pulumi:"periodSeconds"`
-	SuccessThreshold pulumi.IntPtrInput      `pulumi:"successThreshold"`
-	TcpSocketPort    pulumi.IntPtrInput      `pulumi:"tcpSocketPort"`
-	TimeoutSeconds   pulumi.IntPtrInput      `pulumi:"timeoutSeconds"`
+	// List of execution commands.
+	ExecCommands pulumi.StringArrayInput `pulumi:"execCommands"`
+	// Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
+	FailureThreshold pulumi.IntPtrInput `pulumi:"failureThreshold"`
+	// HttpGet detection path.
+	HttpGetPath pulumi.StringPtrInput `pulumi:"httpGetPath"`
+	// HttpGet detection port.
+	HttpGetPort pulumi.IntPtrInput `pulumi:"httpGetPort"`
+	// HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
+	HttpGetScheme pulumi.StringPtrInput `pulumi:"httpGetScheme"`
+	// Number of seconds after the container has started before probes are initiated.
+	InitDelaySeconds pulumi.IntPtrInput `pulumi:"initDelaySeconds"`
+	// How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
+	PeriodSeconds pulumi.IntPtrInput `pulumi:"periodSeconds"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
+	SuccessThreshold pulumi.IntPtrInput `pulumi:"successThreshold"`
+	// TCP Socket detection port.
+	TcpSocketPort pulumi.IntPtrInput `pulumi:"tcpSocketPort"`
+	// Number of seconds after which the probe times out.
+	// Defaults to 1 second. Minimum value is `1`.
+	TimeoutSeconds pulumi.IntPtrInput `pulumi:"timeoutSeconds"`
 }
 
 func (ContainerInstanceContainerReadinessProbeArgs) ElementType() reflect.Type {
@@ -1677,42 +1222,53 @@ func (o ContainerInstanceContainerReadinessProbeOutput) ToContainerInstanceConta
 	}).(ContainerInstanceContainerReadinessProbePtrOutput)
 }
 
+// List of execution commands.
 func (o ContainerInstanceContainerReadinessProbeOutput) ExecCommands() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerReadinessProbe) []string { return v.ExecCommands }).(pulumi.StringArrayOutput)
 }
 
+// Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
 func (o ContainerInstanceContainerReadinessProbeOutput) FailureThreshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerReadinessProbe) *int { return v.FailureThreshold }).(pulumi.IntPtrOutput)
 }
 
+// HttpGet detection path.
 func (o ContainerInstanceContainerReadinessProbeOutput) HttpGetPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerReadinessProbe) *string { return v.HttpGetPath }).(pulumi.StringPtrOutput)
 }
 
+// HttpGet detection port.
 func (o ContainerInstanceContainerReadinessProbeOutput) HttpGetPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerReadinessProbe) *int { return v.HttpGetPort }).(pulumi.IntPtrOutput)
 }
 
+// HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
 func (o ContainerInstanceContainerReadinessProbeOutput) HttpGetScheme() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerReadinessProbe) *string { return v.HttpGetScheme }).(pulumi.StringPtrOutput)
 }
 
+// Number of seconds after the container has started before probes are initiated.
 func (o ContainerInstanceContainerReadinessProbeOutput) InitDelaySeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerReadinessProbe) *int { return v.InitDelaySeconds }).(pulumi.IntPtrOutput)
 }
 
+// How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
 func (o ContainerInstanceContainerReadinessProbeOutput) PeriodSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerReadinessProbe) *int { return v.PeriodSeconds }).(pulumi.IntPtrOutput)
 }
 
+// Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
 func (o ContainerInstanceContainerReadinessProbeOutput) SuccessThreshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerReadinessProbe) *int { return v.SuccessThreshold }).(pulumi.IntPtrOutput)
 }
 
+// TCP Socket detection port.
 func (o ContainerInstanceContainerReadinessProbeOutput) TcpSocketPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerReadinessProbe) *int { return v.TcpSocketPort }).(pulumi.IntPtrOutput)
 }
 
+// Number of seconds after which the probe times out.
+// Defaults to 1 second. Minimum value is `1`.
 func (o ContainerInstanceContainerReadinessProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerReadinessProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
 }
@@ -1741,6 +1297,7 @@ func (o ContainerInstanceContainerReadinessProbePtrOutput) Elem() ContainerInsta
 	}).(ContainerInstanceContainerReadinessProbeOutput)
 }
 
+// List of execution commands.
 func (o ContainerInstanceContainerReadinessProbePtrOutput) ExecCommands() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerReadinessProbe) []string {
 		if v == nil {
@@ -1750,6 +1307,7 @@ func (o ContainerInstanceContainerReadinessProbePtrOutput) ExecCommands() pulumi
 	}).(pulumi.StringArrayOutput)
 }
 
+// Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
 func (o ContainerInstanceContainerReadinessProbePtrOutput) FailureThreshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerReadinessProbe) *int {
 		if v == nil {
@@ -1759,6 +1317,7 @@ func (o ContainerInstanceContainerReadinessProbePtrOutput) FailureThreshold() pu
 	}).(pulumi.IntPtrOutput)
 }
 
+// HttpGet detection path.
 func (o ContainerInstanceContainerReadinessProbePtrOutput) HttpGetPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerReadinessProbe) *string {
 		if v == nil {
@@ -1768,6 +1327,7 @@ func (o ContainerInstanceContainerReadinessProbePtrOutput) HttpGetPath() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// HttpGet detection port.
 func (o ContainerInstanceContainerReadinessProbePtrOutput) HttpGetPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerReadinessProbe) *int {
 		if v == nil {
@@ -1777,6 +1337,7 @@ func (o ContainerInstanceContainerReadinessProbePtrOutput) HttpGetPort() pulumi.
 	}).(pulumi.IntPtrOutput)
 }
 
+// HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
 func (o ContainerInstanceContainerReadinessProbePtrOutput) HttpGetScheme() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerReadinessProbe) *string {
 		if v == nil {
@@ -1786,6 +1347,7 @@ func (o ContainerInstanceContainerReadinessProbePtrOutput) HttpGetScheme() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
+// Number of seconds after the container has started before probes are initiated.
 func (o ContainerInstanceContainerReadinessProbePtrOutput) InitDelaySeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerReadinessProbe) *int {
 		if v == nil {
@@ -1795,6 +1357,7 @@ func (o ContainerInstanceContainerReadinessProbePtrOutput) InitDelaySeconds() pu
 	}).(pulumi.IntPtrOutput)
 }
 
+// How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
 func (o ContainerInstanceContainerReadinessProbePtrOutput) PeriodSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerReadinessProbe) *int {
 		if v == nil {
@@ -1804,6 +1367,7 @@ func (o ContainerInstanceContainerReadinessProbePtrOutput) PeriodSeconds() pulum
 	}).(pulumi.IntPtrOutput)
 }
 
+// Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
 func (o ContainerInstanceContainerReadinessProbePtrOutput) SuccessThreshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerReadinessProbe) *int {
 		if v == nil {
@@ -1813,6 +1377,7 @@ func (o ContainerInstanceContainerReadinessProbePtrOutput) SuccessThreshold() pu
 	}).(pulumi.IntPtrOutput)
 }
 
+// TCP Socket detection port.
 func (o ContainerInstanceContainerReadinessProbePtrOutput) TcpSocketPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerReadinessProbe) *int {
 		if v == nil {
@@ -1822,6 +1387,8 @@ func (o ContainerInstanceContainerReadinessProbePtrOutput) TcpSocketPort() pulum
 	}).(pulumi.IntPtrOutput)
 }
 
+// Number of seconds after which the probe times out.
+// Defaults to 1 second. Minimum value is `1`.
 func (o ContainerInstanceContainerReadinessProbePtrOutput) TimeoutSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ContainerInstanceContainerReadinessProbe) *int {
 		if v == nil {
@@ -1832,12 +1399,18 @@ func (o ContainerInstanceContainerReadinessProbePtrOutput) TimeoutSeconds() pulu
 }
 
 type ContainerInstanceContainerVolumeMount struct {
+	// Volume mount propagation.
 	MountPropagation *string `pulumi:"mountPropagation"`
-	Name             string  `pulumi:"name"`
-	Path             string  `pulumi:"path"`
-	ReadOnly         *bool   `pulumi:"readOnly"`
-	SubPath          *string `pulumi:"subPath"`
-	SubPathExpr      *string `pulumi:"subPathExpr"`
+	// Volume name.
+	Name string `pulumi:"name"`
+	// Volume mount path.
+	Path string `pulumi:"path"`
+	// Whether the volume is read-only.
+	ReadOnly *bool `pulumi:"readOnly"`
+	// Volume mount sub-path.
+	SubPath *string `pulumi:"subPath"`
+	// Volume mount sub-path expression.
+	SubPathExpr *string `pulumi:"subPathExpr"`
 }
 
 // ContainerInstanceContainerVolumeMountInput is an input type that accepts ContainerInstanceContainerVolumeMountArgs and ContainerInstanceContainerVolumeMountOutput values.
@@ -1852,12 +1425,18 @@ type ContainerInstanceContainerVolumeMountInput interface {
 }
 
 type ContainerInstanceContainerVolumeMountArgs struct {
+	// Volume mount propagation.
 	MountPropagation pulumi.StringPtrInput `pulumi:"mountPropagation"`
-	Name             pulumi.StringInput    `pulumi:"name"`
-	Path             pulumi.StringInput    `pulumi:"path"`
-	ReadOnly         pulumi.BoolPtrInput   `pulumi:"readOnly"`
-	SubPath          pulumi.StringPtrInput `pulumi:"subPath"`
-	SubPathExpr      pulumi.StringPtrInput `pulumi:"subPathExpr"`
+	// Volume name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Volume mount path.
+	Path pulumi.StringInput `pulumi:"path"`
+	// Whether the volume is read-only.
+	ReadOnly pulumi.BoolPtrInput `pulumi:"readOnly"`
+	// Volume mount sub-path.
+	SubPath pulumi.StringPtrInput `pulumi:"subPath"`
+	// Volume mount sub-path expression.
+	SubPathExpr pulumi.StringPtrInput `pulumi:"subPathExpr"`
 }
 
 func (ContainerInstanceContainerVolumeMountArgs) ElementType() reflect.Type {
@@ -1911,26 +1490,32 @@ func (o ContainerInstanceContainerVolumeMountOutput) ToContainerInstanceContaine
 	return o
 }
 
+// Volume mount propagation.
 func (o ContainerInstanceContainerVolumeMountOutput) MountPropagation() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerVolumeMount) *string { return v.MountPropagation }).(pulumi.StringPtrOutput)
 }
 
+// Volume name.
 func (o ContainerInstanceContainerVolumeMountOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerVolumeMount) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Volume mount path.
 func (o ContainerInstanceContainerVolumeMountOutput) Path() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerVolumeMount) string { return v.Path }).(pulumi.StringOutput)
 }
 
+// Whether the volume is read-only.
 func (o ContainerInstanceContainerVolumeMountOutput) ReadOnly() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerVolumeMount) *bool { return v.ReadOnly }).(pulumi.BoolPtrOutput)
 }
 
+// Volume mount sub-path.
 func (o ContainerInstanceContainerVolumeMountOutput) SubPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerVolumeMount) *string { return v.SubPath }).(pulumi.StringPtrOutput)
 }
 
+// Volume mount sub-path expression.
 func (o ContainerInstanceContainerVolumeMountOutput) SubPathExpr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceContainerVolumeMount) *string { return v.SubPathExpr }).(pulumi.StringPtrOutput)
 }
@@ -1956,9 +1541,13 @@ func (o ContainerInstanceContainerVolumeMountArrayOutput) Index(i pulumi.IntInpu
 }
 
 type ContainerInstanceImageRegistryCredential struct {
-	Name     *string `pulumi:"name"`
+	// Name of credential.
+	Name *string `pulumi:"name"`
+	// Password.
 	Password *string `pulumi:"password"`
-	Server   *string `pulumi:"server"`
+	// Address of image registry.
+	Server *string `pulumi:"server"`
+	// Username.
 	Username *string `pulumi:"username"`
 }
 
@@ -1974,9 +1563,13 @@ type ContainerInstanceImageRegistryCredentialInput interface {
 }
 
 type ContainerInstanceImageRegistryCredentialArgs struct {
-	Name     pulumi.StringPtrInput `pulumi:"name"`
+	// Name of credential.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Password.
 	Password pulumi.StringPtrInput `pulumi:"password"`
-	Server   pulumi.StringPtrInput `pulumi:"server"`
+	// Address of image registry.
+	Server pulumi.StringPtrInput `pulumi:"server"`
+	// Username.
 	Username pulumi.StringPtrInput `pulumi:"username"`
 }
 
@@ -2031,18 +1624,22 @@ func (o ContainerInstanceImageRegistryCredentialOutput) ToContainerInstanceImage
 	return o
 }
 
+// Name of credential.
 func (o ContainerInstanceImageRegistryCredentialOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceImageRegistryCredential) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// Password.
 func (o ContainerInstanceImageRegistryCredentialOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceImageRegistryCredential) *string { return v.Password }).(pulumi.StringPtrOutput)
 }
 
+// Address of image registry.
 func (o ContainerInstanceImageRegistryCredentialOutput) Server() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceImageRegistryCredential) *string { return v.Server }).(pulumi.StringPtrOutput)
 }
 
+// Username.
 func (o ContainerInstanceImageRegistryCredentialOutput) Username() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceImageRegistryCredential) *string { return v.Username }).(pulumi.StringPtrOutput)
 }
@@ -2068,15 +1665,24 @@ func (o ContainerInstanceImageRegistryCredentialArrayOutput) Index(i pulumi.IntI
 }
 
 type ContainerInstanceInitContainer struct {
-	Args         []string                                    `pulumi:"args"`
-	Commands     []string                                    `pulumi:"commands"`
-	Cpu          *float64                                    `pulumi:"cpu"`
-	EnvVars      map[string]interface{}                      `pulumi:"envVars"`
-	Image        string                                      `pulumi:"image"`
-	Memory       *float64                                    `pulumi:"memory"`
-	Name         string                                      `pulumi:"name"`
+	// Container launch argument list.
+	Args []string `pulumi:"args"`
+	// Container launch command list.
+	Commands []string `pulumi:"commands"`
+	// Number of cpu core of container.
+	Cpu *float64 `pulumi:"cpu"`
+	// Map of environment variables of container OS.
+	EnvVars map[string]interface{} `pulumi:"envVars"`
+	// Image of Container.
+	Image string `pulumi:"image"`
+	// Memory size of container.
+	Memory *float64 `pulumi:"memory"`
+	// Name of Container.
+	Name string `pulumi:"name"`
+	// List of volume mount informations.
 	VolumeMounts []ContainerInstanceInitContainerVolumeMount `pulumi:"volumeMounts"`
-	WorkingDir   *string                                     `pulumi:"workingDir"`
+	// Container working directory.
+	WorkingDir *string `pulumi:"workingDir"`
 }
 
 // ContainerInstanceInitContainerInput is an input type that accepts ContainerInstanceInitContainerArgs and ContainerInstanceInitContainerOutput values.
@@ -2091,15 +1697,24 @@ type ContainerInstanceInitContainerInput interface {
 }
 
 type ContainerInstanceInitContainerArgs struct {
-	Args         pulumi.StringArrayInput                             `pulumi:"args"`
-	Commands     pulumi.StringArrayInput                             `pulumi:"commands"`
-	Cpu          pulumi.Float64PtrInput                              `pulumi:"cpu"`
-	EnvVars      pulumi.MapInput                                     `pulumi:"envVars"`
-	Image        pulumi.StringInput                                  `pulumi:"image"`
-	Memory       pulumi.Float64PtrInput                              `pulumi:"memory"`
-	Name         pulumi.StringInput                                  `pulumi:"name"`
+	// Container launch argument list.
+	Args pulumi.StringArrayInput `pulumi:"args"`
+	// Container launch command list.
+	Commands pulumi.StringArrayInput `pulumi:"commands"`
+	// Number of cpu core of container.
+	Cpu pulumi.Float64PtrInput `pulumi:"cpu"`
+	// Map of environment variables of container OS.
+	EnvVars pulumi.MapInput `pulumi:"envVars"`
+	// Image of Container.
+	Image pulumi.StringInput `pulumi:"image"`
+	// Memory size of container.
+	Memory pulumi.Float64PtrInput `pulumi:"memory"`
+	// Name of Container.
+	Name pulumi.StringInput `pulumi:"name"`
+	// List of volume mount informations.
 	VolumeMounts ContainerInstanceInitContainerVolumeMountArrayInput `pulumi:"volumeMounts"`
-	WorkingDir   pulumi.StringPtrInput                               `pulumi:"workingDir"`
+	// Container working directory.
+	WorkingDir pulumi.StringPtrInput `pulumi:"workingDir"`
 }
 
 func (ContainerInstanceInitContainerArgs) ElementType() reflect.Type {
@@ -2153,40 +1768,49 @@ func (o ContainerInstanceInitContainerOutput) ToContainerInstanceInitContainerOu
 	return o
 }
 
+// Container launch argument list.
 func (o ContainerInstanceInitContainerOutput) Args() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainer) []string { return v.Args }).(pulumi.StringArrayOutput)
 }
 
+// Container launch command list.
 func (o ContainerInstanceInitContainerOutput) Commands() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainer) []string { return v.Commands }).(pulumi.StringArrayOutput)
 }
 
+// Number of cpu core of container.
 func (o ContainerInstanceInitContainerOutput) Cpu() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainer) *float64 { return v.Cpu }).(pulumi.Float64PtrOutput)
 }
 
+// Map of environment variables of container OS.
 func (o ContainerInstanceInitContainerOutput) EnvVars() pulumi.MapOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainer) map[string]interface{} { return v.EnvVars }).(pulumi.MapOutput)
 }
 
+// Image of Container.
 func (o ContainerInstanceInitContainerOutput) Image() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainer) string { return v.Image }).(pulumi.StringOutput)
 }
 
+// Memory size of container.
 func (o ContainerInstanceInitContainerOutput) Memory() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainer) *float64 { return v.Memory }).(pulumi.Float64PtrOutput)
 }
 
+// Name of Container.
 func (o ContainerInstanceInitContainerOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainer) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// List of volume mount informations.
 func (o ContainerInstanceInitContainerOutput) VolumeMounts() ContainerInstanceInitContainerVolumeMountArrayOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainer) []ContainerInstanceInitContainerVolumeMount {
 		return v.VolumeMounts
 	}).(ContainerInstanceInitContainerVolumeMountArrayOutput)
 }
 
+// Container working directory.
 func (o ContainerInstanceInitContainerOutput) WorkingDir() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainer) *string { return v.WorkingDir }).(pulumi.StringPtrOutput)
 }
@@ -2212,12 +1836,18 @@ func (o ContainerInstanceInitContainerArrayOutput) Index(i pulumi.IntInput) Cont
 }
 
 type ContainerInstanceInitContainerVolumeMount struct {
+	// Volume mount propagation.
 	MountPropagation *string `pulumi:"mountPropagation"`
-	Name             string  `pulumi:"name"`
-	Path             string  `pulumi:"path"`
-	ReadOnly         *bool   `pulumi:"readOnly"`
-	SubPath          *string `pulumi:"subPath"`
-	SubPathExpr      *string `pulumi:"subPathExpr"`
+	// Volume name.
+	Name string `pulumi:"name"`
+	// Volume mount path.
+	Path string `pulumi:"path"`
+	// Whether the volume is read-only.
+	ReadOnly *bool `pulumi:"readOnly"`
+	// Volume mount sub-path.
+	SubPath *string `pulumi:"subPath"`
+	// Volume mount sub-path expression.
+	SubPathExpr *string `pulumi:"subPathExpr"`
 }
 
 // ContainerInstanceInitContainerVolumeMountInput is an input type that accepts ContainerInstanceInitContainerVolumeMountArgs and ContainerInstanceInitContainerVolumeMountOutput values.
@@ -2232,12 +1862,18 @@ type ContainerInstanceInitContainerVolumeMountInput interface {
 }
 
 type ContainerInstanceInitContainerVolumeMountArgs struct {
+	// Volume mount propagation.
 	MountPropagation pulumi.StringPtrInput `pulumi:"mountPropagation"`
-	Name             pulumi.StringInput    `pulumi:"name"`
-	Path             pulumi.StringInput    `pulumi:"path"`
-	ReadOnly         pulumi.BoolPtrInput   `pulumi:"readOnly"`
-	SubPath          pulumi.StringPtrInput `pulumi:"subPath"`
-	SubPathExpr      pulumi.StringPtrInput `pulumi:"subPathExpr"`
+	// Volume name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Volume mount path.
+	Path pulumi.StringInput `pulumi:"path"`
+	// Whether the volume is read-only.
+	ReadOnly pulumi.BoolPtrInput `pulumi:"readOnly"`
+	// Volume mount sub-path.
+	SubPath pulumi.StringPtrInput `pulumi:"subPath"`
+	// Volume mount sub-path expression.
+	SubPathExpr pulumi.StringPtrInput `pulumi:"subPathExpr"`
 }
 
 func (ContainerInstanceInitContainerVolumeMountArgs) ElementType() reflect.Type {
@@ -2291,26 +1927,32 @@ func (o ContainerInstanceInitContainerVolumeMountOutput) ToContainerInstanceInit
 	return o
 }
 
+// Volume mount propagation.
 func (o ContainerInstanceInitContainerVolumeMountOutput) MountPropagation() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainerVolumeMount) *string { return v.MountPropagation }).(pulumi.StringPtrOutput)
 }
 
+// Volume name.
 func (o ContainerInstanceInitContainerVolumeMountOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainerVolumeMount) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Volume mount path.
 func (o ContainerInstanceInitContainerVolumeMountOutput) Path() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainerVolumeMount) string { return v.Path }).(pulumi.StringOutput)
 }
 
+// Whether the volume is read-only.
 func (o ContainerInstanceInitContainerVolumeMountOutput) ReadOnly() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainerVolumeMount) *bool { return v.ReadOnly }).(pulumi.BoolPtrOutput)
 }
 
+// Volume mount sub-path.
 func (o ContainerInstanceInitContainerVolumeMountOutput) SubPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainerVolumeMount) *string { return v.SubPath }).(pulumi.StringPtrOutput)
 }
 
+// Volume mount sub-path expression.
 func (o ContainerInstanceInitContainerVolumeMountOutput) SubPathExpr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceInitContainerVolumeMount) *string { return v.SubPathExpr }).(pulumi.StringPtrOutput)
 }
@@ -2336,10 +1978,14 @@ func (o ContainerInstanceInitContainerVolumeMountArrayOutput) Index(i pulumi.Int
 }
 
 type ContainerInstanceNfsVolume struct {
-	Name     string `pulumi:"name"`
-	Path     string `pulumi:"path"`
-	ReadOnly *bool  `pulumi:"readOnly"`
-	Server   string `pulumi:"server"`
+	// Name of NFS volume.
+	Name string `pulumi:"name"`
+	// NFS volume path.
+	Path string `pulumi:"path"`
+	// Indicates whether the volume is read only. Default is `false`.
+	ReadOnly *bool `pulumi:"readOnly"`
+	// NFS server address.
+	Server string `pulumi:"server"`
 }
 
 // ContainerInstanceNfsVolumeInput is an input type that accepts ContainerInstanceNfsVolumeArgs and ContainerInstanceNfsVolumeOutput values.
@@ -2354,10 +2000,14 @@ type ContainerInstanceNfsVolumeInput interface {
 }
 
 type ContainerInstanceNfsVolumeArgs struct {
-	Name     pulumi.StringInput  `pulumi:"name"`
-	Path     pulumi.StringInput  `pulumi:"path"`
+	// Name of NFS volume.
+	Name pulumi.StringInput `pulumi:"name"`
+	// NFS volume path.
+	Path pulumi.StringInput `pulumi:"path"`
+	// Indicates whether the volume is read only. Default is `false`.
 	ReadOnly pulumi.BoolPtrInput `pulumi:"readOnly"`
-	Server   pulumi.StringInput  `pulumi:"server"`
+	// NFS server address.
+	Server pulumi.StringInput `pulumi:"server"`
 }
 
 func (ContainerInstanceNfsVolumeArgs) ElementType() reflect.Type {
@@ -2411,18 +2061,22 @@ func (o ContainerInstanceNfsVolumeOutput) ToContainerInstanceNfsVolumeOutputWith
 	return o
 }
 
+// Name of NFS volume.
 func (o ContainerInstanceNfsVolumeOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceNfsVolume) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// NFS volume path.
 func (o ContainerInstanceNfsVolumeOutput) Path() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceNfsVolume) string { return v.Path }).(pulumi.StringOutput)
 }
 
+// Indicates whether the volume is read only. Default is `false`.
 func (o ContainerInstanceNfsVolumeOutput) ReadOnly() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ContainerInstanceNfsVolume) *bool { return v.ReadOnly }).(pulumi.BoolPtrOutput)
 }
 
+// NFS server address.
 func (o ContainerInstanceNfsVolumeOutput) Server() pulumi.StringOutput {
 	return o.ApplyT(func(v ContainerInstanceNfsVolume) string { return v.Server }).(pulumi.StringOutput)
 }
@@ -2447,23 +2101,678 @@ func (o ContainerInstanceNfsVolumeArrayOutput) Index(i pulumi.IntInput) Containe
 	}).(ContainerInstanceNfsVolumeOutput)
 }
 
+type GetClusterCredentialAddress struct {
+	// IP Address.
+	Ip string `pulumi:"ip"`
+	// Port.
+	Port string `pulumi:"port"`
+	// Type of IP, can be `advertise`, `public`, etc.
+	Type string `pulumi:"type"`
+}
+
+// GetClusterCredentialAddressInput is an input type that accepts GetClusterCredentialAddressArgs and GetClusterCredentialAddressOutput values.
+// You can construct a concrete instance of `GetClusterCredentialAddressInput` via:
+//
+//          GetClusterCredentialAddressArgs{...}
+type GetClusterCredentialAddressInput interface {
+	pulumi.Input
+
+	ToGetClusterCredentialAddressOutput() GetClusterCredentialAddressOutput
+	ToGetClusterCredentialAddressOutputWithContext(context.Context) GetClusterCredentialAddressOutput
+}
+
+type GetClusterCredentialAddressArgs struct {
+	// IP Address.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Port.
+	Port pulumi.StringInput `pulumi:"port"`
+	// Type of IP, can be `advertise`, `public`, etc.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetClusterCredentialAddressArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterCredentialAddress)(nil)).Elem()
+}
+
+func (i GetClusterCredentialAddressArgs) ToGetClusterCredentialAddressOutput() GetClusterCredentialAddressOutput {
+	return i.ToGetClusterCredentialAddressOutputWithContext(context.Background())
+}
+
+func (i GetClusterCredentialAddressArgs) ToGetClusterCredentialAddressOutputWithContext(ctx context.Context) GetClusterCredentialAddressOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterCredentialAddressOutput)
+}
+
+// GetClusterCredentialAddressArrayInput is an input type that accepts GetClusterCredentialAddressArray and GetClusterCredentialAddressArrayOutput values.
+// You can construct a concrete instance of `GetClusterCredentialAddressArrayInput` via:
+//
+//          GetClusterCredentialAddressArray{ GetClusterCredentialAddressArgs{...} }
+type GetClusterCredentialAddressArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterCredentialAddressArrayOutput() GetClusterCredentialAddressArrayOutput
+	ToGetClusterCredentialAddressArrayOutputWithContext(context.Context) GetClusterCredentialAddressArrayOutput
+}
+
+type GetClusterCredentialAddressArray []GetClusterCredentialAddressInput
+
+func (GetClusterCredentialAddressArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterCredentialAddress)(nil)).Elem()
+}
+
+func (i GetClusterCredentialAddressArray) ToGetClusterCredentialAddressArrayOutput() GetClusterCredentialAddressArrayOutput {
+	return i.ToGetClusterCredentialAddressArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterCredentialAddressArray) ToGetClusterCredentialAddressArrayOutputWithContext(ctx context.Context) GetClusterCredentialAddressArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterCredentialAddressArrayOutput)
+}
+
+type GetClusterCredentialAddressOutput struct{ *pulumi.OutputState }
+
+func (GetClusterCredentialAddressOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterCredentialAddress)(nil)).Elem()
+}
+
+func (o GetClusterCredentialAddressOutput) ToGetClusterCredentialAddressOutput() GetClusterCredentialAddressOutput {
+	return o
+}
+
+func (o GetClusterCredentialAddressOutput) ToGetClusterCredentialAddressOutputWithContext(ctx context.Context) GetClusterCredentialAddressOutput {
+	return o
+}
+
+// IP Address.
+func (o GetClusterCredentialAddressOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterCredentialAddress) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Port.
+func (o GetClusterCredentialAddressOutput) Port() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterCredentialAddress) string { return v.Port }).(pulumi.StringOutput)
+}
+
+// Type of IP, can be `advertise`, `public`, etc.
+func (o GetClusterCredentialAddressOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterCredentialAddress) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetClusterCredentialAddressArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterCredentialAddressArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterCredentialAddress)(nil)).Elem()
+}
+
+func (o GetClusterCredentialAddressArrayOutput) ToGetClusterCredentialAddressArrayOutput() GetClusterCredentialAddressArrayOutput {
+	return o
+}
+
+func (o GetClusterCredentialAddressArrayOutput) ToGetClusterCredentialAddressArrayOutputWithContext(ctx context.Context) GetClusterCredentialAddressArrayOutput {
+	return o
+}
+
+func (o GetClusterCredentialAddressArrayOutput) Index(i pulumi.IntInput) GetClusterCredentialAddressOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterCredentialAddress {
+		return vs[0].([]GetClusterCredentialAddress)[vs[1].(int)]
+	}).(GetClusterCredentialAddressOutput)
+}
+
+type GetClusterCredentialInternalLb struct {
+	// Indicates weather the public access LB enabled.
+	Enabled bool `pulumi:"enabled"`
+	// ID of subnet which related to Internal LB.
+	SubnetId string `pulumi:"subnetId"`
+}
+
+// GetClusterCredentialInternalLbInput is an input type that accepts GetClusterCredentialInternalLbArgs and GetClusterCredentialInternalLbOutput values.
+// You can construct a concrete instance of `GetClusterCredentialInternalLbInput` via:
+//
+//          GetClusterCredentialInternalLbArgs{...}
+type GetClusterCredentialInternalLbInput interface {
+	pulumi.Input
+
+	ToGetClusterCredentialInternalLbOutput() GetClusterCredentialInternalLbOutput
+	ToGetClusterCredentialInternalLbOutputWithContext(context.Context) GetClusterCredentialInternalLbOutput
+}
+
+type GetClusterCredentialInternalLbArgs struct {
+	// Indicates weather the public access LB enabled.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// ID of subnet which related to Internal LB.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+}
+
+func (GetClusterCredentialInternalLbArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterCredentialInternalLb)(nil)).Elem()
+}
+
+func (i GetClusterCredentialInternalLbArgs) ToGetClusterCredentialInternalLbOutput() GetClusterCredentialInternalLbOutput {
+	return i.ToGetClusterCredentialInternalLbOutputWithContext(context.Background())
+}
+
+func (i GetClusterCredentialInternalLbArgs) ToGetClusterCredentialInternalLbOutputWithContext(ctx context.Context) GetClusterCredentialInternalLbOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterCredentialInternalLbOutput)
+}
+
+// GetClusterCredentialInternalLbArrayInput is an input type that accepts GetClusterCredentialInternalLbArray and GetClusterCredentialInternalLbArrayOutput values.
+// You can construct a concrete instance of `GetClusterCredentialInternalLbArrayInput` via:
+//
+//          GetClusterCredentialInternalLbArray{ GetClusterCredentialInternalLbArgs{...} }
+type GetClusterCredentialInternalLbArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterCredentialInternalLbArrayOutput() GetClusterCredentialInternalLbArrayOutput
+	ToGetClusterCredentialInternalLbArrayOutputWithContext(context.Context) GetClusterCredentialInternalLbArrayOutput
+}
+
+type GetClusterCredentialInternalLbArray []GetClusterCredentialInternalLbInput
+
+func (GetClusterCredentialInternalLbArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterCredentialInternalLb)(nil)).Elem()
+}
+
+func (i GetClusterCredentialInternalLbArray) ToGetClusterCredentialInternalLbArrayOutput() GetClusterCredentialInternalLbArrayOutput {
+	return i.ToGetClusterCredentialInternalLbArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterCredentialInternalLbArray) ToGetClusterCredentialInternalLbArrayOutputWithContext(ctx context.Context) GetClusterCredentialInternalLbArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterCredentialInternalLbArrayOutput)
+}
+
+type GetClusterCredentialInternalLbOutput struct{ *pulumi.OutputState }
+
+func (GetClusterCredentialInternalLbOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterCredentialInternalLb)(nil)).Elem()
+}
+
+func (o GetClusterCredentialInternalLbOutput) ToGetClusterCredentialInternalLbOutput() GetClusterCredentialInternalLbOutput {
+	return o
+}
+
+func (o GetClusterCredentialInternalLbOutput) ToGetClusterCredentialInternalLbOutputWithContext(ctx context.Context) GetClusterCredentialInternalLbOutput {
+	return o
+}
+
+// Indicates weather the public access LB enabled.
+func (o GetClusterCredentialInternalLbOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterCredentialInternalLb) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// ID of subnet which related to Internal LB.
+func (o GetClusterCredentialInternalLbOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterCredentialInternalLb) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+type GetClusterCredentialInternalLbArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterCredentialInternalLbArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterCredentialInternalLb)(nil)).Elem()
+}
+
+func (o GetClusterCredentialInternalLbArrayOutput) ToGetClusterCredentialInternalLbArrayOutput() GetClusterCredentialInternalLbArrayOutput {
+	return o
+}
+
+func (o GetClusterCredentialInternalLbArrayOutput) ToGetClusterCredentialInternalLbArrayOutputWithContext(ctx context.Context) GetClusterCredentialInternalLbArrayOutput {
+	return o
+}
+
+func (o GetClusterCredentialInternalLbArrayOutput) Index(i pulumi.IntInput) GetClusterCredentialInternalLbOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterCredentialInternalLb {
+		return vs[0].([]GetClusterCredentialInternalLb)[vs[1].(int)]
+	}).(GetClusterCredentialInternalLbOutput)
+}
+
+type GetClusterCredentialPublicLb struct {
+	// List of CIDRs which allowed to access.
+	AllowFromCidrs []string `pulumi:"allowFromCidrs"`
+	// Indicates weather the public access LB enabled.
+	Enabled bool `pulumi:"enabled"`
+	// Extra param text json.
+	ExtraParam string `pulumi:"extraParam"`
+	// Security group.
+	SecurityGroup string `pulumi:"securityGroup"`
+	// List of security allow IP or CIDRs, default deny all.
+	SecurityPolicies []string `pulumi:"securityPolicies"`
+}
+
+// GetClusterCredentialPublicLbInput is an input type that accepts GetClusterCredentialPublicLbArgs and GetClusterCredentialPublicLbOutput values.
+// You can construct a concrete instance of `GetClusterCredentialPublicLbInput` via:
+//
+//          GetClusterCredentialPublicLbArgs{...}
+type GetClusterCredentialPublicLbInput interface {
+	pulumi.Input
+
+	ToGetClusterCredentialPublicLbOutput() GetClusterCredentialPublicLbOutput
+	ToGetClusterCredentialPublicLbOutputWithContext(context.Context) GetClusterCredentialPublicLbOutput
+}
+
+type GetClusterCredentialPublicLbArgs struct {
+	// List of CIDRs which allowed to access.
+	AllowFromCidrs pulumi.StringArrayInput `pulumi:"allowFromCidrs"`
+	// Indicates weather the public access LB enabled.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// Extra param text json.
+	ExtraParam pulumi.StringInput `pulumi:"extraParam"`
+	// Security group.
+	SecurityGroup pulumi.StringInput `pulumi:"securityGroup"`
+	// List of security allow IP or CIDRs, default deny all.
+	SecurityPolicies pulumi.StringArrayInput `pulumi:"securityPolicies"`
+}
+
+func (GetClusterCredentialPublicLbArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterCredentialPublicLb)(nil)).Elem()
+}
+
+func (i GetClusterCredentialPublicLbArgs) ToGetClusterCredentialPublicLbOutput() GetClusterCredentialPublicLbOutput {
+	return i.ToGetClusterCredentialPublicLbOutputWithContext(context.Background())
+}
+
+func (i GetClusterCredentialPublicLbArgs) ToGetClusterCredentialPublicLbOutputWithContext(ctx context.Context) GetClusterCredentialPublicLbOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterCredentialPublicLbOutput)
+}
+
+// GetClusterCredentialPublicLbArrayInput is an input type that accepts GetClusterCredentialPublicLbArray and GetClusterCredentialPublicLbArrayOutput values.
+// You can construct a concrete instance of `GetClusterCredentialPublicLbArrayInput` via:
+//
+//          GetClusterCredentialPublicLbArray{ GetClusterCredentialPublicLbArgs{...} }
+type GetClusterCredentialPublicLbArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterCredentialPublicLbArrayOutput() GetClusterCredentialPublicLbArrayOutput
+	ToGetClusterCredentialPublicLbArrayOutputWithContext(context.Context) GetClusterCredentialPublicLbArrayOutput
+}
+
+type GetClusterCredentialPublicLbArray []GetClusterCredentialPublicLbInput
+
+func (GetClusterCredentialPublicLbArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterCredentialPublicLb)(nil)).Elem()
+}
+
+func (i GetClusterCredentialPublicLbArray) ToGetClusterCredentialPublicLbArrayOutput() GetClusterCredentialPublicLbArrayOutput {
+	return i.ToGetClusterCredentialPublicLbArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterCredentialPublicLbArray) ToGetClusterCredentialPublicLbArrayOutputWithContext(ctx context.Context) GetClusterCredentialPublicLbArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterCredentialPublicLbArrayOutput)
+}
+
+type GetClusterCredentialPublicLbOutput struct{ *pulumi.OutputState }
+
+func (GetClusterCredentialPublicLbOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterCredentialPublicLb)(nil)).Elem()
+}
+
+func (o GetClusterCredentialPublicLbOutput) ToGetClusterCredentialPublicLbOutput() GetClusterCredentialPublicLbOutput {
+	return o
+}
+
+func (o GetClusterCredentialPublicLbOutput) ToGetClusterCredentialPublicLbOutputWithContext(ctx context.Context) GetClusterCredentialPublicLbOutput {
+	return o
+}
+
+// List of CIDRs which allowed to access.
+func (o GetClusterCredentialPublicLbOutput) AllowFromCidrs() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterCredentialPublicLb) []string { return v.AllowFromCidrs }).(pulumi.StringArrayOutput)
+}
+
+// Indicates weather the public access LB enabled.
+func (o GetClusterCredentialPublicLbOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterCredentialPublicLb) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// Extra param text json.
+func (o GetClusterCredentialPublicLbOutput) ExtraParam() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterCredentialPublicLb) string { return v.ExtraParam }).(pulumi.StringOutput)
+}
+
+// Security group.
+func (o GetClusterCredentialPublicLbOutput) SecurityGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterCredentialPublicLb) string { return v.SecurityGroup }).(pulumi.StringOutput)
+}
+
+// List of security allow IP or CIDRs, default deny all.
+func (o GetClusterCredentialPublicLbOutput) SecurityPolicies() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterCredentialPublicLb) []string { return v.SecurityPolicies }).(pulumi.StringArrayOutput)
+}
+
+type GetClusterCredentialPublicLbArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterCredentialPublicLbArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterCredentialPublicLb)(nil)).Elem()
+}
+
+func (o GetClusterCredentialPublicLbArrayOutput) ToGetClusterCredentialPublicLbArrayOutput() GetClusterCredentialPublicLbArrayOutput {
+	return o
+}
+
+func (o GetClusterCredentialPublicLbArrayOutput) ToGetClusterCredentialPublicLbArrayOutputWithContext(ctx context.Context) GetClusterCredentialPublicLbArrayOutput {
+	return o
+}
+
+func (o GetClusterCredentialPublicLbArrayOutput) Index(i pulumi.IntInput) GetClusterCredentialPublicLbOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterCredentialPublicLb {
+		return vs[0].([]GetClusterCredentialPublicLb)[vs[1].(int)]
+	}).(GetClusterCredentialPublicLbOutput)
+}
+
+type GetClustersList struct {
+	// Description of the cluster.
+	ClusterDesc string `pulumi:"clusterDesc"`
+	// ID of the cluster. Conflict with cluster_name, can not be set at the same time.
+	ClusterId string `pulumi:"clusterId"`
+	// Name of the cluster. Conflict with cluster_id, can not be set at the same time.
+	ClusterName string `pulumi:"clusterName"`
+	// Create time of the clusters.
+	CreatedTime string `pulumi:"createdTime"`
+	// List of cluster custom DNS Server info.
+	DnsServers []GetClustersListDnsServer `pulumi:"dnsServers"`
+	// Indicates whether to enable dns in user cluster, default value is `true`.
+	EnableVpcCoreDns bool `pulumi:"enableVpcCoreDns"`
+	// EKS cluster kubernetes version.
+	K8sVersion string `pulumi:"k8sVersion"`
+	// Indicates whether to delete CBS after EKS cluster remove.
+	NeedDeleteCbs bool `pulumi:"needDeleteCbs"`
+	// Subnet id of service.
+	ServiceSubnetId string `pulumi:"serviceSubnetId"`
+	// EKS status.
+	Status string `pulumi:"status"`
+	// Subnet id list.
+	SubnetIds []string `pulumi:"subnetIds"`
+	// Tags of EKS cluster.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// Vpc id.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetClustersListInput is an input type that accepts GetClustersListArgs and GetClustersListOutput values.
+// You can construct a concrete instance of `GetClustersListInput` via:
+//
+//          GetClustersListArgs{...}
+type GetClustersListInput interface {
+	pulumi.Input
+
+	ToGetClustersListOutput() GetClustersListOutput
+	ToGetClustersListOutputWithContext(context.Context) GetClustersListOutput
+}
+
+type GetClustersListArgs struct {
+	// Description of the cluster.
+	ClusterDesc pulumi.StringInput `pulumi:"clusterDesc"`
+	// ID of the cluster. Conflict with cluster_name, can not be set at the same time.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Name of the cluster. Conflict with cluster_id, can not be set at the same time.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Create time of the clusters.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// List of cluster custom DNS Server info.
+	DnsServers GetClustersListDnsServerArrayInput `pulumi:"dnsServers"`
+	// Indicates whether to enable dns in user cluster, default value is `true`.
+	EnableVpcCoreDns pulumi.BoolInput `pulumi:"enableVpcCoreDns"`
+	// EKS cluster kubernetes version.
+	K8sVersion pulumi.StringInput `pulumi:"k8sVersion"`
+	// Indicates whether to delete CBS after EKS cluster remove.
+	NeedDeleteCbs pulumi.BoolInput `pulumi:"needDeleteCbs"`
+	// Subnet id of service.
+	ServiceSubnetId pulumi.StringInput `pulumi:"serviceSubnetId"`
+	// EKS status.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Subnet id list.
+	SubnetIds pulumi.StringArrayInput `pulumi:"subnetIds"`
+	// Tags of EKS cluster.
+	Tags pulumi.MapInput `pulumi:"tags"`
+	// Vpc id.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetClustersListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClustersList)(nil)).Elem()
+}
+
+func (i GetClustersListArgs) ToGetClustersListOutput() GetClustersListOutput {
+	return i.ToGetClustersListOutputWithContext(context.Background())
+}
+
+func (i GetClustersListArgs) ToGetClustersListOutputWithContext(ctx context.Context) GetClustersListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClustersListOutput)
+}
+
+// GetClustersListArrayInput is an input type that accepts GetClustersListArray and GetClustersListArrayOutput values.
+// You can construct a concrete instance of `GetClustersListArrayInput` via:
+//
+//          GetClustersListArray{ GetClustersListArgs{...} }
+type GetClustersListArrayInput interface {
+	pulumi.Input
+
+	ToGetClustersListArrayOutput() GetClustersListArrayOutput
+	ToGetClustersListArrayOutputWithContext(context.Context) GetClustersListArrayOutput
+}
+
+type GetClustersListArray []GetClustersListInput
+
+func (GetClustersListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClustersList)(nil)).Elem()
+}
+
+func (i GetClustersListArray) ToGetClustersListArrayOutput() GetClustersListArrayOutput {
+	return i.ToGetClustersListArrayOutputWithContext(context.Background())
+}
+
+func (i GetClustersListArray) ToGetClustersListArrayOutputWithContext(ctx context.Context) GetClustersListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClustersListArrayOutput)
+}
+
+type GetClustersListOutput struct{ *pulumi.OutputState }
+
+func (GetClustersListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClustersList)(nil)).Elem()
+}
+
+func (o GetClustersListOutput) ToGetClustersListOutput() GetClustersListOutput {
+	return o
+}
+
+func (o GetClustersListOutput) ToGetClustersListOutputWithContext(ctx context.Context) GetClustersListOutput {
+	return o
+}
+
+// Description of the cluster.
+func (o GetClustersListOutput) ClusterDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.ClusterDesc }).(pulumi.StringOutput)
+}
+
+// ID of the cluster. Conflict with cluster_name, can not be set at the same time.
+func (o GetClustersListOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Name of the cluster. Conflict with cluster_id, can not be set at the same time.
+func (o GetClustersListOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Create time of the clusters.
+func (o GetClustersListOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// List of cluster custom DNS Server info.
+func (o GetClustersListOutput) DnsServers() GetClustersListDnsServerArrayOutput {
+	return o.ApplyT(func(v GetClustersList) []GetClustersListDnsServer { return v.DnsServers }).(GetClustersListDnsServerArrayOutput)
+}
+
+// Indicates whether to enable dns in user cluster, default value is `true`.
+func (o GetClustersListOutput) EnableVpcCoreDns() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClustersList) bool { return v.EnableVpcCoreDns }).(pulumi.BoolOutput)
+}
+
+// EKS cluster kubernetes version.
+func (o GetClustersListOutput) K8sVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.K8sVersion }).(pulumi.StringOutput)
+}
+
+// Indicates whether to delete CBS after EKS cluster remove.
+func (o GetClustersListOutput) NeedDeleteCbs() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClustersList) bool { return v.NeedDeleteCbs }).(pulumi.BoolOutput)
+}
+
+// Subnet id of service.
+func (o GetClustersListOutput) ServiceSubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.ServiceSubnetId }).(pulumi.StringOutput)
+}
+
+// EKS status.
+func (o GetClustersListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Subnet id list.
+func (o GetClustersListOutput) SubnetIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClustersList) []string { return v.SubnetIds }).(pulumi.StringArrayOutput)
+}
+
+// Tags of EKS cluster.
+func (o GetClustersListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetClustersList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+}
+
+// Vpc id.
+func (o GetClustersListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetClustersListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClustersListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClustersList)(nil)).Elem()
+}
+
+func (o GetClustersListArrayOutput) ToGetClustersListArrayOutput() GetClustersListArrayOutput {
+	return o
+}
+
+func (o GetClustersListArrayOutput) ToGetClustersListArrayOutputWithContext(ctx context.Context) GetClustersListArrayOutput {
+	return o
+}
+
+func (o GetClustersListArrayOutput) Index(i pulumi.IntInput) GetClustersListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClustersList {
+		return vs[0].([]GetClustersList)[vs[1].(int)]
+	}).(GetClustersListOutput)
+}
+
+type GetClustersListDnsServer struct {
+	// DNS Server domain. Empty indicates all domain.
+	Domain string `pulumi:"domain"`
+	// List of DNS Server IP address.
+	Servers []string `pulumi:"servers"`
+}
+
+// GetClustersListDnsServerInput is an input type that accepts GetClustersListDnsServerArgs and GetClustersListDnsServerOutput values.
+// You can construct a concrete instance of `GetClustersListDnsServerInput` via:
+//
+//          GetClustersListDnsServerArgs{...}
+type GetClustersListDnsServerInput interface {
+	pulumi.Input
+
+	ToGetClustersListDnsServerOutput() GetClustersListDnsServerOutput
+	ToGetClustersListDnsServerOutputWithContext(context.Context) GetClustersListDnsServerOutput
+}
+
+type GetClustersListDnsServerArgs struct {
+	// DNS Server domain. Empty indicates all domain.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// List of DNS Server IP address.
+	Servers pulumi.StringArrayInput `pulumi:"servers"`
+}
+
+func (GetClustersListDnsServerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClustersListDnsServer)(nil)).Elem()
+}
+
+func (i GetClustersListDnsServerArgs) ToGetClustersListDnsServerOutput() GetClustersListDnsServerOutput {
+	return i.ToGetClustersListDnsServerOutputWithContext(context.Background())
+}
+
+func (i GetClustersListDnsServerArgs) ToGetClustersListDnsServerOutputWithContext(ctx context.Context) GetClustersListDnsServerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClustersListDnsServerOutput)
+}
+
+// GetClustersListDnsServerArrayInput is an input type that accepts GetClustersListDnsServerArray and GetClustersListDnsServerArrayOutput values.
+// You can construct a concrete instance of `GetClustersListDnsServerArrayInput` via:
+//
+//          GetClustersListDnsServerArray{ GetClustersListDnsServerArgs{...} }
+type GetClustersListDnsServerArrayInput interface {
+	pulumi.Input
+
+	ToGetClustersListDnsServerArrayOutput() GetClustersListDnsServerArrayOutput
+	ToGetClustersListDnsServerArrayOutputWithContext(context.Context) GetClustersListDnsServerArrayOutput
+}
+
+type GetClustersListDnsServerArray []GetClustersListDnsServerInput
+
+func (GetClustersListDnsServerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClustersListDnsServer)(nil)).Elem()
+}
+
+func (i GetClustersListDnsServerArray) ToGetClustersListDnsServerArrayOutput() GetClustersListDnsServerArrayOutput {
+	return i.ToGetClustersListDnsServerArrayOutputWithContext(context.Background())
+}
+
+func (i GetClustersListDnsServerArray) ToGetClustersListDnsServerArrayOutputWithContext(ctx context.Context) GetClustersListDnsServerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClustersListDnsServerArrayOutput)
+}
+
+type GetClustersListDnsServerOutput struct{ *pulumi.OutputState }
+
+func (GetClustersListDnsServerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClustersListDnsServer)(nil)).Elem()
+}
+
+func (o GetClustersListDnsServerOutput) ToGetClustersListDnsServerOutput() GetClustersListDnsServerOutput {
+	return o
+}
+
+func (o GetClustersListDnsServerOutput) ToGetClustersListDnsServerOutputWithContext(ctx context.Context) GetClustersListDnsServerOutput {
+	return o
+}
+
+// DNS Server domain. Empty indicates all domain.
+func (o GetClustersListDnsServerOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersListDnsServer) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// List of DNS Server IP address.
+func (o GetClustersListDnsServerOutput) Servers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClustersListDnsServer) []string { return v.Servers }).(pulumi.StringArrayOutput)
+}
+
+type GetClustersListDnsServerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClustersListDnsServerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClustersListDnsServer)(nil)).Elem()
+}
+
+func (o GetClustersListDnsServerArrayOutput) ToGetClustersListDnsServerArrayOutput() GetClustersListDnsServerArrayOutput {
+	return o
+}
+
+func (o GetClustersListDnsServerArrayOutput) ToGetClustersListDnsServerArrayOutputWithContext(ctx context.Context) GetClustersListDnsServerArrayOutput {
+	return o
+}
+
+func (o GetClustersListDnsServerArrayOutput) Index(i pulumi.IntInput) GetClustersListDnsServerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClustersListDnsServer {
+		return vs[0].([]GetClustersListDnsServer)[vs[1].(int)]
+	}).(GetClustersListDnsServerOutput)
+}
+
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*ClusterCredentialAddressInput)(nil)).Elem(), ClusterCredentialAddressArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClusterCredentialAddressArrayInput)(nil)).Elem(), ClusterCredentialAddressArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClusterCredentialInternalLbInput)(nil)).Elem(), ClusterCredentialInternalLbArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClusterCredentialInternalLbArrayInput)(nil)).Elem(), ClusterCredentialInternalLbArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClusterCredentialPublicLbInput)(nil)).Elem(), ClusterCredentialPublicLbArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClusterCredentialPublicLbArrayInput)(nil)).Elem(), ClusterCredentialPublicLbArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterDnsServerInput)(nil)).Elem(), ClusterDnsServerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterDnsServerArrayInput)(nil)).Elem(), ClusterDnsServerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterInternalLbInput)(nil)).Elem(), ClusterInternalLbArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterInternalLbPtrInput)(nil)).Elem(), ClusterInternalLbArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterPublicLbInput)(nil)).Elem(), ClusterPublicLbArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterPublicLbPtrInput)(nil)).Elem(), ClusterPublicLbArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClustersListInput)(nil)).Elem(), ClustersListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClustersListArrayInput)(nil)).Elem(), ClustersListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClustersListDnsServerInput)(nil)).Elem(), ClustersListDnsServerArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ClustersListDnsServerArrayInput)(nil)).Elem(), ClustersListDnsServerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ContainerInstanceCbsVolumeInput)(nil)).Elem(), ContainerInstanceCbsVolumeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ContainerInstanceCbsVolumeArrayInput)(nil)).Elem(), ContainerInstanceCbsVolumeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ContainerInstanceContainerInput)(nil)).Elem(), ContainerInstanceContainerArgs{})
@@ -2482,22 +2791,22 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ContainerInstanceInitContainerVolumeMountArrayInput)(nil)).Elem(), ContainerInstanceInitContainerVolumeMountArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ContainerInstanceNfsVolumeInput)(nil)).Elem(), ContainerInstanceNfsVolumeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ContainerInstanceNfsVolumeArrayInput)(nil)).Elem(), ContainerInstanceNfsVolumeArray{})
-	pulumi.RegisterOutputType(ClusterCredentialAddressOutput{})
-	pulumi.RegisterOutputType(ClusterCredentialAddressArrayOutput{})
-	pulumi.RegisterOutputType(ClusterCredentialInternalLbOutput{})
-	pulumi.RegisterOutputType(ClusterCredentialInternalLbArrayOutput{})
-	pulumi.RegisterOutputType(ClusterCredentialPublicLbOutput{})
-	pulumi.RegisterOutputType(ClusterCredentialPublicLbArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCredentialAddressInput)(nil)).Elem(), GetClusterCredentialAddressArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCredentialAddressArrayInput)(nil)).Elem(), GetClusterCredentialAddressArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCredentialInternalLbInput)(nil)).Elem(), GetClusterCredentialInternalLbArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCredentialInternalLbArrayInput)(nil)).Elem(), GetClusterCredentialInternalLbArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCredentialPublicLbInput)(nil)).Elem(), GetClusterCredentialPublicLbArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCredentialPublicLbArrayInput)(nil)).Elem(), GetClusterCredentialPublicLbArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListInput)(nil)).Elem(), GetClustersListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListArrayInput)(nil)).Elem(), GetClustersListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListDnsServerInput)(nil)).Elem(), GetClustersListDnsServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListDnsServerArrayInput)(nil)).Elem(), GetClustersListDnsServerArray{})
 	pulumi.RegisterOutputType(ClusterDnsServerOutput{})
 	pulumi.RegisterOutputType(ClusterDnsServerArrayOutput{})
 	pulumi.RegisterOutputType(ClusterInternalLbOutput{})
 	pulumi.RegisterOutputType(ClusterInternalLbPtrOutput{})
 	pulumi.RegisterOutputType(ClusterPublicLbOutput{})
 	pulumi.RegisterOutputType(ClusterPublicLbPtrOutput{})
-	pulumi.RegisterOutputType(ClustersListOutput{})
-	pulumi.RegisterOutputType(ClustersListArrayOutput{})
-	pulumi.RegisterOutputType(ClustersListDnsServerOutput{})
-	pulumi.RegisterOutputType(ClustersListDnsServerArrayOutput{})
 	pulumi.RegisterOutputType(ContainerInstanceCbsVolumeOutput{})
 	pulumi.RegisterOutputType(ContainerInstanceCbsVolumeArrayOutput{})
 	pulumi.RegisterOutputType(ContainerInstanceContainerOutput{})
@@ -2516,4 +2825,14 @@ func init() {
 	pulumi.RegisterOutputType(ContainerInstanceInitContainerVolumeMountArrayOutput{})
 	pulumi.RegisterOutputType(ContainerInstanceNfsVolumeOutput{})
 	pulumi.RegisterOutputType(ContainerInstanceNfsVolumeArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterCredentialAddressOutput{})
+	pulumi.RegisterOutputType(GetClusterCredentialAddressArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterCredentialInternalLbOutput{})
+	pulumi.RegisterOutputType(GetClusterCredentialInternalLbArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterCredentialPublicLbOutput{})
+	pulumi.RegisterOutputType(GetClusterCredentialPublicLbArrayOutput{})
+	pulumi.RegisterOutputType(GetClustersListOutput{})
+	pulumi.RegisterOutputType(GetClustersListArrayOutput{})
+	pulumi.RegisterOutputType(GetClustersListDnsServerOutput{})
+	pulumi.RegisterOutputType(GetClustersListDnsServerArrayOutput{})
 }

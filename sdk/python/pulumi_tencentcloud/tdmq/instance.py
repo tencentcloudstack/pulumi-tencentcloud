@@ -131,7 +131,27 @@ class Instance(pulumi.CustomResource):
                  remark: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provide a resource to create a TDMQ instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tdmq.Instance("foo",
+            cluster_name="example",
+            remark="this is description.")
+        ```
+
+        ## Import
+
+        Tdmq instance can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] bind_cluster_id: The Dedicated Cluster Id.
@@ -145,7 +165,27 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provide a resource to create a TDMQ instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tdmq.Instance("foo",
+            cluster_name="example",
+            remark="this is description.")
+        ```
+
+        ## Import
+
+        Tdmq instance can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

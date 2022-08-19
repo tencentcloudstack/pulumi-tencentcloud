@@ -13,8 +13,17 @@ namespace Pulumi.Tencentcloud.Cls.Outputs
     [OutputType]
     public sealed class CosShipperContent
     {
+        /// <summary>
+        /// CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly Outputs.CosShipperContentCsv? Csv;
+        /// <summary>
+        /// Content format. Valid values: json, csv.
+        /// </summary>
         public readonly string Format;
+        /// <summary>
+        /// JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly Outputs.CosShipperContentJson? Json;
 
         [OutputConstructor]

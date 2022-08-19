@@ -13,15 +13,45 @@ namespace Pulumi.Tencentcloud.Cls.Outputs
     [OutputType]
     public sealed class ConfigExtractRule
     {
+        /// <summary>
+        /// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+        /// </summary>
         public readonly int? Backtracking;
+        /// <summary>
+        /// First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.
+        /// </summary>
         public readonly string? BeginRegex;
+        /// <summary>
+        /// Delimiter for delimited log, which is valid only if log_type is delimiter_log.
+        /// </summary>
         public readonly string? Delimiter;
+        /// <summary>
+        /// Log keys to be filtered and the corresponding regex.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ConfigExtractRuleFilterKeyRegex> FilterKeyRegexes;
+        /// <summary>
+        /// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.
+        /// </summary>
         public readonly ImmutableArray<string> Keys;
+        /// <summary>
+        /// Full log matching rule, which is valid only if log_type is fullregex_log.
+        /// </summary>
         public readonly string? LogRegex;
+        /// <summary>
+        /// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+        /// </summary>
         public readonly string? TimeFormat;
+        /// <summary>
+        /// Time field key name. time_key and time_format must appear in pair.
+        /// </summary>
         public readonly string? TimeKey;
+        /// <summary>
+        /// Unmatched log key.
+        /// </summary>
         public readonly string? UnMatchLogKey;
+        /// <summary>
+        /// Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+        /// </summary>
         public readonly bool? UnMatchUpLoadSwitch;
 
         [OutputConstructor]

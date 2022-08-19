@@ -24,23 +24,15 @@ class ExternalKeyArgs:
                  wrapping_algorithm: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ExternalKey resource.
-        :param pulumi.Input[str] alias: Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-               a letter or number.
+        :param pulumi.Input[str] alias: Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         :param pulumi.Input[str] description: Description of CMK. The maximum is 1024 bytes.
-        :param pulumi.Input[bool] is_archived: Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-               is `Enabled`, `Disabled`, `Archived`.
-        :param pulumi.Input[bool] is_enabled: Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-               is `Enabled`, `Disabled`, `Archived`.
-        :param pulumi.Input[str] key_material_base64: The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-               of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-               imported key material is required to be 256 bits.
-        :param pulumi.Input[int] pending_delete_window_in_days: Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-               Defaults to 7 days.
+        :param pulumi.Input[bool] is_archived: Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
+        :param pulumi.Input[bool] is_enabled: Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
+        :param pulumi.Input[str] key_material_base64: The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
+        :param pulumi.Input[int] pending_delete_window_in_days: Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of CMK.
-        :param pulumi.Input[int] valid_to: This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-               current timestamp, the maximum support is 2147443200.
-        :param pulumi.Input[str] wrapping_algorithm: The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-               `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+        :param pulumi.Input[int] valid_to: This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
+        :param pulumi.Input[str] wrapping_algorithm: The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
         """
         pulumi.set(__self__, "alias", alias)
         if description is not None:
@@ -64,8 +56,7 @@ class ExternalKeyArgs:
     @pulumi.getter
     def alias(self) -> pulumi.Input[str]:
         """
-        Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-        a letter or number.
+        Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "alias")
 
@@ -89,8 +80,7 @@ class ExternalKeyArgs:
     @pulumi.getter(name="isArchived")
     def is_archived(self) -> Optional[pulumi.Input[bool]]:
         """
-        Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-        is `Enabled`, `Disabled`, `Archived`.
+        Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
         """
         return pulumi.get(self, "is_archived")
 
@@ -102,8 +92,7 @@ class ExternalKeyArgs:
     @pulumi.getter(name="isEnabled")
     def is_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-        is `Enabled`, `Disabled`, `Archived`.
+        Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
         """
         return pulumi.get(self, "is_enabled")
 
@@ -115,9 +104,7 @@ class ExternalKeyArgs:
     @pulumi.getter(name="keyMaterialBase64")
     def key_material_base64(self) -> Optional[pulumi.Input[str]]:
         """
-        The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-        of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-        imported key material is required to be 256 bits.
+        The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
         """
         return pulumi.get(self, "key_material_base64")
 
@@ -129,8 +116,7 @@ class ExternalKeyArgs:
     @pulumi.getter(name="pendingDeleteWindowInDays")
     def pending_delete_window_in_days(self) -> Optional[pulumi.Input[int]]:
         """
-        Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-        Defaults to 7 days.
+        Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
         """
         return pulumi.get(self, "pending_delete_window_in_days")
 
@@ -154,8 +140,7 @@ class ExternalKeyArgs:
     @pulumi.getter(name="validTo")
     def valid_to(self) -> Optional[pulumi.Input[int]]:
         """
-        This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-        current timestamp, the maximum support is 2147443200.
+        This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
         """
         return pulumi.get(self, "valid_to")
 
@@ -167,8 +152,7 @@ class ExternalKeyArgs:
     @pulumi.getter(name="wrappingAlgorithm")
     def wrapping_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-        `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+        The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
         """
         return pulumi.get(self, "wrapping_algorithm")
 
@@ -192,24 +176,16 @@ class _ExternalKeyState:
                  wrapping_algorithm: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ExternalKey resources.
-        :param pulumi.Input[str] alias: Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-               a letter or number.
+        :param pulumi.Input[str] alias: Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         :param pulumi.Input[str] description: Description of CMK. The maximum is 1024 bytes.
-        :param pulumi.Input[bool] is_archived: Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-               is `Enabled`, `Disabled`, `Archived`.
-        :param pulumi.Input[bool] is_enabled: Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-               is `Enabled`, `Disabled`, `Archived`.
-        :param pulumi.Input[str] key_material_base64: The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-               of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-               imported key material is required to be 256 bits.
+        :param pulumi.Input[bool] is_archived: Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
+        :param pulumi.Input[bool] is_enabled: Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
+        :param pulumi.Input[str] key_material_base64: The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
         :param pulumi.Input[str] key_state: State of CMK.
-        :param pulumi.Input[int] pending_delete_window_in_days: Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-               Defaults to 7 days.
+        :param pulumi.Input[int] pending_delete_window_in_days: Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of CMK.
-        :param pulumi.Input[int] valid_to: This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-               current timestamp, the maximum support is 2147443200.
-        :param pulumi.Input[str] wrapping_algorithm: The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-               `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+        :param pulumi.Input[int] valid_to: This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
+        :param pulumi.Input[str] wrapping_algorithm: The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
         """
         if alias is not None:
             pulumi.set(__self__, "alias", alias)
@@ -236,8 +212,7 @@ class _ExternalKeyState:
     @pulumi.getter
     def alias(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-        a letter or number.
+        Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "alias")
 
@@ -261,8 +236,7 @@ class _ExternalKeyState:
     @pulumi.getter(name="isArchived")
     def is_archived(self) -> Optional[pulumi.Input[bool]]:
         """
-        Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-        is `Enabled`, `Disabled`, `Archived`.
+        Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
         """
         return pulumi.get(self, "is_archived")
 
@@ -274,8 +248,7 @@ class _ExternalKeyState:
     @pulumi.getter(name="isEnabled")
     def is_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-        is `Enabled`, `Disabled`, `Archived`.
+        Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
         """
         return pulumi.get(self, "is_enabled")
 
@@ -287,9 +260,7 @@ class _ExternalKeyState:
     @pulumi.getter(name="keyMaterialBase64")
     def key_material_base64(self) -> Optional[pulumi.Input[str]]:
         """
-        The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-        of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-        imported key material is required to be 256 bits.
+        The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
         """
         return pulumi.get(self, "key_material_base64")
 
@@ -313,8 +284,7 @@ class _ExternalKeyState:
     @pulumi.getter(name="pendingDeleteWindowInDays")
     def pending_delete_window_in_days(self) -> Optional[pulumi.Input[int]]:
         """
-        Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-        Defaults to 7 days.
+        Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
         """
         return pulumi.get(self, "pending_delete_window_in_days")
 
@@ -338,8 +308,7 @@ class _ExternalKeyState:
     @pulumi.getter(name="validTo")
     def valid_to(self) -> Optional[pulumi.Input[int]]:
         """
-        This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-        current timestamp, the maximum support is 2147443200.
+        This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
         """
         return pulumi.get(self, "valid_to")
 
@@ -351,8 +320,7 @@ class _ExternalKeyState:
     @pulumi.getter(name="wrappingAlgorithm")
     def wrapping_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-        `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+        The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
         """
         return pulumi.get(self, "wrapping_algorithm")
 
@@ -377,26 +345,42 @@ class ExternalKey(pulumi.CustomResource):
                  wrapping_algorithm: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a ExternalKey resource with the given unique name, props, and options.
+        Provide a resource to create a KMS external key.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.kms.ExternalKey("foo",
+            alias="test",
+            description="describe key test message.",
+            is_enabled=True,
+            key_material_base64="MTIzMTIzMTIzMTIzMTIzQQ==",
+            valid_to=2147443200,
+            wrapping_algorithm="RSAES_PKCS1_V1_5")
+        ```
+
+        ## Import
+
+        KMS external keys can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Kms/externalKey:ExternalKey foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] alias: Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-               a letter or number.
+        :param pulumi.Input[str] alias: Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         :param pulumi.Input[str] description: Description of CMK. The maximum is 1024 bytes.
-        :param pulumi.Input[bool] is_archived: Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-               is `Enabled`, `Disabled`, `Archived`.
-        :param pulumi.Input[bool] is_enabled: Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-               is `Enabled`, `Disabled`, `Archived`.
-        :param pulumi.Input[str] key_material_base64: The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-               of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-               imported key material is required to be 256 bits.
-        :param pulumi.Input[int] pending_delete_window_in_days: Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-               Defaults to 7 days.
+        :param pulumi.Input[bool] is_archived: Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
+        :param pulumi.Input[bool] is_enabled: Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
+        :param pulumi.Input[str] key_material_base64: The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
+        :param pulumi.Input[int] pending_delete_window_in_days: Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of CMK.
-        :param pulumi.Input[int] valid_to: This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-               current timestamp, the maximum support is 2147443200.
-        :param pulumi.Input[str] wrapping_algorithm: The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-               `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+        :param pulumi.Input[int] valid_to: This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
+        :param pulumi.Input[str] wrapping_algorithm: The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
         """
         ...
     @overload
@@ -405,7 +389,31 @@ class ExternalKey(pulumi.CustomResource):
                  args: ExternalKeyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ExternalKey resource with the given unique name, props, and options.
+        Provide a resource to create a KMS external key.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.kms.ExternalKey("foo",
+            alias="test",
+            description="describe key test message.",
+            is_enabled=True,
+            key_material_base64="MTIzMTIzMTIzMTIzMTIzQQ==",
+            valid_to=2147443200,
+            wrapping_algorithm="RSAES_PKCS1_V1_5")
+        ```
+
+        ## Import
+
+        KMS external keys can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Kms/externalKey:ExternalKey foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+        ```
+
         :param str resource_name: The name of the resource.
         :param ExternalKeyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -481,24 +489,16 @@ class ExternalKey(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] alias: Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-               a letter or number.
+        :param pulumi.Input[str] alias: Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         :param pulumi.Input[str] description: Description of CMK. The maximum is 1024 bytes.
-        :param pulumi.Input[bool] is_archived: Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-               is `Enabled`, `Disabled`, `Archived`.
-        :param pulumi.Input[bool] is_enabled: Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-               is `Enabled`, `Disabled`, `Archived`.
-        :param pulumi.Input[str] key_material_base64: The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-               of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-               imported key material is required to be 256 bits.
+        :param pulumi.Input[bool] is_archived: Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
+        :param pulumi.Input[bool] is_enabled: Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
+        :param pulumi.Input[str] key_material_base64: The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
         :param pulumi.Input[str] key_state: State of CMK.
-        :param pulumi.Input[int] pending_delete_window_in_days: Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-               Defaults to 7 days.
+        :param pulumi.Input[int] pending_delete_window_in_days: Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of CMK.
-        :param pulumi.Input[int] valid_to: This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-               current timestamp, the maximum support is 2147443200.
-        :param pulumi.Input[str] wrapping_algorithm: The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-               `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+        :param pulumi.Input[int] valid_to: This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
+        :param pulumi.Input[str] wrapping_algorithm: The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -520,8 +520,7 @@ class ExternalKey(pulumi.CustomResource):
     @pulumi.getter
     def alias(self) -> pulumi.Output[str]:
         """
-        Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-        a letter or number.
+        Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "alias")
 
@@ -537,8 +536,7 @@ class ExternalKey(pulumi.CustomResource):
     @pulumi.getter(name="isArchived")
     def is_archived(self) -> pulumi.Output[Optional[bool]]:
         """
-        Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-        is `Enabled`, `Disabled`, `Archived`.
+        Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
         """
         return pulumi.get(self, "is_archived")
 
@@ -546,8 +544,7 @@ class ExternalKey(pulumi.CustomResource):
     @pulumi.getter(name="isEnabled")
     def is_enabled(self) -> pulumi.Output[Optional[bool]]:
         """
-        Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-        is `Enabled`, `Disabled`, `Archived`.
+        Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state is `Enabled`, `Disabled`, `Archived`.
         """
         return pulumi.get(self, "is_enabled")
 
@@ -555,9 +552,7 @@ class ExternalKey(pulumi.CustomResource):
     @pulumi.getter(name="keyMaterialBase64")
     def key_material_base64(self) -> pulumi.Output[Optional[str]]:
         """
-        The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-        of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-        imported key material is required to be 256 bits.
+        The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
         """
         return pulumi.get(self, "key_material_base64")
 
@@ -573,8 +568,7 @@ class ExternalKey(pulumi.CustomResource):
     @pulumi.getter(name="pendingDeleteWindowInDays")
     def pending_delete_window_in_days(self) -> pulumi.Output[Optional[int]]:
         """
-        Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-        Defaults to 7 days.
+        Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
         """
         return pulumi.get(self, "pending_delete_window_in_days")
 
@@ -590,8 +584,7 @@ class ExternalKey(pulumi.CustomResource):
     @pulumi.getter(name="validTo")
     def valid_to(self) -> pulumi.Output[Optional[int]]:
         """
-        This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-        current timestamp, the maximum support is 2147443200.
+        This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
         """
         return pulumi.get(self, "valid_to")
 
@@ -599,8 +592,7 @@ class ExternalKey(pulumi.CustomResource):
     @pulumi.getter(name="wrappingAlgorithm")
     def wrapping_algorithm(self) -> pulumi.Output[Optional[str]]:
         """
-        The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-        `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+        The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
         """
         return pulumi.get(self, "wrapping_algorithm")
 

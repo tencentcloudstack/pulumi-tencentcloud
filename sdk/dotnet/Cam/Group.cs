@@ -9,6 +9,36 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cam
 {
+    /// <summary>
+    /// Provides a resource to create a CAM group.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cam.Group("foo", new Tencentcloud.Cam.GroupArgs
+    ///         {
+    ///             Remark = "test",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CAM group can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cam/group:Group foo 90496
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/group:Group")]
     public partial class Group : Pulumi.CustomResource
     {

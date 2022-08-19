@@ -5,10 +5,10 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .bucket import *
 from .bucket_object import *
-from .bucket_objects import *
 from .bucket_policy import *
-from .buckets import *
-from .cos_bucket import *
+from .get_bucket_object import *
+from .get_buckets import *
 from ._inputs import *
 from . import outputs

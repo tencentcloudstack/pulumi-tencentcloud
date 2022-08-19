@@ -9,6 +9,53 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Tdmq
 {
+    /// <summary>
+    /// Provide a resource to create a TDMQ topic.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Tdmq.Instance("foo", new Tencentcloud.Tdmq.InstanceArgs
+    ///         {
+    ///             ClusterName = "example",
+    ///             Remark = "this is description.",
+    ///         });
+    ///         var barNamespace = new Tencentcloud.Tdmq.Namespace("barNamespace", new Tencentcloud.Tdmq.NamespaceArgs
+    ///         {
+    ///             ClusterId = foo.Id,
+    ///             EnvironName = "example",
+    ///             MsgTtl = 300,
+    ///             Remark = "this is description.",
+    ///         });
+    ///         var barTopic = new Tencentcloud.Tdmq.Topic("barTopic", new Tencentcloud.Tdmq.TopicArgs
+    ///         {
+    ///             ClusterId = foo.Id,
+    ///             EnvironId = barNamespace.Id,
+    ///             Partitions = 6,
+    ///             Remark = "this is description.",
+    ///             TopicName = "example",
+    ///             TopicType = 0,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Tdmq Topic can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Tdmq/topic:Topic test topic_id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/topic:Topic")]
     public partial class Topic : Pulumi.CustomResource
     {

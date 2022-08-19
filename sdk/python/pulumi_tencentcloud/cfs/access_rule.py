@@ -21,15 +21,10 @@ class AccessRuleArgs:
         """
         The set of arguments for constructing a AccessRule resource.
         :param pulumi.Input[str] access_group_id: ID of a access group.
-        :param pulumi.Input[str] auth_client_ip: A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-               note that the IP entered should be CVM's private IP.
+        :param pulumi.Input[str] auth_client_ip: A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
         :param pulumi.Input[int] priority: The priority level of rule. Valid value ranges: (1~100). `1` indicates the highest priority.
         :param pulumi.Input[str] rw_permission: Read and write permissions. Valid values are `RO` and `RW`. and default is `RO`.
-        :param pulumi.Input[str] user_permission: The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-               and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-               `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-               after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-               `no_root_squash` indicates that access root users keep root account permission.
+        :param pulumi.Input[str] user_permission: The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`. and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups; `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups; `no_root_squash` indicates that access root users keep root account permission.
         """
         pulumi.set(__self__, "access_group_id", access_group_id)
         pulumi.set(__self__, "auth_client_ip", auth_client_ip)
@@ -55,8 +50,7 @@ class AccessRuleArgs:
     @pulumi.getter(name="authClientIp")
     def auth_client_ip(self) -> pulumi.Input[str]:
         """
-        A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-        note that the IP entered should be CVM's private IP.
+        A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
         """
         return pulumi.get(self, "auth_client_ip")
 
@@ -92,11 +86,7 @@ class AccessRuleArgs:
     @pulumi.getter(name="userPermission")
     def user_permission(self) -> Optional[pulumi.Input[str]]:
         """
-        The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-        and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-        `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-        after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-        `no_root_squash` indicates that access root users keep root account permission.
+        The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`. and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups; `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups; `no_root_squash` indicates that access root users keep root account permission.
         """
         return pulumi.get(self, "user_permission")
 
@@ -116,15 +106,10 @@ class _AccessRuleState:
         """
         Input properties used for looking up and filtering AccessRule resources.
         :param pulumi.Input[str] access_group_id: ID of a access group.
-        :param pulumi.Input[str] auth_client_ip: A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-               note that the IP entered should be CVM's private IP.
+        :param pulumi.Input[str] auth_client_ip: A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
         :param pulumi.Input[int] priority: The priority level of rule. Valid value ranges: (1~100). `1` indicates the highest priority.
         :param pulumi.Input[str] rw_permission: Read and write permissions. Valid values are `RO` and `RW`. and default is `RO`.
-        :param pulumi.Input[str] user_permission: The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-               and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-               `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-               after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-               `no_root_squash` indicates that access root users keep root account permission.
+        :param pulumi.Input[str] user_permission: The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`. and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups; `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups; `no_root_squash` indicates that access root users keep root account permission.
         """
         if access_group_id is not None:
             pulumi.set(__self__, "access_group_id", access_group_id)
@@ -153,8 +138,7 @@ class _AccessRuleState:
     @pulumi.getter(name="authClientIp")
     def auth_client_ip(self) -> Optional[pulumi.Input[str]]:
         """
-        A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-        note that the IP entered should be CVM's private IP.
+        A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
         """
         return pulumi.get(self, "auth_client_ip")
 
@@ -190,11 +174,7 @@ class _AccessRuleState:
     @pulumi.getter(name="userPermission")
     def user_permission(self) -> Optional[pulumi.Input[str]]:
         """
-        The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-        and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-        `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-        after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-        `no_root_squash` indicates that access root users keep root account permission.
+        The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`. and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups; `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups; `no_root_squash` indicates that access root users keep root account permission.
         """
         return pulumi.get(self, "user_permission")
 
@@ -215,19 +195,29 @@ class AccessRule(pulumi.CustomResource):
                  user_permission: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AccessRule resource with the given unique name, props, and options.
+        Provides a resource to create a CFS access rule.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cfs.AccessRule("foo",
+            access_group_id="pgroup-7nx89k7l",
+            auth_client_ip="10.10.1.0/24",
+            priority=1,
+            rw_permission="RO",
+            user_permission="root_squash")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] access_group_id: ID of a access group.
-        :param pulumi.Input[str] auth_client_ip: A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-               note that the IP entered should be CVM's private IP.
+        :param pulumi.Input[str] auth_client_ip: A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
         :param pulumi.Input[int] priority: The priority level of rule. Valid value ranges: (1~100). `1` indicates the highest priority.
         :param pulumi.Input[str] rw_permission: Read and write permissions. Valid values are `RO` and `RW`. and default is `RO`.
-        :param pulumi.Input[str] user_permission: The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-               and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-               `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-               after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-               `no_root_squash` indicates that access root users keep root account permission.
+        :param pulumi.Input[str] user_permission: The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`. and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups; `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups; `no_root_squash` indicates that access root users keep root account permission.
         """
         ...
     @overload
@@ -236,7 +226,22 @@ class AccessRule(pulumi.CustomResource):
                  args: AccessRuleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AccessRule resource with the given unique name, props, and options.
+        Provides a resource to create a CFS access rule.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cfs.AccessRule("foo",
+            access_group_id="pgroup-7nx89k7l",
+            auth_client_ip="10.10.1.0/24",
+            priority=1,
+            rw_permission="RO",
+            user_permission="root_squash")
+        ```
+
         :param str resource_name: The name of the resource.
         :param AccessRuleArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -303,15 +308,10 @@ class AccessRule(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] access_group_id: ID of a access group.
-        :param pulumi.Input[str] auth_client_ip: A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-               note that the IP entered should be CVM's private IP.
+        :param pulumi.Input[str] auth_client_ip: A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
         :param pulumi.Input[int] priority: The priority level of rule. Valid value ranges: (1~100). `1` indicates the highest priority.
         :param pulumi.Input[str] rw_permission: Read and write permissions. Valid values are `RO` and `RW`. and default is `RO`.
-        :param pulumi.Input[str] user_permission: The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-               and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-               `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-               after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-               `no_root_squash` indicates that access root users keep root account permission.
+        :param pulumi.Input[str] user_permission: The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`. and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups; `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups; `no_root_squash` indicates that access root users keep root account permission.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -336,8 +336,7 @@ class AccessRule(pulumi.CustomResource):
     @pulumi.getter(name="authClientIp")
     def auth_client_ip(self) -> pulumi.Output[str]:
         """
-        A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-        note that the IP entered should be CVM's private IP.
+        A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
         """
         return pulumi.get(self, "auth_client_ip")
 
@@ -361,11 +360,7 @@ class AccessRule(pulumi.CustomResource):
     @pulumi.getter(name="userPermission")
     def user_permission(self) -> pulumi.Output[Optional[str]]:
         """
-        The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-        and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-        `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-        after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-        `no_root_squash` indicates that access root users keep root account permission.
+        The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`. and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups; `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups; `no_root_squash` indicates that access root users keep root account permission.
         """
         return pulumi.get(self, "user_permission")
 

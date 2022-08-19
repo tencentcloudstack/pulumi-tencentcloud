@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create security group.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const sglab = new tencentcloud.Security.Group("sglab", {
+ *     description: "favourite sg",
+ *     projectId: 0,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Security group can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Security/group:Group tencentcloud_security_group.sglab sg-ey3wmiz1
+ * ```
+ */
 export class Group extends pulumi.CustomResource {
     /**
      * Get an existing Group resource's state with the given name, ID, and optional extra

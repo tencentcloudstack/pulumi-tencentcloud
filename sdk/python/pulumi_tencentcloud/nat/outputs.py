@@ -9,12 +9,12 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'GatewaySnatsSnatListResult',
-    'GatewaysNatResult',
+    'GetGatewaySnatsSnatListResult',
+    'GetGatewaysNatResult',
 ]
 
 @pulumi.output_type
-class GatewaySnatsSnatListResult(dict):
+class GetGatewaySnatsSnatListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  description: str,
@@ -26,6 +26,15 @@ class GatewaySnatsSnatListResult(dict):
                  instance_private_ip_addr: Optional[str] = None,
                  subnet_cidr_block: Optional[str] = None,
                  subnet_id: Optional[str] = None):
+        """
+        :param str create_time: Create time.
+        :param str description: Description.
+        :param str nat_gateway_id: NAT gateway ID.
+        :param Sequence[str] public_ip_addrs: Elastic IP address pool.
+        :param str snat_id: SNAT rule ID.
+        :param str instance_id: Instance ID.
+        :param str subnet_id: Subnet instance ID.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "nat_gateway_id", nat_gateway_id)
@@ -44,21 +53,33 @@ class GatewaySnatsSnatListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Description.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter(name="natGatewayId")
     def nat_gateway_id(self) -> str:
+        """
+        NAT gateway ID.
+        """
         return pulumi.get(self, "nat_gateway_id")
 
     @property
     @pulumi.getter(name="publicIpAddrs")
     def public_ip_addrs(self) -> Sequence[str]:
+        """
+        Elastic IP address pool.
+        """
         return pulumi.get(self, "public_ip_addrs")
 
     @property
@@ -69,11 +90,17 @@ class GatewaySnatsSnatListResult(dict):
     @property
     @pulumi.getter(name="snatId")
     def snat_id(self) -> str:
+        """
+        SNAT rule ID.
+        """
         return pulumi.get(self, "snat_id")
 
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> Optional[str]:
+        """
+        Instance ID.
+        """
         return pulumi.get(self, "instance_id")
 
     @property
@@ -89,11 +116,14 @@ class GatewaySnatsSnatListResult(dict):
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[str]:
+        """
+        Subnet instance ID.
+        """
         return pulumi.get(self, "subnet_id")
 
 
 @pulumi.output_type
-class GatewaysNatResult(dict):
+class GetGatewaysNatResult(dict):
     def __init__(__self__, *,
                  assigned_eip_sets: Sequence[str],
                  bandwidth: int,
@@ -104,6 +134,17 @@ class GatewaysNatResult(dict):
                  state: str,
                  tags: Mapping[str, Any],
                  vpc_id: str):
+        """
+        :param Sequence[str] assigned_eip_sets: EIP IP address set bound to the gateway. The value of at least 1.
+        :param int bandwidth: The maximum public network output bandwidth of NAT gateway (unit: Mbps), the available values include: 20,50,100,200,500,1000,2000,5000. Default is 100.
+        :param str create_time: Create time of the NAT gateway.
+        :param str id: ID of the NAT gateway.
+        :param int max_concurrent: The upper limit of concurrent connection of NAT gateway, the available values include: 1000000,3000000,10000000. Default is 1000000.
+        :param str name: Name of the NAT gateway.
+        :param str state: State of the NAT gateway.
+        :param Mapping[str, Any] tags: The available tags within this NAT gateway.
+        :param str vpc_id: ID of the VPC.
+        """
         pulumi.set(__self__, "assigned_eip_sets", assigned_eip_sets)
         pulumi.set(__self__, "bandwidth", bandwidth)
         pulumi.set(__self__, "create_time", create_time)
@@ -117,46 +158,73 @@ class GatewaysNatResult(dict):
     @property
     @pulumi.getter(name="assignedEipSets")
     def assigned_eip_sets(self) -> Sequence[str]:
+        """
+        EIP IP address set bound to the gateway. The value of at least 1.
+        """
         return pulumi.get(self, "assigned_eip_sets")
 
     @property
     @pulumi.getter
     def bandwidth(self) -> int:
+        """
+        The maximum public network output bandwidth of NAT gateway (unit: Mbps), the available values include: 20,50,100,200,500,1000,2000,5000. Default is 100.
+        """
         return pulumi.get(self, "bandwidth")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the NAT gateway.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the NAT gateway.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="maxConcurrent")
     def max_concurrent(self) -> int:
+        """
+        The upper limit of concurrent connection of NAT gateway, the available values include: 1000000,3000000,10000000. Default is 1000000.
+        """
         return pulumi.get(self, "max_concurrent")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the NAT gateway.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def state(self) -> str:
+        """
+        State of the NAT gateway.
+        """
         return pulumi.get(self, "state")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        The available tags within this NAT gateway.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the VPC.
+        """
         return pulumi.get(self, "vpc_id")
 
 

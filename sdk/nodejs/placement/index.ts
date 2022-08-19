@@ -5,8 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getGroups";
 export * from "./group";
-export * from "./groups";
 
 // Import resources to register:
 import { Group } from "./group";

@@ -97,7 +97,27 @@ class StorageAttachment(pulumi.CustomResource):
                  storage_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a StorageAttachment resource with the given unique name, props, and options.
+        Provides a CBS storage attachment resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        attachment = tencentcloud.cbs.StorageAttachment("attachment",
+            instance_id="ins-jqlegd42",
+            storage_id="disk-kdt0sq6m")
+        ```
+
+        ## Import
+
+        CBS storage attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cbs/storageAttachment:StorageAttachment attachment disk-41s6jwy4
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] instance_id: ID of the CVM instance.
@@ -110,7 +130,27 @@ class StorageAttachment(pulumi.CustomResource):
                  args: StorageAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a StorageAttachment resource with the given unique name, props, and options.
+        Provides a CBS storage attachment resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        attachment = tencentcloud.cbs.StorageAttachment("attachment",
+            instance_id="ins-jqlegd42",
+            storage_id="disk-kdt0sq6m")
+        ```
+
+        ## Import
+
+        CBS storage attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cbs/storageAttachment:StorageAttachment attachment disk-41s6jwy4
+        ```
+
         :param str resource_name: The name of the resource.
         :param StorageAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

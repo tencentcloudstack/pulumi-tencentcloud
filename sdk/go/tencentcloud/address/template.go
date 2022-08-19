@@ -11,6 +11,42 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to manage address template.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Address"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Address.NewTemplate(ctx, "foo", &Address.TemplateArgs{
+// 			Addresses: pulumi.StringArray{
+// 				pulumi.String("10.0.0.1"),
+// 				pulumi.String("10.0.1.0/24"),
+// 				pulumi.String("10.0.0.1-10.0.0.100"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Address template can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Address/template:Template foo ipm-makf7k9e"
+// ```
 type Template struct {
 	pulumi.CustomResourceState
 

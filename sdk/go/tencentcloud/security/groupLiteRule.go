@@ -11,18 +11,63 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create security group some lite rules quickly.
+//
+// > **NOTE:** It can't be used with tencentcloud_security_group_rule, and don't create multiple Security.GroupRule resources, otherwise it may cause problems.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
+// 			SecurityGroupId: fooGroup.ID(),
+// 			Ingresses: pulumi.StringArray{
+// 				pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
+// 				pulumi.String("DROP#8.8.8.8#80,90#UDP"),
+// 				pulumi.String("ACCEPT#0.0.0.0/0#80-90#TCP"),
+// 				pulumi.String("ACCEPT#sg-7ixn3foj#80-90#TCP"),
+// 				pulumi.String("ACCEPT#ipm-epjq5kn0#80-90#TCP"),
+// 				pulumi.String("ACCEPT#ipmg-3loavam6#80-90#TCP"),
+// 			},
+// 			Egresses: pulumi.StringArray{
+// 				pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
+// 				pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
+// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Security group lite rule can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Security/groupLiteRule:GroupLiteRule tencentcloud_security_group_lite_rule.foo sg-ey3wmiz1
+// ```
 type GroupLiteRule struct {
 	pulumi.CustomResourceState
 
-	// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-	// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-	// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Egresses pulumi.StringArrayOutput `pulumi:"egresses"`
-	// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-	// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-	// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Ingresses pulumi.StringArrayOutput `pulumi:"ingresses"`
 	// ID of the security group.
 	SecurityGroupId pulumi.StringOutput `pulumi:"securityGroupId"`
@@ -60,30 +105,18 @@ func GetGroupLiteRule(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering GroupLiteRule resources.
 type groupLiteRuleState struct {
-	// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-	// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-	// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Egresses []string `pulumi:"egresses"`
-	// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-	// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-	// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Ingresses []string `pulumi:"ingresses"`
 	// ID of the security group.
 	SecurityGroupId *string `pulumi:"securityGroupId"`
 }
 
 type GroupLiteRuleState struct {
-	// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-	// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-	// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Egresses pulumi.StringArrayInput
-	// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-	// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-	// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Ingresses pulumi.StringArrayInput
 	// ID of the security group.
 	SecurityGroupId pulumi.StringPtrInput
@@ -94,15 +127,9 @@ func (GroupLiteRuleState) ElementType() reflect.Type {
 }
 
 type groupLiteRuleArgs struct {
-	// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-	// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-	// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Egresses []string `pulumi:"egresses"`
-	// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-	// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-	// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Ingresses []string `pulumi:"ingresses"`
 	// ID of the security group.
 	SecurityGroupId string `pulumi:"securityGroupId"`
@@ -110,15 +137,9 @@ type groupLiteRuleArgs struct {
 
 // The set of arguments for constructing a GroupLiteRule resource.
 type GroupLiteRuleArgs struct {
-	// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-	// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-	// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Egresses pulumi.StringArrayInput
-	// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-	// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-	// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-	// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+	// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 	Ingresses pulumi.StringArrayInput
 	// ID of the security group.
 	SecurityGroupId pulumi.StringInput
@@ -211,18 +232,12 @@ func (o GroupLiteRuleOutput) ToGroupLiteRuleOutputWithContext(ctx context.Contex
 	return o
 }
 
-// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+// Egress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 func (o GroupLiteRuleOutput) Egresses() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *GroupLiteRule) pulumi.StringArrayOutput { return v.Egresses }).(pulumi.StringArrayOutput)
 }
 
-// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of
-// 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address
-// Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`,
-// `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
+// Ingress rules set. A rule must match the following format: [action]#[source]#[port]#[protocol]. The available value of 'action' is `ACCEPT` and `DROP`. The 'source' can be an IP address network, segment, security group ID and Address Template ID. The 'port' valid format is `80`, `80,443`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When 'protocol' is `ICMP` or `ALL`, the 'port' must be `ALL`.
 func (o GroupLiteRuleOutput) Ingresses() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *GroupLiteRule) pulumi.StringArrayOutput { return v.Ingresses }).(pulumi.StringArrayOutput)
 }

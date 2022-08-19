@@ -11,6 +11,39 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a HA VIP EIP attachment.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Ha.NewVipEipAttachment(ctx, "foo", &Ha.VipEipAttachmentArgs{
+// 			AddressIp: pulumi.String("1.1.1.1"),
+// 			HavipId:   pulumi.String("havip-kjqwe4ba"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// HA VIP EIP attachment can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Ha/vipEipAttachment:VipEipAttachment foo havip-kjqwe4ba#1.1.1.1
+// ```
 type VipEipAttachment struct {
 	pulumi.CustomResourceState
 

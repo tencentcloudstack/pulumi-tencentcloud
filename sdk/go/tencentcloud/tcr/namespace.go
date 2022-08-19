@@ -11,6 +11,39 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create tcr namespace.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Tcr.NewNamespace(ctx, "foo", &Tcr.NamespaceArgs{
+// 			InstanceId: pulumi.String(""),
+// 			IsPublic:   pulumi.Bool(true),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// tcr namespace can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Tcr/namespace:Namespace foo cls-cda1iex1#namespace
+// ```
 type Namespace struct {
 	pulumi.CustomResourceState
 
@@ -18,8 +51,7 @@ type Namespace struct {
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// Indicate that the namespace is public or not. Default is `false`.
 	IsPublic pulumi.BoolPtrOutput `pulumi:"isPublic"`
-	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-	// `_`, `-`), and cannot start, end or continue with separators.
+	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
 	Name pulumi.StringOutput `pulumi:"name"`
 }
 
@@ -59,8 +91,7 @@ type namespaceState struct {
 	InstanceId *string `pulumi:"instanceId"`
 	// Indicate that the namespace is public or not. Default is `false`.
 	IsPublic *bool `pulumi:"isPublic"`
-	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-	// `_`, `-`), and cannot start, end or continue with separators.
+	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
 	Name *string `pulumi:"name"`
 }
 
@@ -69,8 +100,7 @@ type NamespaceState struct {
 	InstanceId pulumi.StringPtrInput
 	// Indicate that the namespace is public or not. Default is `false`.
 	IsPublic pulumi.BoolPtrInput
-	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-	// `_`, `-`), and cannot start, end or continue with separators.
+	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
 	Name pulumi.StringPtrInput
 }
 
@@ -83,8 +113,7 @@ type namespaceArgs struct {
 	InstanceId string `pulumi:"instanceId"`
 	// Indicate that the namespace is public or not. Default is `false`.
 	IsPublic *bool `pulumi:"isPublic"`
-	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-	// `_`, `-`), and cannot start, end or continue with separators.
+	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
 	Name *string `pulumi:"name"`
 }
 
@@ -94,8 +123,7 @@ type NamespaceArgs struct {
 	InstanceId pulumi.StringInput
 	// Indicate that the namespace is public or not. Default is `false`.
 	IsPublic pulumi.BoolPtrInput
-	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-	// `_`, `-`), and cannot start, end or continue with separators.
+	// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
 	Name pulumi.StringPtrInput
 }
 
@@ -196,8 +224,7 @@ func (o NamespaceOutput) IsPublic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Namespace) pulumi.BoolPtrOutput { return v.IsPublic }).(pulumi.BoolPtrOutput)
 }
 
-// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`,
-// `_`, `-`), and cannot start, end or continue with separators.
+// Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`), and cannot start, end or continue with separators.
 func (o NamespaceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Namespace) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }

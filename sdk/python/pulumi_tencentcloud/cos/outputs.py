@@ -10,383 +10,30 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
-    'BucketsBucketListResult',
-    'BucketsBucketListCorsRuleResult',
-    'BucketsBucketListLifecycleRuleResult',
-    'BucketsBucketListLifecycleRuleExpirationResult',
-    'BucketsBucketListLifecycleRuleNonCurrentExpirationResult',
-    'BucketsBucketListLifecycleRuleNonCurrentTransitionResult',
-    'BucketsBucketListLifecycleRuleTransitionResult',
-    'BucketsBucketListOriginDomainRuleResult',
-    'BucketsBucketListOriginPullRuleResult',
-    'BucketsBucketListWebsiteResult',
-    'CosBucketCorsRule',
-    'CosBucketLifecycleRule',
-    'CosBucketLifecycleRuleExpiration',
-    'CosBucketLifecycleRuleNonCurrentExpiration',
-    'CosBucketLifecycleRuleNonCurrentTransition',
-    'CosBucketLifecycleRuleTransition',
-    'CosBucketOriginDomainRule',
-    'CosBucketOriginPullRule',
-    'CosBucketReplicaRule',
-    'CosBucketWebsite',
+    'BucketCorsRule',
+    'BucketLifecycleRule',
+    'BucketLifecycleRuleExpiration',
+    'BucketLifecycleRuleNonCurrentExpiration',
+    'BucketLifecycleRuleNonCurrentTransition',
+    'BucketLifecycleRuleTransition',
+    'BucketOriginDomainRule',
+    'BucketOriginPullRule',
+    'BucketReplicaRule',
+    'BucketWebsite',
+    'GetBucketsBucketListResult',
+    'GetBucketsBucketListCorsRuleResult',
+    'GetBucketsBucketListLifecycleRuleResult',
+    'GetBucketsBucketListLifecycleRuleExpirationResult',
+    'GetBucketsBucketListLifecycleRuleNonCurrentExpirationResult',
+    'GetBucketsBucketListLifecycleRuleNonCurrentTransitionResult',
+    'GetBucketsBucketListLifecycleRuleTransitionResult',
+    'GetBucketsBucketListOriginDomainRuleResult',
+    'GetBucketsBucketListOriginPullRuleResult',
+    'GetBucketsBucketListWebsiteResult',
 ]
 
 @pulumi.output_type
-class BucketsBucketListResult(dict):
-    def __init__(__self__, *,
-                 acl: str,
-                 acl_body: str,
-                 bucket: str,
-                 cors_rules: Sequence['outputs.BucketsBucketListCorsRuleResult'],
-                 cos_bucket_url: str,
-                 lifecycle_rules: Sequence['outputs.BucketsBucketListLifecycleRuleResult'],
-                 origin_domain_rules: Sequence['outputs.BucketsBucketListOriginDomainRuleResult'],
-                 origin_pull_rules: Sequence['outputs.BucketsBucketListOriginPullRuleResult'],
-                 tags: Mapping[str, Any],
-                 websites: Sequence['outputs.BucketsBucketListWebsiteResult']):
-        pulumi.set(__self__, "acl", acl)
-        pulumi.set(__self__, "acl_body", acl_body)
-        pulumi.set(__self__, "bucket", bucket)
-        pulumi.set(__self__, "cors_rules", cors_rules)
-        pulumi.set(__self__, "cos_bucket_url", cos_bucket_url)
-        pulumi.set(__self__, "lifecycle_rules", lifecycle_rules)
-        pulumi.set(__self__, "origin_domain_rules", origin_domain_rules)
-        pulumi.set(__self__, "origin_pull_rules", origin_pull_rules)
-        pulumi.set(__self__, "tags", tags)
-        pulumi.set(__self__, "websites", websites)
-
-    @property
-    @pulumi.getter
-    def acl(self) -> str:
-        return pulumi.get(self, "acl")
-
-    @property
-    @pulumi.getter(name="aclBody")
-    def acl_body(self) -> str:
-        return pulumi.get(self, "acl_body")
-
-    @property
-    @pulumi.getter
-    def bucket(self) -> str:
-        return pulumi.get(self, "bucket")
-
-    @property
-    @pulumi.getter(name="corsRules")
-    def cors_rules(self) -> Sequence['outputs.BucketsBucketListCorsRuleResult']:
-        return pulumi.get(self, "cors_rules")
-
-    @property
-    @pulumi.getter(name="cosBucketUrl")
-    def cos_bucket_url(self) -> str:
-        return pulumi.get(self, "cos_bucket_url")
-
-    @property
-    @pulumi.getter(name="lifecycleRules")
-    def lifecycle_rules(self) -> Sequence['outputs.BucketsBucketListLifecycleRuleResult']:
-        return pulumi.get(self, "lifecycle_rules")
-
-    @property
-    @pulumi.getter(name="originDomainRules")
-    def origin_domain_rules(self) -> Sequence['outputs.BucketsBucketListOriginDomainRuleResult']:
-        return pulumi.get(self, "origin_domain_rules")
-
-    @property
-    @pulumi.getter(name="originPullRules")
-    def origin_pull_rules(self) -> Sequence['outputs.BucketsBucketListOriginPullRuleResult']:
-        return pulumi.get(self, "origin_pull_rules")
-
-    @property
-    @pulumi.getter
-    def tags(self) -> Mapping[str, Any]:
-        return pulumi.get(self, "tags")
-
-    @property
-    @pulumi.getter
-    def websites(self) -> Sequence['outputs.BucketsBucketListWebsiteResult']:
-        return pulumi.get(self, "websites")
-
-
-@pulumi.output_type
-class BucketsBucketListCorsRuleResult(dict):
-    def __init__(__self__, *,
-                 allowed_headers: Sequence[str],
-                 allowed_methods: Sequence[str],
-                 allowed_origins: Sequence[str],
-                 expose_headers: Sequence[str],
-                 max_age_seconds: int):
-        pulumi.set(__self__, "allowed_headers", allowed_headers)
-        pulumi.set(__self__, "allowed_methods", allowed_methods)
-        pulumi.set(__self__, "allowed_origins", allowed_origins)
-        pulumi.set(__self__, "expose_headers", expose_headers)
-        pulumi.set(__self__, "max_age_seconds", max_age_seconds)
-
-    @property
-    @pulumi.getter(name="allowedHeaders")
-    def allowed_headers(self) -> Sequence[str]:
-        return pulumi.get(self, "allowed_headers")
-
-    @property
-    @pulumi.getter(name="allowedMethods")
-    def allowed_methods(self) -> Sequence[str]:
-        return pulumi.get(self, "allowed_methods")
-
-    @property
-    @pulumi.getter(name="allowedOrigins")
-    def allowed_origins(self) -> Sequence[str]:
-        return pulumi.get(self, "allowed_origins")
-
-    @property
-    @pulumi.getter(name="exposeHeaders")
-    def expose_headers(self) -> Sequence[str]:
-        return pulumi.get(self, "expose_headers")
-
-    @property
-    @pulumi.getter(name="maxAgeSeconds")
-    def max_age_seconds(self) -> int:
-        return pulumi.get(self, "max_age_seconds")
-
-
-@pulumi.output_type
-class BucketsBucketListLifecycleRuleResult(dict):
-    def __init__(__self__, *,
-                 expirations: Sequence['outputs.BucketsBucketListLifecycleRuleExpirationResult'],
-                 filter_prefix: str,
-                 non_current_expirations: Sequence['outputs.BucketsBucketListLifecycleRuleNonCurrentExpirationResult'],
-                 non_current_transitions: Sequence['outputs.BucketsBucketListLifecycleRuleNonCurrentTransitionResult'],
-                 transitions: Sequence['outputs.BucketsBucketListLifecycleRuleTransitionResult']):
-        pulumi.set(__self__, "expirations", expirations)
-        pulumi.set(__self__, "filter_prefix", filter_prefix)
-        pulumi.set(__self__, "non_current_expirations", non_current_expirations)
-        pulumi.set(__self__, "non_current_transitions", non_current_transitions)
-        pulumi.set(__self__, "transitions", transitions)
-
-    @property
-    @pulumi.getter
-    def expirations(self) -> Sequence['outputs.BucketsBucketListLifecycleRuleExpirationResult']:
-        return pulumi.get(self, "expirations")
-
-    @property
-    @pulumi.getter(name="filterPrefix")
-    def filter_prefix(self) -> str:
-        return pulumi.get(self, "filter_prefix")
-
-    @property
-    @pulumi.getter(name="nonCurrentExpirations")
-    def non_current_expirations(self) -> Sequence['outputs.BucketsBucketListLifecycleRuleNonCurrentExpirationResult']:
-        return pulumi.get(self, "non_current_expirations")
-
-    @property
-    @pulumi.getter(name="nonCurrentTransitions")
-    def non_current_transitions(self) -> Sequence['outputs.BucketsBucketListLifecycleRuleNonCurrentTransitionResult']:
-        return pulumi.get(self, "non_current_transitions")
-
-    @property
-    @pulumi.getter
-    def transitions(self) -> Sequence['outputs.BucketsBucketListLifecycleRuleTransitionResult']:
-        return pulumi.get(self, "transitions")
-
-
-@pulumi.output_type
-class BucketsBucketListLifecycleRuleExpirationResult(dict):
-    def __init__(__self__, *,
-                 date: str,
-                 days: int):
-        pulumi.set(__self__, "date", date)
-        pulumi.set(__self__, "days", days)
-
-    @property
-    @pulumi.getter
-    def date(self) -> str:
-        return pulumi.get(self, "date")
-
-    @property
-    @pulumi.getter
-    def days(self) -> int:
-        return pulumi.get(self, "days")
-
-
-@pulumi.output_type
-class BucketsBucketListLifecycleRuleNonCurrentExpirationResult(dict):
-    def __init__(__self__, *,
-                 non_current_days: int):
-        pulumi.set(__self__, "non_current_days", non_current_days)
-
-    @property
-    @pulumi.getter(name="nonCurrentDays")
-    def non_current_days(self) -> int:
-        return pulumi.get(self, "non_current_days")
-
-
-@pulumi.output_type
-class BucketsBucketListLifecycleRuleNonCurrentTransitionResult(dict):
-    def __init__(__self__, *,
-                 non_current_days: int,
-                 storage_class: str):
-        pulumi.set(__self__, "non_current_days", non_current_days)
-        pulumi.set(__self__, "storage_class", storage_class)
-
-    @property
-    @pulumi.getter(name="nonCurrentDays")
-    def non_current_days(self) -> int:
-        return pulumi.get(self, "non_current_days")
-
-    @property
-    @pulumi.getter(name="storageClass")
-    def storage_class(self) -> str:
-        return pulumi.get(self, "storage_class")
-
-
-@pulumi.output_type
-class BucketsBucketListLifecycleRuleTransitionResult(dict):
-    def __init__(__self__, *,
-                 date: str,
-                 days: int,
-                 storage_class: str):
-        pulumi.set(__self__, "date", date)
-        pulumi.set(__self__, "days", days)
-        pulumi.set(__self__, "storage_class", storage_class)
-
-    @property
-    @pulumi.getter
-    def date(self) -> str:
-        return pulumi.get(self, "date")
-
-    @property
-    @pulumi.getter
-    def days(self) -> int:
-        return pulumi.get(self, "days")
-
-    @property
-    @pulumi.getter(name="storageClass")
-    def storage_class(self) -> str:
-        return pulumi.get(self, "storage_class")
-
-
-@pulumi.output_type
-class BucketsBucketListOriginDomainRuleResult(dict):
-    def __init__(__self__, *,
-                 domain: str,
-                 status: Optional[str] = None,
-                 type: Optional[str] = None):
-        pulumi.set(__self__, "domain", domain)
-        if status is not None:
-            pulumi.set(__self__, "status", status)
-        if type is not None:
-            pulumi.set(__self__, "type", type)
-
-    @property
-    @pulumi.getter
-    def domain(self) -> str:
-        return pulumi.get(self, "domain")
-
-    @property
-    @pulumi.getter
-    def status(self) -> Optional[str]:
-        return pulumi.get(self, "status")
-
-    @property
-    @pulumi.getter
-    def type(self) -> Optional[str]:
-        return pulumi.get(self, "type")
-
-
-@pulumi.output_type
-class BucketsBucketListOriginPullRuleResult(dict):
-    def __init__(__self__, *,
-                 host: str,
-                 priority: int,
-                 custom_http_headers: Optional[Mapping[str, Any]] = None,
-                 follow_http_headers: Optional[Sequence[str]] = None,
-                 follow_query_string: Optional[bool] = None,
-                 follow_redirection: Optional[bool] = None,
-                 prefix: Optional[str] = None,
-                 protocol: Optional[str] = None,
-                 sync_back_to_source: Optional[bool] = None):
-        pulumi.set(__self__, "host", host)
-        pulumi.set(__self__, "priority", priority)
-        if custom_http_headers is not None:
-            pulumi.set(__self__, "custom_http_headers", custom_http_headers)
-        if follow_http_headers is not None:
-            pulumi.set(__self__, "follow_http_headers", follow_http_headers)
-        if follow_query_string is not None:
-            pulumi.set(__self__, "follow_query_string", follow_query_string)
-        if follow_redirection is not None:
-            pulumi.set(__self__, "follow_redirection", follow_redirection)
-        if prefix is not None:
-            pulumi.set(__self__, "prefix", prefix)
-        if protocol is not None:
-            pulumi.set(__self__, "protocol", protocol)
-        if sync_back_to_source is not None:
-            pulumi.set(__self__, "sync_back_to_source", sync_back_to_source)
-
-    @property
-    @pulumi.getter
-    def host(self) -> str:
-        return pulumi.get(self, "host")
-
-    @property
-    @pulumi.getter
-    def priority(self) -> int:
-        return pulumi.get(self, "priority")
-
-    @property
-    @pulumi.getter(name="customHttpHeaders")
-    def custom_http_headers(self) -> Optional[Mapping[str, Any]]:
-        return pulumi.get(self, "custom_http_headers")
-
-    @property
-    @pulumi.getter(name="followHttpHeaders")
-    def follow_http_headers(self) -> Optional[Sequence[str]]:
-        return pulumi.get(self, "follow_http_headers")
-
-    @property
-    @pulumi.getter(name="followQueryString")
-    def follow_query_string(self) -> Optional[bool]:
-        return pulumi.get(self, "follow_query_string")
-
-    @property
-    @pulumi.getter(name="followRedirection")
-    def follow_redirection(self) -> Optional[bool]:
-        return pulumi.get(self, "follow_redirection")
-
-    @property
-    @pulumi.getter
-    def prefix(self) -> Optional[str]:
-        return pulumi.get(self, "prefix")
-
-    @property
-    @pulumi.getter
-    def protocol(self) -> Optional[str]:
-        return pulumi.get(self, "protocol")
-
-    @property
-    @pulumi.getter(name="syncBackToSource")
-    def sync_back_to_source(self) -> Optional[bool]:
-        return pulumi.get(self, "sync_back_to_source")
-
-
-@pulumi.output_type
-class BucketsBucketListWebsiteResult(dict):
-    def __init__(__self__, *,
-                 error_document: str,
-                 index_document: str):
-        pulumi.set(__self__, "error_document", error_document)
-        pulumi.set(__self__, "index_document", index_document)
-
-    @property
-    @pulumi.getter(name="errorDocument")
-    def error_document(self) -> str:
-        return pulumi.get(self, "error_document")
-
-    @property
-    @pulumi.getter(name="indexDocument")
-    def index_document(self) -> str:
-        return pulumi.get(self, "index_document")
-
-
-@pulumi.output_type
-class CosBucketCorsRule(dict):
+class BucketCorsRule(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -402,14 +49,14 @@ class CosBucketCorsRule(dict):
             suggest = "max_age_seconds"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CosBucketCorsRule. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in BucketCorsRule. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        CosBucketCorsRule.__key_warning(key)
+        BucketCorsRule.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        CosBucketCorsRule.__key_warning(key)
+        BucketCorsRule.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -418,6 +65,13 @@ class CosBucketCorsRule(dict):
                  allowed_origins: Sequence[str],
                  expose_headers: Optional[Sequence[str]] = None,
                  max_age_seconds: Optional[int] = None):
+        """
+        :param Sequence[str] allowed_headers: Specifies which headers are allowed.
+        :param Sequence[str] allowed_methods: Specifies which methods are allowed. Can be `GET`, `PUT`, `POST`, `DELETE` or `HEAD`.
+        :param Sequence[str] allowed_origins: Specifies which origins are allowed.
+        :param Sequence[str] expose_headers: Specifies expose header in the response.
+        :param int max_age_seconds: Specifies time in seconds that browser can cache the response for a preflight request.
+        """
         pulumi.set(__self__, "allowed_headers", allowed_headers)
         pulumi.set(__self__, "allowed_methods", allowed_methods)
         pulumi.set(__self__, "allowed_origins", allowed_origins)
@@ -429,31 +83,46 @@ class CosBucketCorsRule(dict):
     @property
     @pulumi.getter(name="allowedHeaders")
     def allowed_headers(self) -> Sequence[str]:
+        """
+        Specifies which headers are allowed.
+        """
         return pulumi.get(self, "allowed_headers")
 
     @property
     @pulumi.getter(name="allowedMethods")
     def allowed_methods(self) -> Sequence[str]:
+        """
+        Specifies which methods are allowed. Can be `GET`, `PUT`, `POST`, `DELETE` or `HEAD`.
+        """
         return pulumi.get(self, "allowed_methods")
 
     @property
     @pulumi.getter(name="allowedOrigins")
     def allowed_origins(self) -> Sequence[str]:
+        """
+        Specifies which origins are allowed.
+        """
         return pulumi.get(self, "allowed_origins")
 
     @property
     @pulumi.getter(name="exposeHeaders")
     def expose_headers(self) -> Optional[Sequence[str]]:
+        """
+        Specifies expose header in the response.
+        """
         return pulumi.get(self, "expose_headers")
 
     @property
     @pulumi.getter(name="maxAgeSeconds")
     def max_age_seconds(self) -> Optional[int]:
+        """
+        Specifies time in seconds that browser can cache the response for a preflight request.
+        """
         return pulumi.get(self, "max_age_seconds")
 
 
 @pulumi.output_type
-class CosBucketLifecycleRule(dict):
+class BucketLifecycleRule(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -465,23 +134,31 @@ class CosBucketLifecycleRule(dict):
             suggest = "non_current_transitions"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CosBucketLifecycleRule. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in BucketLifecycleRule. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        CosBucketLifecycleRule.__key_warning(key)
+        BucketLifecycleRule.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        CosBucketLifecycleRule.__key_warning(key)
+        BucketLifecycleRule.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
                  filter_prefix: str,
-                 expiration: Optional['outputs.CosBucketLifecycleRuleExpiration'] = None,
+                 expiration: Optional['outputs.BucketLifecycleRuleExpiration'] = None,
                  id: Optional[str] = None,
-                 non_current_expiration: Optional['outputs.CosBucketLifecycleRuleNonCurrentExpiration'] = None,
-                 non_current_transitions: Optional[Sequence['outputs.CosBucketLifecycleRuleNonCurrentTransition']] = None,
-                 transitions: Optional[Sequence['outputs.CosBucketLifecycleRuleTransition']] = None):
+                 non_current_expiration: Optional['outputs.BucketLifecycleRuleNonCurrentExpiration'] = None,
+                 non_current_transitions: Optional[Sequence['outputs.BucketLifecycleRuleNonCurrentTransition']] = None,
+                 transitions: Optional[Sequence['outputs.BucketLifecycleRuleTransition']] = None):
+        """
+        :param str filter_prefix: Object key prefix identifying one or more objects to which the rule applies.
+        :param 'BucketLifecycleRuleExpirationArgs' expiration: Specifies a period in the object's expire (documented below).
+        :param str id: A unique identifier for the rule. It can be up to 255 characters.
+        :param 'BucketLifecycleRuleNonCurrentExpirationArgs' non_current_expiration: Specifies when non current object versions shall expire.
+        :param Sequence['BucketLifecycleRuleNonCurrentTransitionArgs'] non_current_transitions: Specifies a period in the non current object's transitions.
+        :param Sequence['BucketLifecycleRuleTransitionArgs'] transitions: Specifies a period in the object's transitions (documented below).
+        """
         pulumi.set(__self__, "filter_prefix", filter_prefix)
         if expiration is not None:
             pulumi.set(__self__, "expiration", expiration)
@@ -497,36 +174,54 @@ class CosBucketLifecycleRule(dict):
     @property
     @pulumi.getter(name="filterPrefix")
     def filter_prefix(self) -> str:
+        """
+        Object key prefix identifying one or more objects to which the rule applies.
+        """
         return pulumi.get(self, "filter_prefix")
 
     @property
     @pulumi.getter
-    def expiration(self) -> Optional['outputs.CosBucketLifecycleRuleExpiration']:
+    def expiration(self) -> Optional['outputs.BucketLifecycleRuleExpiration']:
+        """
+        Specifies a period in the object's expire (documented below).
+        """
         return pulumi.get(self, "expiration")
 
     @property
     @pulumi.getter
     def id(self) -> Optional[str]:
+        """
+        A unique identifier for the rule. It can be up to 255 characters.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="nonCurrentExpiration")
-    def non_current_expiration(self) -> Optional['outputs.CosBucketLifecycleRuleNonCurrentExpiration']:
+    def non_current_expiration(self) -> Optional['outputs.BucketLifecycleRuleNonCurrentExpiration']:
+        """
+        Specifies when non current object versions shall expire.
+        """
         return pulumi.get(self, "non_current_expiration")
 
     @property
     @pulumi.getter(name="nonCurrentTransitions")
-    def non_current_transitions(self) -> Optional[Sequence['outputs.CosBucketLifecycleRuleNonCurrentTransition']]:
+    def non_current_transitions(self) -> Optional[Sequence['outputs.BucketLifecycleRuleNonCurrentTransition']]:
+        """
+        Specifies a period in the non current object's transitions.
+        """
         return pulumi.get(self, "non_current_transitions")
 
     @property
     @pulumi.getter
-    def transitions(self) -> Optional[Sequence['outputs.CosBucketLifecycleRuleTransition']]:
+    def transitions(self) -> Optional[Sequence['outputs.BucketLifecycleRuleTransition']]:
+        """
+        Specifies a period in the object's transitions (documented below).
+        """
         return pulumi.get(self, "transitions")
 
 
 @pulumi.output_type
-class CosBucketLifecycleRuleExpiration(dict):
+class BucketLifecycleRuleExpiration(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -534,20 +229,25 @@ class CosBucketLifecycleRuleExpiration(dict):
             suggest = "delete_marker"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CosBucketLifecycleRuleExpiration. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in BucketLifecycleRuleExpiration. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        CosBucketLifecycleRuleExpiration.__key_warning(key)
+        BucketLifecycleRuleExpiration.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        CosBucketLifecycleRuleExpiration.__key_warning(key)
+        BucketLifecycleRuleExpiration.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
                  date: Optional[str] = None,
                  days: Optional[int] = None,
                  delete_marker: Optional[bool] = None):
+        """
+        :param str date: Specifies the date after which you want the corresponding action to take effect.
+        :param int days: Specifies the number of days after object creation when the specific rule action takes effect.
+        :param bool delete_marker: Indicates whether the delete marker of an expired object will be removed.
+        """
         if date is not None:
             pulumi.set(__self__, "date", date)
         if days is not None:
@@ -558,21 +258,30 @@ class CosBucketLifecycleRuleExpiration(dict):
     @property
     @pulumi.getter
     def date(self) -> Optional[str]:
+        """
+        Specifies the date after which you want the corresponding action to take effect.
+        """
         return pulumi.get(self, "date")
 
     @property
     @pulumi.getter
     def days(self) -> Optional[int]:
+        """
+        Specifies the number of days after object creation when the specific rule action takes effect.
+        """
         return pulumi.get(self, "days")
 
     @property
     @pulumi.getter(name="deleteMarker")
     def delete_marker(self) -> Optional[bool]:
+        """
+        Indicates whether the delete marker of an expired object will be removed.
+        """
         return pulumi.get(self, "delete_marker")
 
 
 @pulumi.output_type
-class CosBucketLifecycleRuleNonCurrentExpiration(dict):
+class BucketLifecycleRuleNonCurrentExpiration(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -580,29 +289,35 @@ class CosBucketLifecycleRuleNonCurrentExpiration(dict):
             suggest = "non_current_days"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CosBucketLifecycleRuleNonCurrentExpiration. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in BucketLifecycleRuleNonCurrentExpiration. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        CosBucketLifecycleRuleNonCurrentExpiration.__key_warning(key)
+        BucketLifecycleRuleNonCurrentExpiration.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        CosBucketLifecycleRuleNonCurrentExpiration.__key_warning(key)
+        BucketLifecycleRuleNonCurrentExpiration.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
                  non_current_days: Optional[int] = None):
+        """
+        :param int non_current_days: Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.
+        """
         if non_current_days is not None:
             pulumi.set(__self__, "non_current_days", non_current_days)
 
     @property
     @pulumi.getter(name="nonCurrentDays")
     def non_current_days(self) -> Optional[int]:
+        """
+        Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.
+        """
         return pulumi.get(self, "non_current_days")
 
 
 @pulumi.output_type
-class CosBucketLifecycleRuleNonCurrentTransition(dict):
+class BucketLifecycleRuleNonCurrentTransition(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -612,19 +327,23 @@ class CosBucketLifecycleRuleNonCurrentTransition(dict):
             suggest = "non_current_days"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CosBucketLifecycleRuleNonCurrentTransition. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in BucketLifecycleRuleNonCurrentTransition. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        CosBucketLifecycleRuleNonCurrentTransition.__key_warning(key)
+        BucketLifecycleRuleNonCurrentTransition.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        CosBucketLifecycleRuleNonCurrentTransition.__key_warning(key)
+        BucketLifecycleRuleNonCurrentTransition.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
                  storage_class: str,
                  non_current_days: Optional[int] = None):
+        """
+        :param str storage_class: Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        :param int non_current_days: Number of days after non current object creation when the specific rule action takes effect.
+        """
         pulumi.set(__self__, "storage_class", storage_class)
         if non_current_days is not None:
             pulumi.set(__self__, "non_current_days", non_current_days)
@@ -632,16 +351,22 @@ class CosBucketLifecycleRuleNonCurrentTransition(dict):
     @property
     @pulumi.getter(name="storageClass")
     def storage_class(self) -> str:
+        """
+        Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        """
         return pulumi.get(self, "storage_class")
 
     @property
     @pulumi.getter(name="nonCurrentDays")
     def non_current_days(self) -> Optional[int]:
+        """
+        Number of days after non current object creation when the specific rule action takes effect.
+        """
         return pulumi.get(self, "non_current_days")
 
 
 @pulumi.output_type
-class CosBucketLifecycleRuleTransition(dict):
+class BucketLifecycleRuleTransition(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -649,20 +374,25 @@ class CosBucketLifecycleRuleTransition(dict):
             suggest = "storage_class"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CosBucketLifecycleRuleTransition. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in BucketLifecycleRuleTransition. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        CosBucketLifecycleRuleTransition.__key_warning(key)
+        BucketLifecycleRuleTransition.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        CosBucketLifecycleRuleTransition.__key_warning(key)
+        BucketLifecycleRuleTransition.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
                  storage_class: str,
                  date: Optional[str] = None,
                  days: Optional[int] = None):
+        """
+        :param str storage_class: Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        :param str date: Specifies the date after which you want the corresponding action to take effect.
+        :param int days: Specifies the number of days after object creation when the specific rule action takes effect.
+        """
         pulumi.set(__self__, "storage_class", storage_class)
         if date is not None:
             pulumi.set(__self__, "date", date)
@@ -672,21 +402,701 @@ class CosBucketLifecycleRuleTransition(dict):
     @property
     @pulumi.getter(name="storageClass")
     def storage_class(self) -> str:
+        """
+        Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+        """
         return pulumi.get(self, "storage_class")
 
     @property
     @pulumi.getter
     def date(self) -> Optional[str]:
+        """
+        Specifies the date after which you want the corresponding action to take effect.
+        """
         return pulumi.get(self, "date")
 
     @property
     @pulumi.getter
     def days(self) -> Optional[int]:
+        """
+        Specifies the number of days after object creation when the specific rule action takes effect.
+        """
         return pulumi.get(self, "days")
 
 
 @pulumi.output_type
-class CosBucketOriginDomainRule(dict):
+class BucketOriginDomainRule(dict):
+    def __init__(__self__, *,
+                 domain: str,
+                 status: Optional[str] = None,
+                 type: Optional[str] = None):
+        """
+        :param str domain: Specify domain host.
+        :param str status: Domain status, default: `ENABLED`.
+        :param str type: Specify origin domain type, available values: `REST`, `WEBSITE`, `ACCELERATE`, default: `REST`.
+        """
+        pulumi.set(__self__, "domain", domain)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        Specify domain host.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter
+    def status(self) -> Optional[str]:
+        """
+        Domain status, default: `ENABLED`.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        """
+        Specify origin domain type, available values: `REST`, `WEBSITE`, `ACCELERATE`, default: `REST`.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class BucketOriginPullRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "customHttpHeaders":
+            suggest = "custom_http_headers"
+        elif key == "followHttpHeaders":
+            suggest = "follow_http_headers"
+        elif key == "followQueryString":
+            suggest = "follow_query_string"
+        elif key == "followRedirection":
+            suggest = "follow_redirection"
+        elif key == "syncBackToSource":
+            suggest = "sync_back_to_source"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BucketOriginPullRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BucketOriginPullRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BucketOriginPullRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 host: str,
+                 priority: int,
+                 custom_http_headers: Optional[Mapping[str, Any]] = None,
+                 follow_http_headers: Optional[Sequence[str]] = None,
+                 follow_query_string: Optional[bool] = None,
+                 follow_redirection: Optional[bool] = None,
+                 prefix: Optional[str] = None,
+                 protocol: Optional[str] = None,
+                 sync_back_to_source: Optional[bool] = None):
+        """
+        :param str host: Allows only a domain name or IP address. You can optionally append a port number to the address.
+        :param int priority: Priority of origin-pull rules, do not set the same value for multiple rules.
+        :param Mapping[str, Any] custom_http_headers: Specifies the custom headers that you can add for COS to access your origin server.
+        :param Sequence[str] follow_http_headers: Specifies the pass through headers when accessing the origin server.
+        :param bool follow_query_string: Specifies whether to pass through COS request query string when accessing the origin server.
+        :param bool follow_redirection: Specifies whether to follow 3XX redirect to another origin server to pull data from.
+        :param str prefix: Triggers the origin-pull rule when the requested file name matches this prefix.
+        :param str protocol: the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
+        :param bool sync_back_to_source: If `true`, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
+        """
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "priority", priority)
+        if custom_http_headers is not None:
+            pulumi.set(__self__, "custom_http_headers", custom_http_headers)
+        if follow_http_headers is not None:
+            pulumi.set(__self__, "follow_http_headers", follow_http_headers)
+        if follow_query_string is not None:
+            pulumi.set(__self__, "follow_query_string", follow_query_string)
+        if follow_redirection is not None:
+            pulumi.set(__self__, "follow_redirection", follow_redirection)
+        if prefix is not None:
+            pulumi.set(__self__, "prefix", prefix)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if sync_back_to_source is not None:
+            pulumi.set(__self__, "sync_back_to_source", sync_back_to_source)
+
+    @property
+    @pulumi.getter
+    def host(self) -> str:
+        """
+        Allows only a domain name or IP address. You can optionally append a port number to the address.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter
+    def priority(self) -> int:
+        """
+        Priority of origin-pull rules, do not set the same value for multiple rules.
+        """
+        return pulumi.get(self, "priority")
+
+    @property
+    @pulumi.getter(name="customHttpHeaders")
+    def custom_http_headers(self) -> Optional[Mapping[str, Any]]:
+        """
+        Specifies the custom headers that you can add for COS to access your origin server.
+        """
+        return pulumi.get(self, "custom_http_headers")
+
+    @property
+    @pulumi.getter(name="followHttpHeaders")
+    def follow_http_headers(self) -> Optional[Sequence[str]]:
+        """
+        Specifies the pass through headers when accessing the origin server.
+        """
+        return pulumi.get(self, "follow_http_headers")
+
+    @property
+    @pulumi.getter(name="followQueryString")
+    def follow_query_string(self) -> Optional[bool]:
+        """
+        Specifies whether to pass through COS request query string when accessing the origin server.
+        """
+        return pulumi.get(self, "follow_query_string")
+
+    @property
+    @pulumi.getter(name="followRedirection")
+    def follow_redirection(self) -> Optional[bool]:
+        """
+        Specifies whether to follow 3XX redirect to another origin server to pull data from.
+        """
+        return pulumi.get(self, "follow_redirection")
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> Optional[str]:
+        """
+        Triggers the origin-pull rule when the requested file name matches this prefix.
+        """
+        return pulumi.get(self, "prefix")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[str]:
+        """
+        the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="syncBackToSource")
+    def sync_back_to_source(self) -> Optional[bool]:
+        """
+        If `true`, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
+        """
+        return pulumi.get(self, "sync_back_to_source")
+
+
+@pulumi.output_type
+class BucketReplicaRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "destinationBucket":
+            suggest = "destination_bucket"
+        elif key == "destinationStorageClass":
+            suggest = "destination_storage_class"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BucketReplicaRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BucketReplicaRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BucketReplicaRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 destination_bucket: str,
+                 status: str,
+                 destination_storage_class: Optional[str] = None,
+                 id: Optional[str] = None,
+                 prefix: Optional[str] = None):
+        """
+        :param str destination_bucket: Destination bucket identifier, format: `qcs::cos:<region>::<bucketname-appid>`. NOTE: destination bucket must enable versioning.
+        :param str status: Status identifier, available values: `Enabled`, `Disabled`.
+        :param str destination_storage_class: Storage class of destination, available values: `STANDARD`, `INTELLIGENT_TIERING`, `STANDARD_IA`. default is following current class of destination.
+        :param str id: Name of a specific rule.
+        :param str prefix: Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.
+        """
+        pulumi.set(__self__, "destination_bucket", destination_bucket)
+        pulumi.set(__self__, "status", status)
+        if destination_storage_class is not None:
+            pulumi.set(__self__, "destination_storage_class", destination_storage_class)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if prefix is not None:
+            pulumi.set(__self__, "prefix", prefix)
+
+    @property
+    @pulumi.getter(name="destinationBucket")
+    def destination_bucket(self) -> str:
+        """
+        Destination bucket identifier, format: `qcs::cos:<region>::<bucketname-appid>`. NOTE: destination bucket must enable versioning.
+        """
+        return pulumi.get(self, "destination_bucket")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Status identifier, available values: `Enabled`, `Disabled`.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="destinationStorageClass")
+    def destination_storage_class(self) -> Optional[str]:
+        """
+        Storage class of destination, available values: `STANDARD`, `INTELLIGENT_TIERING`, `STANDARD_IA`. default is following current class of destination.
+        """
+        return pulumi.get(self, "destination_storage_class")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        """
+        Name of a specific rule.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> Optional[str]:
+        """
+        Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.
+        """
+        return pulumi.get(self, "prefix")
+
+
+@pulumi.output_type
+class BucketWebsite(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "errorDocument":
+            suggest = "error_document"
+        elif key == "indexDocument":
+            suggest = "index_document"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BucketWebsite. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BucketWebsite.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BucketWebsite.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 error_document: Optional[str] = None,
+                 index_document: Optional[str] = None):
+        """
+        :param str error_document: An absolute path to the document to return in case of a 4XX error.
+        :param str index_document: COS returns this index document when requests are made to the root domain or any of the subfolders.
+        """
+        if error_document is not None:
+            pulumi.set(__self__, "error_document", error_document)
+        if index_document is not None:
+            pulumi.set(__self__, "index_document", index_document)
+
+    @property
+    @pulumi.getter(name="errorDocument")
+    def error_document(self) -> Optional[str]:
+        """
+        An absolute path to the document to return in case of a 4XX error.
+        """
+        return pulumi.get(self, "error_document")
+
+    @property
+    @pulumi.getter(name="indexDocument")
+    def index_document(self) -> Optional[str]:
+        """
+        COS returns this index document when requests are made to the root domain or any of the subfolders.
+        """
+        return pulumi.get(self, "index_document")
+
+
+@pulumi.output_type
+class GetBucketsBucketListResult(dict):
+    def __init__(__self__, *,
+                 acl: str,
+                 acl_body: str,
+                 bucket: str,
+                 cors_rules: Sequence['outputs.GetBucketsBucketListCorsRuleResult'],
+                 cos_bucket_url: str,
+                 lifecycle_rules: Sequence['outputs.GetBucketsBucketListLifecycleRuleResult'],
+                 origin_domain_rules: Sequence['outputs.GetBucketsBucketListOriginDomainRuleResult'],
+                 origin_pull_rules: Sequence['outputs.GetBucketsBucketListOriginPullRuleResult'],
+                 tags: Mapping[str, Any],
+                 websites: Sequence['outputs.GetBucketsBucketListWebsiteResult']):
+        """
+        :param str acl: Bucket access control configurations.
+        :param str acl_body: Bucket verbose acl configurations.
+        :param str bucket: Bucket name, the format likes `<bucket>-<appid>`.
+        :param Sequence['GetBucketsBucketListCorsRuleArgs'] cors_rules: A list of CORS rule configurations.
+        :param str cos_bucket_url: The URL of this cos bucket.
+        :param Sequence['GetBucketsBucketListLifecycleRuleArgs'] lifecycle_rules: The lifecycle configuration of a bucket.
+        :param Sequence['GetBucketsBucketListOriginDomainRuleArgs'] origin_domain_rules: Bucket origin domain rules.
+        :param Sequence['GetBucketsBucketListOriginPullRuleArgs'] origin_pull_rules: Bucket Origin-Pull rules.
+        :param Mapping[str, Any] tags: Tags to filter bucket.
+        :param Sequence['GetBucketsBucketListWebsiteArgs'] websites: A list of one element containing configuration parameters used when the bucket is used as a website.
+        """
+        pulumi.set(__self__, "acl", acl)
+        pulumi.set(__self__, "acl_body", acl_body)
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "cors_rules", cors_rules)
+        pulumi.set(__self__, "cos_bucket_url", cos_bucket_url)
+        pulumi.set(__self__, "lifecycle_rules", lifecycle_rules)
+        pulumi.set(__self__, "origin_domain_rules", origin_domain_rules)
+        pulumi.set(__self__, "origin_pull_rules", origin_pull_rules)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "websites", websites)
+
+    @property
+    @pulumi.getter
+    def acl(self) -> str:
+        """
+        Bucket access control configurations.
+        """
+        return pulumi.get(self, "acl")
+
+    @property
+    @pulumi.getter(name="aclBody")
+    def acl_body(self) -> str:
+        """
+        Bucket verbose acl configurations.
+        """
+        return pulumi.get(self, "acl_body")
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> str:
+        """
+        Bucket name, the format likes `<bucket>-<appid>`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @property
+    @pulumi.getter(name="corsRules")
+    def cors_rules(self) -> Sequence['outputs.GetBucketsBucketListCorsRuleResult']:
+        """
+        A list of CORS rule configurations.
+        """
+        return pulumi.get(self, "cors_rules")
+
+    @property
+    @pulumi.getter(name="cosBucketUrl")
+    def cos_bucket_url(self) -> str:
+        """
+        The URL of this cos bucket.
+        """
+        return pulumi.get(self, "cos_bucket_url")
+
+    @property
+    @pulumi.getter(name="lifecycleRules")
+    def lifecycle_rules(self) -> Sequence['outputs.GetBucketsBucketListLifecycleRuleResult']:
+        """
+        The lifecycle configuration of a bucket.
+        """
+        return pulumi.get(self, "lifecycle_rules")
+
+    @property
+    @pulumi.getter(name="originDomainRules")
+    def origin_domain_rules(self) -> Sequence['outputs.GetBucketsBucketListOriginDomainRuleResult']:
+        """
+        Bucket origin domain rules.
+        """
+        return pulumi.get(self, "origin_domain_rules")
+
+    @property
+    @pulumi.getter(name="originPullRules")
+    def origin_pull_rules(self) -> Sequence['outputs.GetBucketsBucketListOriginPullRuleResult']:
+        """
+        Bucket Origin-Pull rules.
+        """
+        return pulumi.get(self, "origin_pull_rules")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Mapping[str, Any]:
+        """
+        Tags to filter bucket.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter
+    def websites(self) -> Sequence['outputs.GetBucketsBucketListWebsiteResult']:
+        """
+        A list of one element containing configuration parameters used when the bucket is used as a website.
+        """
+        return pulumi.get(self, "websites")
+
+
+@pulumi.output_type
+class GetBucketsBucketListCorsRuleResult(dict):
+    def __init__(__self__, *,
+                 allowed_headers: Sequence[str],
+                 allowed_methods: Sequence[str],
+                 allowed_origins: Sequence[str],
+                 expose_headers: Sequence[str],
+                 max_age_seconds: int):
+        """
+        :param Sequence[str] allowed_headers: Specifies which headers are allowed.
+        :param Sequence[str] allowed_methods: Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.
+        :param Sequence[str] allowed_origins: Specifies which origins are allowed.
+        :param Sequence[str] expose_headers: Specifies expose header in the response.
+        :param int max_age_seconds: Specifies time in seconds that browser can cache the response for a preflight request.
+        """
+        pulumi.set(__self__, "allowed_headers", allowed_headers)
+        pulumi.set(__self__, "allowed_methods", allowed_methods)
+        pulumi.set(__self__, "allowed_origins", allowed_origins)
+        pulumi.set(__self__, "expose_headers", expose_headers)
+        pulumi.set(__self__, "max_age_seconds", max_age_seconds)
+
+    @property
+    @pulumi.getter(name="allowedHeaders")
+    def allowed_headers(self) -> Sequence[str]:
+        """
+        Specifies which headers are allowed.
+        """
+        return pulumi.get(self, "allowed_headers")
+
+    @property
+    @pulumi.getter(name="allowedMethods")
+    def allowed_methods(self) -> Sequence[str]:
+        """
+        Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.
+        """
+        return pulumi.get(self, "allowed_methods")
+
+    @property
+    @pulumi.getter(name="allowedOrigins")
+    def allowed_origins(self) -> Sequence[str]:
+        """
+        Specifies which origins are allowed.
+        """
+        return pulumi.get(self, "allowed_origins")
+
+    @property
+    @pulumi.getter(name="exposeHeaders")
+    def expose_headers(self) -> Sequence[str]:
+        """
+        Specifies expose header in the response.
+        """
+        return pulumi.get(self, "expose_headers")
+
+    @property
+    @pulumi.getter(name="maxAgeSeconds")
+    def max_age_seconds(self) -> int:
+        """
+        Specifies time in seconds that browser can cache the response for a preflight request.
+        """
+        return pulumi.get(self, "max_age_seconds")
+
+
+@pulumi.output_type
+class GetBucketsBucketListLifecycleRuleResult(dict):
+    def __init__(__self__, *,
+                 expirations: Sequence['outputs.GetBucketsBucketListLifecycleRuleExpirationResult'],
+                 filter_prefix: str,
+                 non_current_expirations: Sequence['outputs.GetBucketsBucketListLifecycleRuleNonCurrentExpirationResult'],
+                 non_current_transitions: Sequence['outputs.GetBucketsBucketListLifecycleRuleNonCurrentTransitionResult'],
+                 transitions: Sequence['outputs.GetBucketsBucketListLifecycleRuleTransitionResult']):
+        """
+        :param Sequence['GetBucketsBucketListLifecycleRuleExpirationArgs'] expirations: Specifies a period in the object's expire.
+        :param str filter_prefix: Object key prefix identifying one or more objects to which the rule applies.
+        :param Sequence['GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs'] non_current_expirations: Specifies when non current object versions shall expire.
+        :param Sequence['GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs'] non_current_transitions: Specifies when to transition objects of non current versions and the target storage class.
+        :param Sequence['GetBucketsBucketListLifecycleRuleTransitionArgs'] transitions: Specifies a period in the object's transitions.
+        """
+        pulumi.set(__self__, "expirations", expirations)
+        pulumi.set(__self__, "filter_prefix", filter_prefix)
+        pulumi.set(__self__, "non_current_expirations", non_current_expirations)
+        pulumi.set(__self__, "non_current_transitions", non_current_transitions)
+        pulumi.set(__self__, "transitions", transitions)
+
+    @property
+    @pulumi.getter
+    def expirations(self) -> Sequence['outputs.GetBucketsBucketListLifecycleRuleExpirationResult']:
+        """
+        Specifies a period in the object's expire.
+        """
+        return pulumi.get(self, "expirations")
+
+    @property
+    @pulumi.getter(name="filterPrefix")
+    def filter_prefix(self) -> str:
+        """
+        Object key prefix identifying one or more objects to which the rule applies.
+        """
+        return pulumi.get(self, "filter_prefix")
+
+    @property
+    @pulumi.getter(name="nonCurrentExpirations")
+    def non_current_expirations(self) -> Sequence['outputs.GetBucketsBucketListLifecycleRuleNonCurrentExpirationResult']:
+        """
+        Specifies when non current object versions shall expire.
+        """
+        return pulumi.get(self, "non_current_expirations")
+
+    @property
+    @pulumi.getter(name="nonCurrentTransitions")
+    def non_current_transitions(self) -> Sequence['outputs.GetBucketsBucketListLifecycleRuleNonCurrentTransitionResult']:
+        """
+        Specifies when to transition objects of non current versions and the target storage class.
+        """
+        return pulumi.get(self, "non_current_transitions")
+
+    @property
+    @pulumi.getter
+    def transitions(self) -> Sequence['outputs.GetBucketsBucketListLifecycleRuleTransitionResult']:
+        """
+        Specifies a period in the object's transitions.
+        """
+        return pulumi.get(self, "transitions")
+
+
+@pulumi.output_type
+class GetBucketsBucketListLifecycleRuleExpirationResult(dict):
+    def __init__(__self__, *,
+                 date: str,
+                 days: int):
+        """
+        :param str date: Specifies the date after which you want the corresponding action to take effect.
+        :param int days: Specifies the number of days after object creation when the specific rule action takes effect.
+        """
+        pulumi.set(__self__, "date", date)
+        pulumi.set(__self__, "days", days)
+
+    @property
+    @pulumi.getter
+    def date(self) -> str:
+        """
+        Specifies the date after which you want the corresponding action to take effect.
+        """
+        return pulumi.get(self, "date")
+
+    @property
+    @pulumi.getter
+    def days(self) -> int:
+        """
+        Specifies the number of days after object creation when the specific rule action takes effect.
+        """
+        return pulumi.get(self, "days")
+
+
+@pulumi.output_type
+class GetBucketsBucketListLifecycleRuleNonCurrentExpirationResult(dict):
+    def __init__(__self__, *,
+                 non_current_days: int):
+        """
+        :param int non_current_days: Number of days after non current object creation when the specific rule action takes effect.
+        """
+        pulumi.set(__self__, "non_current_days", non_current_days)
+
+    @property
+    @pulumi.getter(name="nonCurrentDays")
+    def non_current_days(self) -> int:
+        """
+        Number of days after non current object creation when the specific rule action takes effect.
+        """
+        return pulumi.get(self, "non_current_days")
+
+
+@pulumi.output_type
+class GetBucketsBucketListLifecycleRuleNonCurrentTransitionResult(dict):
+    def __init__(__self__, *,
+                 non_current_days: int,
+                 storage_class: str):
+        """
+        :param int non_current_days: Number of days after non current object creation when the specific rule action takes effect.
+        :param str storage_class: Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.
+        """
+        pulumi.set(__self__, "non_current_days", non_current_days)
+        pulumi.set(__self__, "storage_class", storage_class)
+
+    @property
+    @pulumi.getter(name="nonCurrentDays")
+    def non_current_days(self) -> int:
+        """
+        Number of days after non current object creation when the specific rule action takes effect.
+        """
+        return pulumi.get(self, "non_current_days")
+
+    @property
+    @pulumi.getter(name="storageClass")
+    def storage_class(self) -> str:
+        """
+        Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.
+        """
+        return pulumi.get(self, "storage_class")
+
+
+@pulumi.output_type
+class GetBucketsBucketListLifecycleRuleTransitionResult(dict):
+    def __init__(__self__, *,
+                 date: str,
+                 days: int,
+                 storage_class: str):
+        """
+        :param str date: Specifies the date after which you want the corresponding action to take effect.
+        :param int days: Specifies the number of days after object creation when the specific rule action takes effect.
+        :param str storage_class: Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.
+        """
+        pulumi.set(__self__, "date", date)
+        pulumi.set(__self__, "days", days)
+        pulumi.set(__self__, "storage_class", storage_class)
+
+    @property
+    @pulumi.getter
+    def date(self) -> str:
+        """
+        Specifies the date after which you want the corresponding action to take effect.
+        """
+        return pulumi.get(self, "date")
+
+    @property
+    @pulumi.getter
+    def days(self) -> int:
+        """
+        Specifies the number of days after object creation when the specific rule action takes effect.
+        """
+        return pulumi.get(self, "days")
+
+    @property
+    @pulumi.getter(name="storageClass")
+    def storage_class(self) -> str:
+        """
+        Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.
+        """
+        return pulumi.get(self, "storage_class")
+
+
+@pulumi.output_type
+class GetBucketsBucketListOriginDomainRuleResult(dict):
     def __init__(__self__, *,
                  domain: str,
                  status: Optional[str] = None,
@@ -714,32 +1124,7 @@ class CosBucketOriginDomainRule(dict):
 
 
 @pulumi.output_type
-class CosBucketOriginPullRule(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "customHttpHeaders":
-            suggest = "custom_http_headers"
-        elif key == "followHttpHeaders":
-            suggest = "follow_http_headers"
-        elif key == "followQueryString":
-            suggest = "follow_query_string"
-        elif key == "followRedirection":
-            suggest = "follow_redirection"
-        elif key == "syncBackToSource":
-            suggest = "sync_back_to_source"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CosBucketOriginPullRule. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        CosBucketOriginPullRule.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        CosBucketOriginPullRule.__key_warning(key)
-        return super().get(key, default)
-
+class GetBucketsBucketListOriginPullRuleResult(dict):
     def __init__(__self__, *,
                  host: str,
                  priority: int,
@@ -814,104 +1199,31 @@ class CosBucketOriginPullRule(dict):
 
 
 @pulumi.output_type
-class CosBucketReplicaRule(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "destinationBucket":
-            suggest = "destination_bucket"
-        elif key == "destinationStorageClass":
-            suggest = "destination_storage_class"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CosBucketReplicaRule. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        CosBucketReplicaRule.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        CosBucketReplicaRule.__key_warning(key)
-        return super().get(key, default)
-
+class GetBucketsBucketListWebsiteResult(dict):
     def __init__(__self__, *,
-                 destination_bucket: str,
-                 status: str,
-                 destination_storage_class: Optional[str] = None,
-                 id: Optional[str] = None,
-                 prefix: Optional[str] = None):
-        pulumi.set(__self__, "destination_bucket", destination_bucket)
-        pulumi.set(__self__, "status", status)
-        if destination_storage_class is not None:
-            pulumi.set(__self__, "destination_storage_class", destination_storage_class)
-        if id is not None:
-            pulumi.set(__self__, "id", id)
-        if prefix is not None:
-            pulumi.set(__self__, "prefix", prefix)
-
-    @property
-    @pulumi.getter(name="destinationBucket")
-    def destination_bucket(self) -> str:
-        return pulumi.get(self, "destination_bucket")
-
-    @property
-    @pulumi.getter
-    def status(self) -> str:
-        return pulumi.get(self, "status")
-
-    @property
-    @pulumi.getter(name="destinationStorageClass")
-    def destination_storage_class(self) -> Optional[str]:
-        return pulumi.get(self, "destination_storage_class")
-
-    @property
-    @pulumi.getter
-    def id(self) -> Optional[str]:
-        return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter
-    def prefix(self) -> Optional[str]:
-        return pulumi.get(self, "prefix")
-
-
-@pulumi.output_type
-class CosBucketWebsite(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "errorDocument":
-            suggest = "error_document"
-        elif key == "indexDocument":
-            suggest = "index_document"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CosBucketWebsite. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        CosBucketWebsite.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        CosBucketWebsite.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 error_document: Optional[str] = None,
-                 index_document: Optional[str] = None):
-        if error_document is not None:
-            pulumi.set(__self__, "error_document", error_document)
-        if index_document is not None:
-            pulumi.set(__self__, "index_document", index_document)
+                 error_document: str,
+                 index_document: str):
+        """
+        :param str error_document: An absolute path to the document to return in case of a 4XX error.
+        :param str index_document: COS returns this index document when requests are made to the root domain or any of the subfolders.
+        """
+        pulumi.set(__self__, "error_document", error_document)
+        pulumi.set(__self__, "index_document", index_document)
 
     @property
     @pulumi.getter(name="errorDocument")
-    def error_document(self) -> Optional[str]:
+    def error_document(self) -> str:
+        """
+        An absolute path to the document to return in case of a 4XX error.
+        """
         return pulumi.get(self, "error_document")
 
     @property
     @pulumi.getter(name="indexDocument")
-    def index_document(self) -> Optional[str]:
+    def index_document(self) -> str:
+        """
+        COS returns this index document when requests are made to the root domain or any of the subfolders.
+        """
         return pulumi.get(self, "index_document")
 
 

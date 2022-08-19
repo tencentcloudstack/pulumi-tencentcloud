@@ -4,6 +4,21 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create postgresql readonly attachment.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const attach = new tencentcloud.postgresql.ReadonlyAttachment("attach", {
+ *     dbInstanceId: tencentcloud_postgresql_readonly_instance.foo.id,
+ *     readOnlyGroupId: tencentcloud_postgresql_readonly_group.group.id,
+ * });
+ * ```
+ */
 export class ReadonlyAttachment extends pulumi.CustomResource {
     /**
      * Get an existing ReadonlyAttachment resource's state with the given name, ID, and optional extra

@@ -5,6 +5,65 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource for bind objects to a alarm policy resource.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instances = tencentcloud.Instances.getInstance({});
+ * const policy = new tencentcloud.monitor.AlarmPolicy("policy", {
+ *     policyName: "hello",
+ *     monitorType: "MT_QCE",
+ *     enable: 1,
+ *     projectId: 1244035,
+ *     namespace: "cvm_device",
+ *     conditions: {
+ *         isUnionRule: 1,
+ *         rules: [{
+ *             metricName: "CpuUsage",
+ *             period: 60,
+ *             operator: "ge",
+ *             value: "89.9",
+ *             continuePeriod: 1,
+ *             noticeFrequency: 3600,
+ *             isPowerNotice: 0,
+ *         }],
+ *     },
+ *     eventConditions: [
+ *         {
+ *             metricName: "ping_unreachable",
+ *         },
+ *         {
+ *             metricName: "guest_reboot",
+ *         },
+ *     ],
+ *     noticeIds: ["notice-l9ziyxw6"],
+ *     triggerTasks: [{
+ *         type: "AS",
+ *         taskConfig: "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
+ *     }],
+ * });
+ * //for cvm
+ * const binding = new tencentcloud.monitor.PolicyBindingObject("binding", {
+ *     policyId: policy.id,
+ *     dimensions: [{
+ *         dimensionsJson: instances.then(instances => `{"unInstanceId":"${instances.instanceLists?[0]?.instanceId}"}`),
+ *     }],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Monitor Policy Binding Object can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Monitor/policyBindingObject:PolicyBindingObject binding policyId
+ * ```
+ */
 export class PolicyBindingObject extends pulumi.CustomResource {
     /**
      * Get an existing PolicyBindingObject resource's state with the given name, ID, and optional extra

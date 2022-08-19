@@ -10,6 +10,38 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CFS access group.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cfs.NewAccessGroup(ctx, "foo", &Cfs.AccessGroupArgs{
+// 			Description: pulumi.String("test"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CFS access group can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup foo pgroup-7nx89k7l
+// ```
 type AccessGroup struct {
 	pulumi.CustomResourceState
 

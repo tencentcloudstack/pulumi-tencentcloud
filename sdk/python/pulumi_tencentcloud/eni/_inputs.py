@@ -19,6 +19,11 @@ class InstanceIpv4Args:
                  ip: pulumi.Input[str],
                  primary: pulumi.Input[bool],
                  description: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] ip: Intranet IP.
+        :param pulumi.Input[bool] primary: Indicates whether the IP is primary.
+        :param pulumi.Input[str] description: Description of the IP, maximum length 25.
+        """
         pulumi.set(__self__, "ip", ip)
         pulumi.set(__self__, "primary", primary)
         if description is not None:
@@ -27,6 +32,9 @@ class InstanceIpv4Args:
     @property
     @pulumi.getter
     def ip(self) -> pulumi.Input[str]:
+        """
+        Intranet IP.
+        """
         return pulumi.get(self, "ip")
 
     @ip.setter
@@ -36,6 +44,9 @@ class InstanceIpv4Args:
     @property
     @pulumi.getter
     def primary(self) -> pulumi.Input[bool]:
+        """
+        Indicates whether the IP is primary.
+        """
         return pulumi.get(self, "primary")
 
     @primary.setter
@@ -45,6 +56,9 @@ class InstanceIpv4Args:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Description of the IP, maximum length 25.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -58,6 +72,11 @@ class InstanceIpv4InfoArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  ip: Optional[pulumi.Input[str]] = None,
                  primary: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] description: Description of the IP, maximum length 25.
+        :param pulumi.Input[str] ip: Intranet IP.
+        :param pulumi.Input[bool] primary: Indicates whether the IP is primary.
+        """
         if description is not None:
             pulumi.set(__self__, "description", description)
         if ip is not None:
@@ -68,6 +87,9 @@ class InstanceIpv4InfoArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Description of the IP, maximum length 25.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -77,6 +99,9 @@ class InstanceIpv4InfoArgs:
     @property
     @pulumi.getter
     def ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Intranet IP.
+        """
         return pulumi.get(self, "ip")
 
     @ip.setter
@@ -86,6 +111,9 @@ class InstanceIpv4InfoArgs:
     @property
     @pulumi.getter
     def primary(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicates whether the IP is primary.
+        """
         return pulumi.get(self, "primary")
 
     @primary.setter

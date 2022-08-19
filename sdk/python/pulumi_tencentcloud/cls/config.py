@@ -26,9 +26,7 @@ class ConfigArgs:
         The set of arguments for constructing a Config resource.
         :param pulumi.Input['ConfigExtractRuleArgs'] extract_rule: Extraction rule. If ExtractRule is set, LogType must be set.
         :param pulumi.Input[Sequence[pulumi.Input['ConfigExcludePathArgs']]] exclude_paths: Collection path blocklist.
-        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-               minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-               Default value: minimalist_log.
+        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         :param pulumi.Input[str] name: Collection configuration name.
         :param pulumi.Input[str] output: Log topic ID (TopicId) of collection configuration.
         :param pulumi.Input[str] path: Log collection path containing the filename.
@@ -76,9 +74,7 @@ class ConfigArgs:
     @pulumi.getter(name="logType")
     def log_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-        minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-        Default value: minimalist_log.
+        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         """
         return pulumi.get(self, "log_type")
 
@@ -149,9 +145,7 @@ class _ConfigState:
         Input properties used for looking up and filtering Config resources.
         :param pulumi.Input[Sequence[pulumi.Input['ConfigExcludePathArgs']]] exclude_paths: Collection path blocklist.
         :param pulumi.Input['ConfigExtractRuleArgs'] extract_rule: Extraction rule. If ExtractRule is set, LogType must be set.
-        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-               minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-               Default value: minimalist_log.
+        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         :param pulumi.Input[str] name: Collection configuration name.
         :param pulumi.Input[str] output: Log topic ID (TopicId) of collection configuration.
         :param pulumi.Input[str] path: Log collection path containing the filename.
@@ -200,9 +194,7 @@ class _ConfigState:
     @pulumi.getter(name="logType")
     def log_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-        minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-        Default value: minimalist_log.
+        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         """
         return pulumi.get(self, "log_type")
 
@@ -273,14 +265,50 @@ class Config(pulumi.CustomResource):
                  user_define_rule: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Config resource with the given unique name, props, and options.
+        Provides a resource to create a cls config
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        config = tencentcloud.cls.Config("config",
+            exclude_paths=[
+                tencentcloud.cls.ConfigExcludePathArgs(
+                    type="Path",
+                    value="/data",
+                ),
+                tencentcloud.cls.ConfigExcludePathArgs(
+                    type="File",
+                    value="/file",
+                ),
+            ],
+            extract_rule=tencentcloud.cls.ConfigExtractRuleArgs(
+                backtracking=-1,
+                filter_key_regexes=[
+                    tencentcloud.cls.ConfigExtractRuleFilterKeyRegexArgs(
+                        key="key1",
+                        regex="value1",
+                    ),
+                    tencentcloud.cls.ConfigExtractRuleFilterKeyRegexArgs(
+                        key="key2",
+                        regex="value2",
+                    ),
+                ],
+                un_match_log_key="config",
+                un_match_up_load_switch=True,
+            ),
+            log_type="json_log",
+            output="4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
+            path="/var/log/kubernetes")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConfigExcludePathArgs']]]] exclude_paths: Collection path blocklist.
         :param pulumi.Input[pulumi.InputType['ConfigExtractRuleArgs']] extract_rule: Extraction rule. If ExtractRule is set, LogType must be set.
-        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-               minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-               Default value: minimalist_log.
+        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         :param pulumi.Input[str] name: Collection configuration name.
         :param pulumi.Input[str] output: Log topic ID (TopicId) of collection configuration.
         :param pulumi.Input[str] path: Log collection path containing the filename.
@@ -293,7 +321,45 @@ class Config(pulumi.CustomResource):
                  args: ConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Config resource with the given unique name, props, and options.
+        Provides a resource to create a cls config
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        config = tencentcloud.cls.Config("config",
+            exclude_paths=[
+                tencentcloud.cls.ConfigExcludePathArgs(
+                    type="Path",
+                    value="/data",
+                ),
+                tencentcloud.cls.ConfigExcludePathArgs(
+                    type="File",
+                    value="/file",
+                ),
+            ],
+            extract_rule=tencentcloud.cls.ConfigExtractRuleArgs(
+                backtracking=-1,
+                filter_key_regexes=[
+                    tencentcloud.cls.ConfigExtractRuleFilterKeyRegexArgs(
+                        key="key1",
+                        regex="value1",
+                    ),
+                    tencentcloud.cls.ConfigExtractRuleFilterKeyRegexArgs(
+                        key="key2",
+                        regex="value2",
+                    ),
+                ],
+                un_match_log_key="config",
+                un_match_up_load_switch=True,
+            ),
+            log_type="json_log",
+            output="4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
+            path="/var/log/kubernetes")
+        ```
+
         :param str resource_name: The name of the resource.
         :param ConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -363,9 +429,7 @@ class Config(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConfigExcludePathArgs']]]] exclude_paths: Collection path blocklist.
         :param pulumi.Input[pulumi.InputType['ConfigExtractRuleArgs']] extract_rule: Extraction rule. If ExtractRule is set, LogType must be set.
-        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-               minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-               Default value: minimalist_log.
+        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         :param pulumi.Input[str] name: Collection configuration name.
         :param pulumi.Input[str] output: Log topic ID (TopicId) of collection configuration.
         :param pulumi.Input[str] path: Log collection path containing the filename.
@@ -404,9 +468,7 @@ class Config(pulumi.CustomResource):
     @pulumi.getter(name="logType")
     def log_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-        minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-        Default value: minimalist_log.
+        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         """
         return pulumi.get(self, "log_type")
 

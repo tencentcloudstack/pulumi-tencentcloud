@@ -11,13 +11,19 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
 {
 
     [OutputType]
-    public sealed class CCPolicyV2Threshold
+    public sealed class CcPolicyV2Threshold
     {
+        /// <summary>
+        /// domain.
+        /// </summary>
         public readonly string Domain;
+        /// <summary>
+        /// Cleaning threshold, -1 indicates that the `default` mode is turned on.
+        /// </summary>
         public readonly int Threshold;
 
         [OutputConstructor]
-        private CCPolicyV2Threshold(
+        private CcPolicyV2Threshold(
             string domain,
 
             int threshold)

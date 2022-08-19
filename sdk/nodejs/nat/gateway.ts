@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a NAT gateway.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Nat.Gateway("foo", {
+ *     assignedEipSets: ["1.1.1.1"],
+ *     bandwidth: 100,
+ *     maxConcurrent: 1000000,
+ *     tags: {
+ *         test: "tf",
+ *     },
+ *     vpcId: "vpc-4xxr2cy7",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * NAT gateway can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+ * ```
+ */
 export class Gateway extends pulumi.CustomResource {
     /**
      * Get an existing Gateway resource's state with the given name, ID, and optional extra
@@ -37,8 +65,7 @@ export class Gateway extends pulumi.CustomResource {
      */
     public readonly assignedEipSets!: pulumi.Output<string[]>;
     /**
-     * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-     * `1000`, `2000`, `5000`. Default is 100.
+     * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
      */
     public readonly bandwidth!: pulumi.Output<number | undefined>;
     /**
@@ -46,8 +73,7 @@ export class Gateway extends pulumi.CustomResource {
      */
     public /*out*/ readonly createdTime!: pulumi.Output<string>;
     /**
-     * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-     * `1000000`.
+     * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
      */
     public readonly maxConcurrent!: pulumi.Output<number | undefined>;
     /**
@@ -113,8 +139,7 @@ export interface GatewayState {
      */
     assignedEipSets?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-     * `1000`, `2000`, `5000`. Default is 100.
+     * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
      */
     bandwidth?: pulumi.Input<number>;
     /**
@@ -122,8 +147,7 @@ export interface GatewayState {
      */
     createdTime?: pulumi.Input<string>;
     /**
-     * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-     * `1000000`.
+     * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
      */
     maxConcurrent?: pulumi.Input<number>;
     /**
@@ -149,13 +173,11 @@ export interface GatewayArgs {
      */
     assignedEipSets: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-     * `1000`, `2000`, `5000`. Default is 100.
+     * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
      */
     bandwidth?: pulumi.Input<number>;
     /**
-     * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-     * `1000000`.
+     * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
      */
     maxConcurrent?: pulumi.Input<number>;
     /**

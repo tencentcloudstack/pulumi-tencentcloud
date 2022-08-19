@@ -97,7 +97,27 @@ class VipEipAttachment(pulumi.CustomResource):
                  havip_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a VipEipAttachment resource with the given unique name, props, and options.
+        Provides a resource to create a HA VIP EIP attachment.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ha.VipEipAttachment("foo",
+            address_ip="1.1.1.1",
+            havip_id="havip-kjqwe4ba")
+        ```
+
+        ## Import
+
+        HA VIP EIP attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ha/vipEipAttachment:VipEipAttachment foo havip-kjqwe4ba#1.1.1.1
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] address_ip: Public address of the EIP.
@@ -110,7 +130,27 @@ class VipEipAttachment(pulumi.CustomResource):
                  args: VipEipAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a VipEipAttachment resource with the given unique name, props, and options.
+        Provides a resource to create a HA VIP EIP attachment.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ha.VipEipAttachment("foo",
+            address_ip="1.1.1.1",
+            havip_id="havip-kjqwe4ba")
+        ```
+
+        ## Import
+
+        HA VIP EIP attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ha/vipEipAttachment:VipEipAttachment foo havip-kjqwe4ba#1.1.1.1
+        ```
+
         :param str resource_name: The name of the resource.
         :param VipEipAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

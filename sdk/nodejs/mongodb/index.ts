@@ -5,11 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getInstances";
+export * from "./getZoneConfig";
 export * from "./instance";
-export * from "./instances";
 export * from "./shardingInstance";
 export * from "./standbyInstance";
-export * from "./zoneConfig";
 
 // Import resources to register:
 import { Instance } from "./instance";

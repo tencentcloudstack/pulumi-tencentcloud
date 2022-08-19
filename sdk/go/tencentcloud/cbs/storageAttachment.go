@@ -11,6 +11,39 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a CBS storage attachment resource.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cbs.NewStorageAttachment(ctx, "attachment", &Cbs.StorageAttachmentArgs{
+// 			InstanceId: pulumi.String("ins-jqlegd42"),
+// 			StorageId:  pulumi.String("disk-kdt0sq6m"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CBS storage attachment can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cbs/storageAttachment:StorageAttachment attachment disk-41s6jwy4
+// ```
 type StorageAttachment struct {
 	pulumi.CustomResourceState
 

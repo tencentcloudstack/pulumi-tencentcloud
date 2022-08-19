@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Elasticsearch.Inputs
 
     public sealed class InstanceMultiZoneInfoArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Availability zone.
+        /// </summary>
         [Input("availabilityZone", required: true)]
         public Input<string> AvailabilityZone { get; set; } = null!;
 
+        /// <summary>
+        /// The ID of a VPC subnetwork.
+        /// </summary>
         [Input("subnetId", required: true)]
         public Input<string> SubnetId { get; set; } = null!;
 

@@ -12,11 +12,18 @@ namespace Pulumi.Tencentcloud.Vpn.Inputs
 
     public sealed class ConnectionSecurityGroupPolicyArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Local cidr block.
+        /// </summary>
         [Input("localCidrBlock", required: true)]
         public Input<string> LocalCidrBlock { get; set; } = null!;
 
         [Input("remoteCidrBlocks", required: true)]
         private InputList<string>? _remoteCidrBlocks;
+
+        /// <summary>
+        /// Remote cidr block list.
+        /// </summary>
         public InputList<string> RemoteCidrBlocks
         {
             get => _remoteCidrBlocks ?? (_remoteCidrBlocks = new InputList<string>());

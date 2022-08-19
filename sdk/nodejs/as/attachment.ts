@@ -4,6 +4,24 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to attach or detach CVM instances to a specified scaling group.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const attachment = new tencentcloud.As.Attachment("attachment", {
+ *     instanceIds: [
+ *         "ins-01",
+ *         "ins-02",
+ *     ],
+ *     scalingGroupId: "sg-afasfa",
+ * });
+ * ```
+ */
 export class Attachment extends pulumi.CustomResource {
     /**
      * Get an existing Attachment resource's state with the given name, ID, and optional extra

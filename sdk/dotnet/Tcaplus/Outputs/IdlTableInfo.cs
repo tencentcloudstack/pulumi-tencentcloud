@@ -13,12 +13,33 @@ namespace Pulumi.Tencentcloud.Tcaplus.Outputs
     [OutputType]
     public sealed class IdlTableInfo
     {
+        /// <summary>
+        /// Error messages for creating IDL file.
+        /// </summary>
         public readonly string? Error;
+        /// <summary>
+        /// Index key set of the TcaplusDB table.
+        /// </summary>
         public readonly string? IndexKeySet;
+        /// <summary>
+        /// Primary key fields of the TcaplusDB table.
+        /// </summary>
         public readonly string? KeyFields;
+        /// <summary>
+        /// Total size of primary key field of the TcaplusDB table.
+        /// </summary>
         public readonly int? SumKeyFieldSize;
+        /// <summary>
+        /// Total size of non-primary key fields of the TcaplusDB table.
+        /// </summary>
         public readonly int? SumValueFieldSize;
+        /// <summary>
+        /// Name of the TcaplusDB table.
+        /// </summary>
         public readonly string? TableName;
+        /// <summary>
+        /// Non-primary key fields of the TcaplusDB table.
+        /// </summary>
         public readonly string? ValueFields;
 
         [OutputConstructor]

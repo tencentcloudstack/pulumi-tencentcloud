@@ -11,6 +11,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a cls topic.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cls.NewTopic(ctx, "topic", &Cls.TopicArgs{
+// 			AutoSplit:          pulumi.Bool(false),
+// 			LogsetId:           pulumi.String("5cd3a17e-fb0b-418c-afd7-77b365397426"),
+// 			MaxSplitPartitions: pulumi.Int(20),
+// 			PartitionCount:     pulumi.Int(1),
+// 			Period:             pulumi.Int(10),
+// 			StorageType:        pulumi.String("hot"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("test"),
+// 			},
+// 			TopicName: pulumi.String("topic"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// cls topic can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cls/topic:Topic topic 2f5764c1-c833-44c5-84c7-950979b2a278
+// ```
 type Topic struct {
 	pulumi.CustomResourceState
 
@@ -24,8 +65,7 @@ type Topic struct {
 	PartitionCount pulumi.IntOutput `pulumi:"partitionCount"`
 	// Lifecycle in days. Value range: 1~366. Default value: 30.
 	Period pulumi.IntOutput `pulumi:"period"`
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-	// passed in, please contact the customer service to add the log topic to the allowlist first..
+	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
 	StorageType pulumi.StringOutput `pulumi:"storageType"`
 	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
 	Tags pulumi.MapOutput `pulumi:"tags"`
@@ -78,8 +118,7 @@ type topicState struct {
 	PartitionCount *int `pulumi:"partitionCount"`
 	// Lifecycle in days. Value range: 1~366. Default value: 30.
 	Period *int `pulumi:"period"`
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-	// passed in, please contact the customer service to add the log topic to the allowlist first..
+	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
 	StorageType *string `pulumi:"storageType"`
 	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -98,8 +137,7 @@ type TopicState struct {
 	PartitionCount pulumi.IntPtrInput
 	// Lifecycle in days. Value range: 1~366. Default value: 30.
 	Period pulumi.IntPtrInput
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-	// passed in, please contact the customer service to add the log topic to the allowlist first..
+	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
 	StorageType pulumi.StringPtrInput
 	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
 	Tags pulumi.MapInput
@@ -122,8 +160,7 @@ type topicArgs struct {
 	PartitionCount *int `pulumi:"partitionCount"`
 	// Lifecycle in days. Value range: 1~366. Default value: 30.
 	Period *int `pulumi:"period"`
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-	// passed in, please contact the customer service to add the log topic to the allowlist first..
+	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
 	StorageType *string `pulumi:"storageType"`
 	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -143,8 +180,7 @@ type TopicArgs struct {
 	PartitionCount pulumi.IntPtrInput
 	// Lifecycle in days. Value range: 1~366. Default value: 30.
 	Period pulumi.IntPtrInput
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-	// passed in, please contact the customer service to add the log topic to the allowlist first..
+	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
 	StorageType pulumi.StringPtrInput
 	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
 	Tags pulumi.MapInput
@@ -264,8 +300,7 @@ func (o TopicOutput) Period() pulumi.IntOutput {
 	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.Period }).(pulumi.IntOutput)
 }
 
-// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-// passed in, please contact the customer service to add the log topic to the allowlist first..
+// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
 func (o TopicOutput) StorageType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringOutput { return v.StorageType }).(pulumi.StringOutput)
 }

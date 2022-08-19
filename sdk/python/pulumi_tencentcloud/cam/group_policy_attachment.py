@@ -59,8 +59,7 @@ class _GroupPolicyAttachmentState:
                  policy_type: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering GroupPolicyAttachment resources.
-        :param pulumi.Input[int] create_mode: Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and
-               the others indicate syntax strategy ways.
+        :param pulumi.Input[int] create_mode: Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
         :param pulumi.Input[str] create_time: Create time of the CAM group policy attachment.
         :param pulumi.Input[str] group_id: ID of the attached CAM group.
         :param pulumi.Input[str] policy_id: ID of the policy.
@@ -84,8 +83,7 @@ class _GroupPolicyAttachmentState:
     @pulumi.getter(name="createMode")
     def create_mode(self) -> Optional[pulumi.Input[int]]:
         """
-        Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and
-        the others indicate syntax strategy ways.
+        Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
         """
         return pulumi.get(self, "create_mode")
 
@@ -163,7 +161,27 @@ class GroupPolicyAttachment(pulumi.CustomResource):
                  policy_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a GroupPolicyAttachment resource with the given unique name, props, and options.
+        Provides a resource to create a CAM group policy attachment.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.GroupPolicyAttachment("foo",
+            group_id=tencentcloud_cam_group["foo"]["id"],
+            policy_id=tencentcloud_cam_policy["foo"]["id"])
+        ```
+
+        ## Import
+
+        CAM group policy attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment foo 12515263#26800353
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] group_id: ID of the attached CAM group.
@@ -176,7 +194,27 @@ class GroupPolicyAttachment(pulumi.CustomResource):
                  args: GroupPolicyAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a GroupPolicyAttachment resource with the given unique name, props, and options.
+        Provides a resource to create a CAM group policy attachment.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.GroupPolicyAttachment("foo",
+            group_id=tencentcloud_cam_group["foo"]["id"],
+            policy_id=tencentcloud_cam_policy["foo"]["id"])
+        ```
+
+        ## Import
+
+        CAM group policy attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment foo 12515263#26800353
+        ```
+
         :param str resource_name: The name of the resource.
         :param GroupPolicyAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -239,8 +277,7 @@ class GroupPolicyAttachment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] create_mode: Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and
-               the others indicate syntax strategy ways.
+        :param pulumi.Input[int] create_mode: Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
         :param pulumi.Input[str] create_time: Create time of the CAM group policy attachment.
         :param pulumi.Input[str] group_id: ID of the attached CAM group.
         :param pulumi.Input[str] policy_id: ID of the policy.
@@ -263,8 +300,7 @@ class GroupPolicyAttachment(pulumi.CustomResource):
     @pulumi.getter(name="createMode")
     def create_mode(self) -> pulumi.Output[int]:
         """
-        Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and
-        the others indicate syntax strategy ways.
+        Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
         """
         return pulumi.get(self, "create_mode")
 

@@ -12,21 +12,39 @@ namespace Pulumi.Tencentcloud.Eks.Inputs
 
     public sealed class ContainerInstanceInitContainerVolumeMountArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Volume mount propagation.
+        /// </summary>
         [Input("mountPropagation")]
         public Input<string>? MountPropagation { get; set; }
 
+        /// <summary>
+        /// Volume name.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// Volume mount path.
+        /// </summary>
         [Input("path", required: true)]
         public Input<string> Path { get; set; } = null!;
 
+        /// <summary>
+        /// Whether the volume is read-only.
+        /// </summary>
         [Input("readOnly")]
         public Input<bool>? ReadOnly { get; set; }
 
+        /// <summary>
+        /// Volume mount sub-path.
+        /// </summary>
         [Input("subPath")]
         public Input<string>? SubPath { get; set; }
 
+        /// <summary>
+        /// Volume mount sub-path expression.
+        /// </summary>
         [Input("subPathExpr")]
         public Input<string>? SubPathExpr { get; set; }
 

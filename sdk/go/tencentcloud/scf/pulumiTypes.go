@@ -11,15 +11,21 @@ import (
 )
 
 type FunctionCfsConfig struct {
-	CfsId          string  `pulumi:"cfsId"`
-	IpAddress      *string `pulumi:"ipAddress"`
-	LocalMountDir  string  `pulumi:"localMountDir"`
-	MountInsId     string  `pulumi:"mountInsId"`
-	MountSubnetId  *string `pulumi:"mountSubnetId"`
-	MountVpcId     *string `pulumi:"mountVpcId"`
-	RemoteMountDir string  `pulumi:"remoteMountDir"`
-	UserGroupId    string  `pulumi:"userGroupId"`
-	UserId         string  `pulumi:"userId"`
+	// File system instance ID.
+	CfsId     string  `pulumi:"cfsId"`
+	IpAddress *string `pulumi:"ipAddress"`
+	// Local mount directory.
+	LocalMountDir string `pulumi:"localMountDir"`
+	// File system mount instance ID.
+	MountInsId    string  `pulumi:"mountInsId"`
+	MountSubnetId *string `pulumi:"mountSubnetId"`
+	MountVpcId    *string `pulumi:"mountVpcId"`
+	// Remote mount directory.
+	RemoteMountDir string `pulumi:"remoteMountDir"`
+	// ID of user group.
+	UserGroupId string `pulumi:"userGroupId"`
+	// ID of user.
+	UserId string `pulumi:"userId"`
 }
 
 // FunctionCfsConfigInput is an input type that accepts FunctionCfsConfigArgs and FunctionCfsConfigOutput values.
@@ -34,15 +40,21 @@ type FunctionCfsConfigInput interface {
 }
 
 type FunctionCfsConfigArgs struct {
-	CfsId          pulumi.StringInput    `pulumi:"cfsId"`
-	IpAddress      pulumi.StringPtrInput `pulumi:"ipAddress"`
-	LocalMountDir  pulumi.StringInput    `pulumi:"localMountDir"`
-	MountInsId     pulumi.StringInput    `pulumi:"mountInsId"`
-	MountSubnetId  pulumi.StringPtrInput `pulumi:"mountSubnetId"`
-	MountVpcId     pulumi.StringPtrInput `pulumi:"mountVpcId"`
-	RemoteMountDir pulumi.StringInput    `pulumi:"remoteMountDir"`
-	UserGroupId    pulumi.StringInput    `pulumi:"userGroupId"`
-	UserId         pulumi.StringInput    `pulumi:"userId"`
+	// File system instance ID.
+	CfsId     pulumi.StringInput    `pulumi:"cfsId"`
+	IpAddress pulumi.StringPtrInput `pulumi:"ipAddress"`
+	// Local mount directory.
+	LocalMountDir pulumi.StringInput `pulumi:"localMountDir"`
+	// File system mount instance ID.
+	MountInsId    pulumi.StringInput    `pulumi:"mountInsId"`
+	MountSubnetId pulumi.StringPtrInput `pulumi:"mountSubnetId"`
+	MountVpcId    pulumi.StringPtrInput `pulumi:"mountVpcId"`
+	// Remote mount directory.
+	RemoteMountDir pulumi.StringInput `pulumi:"remoteMountDir"`
+	// ID of user group.
+	UserGroupId pulumi.StringInput `pulumi:"userGroupId"`
+	// ID of user.
+	UserId pulumi.StringInput `pulumi:"userId"`
 }
 
 func (FunctionCfsConfigArgs) ElementType() reflect.Type {
@@ -96,6 +108,7 @@ func (o FunctionCfsConfigOutput) ToFunctionCfsConfigOutputWithContext(ctx contex
 	return o
 }
 
+// File system instance ID.
 func (o FunctionCfsConfigOutput) CfsId() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionCfsConfig) string { return v.CfsId }).(pulumi.StringOutput)
 }
@@ -104,10 +117,12 @@ func (o FunctionCfsConfigOutput) IpAddress() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionCfsConfig) *string { return v.IpAddress }).(pulumi.StringPtrOutput)
 }
 
+// Local mount directory.
 func (o FunctionCfsConfigOutput) LocalMountDir() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionCfsConfig) string { return v.LocalMountDir }).(pulumi.StringOutput)
 }
 
+// File system mount instance ID.
 func (o FunctionCfsConfigOutput) MountInsId() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionCfsConfig) string { return v.MountInsId }).(pulumi.StringOutput)
 }
@@ -120,14 +135,17 @@ func (o FunctionCfsConfigOutput) MountVpcId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionCfsConfig) *string { return v.MountVpcId }).(pulumi.StringPtrOutput)
 }
 
+// Remote mount directory.
 func (o FunctionCfsConfigOutput) RemoteMountDir() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionCfsConfig) string { return v.RemoteMountDir }).(pulumi.StringOutput)
 }
 
+// ID of user group.
 func (o FunctionCfsConfigOutput) UserGroupId() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionCfsConfig) string { return v.UserGroupId }).(pulumi.StringOutput)
 }
 
+// ID of user.
 func (o FunctionCfsConfigOutput) UserId() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionCfsConfig) string { return v.UserId }).(pulumi.StringOutput)
 }
@@ -153,11 +171,17 @@ func (o FunctionCfsConfigArrayOutput) Index(i pulumi.IntInput) FunctionCfsConfig
 }
 
 type FunctionImageConfig struct {
-	Args       *string `pulumi:"args"`
-	Command    *string `pulumi:"command"`
+	// the parameters of command.
+	Args *string `pulumi:"args"`
+	// The command of entrypoint.
+	Command *string `pulumi:"command"`
+	// The entrypoint of app.
 	EntryPoint *string `pulumi:"entryPoint"`
-	ImageType  string  `pulumi:"imageType"`
-	ImageUri   string  `pulumi:"imageUri"`
+	// The image type. personal or enterprise.
+	ImageType string `pulumi:"imageType"`
+	// The uri of image.
+	ImageUri string `pulumi:"imageUri"`
+	// The registry id of TCR. When image type is enterprise, it must be set.
 	RegistryId *string `pulumi:"registryId"`
 }
 
@@ -173,11 +197,17 @@ type FunctionImageConfigInput interface {
 }
 
 type FunctionImageConfigArgs struct {
-	Args       pulumi.StringPtrInput `pulumi:"args"`
-	Command    pulumi.StringPtrInput `pulumi:"command"`
+	// the parameters of command.
+	Args pulumi.StringPtrInput `pulumi:"args"`
+	// The command of entrypoint.
+	Command pulumi.StringPtrInput `pulumi:"command"`
+	// The entrypoint of app.
 	EntryPoint pulumi.StringPtrInput `pulumi:"entryPoint"`
-	ImageType  pulumi.StringInput    `pulumi:"imageType"`
-	ImageUri   pulumi.StringInput    `pulumi:"imageUri"`
+	// The image type. personal or enterprise.
+	ImageType pulumi.StringInput `pulumi:"imageType"`
+	// The uri of image.
+	ImageUri pulumi.StringInput `pulumi:"imageUri"`
+	// The registry id of TCR. When image type is enterprise, it must be set.
 	RegistryId pulumi.StringPtrInput `pulumi:"registryId"`
 }
 
@@ -232,26 +262,32 @@ func (o FunctionImageConfigOutput) ToFunctionImageConfigOutputWithContext(ctx co
 	return o
 }
 
+// the parameters of command.
 func (o FunctionImageConfigOutput) Args() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionImageConfig) *string { return v.Args }).(pulumi.StringPtrOutput)
 }
 
+// The command of entrypoint.
 func (o FunctionImageConfigOutput) Command() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionImageConfig) *string { return v.Command }).(pulumi.StringPtrOutput)
 }
 
+// The entrypoint of app.
 func (o FunctionImageConfigOutput) EntryPoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionImageConfig) *string { return v.EntryPoint }).(pulumi.StringPtrOutput)
 }
 
+// The image type. personal or enterprise.
 func (o FunctionImageConfigOutput) ImageType() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionImageConfig) string { return v.ImageType }).(pulumi.StringOutput)
 }
 
+// The uri of image.
 func (o FunctionImageConfigOutput) ImageUri() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionImageConfig) string { return v.ImageUri }).(pulumi.StringOutput)
 }
 
+// The registry id of TCR. When image type is enterprise, it must be set.
 func (o FunctionImageConfigOutput) RegistryId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionImageConfig) *string { return v.RegistryId }).(pulumi.StringPtrOutput)
 }
@@ -277,8 +313,10 @@ func (o FunctionImageConfigArrayOutput) Index(i pulumi.IntInput) FunctionImageCo
 }
 
 type FunctionLayer struct {
-	LayerName    string `pulumi:"layerName"`
-	LayerVersion int    `pulumi:"layerVersion"`
+	// The name of Layer.
+	LayerName string `pulumi:"layerName"`
+	// The version of layer.
+	LayerVersion int `pulumi:"layerVersion"`
 }
 
 // FunctionLayerInput is an input type that accepts FunctionLayerArgs and FunctionLayerOutput values.
@@ -293,8 +331,10 @@ type FunctionLayerInput interface {
 }
 
 type FunctionLayerArgs struct {
-	LayerName    pulumi.StringInput `pulumi:"layerName"`
-	LayerVersion pulumi.IntInput    `pulumi:"layerVersion"`
+	// The name of Layer.
+	LayerName pulumi.StringInput `pulumi:"layerName"`
+	// The version of layer.
+	LayerVersion pulumi.IntInput `pulumi:"layerVersion"`
 }
 
 func (FunctionLayerArgs) ElementType() reflect.Type {
@@ -348,10 +388,12 @@ func (o FunctionLayerOutput) ToFunctionLayerOutputWithContext(ctx context.Contex
 	return o
 }
 
+// The name of Layer.
 func (o FunctionLayerOutput) LayerName() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionLayer) string { return v.LayerName }).(pulumi.StringOutput)
 }
 
+// The version of layer.
 func (o FunctionLayerOutput) LayerVersion() pulumi.IntOutput {
 	return o.ApplyT(func(v FunctionLayer) int { return v.LayerVersion }).(pulumi.IntOutput)
 }
@@ -377,10 +419,14 @@ func (o FunctionLayerArrayOutput) Index(i pulumi.IntInput) FunctionLayerOutput {
 }
 
 type FunctionTrigger struct {
-	CosRegion   *string `pulumi:"cosRegion"`
-	Name        string  `pulumi:"name"`
-	TriggerDesc string  `pulumi:"triggerDesc"`
-	Type        string  `pulumi:"type"`
+	// Region of cos bucket. if `type` is `cos`, `cosRegion` is required.
+	CosRegion *string `pulumi:"cosRegion"`
+	// Name of the SCF function trigger, if `type` is `ckafka`, the format of name must be `<ckafkaInstanceId>-<topicId>`; if `type` is `cos`, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.
+	Name string `pulumi:"name"`
+	// TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
+	TriggerDesc string `pulumi:"triggerDesc"`
+	// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+	Type string `pulumi:"type"`
 }
 
 // FunctionTriggerInput is an input type that accepts FunctionTriggerArgs and FunctionTriggerOutput values.
@@ -395,10 +441,14 @@ type FunctionTriggerInput interface {
 }
 
 type FunctionTriggerArgs struct {
-	CosRegion   pulumi.StringPtrInput `pulumi:"cosRegion"`
-	Name        pulumi.StringInput    `pulumi:"name"`
-	TriggerDesc pulumi.StringInput    `pulumi:"triggerDesc"`
-	Type        pulumi.StringInput    `pulumi:"type"`
+	// Region of cos bucket. if `type` is `cos`, `cosRegion` is required.
+	CosRegion pulumi.StringPtrInput `pulumi:"cosRegion"`
+	// Name of the SCF function trigger, if `type` is `ckafka`, the format of name must be `<ckafkaInstanceId>-<topicId>`; if `type` is `cos`, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.
+	Name pulumi.StringInput `pulumi:"name"`
+	// TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
+	TriggerDesc pulumi.StringInput `pulumi:"triggerDesc"`
+	// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
 func (FunctionTriggerArgs) ElementType() reflect.Type {
@@ -452,18 +502,22 @@ func (o FunctionTriggerOutput) ToFunctionTriggerOutputWithContext(ctx context.Co
 	return o
 }
 
+// Region of cos bucket. if `type` is `cos`, `cosRegion` is required.
 func (o FunctionTriggerOutput) CosRegion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionTrigger) *string { return v.CosRegion }).(pulumi.StringPtrOutput)
 }
 
+// Name of the SCF function trigger, if `type` is `ckafka`, the format of name must be `<ckafkaInstanceId>-<topicId>`; if `type` is `cos`, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.
 func (o FunctionTriggerOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionTrigger) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
 func (o FunctionTriggerOutput) TriggerDesc() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionTrigger) string { return v.TriggerDesc }).(pulumi.StringOutput)
 }
 
+// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
 func (o FunctionTriggerOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionTrigger) string { return v.Type }).(pulumi.StringOutput)
 }
@@ -489,13 +543,20 @@ func (o FunctionTriggerArrayOutput) Index(i pulumi.IntInput) FunctionTriggerOutp
 }
 
 type FunctionTriggerInfo struct {
-	CreateTime     *string `pulumi:"createTime"`
+	// Create time of SCF function trigger.
+	CreateTime *string `pulumi:"createTime"`
+	// User-defined parameters of SCF function trigger.
 	CustomArgument *string `pulumi:"customArgument"`
-	Enable         *bool   `pulumi:"enable"`
-	ModifyTime     *string `pulumi:"modifyTime"`
-	Name           *string `pulumi:"name"`
-	TriggerDesc    *string `pulumi:"triggerDesc"`
-	Type           *string `pulumi:"type"`
+	// Whether SCF function trigger is enable.
+	Enable *bool `pulumi:"enable"`
+	// Modify time of SCF function trigger.
+	ModifyTime *string `pulumi:"modifyTime"`
+	// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
+	Name *string `pulumi:"name"`
+	// TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
+	TriggerDesc *string `pulumi:"triggerDesc"`
+	// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+	Type *string `pulumi:"type"`
 }
 
 // FunctionTriggerInfoInput is an input type that accepts FunctionTriggerInfoArgs and FunctionTriggerInfoOutput values.
@@ -510,13 +571,20 @@ type FunctionTriggerInfoInput interface {
 }
 
 type FunctionTriggerInfoArgs struct {
-	CreateTime     pulumi.StringPtrInput `pulumi:"createTime"`
+	// Create time of SCF function trigger.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// User-defined parameters of SCF function trigger.
 	CustomArgument pulumi.StringPtrInput `pulumi:"customArgument"`
-	Enable         pulumi.BoolPtrInput   `pulumi:"enable"`
-	ModifyTime     pulumi.StringPtrInput `pulumi:"modifyTime"`
-	Name           pulumi.StringPtrInput `pulumi:"name"`
-	TriggerDesc    pulumi.StringPtrInput `pulumi:"triggerDesc"`
-	Type           pulumi.StringPtrInput `pulumi:"type"`
+	// Whether SCF function trigger is enable.
+	Enable pulumi.BoolPtrInput `pulumi:"enable"`
+	// Modify time of SCF function trigger.
+	ModifyTime pulumi.StringPtrInput `pulumi:"modifyTime"`
+	// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
+	TriggerDesc pulumi.StringPtrInput `pulumi:"triggerDesc"`
+	// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+	Type pulumi.StringPtrInput `pulumi:"type"`
 }
 
 func (FunctionTriggerInfoArgs) ElementType() reflect.Type {
@@ -570,30 +638,37 @@ func (o FunctionTriggerInfoOutput) ToFunctionTriggerInfoOutputWithContext(ctx co
 	return o
 }
 
+// Create time of SCF function trigger.
 func (o FunctionTriggerInfoOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionTriggerInfo) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
+// User-defined parameters of SCF function trigger.
 func (o FunctionTriggerInfoOutput) CustomArgument() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionTriggerInfo) *string { return v.CustomArgument }).(pulumi.StringPtrOutput)
 }
 
+// Whether SCF function trigger is enable.
 func (o FunctionTriggerInfoOutput) Enable() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v FunctionTriggerInfo) *bool { return v.Enable }).(pulumi.BoolPtrOutput)
 }
 
+// Modify time of SCF function trigger.
 func (o FunctionTriggerInfoOutput) ModifyTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionTriggerInfo) *string { return v.ModifyTime }).(pulumi.StringPtrOutput)
 }
 
+// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
 func (o FunctionTriggerInfoOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionTriggerInfo) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
 func (o FunctionTriggerInfoOutput) TriggerDesc() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionTriggerInfo) *string { return v.TriggerDesc }).(pulumi.StringPtrOutput)
 }
 
+// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
 func (o FunctionTriggerInfoOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionTriggerInfo) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -618,415 +693,15 @@ func (o FunctionTriggerInfoArrayOutput) Index(i pulumi.IntInput) FunctionTrigger
 	}).(FunctionTriggerInfoOutput)
 }
 
-type FunctionsFunction struct {
-	ClsLogsetId       string                         `pulumi:"clsLogsetId"`
-	ClsTopicId        string                         `pulumi:"clsTopicId"`
-	CodeError         string                         `pulumi:"codeError"`
-	CodeResult        string                         `pulumi:"codeResult"`
-	CodeSize          int                            `pulumi:"codeSize"`
-	CreateTime        string                         `pulumi:"createTime"`
-	Description       string                         `pulumi:"description"`
-	EipFixed          bool                           `pulumi:"eipFixed"`
-	Eips              []string                       `pulumi:"eips"`
-	EnableEipConfig   bool                           `pulumi:"enableEipConfig"`
-	EnablePublicNet   bool                           `pulumi:"enablePublicNet"`
-	Environment       map[string]interface{}         `pulumi:"environment"`
-	ErrNo             int                            `pulumi:"errNo"`
-	Handler           string                         `pulumi:"handler"`
-	Host              string                         `pulumi:"host"`
-	InstallDependency bool                           `pulumi:"installDependency"`
-	L5Enable          bool                           `pulumi:"l5Enable"`
-	MemSize           int                            `pulumi:"memSize"`
-	ModifyTime        string                         `pulumi:"modifyTime"`
-	Name              string                         `pulumi:"name"`
-	Namespace         string                         `pulumi:"namespace"`
-	Role              string                         `pulumi:"role"`
-	Runtime           string                         `pulumi:"runtime"`
-	Status            string                         `pulumi:"status"`
-	StatusDesc        string                         `pulumi:"statusDesc"`
-	SubnetId          string                         `pulumi:"subnetId"`
-	Tags              map[string]interface{}         `pulumi:"tags"`
-	Timeout           int                            `pulumi:"timeout"`
-	TriggerInfos      []FunctionsFunctionTriggerInfo `pulumi:"triggerInfos"`
-	Vip               string                         `pulumi:"vip"`
-	VpcId             string                         `pulumi:"vpcId"`
-}
-
-// FunctionsFunctionInput is an input type that accepts FunctionsFunctionArgs and FunctionsFunctionOutput values.
-// You can construct a concrete instance of `FunctionsFunctionInput` via:
-//
-//          FunctionsFunctionArgs{...}
-type FunctionsFunctionInput interface {
-	pulumi.Input
-
-	ToFunctionsFunctionOutput() FunctionsFunctionOutput
-	ToFunctionsFunctionOutputWithContext(context.Context) FunctionsFunctionOutput
-}
-
-type FunctionsFunctionArgs struct {
-	ClsLogsetId       pulumi.StringInput                     `pulumi:"clsLogsetId"`
-	ClsTopicId        pulumi.StringInput                     `pulumi:"clsTopicId"`
-	CodeError         pulumi.StringInput                     `pulumi:"codeError"`
-	CodeResult        pulumi.StringInput                     `pulumi:"codeResult"`
-	CodeSize          pulumi.IntInput                        `pulumi:"codeSize"`
-	CreateTime        pulumi.StringInput                     `pulumi:"createTime"`
-	Description       pulumi.StringInput                     `pulumi:"description"`
-	EipFixed          pulumi.BoolInput                       `pulumi:"eipFixed"`
-	Eips              pulumi.StringArrayInput                `pulumi:"eips"`
-	EnableEipConfig   pulumi.BoolInput                       `pulumi:"enableEipConfig"`
-	EnablePublicNet   pulumi.BoolInput                       `pulumi:"enablePublicNet"`
-	Environment       pulumi.MapInput                        `pulumi:"environment"`
-	ErrNo             pulumi.IntInput                        `pulumi:"errNo"`
-	Handler           pulumi.StringInput                     `pulumi:"handler"`
-	Host              pulumi.StringInput                     `pulumi:"host"`
-	InstallDependency pulumi.BoolInput                       `pulumi:"installDependency"`
-	L5Enable          pulumi.BoolInput                       `pulumi:"l5Enable"`
-	MemSize           pulumi.IntInput                        `pulumi:"memSize"`
-	ModifyTime        pulumi.StringInput                     `pulumi:"modifyTime"`
-	Name              pulumi.StringInput                     `pulumi:"name"`
-	Namespace         pulumi.StringInput                     `pulumi:"namespace"`
-	Role              pulumi.StringInput                     `pulumi:"role"`
-	Runtime           pulumi.StringInput                     `pulumi:"runtime"`
-	Status            pulumi.StringInput                     `pulumi:"status"`
-	StatusDesc        pulumi.StringInput                     `pulumi:"statusDesc"`
-	SubnetId          pulumi.StringInput                     `pulumi:"subnetId"`
-	Tags              pulumi.MapInput                        `pulumi:"tags"`
-	Timeout           pulumi.IntInput                        `pulumi:"timeout"`
-	TriggerInfos      FunctionsFunctionTriggerInfoArrayInput `pulumi:"triggerInfos"`
-	Vip               pulumi.StringInput                     `pulumi:"vip"`
-	VpcId             pulumi.StringInput                     `pulumi:"vpcId"`
-}
-
-func (FunctionsFunctionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*FunctionsFunction)(nil)).Elem()
-}
-
-func (i FunctionsFunctionArgs) ToFunctionsFunctionOutput() FunctionsFunctionOutput {
-	return i.ToFunctionsFunctionOutputWithContext(context.Background())
-}
-
-func (i FunctionsFunctionArgs) ToFunctionsFunctionOutputWithContext(ctx context.Context) FunctionsFunctionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(FunctionsFunctionOutput)
-}
-
-// FunctionsFunctionArrayInput is an input type that accepts FunctionsFunctionArray and FunctionsFunctionArrayOutput values.
-// You can construct a concrete instance of `FunctionsFunctionArrayInput` via:
-//
-//          FunctionsFunctionArray{ FunctionsFunctionArgs{...} }
-type FunctionsFunctionArrayInput interface {
-	pulumi.Input
-
-	ToFunctionsFunctionArrayOutput() FunctionsFunctionArrayOutput
-	ToFunctionsFunctionArrayOutputWithContext(context.Context) FunctionsFunctionArrayOutput
-}
-
-type FunctionsFunctionArray []FunctionsFunctionInput
-
-func (FunctionsFunctionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]FunctionsFunction)(nil)).Elem()
-}
-
-func (i FunctionsFunctionArray) ToFunctionsFunctionArrayOutput() FunctionsFunctionArrayOutput {
-	return i.ToFunctionsFunctionArrayOutputWithContext(context.Background())
-}
-
-func (i FunctionsFunctionArray) ToFunctionsFunctionArrayOutputWithContext(ctx context.Context) FunctionsFunctionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(FunctionsFunctionArrayOutput)
-}
-
-type FunctionsFunctionOutput struct{ *pulumi.OutputState }
-
-func (FunctionsFunctionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*FunctionsFunction)(nil)).Elem()
-}
-
-func (o FunctionsFunctionOutput) ToFunctionsFunctionOutput() FunctionsFunctionOutput {
-	return o
-}
-
-func (o FunctionsFunctionOutput) ToFunctionsFunctionOutputWithContext(ctx context.Context) FunctionsFunctionOutput {
-	return o
-}
-
-func (o FunctionsFunctionOutput) ClsLogsetId() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.ClsLogsetId }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) ClsTopicId() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.ClsTopicId }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) CodeError() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.CodeError }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) CodeResult() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.CodeResult }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) CodeSize() pulumi.IntOutput {
-	return o.ApplyT(func(v FunctionsFunction) int { return v.CodeSize }).(pulumi.IntOutput)
-}
-
-func (o FunctionsFunctionOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.Description }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) EipFixed() pulumi.BoolOutput {
-	return o.ApplyT(func(v FunctionsFunction) bool { return v.EipFixed }).(pulumi.BoolOutput)
-}
-
-func (o FunctionsFunctionOutput) Eips() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v FunctionsFunction) []string { return v.Eips }).(pulumi.StringArrayOutput)
-}
-
-func (o FunctionsFunctionOutput) EnableEipConfig() pulumi.BoolOutput {
-	return o.ApplyT(func(v FunctionsFunction) bool { return v.EnableEipConfig }).(pulumi.BoolOutput)
-}
-
-func (o FunctionsFunctionOutput) EnablePublicNet() pulumi.BoolOutput {
-	return o.ApplyT(func(v FunctionsFunction) bool { return v.EnablePublicNet }).(pulumi.BoolOutput)
-}
-
-func (o FunctionsFunctionOutput) Environment() pulumi.MapOutput {
-	return o.ApplyT(func(v FunctionsFunction) map[string]interface{} { return v.Environment }).(pulumi.MapOutput)
-}
-
-func (o FunctionsFunctionOutput) ErrNo() pulumi.IntOutput {
-	return o.ApplyT(func(v FunctionsFunction) int { return v.ErrNo }).(pulumi.IntOutput)
-}
-
-func (o FunctionsFunctionOutput) Handler() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.Handler }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) Host() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.Host }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) InstallDependency() pulumi.BoolOutput {
-	return o.ApplyT(func(v FunctionsFunction) bool { return v.InstallDependency }).(pulumi.BoolOutput)
-}
-
-func (o FunctionsFunctionOutput) L5Enable() pulumi.BoolOutput {
-	return o.ApplyT(func(v FunctionsFunction) bool { return v.L5Enable }).(pulumi.BoolOutput)
-}
-
-func (o FunctionsFunctionOutput) MemSize() pulumi.IntOutput {
-	return o.ApplyT(func(v FunctionsFunction) int { return v.MemSize }).(pulumi.IntOutput)
-}
-
-func (o FunctionsFunctionOutput) ModifyTime() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.ModifyTime }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) Namespace() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.Namespace }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) Role() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.Role }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) Runtime() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.Runtime }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.Status }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) StatusDesc() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.StatusDesc }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.SubnetId }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v FunctionsFunction) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
-}
-
-func (o FunctionsFunctionOutput) Timeout() pulumi.IntOutput {
-	return o.ApplyT(func(v FunctionsFunction) int { return v.Timeout }).(pulumi.IntOutput)
-}
-
-func (o FunctionsFunctionOutput) TriggerInfos() FunctionsFunctionTriggerInfoArrayOutput {
-	return o.ApplyT(func(v FunctionsFunction) []FunctionsFunctionTriggerInfo { return v.TriggerInfos }).(FunctionsFunctionTriggerInfoArrayOutput)
-}
-
-func (o FunctionsFunctionOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.Vip }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunction) string { return v.VpcId }).(pulumi.StringOutput)
-}
-
-type FunctionsFunctionArrayOutput struct{ *pulumi.OutputState }
-
-func (FunctionsFunctionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]FunctionsFunction)(nil)).Elem()
-}
-
-func (o FunctionsFunctionArrayOutput) ToFunctionsFunctionArrayOutput() FunctionsFunctionArrayOutput {
-	return o
-}
-
-func (o FunctionsFunctionArrayOutput) ToFunctionsFunctionArrayOutputWithContext(ctx context.Context) FunctionsFunctionArrayOutput {
-	return o
-}
-
-func (o FunctionsFunctionArrayOutput) Index(i pulumi.IntInput) FunctionsFunctionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FunctionsFunction {
-		return vs[0].([]FunctionsFunction)[vs[1].(int)]
-	}).(FunctionsFunctionOutput)
-}
-
-type FunctionsFunctionTriggerInfo struct {
-	CreateTime     string `pulumi:"createTime"`
-	CustomArgument string `pulumi:"customArgument"`
-	Enable         bool   `pulumi:"enable"`
-	ModifyTime     string `pulumi:"modifyTime"`
-	Name           string `pulumi:"name"`
-	TriggerDesc    string `pulumi:"triggerDesc"`
-	Type           string `pulumi:"type"`
-}
-
-// FunctionsFunctionTriggerInfoInput is an input type that accepts FunctionsFunctionTriggerInfoArgs and FunctionsFunctionTriggerInfoOutput values.
-// You can construct a concrete instance of `FunctionsFunctionTriggerInfoInput` via:
-//
-//          FunctionsFunctionTriggerInfoArgs{...}
-type FunctionsFunctionTriggerInfoInput interface {
-	pulumi.Input
-
-	ToFunctionsFunctionTriggerInfoOutput() FunctionsFunctionTriggerInfoOutput
-	ToFunctionsFunctionTriggerInfoOutputWithContext(context.Context) FunctionsFunctionTriggerInfoOutput
-}
-
-type FunctionsFunctionTriggerInfoArgs struct {
-	CreateTime     pulumi.StringInput `pulumi:"createTime"`
-	CustomArgument pulumi.StringInput `pulumi:"customArgument"`
-	Enable         pulumi.BoolInput   `pulumi:"enable"`
-	ModifyTime     pulumi.StringInput `pulumi:"modifyTime"`
-	Name           pulumi.StringInput `pulumi:"name"`
-	TriggerDesc    pulumi.StringInput `pulumi:"triggerDesc"`
-	Type           pulumi.StringInput `pulumi:"type"`
-}
-
-func (FunctionsFunctionTriggerInfoArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*FunctionsFunctionTriggerInfo)(nil)).Elem()
-}
-
-func (i FunctionsFunctionTriggerInfoArgs) ToFunctionsFunctionTriggerInfoOutput() FunctionsFunctionTriggerInfoOutput {
-	return i.ToFunctionsFunctionTriggerInfoOutputWithContext(context.Background())
-}
-
-func (i FunctionsFunctionTriggerInfoArgs) ToFunctionsFunctionTriggerInfoOutputWithContext(ctx context.Context) FunctionsFunctionTriggerInfoOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(FunctionsFunctionTriggerInfoOutput)
-}
-
-// FunctionsFunctionTriggerInfoArrayInput is an input type that accepts FunctionsFunctionTriggerInfoArray and FunctionsFunctionTriggerInfoArrayOutput values.
-// You can construct a concrete instance of `FunctionsFunctionTriggerInfoArrayInput` via:
-//
-//          FunctionsFunctionTriggerInfoArray{ FunctionsFunctionTriggerInfoArgs{...} }
-type FunctionsFunctionTriggerInfoArrayInput interface {
-	pulumi.Input
-
-	ToFunctionsFunctionTriggerInfoArrayOutput() FunctionsFunctionTriggerInfoArrayOutput
-	ToFunctionsFunctionTriggerInfoArrayOutputWithContext(context.Context) FunctionsFunctionTriggerInfoArrayOutput
-}
-
-type FunctionsFunctionTriggerInfoArray []FunctionsFunctionTriggerInfoInput
-
-func (FunctionsFunctionTriggerInfoArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]FunctionsFunctionTriggerInfo)(nil)).Elem()
-}
-
-func (i FunctionsFunctionTriggerInfoArray) ToFunctionsFunctionTriggerInfoArrayOutput() FunctionsFunctionTriggerInfoArrayOutput {
-	return i.ToFunctionsFunctionTriggerInfoArrayOutputWithContext(context.Background())
-}
-
-func (i FunctionsFunctionTriggerInfoArray) ToFunctionsFunctionTriggerInfoArrayOutputWithContext(ctx context.Context) FunctionsFunctionTriggerInfoArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(FunctionsFunctionTriggerInfoArrayOutput)
-}
-
-type FunctionsFunctionTriggerInfoOutput struct{ *pulumi.OutputState }
-
-func (FunctionsFunctionTriggerInfoOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*FunctionsFunctionTriggerInfo)(nil)).Elem()
-}
-
-func (o FunctionsFunctionTriggerInfoOutput) ToFunctionsFunctionTriggerInfoOutput() FunctionsFunctionTriggerInfoOutput {
-	return o
-}
-
-func (o FunctionsFunctionTriggerInfoOutput) ToFunctionsFunctionTriggerInfoOutputWithContext(ctx context.Context) FunctionsFunctionTriggerInfoOutput {
-	return o
-}
-
-func (o FunctionsFunctionTriggerInfoOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunctionTriggerInfo) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionTriggerInfoOutput) CustomArgument() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunctionTriggerInfo) string { return v.CustomArgument }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionTriggerInfoOutput) Enable() pulumi.BoolOutput {
-	return o.ApplyT(func(v FunctionsFunctionTriggerInfo) bool { return v.Enable }).(pulumi.BoolOutput)
-}
-
-func (o FunctionsFunctionTriggerInfoOutput) ModifyTime() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunctionTriggerInfo) string { return v.ModifyTime }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionTriggerInfoOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunctionTriggerInfo) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionTriggerInfoOutput) TriggerDesc() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunctionTriggerInfo) string { return v.TriggerDesc }).(pulumi.StringOutput)
-}
-
-func (o FunctionsFunctionTriggerInfoOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v FunctionsFunctionTriggerInfo) string { return v.Type }).(pulumi.StringOutput)
-}
-
-type FunctionsFunctionTriggerInfoArrayOutput struct{ *pulumi.OutputState }
-
-func (FunctionsFunctionTriggerInfoArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]FunctionsFunctionTriggerInfo)(nil)).Elem()
-}
-
-func (o FunctionsFunctionTriggerInfoArrayOutput) ToFunctionsFunctionTriggerInfoArrayOutput() FunctionsFunctionTriggerInfoArrayOutput {
-	return o
-}
-
-func (o FunctionsFunctionTriggerInfoArrayOutput) ToFunctionsFunctionTriggerInfoArrayOutputWithContext(ctx context.Context) FunctionsFunctionTriggerInfoArrayOutput {
-	return o
-}
-
-func (o FunctionsFunctionTriggerInfoArrayOutput) Index(i pulumi.IntInput) FunctionsFunctionTriggerInfoOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FunctionsFunctionTriggerInfo {
-		return vs[0].([]FunctionsFunctionTriggerInfo)[vs[1].(int)]
-	}).(FunctionsFunctionTriggerInfoOutput)
-}
-
 type LayerContent struct {
-	CosBucketName   *string `pulumi:"cosBucketName"`
+	// Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zipFile`.
+	CosBucketName *string `pulumi:"cosBucketName"`
+	// Cos bucket region of the SCF layer, conflict with `zipFile`.
 	CosBucketRegion *string `pulumi:"cosBucketRegion"`
-	CosObjectName   *string `pulumi:"cosObjectName"`
-	ZipFile         *string `pulumi:"zipFile"`
+	// Cos object name of the SCF layer, should have suffix `.zip` or `.jar`, conflict with `zipFile`.
+	CosObjectName *string `pulumi:"cosObjectName"`
+	// Zip file of the SCF layer, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
+	ZipFile *string `pulumi:"zipFile"`
 }
 
 // LayerContentInput is an input type that accepts LayerContentArgs and LayerContentOutput values.
@@ -1041,10 +716,14 @@ type LayerContentInput interface {
 }
 
 type LayerContentArgs struct {
-	CosBucketName   pulumi.StringPtrInput `pulumi:"cosBucketName"`
+	// Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zipFile`.
+	CosBucketName pulumi.StringPtrInput `pulumi:"cosBucketName"`
+	// Cos bucket region of the SCF layer, conflict with `zipFile`.
 	CosBucketRegion pulumi.StringPtrInput `pulumi:"cosBucketRegion"`
-	CosObjectName   pulumi.StringPtrInput `pulumi:"cosObjectName"`
-	ZipFile         pulumi.StringPtrInput `pulumi:"zipFile"`
+	// Cos object name of the SCF layer, should have suffix `.zip` or `.jar`, conflict with `zipFile`.
+	CosObjectName pulumi.StringPtrInput `pulumi:"cosObjectName"`
+	// Zip file of the SCF layer, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
+	ZipFile pulumi.StringPtrInput `pulumi:"zipFile"`
 }
 
 func (LayerContentArgs) ElementType() reflect.Type {
@@ -1124,18 +803,22 @@ func (o LayerContentOutput) ToLayerContentPtrOutputWithContext(ctx context.Conte
 	}).(LayerContentPtrOutput)
 }
 
+// Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zipFile`.
 func (o LayerContentOutput) CosBucketName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LayerContent) *string { return v.CosBucketName }).(pulumi.StringPtrOutput)
 }
 
+// Cos bucket region of the SCF layer, conflict with `zipFile`.
 func (o LayerContentOutput) CosBucketRegion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LayerContent) *string { return v.CosBucketRegion }).(pulumi.StringPtrOutput)
 }
 
+// Cos object name of the SCF layer, should have suffix `.zip` or `.jar`, conflict with `zipFile`.
 func (o LayerContentOutput) CosObjectName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LayerContent) *string { return v.CosObjectName }).(pulumi.StringPtrOutput)
 }
 
+// Zip file of the SCF layer, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
 func (o LayerContentOutput) ZipFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LayerContent) *string { return v.ZipFile }).(pulumi.StringPtrOutput)
 }
@@ -1164,6 +847,7 @@ func (o LayerContentPtrOutput) Elem() LayerContentOutput {
 	}).(LayerContentOutput)
 }
 
+// Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zipFile`.
 func (o LayerContentPtrOutput) CosBucketName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LayerContent) *string {
 		if v == nil {
@@ -1173,6 +857,7 @@ func (o LayerContentPtrOutput) CosBucketName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Cos bucket region of the SCF layer, conflict with `zipFile`.
 func (o LayerContentPtrOutput) CosBucketRegion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LayerContent) *string {
 		if v == nil {
@@ -1182,6 +867,7 @@ func (o LayerContentPtrOutput) CosBucketRegion() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Cos object name of the SCF layer, should have suffix `.zip` or `.jar`, conflict with `zipFile`.
 func (o LayerContentPtrOutput) CosObjectName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LayerContent) *string {
 		if v == nil {
@@ -1191,6 +877,7 @@ func (o LayerContentPtrOutput) CosObjectName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Zip file of the SCF layer, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
 func (o LayerContentPtrOutput) ZipFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LayerContent) *string {
 		if v == nil {
@@ -1200,282 +887,851 @@ func (o LayerContentPtrOutput) ZipFile() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type LogsLog struct {
-	BillDuration   int     `pulumi:"billDuration"`
-	Duration       float64 `pulumi:"duration"`
-	FunctionName   string  `pulumi:"functionName"`
-	InvokeFinished int     `pulumi:"invokeFinished"`
-	Level          string  `pulumi:"level"`
-	Log            string  `pulumi:"log"`
-	MemUsage       int     `pulumi:"memUsage"`
-	RequestId      string  `pulumi:"requestId"`
-	RetCode        int     `pulumi:"retCode"`
-	RetMsg         string  `pulumi:"retMsg"`
-	Source         string  `pulumi:"source"`
-	StartTime      string  `pulumi:"startTime"`
-}
-
-// LogsLogInput is an input type that accepts LogsLogArgs and LogsLogOutput values.
-// You can construct a concrete instance of `LogsLogInput` via:
-//
-//          LogsLogArgs{...}
-type LogsLogInput interface {
-	pulumi.Input
-
-	ToLogsLogOutput() LogsLogOutput
-	ToLogsLogOutputWithContext(context.Context) LogsLogOutput
-}
-
-type LogsLogArgs struct {
-	BillDuration   pulumi.IntInput     `pulumi:"billDuration"`
-	Duration       pulumi.Float64Input `pulumi:"duration"`
-	FunctionName   pulumi.StringInput  `pulumi:"functionName"`
-	InvokeFinished pulumi.IntInput     `pulumi:"invokeFinished"`
-	Level          pulumi.StringInput  `pulumi:"level"`
-	Log            pulumi.StringInput  `pulumi:"log"`
-	MemUsage       pulumi.IntInput     `pulumi:"memUsage"`
-	RequestId      pulumi.StringInput  `pulumi:"requestId"`
-	RetCode        pulumi.IntInput     `pulumi:"retCode"`
-	RetMsg         pulumi.StringInput  `pulumi:"retMsg"`
-	Source         pulumi.StringInput  `pulumi:"source"`
-	StartTime      pulumi.StringInput  `pulumi:"startTime"`
-}
-
-func (LogsLogArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*LogsLog)(nil)).Elem()
-}
-
-func (i LogsLogArgs) ToLogsLogOutput() LogsLogOutput {
-	return i.ToLogsLogOutputWithContext(context.Background())
-}
-
-func (i LogsLogArgs) ToLogsLogOutputWithContext(ctx context.Context) LogsLogOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(LogsLogOutput)
-}
-
-// LogsLogArrayInput is an input type that accepts LogsLogArray and LogsLogArrayOutput values.
-// You can construct a concrete instance of `LogsLogArrayInput` via:
-//
-//          LogsLogArray{ LogsLogArgs{...} }
-type LogsLogArrayInput interface {
-	pulumi.Input
-
-	ToLogsLogArrayOutput() LogsLogArrayOutput
-	ToLogsLogArrayOutputWithContext(context.Context) LogsLogArrayOutput
-}
-
-type LogsLogArray []LogsLogInput
-
-func (LogsLogArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]LogsLog)(nil)).Elem()
-}
-
-func (i LogsLogArray) ToLogsLogArrayOutput() LogsLogArrayOutput {
-	return i.ToLogsLogArrayOutputWithContext(context.Background())
-}
-
-func (i LogsLogArray) ToLogsLogArrayOutputWithContext(ctx context.Context) LogsLogArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(LogsLogArrayOutput)
-}
-
-type LogsLogOutput struct{ *pulumi.OutputState }
-
-func (LogsLogOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*LogsLog)(nil)).Elem()
-}
-
-func (o LogsLogOutput) ToLogsLogOutput() LogsLogOutput {
-	return o
-}
-
-func (o LogsLogOutput) ToLogsLogOutputWithContext(ctx context.Context) LogsLogOutput {
-	return o
-}
-
-func (o LogsLogOutput) BillDuration() pulumi.IntOutput {
-	return o.ApplyT(func(v LogsLog) int { return v.BillDuration }).(pulumi.IntOutput)
-}
-
-func (o LogsLogOutput) Duration() pulumi.Float64Output {
-	return o.ApplyT(func(v LogsLog) float64 { return v.Duration }).(pulumi.Float64Output)
-}
-
-func (o LogsLogOutput) FunctionName() pulumi.StringOutput {
-	return o.ApplyT(func(v LogsLog) string { return v.FunctionName }).(pulumi.StringOutput)
-}
-
-func (o LogsLogOutput) InvokeFinished() pulumi.IntOutput {
-	return o.ApplyT(func(v LogsLog) int { return v.InvokeFinished }).(pulumi.IntOutput)
-}
-
-func (o LogsLogOutput) Level() pulumi.StringOutput {
-	return o.ApplyT(func(v LogsLog) string { return v.Level }).(pulumi.StringOutput)
-}
-
-func (o LogsLogOutput) Log() pulumi.StringOutput {
-	return o.ApplyT(func(v LogsLog) string { return v.Log }).(pulumi.StringOutput)
-}
-
-func (o LogsLogOutput) MemUsage() pulumi.IntOutput {
-	return o.ApplyT(func(v LogsLog) int { return v.MemUsage }).(pulumi.IntOutput)
-}
-
-func (o LogsLogOutput) RequestId() pulumi.StringOutput {
-	return o.ApplyT(func(v LogsLog) string { return v.RequestId }).(pulumi.StringOutput)
-}
-
-func (o LogsLogOutput) RetCode() pulumi.IntOutput {
-	return o.ApplyT(func(v LogsLog) int { return v.RetCode }).(pulumi.IntOutput)
-}
-
-func (o LogsLogOutput) RetMsg() pulumi.StringOutput {
-	return o.ApplyT(func(v LogsLog) string { return v.RetMsg }).(pulumi.StringOutput)
-}
-
-func (o LogsLogOutput) Source() pulumi.StringOutput {
-	return o.ApplyT(func(v LogsLog) string { return v.Source }).(pulumi.StringOutput)
-}
-
-func (o LogsLogOutput) StartTime() pulumi.StringOutput {
-	return o.ApplyT(func(v LogsLog) string { return v.StartTime }).(pulumi.StringOutput)
-}
-
-type LogsLogArrayOutput struct{ *pulumi.OutputState }
-
-func (LogsLogArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]LogsLog)(nil)).Elem()
-}
-
-func (o LogsLogArrayOutput) ToLogsLogArrayOutput() LogsLogArrayOutput {
-	return o
-}
-
-func (o LogsLogArrayOutput) ToLogsLogArrayOutputWithContext(ctx context.Context) LogsLogArrayOutput {
-	return o
-}
-
-func (o LogsLogArrayOutput) Index(i pulumi.IntInput) LogsLogOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) LogsLog {
-		return vs[0].([]LogsLog)[vs[1].(int)]
-	}).(LogsLogOutput)
-}
-
-type NamespacesNamespace struct {
-	CreateTime  string `pulumi:"createTime"`
+type GetFunctionsFunction struct {
+	// CLS logset ID of the SCF function.
+	ClsLogsetId string `pulumi:"clsLogsetId"`
+	// CLS topic ID of the SCF function.
+	ClsTopicId string `pulumi:"clsTopicId"`
+	// Code error of the SCF function.
+	CodeError string `pulumi:"codeError"`
+	// Code result of the SCF function.
+	CodeResult string `pulumi:"codeResult"`
+	// Code size of the SCF function.
+	CodeSize int `pulumi:"codeSize"`
+	// Create time of the SCF function trigger.
+	CreateTime string `pulumi:"createTime"`
+	// Description of the SCF function to be queried.
 	Description string `pulumi:"description"`
-	ModifyTime  string `pulumi:"modifyTime"`
-	Namespace   string `pulumi:"namespace"`
-	Type        string `pulumi:"type"`
+	// Whether EIP is a fixed IP.
+	EipFixed bool `pulumi:"eipFixed"`
+	// EIP list of the SCF function.
+	Eips []string `pulumi:"eips"`
+	// Whether the EIP enabled.
+	EnableEipConfig bool `pulumi:"enableEipConfig"`
+	// Whether the public net enabled.
+	EnablePublicNet bool `pulumi:"enablePublicNet"`
+	// Environment variable of the SCF function.
+	Environment map[string]interface{} `pulumi:"environment"`
+	// Errno of the SCF function.
+	ErrNo int `pulumi:"errNo"`
+	// Handler of the SCF function.
+	Handler string `pulumi:"handler"`
+	// Host of the SCF function.
+	Host string `pulumi:"host"`
+	// Whether to automatically install dependencies.
+	InstallDependency bool `pulumi:"installDependency"`
+	// Whether to enable L5.
+	L5Enable bool `pulumi:"l5Enable"`
+	// Memory size of the SCF function runtime, unit is M.
+	MemSize int `pulumi:"memSize"`
+	// Modify time of the SCF function trigger.
+	ModifyTime string `pulumi:"modifyTime"`
+	// Name of the SCF function to be queried.
+	Name string `pulumi:"name"`
+	// Namespace of the SCF function to be queried.
+	Namespace string `pulumi:"namespace"`
+	// CAM role of the SCF function.
+	Role string `pulumi:"role"`
+	// Runtime of the SCF function.
+	Runtime string `pulumi:"runtime"`
+	// Status of the SCF function.
+	Status string `pulumi:"status"`
+	// Status description of the SCF function.
+	StatusDesc string `pulumi:"statusDesc"`
+	// Subnet ID of the SCF function.
+	SubnetId string `pulumi:"subnetId"`
+	// Tags of the SCF function to be queried, can use up to 10 tags.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// Timeout of the SCF function maximum execution time, unit is second.
+	Timeout int `pulumi:"timeout"`
+	// Trigger details list the SCF function. Each element contains the following attributes:
+	TriggerInfos []GetFunctionsFunctionTriggerInfo `pulumi:"triggerInfos"`
+	// Vip of the SCF function.
+	Vip string `pulumi:"vip"`
+	// VPC ID of the SCF function.
+	VpcId string `pulumi:"vpcId"`
 }
 
-// NamespacesNamespaceInput is an input type that accepts NamespacesNamespaceArgs and NamespacesNamespaceOutput values.
-// You can construct a concrete instance of `NamespacesNamespaceInput` via:
+// GetFunctionsFunctionInput is an input type that accepts GetFunctionsFunctionArgs and GetFunctionsFunctionOutput values.
+// You can construct a concrete instance of `GetFunctionsFunctionInput` via:
 //
-//          NamespacesNamespaceArgs{...}
-type NamespacesNamespaceInput interface {
+//          GetFunctionsFunctionArgs{...}
+type GetFunctionsFunctionInput interface {
 	pulumi.Input
 
-	ToNamespacesNamespaceOutput() NamespacesNamespaceOutput
-	ToNamespacesNamespaceOutputWithContext(context.Context) NamespacesNamespaceOutput
+	ToGetFunctionsFunctionOutput() GetFunctionsFunctionOutput
+	ToGetFunctionsFunctionOutputWithContext(context.Context) GetFunctionsFunctionOutput
 }
 
-type NamespacesNamespaceArgs struct {
-	CreateTime  pulumi.StringInput `pulumi:"createTime"`
+type GetFunctionsFunctionArgs struct {
+	// CLS logset ID of the SCF function.
+	ClsLogsetId pulumi.StringInput `pulumi:"clsLogsetId"`
+	// CLS topic ID of the SCF function.
+	ClsTopicId pulumi.StringInput `pulumi:"clsTopicId"`
+	// Code error of the SCF function.
+	CodeError pulumi.StringInput `pulumi:"codeError"`
+	// Code result of the SCF function.
+	CodeResult pulumi.StringInput `pulumi:"codeResult"`
+	// Code size of the SCF function.
+	CodeSize pulumi.IntInput `pulumi:"codeSize"`
+	// Create time of the SCF function trigger.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Description of the SCF function to be queried.
 	Description pulumi.StringInput `pulumi:"description"`
-	ModifyTime  pulumi.StringInput `pulumi:"modifyTime"`
-	Namespace   pulumi.StringInput `pulumi:"namespace"`
-	Type        pulumi.StringInput `pulumi:"type"`
+	// Whether EIP is a fixed IP.
+	EipFixed pulumi.BoolInput `pulumi:"eipFixed"`
+	// EIP list of the SCF function.
+	Eips pulumi.StringArrayInput `pulumi:"eips"`
+	// Whether the EIP enabled.
+	EnableEipConfig pulumi.BoolInput `pulumi:"enableEipConfig"`
+	// Whether the public net enabled.
+	EnablePublicNet pulumi.BoolInput `pulumi:"enablePublicNet"`
+	// Environment variable of the SCF function.
+	Environment pulumi.MapInput `pulumi:"environment"`
+	// Errno of the SCF function.
+	ErrNo pulumi.IntInput `pulumi:"errNo"`
+	// Handler of the SCF function.
+	Handler pulumi.StringInput `pulumi:"handler"`
+	// Host of the SCF function.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Whether to automatically install dependencies.
+	InstallDependency pulumi.BoolInput `pulumi:"installDependency"`
+	// Whether to enable L5.
+	L5Enable pulumi.BoolInput `pulumi:"l5Enable"`
+	// Memory size of the SCF function runtime, unit is M.
+	MemSize pulumi.IntInput `pulumi:"memSize"`
+	// Modify time of the SCF function trigger.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// Name of the SCF function to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Namespace of the SCF function to be queried.
+	Namespace pulumi.StringInput `pulumi:"namespace"`
+	// CAM role of the SCF function.
+	Role pulumi.StringInput `pulumi:"role"`
+	// Runtime of the SCF function.
+	Runtime pulumi.StringInput `pulumi:"runtime"`
+	// Status of the SCF function.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Status description of the SCF function.
+	StatusDesc pulumi.StringInput `pulumi:"statusDesc"`
+	// Subnet ID of the SCF function.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Tags of the SCF function to be queried, can use up to 10 tags.
+	Tags pulumi.MapInput `pulumi:"tags"`
+	// Timeout of the SCF function maximum execution time, unit is second.
+	Timeout pulumi.IntInput `pulumi:"timeout"`
+	// Trigger details list the SCF function. Each element contains the following attributes:
+	TriggerInfos GetFunctionsFunctionTriggerInfoArrayInput `pulumi:"triggerInfos"`
+	// Vip of the SCF function.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// VPC ID of the SCF function.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
-func (NamespacesNamespaceArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*NamespacesNamespace)(nil)).Elem()
+func (GetFunctionsFunctionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionsFunction)(nil)).Elem()
 }
 
-func (i NamespacesNamespaceArgs) ToNamespacesNamespaceOutput() NamespacesNamespaceOutput {
-	return i.ToNamespacesNamespaceOutputWithContext(context.Background())
+func (i GetFunctionsFunctionArgs) ToGetFunctionsFunctionOutput() GetFunctionsFunctionOutput {
+	return i.ToGetFunctionsFunctionOutputWithContext(context.Background())
 }
 
-func (i NamespacesNamespaceArgs) ToNamespacesNamespaceOutputWithContext(ctx context.Context) NamespacesNamespaceOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(NamespacesNamespaceOutput)
+func (i GetFunctionsFunctionArgs) ToGetFunctionsFunctionOutputWithContext(ctx context.Context) GetFunctionsFunctionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionsFunctionOutput)
 }
 
-// NamespacesNamespaceArrayInput is an input type that accepts NamespacesNamespaceArray and NamespacesNamespaceArrayOutput values.
-// You can construct a concrete instance of `NamespacesNamespaceArrayInput` via:
+// GetFunctionsFunctionArrayInput is an input type that accepts GetFunctionsFunctionArray and GetFunctionsFunctionArrayOutput values.
+// You can construct a concrete instance of `GetFunctionsFunctionArrayInput` via:
 //
-//          NamespacesNamespaceArray{ NamespacesNamespaceArgs{...} }
-type NamespacesNamespaceArrayInput interface {
+//          GetFunctionsFunctionArray{ GetFunctionsFunctionArgs{...} }
+type GetFunctionsFunctionArrayInput interface {
 	pulumi.Input
 
-	ToNamespacesNamespaceArrayOutput() NamespacesNamespaceArrayOutput
-	ToNamespacesNamespaceArrayOutputWithContext(context.Context) NamespacesNamespaceArrayOutput
+	ToGetFunctionsFunctionArrayOutput() GetFunctionsFunctionArrayOutput
+	ToGetFunctionsFunctionArrayOutputWithContext(context.Context) GetFunctionsFunctionArrayOutput
 }
 
-type NamespacesNamespaceArray []NamespacesNamespaceInput
+type GetFunctionsFunctionArray []GetFunctionsFunctionInput
 
-func (NamespacesNamespaceArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]NamespacesNamespace)(nil)).Elem()
+func (GetFunctionsFunctionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionsFunction)(nil)).Elem()
 }
 
-func (i NamespacesNamespaceArray) ToNamespacesNamespaceArrayOutput() NamespacesNamespaceArrayOutput {
-	return i.ToNamespacesNamespaceArrayOutputWithContext(context.Background())
+func (i GetFunctionsFunctionArray) ToGetFunctionsFunctionArrayOutput() GetFunctionsFunctionArrayOutput {
+	return i.ToGetFunctionsFunctionArrayOutputWithContext(context.Background())
 }
 
-func (i NamespacesNamespaceArray) ToNamespacesNamespaceArrayOutputWithContext(ctx context.Context) NamespacesNamespaceArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(NamespacesNamespaceArrayOutput)
+func (i GetFunctionsFunctionArray) ToGetFunctionsFunctionArrayOutputWithContext(ctx context.Context) GetFunctionsFunctionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionsFunctionArrayOutput)
 }
 
-type NamespacesNamespaceOutput struct{ *pulumi.OutputState }
+type GetFunctionsFunctionOutput struct{ *pulumi.OutputState }
 
-func (NamespacesNamespaceOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*NamespacesNamespace)(nil)).Elem()
+func (GetFunctionsFunctionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionsFunction)(nil)).Elem()
 }
 
-func (o NamespacesNamespaceOutput) ToNamespacesNamespaceOutput() NamespacesNamespaceOutput {
+func (o GetFunctionsFunctionOutput) ToGetFunctionsFunctionOutput() GetFunctionsFunctionOutput {
 	return o
 }
 
-func (o NamespacesNamespaceOutput) ToNamespacesNamespaceOutputWithContext(ctx context.Context) NamespacesNamespaceOutput {
+func (o GetFunctionsFunctionOutput) ToGetFunctionsFunctionOutputWithContext(ctx context.Context) GetFunctionsFunctionOutput {
 	return o
 }
 
-func (o NamespacesNamespaceOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v NamespacesNamespace) string { return v.CreateTime }).(pulumi.StringOutput)
+// CLS logset ID of the SCF function.
+func (o GetFunctionsFunctionOutput) ClsLogsetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.ClsLogsetId }).(pulumi.StringOutput)
 }
 
-func (o NamespacesNamespaceOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v NamespacesNamespace) string { return v.Description }).(pulumi.StringOutput)
+// CLS topic ID of the SCF function.
+func (o GetFunctionsFunctionOutput) ClsTopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.ClsTopicId }).(pulumi.StringOutput)
 }
 
-func (o NamespacesNamespaceOutput) ModifyTime() pulumi.StringOutput {
-	return o.ApplyT(func(v NamespacesNamespace) string { return v.ModifyTime }).(pulumi.StringOutput)
+// Code error of the SCF function.
+func (o GetFunctionsFunctionOutput) CodeError() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.CodeError }).(pulumi.StringOutput)
 }
 
-func (o NamespacesNamespaceOutput) Namespace() pulumi.StringOutput {
-	return o.ApplyT(func(v NamespacesNamespace) string { return v.Namespace }).(pulumi.StringOutput)
+// Code result of the SCF function.
+func (o GetFunctionsFunctionOutput) CodeResult() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.CodeResult }).(pulumi.StringOutput)
 }
 
-func (o NamespacesNamespaceOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v NamespacesNamespace) string { return v.Type }).(pulumi.StringOutput)
+// Code size of the SCF function.
+func (o GetFunctionsFunctionOutput) CodeSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) int { return v.CodeSize }).(pulumi.IntOutput)
 }
 
-type NamespacesNamespaceArrayOutput struct{ *pulumi.OutputState }
-
-func (NamespacesNamespaceArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]NamespacesNamespace)(nil)).Elem()
+// Create time of the SCF function trigger.
+func (o GetFunctionsFunctionOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o NamespacesNamespaceArrayOutput) ToNamespacesNamespaceArrayOutput() NamespacesNamespaceArrayOutput {
+// Description of the SCF function to be queried.
+func (o GetFunctionsFunctionOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Whether EIP is a fixed IP.
+func (o GetFunctionsFunctionOutput) EipFixed() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) bool { return v.EipFixed }).(pulumi.BoolOutput)
+}
+
+// EIP list of the SCF function.
+func (o GetFunctionsFunctionOutput) Eips() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) []string { return v.Eips }).(pulumi.StringArrayOutput)
+}
+
+// Whether the EIP enabled.
+func (o GetFunctionsFunctionOutput) EnableEipConfig() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) bool { return v.EnableEipConfig }).(pulumi.BoolOutput)
+}
+
+// Whether the public net enabled.
+func (o GetFunctionsFunctionOutput) EnablePublicNet() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) bool { return v.EnablePublicNet }).(pulumi.BoolOutput)
+}
+
+// Environment variable of the SCF function.
+func (o GetFunctionsFunctionOutput) Environment() pulumi.MapOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) map[string]interface{} { return v.Environment }).(pulumi.MapOutput)
+}
+
+// Errno of the SCF function.
+func (o GetFunctionsFunctionOutput) ErrNo() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) int { return v.ErrNo }).(pulumi.IntOutput)
+}
+
+// Handler of the SCF function.
+func (o GetFunctionsFunctionOutput) Handler() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.Handler }).(pulumi.StringOutput)
+}
+
+// Host of the SCF function.
+func (o GetFunctionsFunctionOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Whether to automatically install dependencies.
+func (o GetFunctionsFunctionOutput) InstallDependency() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) bool { return v.InstallDependency }).(pulumi.BoolOutput)
+}
+
+// Whether to enable L5.
+func (o GetFunctionsFunctionOutput) L5Enable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) bool { return v.L5Enable }).(pulumi.BoolOutput)
+}
+
+// Memory size of the SCF function runtime, unit is M.
+func (o GetFunctionsFunctionOutput) MemSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) int { return v.MemSize }).(pulumi.IntOutput)
+}
+
+// Modify time of the SCF function trigger.
+func (o GetFunctionsFunctionOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// Name of the SCF function to be queried.
+func (o GetFunctionsFunctionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Namespace of the SCF function to be queried.
+func (o GetFunctionsFunctionOutput) Namespace() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.Namespace }).(pulumi.StringOutput)
+}
+
+// CAM role of the SCF function.
+func (o GetFunctionsFunctionOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// Runtime of the SCF function.
+func (o GetFunctionsFunctionOutput) Runtime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.Runtime }).(pulumi.StringOutput)
+}
+
+// Status of the SCF function.
+func (o GetFunctionsFunctionOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Status description of the SCF function.
+func (o GetFunctionsFunctionOutput) StatusDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.StatusDesc }).(pulumi.StringOutput)
+}
+
+// Subnet ID of the SCF function.
+func (o GetFunctionsFunctionOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Tags of the SCF function to be queried, can use up to 10 tags.
+func (o GetFunctionsFunctionOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+}
+
+// Timeout of the SCF function maximum execution time, unit is second.
+func (o GetFunctionsFunctionOutput) Timeout() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) int { return v.Timeout }).(pulumi.IntOutput)
+}
+
+// Trigger details list the SCF function. Each element contains the following attributes:
+func (o GetFunctionsFunctionOutput) TriggerInfos() GetFunctionsFunctionTriggerInfoArrayOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) []GetFunctionsFunctionTriggerInfo { return v.TriggerInfos }).(GetFunctionsFunctionTriggerInfoArrayOutput)
+}
+
+// Vip of the SCF function.
+func (o GetFunctionsFunctionOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// VPC ID of the SCF function.
+func (o GetFunctionsFunctionOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunction) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetFunctionsFunctionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionsFunctionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionsFunction)(nil)).Elem()
+}
+
+func (o GetFunctionsFunctionArrayOutput) ToGetFunctionsFunctionArrayOutput() GetFunctionsFunctionArrayOutput {
 	return o
 }
 
-func (o NamespacesNamespaceArrayOutput) ToNamespacesNamespaceArrayOutputWithContext(ctx context.Context) NamespacesNamespaceArrayOutput {
+func (o GetFunctionsFunctionArrayOutput) ToGetFunctionsFunctionArrayOutputWithContext(ctx context.Context) GetFunctionsFunctionArrayOutput {
 	return o
 }
 
-func (o NamespacesNamespaceArrayOutput) Index(i pulumi.IntInput) NamespacesNamespaceOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NamespacesNamespace {
-		return vs[0].([]NamespacesNamespace)[vs[1].(int)]
-	}).(NamespacesNamespaceOutput)
+func (o GetFunctionsFunctionArrayOutput) Index(i pulumi.IntInput) GetFunctionsFunctionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFunctionsFunction {
+		return vs[0].([]GetFunctionsFunction)[vs[1].(int)]
+	}).(GetFunctionsFunctionOutput)
+}
+
+type GetFunctionsFunctionTriggerInfo struct {
+	// Create time of the SCF function trigger.
+	CreateTime string `pulumi:"createTime"`
+	// user-defined parameter of the SCF function trigger.
+	CustomArgument string `pulumi:"customArgument"`
+	// Whether to enable SCF function trigger.
+	Enable bool `pulumi:"enable"`
+	// Modify time of the SCF function trigger.
+	ModifyTime string `pulumi:"modifyTime"`
+	// Name of the SCF function to be queried.
+	Name string `pulumi:"name"`
+	// TriggerDesc of the SCF function trigger.
+	TriggerDesc string `pulumi:"triggerDesc"`
+	// Type of the SCF function trigger.
+	Type string `pulumi:"type"`
+}
+
+// GetFunctionsFunctionTriggerInfoInput is an input type that accepts GetFunctionsFunctionTriggerInfoArgs and GetFunctionsFunctionTriggerInfoOutput values.
+// You can construct a concrete instance of `GetFunctionsFunctionTriggerInfoInput` via:
+//
+//          GetFunctionsFunctionTriggerInfoArgs{...}
+type GetFunctionsFunctionTriggerInfoInput interface {
+	pulumi.Input
+
+	ToGetFunctionsFunctionTriggerInfoOutput() GetFunctionsFunctionTriggerInfoOutput
+	ToGetFunctionsFunctionTriggerInfoOutputWithContext(context.Context) GetFunctionsFunctionTriggerInfoOutput
+}
+
+type GetFunctionsFunctionTriggerInfoArgs struct {
+	// Create time of the SCF function trigger.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// user-defined parameter of the SCF function trigger.
+	CustomArgument pulumi.StringInput `pulumi:"customArgument"`
+	// Whether to enable SCF function trigger.
+	Enable pulumi.BoolInput `pulumi:"enable"`
+	// Modify time of the SCF function trigger.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// Name of the SCF function to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// TriggerDesc of the SCF function trigger.
+	TriggerDesc pulumi.StringInput `pulumi:"triggerDesc"`
+	// Type of the SCF function trigger.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetFunctionsFunctionTriggerInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionsFunctionTriggerInfo)(nil)).Elem()
+}
+
+func (i GetFunctionsFunctionTriggerInfoArgs) ToGetFunctionsFunctionTriggerInfoOutput() GetFunctionsFunctionTriggerInfoOutput {
+	return i.ToGetFunctionsFunctionTriggerInfoOutputWithContext(context.Background())
+}
+
+func (i GetFunctionsFunctionTriggerInfoArgs) ToGetFunctionsFunctionTriggerInfoOutputWithContext(ctx context.Context) GetFunctionsFunctionTriggerInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionsFunctionTriggerInfoOutput)
+}
+
+// GetFunctionsFunctionTriggerInfoArrayInput is an input type that accepts GetFunctionsFunctionTriggerInfoArray and GetFunctionsFunctionTriggerInfoArrayOutput values.
+// You can construct a concrete instance of `GetFunctionsFunctionTriggerInfoArrayInput` via:
+//
+//          GetFunctionsFunctionTriggerInfoArray{ GetFunctionsFunctionTriggerInfoArgs{...} }
+type GetFunctionsFunctionTriggerInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetFunctionsFunctionTriggerInfoArrayOutput() GetFunctionsFunctionTriggerInfoArrayOutput
+	ToGetFunctionsFunctionTriggerInfoArrayOutputWithContext(context.Context) GetFunctionsFunctionTriggerInfoArrayOutput
+}
+
+type GetFunctionsFunctionTriggerInfoArray []GetFunctionsFunctionTriggerInfoInput
+
+func (GetFunctionsFunctionTriggerInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionsFunctionTriggerInfo)(nil)).Elem()
+}
+
+func (i GetFunctionsFunctionTriggerInfoArray) ToGetFunctionsFunctionTriggerInfoArrayOutput() GetFunctionsFunctionTriggerInfoArrayOutput {
+	return i.ToGetFunctionsFunctionTriggerInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetFunctionsFunctionTriggerInfoArray) ToGetFunctionsFunctionTriggerInfoArrayOutputWithContext(ctx context.Context) GetFunctionsFunctionTriggerInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFunctionsFunctionTriggerInfoArrayOutput)
+}
+
+type GetFunctionsFunctionTriggerInfoOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionsFunctionTriggerInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFunctionsFunctionTriggerInfo)(nil)).Elem()
+}
+
+func (o GetFunctionsFunctionTriggerInfoOutput) ToGetFunctionsFunctionTriggerInfoOutput() GetFunctionsFunctionTriggerInfoOutput {
+	return o
+}
+
+func (o GetFunctionsFunctionTriggerInfoOutput) ToGetFunctionsFunctionTriggerInfoOutputWithContext(ctx context.Context) GetFunctionsFunctionTriggerInfoOutput {
+	return o
+}
+
+// Create time of the SCF function trigger.
+func (o GetFunctionsFunctionTriggerInfoOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionTriggerInfo) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// user-defined parameter of the SCF function trigger.
+func (o GetFunctionsFunctionTriggerInfoOutput) CustomArgument() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionTriggerInfo) string { return v.CustomArgument }).(pulumi.StringOutput)
+}
+
+// Whether to enable SCF function trigger.
+func (o GetFunctionsFunctionTriggerInfoOutput) Enable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionTriggerInfo) bool { return v.Enable }).(pulumi.BoolOutput)
+}
+
+// Modify time of the SCF function trigger.
+func (o GetFunctionsFunctionTriggerInfoOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionTriggerInfo) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// Name of the SCF function to be queried.
+func (o GetFunctionsFunctionTriggerInfoOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionTriggerInfo) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// TriggerDesc of the SCF function trigger.
+func (o GetFunctionsFunctionTriggerInfoOutput) TriggerDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionTriggerInfo) string { return v.TriggerDesc }).(pulumi.StringOutput)
+}
+
+// Type of the SCF function trigger.
+func (o GetFunctionsFunctionTriggerInfoOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFunctionsFunctionTriggerInfo) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetFunctionsFunctionTriggerInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFunctionsFunctionTriggerInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFunctionsFunctionTriggerInfo)(nil)).Elem()
+}
+
+func (o GetFunctionsFunctionTriggerInfoArrayOutput) ToGetFunctionsFunctionTriggerInfoArrayOutput() GetFunctionsFunctionTriggerInfoArrayOutput {
+	return o
+}
+
+func (o GetFunctionsFunctionTriggerInfoArrayOutput) ToGetFunctionsFunctionTriggerInfoArrayOutputWithContext(ctx context.Context) GetFunctionsFunctionTriggerInfoArrayOutput {
+	return o
+}
+
+func (o GetFunctionsFunctionTriggerInfoArrayOutput) Index(i pulumi.IntInput) GetFunctionsFunctionTriggerInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFunctionsFunctionTriggerInfo {
+		return vs[0].([]GetFunctionsFunctionTriggerInfo)[vs[1].(int)]
+	}).(GetFunctionsFunctionTriggerInfoOutput)
+}
+
+type GetLogsLog struct {
+	// Function billing time, according to duration up to the last 100ms, unit is ms.
+	BillDuration int `pulumi:"billDuration"`
+	// Function execution time-consuming, unit is ms.
+	Duration float64 `pulumi:"duration"`
+	// Name of the SCF function to be queried.
+	FunctionName string `pulumi:"functionName"`
+	// Whether the function call ends, `1` means the execution ends, other values indicate the call exception.
+	InvokeFinished int `pulumi:"invokeFinished"`
+	// Log level.
+	Level string `pulumi:"level"`
+	// Log output during function execution.
+	Log string `pulumi:"log"`
+	// The actual memory size consumed in the execution of the function, unit is Byte.
+	MemUsage int `pulumi:"memUsage"`
+	// Execute the requestId corresponding to the function.
+	RequestId string `pulumi:"requestId"`
+	// Use to filter log, optional value: `not0` only returns the error log. `is0` only returns the correct log. `TimeLimitExceeded` returns the log of the function call timeout. `ResourceLimitExceeded` returns the function call generation resource overrun log. `UserCodeException` returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.
+	RetCode int `pulumi:"retCode"`
+	// Return value after function execution is completed.
+	RetMsg string `pulumi:"retMsg"`
+	// Log source.
+	Source string `pulumi:"source"`
+	// The start time of the query, the format is `2017-05-16 20:00:00`, which can only be within one day from `endTime`.
+	StartTime string `pulumi:"startTime"`
+}
+
+// GetLogsLogInput is an input type that accepts GetLogsLogArgs and GetLogsLogOutput values.
+// You can construct a concrete instance of `GetLogsLogInput` via:
+//
+//          GetLogsLogArgs{...}
+type GetLogsLogInput interface {
+	pulumi.Input
+
+	ToGetLogsLogOutput() GetLogsLogOutput
+	ToGetLogsLogOutputWithContext(context.Context) GetLogsLogOutput
+}
+
+type GetLogsLogArgs struct {
+	// Function billing time, according to duration up to the last 100ms, unit is ms.
+	BillDuration pulumi.IntInput `pulumi:"billDuration"`
+	// Function execution time-consuming, unit is ms.
+	Duration pulumi.Float64Input `pulumi:"duration"`
+	// Name of the SCF function to be queried.
+	FunctionName pulumi.StringInput `pulumi:"functionName"`
+	// Whether the function call ends, `1` means the execution ends, other values indicate the call exception.
+	InvokeFinished pulumi.IntInput `pulumi:"invokeFinished"`
+	// Log level.
+	Level pulumi.StringInput `pulumi:"level"`
+	// Log output during function execution.
+	Log pulumi.StringInput `pulumi:"log"`
+	// The actual memory size consumed in the execution of the function, unit is Byte.
+	MemUsage pulumi.IntInput `pulumi:"memUsage"`
+	// Execute the requestId corresponding to the function.
+	RequestId pulumi.StringInput `pulumi:"requestId"`
+	// Use to filter log, optional value: `not0` only returns the error log. `is0` only returns the correct log. `TimeLimitExceeded` returns the log of the function call timeout. `ResourceLimitExceeded` returns the function call generation resource overrun log. `UserCodeException` returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.
+	RetCode pulumi.IntInput `pulumi:"retCode"`
+	// Return value after function execution is completed.
+	RetMsg pulumi.StringInput `pulumi:"retMsg"`
+	// Log source.
+	Source pulumi.StringInput `pulumi:"source"`
+	// The start time of the query, the format is `2017-05-16 20:00:00`, which can only be within one day from `endTime`.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+}
+
+func (GetLogsLogArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogsLog)(nil)).Elem()
+}
+
+func (i GetLogsLogArgs) ToGetLogsLogOutput() GetLogsLogOutput {
+	return i.ToGetLogsLogOutputWithContext(context.Background())
+}
+
+func (i GetLogsLogArgs) ToGetLogsLogOutputWithContext(ctx context.Context) GetLogsLogOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogsLogOutput)
+}
+
+// GetLogsLogArrayInput is an input type that accepts GetLogsLogArray and GetLogsLogArrayOutput values.
+// You can construct a concrete instance of `GetLogsLogArrayInput` via:
+//
+//          GetLogsLogArray{ GetLogsLogArgs{...} }
+type GetLogsLogArrayInput interface {
+	pulumi.Input
+
+	ToGetLogsLogArrayOutput() GetLogsLogArrayOutput
+	ToGetLogsLogArrayOutputWithContext(context.Context) GetLogsLogArrayOutput
+}
+
+type GetLogsLogArray []GetLogsLogInput
+
+func (GetLogsLogArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogsLog)(nil)).Elem()
+}
+
+func (i GetLogsLogArray) ToGetLogsLogArrayOutput() GetLogsLogArrayOutput {
+	return i.ToGetLogsLogArrayOutputWithContext(context.Background())
+}
+
+func (i GetLogsLogArray) ToGetLogsLogArrayOutputWithContext(ctx context.Context) GetLogsLogArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLogsLogArrayOutput)
+}
+
+type GetLogsLogOutput struct{ *pulumi.OutputState }
+
+func (GetLogsLogOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLogsLog)(nil)).Elem()
+}
+
+func (o GetLogsLogOutput) ToGetLogsLogOutput() GetLogsLogOutput {
+	return o
+}
+
+func (o GetLogsLogOutput) ToGetLogsLogOutputWithContext(ctx context.Context) GetLogsLogOutput {
+	return o
+}
+
+// Function billing time, according to duration up to the last 100ms, unit is ms.
+func (o GetLogsLogOutput) BillDuration() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogsLog) int { return v.BillDuration }).(pulumi.IntOutput)
+}
+
+// Function execution time-consuming, unit is ms.
+func (o GetLogsLogOutput) Duration() pulumi.Float64Output {
+	return o.ApplyT(func(v GetLogsLog) float64 { return v.Duration }).(pulumi.Float64Output)
+}
+
+// Name of the SCF function to be queried.
+func (o GetLogsLogOutput) FunctionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogsLog) string { return v.FunctionName }).(pulumi.StringOutput)
+}
+
+// Whether the function call ends, `1` means the execution ends, other values indicate the call exception.
+func (o GetLogsLogOutput) InvokeFinished() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogsLog) int { return v.InvokeFinished }).(pulumi.IntOutput)
+}
+
+// Log level.
+func (o GetLogsLogOutput) Level() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogsLog) string { return v.Level }).(pulumi.StringOutput)
+}
+
+// Log output during function execution.
+func (o GetLogsLogOutput) Log() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogsLog) string { return v.Log }).(pulumi.StringOutput)
+}
+
+// The actual memory size consumed in the execution of the function, unit is Byte.
+func (o GetLogsLogOutput) MemUsage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogsLog) int { return v.MemUsage }).(pulumi.IntOutput)
+}
+
+// Execute the requestId corresponding to the function.
+func (o GetLogsLogOutput) RequestId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogsLog) string { return v.RequestId }).(pulumi.StringOutput)
+}
+
+// Use to filter log, optional value: `not0` only returns the error log. `is0` only returns the correct log. `TimeLimitExceeded` returns the log of the function call timeout. `ResourceLimitExceeded` returns the function call generation resource overrun log. `UserCodeException` returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.
+func (o GetLogsLogOutput) RetCode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLogsLog) int { return v.RetCode }).(pulumi.IntOutput)
+}
+
+// Return value after function execution is completed.
+func (o GetLogsLogOutput) RetMsg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogsLog) string { return v.RetMsg }).(pulumi.StringOutput)
+}
+
+// Log source.
+func (o GetLogsLogOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogsLog) string { return v.Source }).(pulumi.StringOutput)
+}
+
+// The start time of the query, the format is `2017-05-16 20:00:00`, which can only be within one day from `endTime`.
+func (o GetLogsLogOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLogsLog) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+type GetLogsLogArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLogsLogArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLogsLog)(nil)).Elem()
+}
+
+func (o GetLogsLogArrayOutput) ToGetLogsLogArrayOutput() GetLogsLogArrayOutput {
+	return o
+}
+
+func (o GetLogsLogArrayOutput) ToGetLogsLogArrayOutputWithContext(ctx context.Context) GetLogsLogArrayOutput {
+	return o
+}
+
+func (o GetLogsLogArrayOutput) Index(i pulumi.IntInput) GetLogsLogOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLogsLog {
+		return vs[0].([]GetLogsLog)[vs[1].(int)]
+	}).(GetLogsLogOutput)
+}
+
+type GetNamespacesNamespace struct {
+	// Create time of the SCF namespace.
+	CreateTime string `pulumi:"createTime"`
+	// Description of the SCF namespace to be queried.
+	Description string `pulumi:"description"`
+	// Modify time of the SCF namespace.
+	ModifyTime string `pulumi:"modifyTime"`
+	// Name of the SCF namespace to be queried.
+	Namespace string `pulumi:"namespace"`
+	// Type of the SCF namespace.
+	Type string `pulumi:"type"`
+}
+
+// GetNamespacesNamespaceInput is an input type that accepts GetNamespacesNamespaceArgs and GetNamespacesNamespaceOutput values.
+// You can construct a concrete instance of `GetNamespacesNamespaceInput` via:
+//
+//          GetNamespacesNamespaceArgs{...}
+type GetNamespacesNamespaceInput interface {
+	pulumi.Input
+
+	ToGetNamespacesNamespaceOutput() GetNamespacesNamespaceOutput
+	ToGetNamespacesNamespaceOutputWithContext(context.Context) GetNamespacesNamespaceOutput
+}
+
+type GetNamespacesNamespaceArgs struct {
+	// Create time of the SCF namespace.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Description of the SCF namespace to be queried.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Modify time of the SCF namespace.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// Name of the SCF namespace to be queried.
+	Namespace pulumi.StringInput `pulumi:"namespace"`
+	// Type of the SCF namespace.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetNamespacesNamespaceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNamespacesNamespace)(nil)).Elem()
+}
+
+func (i GetNamespacesNamespaceArgs) ToGetNamespacesNamespaceOutput() GetNamespacesNamespaceOutput {
+	return i.ToGetNamespacesNamespaceOutputWithContext(context.Background())
+}
+
+func (i GetNamespacesNamespaceArgs) ToGetNamespacesNamespaceOutputWithContext(ctx context.Context) GetNamespacesNamespaceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNamespacesNamespaceOutput)
+}
+
+// GetNamespacesNamespaceArrayInput is an input type that accepts GetNamespacesNamespaceArray and GetNamespacesNamespaceArrayOutput values.
+// You can construct a concrete instance of `GetNamespacesNamespaceArrayInput` via:
+//
+//          GetNamespacesNamespaceArray{ GetNamespacesNamespaceArgs{...} }
+type GetNamespacesNamespaceArrayInput interface {
+	pulumi.Input
+
+	ToGetNamespacesNamespaceArrayOutput() GetNamespacesNamespaceArrayOutput
+	ToGetNamespacesNamespaceArrayOutputWithContext(context.Context) GetNamespacesNamespaceArrayOutput
+}
+
+type GetNamespacesNamespaceArray []GetNamespacesNamespaceInput
+
+func (GetNamespacesNamespaceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNamespacesNamespace)(nil)).Elem()
+}
+
+func (i GetNamespacesNamespaceArray) ToGetNamespacesNamespaceArrayOutput() GetNamespacesNamespaceArrayOutput {
+	return i.ToGetNamespacesNamespaceArrayOutputWithContext(context.Background())
+}
+
+func (i GetNamespacesNamespaceArray) ToGetNamespacesNamespaceArrayOutputWithContext(ctx context.Context) GetNamespacesNamespaceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNamespacesNamespaceArrayOutput)
+}
+
+type GetNamespacesNamespaceOutput struct{ *pulumi.OutputState }
+
+func (GetNamespacesNamespaceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNamespacesNamespace)(nil)).Elem()
+}
+
+func (o GetNamespacesNamespaceOutput) ToGetNamespacesNamespaceOutput() GetNamespacesNamespaceOutput {
+	return o
+}
+
+func (o GetNamespacesNamespaceOutput) ToGetNamespacesNamespaceOutputWithContext(ctx context.Context) GetNamespacesNamespaceOutput {
+	return o
+}
+
+// Create time of the SCF namespace.
+func (o GetNamespacesNamespaceOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNamespacesNamespace) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Description of the SCF namespace to be queried.
+func (o GetNamespacesNamespaceOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNamespacesNamespace) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Modify time of the SCF namespace.
+func (o GetNamespacesNamespaceOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNamespacesNamespace) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// Name of the SCF namespace to be queried.
+func (o GetNamespacesNamespaceOutput) Namespace() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNamespacesNamespace) string { return v.Namespace }).(pulumi.StringOutput)
+}
+
+// Type of the SCF namespace.
+func (o GetNamespacesNamespaceOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNamespacesNamespace) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetNamespacesNamespaceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNamespacesNamespaceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNamespacesNamespace)(nil)).Elem()
+}
+
+func (o GetNamespacesNamespaceArrayOutput) ToGetNamespacesNamespaceArrayOutput() GetNamespacesNamespaceArrayOutput {
+	return o
+}
+
+func (o GetNamespacesNamespaceArrayOutput) ToGetNamespacesNamespaceArrayOutputWithContext(ctx context.Context) GetNamespacesNamespaceArrayOutput {
+	return o
+}
+
+func (o GetNamespacesNamespaceArrayOutput) Index(i pulumi.IntInput) GetNamespacesNamespaceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNamespacesNamespace {
+		return vs[0].([]GetNamespacesNamespace)[vs[1].(int)]
+	}).(GetNamespacesNamespaceOutput)
 }
 
 func init() {
@@ -1489,16 +1745,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTriggerArrayInput)(nil)).Elem(), FunctionTriggerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTriggerInfoInput)(nil)).Elem(), FunctionTriggerInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTriggerInfoArrayInput)(nil)).Elem(), FunctionTriggerInfoArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*FunctionsFunctionInput)(nil)).Elem(), FunctionsFunctionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*FunctionsFunctionArrayInput)(nil)).Elem(), FunctionsFunctionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*FunctionsFunctionTriggerInfoInput)(nil)).Elem(), FunctionsFunctionTriggerInfoArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*FunctionsFunctionTriggerInfoArrayInput)(nil)).Elem(), FunctionsFunctionTriggerInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LayerContentInput)(nil)).Elem(), LayerContentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LayerContentPtrInput)(nil)).Elem(), LayerContentArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*LogsLogInput)(nil)).Elem(), LogsLogArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*LogsLogArrayInput)(nil)).Elem(), LogsLogArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*NamespacesNamespaceInput)(nil)).Elem(), NamespacesNamespaceArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*NamespacesNamespaceArrayInput)(nil)).Elem(), NamespacesNamespaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionInput)(nil)).Elem(), GetFunctionsFunctionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionArrayInput)(nil)).Elem(), GetFunctionsFunctionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionTriggerInfoInput)(nil)).Elem(), GetFunctionsFunctionTriggerInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFunctionsFunctionTriggerInfoArrayInput)(nil)).Elem(), GetFunctionsFunctionTriggerInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogsLogInput)(nil)).Elem(), GetLogsLogArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLogsLogArrayInput)(nil)).Elem(), GetLogsLogArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNamespacesNamespaceInput)(nil)).Elem(), GetNamespacesNamespaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNamespacesNamespaceArrayInput)(nil)).Elem(), GetNamespacesNamespaceArray{})
 	pulumi.RegisterOutputType(FunctionCfsConfigOutput{})
 	pulumi.RegisterOutputType(FunctionCfsConfigArrayOutput{})
 	pulumi.RegisterOutputType(FunctionImageConfigOutput{})
@@ -1509,14 +1765,14 @@ func init() {
 	pulumi.RegisterOutputType(FunctionTriggerArrayOutput{})
 	pulumi.RegisterOutputType(FunctionTriggerInfoOutput{})
 	pulumi.RegisterOutputType(FunctionTriggerInfoArrayOutput{})
-	pulumi.RegisterOutputType(FunctionsFunctionOutput{})
-	pulumi.RegisterOutputType(FunctionsFunctionArrayOutput{})
-	pulumi.RegisterOutputType(FunctionsFunctionTriggerInfoOutput{})
-	pulumi.RegisterOutputType(FunctionsFunctionTriggerInfoArrayOutput{})
 	pulumi.RegisterOutputType(LayerContentOutput{})
 	pulumi.RegisterOutputType(LayerContentPtrOutput{})
-	pulumi.RegisterOutputType(LogsLogOutput{})
-	pulumi.RegisterOutputType(LogsLogArrayOutput{})
-	pulumi.RegisterOutputType(NamespacesNamespaceOutput{})
-	pulumi.RegisterOutputType(NamespacesNamespaceArrayOutput{})
+	pulumi.RegisterOutputType(GetFunctionsFunctionOutput{})
+	pulumi.RegisterOutputType(GetFunctionsFunctionArrayOutput{})
+	pulumi.RegisterOutputType(GetFunctionsFunctionTriggerInfoOutput{})
+	pulumi.RegisterOutputType(GetFunctionsFunctionTriggerInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetLogsLogOutput{})
+	pulumi.RegisterOutputType(GetLogsLogArrayOutput{})
+	pulumi.RegisterOutputType(GetNamespacesNamespaceOutput{})
+	pulumi.RegisterOutputType(GetNamespacesNamespaceArrayOutput{})
 }

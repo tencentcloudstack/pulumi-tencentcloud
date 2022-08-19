@@ -28,29 +28,15 @@ class ImageSpriteTemplateArgs:
         The set of arguments for constructing a ImageSpriteTemplate resource.
         :param pulumi.Input[int] column_count: Subimage column count of an image sprite.
         :param pulumi.Input[int] row_count: Subimage row count of an image sprite.
-        :param pulumi.Input[int] sample_interval: Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage.
-               If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
+        :param pulumi.Input[int] sample_interval: Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage. If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
         :param pulumi.Input[str] sample_type: Sampling type. Valid values: `Percent`, `Time`. `Percent`: by percent. `Time`: by time interval.
         :param pulumi.Input[str] comment: Template description. Length limit: 256 characters.
-        :param pulumi.Input[str] fill_type: Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-               following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-               aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option
-               retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.
-               Default value: `black`.
-        :param pulumi.Input[int] height: Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-               and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-               not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-               proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        :param pulumi.Input[str] fill_type: Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
+        :param pulumi.Input[int] height: Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         :param pulumi.Input[str] name: Name of a time point screen capturing template. Length limit: 64 characters.
-        :param pulumi.Input[bool] resolution_adaptive: Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-               video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-               `height` the height. Default value: `true`.
-        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-               field; otherwise, leave it empty.
-        :param pulumi.Input[int] width: Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-               `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-               `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-               scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        :param pulumi.Input[bool] resolution_adaptive: Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
+        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        :param pulumi.Input[int] width: Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         """
         pulumi.set(__self__, "column_count", column_count)
         pulumi.set(__self__, "row_count", row_count)
@@ -99,8 +85,7 @@ class ImageSpriteTemplateArgs:
     @pulumi.getter(name="sampleInterval")
     def sample_interval(self) -> pulumi.Input[int]:
         """
-        Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage.
-        If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
+        Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage. If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
         """
         return pulumi.get(self, "sample_interval")
 
@@ -136,11 +121,7 @@ class ImageSpriteTemplateArgs:
     @pulumi.getter(name="fillType")
     def fill_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-        following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-        aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option
-        retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.
-        Default value: `black`.
+        Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
         """
         return pulumi.get(self, "fill_type")
 
@@ -152,10 +133,7 @@ class ImageSpriteTemplateArgs:
     @pulumi.getter
     def height(self) -> Optional[pulumi.Input[int]]:
         """
-        Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-        and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-        not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-        proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         """
         return pulumi.get(self, "height")
 
@@ -179,9 +157,7 @@ class ImageSpriteTemplateArgs:
     @pulumi.getter(name="resolutionAdaptive")
     def resolution_adaptive(self) -> Optional[pulumi.Input[bool]]:
         """
-        Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-        video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-        `height` the height. Default value: `true`.
+        Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
         """
         return pulumi.get(self, "resolution_adaptive")
 
@@ -193,8 +169,7 @@ class ImageSpriteTemplateArgs:
     @pulumi.getter(name="subAppId")
     def sub_app_id(self) -> Optional[pulumi.Input[int]]:
         """
-        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        field; otherwise, leave it empty.
+        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         return pulumi.get(self, "sub_app_id")
 
@@ -206,10 +181,7 @@ class ImageSpriteTemplateArgs:
     @pulumi.getter
     def width(self) -> Optional[pulumi.Input[int]]:
         """
-        Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-        `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-        `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-        scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         """
         return pulumi.get(self, "width")
 
@@ -239,30 +211,16 @@ class _ImageSpriteTemplateState:
         :param pulumi.Input[int] column_count: Subimage column count of an image sprite.
         :param pulumi.Input[str] comment: Template description. Length limit: 256 characters.
         :param pulumi.Input[str] create_time: Creation time of template in ISO date format.
-        :param pulumi.Input[str] fill_type: Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-               following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-               aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option
-               retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.
-               Default value: `black`.
-        :param pulumi.Input[int] height: Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-               and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-               not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-               proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        :param pulumi.Input[str] fill_type: Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
+        :param pulumi.Input[int] height: Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         :param pulumi.Input[str] name: Name of a time point screen capturing template. Length limit: 64 characters.
-        :param pulumi.Input[bool] resolution_adaptive: Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-               video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-               `height` the height. Default value: `true`.
+        :param pulumi.Input[bool] resolution_adaptive: Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
         :param pulumi.Input[int] row_count: Subimage row count of an image sprite.
-        :param pulumi.Input[int] sample_interval: Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage.
-               If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
+        :param pulumi.Input[int] sample_interval: Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage. If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
         :param pulumi.Input[str] sample_type: Sampling type. Valid values: `Percent`, `Time`. `Percent`: by percent. `Time`: by time interval.
-        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-               field; otherwise, leave it empty.
+        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         :param pulumi.Input[str] update_time: Last modified time of template in ISO date format.
-        :param pulumi.Input[int] width: Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-               `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-               `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-               scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        :param pulumi.Input[int] width: Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         """
         if column_count is not None:
             pulumi.set(__self__, "column_count", column_count)
@@ -331,11 +289,7 @@ class _ImageSpriteTemplateState:
     @pulumi.getter(name="fillType")
     def fill_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-        following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-        aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option
-        retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.
-        Default value: `black`.
+        Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
         """
         return pulumi.get(self, "fill_type")
 
@@ -347,10 +301,7 @@ class _ImageSpriteTemplateState:
     @pulumi.getter
     def height(self) -> Optional[pulumi.Input[int]]:
         """
-        Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-        and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-        not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-        proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         """
         return pulumi.get(self, "height")
 
@@ -374,9 +325,7 @@ class _ImageSpriteTemplateState:
     @pulumi.getter(name="resolutionAdaptive")
     def resolution_adaptive(self) -> Optional[pulumi.Input[bool]]:
         """
-        Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-        video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-        `height` the height. Default value: `true`.
+        Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
         """
         return pulumi.get(self, "resolution_adaptive")
 
@@ -400,8 +349,7 @@ class _ImageSpriteTemplateState:
     @pulumi.getter(name="sampleInterval")
     def sample_interval(self) -> Optional[pulumi.Input[int]]:
         """
-        Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage.
-        If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
+        Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage. If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
         """
         return pulumi.get(self, "sample_interval")
 
@@ -425,8 +373,7 @@ class _ImageSpriteTemplateState:
     @pulumi.getter(name="subAppId")
     def sub_app_id(self) -> Optional[pulumi.Input[int]]:
         """
-        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        field; otherwise, leave it empty.
+        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         return pulumi.get(self, "sub_app_id")
 
@@ -450,10 +397,7 @@ class _ImageSpriteTemplateState:
     @pulumi.getter
     def width(self) -> Optional[pulumi.Input[int]]:
         """
-        Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-        `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-        `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-        scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         """
         return pulumi.get(self, "width")
 
@@ -480,34 +424,47 @@ class ImageSpriteTemplate(pulumi.CustomResource):
                  width: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a ImageSpriteTemplate resource with the given unique name, props, and options.
+        Provide a resource to create a VOD image sprite template.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.vod.ImageSpriteTemplate("foo",
+            column_count=3,
+            comment="test",
+            fill_type="stretch",
+            height=128,
+            resolution_adaptive=False,
+            row_count=3,
+            sample_interval=10,
+            sample_type="Percent",
+            width=128)
+        ```
+
+        ## Import
+
+        VOD image sprite template can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo 51156
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] column_count: Subimage column count of an image sprite.
         :param pulumi.Input[str] comment: Template description. Length limit: 256 characters.
-        :param pulumi.Input[str] fill_type: Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-               following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-               aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option
-               retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.
-               Default value: `black`.
-        :param pulumi.Input[int] height: Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-               and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-               not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-               proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        :param pulumi.Input[str] fill_type: Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
+        :param pulumi.Input[int] height: Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         :param pulumi.Input[str] name: Name of a time point screen capturing template. Length limit: 64 characters.
-        :param pulumi.Input[bool] resolution_adaptive: Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-               video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-               `height` the height. Default value: `true`.
+        :param pulumi.Input[bool] resolution_adaptive: Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
         :param pulumi.Input[int] row_count: Subimage row count of an image sprite.
-        :param pulumi.Input[int] sample_interval: Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage.
-               If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
+        :param pulumi.Input[int] sample_interval: Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage. If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
         :param pulumi.Input[str] sample_type: Sampling type. Valid values: `Percent`, `Time`. `Percent`: by percent. `Time`: by time interval.
-        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-               field; otherwise, leave it empty.
-        :param pulumi.Input[int] width: Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-               `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-               `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-               scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+        :param pulumi.Input[int] width: Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         """
         ...
     @overload
@@ -516,7 +473,34 @@ class ImageSpriteTemplate(pulumi.CustomResource):
                  args: ImageSpriteTemplateArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ImageSpriteTemplate resource with the given unique name, props, and options.
+        Provide a resource to create a VOD image sprite template.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.vod.ImageSpriteTemplate("foo",
+            column_count=3,
+            comment="test",
+            fill_type="stretch",
+            height=128,
+            resolution_adaptive=False,
+            row_count=3,
+            sample_interval=10,
+            sample_type="Percent",
+            width=128)
+        ```
+
+        ## Import
+
+        VOD image sprite template can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo 51156
+        ```
+
         :param str resource_name: The name of the resource.
         :param ImageSpriteTemplateArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -609,30 +593,16 @@ class ImageSpriteTemplate(pulumi.CustomResource):
         :param pulumi.Input[int] column_count: Subimage column count of an image sprite.
         :param pulumi.Input[str] comment: Template description. Length limit: 256 characters.
         :param pulumi.Input[str] create_time: Creation time of template in ISO date format.
-        :param pulumi.Input[str] fill_type: Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-               following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-               aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option
-               retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.
-               Default value: `black`.
-        :param pulumi.Input[int] height: Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-               and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-               not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-               proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        :param pulumi.Input[str] fill_type: Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
+        :param pulumi.Input[int] height: Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         :param pulumi.Input[str] name: Name of a time point screen capturing template. Length limit: 64 characters.
-        :param pulumi.Input[bool] resolution_adaptive: Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-               video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-               `height` the height. Default value: `true`.
+        :param pulumi.Input[bool] resolution_adaptive: Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
         :param pulumi.Input[int] row_count: Subimage row count of an image sprite.
-        :param pulumi.Input[int] sample_interval: Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage.
-               If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
+        :param pulumi.Input[int] sample_interval: Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage. If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
         :param pulumi.Input[str] sample_type: Sampling type. Valid values: `Percent`, `Time`. `Percent`: by percent. `Time`: by time interval.
-        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-               field; otherwise, leave it empty.
+        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         :param pulumi.Input[str] update_time: Last modified time of template in ISO date format.
-        :param pulumi.Input[int] width: Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-               `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-               `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-               scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        :param pulumi.Input[int] width: Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -681,11 +651,7 @@ class ImageSpriteTemplate(pulumi.CustomResource):
     @pulumi.getter(name="fillType")
     def fill_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The
-        following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the
-        aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option
-        retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.
-        Default value: `black`.
+        Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
         """
         return pulumi.get(self, "fill_type")
 
@@ -693,10 +659,7 @@ class ImageSpriteTemplate(pulumi.CustomResource):
     @pulumi.getter
     def height(self) -> pulumi.Output[Optional[int]]:
         """
-        Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width`
-        and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is
-        not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be
-        proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         """
         return pulumi.get(self, "height")
 
@@ -712,9 +675,7 @@ class ImageSpriteTemplate(pulumi.CustomResource):
     @pulumi.getter(name="resolutionAdaptive")
     def resolution_adaptive(self) -> pulumi.Output[Optional[bool]]:
         """
-        Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a
-        video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while
-        `height` the height. Default value: `true`.
+        Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`.
         """
         return pulumi.get(self, "resolution_adaptive")
 
@@ -730,8 +691,7 @@ class ImageSpriteTemplate(pulumi.CustomResource):
     @pulumi.getter(name="sampleInterval")
     def sample_interval(self) -> pulumi.Output[int]:
         """
-        Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage.
-        If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
+        Sampling interval. If `sample_type` is `Percent`, sampling will be performed at an interval of the specified percentage. If `sample_type` is `Time`, sampling will be performed at the specified time interval in seconds.
         """
         return pulumi.get(self, "sample_interval")
 
@@ -747,8 +707,7 @@ class ImageSpriteTemplate(pulumi.CustomResource):
     @pulumi.getter(name="subAppId")
     def sub_app_id(self) -> pulumi.Output[Optional[int]]:
         """
-        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        field; otherwise, leave it empty.
+        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         return pulumi.get(self, "sub_app_id")
 
@@ -764,10 +723,7 @@ class ImageSpriteTemplate(pulumi.CustomResource):
     @pulumi.getter
     def width(self) -> pulumi.Output[Optional[int]]:
         """
-        Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and
-        `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not
-        `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally
-        scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
+        Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
         """
         return pulumi.get(self, "width")
 

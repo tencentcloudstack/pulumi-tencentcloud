@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
 
     public sealed class DdosPolicyV2BlackWhiteIpGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Ip of resource instance.
+        /// </summary>
         [Input("ip", required: true)]
         public Input<string> Ip { get; set; } = null!;
 
+        /// <summary>
+        /// IP type, value [`black`(blacklist IP), `white` (whitelist IP)].
+        /// </summary>
         [Input("ipType", required: true)]
         public Input<string> IpType { get; set; } = null!;
 

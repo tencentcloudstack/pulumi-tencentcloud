@@ -11,9 +11,12 @@ import (
 )
 
 type InstanceIpv4 struct {
+	// Description of the IP, maximum length 25.
 	Description *string `pulumi:"description"`
-	Ip          string  `pulumi:"ip"`
-	Primary     bool    `pulumi:"primary"`
+	// Intranet IP.
+	Ip string `pulumi:"ip"`
+	// Indicates whether the IP is primary.
+	Primary bool `pulumi:"primary"`
 }
 
 // InstanceIpv4Input is an input type that accepts InstanceIpv4Args and InstanceIpv4Output values.
@@ -28,9 +31,12 @@ type InstanceIpv4Input interface {
 }
 
 type InstanceIpv4Args struct {
+	// Description of the IP, maximum length 25.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Ip          pulumi.StringInput    `pulumi:"ip"`
-	Primary     pulumi.BoolInput      `pulumi:"primary"`
+	// Intranet IP.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Indicates whether the IP is primary.
+	Primary pulumi.BoolInput `pulumi:"primary"`
 }
 
 func (InstanceIpv4Args) ElementType() reflect.Type {
@@ -84,14 +90,17 @@ func (o InstanceIpv4Output) ToInstanceIpv4OutputWithContext(ctx context.Context)
 	return o
 }
 
+// Description of the IP, maximum length 25.
 func (o InstanceIpv4Output) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceIpv4) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Intranet IP.
 func (o InstanceIpv4Output) Ip() pulumi.StringOutput {
 	return o.ApplyT(func(v InstanceIpv4) string { return v.Ip }).(pulumi.StringOutput)
 }
 
+// Indicates whether the IP is primary.
 func (o InstanceIpv4Output) Primary() pulumi.BoolOutput {
 	return o.ApplyT(func(v InstanceIpv4) bool { return v.Primary }).(pulumi.BoolOutput)
 }
@@ -117,9 +126,12 @@ func (o InstanceIpv4ArrayOutput) Index(i pulumi.IntInput) InstanceIpv4Output {
 }
 
 type InstanceIpv4Info struct {
+	// Description of the IP, maximum length 25.
 	Description *string `pulumi:"description"`
-	Ip          *string `pulumi:"ip"`
-	Primary     *bool   `pulumi:"primary"`
+	// Intranet IP.
+	Ip *string `pulumi:"ip"`
+	// Indicates whether the IP is primary.
+	Primary *bool `pulumi:"primary"`
 }
 
 // InstanceIpv4InfoInput is an input type that accepts InstanceIpv4InfoArgs and InstanceIpv4InfoOutput values.
@@ -134,9 +146,12 @@ type InstanceIpv4InfoInput interface {
 }
 
 type InstanceIpv4InfoArgs struct {
+	// Description of the IP, maximum length 25.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Ip          pulumi.StringPtrInput `pulumi:"ip"`
-	Primary     pulumi.BoolPtrInput   `pulumi:"primary"`
+	// Intranet IP.
+	Ip pulumi.StringPtrInput `pulumi:"ip"`
+	// Indicates whether the IP is primary.
+	Primary pulumi.BoolPtrInput `pulumi:"primary"`
 }
 
 func (InstanceIpv4InfoArgs) ElementType() reflect.Type {
@@ -190,14 +205,17 @@ func (o InstanceIpv4InfoOutput) ToInstanceIpv4InfoOutputWithContext(ctx context.
 	return o
 }
 
+// Description of the IP, maximum length 25.
 func (o InstanceIpv4InfoOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceIpv4Info) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Intranet IP.
 func (o InstanceIpv4InfoOutput) Ip() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceIpv4Info) *string { return v.Ip }).(pulumi.StringPtrOutput)
 }
 
+// Indicates whether the IP is primary.
 func (o InstanceIpv4InfoOutput) Primary() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v InstanceIpv4Info) *bool { return v.Primary }).(pulumi.BoolPtrOutput)
 }

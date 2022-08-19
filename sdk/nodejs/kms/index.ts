@@ -6,12 +6,12 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./externalKey";
-export * from "./keys";
-export * from "./kmsKey";
+export * from "./getKeys";
+export * from "./key";
 
 // Import resources to register:
 import { ExternalKey } from "./externalKey";
-import { KmsKey } from "./kmsKey";
+import { Key } from "./key";
 
 const _module = {
     version: utilities.getVersion(),
@@ -19,12 +19,12 @@ const _module = {
         switch (type) {
             case "tencentcloud:Kms/externalKey:ExternalKey":
                 return new ExternalKey(name, <any>undefined, { urn })
-            case "tencentcloud:Kms/kmsKey:KmsKey":
-                return new KmsKey(name, <any>undefined, { urn })
+            case "tencentcloud:Kms/key:Key":
+                return new Key(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Kms/externalKey", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Kms/kmsKey", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kms/key", _module)

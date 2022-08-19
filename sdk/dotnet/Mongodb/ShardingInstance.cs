@@ -9,13 +9,52 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Mongodb
 {
+    /// <summary>
+    /// Provide a resource to create a Mongodb sharding instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var mongodb = new Tencentcloud.Mongodb.ShardingInstance("mongodb", new Tencentcloud.Mongodb.ShardingInstanceArgs
+    ///         {
+    ///             AvailableZone = "ap-guangzhou-3",
+    ///             EngineVersion = "MONGO_3_WT",
+    ///             InstanceName = "mongodb",
+    ///             MachineType = "GIO",
+    ///             Memory = 4,
+    ///             NodesPerShard = 3,
+    ///             Password = "password1234",
+    ///             ProjectId = 0,
+    ///             ShardQuantity = 2,
+    ///             SubnetId = "subnet-lk0svi3p",
+    ///             Volume = 100,
+    ///             VpcId = "vpc-mz3efvbw",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Mongodb sharding instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/shardingInstance:ShardingInstance")]
     public partial class ShardingInstance : Pulumi.CustomResource
     {
         /// <summary>
-        /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-        /// `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-        /// `1` for creation.
+        /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         /// </summary>
         [Output("autoRenewFlag")]
         public Output<int?> AutoRenewFlag { get; private set; } = null!;
@@ -27,9 +66,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Output<string> AvailableZone { get; private set; } = null!;
 
         /// <summary>
-        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-        /// Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-        /// delete old instances and create new one with new charge type.
+        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         /// </summary>
         [Output("chargeType")]
         public Output<string?> ChargeType { get; private set; } = null!;
@@ -41,9 +78,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-        /// (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-        /// WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        /// Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
         /// </summary>
         [Output("engineVersion")]
         public Output<string> EngineVersion { get; private set; } = null!;
@@ -55,8 +90,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Output<string> InstanceName { get; private set; } = null!;
 
         /// <summary>
-        /// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-        /// `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        /// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         /// </summary>
         [Output("machineType")]
         public Output<string> MachineType { get; private set; } = null!;
@@ -80,8 +114,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Output<string?> Password { get; private set; } = null!;
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-        /// 36. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Output("prepaidPeriod")]
         public Output<int?> PrepaidPeriod { get; private set; } = null!;
@@ -93,8 +126,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Output<int?> ProjectId { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-        /// supported.
+        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         /// </summary>
         [Output("securityGroups")]
         public Output<ImmutableArray<string>> SecurityGroups { get; private set; } = null!;
@@ -106,8 +138,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Output<int> ShardQuantity { get; private set; } = null!;
 
         /// <summary>
-        /// Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-        /// processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        /// Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         /// </summary>
         [Output("status")]
         public Output<int> Status { get; private set; } = null!;
@@ -195,9 +226,7 @@ namespace Pulumi.Tencentcloud.Mongodb
     public sealed class ShardingInstanceArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-        /// `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-        /// `1` for creation.
+        /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         /// </summary>
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
@@ -209,17 +238,13 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Input<string> AvailableZone { get; set; } = null!;
 
         /// <summary>
-        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-        /// Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-        /// delete old instances and create new one with new charge type.
+        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
-        /// Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-        /// (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-        /// WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        /// Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
         /// </summary>
         [Input("engineVersion", required: true)]
         public Input<string> EngineVersion { get; set; } = null!;
@@ -231,8 +256,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Input<string> InstanceName { get; set; } = null!;
 
         /// <summary>
-        /// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-        /// `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        /// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         /// </summary>
         [Input("machineType", required: true)]
         public Input<string> MachineType { get; set; } = null!;
@@ -256,8 +280,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Input<string>? Password { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-        /// 36. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
@@ -272,8 +295,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         private InputList<string>? _securityGroups;
 
         /// <summary>
-        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-        /// supported.
+        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         /// </summary>
         public InputList<string> SecurityGroups
         {
@@ -325,9 +347,7 @@ namespace Pulumi.Tencentcloud.Mongodb
     public sealed class ShardingInstanceState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-        /// `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-        /// `1` for creation.
+        /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         /// </summary>
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
@@ -339,9 +359,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Input<string>? AvailableZone { get; set; }
 
         /// <summary>
-        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-        /// Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-        /// delete old instances and create new one with new charge type.
+        /// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
@@ -353,9 +371,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-        /// (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-        /// WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        /// Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }
@@ -367,8 +383,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Input<string>? InstanceName { get; set; }
 
         /// <summary>
-        /// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-        /// `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        /// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         /// </summary>
         [Input("machineType")]
         public Input<string>? MachineType { get; set; }
@@ -392,8 +407,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Input<string>? Password { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-        /// 36. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
@@ -408,8 +422,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         private InputList<string>? _securityGroups;
 
         /// <summary>
-        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-        /// supported.
+        /// ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         /// </summary>
         public InputList<string> SecurityGroups
         {
@@ -424,8 +437,7 @@ namespace Pulumi.Tencentcloud.Mongodb
         public Input<int>? ShardQuantity { get; set; }
 
         /// <summary>
-        /// Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-        /// processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        /// Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         /// </summary>
         [Input("status")]
         public Input<int>? Status { get; set; }

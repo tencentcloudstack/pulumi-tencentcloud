@@ -9,16 +9,21 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'TemplateGroupsGroupListResult',
-    'TemplatesTemplateListResult',
+    'GetTemplateGroupsGroupListResult',
+    'GetTemplatesTemplateListResult',
 ]
 
 @pulumi.output_type
-class TemplateGroupsGroupListResult(dict):
+class GetTemplateGroupsGroupListResult(dict):
     def __init__(__self__, *,
                  id: str,
                  name: str,
                  template_ids: Sequence[str]):
+        """
+        :param str id: ID of the protocol template group to query.
+        :param str name: Name of the protocol template group to query.
+        :param Sequence[str] template_ids: ID set of the protocol template.
+        """
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template_ids", template_ids)
@@ -26,25 +31,39 @@ class TemplateGroupsGroupListResult(dict):
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the protocol template group to query.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the protocol template group to query.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="templateIds")
     def template_ids(self) -> Sequence[str]:
+        """
+        ID set of the protocol template.
+        """
         return pulumi.get(self, "template_ids")
 
 
 @pulumi.output_type
-class TemplatesTemplateListResult(dict):
+class GetTemplatesTemplateListResult(dict):
     def __init__(__self__, *,
                  id: str,
                  name: str,
                  protocols: Sequence[str]):
+        """
+        :param str id: ID of the protocol template to query.
+        :param str name: Name of the protocol template to query.
+        :param Sequence[str] protocols: Set of the protocols.
+        """
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "protocols", protocols)
@@ -52,16 +71,25 @@ class TemplatesTemplateListResult(dict):
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the protocol template to query.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the protocol template to query.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def protocols(self) -> Sequence[str]:
+        """
+        Set of the protocols.
+        """
         return pulumi.get(self, "protocols")
 
 

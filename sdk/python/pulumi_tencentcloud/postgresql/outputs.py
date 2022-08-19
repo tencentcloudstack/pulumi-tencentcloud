@@ -11,9 +11,9 @@ from .. import _utilities
 __all__ = [
     'InstanceBackupPlan',
     'InstanceDbNodeSet',
-    'InstancesInstanceListResult',
-    'SpecinfosListResult',
-    'XlogsListResult',
+    'GetInstancesInstanceListResult',
+    'GetSpecinfosListResult',
+    'GetXlogsListResult',
 ]
 
 @pulumi.output_type
@@ -46,6 +46,12 @@ class InstanceBackupPlan(dict):
                  base_backup_retention_period: Optional[int] = None,
                  max_backup_start_time: Optional[str] = None,
                  min_backup_start_time: Optional[str] = None):
+        """
+        :param Sequence[str] backup_periods: List of backup period per week, available values: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`. NOTE: At least specify two days.
+        :param int base_backup_retention_period: Specify days of the retention.
+        :param str max_backup_start_time: Specify latest backup start time, format `hh:mm:ss`.
+        :param str min_backup_start_time: Specify earliest backup start time, format `hh:mm:ss`.
+        """
         if backup_periods is not None:
             pulumi.set(__self__, "backup_periods", backup_periods)
         if base_backup_retention_period is not None:
@@ -58,21 +64,33 @@ class InstanceBackupPlan(dict):
     @property
     @pulumi.getter(name="backupPeriods")
     def backup_periods(self) -> Optional[Sequence[str]]:
+        """
+        List of backup period per week, available values: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`. NOTE: At least specify two days.
+        """
         return pulumi.get(self, "backup_periods")
 
     @property
     @pulumi.getter(name="baseBackupRetentionPeriod")
     def base_backup_retention_period(self) -> Optional[int]:
+        """
+        Specify days of the retention.
+        """
         return pulumi.get(self, "base_backup_retention_period")
 
     @property
     @pulumi.getter(name="maxBackupStartTime")
     def max_backup_start_time(self) -> Optional[str]:
+        """
+        Specify latest backup start time, format `hh:mm:ss`.
+        """
         return pulumi.get(self, "max_backup_start_time")
 
     @property
     @pulumi.getter(name="minBackupStartTime")
     def min_backup_start_time(self) -> Optional[str]:
+        """
+        Specify earliest backup start time, format `hh:mm:ss`.
+        """
         return pulumi.get(self, "min_backup_start_time")
 
 
@@ -81,6 +99,10 @@ class InstanceDbNodeSet(dict):
     def __init__(__self__, *,
                  zone: str,
                  role: Optional[str] = None):
+        """
+        :param str zone: Indicates the node available zone.
+        :param str role: Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
+        """
         pulumi.set(__self__, "zone", zone)
         if role is not None:
             pulumi.set(__self__, "role", role)
@@ -88,16 +110,22 @@ class InstanceDbNodeSet(dict):
     @property
     @pulumi.getter
     def zone(self) -> str:
+        """
+        Indicates the node available zone.
+        """
         return pulumi.get(self, "zone")
 
     @property
     @pulumi.getter
     def role(self) -> Optional[str]:
+        """
+        Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
+        """
         return pulumi.get(self, "role")
 
 
 @pulumi.output_type
-class InstancesInstanceListResult(dict):
+class GetInstancesInstanceListResult(dict):
     def __init__(__self__, *,
                  auto_renew_flag: int,
                  availability_zone: str,
@@ -119,6 +147,28 @@ class InstancesInstanceListResult(dict):
                  subnet_id: str,
                  tags: Mapping[str, Any],
                  vpc_id: str):
+        """
+        :param int auto_renew_flag: Auto renew flag.
+        :param str availability_zone: Availability zone.
+        :param str charge_type: Pay type of the postgresql instance.
+        :param str charset: Charset of the postgresql instance.
+        :param str create_time: Create time of the postgresql instance.
+        :param str engine_version: Version of the postgresql database engine.
+        :param str id: ID of the postgresql instance to be query.
+        :param int memory: Memory size(in GB).
+        :param str name: Name of the postgresql instance to be query.
+        :param str private_access_ip: IP address for private access.
+        :param int private_access_port: Port for private access.
+        :param int project_id: Project ID of the postgresql instance to be query.
+        :param str public_access_host: Host for public access.
+        :param int public_access_port: Port for public access.
+        :param bool public_access_switch: Indicates whether to enable the access to an instance from public network or not.
+        :param str root_user: Instance root account name, default value is `root`.
+        :param int storage: Volume size(in GB).
+        :param str subnet_id: ID of subnet.
+        :param Mapping[str, Any] tags: The available tags within this postgresql.
+        :param str vpc_id: ID of VPC.
+        """
         pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "charge_type", charge_type)
@@ -143,106 +193,166 @@ class InstancesInstanceListResult(dict):
     @property
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> int:
+        """
+        Auto renew flag.
+        """
         return pulumi.get(self, "auto_renew_flag")
 
     @property
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> str:
+        """
+        Availability zone.
+        """
         return pulumi.get(self, "availability_zone")
 
     @property
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> str:
+        """
+        Pay type of the postgresql instance.
+        """
         return pulumi.get(self, "charge_type")
 
     @property
     @pulumi.getter
     def charset(self) -> str:
+        """
+        Charset of the postgresql instance.
+        """
         return pulumi.get(self, "charset")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the postgresql instance.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> str:
+        """
+        Version of the postgresql database engine.
+        """
         return pulumi.get(self, "engine_version")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the postgresql instance to be query.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def memory(self) -> int:
+        """
+        Memory size(in GB).
+        """
         return pulumi.get(self, "memory")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the postgresql instance to be query.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="privateAccessIp")
     def private_access_ip(self) -> str:
+        """
+        IP address for private access.
+        """
         return pulumi.get(self, "private_access_ip")
 
     @property
     @pulumi.getter(name="privateAccessPort")
     def private_access_port(self) -> int:
+        """
+        Port for private access.
+        """
         return pulumi.get(self, "private_access_port")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        Project ID of the postgresql instance to be query.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter(name="publicAccessHost")
     def public_access_host(self) -> str:
+        """
+        Host for public access.
+        """
         return pulumi.get(self, "public_access_host")
 
     @property
     @pulumi.getter(name="publicAccessPort")
     def public_access_port(self) -> int:
+        """
+        Port for public access.
+        """
         return pulumi.get(self, "public_access_port")
 
     @property
     @pulumi.getter(name="publicAccessSwitch")
     def public_access_switch(self) -> bool:
+        """
+        Indicates whether to enable the access to an instance from public network or not.
+        """
         return pulumi.get(self, "public_access_switch")
 
     @property
     @pulumi.getter(name="rootUser")
     def root_user(self) -> str:
+        """
+        Instance root account name, default value is `root`.
+        """
         return pulumi.get(self, "root_user")
 
     @property
     @pulumi.getter
     def storage(self) -> int:
+        """
+        Volume size(in GB).
+        """
         return pulumi.get(self, "storage")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        ID of subnet.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        The available tags within this postgresql.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of VPC.
+        """
         return pulumi.get(self, "vpc_id")
 
 
 @pulumi.output_type
-class SpecinfosListResult(dict):
+class GetSpecinfosListResult(dict):
     def __init__(__self__, *,
                  cpu: int,
                  engine_version: str,
@@ -252,6 +362,16 @@ class SpecinfosListResult(dict):
                  qps: int,
                  storage_max: int,
                  storage_min: int):
+        """
+        :param int cpu: The CPU number of the postgresql instance.
+        :param str engine_version: Version of the postgresql database engine.
+        :param str engine_version_name: Version name of the postgresql database engine.
+        :param str id: ID of the postgresql instance speccode.
+        :param int memory: Memory size(in GB).
+        :param int qps: The QPS of the postgresql instance.
+        :param int storage_max: The maximum volume size(in GB).
+        :param int storage_min: The minimum volume size(in GB).
+        """
         pulumi.set(__self__, "cpu", cpu)
         pulumi.set(__self__, "engine_version", engine_version)
         pulumi.set(__self__, "engine_version_name", engine_version_name)
@@ -264,46 +384,70 @@ class SpecinfosListResult(dict):
     @property
     @pulumi.getter
     def cpu(self) -> int:
+        """
+        The CPU number of the postgresql instance.
+        """
         return pulumi.get(self, "cpu")
 
     @property
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> str:
+        """
+        Version of the postgresql database engine.
+        """
         return pulumi.get(self, "engine_version")
 
     @property
     @pulumi.getter(name="engineVersionName")
     def engine_version_name(self) -> str:
+        """
+        Version name of the postgresql database engine.
+        """
         return pulumi.get(self, "engine_version_name")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the postgresql instance speccode.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def memory(self) -> int:
+        """
+        Memory size(in GB).
+        """
         return pulumi.get(self, "memory")
 
     @property
     @pulumi.getter
     def qps(self) -> int:
+        """
+        The QPS of the postgresql instance.
+        """
         return pulumi.get(self, "qps")
 
     @property
     @pulumi.getter(name="storageMax")
     def storage_max(self) -> int:
+        """
+        The maximum volume size(in GB).
+        """
         return pulumi.get(self, "storage_max")
 
     @property
     @pulumi.getter(name="storageMin")
     def storage_min(self) -> int:
+        """
+        The minimum volume size(in GB).
+        """
         return pulumi.get(self, "storage_min")
 
 
 @pulumi.output_type
-class XlogsListResult(dict):
+class GetXlogsListResult(dict):
     def __init__(__self__, *,
                  end_time: str,
                  external_addr: str,
@@ -311,6 +455,14 @@ class XlogsListResult(dict):
                  internal_addr: str,
                  size: int,
                  start_time: str):
+        """
+        :param str end_time: Xlog end time, format `yyyy-MM-dd hh:mm:ss`.
+        :param str external_addr: Xlog external download address.
+        :param int id: Xlog id.
+        :param str internal_addr: Xlog internal download address.
+        :param int size: Xlog file size.
+        :param str start_time: Xlog start time, format `yyyy-MM-dd hh:mm:ss`, start time cannot before 7 days ago.
+        """
         pulumi.set(__self__, "end_time", end_time)
         pulumi.set(__self__, "external_addr", external_addr)
         pulumi.set(__self__, "id", id)
@@ -321,31 +473,49 @@ class XlogsListResult(dict):
     @property
     @pulumi.getter(name="endTime")
     def end_time(self) -> str:
+        """
+        Xlog end time, format `yyyy-MM-dd hh:mm:ss`.
+        """
         return pulumi.get(self, "end_time")
 
     @property
     @pulumi.getter(name="externalAddr")
     def external_addr(self) -> str:
+        """
+        Xlog external download address.
+        """
         return pulumi.get(self, "external_addr")
 
     @property
     @pulumi.getter
     def id(self) -> int:
+        """
+        Xlog id.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="internalAddr")
     def internal_addr(self) -> str:
+        """
+        Xlog internal download address.
+        """
         return pulumi.get(self, "internal_addr")
 
     @property
     @pulumi.getter
     def size(self) -> int:
+        """
+        Xlog file size.
+        """
         return pulumi.get(self, "size")
 
     @property
     @pulumi.getter(name="startTime")
     def start_time(self) -> str:
+        """
+        Xlog start time, format `yyyy-MM-dd hh:mm:ss`, start time cannot before 7 days ago.
+        """
         return pulumi.get(self, "start_time")
 
 

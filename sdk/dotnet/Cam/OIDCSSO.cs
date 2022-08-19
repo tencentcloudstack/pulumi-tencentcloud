@@ -9,12 +9,52 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cam
 {
-    [TencentcloudResourceType("tencentcloud:Cam/oIDCSSO:OIDCSSO")]
-    public partial class OIDCSSO : Pulumi.CustomResource
+    /// <summary>
+    /// Provides a resource to create a CAM-OIDC-SSO.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cam.OidcSso("foo", new Tencentcloud.Cam.OidcSsoArgs
+    ///         {
+    ///             AuthorizationEndpoint = "https://login.microsoftonline.com/.../oauth2/v2.0/authorize",
+    ///             ClientId = "...",
+    ///             IdentityKey = "...",
+    ///             IdentityUrl = "https://login.microsoftonline.com/.../v2.0",
+    ///             MappingFiled = "name",
+    ///             ResponseMode = "form_post",
+    ///             ResponseType = "id_token",
+    ///             Scopes = 
+    ///             {
+    ///                 "openid",
+    ///                 "email",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CAM-OIDC-SSO can be imported using the client_id or any string which can identifier resource, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:Cam/oidcSso:OidcSso")]
+    public partial class OidcSso : Pulumi.CustomResource
     {
         /// <summary>
-        /// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the
-        /// `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
+        /// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
         /// </summary>
         [Output("authorizationEndpoint")]
         public Output<string> AuthorizationEndpoint { get; private set; } = null!;
@@ -26,15 +66,13 @@ namespace Pulumi.Tencentcloud.Cam
         public Output<string> ClientId { get; private set; } = null!;
 
         /// <summary>
-        /// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID
-        /// Token. For the security of your account, we recommend that you rotate the signed public key regularly.
+        /// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
         /// </summary>
         [Output("identityKey")]
         public Output<string> IdentityKey { get; private set; } = null!;
 
         /// <summary>
-        /// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the
-        /// Openid-configuration provided by the Enterprise IdP.
+        /// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
         /// </summary>
         [Output("identityUrl")]
         public Output<string> IdentityUrl { get; private set; } = null!;
@@ -46,8 +84,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Output<string> MappingFiled { get; private set; } = null!;
 
         /// <summary>
-        /// Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes,
-        /// recommended to select form_post mode.
+        /// Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.
         /// </summary>
         [Output("responseMode")]
         public Output<string> ResponseMode { get; private set; } = null!;
@@ -59,27 +96,26 @@ namespace Pulumi.Tencentcloud.Cam
         public Output<string> ResponseType { get; private set; } = null!;
 
         /// <summary>
-        /// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required
-        /// openid.
+        /// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
         /// </summary>
         [Output("scopes")]
         public Output<ImmutableArray<string>> Scopes { get; private set; } = null!;
 
 
         /// <summary>
-        /// Create a OIDCSSO resource with the given unique name, arguments, and options.
+        /// Create a OidcSso resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public OIDCSSO(string name, OIDCSSOArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:Cam/oIDCSSO:OIDCSSO", name, args ?? new OIDCSSOArgs(), MakeResourceOptions(options, ""))
+        public OidcSso(string name, OidcSsoArgs args, CustomResourceOptions? options = null)
+            : base("tencentcloud:Cam/oidcSso:OidcSso", name, args ?? new OidcSsoArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private OIDCSSO(string name, Input<string> id, OIDCSSOState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:Cam/oIDCSSO:OIDCSSO", name, state, MakeResourceOptions(options, id))
+        private OidcSso(string name, Input<string> id, OidcSsoState? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:Cam/oidcSso:OidcSso", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -95,7 +131,7 @@ namespace Pulumi.Tencentcloud.Cam
             return merged;
         }
         /// <summary>
-        /// Get an existing OIDCSSO resource's state with the given name, ID, and optional extra
+        /// Get an existing OidcSso resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -103,17 +139,16 @@ namespace Pulumi.Tencentcloud.Cam
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static OIDCSSO Get(string name, Input<string> id, OIDCSSOState? state = null, CustomResourceOptions? options = null)
+        public static OidcSso Get(string name, Input<string> id, OidcSsoState? state = null, CustomResourceOptions? options = null)
         {
-            return new OIDCSSO(name, id, state, options);
+            return new OidcSso(name, id, state, options);
         }
     }
 
-    public sealed class OIDCSSOArgs : Pulumi.ResourceArgs
+    public sealed class OidcSsoArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the
-        /// `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
+        /// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
         /// </summary>
         [Input("authorizationEndpoint", required: true)]
         public Input<string> AuthorizationEndpoint { get; set; } = null!;
@@ -125,15 +160,13 @@ namespace Pulumi.Tencentcloud.Cam
         public Input<string> ClientId { get; set; } = null!;
 
         /// <summary>
-        /// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID
-        /// Token. For the security of your account, we recommend that you rotate the signed public key regularly.
+        /// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
         /// </summary>
         [Input("identityKey", required: true)]
         public Input<string> IdentityKey { get; set; } = null!;
 
         /// <summary>
-        /// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the
-        /// Openid-configuration provided by the Enterprise IdP.
+        /// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
         /// </summary>
         [Input("identityUrl", required: true)]
         public Input<string> IdentityUrl { get; set; } = null!;
@@ -145,8 +178,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Input<string> MappingFiled { get; set; } = null!;
 
         /// <summary>
-        /// Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes,
-        /// recommended to select form_post mode.
+        /// Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.
         /// </summary>
         [Input("responseMode", required: true)]
         public Input<string> ResponseMode { get; set; } = null!;
@@ -161,8 +193,7 @@ namespace Pulumi.Tencentcloud.Cam
         private InputList<string>? _scopes;
 
         /// <summary>
-        /// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required
-        /// openid.
+        /// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
         /// </summary>
         public InputList<string> Scopes
         {
@@ -170,16 +201,15 @@ namespace Pulumi.Tencentcloud.Cam
             set => _scopes = value;
         }
 
-        public OIDCSSOArgs()
+        public OidcSsoArgs()
         {
         }
     }
 
-    public sealed class OIDCSSOState : Pulumi.ResourceArgs
+    public sealed class OidcSsoState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the
-        /// `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
+        /// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
         /// </summary>
         [Input("authorizationEndpoint")]
         public Input<string>? AuthorizationEndpoint { get; set; }
@@ -191,15 +221,13 @@ namespace Pulumi.Tencentcloud.Cam
         public Input<string>? ClientId { get; set; }
 
         /// <summary>
-        /// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID
-        /// Token. For the security of your account, we recommend that you rotate the signed public key regularly.
+        /// The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
         /// </summary>
         [Input("identityKey")]
         public Input<string>? IdentityKey { get; set; }
 
         /// <summary>
-        /// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the
-        /// Openid-configuration provided by the Enterprise IdP.
+        /// Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
         /// </summary>
         [Input("identityUrl")]
         public Input<string>? IdentityUrl { get; set; }
@@ -211,8 +239,7 @@ namespace Pulumi.Tencentcloud.Cam
         public Input<string>? MappingFiled { get; set; }
 
         /// <summary>
-        /// Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes,
-        /// recommended to select form_post mode.
+        /// Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.
         /// </summary>
         [Input("responseMode")]
         public Input<string>? ResponseMode { get; set; }
@@ -227,8 +254,7 @@ namespace Pulumi.Tencentcloud.Cam
         private InputList<string>? _scopes;
 
         /// <summary>
-        /// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required
-        /// openid.
+        /// Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
         /// </summary>
         public InputList<string> Scopes
         {
@@ -236,7 +262,7 @@ namespace Pulumi.Tencentcloud.Cam
             set => _scopes = value;
         }
 
-        public OIDCSSOState()
+        public OidcSsoState()
         {
         }
     }

@@ -37,12 +37,10 @@ class InstanceArgs:
         :param pulumi.Input[str] customer_address: Interconnect IP of the DC within client.
         :param pulumi.Input[str] name: Name of the dedicated tunnel.
         :param pulumi.Input[str] network_type: Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-               field within BGP.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         :param pulumi.Input[str] route_type: Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
         :param pulumi.Input[str] tencent_address: Interconnect IP of the DC within Tencent.
-        :param pulumi.Input[int] vlan: Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-               physical connect.
+        :param pulumi.Input[int] vlan: Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
         """
         pulumi.set(__self__, "dc_id", dc_id)
         pulumi.set(__self__, "dcg_id", dcg_id)
@@ -180,8 +178,7 @@ class InstanceArgs:
     @pulumi.getter(name="routeFilterPrefixes")
     def route_filter_prefixes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-        field within BGP.
+        Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         """
         return pulumi.get(self, "route_filter_prefixes")
 
@@ -217,8 +214,7 @@ class InstanceArgs:
     @pulumi.getter
     def vlan(self) -> Optional[pulumi.Input[int]]:
         """
-        Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-        physical connect.
+        Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
         """
         return pulumi.get(self, "vlan")
 
@@ -256,14 +252,11 @@ class _InstanceState:
         :param pulumi.Input[str] dcg_id: ID of the DC Gateway. Currently only new in the console.
         :param pulumi.Input[str] name: Name of the dedicated tunnel.
         :param pulumi.Input[str] network_type: Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-               field within BGP.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         :param pulumi.Input[str] route_type: Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
-        :param pulumi.Input[str] state: State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`,
-               `COMFIRMING` and `REJECTED`.
+        :param pulumi.Input[str] state: State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
         :param pulumi.Input[str] tencent_address: Interconnect IP of the DC within Tencent.
-        :param pulumi.Input[int] vlan: Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-               physical connect.
+        :param pulumi.Input[int] vlan: Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
         :param pulumi.Input[str] vpc_id: ID of the VPC or BMVPC.
         """
         if bandwidth is not None:
@@ -409,8 +402,7 @@ class _InstanceState:
     @pulumi.getter(name="routeFilterPrefixes")
     def route_filter_prefixes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-        field within BGP.
+        Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         """
         return pulumi.get(self, "route_filter_prefixes")
 
@@ -434,8 +426,7 @@ class _InstanceState:
     @pulumi.getter
     def state(self) -> Optional[pulumi.Input[str]]:
         """
-        State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`,
-        `COMFIRMING` and `REJECTED`.
+        State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
         """
         return pulumi.get(self, "state")
 
@@ -459,8 +450,7 @@ class _InstanceState:
     @pulumi.getter
     def vlan(self) -> Optional[pulumi.Input[int]]:
         """
-        Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-        physical connect.
+        Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
         """
         return pulumi.get(self, "vlan")
 
@@ -501,7 +491,47 @@ class Instance(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a resource to creating dedicated tunnels instances.
+
+        > **NOTE:** 1. ID of the DC is queried, can only apply for this resource offline.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        config = pulumi.Config()
+        dc_id = config.get("dcId")
+        if dc_id is None:
+            dc_id = "dc-kax48sg7"
+        dcg_id = config.get("dcgId")
+        if dcg_id is None:
+            dcg_id = "dcg-dmbhf7jf"
+        vpc_id = config.get("vpcId")
+        if vpc_id is None:
+            vpc_id = "vpc-4h9v4mo3"
+        bgp_main = tencentcloud.dcx.Instance("bgpMain",
+            bandwidth=900,
+            dc_id=dc_id,
+            dcg_id=dcg_id,
+            network_type="VPC",
+            route_type="BGP",
+            vlan=306,
+            vpc_id=vpc_id)
+        static_main = tencentcloud.dcx.Instance("staticMain",
+            bandwidth=900,
+            dc_id=dc_id,
+            dcg_id=dcg_id,
+            network_type="VPC",
+            route_type="STATIC",
+            vlan=301,
+            vpc_id=vpc_id,
+            route_filter_prefixes=["10.10.10.101/32"],
+            tencent_address="100.93.46.1/30",
+            customer_address="100.93.46.2/30")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] bandwidth: Bandwidth of the DC.
@@ -512,12 +542,10 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] dcg_id: ID of the DC Gateway. Currently only new in the console.
         :param pulumi.Input[str] name: Name of the dedicated tunnel.
         :param pulumi.Input[str] network_type: Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-               field within BGP.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         :param pulumi.Input[str] route_type: Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
         :param pulumi.Input[str] tencent_address: Interconnect IP of the DC within Tencent.
-        :param pulumi.Input[int] vlan: Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-               physical connect.
+        :param pulumi.Input[int] vlan: Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
         :param pulumi.Input[str] vpc_id: ID of the VPC or BMVPC.
         """
         ...
@@ -527,7 +555,47 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a resource to creating dedicated tunnels instances.
+
+        > **NOTE:** 1. ID of the DC is queried, can only apply for this resource offline.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        config = pulumi.Config()
+        dc_id = config.get("dcId")
+        if dc_id is None:
+            dc_id = "dc-kax48sg7"
+        dcg_id = config.get("dcgId")
+        if dcg_id is None:
+            dcg_id = "dcg-dmbhf7jf"
+        vpc_id = config.get("vpcId")
+        if vpc_id is None:
+            vpc_id = "vpc-4h9v4mo3"
+        bgp_main = tencentcloud.dcx.Instance("bgpMain",
+            bandwidth=900,
+            dc_id=dc_id,
+            dcg_id=dcg_id,
+            network_type="VPC",
+            route_type="BGP",
+            vlan=306,
+            vpc_id=vpc_id)
+        static_main = tencentcloud.dcx.Instance("staticMain",
+            bandwidth=900,
+            dc_id=dc_id,
+            dcg_id=dcg_id,
+            network_type="VPC",
+            route_type="STATIC",
+            vlan=301,
+            vpc_id=vpc_id,
+            route_filter_prefixes=["10.10.10.101/32"],
+            tencent_address="100.93.46.1/30",
+            customer_address="100.93.46.2/30")
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -630,14 +698,11 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] dcg_id: ID of the DC Gateway. Currently only new in the console.
         :param pulumi.Input[str] name: Name of the dedicated tunnel.
         :param pulumi.Input[str] network_type: Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-               field within BGP.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         :param pulumi.Input[str] route_type: Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
-        :param pulumi.Input[str] state: State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`,
-               `COMFIRMING` and `REJECTED`.
+        :param pulumi.Input[str] state: State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
         :param pulumi.Input[str] tencent_address: Interconnect IP of the DC within Tencent.
-        :param pulumi.Input[int] vlan: Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-               physical connect.
+        :param pulumi.Input[int] vlan: Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
         :param pulumi.Input[str] vpc_id: ID of the VPC or BMVPC.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -737,8 +802,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="routeFilterPrefixes")
     def route_filter_prefixes(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-        field within BGP.
+        Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         """
         return pulumi.get(self, "route_filter_prefixes")
 
@@ -754,8 +818,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def state(self) -> pulumi.Output[str]:
         """
-        State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`,
-        `COMFIRMING` and `REJECTED`.
+        State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
         """
         return pulumi.get(self, "state")
 
@@ -771,8 +834,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def vlan(self) -> pulumi.Output[Optional[int]]:
         """
-        Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-        physical connect.
+        Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
         """
         return pulumi.get(self, "vlan")
 

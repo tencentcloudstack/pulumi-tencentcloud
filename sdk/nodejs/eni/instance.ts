@@ -5,6 +5,38 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create an ENI.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fooInstance = new tencentcloud.vpc.Instance("fooInstance", {cidrBlock: "10.0.0.0/16"});
+ * const fooSubnet_instanceInstance = new tencentcloud.subnet.Instance("fooSubnet/instanceInstance", {
+ *     availabilityZone: "ap-guangzhou-3",
+ *     vpcId: fooInstance.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const fooEni_instanceInstance = new tencentcloud.eni.Instance("fooEni/instanceInstance", {
+ *     vpcId: fooInstance.id,
+ *     subnetId: fooSubnet / instanceInstance.id,
+ *     description: "eni desc",
+ *     ipv4Count: 1,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * ENI can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Eni/instance:Instance tencentcloud_eni.foo eni-qka182br
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -38,12 +70,11 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
-     * Description of the ENI, maximum length 60.
+     * Description of the IP, maximum length 25.
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-     * intranet IPs, which conflict with `ipv4s`.
+     * The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
      */
     public readonly ipv4Count!: pulumi.Output<number | undefined>;
     /**
@@ -51,8 +82,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly ipv4Infos!: pulumi.Output<outputs.Eni.InstanceIpv4Info[]>;
     /**
-     * Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-     * primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+     * Applying for intranet IPv4s collection, conflict with `ipv4Count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
      */
     public readonly ipv4s!: pulumi.Output<outputs.Eni.InstanceIpv4[] | undefined>;
     /**
@@ -150,12 +180,11 @@ export interface InstanceState {
      */
     createTime?: pulumi.Input<string>;
     /**
-     * Description of the ENI, maximum length 60.
+     * Description of the IP, maximum length 25.
      */
     description?: pulumi.Input<string>;
     /**
-     * The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-     * intranet IPs, which conflict with `ipv4s`.
+     * The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
      */
     ipv4Count?: pulumi.Input<number>;
     /**
@@ -163,8 +192,7 @@ export interface InstanceState {
      */
     ipv4Infos?: pulumi.Input<pulumi.Input<inputs.Eni.InstanceIpv4Info>[]>;
     /**
-     * Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-     * primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+     * Applying for intranet IPv4s collection, conflict with `ipv4Count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
      */
     ipv4s?: pulumi.Input<pulumi.Input<inputs.Eni.InstanceIpv4>[]>;
     /**
@@ -206,17 +234,15 @@ export interface InstanceState {
  */
 export interface InstanceArgs {
     /**
-     * Description of the ENI, maximum length 60.
+     * Description of the IP, maximum length 25.
      */
     description?: pulumi.Input<string>;
     /**
-     * The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-     * intranet IPs, which conflict with `ipv4s`.
+     * The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
      */
     ipv4Count?: pulumi.Input<number>;
     /**
-     * Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-     * primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+     * Applying for intranet IPv4s collection, conflict with `ipv4Count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
      */
     ipv4s?: pulumi.Input<pulumi.Input<inputs.Eni.InstanceIpv4>[]>;
     /**

@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create a backup config of redis.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const redislab = new tencentcloud.Redis.BackupConfig("redislab", {
+ *     backupPeriods: ["Monday"],
+ *     backupTime: "04:00-05:00",
+ *     redisId: "crs-7yl0q0dd",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Redis
+ *
+ * backup config can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig redisconfig redis-id
+ * ```
+ */
 export class BackupConfig extends pulumi.CustomResource {
     /**
      * Get an existing BackupConfig resource's state with the given name, ID, and optional extra
@@ -33,8 +59,7 @@ export class BackupConfig extends pulumi.CustomResource {
     }
 
     /**
-     * Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-     * `Friday`, `Saturday` and `Sunday`.
+     * It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
      *
      * @deprecated It has been deprecated from version 1.58.2. It makes no difference to online config at all
      */
@@ -86,8 +111,7 @@ export class BackupConfig extends pulumi.CustomResource {
  */
 export interface BackupConfigState {
     /**
-     * Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-     * `Friday`, `Saturday` and `Sunday`.
+     * It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
      *
      * @deprecated It has been deprecated from version 1.58.2. It makes no difference to online config at all
      */
@@ -107,8 +131,7 @@ export interface BackupConfigState {
  */
 export interface BackupConfigArgs {
     /**
-     * Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-     * `Friday`, `Saturday` and `Sunday`.
+     * It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
      *
      * @deprecated It has been deprecated from version 1.58.2. It makes no difference to online config at all
      */

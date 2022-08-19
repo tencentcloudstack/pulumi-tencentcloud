@@ -11,8 +11,10 @@ import (
 )
 
 type AlarmPolicyConditions struct {
-	IsUnionRule *int                        `pulumi:"isUnionRule"`
-	Rules       []AlarmPolicyConditionsRule `pulumi:"rules"`
+	// The and or relation of indicator alarm rule.
+	IsUnionRule *int `pulumi:"isUnionRule"`
+	// A list of metric trigger condition.
+	Rules []AlarmPolicyConditionsRule `pulumi:"rules"`
 }
 
 // AlarmPolicyConditionsInput is an input type that accepts AlarmPolicyConditionsArgs and AlarmPolicyConditionsOutput values.
@@ -27,8 +29,10 @@ type AlarmPolicyConditionsInput interface {
 }
 
 type AlarmPolicyConditionsArgs struct {
-	IsUnionRule pulumi.IntPtrInput                  `pulumi:"isUnionRule"`
-	Rules       AlarmPolicyConditionsRuleArrayInput `pulumi:"rules"`
+	// The and or relation of indicator alarm rule.
+	IsUnionRule pulumi.IntPtrInput `pulumi:"isUnionRule"`
+	// A list of metric trigger condition.
+	Rules AlarmPolicyConditionsRuleArrayInput `pulumi:"rules"`
 }
 
 func (AlarmPolicyConditionsArgs) ElementType() reflect.Type {
@@ -108,10 +112,12 @@ func (o AlarmPolicyConditionsOutput) ToAlarmPolicyConditionsPtrOutputWithContext
 	}).(AlarmPolicyConditionsPtrOutput)
 }
 
+// The and or relation of indicator alarm rule.
 func (o AlarmPolicyConditionsOutput) IsUnionRule() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditions) *int { return v.IsUnionRule }).(pulumi.IntPtrOutput)
 }
 
+// A list of metric trigger condition.
 func (o AlarmPolicyConditionsOutput) Rules() AlarmPolicyConditionsRuleArrayOutput {
 	return o.ApplyT(func(v AlarmPolicyConditions) []AlarmPolicyConditionsRule { return v.Rules }).(AlarmPolicyConditionsRuleArrayOutput)
 }
@@ -140,6 +146,7 @@ func (o AlarmPolicyConditionsPtrOutput) Elem() AlarmPolicyConditionsOutput {
 	}).(AlarmPolicyConditionsOutput)
 }
 
+// The and or relation of indicator alarm rule.
 func (o AlarmPolicyConditionsPtrOutput) IsUnionRule() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AlarmPolicyConditions) *int {
 		if v == nil {
@@ -149,6 +156,7 @@ func (o AlarmPolicyConditionsPtrOutput) IsUnionRule() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// A list of metric trigger condition.
 func (o AlarmPolicyConditionsPtrOutput) Rules() AlarmPolicyConditionsRuleArrayOutput {
 	return o.ApplyT(func(v *AlarmPolicyConditions) []AlarmPolicyConditionsRule {
 		if v == nil {
@@ -159,17 +167,28 @@ func (o AlarmPolicyConditionsPtrOutput) Rules() AlarmPolicyConditionsRuleArrayOu
 }
 
 type AlarmPolicyConditionsRule struct {
-	ContinuePeriod  *int                             `pulumi:"continuePeriod"`
-	Description     *string                          `pulumi:"description"`
-	Filter          *AlarmPolicyConditionsRuleFilter `pulumi:"filter"`
-	IsPowerNotice   *int                             `pulumi:"isPowerNotice"`
-	MetricName      *string                          `pulumi:"metricName"`
-	NoticeFrequency *int                             `pulumi:"noticeFrequency"`
-	Operator        *string                          `pulumi:"operator"`
-	Period          *int                             `pulumi:"period"`
-	RuleType        *string                          `pulumi:"ruleType"`
-	Unit            *string                          `pulumi:"unit"`
-	Value           *string                          `pulumi:"value"`
+	// Number of periods.
+	ContinuePeriod *int `pulumi:"continuePeriod"`
+	// Metric display name, which is used in the output parameter.
+	Description *string `pulumi:"description"`
+	// Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+	Filter *AlarmPolicyConditionsRuleFilter `pulumi:"filter"`
+	// Whether the alarm frequency increases exponentially.
+	IsPowerNotice *int `pulumi:"isPowerNotice"`
+	// Metric name or event name.
+	MetricName *string `pulumi:"metricName"`
+	// Alarm interval in seconds.
+	NoticeFrequency *int `pulumi:"noticeFrequency"`
+	// Operator.
+	Operator *string `pulumi:"operator"`
+	// Statistical period in seconds.
+	Period *int `pulumi:"period"`
+	// Trigger condition type.
+	RuleType *string `pulumi:"ruleType"`
+	// Unit, which is used in the output parameter.
+	Unit *string `pulumi:"unit"`
+	// Threshold.
+	Value *string `pulumi:"value"`
 }
 
 // AlarmPolicyConditionsRuleInput is an input type that accepts AlarmPolicyConditionsRuleArgs and AlarmPolicyConditionsRuleOutput values.
@@ -184,17 +203,28 @@ type AlarmPolicyConditionsRuleInput interface {
 }
 
 type AlarmPolicyConditionsRuleArgs struct {
-	ContinuePeriod  pulumi.IntPtrInput                      `pulumi:"continuePeriod"`
-	Description     pulumi.StringPtrInput                   `pulumi:"description"`
-	Filter          AlarmPolicyConditionsRuleFilterPtrInput `pulumi:"filter"`
-	IsPowerNotice   pulumi.IntPtrInput                      `pulumi:"isPowerNotice"`
-	MetricName      pulumi.StringPtrInput                   `pulumi:"metricName"`
-	NoticeFrequency pulumi.IntPtrInput                      `pulumi:"noticeFrequency"`
-	Operator        pulumi.StringPtrInput                   `pulumi:"operator"`
-	Period          pulumi.IntPtrInput                      `pulumi:"period"`
-	RuleType        pulumi.StringPtrInput                   `pulumi:"ruleType"`
-	Unit            pulumi.StringPtrInput                   `pulumi:"unit"`
-	Value           pulumi.StringPtrInput                   `pulumi:"value"`
+	// Number of periods.
+	ContinuePeriod pulumi.IntPtrInput `pulumi:"continuePeriod"`
+	// Metric display name, which is used in the output parameter.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+	Filter AlarmPolicyConditionsRuleFilterPtrInput `pulumi:"filter"`
+	// Whether the alarm frequency increases exponentially.
+	IsPowerNotice pulumi.IntPtrInput `pulumi:"isPowerNotice"`
+	// Metric name or event name.
+	MetricName pulumi.StringPtrInput `pulumi:"metricName"`
+	// Alarm interval in seconds.
+	NoticeFrequency pulumi.IntPtrInput `pulumi:"noticeFrequency"`
+	// Operator.
+	Operator pulumi.StringPtrInput `pulumi:"operator"`
+	// Statistical period in seconds.
+	Period pulumi.IntPtrInput `pulumi:"period"`
+	// Trigger condition type.
+	RuleType pulumi.StringPtrInput `pulumi:"ruleType"`
+	// Unit, which is used in the output parameter.
+	Unit pulumi.StringPtrInput `pulumi:"unit"`
+	// Threshold.
+	Value pulumi.StringPtrInput `pulumi:"value"`
 }
 
 func (AlarmPolicyConditionsRuleArgs) ElementType() reflect.Type {
@@ -248,46 +278,57 @@ func (o AlarmPolicyConditionsRuleOutput) ToAlarmPolicyConditionsRuleOutputWithCo
 	return o
 }
 
+// Number of periods.
 func (o AlarmPolicyConditionsRuleOutput) ContinuePeriod() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRule) *int { return v.ContinuePeriod }).(pulumi.IntPtrOutput)
 }
 
+// Metric display name, which is used in the output parameter.
 func (o AlarmPolicyConditionsRuleOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRule) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
 func (o AlarmPolicyConditionsRuleOutput) Filter() AlarmPolicyConditionsRuleFilterPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRule) *AlarmPolicyConditionsRuleFilter { return v.Filter }).(AlarmPolicyConditionsRuleFilterPtrOutput)
 }
 
+// Whether the alarm frequency increases exponentially.
 func (o AlarmPolicyConditionsRuleOutput) IsPowerNotice() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRule) *int { return v.IsPowerNotice }).(pulumi.IntPtrOutput)
 }
 
+// Metric name or event name.
 func (o AlarmPolicyConditionsRuleOutput) MetricName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRule) *string { return v.MetricName }).(pulumi.StringPtrOutput)
 }
 
+// Alarm interval in seconds.
 func (o AlarmPolicyConditionsRuleOutput) NoticeFrequency() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRule) *int { return v.NoticeFrequency }).(pulumi.IntPtrOutput)
 }
 
+// Operator.
 func (o AlarmPolicyConditionsRuleOutput) Operator() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRule) *string { return v.Operator }).(pulumi.StringPtrOutput)
 }
 
+// Statistical period in seconds.
 func (o AlarmPolicyConditionsRuleOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRule) *int { return v.Period }).(pulumi.IntPtrOutput)
 }
 
+// Trigger condition type.
 func (o AlarmPolicyConditionsRuleOutput) RuleType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRule) *string { return v.RuleType }).(pulumi.StringPtrOutput)
 }
 
+// Unit, which is used in the output parameter.
 func (o AlarmPolicyConditionsRuleOutput) Unit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRule) *string { return v.Unit }).(pulumi.StringPtrOutput)
 }
 
+// Threshold.
 func (o AlarmPolicyConditionsRuleOutput) Value() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRule) *string { return v.Value }).(pulumi.StringPtrOutput)
 }
@@ -313,8 +354,10 @@ func (o AlarmPolicyConditionsRuleArrayOutput) Index(i pulumi.IntInput) AlarmPoli
 }
 
 type AlarmPolicyConditionsRuleFilter struct {
+	// JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
 	Dimensions *string `pulumi:"dimensions"`
-	Type       *string `pulumi:"type"`
+	// Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+	Type *string `pulumi:"type"`
 }
 
 // AlarmPolicyConditionsRuleFilterInput is an input type that accepts AlarmPolicyConditionsRuleFilterArgs and AlarmPolicyConditionsRuleFilterOutput values.
@@ -329,8 +372,10 @@ type AlarmPolicyConditionsRuleFilterInput interface {
 }
 
 type AlarmPolicyConditionsRuleFilterArgs struct {
+	// JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
 	Dimensions pulumi.StringPtrInput `pulumi:"dimensions"`
-	Type       pulumi.StringPtrInput `pulumi:"type"`
+	// Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+	Type pulumi.StringPtrInput `pulumi:"type"`
 }
 
 func (AlarmPolicyConditionsRuleFilterArgs) ElementType() reflect.Type {
@@ -410,10 +455,12 @@ func (o AlarmPolicyConditionsRuleFilterOutput) ToAlarmPolicyConditionsRuleFilter
 	}).(AlarmPolicyConditionsRuleFilterPtrOutput)
 }
 
+// JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
 func (o AlarmPolicyConditionsRuleFilterOutput) Dimensions() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRuleFilter) *string { return v.Dimensions }).(pulumi.StringPtrOutput)
 }
 
+// Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
 func (o AlarmPolicyConditionsRuleFilterOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyConditionsRuleFilter) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -442,6 +489,7 @@ func (o AlarmPolicyConditionsRuleFilterPtrOutput) Elem() AlarmPolicyConditionsRu
 	}).(AlarmPolicyConditionsRuleFilterOutput)
 }
 
+// JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
 func (o AlarmPolicyConditionsRuleFilterPtrOutput) Dimensions() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AlarmPolicyConditionsRuleFilter) *string {
 		if v == nil {
@@ -451,6 +499,7 @@ func (o AlarmPolicyConditionsRuleFilterPtrOutput) Dimensions() pulumi.StringPtrO
 	}).(pulumi.StringPtrOutput)
 }
 
+// Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
 func (o AlarmPolicyConditionsRuleFilterPtrOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AlarmPolicyConditionsRuleFilter) *string {
 		if v == nil {
@@ -461,17 +510,28 @@ func (o AlarmPolicyConditionsRuleFilterPtrOutput) Type() pulumi.StringPtrOutput 
 }
 
 type AlarmPolicyEventCondition struct {
-	ContinuePeriod  *int                             `pulumi:"continuePeriod"`
-	Description     *string                          `pulumi:"description"`
-	Filter          *AlarmPolicyEventConditionFilter `pulumi:"filter"`
-	IsPowerNotice   *int                             `pulumi:"isPowerNotice"`
-	MetricName      *string                          `pulumi:"metricName"`
-	NoticeFrequency *int                             `pulumi:"noticeFrequency"`
-	Operator        *string                          `pulumi:"operator"`
-	Period          *int                             `pulumi:"period"`
-	RuleType        *string                          `pulumi:"ruleType"`
-	Unit            *string                          `pulumi:"unit"`
-	Value           *string                          `pulumi:"value"`
+	// Number of periods.
+	ContinuePeriod *int `pulumi:"continuePeriod"`
+	// Metric display name, which is used in the output parameter.
+	Description *string `pulumi:"description"`
+	// Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+	Filter *AlarmPolicyEventConditionFilter `pulumi:"filter"`
+	// Whether the alarm frequency increases exponentially.
+	IsPowerNotice *int `pulumi:"isPowerNotice"`
+	// Metric name or event name.
+	MetricName *string `pulumi:"metricName"`
+	// Alarm interval in seconds.
+	NoticeFrequency *int `pulumi:"noticeFrequency"`
+	// Operator.
+	Operator *string `pulumi:"operator"`
+	// Statistical period in seconds.
+	Period *int `pulumi:"period"`
+	// Trigger condition type.
+	RuleType *string `pulumi:"ruleType"`
+	// Unit, which is used in the output parameter.
+	Unit *string `pulumi:"unit"`
+	// Threshold.
+	Value *string `pulumi:"value"`
 }
 
 // AlarmPolicyEventConditionInput is an input type that accepts AlarmPolicyEventConditionArgs and AlarmPolicyEventConditionOutput values.
@@ -486,17 +546,28 @@ type AlarmPolicyEventConditionInput interface {
 }
 
 type AlarmPolicyEventConditionArgs struct {
-	ContinuePeriod  pulumi.IntPtrInput                      `pulumi:"continuePeriod"`
-	Description     pulumi.StringPtrInput                   `pulumi:"description"`
-	Filter          AlarmPolicyEventConditionFilterPtrInput `pulumi:"filter"`
-	IsPowerNotice   pulumi.IntPtrInput                      `pulumi:"isPowerNotice"`
-	MetricName      pulumi.StringPtrInput                   `pulumi:"metricName"`
-	NoticeFrequency pulumi.IntPtrInput                      `pulumi:"noticeFrequency"`
-	Operator        pulumi.StringPtrInput                   `pulumi:"operator"`
-	Period          pulumi.IntPtrInput                      `pulumi:"period"`
-	RuleType        pulumi.StringPtrInput                   `pulumi:"ruleType"`
-	Unit            pulumi.StringPtrInput                   `pulumi:"unit"`
-	Value           pulumi.StringPtrInput                   `pulumi:"value"`
+	// Number of periods.
+	ContinuePeriod pulumi.IntPtrInput `pulumi:"continuePeriod"`
+	// Metric display name, which is used in the output parameter.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+	Filter AlarmPolicyEventConditionFilterPtrInput `pulumi:"filter"`
+	// Whether the alarm frequency increases exponentially.
+	IsPowerNotice pulumi.IntPtrInput `pulumi:"isPowerNotice"`
+	// Metric name or event name.
+	MetricName pulumi.StringPtrInput `pulumi:"metricName"`
+	// Alarm interval in seconds.
+	NoticeFrequency pulumi.IntPtrInput `pulumi:"noticeFrequency"`
+	// Operator.
+	Operator pulumi.StringPtrInput `pulumi:"operator"`
+	// Statistical period in seconds.
+	Period pulumi.IntPtrInput `pulumi:"period"`
+	// Trigger condition type.
+	RuleType pulumi.StringPtrInput `pulumi:"ruleType"`
+	// Unit, which is used in the output parameter.
+	Unit pulumi.StringPtrInput `pulumi:"unit"`
+	// Threshold.
+	Value pulumi.StringPtrInput `pulumi:"value"`
 }
 
 func (AlarmPolicyEventConditionArgs) ElementType() reflect.Type {
@@ -550,46 +621,57 @@ func (o AlarmPolicyEventConditionOutput) ToAlarmPolicyEventConditionOutputWithCo
 	return o
 }
 
+// Number of periods.
 func (o AlarmPolicyEventConditionOutput) ContinuePeriod() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventCondition) *int { return v.ContinuePeriod }).(pulumi.IntPtrOutput)
 }
 
+// Metric display name, which is used in the output parameter.
 func (o AlarmPolicyEventConditionOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventCondition) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
 func (o AlarmPolicyEventConditionOutput) Filter() AlarmPolicyEventConditionFilterPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventCondition) *AlarmPolicyEventConditionFilter { return v.Filter }).(AlarmPolicyEventConditionFilterPtrOutput)
 }
 
+// Whether the alarm frequency increases exponentially.
 func (o AlarmPolicyEventConditionOutput) IsPowerNotice() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventCondition) *int { return v.IsPowerNotice }).(pulumi.IntPtrOutput)
 }
 
+// Metric name or event name.
 func (o AlarmPolicyEventConditionOutput) MetricName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventCondition) *string { return v.MetricName }).(pulumi.StringPtrOutput)
 }
 
+// Alarm interval in seconds.
 func (o AlarmPolicyEventConditionOutput) NoticeFrequency() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventCondition) *int { return v.NoticeFrequency }).(pulumi.IntPtrOutput)
 }
 
+// Operator.
 func (o AlarmPolicyEventConditionOutput) Operator() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventCondition) *string { return v.Operator }).(pulumi.StringPtrOutput)
 }
 
+// Statistical period in seconds.
 func (o AlarmPolicyEventConditionOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventCondition) *int { return v.Period }).(pulumi.IntPtrOutput)
 }
 
+// Trigger condition type.
 func (o AlarmPolicyEventConditionOutput) RuleType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventCondition) *string { return v.RuleType }).(pulumi.StringPtrOutput)
 }
 
+// Unit, which is used in the output parameter.
 func (o AlarmPolicyEventConditionOutput) Unit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventCondition) *string { return v.Unit }).(pulumi.StringPtrOutput)
 }
 
+// Threshold.
 func (o AlarmPolicyEventConditionOutput) Value() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventCondition) *string { return v.Value }).(pulumi.StringPtrOutput)
 }
@@ -615,8 +697,10 @@ func (o AlarmPolicyEventConditionArrayOutput) Index(i pulumi.IntInput) AlarmPoli
 }
 
 type AlarmPolicyEventConditionFilter struct {
+	// JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
 	Dimensions *string `pulumi:"dimensions"`
-	Type       *string `pulumi:"type"`
+	// Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+	Type *string `pulumi:"type"`
 }
 
 // AlarmPolicyEventConditionFilterInput is an input type that accepts AlarmPolicyEventConditionFilterArgs and AlarmPolicyEventConditionFilterOutput values.
@@ -631,8 +715,10 @@ type AlarmPolicyEventConditionFilterInput interface {
 }
 
 type AlarmPolicyEventConditionFilterArgs struct {
+	// JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
 	Dimensions pulumi.StringPtrInput `pulumi:"dimensions"`
-	Type       pulumi.StringPtrInput `pulumi:"type"`
+	// Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
+	Type pulumi.StringPtrInput `pulumi:"type"`
 }
 
 func (AlarmPolicyEventConditionFilterArgs) ElementType() reflect.Type {
@@ -712,10 +798,12 @@ func (o AlarmPolicyEventConditionFilterOutput) ToAlarmPolicyEventConditionFilter
 	}).(AlarmPolicyEventConditionFilterPtrOutput)
 }
 
+// JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
 func (o AlarmPolicyEventConditionFilterOutput) Dimensions() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventConditionFilter) *string { return v.Dimensions }).(pulumi.StringPtrOutput)
 }
 
+// Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
 func (o AlarmPolicyEventConditionFilterOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlarmPolicyEventConditionFilter) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -744,6 +832,7 @@ func (o AlarmPolicyEventConditionFilterPtrOutput) Elem() AlarmPolicyEventConditi
 	}).(AlarmPolicyEventConditionFilterOutput)
 }
 
+// JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.
 func (o AlarmPolicyEventConditionFilterPtrOutput) Dimensions() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AlarmPolicyEventConditionFilter) *string {
 		if v == nil {
@@ -753,6 +842,7 @@ func (o AlarmPolicyEventConditionFilterPtrOutput) Dimensions() pulumi.StringPtrO
 	}).(pulumi.StringPtrOutput)
 }
 
+// Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).
 func (o AlarmPolicyEventConditionFilterPtrOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AlarmPolicyEventConditionFilter) *string {
 		if v == nil {
@@ -763,7 +853,9 @@ func (o AlarmPolicyEventConditionFilterPtrOutput) Type() pulumi.StringPtrOutput 
 }
 
 type AlarmPolicyPolicyTag struct {
-	Key   string `pulumi:"key"`
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
 	Value string `pulumi:"value"`
 }
 
@@ -779,7 +871,9 @@ type AlarmPolicyPolicyTagInput interface {
 }
 
 type AlarmPolicyPolicyTagArgs struct {
-	Key   pulumi.StringInput `pulumi:"key"`
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
@@ -834,10 +928,12 @@ func (o AlarmPolicyPolicyTagOutput) ToAlarmPolicyPolicyTagOutputWithContext(ctx 
 	return o
 }
 
+// Tag key.
 func (o AlarmPolicyPolicyTagOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v AlarmPolicyPolicyTag) string { return v.Key }).(pulumi.StringOutput)
 }
 
+// Tag value.
 func (o AlarmPolicyPolicyTagOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v AlarmPolicyPolicyTag) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -863,8 +959,10 @@ func (o AlarmPolicyPolicyTagArrayOutput) Index(i pulumi.IntInput) AlarmPolicyPol
 }
 
 type AlarmPolicyTriggerTask struct {
+	// Configuration information in JSON format.
 	TaskConfig string `pulumi:"taskConfig"`
-	Type       string `pulumi:"type"`
+	// Triggered task type.
+	Type string `pulumi:"type"`
 }
 
 // AlarmPolicyTriggerTaskInput is an input type that accepts AlarmPolicyTriggerTaskArgs and AlarmPolicyTriggerTaskOutput values.
@@ -879,8 +977,10 @@ type AlarmPolicyTriggerTaskInput interface {
 }
 
 type AlarmPolicyTriggerTaskArgs struct {
+	// Configuration information in JSON format.
 	TaskConfig pulumi.StringInput `pulumi:"taskConfig"`
-	Type       pulumi.StringInput `pulumi:"type"`
+	// Triggered task type.
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
 func (AlarmPolicyTriggerTaskArgs) ElementType() reflect.Type {
@@ -934,10 +1034,12 @@ func (o AlarmPolicyTriggerTaskOutput) ToAlarmPolicyTriggerTaskOutputWithContext(
 	return o
 }
 
+// Configuration information in JSON format.
 func (o AlarmPolicyTriggerTaskOutput) TaskConfig() pulumi.StringOutput {
 	return o.ApplyT(func(v AlarmPolicyTriggerTask) string { return v.TaskConfig }).(pulumi.StringOutput)
 }
 
+// Triggered task type.
 func (o AlarmPolicyTriggerTaskOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v AlarmPolicyTriggerTask) string { return v.Type }).(pulumi.StringOutput)
 }
@@ -962,168 +1064,190 @@ func (o AlarmPolicyTriggerTaskArrayOutput) Index(i pulumi.IntInput) AlarmPolicyT
 	}).(AlarmPolicyTriggerTaskOutput)
 }
 
-type BindingAlarmReceiverReceivers struct {
-	EndTime            *int     `pulumi:"endTime"`
-	NotifyWays         []string `pulumi:"notifyWays"`
-	ReceiveLanguage    *string  `pulumi:"receiveLanguage"`
-	ReceiverGroupLists []int    `pulumi:"receiverGroupLists"`
-	ReceiverType       string   `pulumi:"receiverType"`
-	ReceiverUserLists  []int    `pulumi:"receiverUserLists"`
-	StartTime          *int     `pulumi:"startTime"`
+type BindingReceiverReceivers struct {
+	// End of alarm period. Meaning with `startTime`.
+	EndTime *int `pulumi:"endTime"`
+	// Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+	NotifyWays []string `pulumi:"notifyWays"`
+	// Alert sending language. Optional `en-US`,`zh-CN`.
+	ReceiveLanguage *string `pulumi:"receiveLanguage"`
+	// Alarm receive group ID list.
+	ReceiverGroupLists []int `pulumi:"receiverGroupLists"`
+	// Receive type. Optional `group`,`user`.
+	ReceiverType string `pulumi:"receiverType"`
+	// Alarm receiver ID list.
+	ReceiverUserLists []int `pulumi:"receiverUserLists"`
+	// Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+	StartTime *int `pulumi:"startTime"`
 }
 
-// BindingAlarmReceiverReceiversInput is an input type that accepts BindingAlarmReceiverReceiversArgs and BindingAlarmReceiverReceiversOutput values.
-// You can construct a concrete instance of `BindingAlarmReceiverReceiversInput` via:
+// BindingReceiverReceiversInput is an input type that accepts BindingReceiverReceiversArgs and BindingReceiverReceiversOutput values.
+// You can construct a concrete instance of `BindingReceiverReceiversInput` via:
 //
-//          BindingAlarmReceiverReceiversArgs{...}
-type BindingAlarmReceiverReceiversInput interface {
+//          BindingReceiverReceiversArgs{...}
+type BindingReceiverReceiversInput interface {
 	pulumi.Input
 
-	ToBindingAlarmReceiverReceiversOutput() BindingAlarmReceiverReceiversOutput
-	ToBindingAlarmReceiverReceiversOutputWithContext(context.Context) BindingAlarmReceiverReceiversOutput
+	ToBindingReceiverReceiversOutput() BindingReceiverReceiversOutput
+	ToBindingReceiverReceiversOutputWithContext(context.Context) BindingReceiverReceiversOutput
 }
 
-type BindingAlarmReceiverReceiversArgs struct {
-	EndTime            pulumi.IntPtrInput      `pulumi:"endTime"`
-	NotifyWays         pulumi.StringArrayInput `pulumi:"notifyWays"`
-	ReceiveLanguage    pulumi.StringPtrInput   `pulumi:"receiveLanguage"`
-	ReceiverGroupLists pulumi.IntArrayInput    `pulumi:"receiverGroupLists"`
-	ReceiverType       pulumi.StringInput      `pulumi:"receiverType"`
-	ReceiverUserLists  pulumi.IntArrayInput    `pulumi:"receiverUserLists"`
-	StartTime          pulumi.IntPtrInput      `pulumi:"startTime"`
+type BindingReceiverReceiversArgs struct {
+	// End of alarm period. Meaning with `startTime`.
+	EndTime pulumi.IntPtrInput `pulumi:"endTime"`
+	// Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+	NotifyWays pulumi.StringArrayInput `pulumi:"notifyWays"`
+	// Alert sending language. Optional `en-US`,`zh-CN`.
+	ReceiveLanguage pulumi.StringPtrInput `pulumi:"receiveLanguage"`
+	// Alarm receive group ID list.
+	ReceiverGroupLists pulumi.IntArrayInput `pulumi:"receiverGroupLists"`
+	// Receive type. Optional `group`,`user`.
+	ReceiverType pulumi.StringInput `pulumi:"receiverType"`
+	// Alarm receiver ID list.
+	ReceiverUserLists pulumi.IntArrayInput `pulumi:"receiverUserLists"`
+	// Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+	StartTime pulumi.IntPtrInput `pulumi:"startTime"`
 }
 
-func (BindingAlarmReceiverReceiversArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BindingAlarmReceiverReceivers)(nil)).Elem()
+func (BindingReceiverReceiversArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BindingReceiverReceivers)(nil)).Elem()
 }
 
-func (i BindingAlarmReceiverReceiversArgs) ToBindingAlarmReceiverReceiversOutput() BindingAlarmReceiverReceiversOutput {
-	return i.ToBindingAlarmReceiverReceiversOutputWithContext(context.Background())
+func (i BindingReceiverReceiversArgs) ToBindingReceiverReceiversOutput() BindingReceiverReceiversOutput {
+	return i.ToBindingReceiverReceiversOutputWithContext(context.Background())
 }
 
-func (i BindingAlarmReceiverReceiversArgs) ToBindingAlarmReceiverReceiversOutputWithContext(ctx context.Context) BindingAlarmReceiverReceiversOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BindingAlarmReceiverReceiversOutput)
+func (i BindingReceiverReceiversArgs) ToBindingReceiverReceiversOutputWithContext(ctx context.Context) BindingReceiverReceiversOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BindingReceiverReceiversOutput)
 }
 
-func (i BindingAlarmReceiverReceiversArgs) ToBindingAlarmReceiverReceiversPtrOutput() BindingAlarmReceiverReceiversPtrOutput {
-	return i.ToBindingAlarmReceiverReceiversPtrOutputWithContext(context.Background())
+func (i BindingReceiverReceiversArgs) ToBindingReceiverReceiversPtrOutput() BindingReceiverReceiversPtrOutput {
+	return i.ToBindingReceiverReceiversPtrOutputWithContext(context.Background())
 }
 
-func (i BindingAlarmReceiverReceiversArgs) ToBindingAlarmReceiverReceiversPtrOutputWithContext(ctx context.Context) BindingAlarmReceiverReceiversPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BindingAlarmReceiverReceiversOutput).ToBindingAlarmReceiverReceiversPtrOutputWithContext(ctx)
+func (i BindingReceiverReceiversArgs) ToBindingReceiverReceiversPtrOutputWithContext(ctx context.Context) BindingReceiverReceiversPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BindingReceiverReceiversOutput).ToBindingReceiverReceiversPtrOutputWithContext(ctx)
 }
 
-// BindingAlarmReceiverReceiversPtrInput is an input type that accepts BindingAlarmReceiverReceiversArgs, BindingAlarmReceiverReceiversPtr and BindingAlarmReceiverReceiversPtrOutput values.
-// You can construct a concrete instance of `BindingAlarmReceiverReceiversPtrInput` via:
+// BindingReceiverReceiversPtrInput is an input type that accepts BindingReceiverReceiversArgs, BindingReceiverReceiversPtr and BindingReceiverReceiversPtrOutput values.
+// You can construct a concrete instance of `BindingReceiverReceiversPtrInput` via:
 //
-//          BindingAlarmReceiverReceiversArgs{...}
+//          BindingReceiverReceiversArgs{...}
 //
 //  or:
 //
 //          nil
-type BindingAlarmReceiverReceiversPtrInput interface {
+type BindingReceiverReceiversPtrInput interface {
 	pulumi.Input
 
-	ToBindingAlarmReceiverReceiversPtrOutput() BindingAlarmReceiverReceiversPtrOutput
-	ToBindingAlarmReceiverReceiversPtrOutputWithContext(context.Context) BindingAlarmReceiverReceiversPtrOutput
+	ToBindingReceiverReceiversPtrOutput() BindingReceiverReceiversPtrOutput
+	ToBindingReceiverReceiversPtrOutputWithContext(context.Context) BindingReceiverReceiversPtrOutput
 }
 
-type bindingAlarmReceiverReceiversPtrType BindingAlarmReceiverReceiversArgs
+type bindingReceiverReceiversPtrType BindingReceiverReceiversArgs
 
-func BindingAlarmReceiverReceiversPtr(v *BindingAlarmReceiverReceiversArgs) BindingAlarmReceiverReceiversPtrInput {
-	return (*bindingAlarmReceiverReceiversPtrType)(v)
+func BindingReceiverReceiversPtr(v *BindingReceiverReceiversArgs) BindingReceiverReceiversPtrInput {
+	return (*bindingReceiverReceiversPtrType)(v)
 }
 
-func (*bindingAlarmReceiverReceiversPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**BindingAlarmReceiverReceivers)(nil)).Elem()
+func (*bindingReceiverReceiversPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BindingReceiverReceivers)(nil)).Elem()
 }
 
-func (i *bindingAlarmReceiverReceiversPtrType) ToBindingAlarmReceiverReceiversPtrOutput() BindingAlarmReceiverReceiversPtrOutput {
-	return i.ToBindingAlarmReceiverReceiversPtrOutputWithContext(context.Background())
+func (i *bindingReceiverReceiversPtrType) ToBindingReceiverReceiversPtrOutput() BindingReceiverReceiversPtrOutput {
+	return i.ToBindingReceiverReceiversPtrOutputWithContext(context.Background())
 }
 
-func (i *bindingAlarmReceiverReceiversPtrType) ToBindingAlarmReceiverReceiversPtrOutputWithContext(ctx context.Context) BindingAlarmReceiverReceiversPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BindingAlarmReceiverReceiversPtrOutput)
+func (i *bindingReceiverReceiversPtrType) ToBindingReceiverReceiversPtrOutputWithContext(ctx context.Context) BindingReceiverReceiversPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BindingReceiverReceiversPtrOutput)
 }
 
-type BindingAlarmReceiverReceiversOutput struct{ *pulumi.OutputState }
+type BindingReceiverReceiversOutput struct{ *pulumi.OutputState }
 
-func (BindingAlarmReceiverReceiversOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BindingAlarmReceiverReceivers)(nil)).Elem()
+func (BindingReceiverReceiversOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BindingReceiverReceivers)(nil)).Elem()
 }
 
-func (o BindingAlarmReceiverReceiversOutput) ToBindingAlarmReceiverReceiversOutput() BindingAlarmReceiverReceiversOutput {
+func (o BindingReceiverReceiversOutput) ToBindingReceiverReceiversOutput() BindingReceiverReceiversOutput {
 	return o
 }
 
-func (o BindingAlarmReceiverReceiversOutput) ToBindingAlarmReceiverReceiversOutputWithContext(ctx context.Context) BindingAlarmReceiverReceiversOutput {
+func (o BindingReceiverReceiversOutput) ToBindingReceiverReceiversOutputWithContext(ctx context.Context) BindingReceiverReceiversOutput {
 	return o
 }
 
-func (o BindingAlarmReceiverReceiversOutput) ToBindingAlarmReceiverReceiversPtrOutput() BindingAlarmReceiverReceiversPtrOutput {
-	return o.ToBindingAlarmReceiverReceiversPtrOutputWithContext(context.Background())
+func (o BindingReceiverReceiversOutput) ToBindingReceiverReceiversPtrOutput() BindingReceiverReceiversPtrOutput {
+	return o.ToBindingReceiverReceiversPtrOutputWithContext(context.Background())
 }
 
-func (o BindingAlarmReceiverReceiversOutput) ToBindingAlarmReceiverReceiversPtrOutputWithContext(ctx context.Context) BindingAlarmReceiverReceiversPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v BindingAlarmReceiverReceivers) *BindingAlarmReceiverReceivers {
+func (o BindingReceiverReceiversOutput) ToBindingReceiverReceiversPtrOutputWithContext(ctx context.Context) BindingReceiverReceiversPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BindingReceiverReceivers) *BindingReceiverReceivers {
 		return &v
-	}).(BindingAlarmReceiverReceiversPtrOutput)
+	}).(BindingReceiverReceiversPtrOutput)
 }
 
-func (o BindingAlarmReceiverReceiversOutput) EndTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v BindingAlarmReceiverReceivers) *int { return v.EndTime }).(pulumi.IntPtrOutput)
+// End of alarm period. Meaning with `startTime`.
+func (o BindingReceiverReceiversOutput) EndTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BindingReceiverReceivers) *int { return v.EndTime }).(pulumi.IntPtrOutput)
 }
 
-func (o BindingAlarmReceiverReceiversOutput) NotifyWays() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v BindingAlarmReceiverReceivers) []string { return v.NotifyWays }).(pulumi.StringArrayOutput)
+// Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+func (o BindingReceiverReceiversOutput) NotifyWays() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BindingReceiverReceivers) []string { return v.NotifyWays }).(pulumi.StringArrayOutput)
 }
 
-func (o BindingAlarmReceiverReceiversOutput) ReceiveLanguage() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v BindingAlarmReceiverReceivers) *string { return v.ReceiveLanguage }).(pulumi.StringPtrOutput)
+// Alert sending language. Optional `en-US`,`zh-CN`.
+func (o BindingReceiverReceiversOutput) ReceiveLanguage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BindingReceiverReceivers) *string { return v.ReceiveLanguage }).(pulumi.StringPtrOutput)
 }
 
-func (o BindingAlarmReceiverReceiversOutput) ReceiverGroupLists() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v BindingAlarmReceiverReceivers) []int { return v.ReceiverGroupLists }).(pulumi.IntArrayOutput)
+// Alarm receive group ID list.
+func (o BindingReceiverReceiversOutput) ReceiverGroupLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v BindingReceiverReceivers) []int { return v.ReceiverGroupLists }).(pulumi.IntArrayOutput)
 }
 
-func (o BindingAlarmReceiverReceiversOutput) ReceiverType() pulumi.StringOutput {
-	return o.ApplyT(func(v BindingAlarmReceiverReceivers) string { return v.ReceiverType }).(pulumi.StringOutput)
+// Receive type. Optional `group`,`user`.
+func (o BindingReceiverReceiversOutput) ReceiverType() pulumi.StringOutput {
+	return o.ApplyT(func(v BindingReceiverReceivers) string { return v.ReceiverType }).(pulumi.StringOutput)
 }
 
-func (o BindingAlarmReceiverReceiversOutput) ReceiverUserLists() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v BindingAlarmReceiverReceivers) []int { return v.ReceiverUserLists }).(pulumi.IntArrayOutput)
+// Alarm receiver ID list.
+func (o BindingReceiverReceiversOutput) ReceiverUserLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v BindingReceiverReceivers) []int { return v.ReceiverUserLists }).(pulumi.IntArrayOutput)
 }
 
-func (o BindingAlarmReceiverReceiversOutput) StartTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v BindingAlarmReceiverReceivers) *int { return v.StartTime }).(pulumi.IntPtrOutput)
+// Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+func (o BindingReceiverReceiversOutput) StartTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BindingReceiverReceivers) *int { return v.StartTime }).(pulumi.IntPtrOutput)
 }
 
-type BindingAlarmReceiverReceiversPtrOutput struct{ *pulumi.OutputState }
+type BindingReceiverReceiversPtrOutput struct{ *pulumi.OutputState }
 
-func (BindingAlarmReceiverReceiversPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**BindingAlarmReceiverReceivers)(nil)).Elem()
+func (BindingReceiverReceiversPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BindingReceiverReceivers)(nil)).Elem()
 }
 
-func (o BindingAlarmReceiverReceiversPtrOutput) ToBindingAlarmReceiverReceiversPtrOutput() BindingAlarmReceiverReceiversPtrOutput {
+func (o BindingReceiverReceiversPtrOutput) ToBindingReceiverReceiversPtrOutput() BindingReceiverReceiversPtrOutput {
 	return o
 }
 
-func (o BindingAlarmReceiverReceiversPtrOutput) ToBindingAlarmReceiverReceiversPtrOutputWithContext(ctx context.Context) BindingAlarmReceiverReceiversPtrOutput {
+func (o BindingReceiverReceiversPtrOutput) ToBindingReceiverReceiversPtrOutputWithContext(ctx context.Context) BindingReceiverReceiversPtrOutput {
 	return o
 }
 
-func (o BindingAlarmReceiverReceiversPtrOutput) Elem() BindingAlarmReceiverReceiversOutput {
-	return o.ApplyT(func(v *BindingAlarmReceiverReceivers) BindingAlarmReceiverReceivers {
+func (o BindingReceiverReceiversPtrOutput) Elem() BindingReceiverReceiversOutput {
+	return o.ApplyT(func(v *BindingReceiverReceivers) BindingReceiverReceivers {
 		if v != nil {
 			return *v
 		}
-		var ret BindingAlarmReceiverReceivers
+		var ret BindingReceiverReceivers
 		return ret
-	}).(BindingAlarmReceiverReceiversOutput)
+	}).(BindingReceiverReceiversOutput)
 }
 
-func (o BindingAlarmReceiverReceiversPtrOutput) EndTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *BindingAlarmReceiverReceivers) *int {
+// End of alarm period. Meaning with `startTime`.
+func (o BindingReceiverReceiversPtrOutput) EndTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BindingReceiverReceivers) *int {
 		if v == nil {
 			return nil
 		}
@@ -1131,8 +1255,9 @@ func (o BindingAlarmReceiverReceiversPtrOutput) EndTime() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o BindingAlarmReceiverReceiversPtrOutput) NotifyWays() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *BindingAlarmReceiverReceivers) []string {
+// Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+func (o BindingReceiverReceiversPtrOutput) NotifyWays() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *BindingReceiverReceivers) []string {
 		if v == nil {
 			return nil
 		}
@@ -1140,8 +1265,9 @@ func (o BindingAlarmReceiverReceiversPtrOutput) NotifyWays() pulumi.StringArrayO
 	}).(pulumi.StringArrayOutput)
 }
 
-func (o BindingAlarmReceiverReceiversPtrOutput) ReceiveLanguage() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *BindingAlarmReceiverReceivers) *string {
+// Alert sending language. Optional `en-US`,`zh-CN`.
+func (o BindingReceiverReceiversPtrOutput) ReceiveLanguage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BindingReceiverReceivers) *string {
 		if v == nil {
 			return nil
 		}
@@ -1149,8 +1275,9 @@ func (o BindingAlarmReceiverReceiversPtrOutput) ReceiveLanguage() pulumi.StringP
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o BindingAlarmReceiverReceiversPtrOutput) ReceiverGroupLists() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *BindingAlarmReceiverReceivers) []int {
+// Alarm receive group ID list.
+func (o BindingReceiverReceiversPtrOutput) ReceiverGroupLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *BindingReceiverReceivers) []int {
 		if v == nil {
 			return nil
 		}
@@ -1158,8 +1285,9 @@ func (o BindingAlarmReceiverReceiversPtrOutput) ReceiverGroupLists() pulumi.IntA
 	}).(pulumi.IntArrayOutput)
 }
 
-func (o BindingAlarmReceiverReceiversPtrOutput) ReceiverType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *BindingAlarmReceiverReceivers) *string {
+// Receive type. Optional `group`,`user`.
+func (o BindingReceiverReceiversPtrOutput) ReceiverType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BindingReceiverReceivers) *string {
 		if v == nil {
 			return nil
 		}
@@ -1167,8 +1295,9 @@ func (o BindingAlarmReceiverReceiversPtrOutput) ReceiverType() pulumi.StringPtrO
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o BindingAlarmReceiverReceiversPtrOutput) ReceiverUserLists() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *BindingAlarmReceiverReceivers) []int {
+// Alarm receiver ID list.
+func (o BindingReceiverReceiversPtrOutput) ReceiverUserLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *BindingReceiverReceivers) []int {
 		if v == nil {
 			return nil
 		}
@@ -1176,8 +1305,9 @@ func (o BindingAlarmReceiverReceiversPtrOutput) ReceiverUserLists() pulumi.IntAr
 	}).(pulumi.IntArrayOutput)
 }
 
-func (o BindingAlarmReceiverReceiversPtrOutput) StartTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *BindingAlarmReceiverReceivers) *int {
+// Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+func (o BindingReceiverReceiversPtrOutput) StartTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BindingReceiverReceivers) *int {
 		if v == nil {
 			return nil
 		}
@@ -1185,419 +1315,8 @@ func (o BindingAlarmReceiverReceiversPtrOutput) StartTime() pulumi.IntPtrOutput 
 	}).(pulumi.IntPtrOutput)
 }
 
-type BindingObjectDimension struct {
-	DimensionsJson string  `pulumi:"dimensionsJson"`
-	UniqueId       *string `pulumi:"uniqueId"`
-}
-
-// BindingObjectDimensionInput is an input type that accepts BindingObjectDimensionArgs and BindingObjectDimensionOutput values.
-// You can construct a concrete instance of `BindingObjectDimensionInput` via:
-//
-//          BindingObjectDimensionArgs{...}
-type BindingObjectDimensionInput interface {
-	pulumi.Input
-
-	ToBindingObjectDimensionOutput() BindingObjectDimensionOutput
-	ToBindingObjectDimensionOutputWithContext(context.Context) BindingObjectDimensionOutput
-}
-
-type BindingObjectDimensionArgs struct {
-	DimensionsJson pulumi.StringInput    `pulumi:"dimensionsJson"`
-	UniqueId       pulumi.StringPtrInput `pulumi:"uniqueId"`
-}
-
-func (BindingObjectDimensionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BindingObjectDimension)(nil)).Elem()
-}
-
-func (i BindingObjectDimensionArgs) ToBindingObjectDimensionOutput() BindingObjectDimensionOutput {
-	return i.ToBindingObjectDimensionOutputWithContext(context.Background())
-}
-
-func (i BindingObjectDimensionArgs) ToBindingObjectDimensionOutputWithContext(ctx context.Context) BindingObjectDimensionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BindingObjectDimensionOutput)
-}
-
-// BindingObjectDimensionArrayInput is an input type that accepts BindingObjectDimensionArray and BindingObjectDimensionArrayOutput values.
-// You can construct a concrete instance of `BindingObjectDimensionArrayInput` via:
-//
-//          BindingObjectDimensionArray{ BindingObjectDimensionArgs{...} }
-type BindingObjectDimensionArrayInput interface {
-	pulumi.Input
-
-	ToBindingObjectDimensionArrayOutput() BindingObjectDimensionArrayOutput
-	ToBindingObjectDimensionArrayOutputWithContext(context.Context) BindingObjectDimensionArrayOutput
-}
-
-type BindingObjectDimensionArray []BindingObjectDimensionInput
-
-func (BindingObjectDimensionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BindingObjectDimension)(nil)).Elem()
-}
-
-func (i BindingObjectDimensionArray) ToBindingObjectDimensionArrayOutput() BindingObjectDimensionArrayOutput {
-	return i.ToBindingObjectDimensionArrayOutputWithContext(context.Background())
-}
-
-func (i BindingObjectDimensionArray) ToBindingObjectDimensionArrayOutputWithContext(ctx context.Context) BindingObjectDimensionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BindingObjectDimensionArrayOutput)
-}
-
-type BindingObjectDimensionOutput struct{ *pulumi.OutputState }
-
-func (BindingObjectDimensionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BindingObjectDimension)(nil)).Elem()
-}
-
-func (o BindingObjectDimensionOutput) ToBindingObjectDimensionOutput() BindingObjectDimensionOutput {
-	return o
-}
-
-func (o BindingObjectDimensionOutput) ToBindingObjectDimensionOutputWithContext(ctx context.Context) BindingObjectDimensionOutput {
-	return o
-}
-
-func (o BindingObjectDimensionOutput) DimensionsJson() pulumi.StringOutput {
-	return o.ApplyT(func(v BindingObjectDimension) string { return v.DimensionsJson }).(pulumi.StringOutput)
-}
-
-func (o BindingObjectDimensionOutput) UniqueId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v BindingObjectDimension) *string { return v.UniqueId }).(pulumi.StringPtrOutput)
-}
-
-type BindingObjectDimensionArrayOutput struct{ *pulumi.OutputState }
-
-func (BindingObjectDimensionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BindingObjectDimension)(nil)).Elem()
-}
-
-func (o BindingObjectDimensionArrayOutput) ToBindingObjectDimensionArrayOutput() BindingObjectDimensionArrayOutput {
-	return o
-}
-
-func (o BindingObjectDimensionArrayOutput) ToBindingObjectDimensionArrayOutputWithContext(ctx context.Context) BindingObjectDimensionArrayOutput {
-	return o
-}
-
-func (o BindingObjectDimensionArrayOutput) Index(i pulumi.IntInput) BindingObjectDimensionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BindingObjectDimension {
-		return vs[0].([]BindingObjectDimension)[vs[1].(int)]
-	}).(BindingObjectDimensionOutput)
-}
-
-type BindingObjectsList struct {
-	DimensionsJson string `pulumi:"dimensionsJson"`
-	IsShielded     int    `pulumi:"isShielded"`
-	Region         string `pulumi:"region"`
-	UniqueId       string `pulumi:"uniqueId"`
-}
-
-// BindingObjectsListInput is an input type that accepts BindingObjectsListArgs and BindingObjectsListOutput values.
-// You can construct a concrete instance of `BindingObjectsListInput` via:
-//
-//          BindingObjectsListArgs{...}
-type BindingObjectsListInput interface {
-	pulumi.Input
-
-	ToBindingObjectsListOutput() BindingObjectsListOutput
-	ToBindingObjectsListOutputWithContext(context.Context) BindingObjectsListOutput
-}
-
-type BindingObjectsListArgs struct {
-	DimensionsJson pulumi.StringInput `pulumi:"dimensionsJson"`
-	IsShielded     pulumi.IntInput    `pulumi:"isShielded"`
-	Region         pulumi.StringInput `pulumi:"region"`
-	UniqueId       pulumi.StringInput `pulumi:"uniqueId"`
-}
-
-func (BindingObjectsListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BindingObjectsList)(nil)).Elem()
-}
-
-func (i BindingObjectsListArgs) ToBindingObjectsListOutput() BindingObjectsListOutput {
-	return i.ToBindingObjectsListOutputWithContext(context.Background())
-}
-
-func (i BindingObjectsListArgs) ToBindingObjectsListOutputWithContext(ctx context.Context) BindingObjectsListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BindingObjectsListOutput)
-}
-
-// BindingObjectsListArrayInput is an input type that accepts BindingObjectsListArray and BindingObjectsListArrayOutput values.
-// You can construct a concrete instance of `BindingObjectsListArrayInput` via:
-//
-//          BindingObjectsListArray{ BindingObjectsListArgs{...} }
-type BindingObjectsListArrayInput interface {
-	pulumi.Input
-
-	ToBindingObjectsListArrayOutput() BindingObjectsListArrayOutput
-	ToBindingObjectsListArrayOutputWithContext(context.Context) BindingObjectsListArrayOutput
-}
-
-type BindingObjectsListArray []BindingObjectsListInput
-
-func (BindingObjectsListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BindingObjectsList)(nil)).Elem()
-}
-
-func (i BindingObjectsListArray) ToBindingObjectsListArrayOutput() BindingObjectsListArrayOutput {
-	return i.ToBindingObjectsListArrayOutputWithContext(context.Background())
-}
-
-func (i BindingObjectsListArray) ToBindingObjectsListArrayOutputWithContext(ctx context.Context) BindingObjectsListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BindingObjectsListArrayOutput)
-}
-
-type BindingObjectsListOutput struct{ *pulumi.OutputState }
-
-func (BindingObjectsListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BindingObjectsList)(nil)).Elem()
-}
-
-func (o BindingObjectsListOutput) ToBindingObjectsListOutput() BindingObjectsListOutput {
-	return o
-}
-
-func (o BindingObjectsListOutput) ToBindingObjectsListOutputWithContext(ctx context.Context) BindingObjectsListOutput {
-	return o
-}
-
-func (o BindingObjectsListOutput) DimensionsJson() pulumi.StringOutput {
-	return o.ApplyT(func(v BindingObjectsList) string { return v.DimensionsJson }).(pulumi.StringOutput)
-}
-
-func (o BindingObjectsListOutput) IsShielded() pulumi.IntOutput {
-	return o.ApplyT(func(v BindingObjectsList) int { return v.IsShielded }).(pulumi.IntOutput)
-}
-
-func (o BindingObjectsListOutput) Region() pulumi.StringOutput {
-	return o.ApplyT(func(v BindingObjectsList) string { return v.Region }).(pulumi.StringOutput)
-}
-
-func (o BindingObjectsListOutput) UniqueId() pulumi.StringOutput {
-	return o.ApplyT(func(v BindingObjectsList) string { return v.UniqueId }).(pulumi.StringOutput)
-}
-
-type BindingObjectsListArrayOutput struct{ *pulumi.OutputState }
-
-func (BindingObjectsListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BindingObjectsList)(nil)).Elem()
-}
-
-func (o BindingObjectsListArrayOutput) ToBindingObjectsListArrayOutput() BindingObjectsListArrayOutput {
-	return o
-}
-
-func (o BindingObjectsListArrayOutput) ToBindingObjectsListArrayOutputWithContext(ctx context.Context) BindingObjectsListArrayOutput {
-	return o
-}
-
-func (o BindingObjectsListArrayOutput) Index(i pulumi.IntInput) BindingObjectsListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BindingObjectsList {
-		return vs[0].([]BindingObjectsList)[vs[1].(int)]
-	}).(BindingObjectsListOutput)
-}
-
-type DataDimension struct {
-	Name  string `pulumi:"name"`
-	Value string `pulumi:"value"`
-}
-
-// DataDimensionInput is an input type that accepts DataDimensionArgs and DataDimensionOutput values.
-// You can construct a concrete instance of `DataDimensionInput` via:
-//
-//          DataDimensionArgs{...}
-type DataDimensionInput interface {
-	pulumi.Input
-
-	ToDataDimensionOutput() DataDimensionOutput
-	ToDataDimensionOutputWithContext(context.Context) DataDimensionOutput
-}
-
-type DataDimensionArgs struct {
-	Name  pulumi.StringInput `pulumi:"name"`
-	Value pulumi.StringInput `pulumi:"value"`
-}
-
-func (DataDimensionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DataDimension)(nil)).Elem()
-}
-
-func (i DataDimensionArgs) ToDataDimensionOutput() DataDimensionOutput {
-	return i.ToDataDimensionOutputWithContext(context.Background())
-}
-
-func (i DataDimensionArgs) ToDataDimensionOutputWithContext(ctx context.Context) DataDimensionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DataDimensionOutput)
-}
-
-// DataDimensionArrayInput is an input type that accepts DataDimensionArray and DataDimensionArrayOutput values.
-// You can construct a concrete instance of `DataDimensionArrayInput` via:
-//
-//          DataDimensionArray{ DataDimensionArgs{...} }
-type DataDimensionArrayInput interface {
-	pulumi.Input
-
-	ToDataDimensionArrayOutput() DataDimensionArrayOutput
-	ToDataDimensionArrayOutputWithContext(context.Context) DataDimensionArrayOutput
-}
-
-type DataDimensionArray []DataDimensionInput
-
-func (DataDimensionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DataDimension)(nil)).Elem()
-}
-
-func (i DataDimensionArray) ToDataDimensionArrayOutput() DataDimensionArrayOutput {
-	return i.ToDataDimensionArrayOutputWithContext(context.Background())
-}
-
-func (i DataDimensionArray) ToDataDimensionArrayOutputWithContext(ctx context.Context) DataDimensionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DataDimensionArrayOutput)
-}
-
-type DataDimensionOutput struct{ *pulumi.OutputState }
-
-func (DataDimensionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DataDimension)(nil)).Elem()
-}
-
-func (o DataDimensionOutput) ToDataDimensionOutput() DataDimensionOutput {
-	return o
-}
-
-func (o DataDimensionOutput) ToDataDimensionOutputWithContext(ctx context.Context) DataDimensionOutput {
-	return o
-}
-
-func (o DataDimensionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v DataDimension) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o DataDimensionOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func(v DataDimension) string { return v.Value }).(pulumi.StringOutput)
-}
-
-type DataDimensionArrayOutput struct{ *pulumi.OutputState }
-
-func (DataDimensionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DataDimension)(nil)).Elem()
-}
-
-func (o DataDimensionArrayOutput) ToDataDimensionArrayOutput() DataDimensionArrayOutput {
-	return o
-}
-
-func (o DataDimensionArrayOutput) ToDataDimensionArrayOutputWithContext(ctx context.Context) DataDimensionArrayOutput {
-	return o
-}
-
-func (o DataDimensionArrayOutput) Index(i pulumi.IntInput) DataDimensionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataDimension {
-		return vs[0].([]DataDimension)[vs[1].(int)]
-	}).(DataDimensionOutput)
-}
-
-type DataList struct {
-	Timestamp int     `pulumi:"timestamp"`
-	Value     float64 `pulumi:"value"`
-}
-
-// DataListInput is an input type that accepts DataListArgs and DataListOutput values.
-// You can construct a concrete instance of `DataListInput` via:
-//
-//          DataListArgs{...}
-type DataListInput interface {
-	pulumi.Input
-
-	ToDataListOutput() DataListOutput
-	ToDataListOutputWithContext(context.Context) DataListOutput
-}
-
-type DataListArgs struct {
-	Timestamp pulumi.IntInput     `pulumi:"timestamp"`
-	Value     pulumi.Float64Input `pulumi:"value"`
-}
-
-func (DataListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DataList)(nil)).Elem()
-}
-
-func (i DataListArgs) ToDataListOutput() DataListOutput {
-	return i.ToDataListOutputWithContext(context.Background())
-}
-
-func (i DataListArgs) ToDataListOutputWithContext(ctx context.Context) DataListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DataListOutput)
-}
-
-// DataListArrayInput is an input type that accepts DataListArray and DataListArrayOutput values.
-// You can construct a concrete instance of `DataListArrayInput` via:
-//
-//          DataListArray{ DataListArgs{...} }
-type DataListArrayInput interface {
-	pulumi.Input
-
-	ToDataListArrayOutput() DataListArrayOutput
-	ToDataListArrayOutputWithContext(context.Context) DataListArrayOutput
-}
-
-type DataListArray []DataListInput
-
-func (DataListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DataList)(nil)).Elem()
-}
-
-func (i DataListArray) ToDataListArrayOutput() DataListArrayOutput {
-	return i.ToDataListArrayOutputWithContext(context.Background())
-}
-
-func (i DataListArray) ToDataListArrayOutputWithContext(ctx context.Context) DataListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DataListArrayOutput)
-}
-
-type DataListOutput struct{ *pulumi.OutputState }
-
-func (DataListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DataList)(nil)).Elem()
-}
-
-func (o DataListOutput) ToDataListOutput() DataListOutput {
-	return o
-}
-
-func (o DataListOutput) ToDataListOutputWithContext(ctx context.Context) DataListOutput {
-	return o
-}
-
-func (o DataListOutput) Timestamp() pulumi.IntOutput {
-	return o.ApplyT(func(v DataList) int { return v.Timestamp }).(pulumi.IntOutput)
-}
-
-func (o DataListOutput) Value() pulumi.Float64Output {
-	return o.ApplyT(func(v DataList) float64 { return v.Value }).(pulumi.Float64Output)
-}
-
-type DataListArrayOutput struct{ *pulumi.OutputState }
-
-func (DataListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DataList)(nil)).Elem()
-}
-
-func (o DataListArrayOutput) ToDataListArrayOutput() DataListArrayOutput {
-	return o
-}
-
-func (o DataListArrayOutput) ToDataListArrayOutputWithContext(ctx context.Context) DataListArrayOutput {
-	return o
-}
-
-func (o DataListArrayOutput) Index(i pulumi.IntInput) DataListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataList {
-		return vs[0].([]DataList)[vs[1].(int)]
-	}).(DataListOutput)
-}
-
 type PolicyBindingObjectDimension struct {
+	// Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
 	DimensionsJson string  `pulumi:"dimensionsJson"`
 	UniqueId       *string `pulumi:"uniqueId"`
 }
@@ -1614,6 +1333,7 @@ type PolicyBindingObjectDimensionInput interface {
 }
 
 type PolicyBindingObjectDimensionArgs struct {
+	// Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
 	DimensionsJson pulumi.StringInput    `pulumi:"dimensionsJson"`
 	UniqueId       pulumi.StringPtrInput `pulumi:"uniqueId"`
 }
@@ -1669,6 +1389,7 @@ func (o PolicyBindingObjectDimensionOutput) ToPolicyBindingObjectDimensionOutput
 	return o
 }
 
+// Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
 func (o PolicyBindingObjectDimensionOutput) DimensionsJson() pulumi.StringOutput {
 	return o.ApplyT(func(v PolicyBindingObjectDimension) string { return v.DimensionsJson }).(pulumi.StringOutput)
 }
@@ -1697,2358 +1418,4704 @@ func (o PolicyBindingObjectDimensionArrayOutput) Index(i pulumi.IntInput) Policy
 	}).(PolicyBindingObjectDimensionOutput)
 }
 
-type PolicyConditionsList struct {
-	EventMetrics         []PolicyConditionsListEventMetric `pulumi:"eventMetrics"`
-	IsSupportMultiRegion bool                              `pulumi:"isSupportMultiRegion"`
-	Metrics              []PolicyConditionsListMetric      `pulumi:"metrics"`
-	Name                 string                            `pulumi:"name"`
-	PolicyViewName       string                            `pulumi:"policyViewName"`
-	SupportRegions       []string                          `pulumi:"supportRegions"`
+type TmpAlertRuleAnnotation struct {
+	// key.
+	Key string `pulumi:"key"`
+	// value.
+	Value string `pulumi:"value"`
 }
 
-// PolicyConditionsListInput is an input type that accepts PolicyConditionsListArgs and PolicyConditionsListOutput values.
-// You can construct a concrete instance of `PolicyConditionsListInput` via:
+// TmpAlertRuleAnnotationInput is an input type that accepts TmpAlertRuleAnnotationArgs and TmpAlertRuleAnnotationOutput values.
+// You can construct a concrete instance of `TmpAlertRuleAnnotationInput` via:
 //
-//          PolicyConditionsListArgs{...}
-type PolicyConditionsListInput interface {
+//          TmpAlertRuleAnnotationArgs{...}
+type TmpAlertRuleAnnotationInput interface {
 	pulumi.Input
 
-	ToPolicyConditionsListOutput() PolicyConditionsListOutput
-	ToPolicyConditionsListOutputWithContext(context.Context) PolicyConditionsListOutput
+	ToTmpAlertRuleAnnotationOutput() TmpAlertRuleAnnotationOutput
+	ToTmpAlertRuleAnnotationOutputWithContext(context.Context) TmpAlertRuleAnnotationOutput
 }
 
-type PolicyConditionsListArgs struct {
-	EventMetrics         PolicyConditionsListEventMetricArrayInput `pulumi:"eventMetrics"`
-	IsSupportMultiRegion pulumi.BoolInput                          `pulumi:"isSupportMultiRegion"`
-	Metrics              PolicyConditionsListMetricArrayInput      `pulumi:"metrics"`
-	Name                 pulumi.StringInput                        `pulumi:"name"`
-	PolicyViewName       pulumi.StringInput                        `pulumi:"policyViewName"`
-	SupportRegions       pulumi.StringArrayInput                   `pulumi:"supportRegions"`
+type TmpAlertRuleAnnotationArgs struct {
+	// key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// value.
+	Value pulumi.StringInput `pulumi:"value"`
 }
 
-func (PolicyConditionsListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyConditionsList)(nil)).Elem()
+func (TmpAlertRuleAnnotationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertRuleAnnotation)(nil)).Elem()
 }
 
-func (i PolicyConditionsListArgs) ToPolicyConditionsListOutput() PolicyConditionsListOutput {
-	return i.ToPolicyConditionsListOutputWithContext(context.Background())
+func (i TmpAlertRuleAnnotationArgs) ToTmpAlertRuleAnnotationOutput() TmpAlertRuleAnnotationOutput {
+	return i.ToTmpAlertRuleAnnotationOutputWithContext(context.Background())
 }
 
-func (i PolicyConditionsListArgs) ToPolicyConditionsListOutputWithContext(ctx context.Context) PolicyConditionsListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyConditionsListOutput)
+func (i TmpAlertRuleAnnotationArgs) ToTmpAlertRuleAnnotationOutputWithContext(ctx context.Context) TmpAlertRuleAnnotationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertRuleAnnotationOutput)
 }
 
-// PolicyConditionsListArrayInput is an input type that accepts PolicyConditionsListArray and PolicyConditionsListArrayOutput values.
-// You can construct a concrete instance of `PolicyConditionsListArrayInput` via:
+// TmpAlertRuleAnnotationArrayInput is an input type that accepts TmpAlertRuleAnnotationArray and TmpAlertRuleAnnotationArrayOutput values.
+// You can construct a concrete instance of `TmpAlertRuleAnnotationArrayInput` via:
 //
-//          PolicyConditionsListArray{ PolicyConditionsListArgs{...} }
-type PolicyConditionsListArrayInput interface {
+//          TmpAlertRuleAnnotationArray{ TmpAlertRuleAnnotationArgs{...} }
+type TmpAlertRuleAnnotationArrayInput interface {
 	pulumi.Input
 
-	ToPolicyConditionsListArrayOutput() PolicyConditionsListArrayOutput
-	ToPolicyConditionsListArrayOutputWithContext(context.Context) PolicyConditionsListArrayOutput
+	ToTmpAlertRuleAnnotationArrayOutput() TmpAlertRuleAnnotationArrayOutput
+	ToTmpAlertRuleAnnotationArrayOutputWithContext(context.Context) TmpAlertRuleAnnotationArrayOutput
 }
 
-type PolicyConditionsListArray []PolicyConditionsListInput
+type TmpAlertRuleAnnotationArray []TmpAlertRuleAnnotationInput
 
-func (PolicyConditionsListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyConditionsList)(nil)).Elem()
+func (TmpAlertRuleAnnotationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpAlertRuleAnnotation)(nil)).Elem()
 }
 
-func (i PolicyConditionsListArray) ToPolicyConditionsListArrayOutput() PolicyConditionsListArrayOutput {
-	return i.ToPolicyConditionsListArrayOutputWithContext(context.Background())
+func (i TmpAlertRuleAnnotationArray) ToTmpAlertRuleAnnotationArrayOutput() TmpAlertRuleAnnotationArrayOutput {
+	return i.ToTmpAlertRuleAnnotationArrayOutputWithContext(context.Background())
 }
 
-func (i PolicyConditionsListArray) ToPolicyConditionsListArrayOutputWithContext(ctx context.Context) PolicyConditionsListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyConditionsListArrayOutput)
+func (i TmpAlertRuleAnnotationArray) ToTmpAlertRuleAnnotationArrayOutputWithContext(ctx context.Context) TmpAlertRuleAnnotationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertRuleAnnotationArrayOutput)
 }
 
-type PolicyConditionsListOutput struct{ *pulumi.OutputState }
+type TmpAlertRuleAnnotationOutput struct{ *pulumi.OutputState }
 
-func (PolicyConditionsListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyConditionsList)(nil)).Elem()
+func (TmpAlertRuleAnnotationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertRuleAnnotation)(nil)).Elem()
 }
 
-func (o PolicyConditionsListOutput) ToPolicyConditionsListOutput() PolicyConditionsListOutput {
+func (o TmpAlertRuleAnnotationOutput) ToTmpAlertRuleAnnotationOutput() TmpAlertRuleAnnotationOutput {
 	return o
 }
 
-func (o PolicyConditionsListOutput) ToPolicyConditionsListOutputWithContext(ctx context.Context) PolicyConditionsListOutput {
+func (o TmpAlertRuleAnnotationOutput) ToTmpAlertRuleAnnotationOutputWithContext(ctx context.Context) TmpAlertRuleAnnotationOutput {
 	return o
 }
 
-func (o PolicyConditionsListOutput) EventMetrics() PolicyConditionsListEventMetricArrayOutput {
-	return o.ApplyT(func(v PolicyConditionsList) []PolicyConditionsListEventMetric { return v.EventMetrics }).(PolicyConditionsListEventMetricArrayOutput)
+// key.
+func (o TmpAlertRuleAnnotationOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpAlertRuleAnnotation) string { return v.Key }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListOutput) IsSupportMultiRegion() pulumi.BoolOutput {
-	return o.ApplyT(func(v PolicyConditionsList) bool { return v.IsSupportMultiRegion }).(pulumi.BoolOutput)
+// value.
+func (o TmpAlertRuleAnnotationOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpAlertRuleAnnotation) string { return v.Value }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListOutput) Metrics() PolicyConditionsListMetricArrayOutput {
-	return o.ApplyT(func(v PolicyConditionsList) []PolicyConditionsListMetric { return v.Metrics }).(PolicyConditionsListMetricArrayOutput)
+type TmpAlertRuleAnnotationArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertRuleAnnotationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpAlertRuleAnnotation)(nil)).Elem()
 }
 
-func (o PolicyConditionsListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsList) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o PolicyConditionsListOutput) PolicyViewName() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsList) string { return v.PolicyViewName }).(pulumi.StringOutput)
-}
-
-func (o PolicyConditionsListOutput) SupportRegions() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v PolicyConditionsList) []string { return v.SupportRegions }).(pulumi.StringArrayOutput)
-}
-
-type PolicyConditionsListArrayOutput struct{ *pulumi.OutputState }
-
-func (PolicyConditionsListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyConditionsList)(nil)).Elem()
-}
-
-func (o PolicyConditionsListArrayOutput) ToPolicyConditionsListArrayOutput() PolicyConditionsListArrayOutput {
+func (o TmpAlertRuleAnnotationArrayOutput) ToTmpAlertRuleAnnotationArrayOutput() TmpAlertRuleAnnotationArrayOutput {
 	return o
 }
 
-func (o PolicyConditionsListArrayOutput) ToPolicyConditionsListArrayOutputWithContext(ctx context.Context) PolicyConditionsListArrayOutput {
+func (o TmpAlertRuleAnnotationArrayOutput) ToTmpAlertRuleAnnotationArrayOutputWithContext(ctx context.Context) TmpAlertRuleAnnotationArrayOutput {
 	return o
 }
 
-func (o PolicyConditionsListArrayOutput) Index(i pulumi.IntInput) PolicyConditionsListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PolicyConditionsList {
-		return vs[0].([]PolicyConditionsList)[vs[1].(int)]
-	}).(PolicyConditionsListOutput)
+func (o TmpAlertRuleAnnotationArrayOutput) Index(i pulumi.IntInput) TmpAlertRuleAnnotationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpAlertRuleAnnotation {
+		return vs[0].([]TmpAlertRuleAnnotation)[vs[1].(int)]
+	}).(TmpAlertRuleAnnotationOutput)
 }
 
-type PolicyConditionsListEventMetric struct {
-	EventId       int    `pulumi:"eventId"`
+type TmpAlertRuleLabel struct {
+	// key.
+	Key string `pulumi:"key"`
+	// value.
+	Value string `pulumi:"value"`
+}
+
+// TmpAlertRuleLabelInput is an input type that accepts TmpAlertRuleLabelArgs and TmpAlertRuleLabelOutput values.
+// You can construct a concrete instance of `TmpAlertRuleLabelInput` via:
+//
+//          TmpAlertRuleLabelArgs{...}
+type TmpAlertRuleLabelInput interface {
+	pulumi.Input
+
+	ToTmpAlertRuleLabelOutput() TmpAlertRuleLabelOutput
+	ToTmpAlertRuleLabelOutputWithContext(context.Context) TmpAlertRuleLabelOutput
+}
+
+type TmpAlertRuleLabelArgs struct {
+	// key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (TmpAlertRuleLabelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertRuleLabel)(nil)).Elem()
+}
+
+func (i TmpAlertRuleLabelArgs) ToTmpAlertRuleLabelOutput() TmpAlertRuleLabelOutput {
+	return i.ToTmpAlertRuleLabelOutputWithContext(context.Background())
+}
+
+func (i TmpAlertRuleLabelArgs) ToTmpAlertRuleLabelOutputWithContext(ctx context.Context) TmpAlertRuleLabelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertRuleLabelOutput)
+}
+
+// TmpAlertRuleLabelArrayInput is an input type that accepts TmpAlertRuleLabelArray and TmpAlertRuleLabelArrayOutput values.
+// You can construct a concrete instance of `TmpAlertRuleLabelArrayInput` via:
+//
+//          TmpAlertRuleLabelArray{ TmpAlertRuleLabelArgs{...} }
+type TmpAlertRuleLabelArrayInput interface {
+	pulumi.Input
+
+	ToTmpAlertRuleLabelArrayOutput() TmpAlertRuleLabelArrayOutput
+	ToTmpAlertRuleLabelArrayOutputWithContext(context.Context) TmpAlertRuleLabelArrayOutput
+}
+
+type TmpAlertRuleLabelArray []TmpAlertRuleLabelInput
+
+func (TmpAlertRuleLabelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpAlertRuleLabel)(nil)).Elem()
+}
+
+func (i TmpAlertRuleLabelArray) ToTmpAlertRuleLabelArrayOutput() TmpAlertRuleLabelArrayOutput {
+	return i.ToTmpAlertRuleLabelArrayOutputWithContext(context.Background())
+}
+
+func (i TmpAlertRuleLabelArray) ToTmpAlertRuleLabelArrayOutputWithContext(ctx context.Context) TmpAlertRuleLabelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertRuleLabelArrayOutput)
+}
+
+type TmpAlertRuleLabelOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertRuleLabelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertRuleLabel)(nil)).Elem()
+}
+
+func (o TmpAlertRuleLabelOutput) ToTmpAlertRuleLabelOutput() TmpAlertRuleLabelOutput {
+	return o
+}
+
+func (o TmpAlertRuleLabelOutput) ToTmpAlertRuleLabelOutputWithContext(ctx context.Context) TmpAlertRuleLabelOutput {
+	return o
+}
+
+// key.
+func (o TmpAlertRuleLabelOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpAlertRuleLabel) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// value.
+func (o TmpAlertRuleLabelOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpAlertRuleLabel) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type TmpAlertRuleLabelArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertRuleLabelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpAlertRuleLabel)(nil)).Elem()
+}
+
+func (o TmpAlertRuleLabelArrayOutput) ToTmpAlertRuleLabelArrayOutput() TmpAlertRuleLabelArrayOutput {
+	return o
+}
+
+func (o TmpAlertRuleLabelArrayOutput) ToTmpAlertRuleLabelArrayOutputWithContext(ctx context.Context) TmpAlertRuleLabelArrayOutput {
+	return o
+}
+
+func (o TmpAlertRuleLabelArrayOutput) Index(i pulumi.IntInput) TmpAlertRuleLabelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpAlertRuleLabel {
+		return vs[0].([]TmpAlertRuleLabel)[vs[1].(int)]
+	}).(TmpAlertRuleLabelOutput)
+}
+
+type TmpTkeAlertPolicyAlertRule struct {
+	// If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.
+	ClusterId *string `pulumi:"clusterId"`
+	// Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.
+	Id *string `pulumi:"id"`
+	// Policy name.
+	Name string `pulumi:"name"`
+	// Alarm channels, which may be returned using null in the template.
+	Notification *TmpTkeAlertPolicyAlertRuleNotification `pulumi:"notification"`
+	// A list of rules.
+	Rules []TmpTkeAlertPolicyAlertRuleRule `pulumi:"rules"`
+	// If the alarm is sent from a template, the TemplateId is the template id.
+	TemplateId *string `pulumi:"templateId"`
+	// Last modified time.
+	UpdatedAt *string `pulumi:"updatedAt"`
+}
+
+// TmpTkeAlertPolicyAlertRuleInput is an input type that accepts TmpTkeAlertPolicyAlertRuleArgs and TmpTkeAlertPolicyAlertRuleOutput values.
+// You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleInput` via:
+//
+//          TmpTkeAlertPolicyAlertRuleArgs{...}
+type TmpTkeAlertPolicyAlertRuleInput interface {
+	pulumi.Input
+
+	ToTmpTkeAlertPolicyAlertRuleOutput() TmpTkeAlertPolicyAlertRuleOutput
+	ToTmpTkeAlertPolicyAlertRuleOutputWithContext(context.Context) TmpTkeAlertPolicyAlertRuleOutput
+}
+
+type TmpTkeAlertPolicyAlertRuleArgs struct {
+	// If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.
+	ClusterId pulumi.StringPtrInput `pulumi:"clusterId"`
+	// Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// Policy name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Alarm channels, which may be returned using null in the template.
+	Notification TmpTkeAlertPolicyAlertRuleNotificationPtrInput `pulumi:"notification"`
+	// A list of rules.
+	Rules TmpTkeAlertPolicyAlertRuleRuleArrayInput `pulumi:"rules"`
+	// If the alarm is sent from a template, the TemplateId is the template id.
+	TemplateId pulumi.StringPtrInput `pulumi:"templateId"`
+	// Last modified time.
+	UpdatedAt pulumi.StringPtrInput `pulumi:"updatedAt"`
+}
+
+func (TmpTkeAlertPolicyAlertRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeAlertPolicyAlertRule)(nil)).Elem()
+}
+
+func (i TmpTkeAlertPolicyAlertRuleArgs) ToTmpTkeAlertPolicyAlertRuleOutput() TmpTkeAlertPolicyAlertRuleOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleOutputWithContext(context.Background())
+}
+
+func (i TmpTkeAlertPolicyAlertRuleArgs) ToTmpTkeAlertPolicyAlertRuleOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleOutput)
+}
+
+func (i TmpTkeAlertPolicyAlertRuleArgs) ToTmpTkeAlertPolicyAlertRulePtrOutput() TmpTkeAlertPolicyAlertRulePtrOutput {
+	return i.ToTmpTkeAlertPolicyAlertRulePtrOutputWithContext(context.Background())
+}
+
+func (i TmpTkeAlertPolicyAlertRuleArgs) ToTmpTkeAlertPolicyAlertRulePtrOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleOutput).ToTmpTkeAlertPolicyAlertRulePtrOutputWithContext(ctx)
+}
+
+// TmpTkeAlertPolicyAlertRulePtrInput is an input type that accepts TmpTkeAlertPolicyAlertRuleArgs, TmpTkeAlertPolicyAlertRulePtr and TmpTkeAlertPolicyAlertRulePtrOutput values.
+// You can construct a concrete instance of `TmpTkeAlertPolicyAlertRulePtrInput` via:
+//
+//          TmpTkeAlertPolicyAlertRuleArgs{...}
+//
+//  or:
+//
+//          nil
+type TmpTkeAlertPolicyAlertRulePtrInput interface {
+	pulumi.Input
+
+	ToTmpTkeAlertPolicyAlertRulePtrOutput() TmpTkeAlertPolicyAlertRulePtrOutput
+	ToTmpTkeAlertPolicyAlertRulePtrOutputWithContext(context.Context) TmpTkeAlertPolicyAlertRulePtrOutput
+}
+
+type tmpTkeAlertPolicyAlertRulePtrType TmpTkeAlertPolicyAlertRuleArgs
+
+func TmpTkeAlertPolicyAlertRulePtr(v *TmpTkeAlertPolicyAlertRuleArgs) TmpTkeAlertPolicyAlertRulePtrInput {
+	return (*tmpTkeAlertPolicyAlertRulePtrType)(v)
+}
+
+func (*tmpTkeAlertPolicyAlertRulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeAlertPolicyAlertRule)(nil)).Elem()
+}
+
+func (i *tmpTkeAlertPolicyAlertRulePtrType) ToTmpTkeAlertPolicyAlertRulePtrOutput() TmpTkeAlertPolicyAlertRulePtrOutput {
+	return i.ToTmpTkeAlertPolicyAlertRulePtrOutputWithContext(context.Background())
+}
+
+func (i *tmpTkeAlertPolicyAlertRulePtrType) ToTmpTkeAlertPolicyAlertRulePtrOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRulePtrOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeAlertPolicyAlertRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeAlertPolicyAlertRule)(nil)).Elem()
+}
+
+func (o TmpTkeAlertPolicyAlertRuleOutput) ToTmpTkeAlertPolicyAlertRuleOutput() TmpTkeAlertPolicyAlertRuleOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleOutput) ToTmpTkeAlertPolicyAlertRuleOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleOutput) ToTmpTkeAlertPolicyAlertRulePtrOutput() TmpTkeAlertPolicyAlertRulePtrOutput {
+	return o.ToTmpTkeAlertPolicyAlertRulePtrOutputWithContext(context.Background())
+}
+
+func (o TmpTkeAlertPolicyAlertRuleOutput) ToTmpTkeAlertPolicyAlertRulePtrOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TmpTkeAlertPolicyAlertRule) *TmpTkeAlertPolicyAlertRule {
+		return &v
+	}).(TmpTkeAlertPolicyAlertRulePtrOutput)
+}
+
+// If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.
+func (o TmpTkeAlertPolicyAlertRuleOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRule) *string { return v.ClusterId }).(pulumi.StringPtrOutput)
+}
+
+// Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o TmpTkeAlertPolicyAlertRuleOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRule) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// Policy name.
+func (o TmpTkeAlertPolicyAlertRuleOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRule) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Alarm channels, which may be returned using null in the template.
+func (o TmpTkeAlertPolicyAlertRuleOutput) Notification() TmpTkeAlertPolicyAlertRuleNotificationPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRule) *TmpTkeAlertPolicyAlertRuleNotification { return v.Notification }).(TmpTkeAlertPolicyAlertRuleNotificationPtrOutput)
+}
+
+// A list of rules.
+func (o TmpTkeAlertPolicyAlertRuleOutput) Rules() TmpTkeAlertPolicyAlertRuleRuleArrayOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRule) []TmpTkeAlertPolicyAlertRuleRule { return v.Rules }).(TmpTkeAlertPolicyAlertRuleRuleArrayOutput)
+}
+
+// If the alarm is sent from a template, the TemplateId is the template id.
+func (o TmpTkeAlertPolicyAlertRuleOutput) TemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRule) *string { return v.TemplateId }).(pulumi.StringPtrOutput)
+}
+
+// Last modified time.
+func (o TmpTkeAlertPolicyAlertRuleOutput) UpdatedAt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRule) *string { return v.UpdatedAt }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeAlertPolicyAlertRulePtrOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeAlertPolicyAlertRulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeAlertPolicyAlertRule)(nil)).Elem()
+}
+
+func (o TmpTkeAlertPolicyAlertRulePtrOutput) ToTmpTkeAlertPolicyAlertRulePtrOutput() TmpTkeAlertPolicyAlertRulePtrOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRulePtrOutput) ToTmpTkeAlertPolicyAlertRulePtrOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRulePtrOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRulePtrOutput) Elem() TmpTkeAlertPolicyAlertRuleOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRule) TmpTkeAlertPolicyAlertRule {
+		if v != nil {
+			return *v
+		}
+		var ret TmpTkeAlertPolicyAlertRule
+		return ret
+	}).(TmpTkeAlertPolicyAlertRuleOutput)
+}
+
+// If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.
+func (o TmpTkeAlertPolicyAlertRulePtrOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o TmpTkeAlertPolicyAlertRulePtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// Policy name.
+func (o TmpTkeAlertPolicyAlertRulePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRule) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Alarm channels, which may be returned using null in the template.
+func (o TmpTkeAlertPolicyAlertRulePtrOutput) Notification() TmpTkeAlertPolicyAlertRuleNotificationPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRule) *TmpTkeAlertPolicyAlertRuleNotification {
+		if v == nil {
+			return nil
+		}
+		return v.Notification
+	}).(TmpTkeAlertPolicyAlertRuleNotificationPtrOutput)
+}
+
+// A list of rules.
+func (o TmpTkeAlertPolicyAlertRulePtrOutput) Rules() TmpTkeAlertPolicyAlertRuleRuleArrayOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRule) []TmpTkeAlertPolicyAlertRuleRule {
+		if v == nil {
+			return nil
+		}
+		return v.Rules
+	}).(TmpTkeAlertPolicyAlertRuleRuleArrayOutput)
+}
+
+// If the alarm is sent from a template, the TemplateId is the template id.
+func (o TmpTkeAlertPolicyAlertRulePtrOutput) TemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TemplateId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Last modified time.
+func (o TmpTkeAlertPolicyAlertRulePtrOutput) UpdatedAt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UpdatedAt
+	}).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleNotification struct {
+	// If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..
+	AlertManager *TmpTkeAlertPolicyAlertRuleNotificationAlertManager `pulumi:"alertManager"`
+	// Whether it is enabled.
+	Enabled bool `pulumi:"enabled"`
+	// Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.
+	NotifyWays []string `pulumi:"notifyWays"`
+	// Telephone alerts reach notifications.
+	PhoneArriveNotice *bool `pulumi:"phoneArriveNotice"`
+	// Effective end timeTelephone alarm wheel interval. Units: Seconds.
+	PhoneCircleInterval *int `pulumi:"phoneCircleInterval"`
+	// PhoneCircleTimes.
+	PhoneCircleTimes *int `pulumi:"phoneCircleTimes"`
+	// Telephone alarm wheel intervals. Units: Seconds.
+	PhoneInnerInterval *int `pulumi:"phoneInnerInterval"`
+	// Telephone alarm sequence.
+	PhoneNotifyOrders []int `pulumi:"phoneNotifyOrders"`
+	// Alert Receiving Group (User Group).
+	ReceiverGroups []string `pulumi:"receiverGroups"`
+	// Convergence time.
+	RepeatInterval *string `pulumi:"repeatInterval"`
+	// Effective end time.
+	TimeRangeEnd *string `pulumi:"timeRangeEnd"`
+	// The time from which it takes effect.
+	TimeRangeStart *string `pulumi:"timeRangeStart"`
+	// The channel type, which defaults to amp, supports the following `amp`, `webhook`, `alertmanager`.
+	Type string `pulumi:"type"`
+	// If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.
+	WebHook *string `pulumi:"webHook"`
+}
+
+// TmpTkeAlertPolicyAlertRuleNotificationInput is an input type that accepts TmpTkeAlertPolicyAlertRuleNotificationArgs and TmpTkeAlertPolicyAlertRuleNotificationOutput values.
+// You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleNotificationInput` via:
+//
+//          TmpTkeAlertPolicyAlertRuleNotificationArgs{...}
+type TmpTkeAlertPolicyAlertRuleNotificationInput interface {
+	pulumi.Input
+
+	ToTmpTkeAlertPolicyAlertRuleNotificationOutput() TmpTkeAlertPolicyAlertRuleNotificationOutput
+	ToTmpTkeAlertPolicyAlertRuleNotificationOutputWithContext(context.Context) TmpTkeAlertPolicyAlertRuleNotificationOutput
+}
+
+type TmpTkeAlertPolicyAlertRuleNotificationArgs struct {
+	// If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..
+	AlertManager TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrInput `pulumi:"alertManager"`
+	// Whether it is enabled.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.
+	NotifyWays pulumi.StringArrayInput `pulumi:"notifyWays"`
+	// Telephone alerts reach notifications.
+	PhoneArriveNotice pulumi.BoolPtrInput `pulumi:"phoneArriveNotice"`
+	// Effective end timeTelephone alarm wheel interval. Units: Seconds.
+	PhoneCircleInterval pulumi.IntPtrInput `pulumi:"phoneCircleInterval"`
+	// PhoneCircleTimes.
+	PhoneCircleTimes pulumi.IntPtrInput `pulumi:"phoneCircleTimes"`
+	// Telephone alarm wheel intervals. Units: Seconds.
+	PhoneInnerInterval pulumi.IntPtrInput `pulumi:"phoneInnerInterval"`
+	// Telephone alarm sequence.
+	PhoneNotifyOrders pulumi.IntArrayInput `pulumi:"phoneNotifyOrders"`
+	// Alert Receiving Group (User Group).
+	ReceiverGroups pulumi.StringArrayInput `pulumi:"receiverGroups"`
+	// Convergence time.
+	RepeatInterval pulumi.StringPtrInput `pulumi:"repeatInterval"`
+	// Effective end time.
+	TimeRangeEnd pulumi.StringPtrInput `pulumi:"timeRangeEnd"`
+	// The time from which it takes effect.
+	TimeRangeStart pulumi.StringPtrInput `pulumi:"timeRangeStart"`
+	// The channel type, which defaults to amp, supports the following `amp`, `webhook`, `alertmanager`.
+	Type pulumi.StringInput `pulumi:"type"`
+	// If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.
+	WebHook pulumi.StringPtrInput `pulumi:"webHook"`
+}
+
+func (TmpTkeAlertPolicyAlertRuleNotificationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleNotification)(nil)).Elem()
+}
+
+func (i TmpTkeAlertPolicyAlertRuleNotificationArgs) ToTmpTkeAlertPolicyAlertRuleNotificationOutput() TmpTkeAlertPolicyAlertRuleNotificationOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleNotificationOutputWithContext(context.Background())
+}
+
+func (i TmpTkeAlertPolicyAlertRuleNotificationArgs) ToTmpTkeAlertPolicyAlertRuleNotificationOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleNotificationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleNotificationOutput)
+}
+
+func (i TmpTkeAlertPolicyAlertRuleNotificationArgs) ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutput() TmpTkeAlertPolicyAlertRuleNotificationPtrOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutputWithContext(context.Background())
+}
+
+func (i TmpTkeAlertPolicyAlertRuleNotificationArgs) ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleNotificationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleNotificationOutput).ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutputWithContext(ctx)
+}
+
+// TmpTkeAlertPolicyAlertRuleNotificationPtrInput is an input type that accepts TmpTkeAlertPolicyAlertRuleNotificationArgs, TmpTkeAlertPolicyAlertRuleNotificationPtr and TmpTkeAlertPolicyAlertRuleNotificationPtrOutput values.
+// You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleNotificationPtrInput` via:
+//
+//          TmpTkeAlertPolicyAlertRuleNotificationArgs{...}
+//
+//  or:
+//
+//          nil
+type TmpTkeAlertPolicyAlertRuleNotificationPtrInput interface {
+	pulumi.Input
+
+	ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutput() TmpTkeAlertPolicyAlertRuleNotificationPtrOutput
+	ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutputWithContext(context.Context) TmpTkeAlertPolicyAlertRuleNotificationPtrOutput
+}
+
+type tmpTkeAlertPolicyAlertRuleNotificationPtrType TmpTkeAlertPolicyAlertRuleNotificationArgs
+
+func TmpTkeAlertPolicyAlertRuleNotificationPtr(v *TmpTkeAlertPolicyAlertRuleNotificationArgs) TmpTkeAlertPolicyAlertRuleNotificationPtrInput {
+	return (*tmpTkeAlertPolicyAlertRuleNotificationPtrType)(v)
+}
+
+func (*tmpTkeAlertPolicyAlertRuleNotificationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeAlertPolicyAlertRuleNotification)(nil)).Elem()
+}
+
+func (i *tmpTkeAlertPolicyAlertRuleNotificationPtrType) ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutput() TmpTkeAlertPolicyAlertRuleNotificationPtrOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutputWithContext(context.Background())
+}
+
+func (i *tmpTkeAlertPolicyAlertRuleNotificationPtrType) ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleNotificationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleNotificationPtrOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleNotificationOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeAlertPolicyAlertRuleNotificationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleNotification)(nil)).Elem()
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) ToTmpTkeAlertPolicyAlertRuleNotificationOutput() TmpTkeAlertPolicyAlertRuleNotificationOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) ToTmpTkeAlertPolicyAlertRuleNotificationOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleNotificationOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutput() TmpTkeAlertPolicyAlertRuleNotificationPtrOutput {
+	return o.ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutputWithContext(context.Background())
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleNotificationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TmpTkeAlertPolicyAlertRuleNotification) *TmpTkeAlertPolicyAlertRuleNotification {
+		return &v
+	}).(TmpTkeAlertPolicyAlertRuleNotificationPtrOutput)
+}
+
+// If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) AlertManager() TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) *TmpTkeAlertPolicyAlertRuleNotificationAlertManager {
+		return v.AlertManager
+	}).(TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput)
+}
+
+// Whether it is enabled.
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) NotifyWays() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) []string { return v.NotifyWays }).(pulumi.StringArrayOutput)
+}
+
+// Telephone alerts reach notifications.
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) PhoneArriveNotice() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) *bool { return v.PhoneArriveNotice }).(pulumi.BoolPtrOutput)
+}
+
+// Effective end timeTelephone alarm wheel interval. Units: Seconds.
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) PhoneCircleInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) *int { return v.PhoneCircleInterval }).(pulumi.IntPtrOutput)
+}
+
+// PhoneCircleTimes.
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) PhoneCircleTimes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) *int { return v.PhoneCircleTimes }).(pulumi.IntPtrOutput)
+}
+
+// Telephone alarm wheel intervals. Units: Seconds.
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) PhoneInnerInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) *int { return v.PhoneInnerInterval }).(pulumi.IntPtrOutput)
+}
+
+// Telephone alarm sequence.
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) PhoneNotifyOrders() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) []int { return v.PhoneNotifyOrders }).(pulumi.IntArrayOutput)
+}
+
+// Alert Receiving Group (User Group).
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) ReceiverGroups() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) []string { return v.ReceiverGroups }).(pulumi.StringArrayOutput)
+}
+
+// Convergence time.
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) RepeatInterval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) *string { return v.RepeatInterval }).(pulumi.StringPtrOutput)
+}
+
+// Effective end time.
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) TimeRangeEnd() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) *string { return v.TimeRangeEnd }).(pulumi.StringPtrOutput)
+}
+
+// The time from which it takes effect.
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) TimeRangeStart() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) *string { return v.TimeRangeStart }).(pulumi.StringPtrOutput)
+}
+
+// The channel type, which defaults to amp, supports the following `amp`, `webhook`, `alertmanager`.
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o TmpTkeAlertPolicyAlertRuleNotificationOutput) WebHook() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotification) *string { return v.WebHook }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleNotificationPtrOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeAlertPolicyAlertRuleNotification)(nil)).Elem()
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutput() TmpTkeAlertPolicyAlertRuleNotificationPtrOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) ToTmpTkeAlertPolicyAlertRuleNotificationPtrOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleNotificationPtrOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) Elem() TmpTkeAlertPolicyAlertRuleNotificationOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) TmpTkeAlertPolicyAlertRuleNotification {
+		if v != nil {
+			return *v
+		}
+		var ret TmpTkeAlertPolicyAlertRuleNotification
+		return ret
+	}).(TmpTkeAlertPolicyAlertRuleNotificationOutput)
+}
+
+// If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) AlertManager() TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) *TmpTkeAlertPolicyAlertRuleNotificationAlertManager {
+		if v == nil {
+			return nil
+		}
+		return v.AlertManager
+	}).(TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput)
+}
+
+// Whether it is enabled.
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) NotifyWays() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) []string {
+		if v == nil {
+			return nil
+		}
+		return v.NotifyWays
+	}).(pulumi.StringArrayOutput)
+}
+
+// Telephone alerts reach notifications.
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) PhoneArriveNotice() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.PhoneArriveNotice
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Effective end timeTelephone alarm wheel interval. Units: Seconds.
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) PhoneCircleInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PhoneCircleInterval
+	}).(pulumi.IntPtrOutput)
+}
+
+// PhoneCircleTimes.
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) PhoneCircleTimes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PhoneCircleTimes
+	}).(pulumi.IntPtrOutput)
+}
+
+// Telephone alarm wheel intervals. Units: Seconds.
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) PhoneInnerInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PhoneInnerInterval
+	}).(pulumi.IntPtrOutput)
+}
+
+// Telephone alarm sequence.
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) PhoneNotifyOrders() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) []int {
+		if v == nil {
+			return nil
+		}
+		return v.PhoneNotifyOrders
+	}).(pulumi.IntArrayOutput)
+}
+
+// Alert Receiving Group (User Group).
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) ReceiverGroups() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ReceiverGroups
+	}).(pulumi.StringArrayOutput)
+}
+
+// Convergence time.
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) RepeatInterval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RepeatInterval
+	}).(pulumi.StringPtrOutput)
+}
+
+// Effective end time.
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) TimeRangeEnd() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeRangeEnd
+	}).(pulumi.StringPtrOutput)
+}
+
+// The time from which it takes effect.
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) TimeRangeStart() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeRangeStart
+	}).(pulumi.StringPtrOutput)
+}
+
+// The channel type, which defaults to amp, supports the following `amp`, `webhook`, `alertmanager`.
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+// If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o TmpTkeAlertPolicyAlertRuleNotificationPtrOutput) WebHook() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotification) *string {
+		if v == nil {
+			return nil
+		}
+		return v.WebHook
+	}).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleNotificationAlertManager struct {
+	// The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.
+	ClusterId *string `pulumi:"clusterId"`
+	// Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.
+	ClusterType *string `pulumi:"clusterType"`
+	// Alertmanager url.
+	Url string `pulumi:"url"`
+}
+
+// TmpTkeAlertPolicyAlertRuleNotificationAlertManagerInput is an input type that accepts TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs and TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput values.
+// You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleNotificationAlertManagerInput` via:
+//
+//          TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{...}
+type TmpTkeAlertPolicyAlertRuleNotificationAlertManagerInput interface {
+	pulumi.Input
+
+	ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput() TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput
+	ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutputWithContext(context.Context) TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput
+}
+
+type TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs struct {
+	// The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.
+	ClusterId pulumi.StringPtrInput `pulumi:"clusterId"`
+	// Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.
+	ClusterType pulumi.StringPtrInput `pulumi:"clusterType"`
+	// Alertmanager url.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleNotificationAlertManager)(nil)).Elem()
+}
+
+func (i TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs) ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput() TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutputWithContext(context.Background())
+}
+
+func (i TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs) ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput)
+}
+
+func (i TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs) ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput() TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutputWithContext(context.Background())
+}
+
+func (i TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs) ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput).ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutputWithContext(ctx)
+}
+
+// TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrInput is an input type that accepts TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs, TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtr and TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput values.
+// You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrInput` via:
+//
+//          TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{...}
+//
+//  or:
+//
+//          nil
+type TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrInput interface {
+	pulumi.Input
+
+	ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput() TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput
+	ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutputWithContext(context.Context) TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput
+}
+
+type tmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrType TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs
+
+func TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtr(v *TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs) TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrInput {
+	return (*tmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrType)(v)
+}
+
+func (*tmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeAlertPolicyAlertRuleNotificationAlertManager)(nil)).Elem()
+}
+
+func (i *tmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrType) ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput() TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutputWithContext(context.Background())
+}
+
+func (i *tmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrType) ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleNotificationAlertManager)(nil)).Elem()
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput) ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput() TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput) ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput) ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput() TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput {
+	return o.ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutputWithContext(context.Background())
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput) ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TmpTkeAlertPolicyAlertRuleNotificationAlertManager) *TmpTkeAlertPolicyAlertRuleNotificationAlertManager {
+		return &v
+	}).(TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput)
+}
+
+// The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotificationAlertManager) *string { return v.ClusterId }).(pulumi.StringPtrOutput)
+}
+
+// Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput) ClusterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotificationAlertManager) *string { return v.ClusterType }).(pulumi.StringPtrOutput)
+}
+
+// Alertmanager url.
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleNotificationAlertManager) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeAlertPolicyAlertRuleNotificationAlertManager)(nil)).Elem()
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput) ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput() TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput) ToTmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput) Elem() TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotificationAlertManager) TmpTkeAlertPolicyAlertRuleNotificationAlertManager {
+		if v != nil {
+			return *v
+		}
+		var ret TmpTkeAlertPolicyAlertRuleNotificationAlertManager
+		return ret
+	}).(TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput)
+}
+
+// The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotificationAlertManager) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput) ClusterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotificationAlertManager) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Alertmanager url.
+func (o TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeAlertPolicyAlertRuleNotificationAlertManager) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleRule struct {
+	// Refer to annotations in prometheus rule.
+	Annotations []TmpTkeAlertPolicyAlertRuleRuleAnnotation `pulumi:"annotations"`
+	// A description of the rule.
+	Describe *string `pulumi:"describe"`
+	// Time of duration.
+	For string `pulumi:"for"`
+	// Extra labels.
+	Labels []TmpTkeAlertPolicyAlertRuleRuleLabel `pulumi:"labels"`
+	// Rule name.
+	Name string `pulumi:"name"`
+	// Prometheus statement.
+	Rule string `pulumi:"rule"`
+	// Alarm rule status.
+	RuleState *int `pulumi:"ruleState"`
+	// Alert sending template.
+	Template string `pulumi:"template"`
+}
+
+// TmpTkeAlertPolicyAlertRuleRuleInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleArgs and TmpTkeAlertPolicyAlertRuleRuleOutput values.
+// You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleInput` via:
+//
+//          TmpTkeAlertPolicyAlertRuleRuleArgs{...}
+type TmpTkeAlertPolicyAlertRuleRuleInput interface {
+	pulumi.Input
+
+	ToTmpTkeAlertPolicyAlertRuleRuleOutput() TmpTkeAlertPolicyAlertRuleRuleOutput
+	ToTmpTkeAlertPolicyAlertRuleRuleOutputWithContext(context.Context) TmpTkeAlertPolicyAlertRuleRuleOutput
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleArgs struct {
+	// Refer to annotations in prometheus rule.
+	Annotations TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayInput `pulumi:"annotations"`
+	// A description of the rule.
+	Describe pulumi.StringPtrInput `pulumi:"describe"`
+	// Time of duration.
+	For pulumi.StringInput `pulumi:"for"`
+	// Extra labels.
+	Labels TmpTkeAlertPolicyAlertRuleRuleLabelArrayInput `pulumi:"labels"`
+	// Rule name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Prometheus statement.
+	Rule pulumi.StringInput `pulumi:"rule"`
+	// Alarm rule status.
+	RuleState pulumi.IntPtrInput `pulumi:"ruleState"`
+	// Alert sending template.
+	Template pulumi.StringInput `pulumi:"template"`
+}
+
+func (TmpTkeAlertPolicyAlertRuleRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRule)(nil)).Elem()
+}
+
+func (i TmpTkeAlertPolicyAlertRuleRuleArgs) ToTmpTkeAlertPolicyAlertRuleRuleOutput() TmpTkeAlertPolicyAlertRuleRuleOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleRuleOutputWithContext(context.Background())
+}
+
+func (i TmpTkeAlertPolicyAlertRuleRuleArgs) ToTmpTkeAlertPolicyAlertRuleRuleOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleRuleOutput)
+}
+
+// TmpTkeAlertPolicyAlertRuleRuleArrayInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleArray and TmpTkeAlertPolicyAlertRuleRuleArrayOutput values.
+// You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleArrayInput` via:
+//
+//          TmpTkeAlertPolicyAlertRuleRuleArray{ TmpTkeAlertPolicyAlertRuleRuleArgs{...} }
+type TmpTkeAlertPolicyAlertRuleRuleArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeAlertPolicyAlertRuleRuleArrayOutput() TmpTkeAlertPolicyAlertRuleRuleArrayOutput
+	ToTmpTkeAlertPolicyAlertRuleRuleArrayOutputWithContext(context.Context) TmpTkeAlertPolicyAlertRuleRuleArrayOutput
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleArray []TmpTkeAlertPolicyAlertRuleRuleInput
+
+func (TmpTkeAlertPolicyAlertRuleRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeAlertPolicyAlertRuleRule)(nil)).Elem()
+}
+
+func (i TmpTkeAlertPolicyAlertRuleRuleArray) ToTmpTkeAlertPolicyAlertRuleRuleArrayOutput() TmpTkeAlertPolicyAlertRuleRuleArrayOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleRuleArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeAlertPolicyAlertRuleRuleArray) ToTmpTkeAlertPolicyAlertRuleRuleArrayOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleRuleArrayOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeAlertPolicyAlertRuleRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRule)(nil)).Elem()
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleOutput) ToTmpTkeAlertPolicyAlertRuleRuleOutput() TmpTkeAlertPolicyAlertRuleRuleOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleOutput) ToTmpTkeAlertPolicyAlertRuleRuleOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleRuleOutput {
+	return o
+}
+
+// Refer to annotations in prometheus rule.
+func (o TmpTkeAlertPolicyAlertRuleRuleOutput) Annotations() TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleRule) []TmpTkeAlertPolicyAlertRuleRuleAnnotation {
+		return v.Annotations
+	}).(TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput)
+}
+
+// A description of the rule.
+func (o TmpTkeAlertPolicyAlertRuleRuleOutput) Describe() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleRule) *string { return v.Describe }).(pulumi.StringPtrOutput)
+}
+
+// Time of duration.
+func (o TmpTkeAlertPolicyAlertRuleRuleOutput) For() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleRule) string { return v.For }).(pulumi.StringOutput)
+}
+
+// Extra labels.
+func (o TmpTkeAlertPolicyAlertRuleRuleOutput) Labels() TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleRule) []TmpTkeAlertPolicyAlertRuleRuleLabel { return v.Labels }).(TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput)
+}
+
+// Rule name.
+func (o TmpTkeAlertPolicyAlertRuleRuleOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleRule) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Prometheus statement.
+func (o TmpTkeAlertPolicyAlertRuleRuleOutput) Rule() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleRule) string { return v.Rule }).(pulumi.StringOutput)
+}
+
+// Alarm rule status.
+func (o TmpTkeAlertPolicyAlertRuleRuleOutput) RuleState() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleRule) *int { return v.RuleState }).(pulumi.IntPtrOutput)
+}
+
+// Alert sending template.
+func (o TmpTkeAlertPolicyAlertRuleRuleOutput) Template() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleRule) string { return v.Template }).(pulumi.StringOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeAlertPolicyAlertRuleRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeAlertPolicyAlertRuleRule)(nil)).Elem()
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleArrayOutput) ToTmpTkeAlertPolicyAlertRuleRuleArrayOutput() TmpTkeAlertPolicyAlertRuleRuleArrayOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleArrayOutput) ToTmpTkeAlertPolicyAlertRuleRuleArrayOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleRuleArrayOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleArrayOutput) Index(i pulumi.IntInput) TmpTkeAlertPolicyAlertRuleRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeAlertPolicyAlertRuleRule {
+		return vs[0].([]TmpTkeAlertPolicyAlertRuleRule)[vs[1].(int)]
+	}).(TmpTkeAlertPolicyAlertRuleRuleOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleAnnotation struct {
+	// Name of map.
+	Name string `pulumi:"name"`
+	// Value of map.
+	Value string `pulumi:"value"`
+}
+
+// TmpTkeAlertPolicyAlertRuleRuleAnnotationInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs and TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput values.
+// You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleAnnotationInput` via:
+//
+//          TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs{...}
+type TmpTkeAlertPolicyAlertRuleRuleAnnotationInput interface {
+	pulumi.Input
+
+	ToTmpTkeAlertPolicyAlertRuleRuleAnnotationOutput() TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput
+	ToTmpTkeAlertPolicyAlertRuleRuleAnnotationOutputWithContext(context.Context) TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs struct {
+	// Name of map.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value of map.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleAnnotation)(nil)).Elem()
+}
+
+func (i TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs) ToTmpTkeAlertPolicyAlertRuleRuleAnnotationOutput() TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleRuleAnnotationOutputWithContext(context.Background())
+}
+
+func (i TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs) ToTmpTkeAlertPolicyAlertRuleRuleAnnotationOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput)
+}
+
+// TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleAnnotationArray and TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput values.
+// You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayInput` via:
+//
+//          TmpTkeAlertPolicyAlertRuleRuleAnnotationArray{ TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs{...} }
+type TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput() TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput
+	ToTmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutputWithContext(context.Context) TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleAnnotationArray []TmpTkeAlertPolicyAlertRuleRuleAnnotationInput
+
+func (TmpTkeAlertPolicyAlertRuleRuleAnnotationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeAlertPolicyAlertRuleRuleAnnotation)(nil)).Elem()
+}
+
+func (i TmpTkeAlertPolicyAlertRuleRuleAnnotationArray) ToTmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput() TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeAlertPolicyAlertRuleRuleAnnotationArray) ToTmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleAnnotation)(nil)).Elem()
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput) ToTmpTkeAlertPolicyAlertRuleRuleAnnotationOutput() TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput) ToTmpTkeAlertPolicyAlertRuleRuleAnnotationOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput {
+	return o
+}
+
+// Name of map.
+func (o TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleRuleAnnotation) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value of map.
+func (o TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleRuleAnnotation) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeAlertPolicyAlertRuleRuleAnnotation)(nil)).Elem()
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput) ToTmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput() TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput) ToTmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput) Index(i pulumi.IntInput) TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeAlertPolicyAlertRuleRuleAnnotation {
+		return vs[0].([]TmpTkeAlertPolicyAlertRuleRuleAnnotation)[vs[1].(int)]
+	}).(TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleLabel struct {
+	// Name of map.
+	Name string `pulumi:"name"`
+	// Value of map.
+	Value string `pulumi:"value"`
+}
+
+// TmpTkeAlertPolicyAlertRuleRuleLabelInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleLabelArgs and TmpTkeAlertPolicyAlertRuleRuleLabelOutput values.
+// You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleLabelInput` via:
+//
+//          TmpTkeAlertPolicyAlertRuleRuleLabelArgs{...}
+type TmpTkeAlertPolicyAlertRuleRuleLabelInput interface {
+	pulumi.Input
+
+	ToTmpTkeAlertPolicyAlertRuleRuleLabelOutput() TmpTkeAlertPolicyAlertRuleRuleLabelOutput
+	ToTmpTkeAlertPolicyAlertRuleRuleLabelOutputWithContext(context.Context) TmpTkeAlertPolicyAlertRuleRuleLabelOutput
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleLabelArgs struct {
+	// Name of map.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value of map.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (TmpTkeAlertPolicyAlertRuleRuleLabelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleLabel)(nil)).Elem()
+}
+
+func (i TmpTkeAlertPolicyAlertRuleRuleLabelArgs) ToTmpTkeAlertPolicyAlertRuleRuleLabelOutput() TmpTkeAlertPolicyAlertRuleRuleLabelOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleRuleLabelOutputWithContext(context.Background())
+}
+
+func (i TmpTkeAlertPolicyAlertRuleRuleLabelArgs) ToTmpTkeAlertPolicyAlertRuleRuleLabelOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleRuleLabelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleRuleLabelOutput)
+}
+
+// TmpTkeAlertPolicyAlertRuleRuleLabelArrayInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleLabelArray and TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput values.
+// You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleLabelArrayInput` via:
+//
+//          TmpTkeAlertPolicyAlertRuleRuleLabelArray{ TmpTkeAlertPolicyAlertRuleRuleLabelArgs{...} }
+type TmpTkeAlertPolicyAlertRuleRuleLabelArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput() TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput
+	ToTmpTkeAlertPolicyAlertRuleRuleLabelArrayOutputWithContext(context.Context) TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleLabelArray []TmpTkeAlertPolicyAlertRuleRuleLabelInput
+
+func (TmpTkeAlertPolicyAlertRuleRuleLabelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeAlertPolicyAlertRuleRuleLabel)(nil)).Elem()
+}
+
+func (i TmpTkeAlertPolicyAlertRuleRuleLabelArray) ToTmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput() TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput {
+	return i.ToTmpTkeAlertPolicyAlertRuleRuleLabelArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeAlertPolicyAlertRuleRuleLabelArray) ToTmpTkeAlertPolicyAlertRuleRuleLabelArrayOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleLabelOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeAlertPolicyAlertRuleRuleLabelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleLabel)(nil)).Elem()
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleLabelOutput) ToTmpTkeAlertPolicyAlertRuleRuleLabelOutput() TmpTkeAlertPolicyAlertRuleRuleLabelOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleLabelOutput) ToTmpTkeAlertPolicyAlertRuleRuleLabelOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleRuleLabelOutput {
+	return o
+}
+
+// Name of map.
+func (o TmpTkeAlertPolicyAlertRuleRuleLabelOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleRuleLabel) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value of map.
+func (o TmpTkeAlertPolicyAlertRuleRuleLabelOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeAlertPolicyAlertRuleRuleLabel) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeAlertPolicyAlertRuleRuleLabel)(nil)).Elem()
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput) ToTmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput() TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput) ToTmpTkeAlertPolicyAlertRuleRuleLabelArrayOutputWithContext(ctx context.Context) TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput {
+	return o
+}
+
+func (o TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput) Index(i pulumi.IntInput) TmpTkeAlertPolicyAlertRuleRuleLabelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeAlertPolicyAlertRuleRuleLabel {
+		return vs[0].([]TmpTkeAlertPolicyAlertRuleRuleLabel)[vs[1].(int)]
+	}).(TmpTkeAlertPolicyAlertRuleRuleLabelOutput)
+}
+
+type TmpTkeTemplateTemplate struct {
+	// Template description.
+	Describe *string `pulumi:"describe"`
+	// Whether the system-supplied default template is used for outgoing references.
+	IsDefault *bool `pulumi:"isDefault"`
+	// Template dimensions, the following types are supported `instance` instance level, `cluster` cluster level.
+	Level string `pulumi:"level"`
+	// Template name.
+	Name string `pulumi:"name"`
+	// Effective when Level is a cluster, A list of PodMonitors rules in the template.
+	PodMonitors []TmpTkeTemplateTemplatePodMonitor `pulumi:"podMonitors"`
+	// Effective when Level is a cluster, A list of RawJobs rules in the template.
+	RawJobs []TmpTkeTemplateTemplateRawJob `pulumi:"rawJobs"`
+	// Effective when Level is instance, A list of aggregation rules in the template.
+	RecordRules []TmpTkeTemplateTemplateRecordRule `pulumi:"recordRules"`
+	// Effective when Level is a cluster, A list of ServiceMonitor rules in the template.
+	ServiceMonitors []TmpTkeTemplateTemplateServiceMonitor `pulumi:"serviceMonitors"`
+	// The ID of the template, which is used for the outgoing reference.
+	TemplateId *string `pulumi:"templateId"`
+	// Last updated, for outgoing references.
+	UpdateTime *string `pulumi:"updateTime"`
+	// Whether the system-supplied default template is used for outgoing references.
+	Version *string `pulumi:"version"`
+}
+
+// TmpTkeTemplateTemplateInput is an input type that accepts TmpTkeTemplateTemplateArgs and TmpTkeTemplateTemplateOutput values.
+// You can construct a concrete instance of `TmpTkeTemplateTemplateInput` via:
+//
+//          TmpTkeTemplateTemplateArgs{...}
+type TmpTkeTemplateTemplateInput interface {
+	pulumi.Input
+
+	ToTmpTkeTemplateTemplateOutput() TmpTkeTemplateTemplateOutput
+	ToTmpTkeTemplateTemplateOutputWithContext(context.Context) TmpTkeTemplateTemplateOutput
+}
+
+type TmpTkeTemplateTemplateArgs struct {
+	// Template description.
+	Describe pulumi.StringPtrInput `pulumi:"describe"`
+	// Whether the system-supplied default template is used for outgoing references.
+	IsDefault pulumi.BoolPtrInput `pulumi:"isDefault"`
+	// Template dimensions, the following types are supported `instance` instance level, `cluster` cluster level.
+	Level pulumi.StringInput `pulumi:"level"`
+	// Template name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Effective when Level is a cluster, A list of PodMonitors rules in the template.
+	PodMonitors TmpTkeTemplateTemplatePodMonitorArrayInput `pulumi:"podMonitors"`
+	// Effective when Level is a cluster, A list of RawJobs rules in the template.
+	RawJobs TmpTkeTemplateTemplateRawJobArrayInput `pulumi:"rawJobs"`
+	// Effective when Level is instance, A list of aggregation rules in the template.
+	RecordRules TmpTkeTemplateTemplateRecordRuleArrayInput `pulumi:"recordRules"`
+	// Effective when Level is a cluster, A list of ServiceMonitor rules in the template.
+	ServiceMonitors TmpTkeTemplateTemplateServiceMonitorArrayInput `pulumi:"serviceMonitors"`
+	// The ID of the template, which is used for the outgoing reference.
+	TemplateId pulumi.StringPtrInput `pulumi:"templateId"`
+	// Last updated, for outgoing references.
+	UpdateTime pulumi.StringPtrInput `pulumi:"updateTime"`
+	// Whether the system-supplied default template is used for outgoing references.
+	Version pulumi.StringPtrInput `pulumi:"version"`
+}
+
+func (TmpTkeTemplateTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeTemplateTemplate)(nil)).Elem()
+}
+
+func (i TmpTkeTemplateTemplateArgs) ToTmpTkeTemplateTemplateOutput() TmpTkeTemplateTemplateOutput {
+	return i.ToTmpTkeTemplateTemplateOutputWithContext(context.Background())
+}
+
+func (i TmpTkeTemplateTemplateArgs) ToTmpTkeTemplateTemplateOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateTemplateOutput)
+}
+
+func (i TmpTkeTemplateTemplateArgs) ToTmpTkeTemplateTemplatePtrOutput() TmpTkeTemplateTemplatePtrOutput {
+	return i.ToTmpTkeTemplateTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i TmpTkeTemplateTemplateArgs) ToTmpTkeTemplateTemplatePtrOutputWithContext(ctx context.Context) TmpTkeTemplateTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateTemplateOutput).ToTmpTkeTemplateTemplatePtrOutputWithContext(ctx)
+}
+
+// TmpTkeTemplateTemplatePtrInput is an input type that accepts TmpTkeTemplateTemplateArgs, TmpTkeTemplateTemplatePtr and TmpTkeTemplateTemplatePtrOutput values.
+// You can construct a concrete instance of `TmpTkeTemplateTemplatePtrInput` via:
+//
+//          TmpTkeTemplateTemplateArgs{...}
+//
+//  or:
+//
+//          nil
+type TmpTkeTemplateTemplatePtrInput interface {
+	pulumi.Input
+
+	ToTmpTkeTemplateTemplatePtrOutput() TmpTkeTemplateTemplatePtrOutput
+	ToTmpTkeTemplateTemplatePtrOutputWithContext(context.Context) TmpTkeTemplateTemplatePtrOutput
+}
+
+type tmpTkeTemplateTemplatePtrType TmpTkeTemplateTemplateArgs
+
+func TmpTkeTemplateTemplatePtr(v *TmpTkeTemplateTemplateArgs) TmpTkeTemplateTemplatePtrInput {
+	return (*tmpTkeTemplateTemplatePtrType)(v)
+}
+
+func (*tmpTkeTemplateTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeTemplateTemplate)(nil)).Elem()
+}
+
+func (i *tmpTkeTemplateTemplatePtrType) ToTmpTkeTemplateTemplatePtrOutput() TmpTkeTemplateTemplatePtrOutput {
+	return i.ToTmpTkeTemplateTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *tmpTkeTemplateTemplatePtrType) ToTmpTkeTemplateTemplatePtrOutputWithContext(ctx context.Context) TmpTkeTemplateTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateTemplatePtrOutput)
+}
+
+type TmpTkeTemplateTemplateOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeTemplateTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeTemplateTemplate)(nil)).Elem()
+}
+
+func (o TmpTkeTemplateTemplateOutput) ToTmpTkeTemplateTemplateOutput() TmpTkeTemplateTemplateOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplateOutput) ToTmpTkeTemplateTemplateOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplateOutput) ToTmpTkeTemplateTemplatePtrOutput() TmpTkeTemplateTemplatePtrOutput {
+	return o.ToTmpTkeTemplateTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o TmpTkeTemplateTemplateOutput) ToTmpTkeTemplateTemplatePtrOutputWithContext(ctx context.Context) TmpTkeTemplateTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TmpTkeTemplateTemplate) *TmpTkeTemplateTemplate {
+		return &v
+	}).(TmpTkeTemplateTemplatePtrOutput)
+}
+
+// Template description.
+func (o TmpTkeTemplateTemplateOutput) Describe() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplate) *string { return v.Describe }).(pulumi.StringPtrOutput)
+}
+
+// Whether the system-supplied default template is used for outgoing references.
+func (o TmpTkeTemplateTemplateOutput) IsDefault() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplate) *bool { return v.IsDefault }).(pulumi.BoolPtrOutput)
+}
+
+// Template dimensions, the following types are supported `instance` instance level, `cluster` cluster level.
+func (o TmpTkeTemplateTemplateOutput) Level() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplate) string { return v.Level }).(pulumi.StringOutput)
+}
+
+// Template name.
+func (o TmpTkeTemplateTemplateOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplate) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Effective when Level is a cluster, A list of PodMonitors rules in the template.
+func (o TmpTkeTemplateTemplateOutput) PodMonitors() TmpTkeTemplateTemplatePodMonitorArrayOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplate) []TmpTkeTemplateTemplatePodMonitor { return v.PodMonitors }).(TmpTkeTemplateTemplatePodMonitorArrayOutput)
+}
+
+// Effective when Level is a cluster, A list of RawJobs rules in the template.
+func (o TmpTkeTemplateTemplateOutput) RawJobs() TmpTkeTemplateTemplateRawJobArrayOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplate) []TmpTkeTemplateTemplateRawJob { return v.RawJobs }).(TmpTkeTemplateTemplateRawJobArrayOutput)
+}
+
+// Effective when Level is instance, A list of aggregation rules in the template.
+func (o TmpTkeTemplateTemplateOutput) RecordRules() TmpTkeTemplateTemplateRecordRuleArrayOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplate) []TmpTkeTemplateTemplateRecordRule { return v.RecordRules }).(TmpTkeTemplateTemplateRecordRuleArrayOutput)
+}
+
+// Effective when Level is a cluster, A list of ServiceMonitor rules in the template.
+func (o TmpTkeTemplateTemplateOutput) ServiceMonitors() TmpTkeTemplateTemplateServiceMonitorArrayOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplate) []TmpTkeTemplateTemplateServiceMonitor { return v.ServiceMonitors }).(TmpTkeTemplateTemplateServiceMonitorArrayOutput)
+}
+
+// The ID of the template, which is used for the outgoing reference.
+func (o TmpTkeTemplateTemplateOutput) TemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplate) *string { return v.TemplateId }).(pulumi.StringPtrOutput)
+}
+
+// Last updated, for outgoing references.
+func (o TmpTkeTemplateTemplateOutput) UpdateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplate) *string { return v.UpdateTime }).(pulumi.StringPtrOutput)
+}
+
+// Whether the system-supplied default template is used for outgoing references.
+func (o TmpTkeTemplateTemplateOutput) Version() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplate) *string { return v.Version }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeTemplateTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeTemplateTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpTkeTemplateTemplate)(nil)).Elem()
+}
+
+func (o TmpTkeTemplateTemplatePtrOutput) ToTmpTkeTemplateTemplatePtrOutput() TmpTkeTemplateTemplatePtrOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplatePtrOutput) ToTmpTkeTemplateTemplatePtrOutputWithContext(ctx context.Context) TmpTkeTemplateTemplatePtrOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplatePtrOutput) Elem() TmpTkeTemplateTemplateOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateTemplate) TmpTkeTemplateTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret TmpTkeTemplateTemplate
+		return ret
+	}).(TmpTkeTemplateTemplateOutput)
+}
+
+// Template description.
+func (o TmpTkeTemplateTemplatePtrOutput) Describe() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Describe
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether the system-supplied default template is used for outgoing references.
+func (o TmpTkeTemplateTemplatePtrOutput) IsDefault() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateTemplate) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsDefault
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Template dimensions, the following types are supported `instance` instance level, `cluster` cluster level.
+func (o TmpTkeTemplateTemplatePtrOutput) Level() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Level
+	}).(pulumi.StringPtrOutput)
+}
+
+// Template name.
+func (o TmpTkeTemplateTemplatePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Effective when Level is a cluster, A list of PodMonitors rules in the template.
+func (o TmpTkeTemplateTemplatePtrOutput) PodMonitors() TmpTkeTemplateTemplatePodMonitorArrayOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateTemplate) []TmpTkeTemplateTemplatePodMonitor {
+		if v == nil {
+			return nil
+		}
+		return v.PodMonitors
+	}).(TmpTkeTemplateTemplatePodMonitorArrayOutput)
+}
+
+// Effective when Level is a cluster, A list of RawJobs rules in the template.
+func (o TmpTkeTemplateTemplatePtrOutput) RawJobs() TmpTkeTemplateTemplateRawJobArrayOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateTemplate) []TmpTkeTemplateTemplateRawJob {
+		if v == nil {
+			return nil
+		}
+		return v.RawJobs
+	}).(TmpTkeTemplateTemplateRawJobArrayOutput)
+}
+
+// Effective when Level is instance, A list of aggregation rules in the template.
+func (o TmpTkeTemplateTemplatePtrOutput) RecordRules() TmpTkeTemplateTemplateRecordRuleArrayOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateTemplate) []TmpTkeTemplateTemplateRecordRule {
+		if v == nil {
+			return nil
+		}
+		return v.RecordRules
+	}).(TmpTkeTemplateTemplateRecordRuleArrayOutput)
+}
+
+// Effective when Level is a cluster, A list of ServiceMonitor rules in the template.
+func (o TmpTkeTemplateTemplatePtrOutput) ServiceMonitors() TmpTkeTemplateTemplateServiceMonitorArrayOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateTemplate) []TmpTkeTemplateTemplateServiceMonitor {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceMonitors
+	}).(TmpTkeTemplateTemplateServiceMonitorArrayOutput)
+}
+
+// The ID of the template, which is used for the outgoing reference.
+func (o TmpTkeTemplateTemplatePtrOutput) TemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TemplateId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Last updated, for outgoing references.
+func (o TmpTkeTemplateTemplatePtrOutput) UpdateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UpdateTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether the system-supplied default template is used for outgoing references.
+func (o TmpTkeTemplateTemplatePtrOutput) Version() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpTkeTemplateTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Version
+	}).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeTemplateTemplatePodMonitor struct {
+	// Config.
+	Config string `pulumi:"config"`
+	// Name.
+	Name string `pulumi:"name"`
+	// Used for the argument, if the configuration comes to the template, the template id.
+	TemplateId *string `pulumi:"templateId"`
+}
+
+// TmpTkeTemplateTemplatePodMonitorInput is an input type that accepts TmpTkeTemplateTemplatePodMonitorArgs and TmpTkeTemplateTemplatePodMonitorOutput values.
+// You can construct a concrete instance of `TmpTkeTemplateTemplatePodMonitorInput` via:
+//
+//          TmpTkeTemplateTemplatePodMonitorArgs{...}
+type TmpTkeTemplateTemplatePodMonitorInput interface {
+	pulumi.Input
+
+	ToTmpTkeTemplateTemplatePodMonitorOutput() TmpTkeTemplateTemplatePodMonitorOutput
+	ToTmpTkeTemplateTemplatePodMonitorOutputWithContext(context.Context) TmpTkeTemplateTemplatePodMonitorOutput
+}
+
+type TmpTkeTemplateTemplatePodMonitorArgs struct {
+	// Config.
+	Config pulumi.StringInput `pulumi:"config"`
+	// Name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Used for the argument, if the configuration comes to the template, the template id.
+	TemplateId pulumi.StringPtrInput `pulumi:"templateId"`
+}
+
+func (TmpTkeTemplateTemplatePodMonitorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeTemplateTemplatePodMonitor)(nil)).Elem()
+}
+
+func (i TmpTkeTemplateTemplatePodMonitorArgs) ToTmpTkeTemplateTemplatePodMonitorOutput() TmpTkeTemplateTemplatePodMonitorOutput {
+	return i.ToTmpTkeTemplateTemplatePodMonitorOutputWithContext(context.Background())
+}
+
+func (i TmpTkeTemplateTemplatePodMonitorArgs) ToTmpTkeTemplateTemplatePodMonitorOutputWithContext(ctx context.Context) TmpTkeTemplateTemplatePodMonitorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateTemplatePodMonitorOutput)
+}
+
+// TmpTkeTemplateTemplatePodMonitorArrayInput is an input type that accepts TmpTkeTemplateTemplatePodMonitorArray and TmpTkeTemplateTemplatePodMonitorArrayOutput values.
+// You can construct a concrete instance of `TmpTkeTemplateTemplatePodMonitorArrayInput` via:
+//
+//          TmpTkeTemplateTemplatePodMonitorArray{ TmpTkeTemplateTemplatePodMonitorArgs{...} }
+type TmpTkeTemplateTemplatePodMonitorArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeTemplateTemplatePodMonitorArrayOutput() TmpTkeTemplateTemplatePodMonitorArrayOutput
+	ToTmpTkeTemplateTemplatePodMonitorArrayOutputWithContext(context.Context) TmpTkeTemplateTemplatePodMonitorArrayOutput
+}
+
+type TmpTkeTemplateTemplatePodMonitorArray []TmpTkeTemplateTemplatePodMonitorInput
+
+func (TmpTkeTemplateTemplatePodMonitorArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeTemplateTemplatePodMonitor)(nil)).Elem()
+}
+
+func (i TmpTkeTemplateTemplatePodMonitorArray) ToTmpTkeTemplateTemplatePodMonitorArrayOutput() TmpTkeTemplateTemplatePodMonitorArrayOutput {
+	return i.ToTmpTkeTemplateTemplatePodMonitorArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeTemplateTemplatePodMonitorArray) ToTmpTkeTemplateTemplatePodMonitorArrayOutputWithContext(ctx context.Context) TmpTkeTemplateTemplatePodMonitorArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateTemplatePodMonitorArrayOutput)
+}
+
+type TmpTkeTemplateTemplatePodMonitorOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeTemplateTemplatePodMonitorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeTemplateTemplatePodMonitor)(nil)).Elem()
+}
+
+func (o TmpTkeTemplateTemplatePodMonitorOutput) ToTmpTkeTemplateTemplatePodMonitorOutput() TmpTkeTemplateTemplatePodMonitorOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplatePodMonitorOutput) ToTmpTkeTemplateTemplatePodMonitorOutputWithContext(ctx context.Context) TmpTkeTemplateTemplatePodMonitorOutput {
+	return o
+}
+
+// Config.
+func (o TmpTkeTemplateTemplatePodMonitorOutput) Config() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplatePodMonitor) string { return v.Config }).(pulumi.StringOutput)
+}
+
+// Name.
+func (o TmpTkeTemplateTemplatePodMonitorOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplatePodMonitor) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Used for the argument, if the configuration comes to the template, the template id.
+func (o TmpTkeTemplateTemplatePodMonitorOutput) TemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplatePodMonitor) *string { return v.TemplateId }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeTemplateTemplatePodMonitorArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeTemplateTemplatePodMonitorArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeTemplateTemplatePodMonitor)(nil)).Elem()
+}
+
+func (o TmpTkeTemplateTemplatePodMonitorArrayOutput) ToTmpTkeTemplateTemplatePodMonitorArrayOutput() TmpTkeTemplateTemplatePodMonitorArrayOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplatePodMonitorArrayOutput) ToTmpTkeTemplateTemplatePodMonitorArrayOutputWithContext(ctx context.Context) TmpTkeTemplateTemplatePodMonitorArrayOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplatePodMonitorArrayOutput) Index(i pulumi.IntInput) TmpTkeTemplateTemplatePodMonitorOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeTemplateTemplatePodMonitor {
+		return vs[0].([]TmpTkeTemplateTemplatePodMonitor)[vs[1].(int)]
+	}).(TmpTkeTemplateTemplatePodMonitorOutput)
+}
+
+type TmpTkeTemplateTemplateRawJob struct {
+	// Config.
+	Config string `pulumi:"config"`
+	// Name.
+	Name string `pulumi:"name"`
+	// Used for the argument, if the configuration comes to the template, the template id.
+	TemplateId *string `pulumi:"templateId"`
+}
+
+// TmpTkeTemplateTemplateRawJobInput is an input type that accepts TmpTkeTemplateTemplateRawJobArgs and TmpTkeTemplateTemplateRawJobOutput values.
+// You can construct a concrete instance of `TmpTkeTemplateTemplateRawJobInput` via:
+//
+//          TmpTkeTemplateTemplateRawJobArgs{...}
+type TmpTkeTemplateTemplateRawJobInput interface {
+	pulumi.Input
+
+	ToTmpTkeTemplateTemplateRawJobOutput() TmpTkeTemplateTemplateRawJobOutput
+	ToTmpTkeTemplateTemplateRawJobOutputWithContext(context.Context) TmpTkeTemplateTemplateRawJobOutput
+}
+
+type TmpTkeTemplateTemplateRawJobArgs struct {
+	// Config.
+	Config pulumi.StringInput `pulumi:"config"`
+	// Name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Used for the argument, if the configuration comes to the template, the template id.
+	TemplateId pulumi.StringPtrInput `pulumi:"templateId"`
+}
+
+func (TmpTkeTemplateTemplateRawJobArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeTemplateTemplateRawJob)(nil)).Elem()
+}
+
+func (i TmpTkeTemplateTemplateRawJobArgs) ToTmpTkeTemplateTemplateRawJobOutput() TmpTkeTemplateTemplateRawJobOutput {
+	return i.ToTmpTkeTemplateTemplateRawJobOutputWithContext(context.Background())
+}
+
+func (i TmpTkeTemplateTemplateRawJobArgs) ToTmpTkeTemplateTemplateRawJobOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateRawJobOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateTemplateRawJobOutput)
+}
+
+// TmpTkeTemplateTemplateRawJobArrayInput is an input type that accepts TmpTkeTemplateTemplateRawJobArray and TmpTkeTemplateTemplateRawJobArrayOutput values.
+// You can construct a concrete instance of `TmpTkeTemplateTemplateRawJobArrayInput` via:
+//
+//          TmpTkeTemplateTemplateRawJobArray{ TmpTkeTemplateTemplateRawJobArgs{...} }
+type TmpTkeTemplateTemplateRawJobArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeTemplateTemplateRawJobArrayOutput() TmpTkeTemplateTemplateRawJobArrayOutput
+	ToTmpTkeTemplateTemplateRawJobArrayOutputWithContext(context.Context) TmpTkeTemplateTemplateRawJobArrayOutput
+}
+
+type TmpTkeTemplateTemplateRawJobArray []TmpTkeTemplateTemplateRawJobInput
+
+func (TmpTkeTemplateTemplateRawJobArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeTemplateTemplateRawJob)(nil)).Elem()
+}
+
+func (i TmpTkeTemplateTemplateRawJobArray) ToTmpTkeTemplateTemplateRawJobArrayOutput() TmpTkeTemplateTemplateRawJobArrayOutput {
+	return i.ToTmpTkeTemplateTemplateRawJobArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeTemplateTemplateRawJobArray) ToTmpTkeTemplateTemplateRawJobArrayOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateRawJobArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateTemplateRawJobArrayOutput)
+}
+
+type TmpTkeTemplateTemplateRawJobOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeTemplateTemplateRawJobOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeTemplateTemplateRawJob)(nil)).Elem()
+}
+
+func (o TmpTkeTemplateTemplateRawJobOutput) ToTmpTkeTemplateTemplateRawJobOutput() TmpTkeTemplateTemplateRawJobOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplateRawJobOutput) ToTmpTkeTemplateTemplateRawJobOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateRawJobOutput {
+	return o
+}
+
+// Config.
+func (o TmpTkeTemplateTemplateRawJobOutput) Config() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplateRawJob) string { return v.Config }).(pulumi.StringOutput)
+}
+
+// Name.
+func (o TmpTkeTemplateTemplateRawJobOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplateRawJob) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Used for the argument, if the configuration comes to the template, the template id.
+func (o TmpTkeTemplateTemplateRawJobOutput) TemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplateRawJob) *string { return v.TemplateId }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeTemplateTemplateRawJobArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeTemplateTemplateRawJobArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeTemplateTemplateRawJob)(nil)).Elem()
+}
+
+func (o TmpTkeTemplateTemplateRawJobArrayOutput) ToTmpTkeTemplateTemplateRawJobArrayOutput() TmpTkeTemplateTemplateRawJobArrayOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplateRawJobArrayOutput) ToTmpTkeTemplateTemplateRawJobArrayOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateRawJobArrayOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplateRawJobArrayOutput) Index(i pulumi.IntInput) TmpTkeTemplateTemplateRawJobOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeTemplateTemplateRawJob {
+		return vs[0].([]TmpTkeTemplateTemplateRawJob)[vs[1].(int)]
+	}).(TmpTkeTemplateTemplateRawJobOutput)
+}
+
+type TmpTkeTemplateTemplateRecordRule struct {
+	// Config.
+	Config string `pulumi:"config"`
+	// Name.
+	Name string `pulumi:"name"`
+	// Used for the argument, if the configuration comes to the template, the template id.
+	TemplateId *string `pulumi:"templateId"`
+}
+
+// TmpTkeTemplateTemplateRecordRuleInput is an input type that accepts TmpTkeTemplateTemplateRecordRuleArgs and TmpTkeTemplateTemplateRecordRuleOutput values.
+// You can construct a concrete instance of `TmpTkeTemplateTemplateRecordRuleInput` via:
+//
+//          TmpTkeTemplateTemplateRecordRuleArgs{...}
+type TmpTkeTemplateTemplateRecordRuleInput interface {
+	pulumi.Input
+
+	ToTmpTkeTemplateTemplateRecordRuleOutput() TmpTkeTemplateTemplateRecordRuleOutput
+	ToTmpTkeTemplateTemplateRecordRuleOutputWithContext(context.Context) TmpTkeTemplateTemplateRecordRuleOutput
+}
+
+type TmpTkeTemplateTemplateRecordRuleArgs struct {
+	// Config.
+	Config pulumi.StringInput `pulumi:"config"`
+	// Name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Used for the argument, if the configuration comes to the template, the template id.
+	TemplateId pulumi.StringPtrInput `pulumi:"templateId"`
+}
+
+func (TmpTkeTemplateTemplateRecordRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeTemplateTemplateRecordRule)(nil)).Elem()
+}
+
+func (i TmpTkeTemplateTemplateRecordRuleArgs) ToTmpTkeTemplateTemplateRecordRuleOutput() TmpTkeTemplateTemplateRecordRuleOutput {
+	return i.ToTmpTkeTemplateTemplateRecordRuleOutputWithContext(context.Background())
+}
+
+func (i TmpTkeTemplateTemplateRecordRuleArgs) ToTmpTkeTemplateTemplateRecordRuleOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateRecordRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateTemplateRecordRuleOutput)
+}
+
+// TmpTkeTemplateTemplateRecordRuleArrayInput is an input type that accepts TmpTkeTemplateTemplateRecordRuleArray and TmpTkeTemplateTemplateRecordRuleArrayOutput values.
+// You can construct a concrete instance of `TmpTkeTemplateTemplateRecordRuleArrayInput` via:
+//
+//          TmpTkeTemplateTemplateRecordRuleArray{ TmpTkeTemplateTemplateRecordRuleArgs{...} }
+type TmpTkeTemplateTemplateRecordRuleArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeTemplateTemplateRecordRuleArrayOutput() TmpTkeTemplateTemplateRecordRuleArrayOutput
+	ToTmpTkeTemplateTemplateRecordRuleArrayOutputWithContext(context.Context) TmpTkeTemplateTemplateRecordRuleArrayOutput
+}
+
+type TmpTkeTemplateTemplateRecordRuleArray []TmpTkeTemplateTemplateRecordRuleInput
+
+func (TmpTkeTemplateTemplateRecordRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeTemplateTemplateRecordRule)(nil)).Elem()
+}
+
+func (i TmpTkeTemplateTemplateRecordRuleArray) ToTmpTkeTemplateTemplateRecordRuleArrayOutput() TmpTkeTemplateTemplateRecordRuleArrayOutput {
+	return i.ToTmpTkeTemplateTemplateRecordRuleArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeTemplateTemplateRecordRuleArray) ToTmpTkeTemplateTemplateRecordRuleArrayOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateRecordRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateTemplateRecordRuleArrayOutput)
+}
+
+type TmpTkeTemplateTemplateRecordRuleOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeTemplateTemplateRecordRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeTemplateTemplateRecordRule)(nil)).Elem()
+}
+
+func (o TmpTkeTemplateTemplateRecordRuleOutput) ToTmpTkeTemplateTemplateRecordRuleOutput() TmpTkeTemplateTemplateRecordRuleOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplateRecordRuleOutput) ToTmpTkeTemplateTemplateRecordRuleOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateRecordRuleOutput {
+	return o
+}
+
+// Config.
+func (o TmpTkeTemplateTemplateRecordRuleOutput) Config() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplateRecordRule) string { return v.Config }).(pulumi.StringOutput)
+}
+
+// Name.
+func (o TmpTkeTemplateTemplateRecordRuleOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplateRecordRule) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Used for the argument, if the configuration comes to the template, the template id.
+func (o TmpTkeTemplateTemplateRecordRuleOutput) TemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplateRecordRule) *string { return v.TemplateId }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeTemplateTemplateRecordRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeTemplateTemplateRecordRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeTemplateTemplateRecordRule)(nil)).Elem()
+}
+
+func (o TmpTkeTemplateTemplateRecordRuleArrayOutput) ToTmpTkeTemplateTemplateRecordRuleArrayOutput() TmpTkeTemplateTemplateRecordRuleArrayOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplateRecordRuleArrayOutput) ToTmpTkeTemplateTemplateRecordRuleArrayOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateRecordRuleArrayOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplateRecordRuleArrayOutput) Index(i pulumi.IntInput) TmpTkeTemplateTemplateRecordRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeTemplateTemplateRecordRule {
+		return vs[0].([]TmpTkeTemplateTemplateRecordRule)[vs[1].(int)]
+	}).(TmpTkeTemplateTemplateRecordRuleOutput)
+}
+
+type TmpTkeTemplateTemplateServiceMonitor struct {
+	// Config.
+	Config string `pulumi:"config"`
+	// Name.
+	Name string `pulumi:"name"`
+	// Used for the argument, if the configuration comes to the template, the template id.
+	TemplateId *string `pulumi:"templateId"`
+}
+
+// TmpTkeTemplateTemplateServiceMonitorInput is an input type that accepts TmpTkeTemplateTemplateServiceMonitorArgs and TmpTkeTemplateTemplateServiceMonitorOutput values.
+// You can construct a concrete instance of `TmpTkeTemplateTemplateServiceMonitorInput` via:
+//
+//          TmpTkeTemplateTemplateServiceMonitorArgs{...}
+type TmpTkeTemplateTemplateServiceMonitorInput interface {
+	pulumi.Input
+
+	ToTmpTkeTemplateTemplateServiceMonitorOutput() TmpTkeTemplateTemplateServiceMonitorOutput
+	ToTmpTkeTemplateTemplateServiceMonitorOutputWithContext(context.Context) TmpTkeTemplateTemplateServiceMonitorOutput
+}
+
+type TmpTkeTemplateTemplateServiceMonitorArgs struct {
+	// Config.
+	Config pulumi.StringInput `pulumi:"config"`
+	// Name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Used for the argument, if the configuration comes to the template, the template id.
+	TemplateId pulumi.StringPtrInput `pulumi:"templateId"`
+}
+
+func (TmpTkeTemplateTemplateServiceMonitorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeTemplateTemplateServiceMonitor)(nil)).Elem()
+}
+
+func (i TmpTkeTemplateTemplateServiceMonitorArgs) ToTmpTkeTemplateTemplateServiceMonitorOutput() TmpTkeTemplateTemplateServiceMonitorOutput {
+	return i.ToTmpTkeTemplateTemplateServiceMonitorOutputWithContext(context.Background())
+}
+
+func (i TmpTkeTemplateTemplateServiceMonitorArgs) ToTmpTkeTemplateTemplateServiceMonitorOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateServiceMonitorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateTemplateServiceMonitorOutput)
+}
+
+// TmpTkeTemplateTemplateServiceMonitorArrayInput is an input type that accepts TmpTkeTemplateTemplateServiceMonitorArray and TmpTkeTemplateTemplateServiceMonitorArrayOutput values.
+// You can construct a concrete instance of `TmpTkeTemplateTemplateServiceMonitorArrayInput` via:
+//
+//          TmpTkeTemplateTemplateServiceMonitorArray{ TmpTkeTemplateTemplateServiceMonitorArgs{...} }
+type TmpTkeTemplateTemplateServiceMonitorArrayInput interface {
+	pulumi.Input
+
+	ToTmpTkeTemplateTemplateServiceMonitorArrayOutput() TmpTkeTemplateTemplateServiceMonitorArrayOutput
+	ToTmpTkeTemplateTemplateServiceMonitorArrayOutputWithContext(context.Context) TmpTkeTemplateTemplateServiceMonitorArrayOutput
+}
+
+type TmpTkeTemplateTemplateServiceMonitorArray []TmpTkeTemplateTemplateServiceMonitorInput
+
+func (TmpTkeTemplateTemplateServiceMonitorArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeTemplateTemplateServiceMonitor)(nil)).Elem()
+}
+
+func (i TmpTkeTemplateTemplateServiceMonitorArray) ToTmpTkeTemplateTemplateServiceMonitorArrayOutput() TmpTkeTemplateTemplateServiceMonitorArrayOutput {
+	return i.ToTmpTkeTemplateTemplateServiceMonitorArrayOutputWithContext(context.Background())
+}
+
+func (i TmpTkeTemplateTemplateServiceMonitorArray) ToTmpTkeTemplateTemplateServiceMonitorArrayOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateServiceMonitorArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpTkeTemplateTemplateServiceMonitorArrayOutput)
+}
+
+type TmpTkeTemplateTemplateServiceMonitorOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeTemplateTemplateServiceMonitorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpTkeTemplateTemplateServiceMonitor)(nil)).Elem()
+}
+
+func (o TmpTkeTemplateTemplateServiceMonitorOutput) ToTmpTkeTemplateTemplateServiceMonitorOutput() TmpTkeTemplateTemplateServiceMonitorOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplateServiceMonitorOutput) ToTmpTkeTemplateTemplateServiceMonitorOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateServiceMonitorOutput {
+	return o
+}
+
+// Config.
+func (o TmpTkeTemplateTemplateServiceMonitorOutput) Config() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplateServiceMonitor) string { return v.Config }).(pulumi.StringOutput)
+}
+
+// Name.
+func (o TmpTkeTemplateTemplateServiceMonitorOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplateServiceMonitor) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Used for the argument, if the configuration comes to the template, the template id.
+func (o TmpTkeTemplateTemplateServiceMonitorOutput) TemplateId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpTkeTemplateTemplateServiceMonitor) *string { return v.TemplateId }).(pulumi.StringPtrOutput)
+}
+
+type TmpTkeTemplateTemplateServiceMonitorArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpTkeTemplateTemplateServiceMonitorArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpTkeTemplateTemplateServiceMonitor)(nil)).Elem()
+}
+
+func (o TmpTkeTemplateTemplateServiceMonitorArrayOutput) ToTmpTkeTemplateTemplateServiceMonitorArrayOutput() TmpTkeTemplateTemplateServiceMonitorArrayOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplateServiceMonitorArrayOutput) ToTmpTkeTemplateTemplateServiceMonitorArrayOutputWithContext(ctx context.Context) TmpTkeTemplateTemplateServiceMonitorArrayOutput {
+	return o
+}
+
+func (o TmpTkeTemplateTemplateServiceMonitorArrayOutput) Index(i pulumi.IntInput) TmpTkeTemplateTemplateServiceMonitorOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpTkeTemplateTemplateServiceMonitor {
+		return vs[0].([]TmpTkeTemplateTemplateServiceMonitor)[vs[1].(int)]
+	}).(TmpTkeTemplateTemplateServiceMonitorOutput)
+}
+
+type GetBindingObjectsList struct {
+	// Represents a collection of dimensions of an object instance, json format.
+	DimensionsJson string `pulumi:"dimensionsJson"`
+	// Whether the object is shielded or not, `0` means unshielded and `1` means shielded.
+	IsShielded int `pulumi:"isShielded"`
+	// The region where the object is located.
+	Region string `pulumi:"region"`
+	// Object unique ID.
+	UniqueId string `pulumi:"uniqueId"`
+}
+
+// GetBindingObjectsListInput is an input type that accepts GetBindingObjectsListArgs and GetBindingObjectsListOutput values.
+// You can construct a concrete instance of `GetBindingObjectsListInput` via:
+//
+//          GetBindingObjectsListArgs{...}
+type GetBindingObjectsListInput interface {
+	pulumi.Input
+
+	ToGetBindingObjectsListOutput() GetBindingObjectsListOutput
+	ToGetBindingObjectsListOutputWithContext(context.Context) GetBindingObjectsListOutput
+}
+
+type GetBindingObjectsListArgs struct {
+	// Represents a collection of dimensions of an object instance, json format.
+	DimensionsJson pulumi.StringInput `pulumi:"dimensionsJson"`
+	// Whether the object is shielded or not, `0` means unshielded and `1` means shielded.
+	IsShielded pulumi.IntInput `pulumi:"isShielded"`
+	// The region where the object is located.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Object unique ID.
+	UniqueId pulumi.StringInput `pulumi:"uniqueId"`
+}
+
+func (GetBindingObjectsListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBindingObjectsList)(nil)).Elem()
+}
+
+func (i GetBindingObjectsListArgs) ToGetBindingObjectsListOutput() GetBindingObjectsListOutput {
+	return i.ToGetBindingObjectsListOutputWithContext(context.Background())
+}
+
+func (i GetBindingObjectsListArgs) ToGetBindingObjectsListOutputWithContext(ctx context.Context) GetBindingObjectsListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBindingObjectsListOutput)
+}
+
+// GetBindingObjectsListArrayInput is an input type that accepts GetBindingObjectsListArray and GetBindingObjectsListArrayOutput values.
+// You can construct a concrete instance of `GetBindingObjectsListArrayInput` via:
+//
+//          GetBindingObjectsListArray{ GetBindingObjectsListArgs{...} }
+type GetBindingObjectsListArrayInput interface {
+	pulumi.Input
+
+	ToGetBindingObjectsListArrayOutput() GetBindingObjectsListArrayOutput
+	ToGetBindingObjectsListArrayOutputWithContext(context.Context) GetBindingObjectsListArrayOutput
+}
+
+type GetBindingObjectsListArray []GetBindingObjectsListInput
+
+func (GetBindingObjectsListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBindingObjectsList)(nil)).Elem()
+}
+
+func (i GetBindingObjectsListArray) ToGetBindingObjectsListArrayOutput() GetBindingObjectsListArrayOutput {
+	return i.ToGetBindingObjectsListArrayOutputWithContext(context.Background())
+}
+
+func (i GetBindingObjectsListArray) ToGetBindingObjectsListArrayOutputWithContext(ctx context.Context) GetBindingObjectsListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBindingObjectsListArrayOutput)
+}
+
+type GetBindingObjectsListOutput struct{ *pulumi.OutputState }
+
+func (GetBindingObjectsListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBindingObjectsList)(nil)).Elem()
+}
+
+func (o GetBindingObjectsListOutput) ToGetBindingObjectsListOutput() GetBindingObjectsListOutput {
+	return o
+}
+
+func (o GetBindingObjectsListOutput) ToGetBindingObjectsListOutputWithContext(ctx context.Context) GetBindingObjectsListOutput {
+	return o
+}
+
+// Represents a collection of dimensions of an object instance, json format.
+func (o GetBindingObjectsListOutput) DimensionsJson() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBindingObjectsList) string { return v.DimensionsJson }).(pulumi.StringOutput)
+}
+
+// Whether the object is shielded or not, `0` means unshielded and `1` means shielded.
+func (o GetBindingObjectsListOutput) IsShielded() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBindingObjectsList) int { return v.IsShielded }).(pulumi.IntOutput)
+}
+
+// The region where the object is located.
+func (o GetBindingObjectsListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBindingObjectsList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Object unique ID.
+func (o GetBindingObjectsListOutput) UniqueId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBindingObjectsList) string { return v.UniqueId }).(pulumi.StringOutput)
+}
+
+type GetBindingObjectsListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBindingObjectsListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBindingObjectsList)(nil)).Elem()
+}
+
+func (o GetBindingObjectsListArrayOutput) ToGetBindingObjectsListArrayOutput() GetBindingObjectsListArrayOutput {
+	return o
+}
+
+func (o GetBindingObjectsListArrayOutput) ToGetBindingObjectsListArrayOutputWithContext(ctx context.Context) GetBindingObjectsListArrayOutput {
+	return o
+}
+
+func (o GetBindingObjectsListArrayOutput) Index(i pulumi.IntInput) GetBindingObjectsListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBindingObjectsList {
+		return vs[0].([]GetBindingObjectsList)[vs[1].(int)]
+	}).(GetBindingObjectsListOutput)
+}
+
+type GetDataDimension struct {
+	// Instance dimension name, eg: `InstanceId` for cvm.
+	Name string `pulumi:"name"`
+	// Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+	Value string `pulumi:"value"`
+}
+
+// GetDataDimensionInput is an input type that accepts GetDataDimensionArgs and GetDataDimensionOutput values.
+// You can construct a concrete instance of `GetDataDimensionInput` via:
+//
+//          GetDataDimensionArgs{...}
+type GetDataDimensionInput interface {
+	pulumi.Input
+
+	ToGetDataDimensionOutput() GetDataDimensionOutput
+	ToGetDataDimensionOutputWithContext(context.Context) GetDataDimensionOutput
+}
+
+type GetDataDimensionArgs struct {
+	// Instance dimension name, eg: `InstanceId` for cvm.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetDataDimensionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDataDimension)(nil)).Elem()
+}
+
+func (i GetDataDimensionArgs) ToGetDataDimensionOutput() GetDataDimensionOutput {
+	return i.ToGetDataDimensionOutputWithContext(context.Background())
+}
+
+func (i GetDataDimensionArgs) ToGetDataDimensionOutputWithContext(ctx context.Context) GetDataDimensionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDataDimensionOutput)
+}
+
+// GetDataDimensionArrayInput is an input type that accepts GetDataDimensionArray and GetDataDimensionArrayOutput values.
+// You can construct a concrete instance of `GetDataDimensionArrayInput` via:
+//
+//          GetDataDimensionArray{ GetDataDimensionArgs{...} }
+type GetDataDimensionArrayInput interface {
+	pulumi.Input
+
+	ToGetDataDimensionArrayOutput() GetDataDimensionArrayOutput
+	ToGetDataDimensionArrayOutputWithContext(context.Context) GetDataDimensionArrayOutput
+}
+
+type GetDataDimensionArray []GetDataDimensionInput
+
+func (GetDataDimensionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDataDimension)(nil)).Elem()
+}
+
+func (i GetDataDimensionArray) ToGetDataDimensionArrayOutput() GetDataDimensionArrayOutput {
+	return i.ToGetDataDimensionArrayOutputWithContext(context.Background())
+}
+
+func (i GetDataDimensionArray) ToGetDataDimensionArrayOutputWithContext(ctx context.Context) GetDataDimensionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDataDimensionArrayOutput)
+}
+
+type GetDataDimensionOutput struct{ *pulumi.OutputState }
+
+func (GetDataDimensionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDataDimension)(nil)).Elem()
+}
+
+func (o GetDataDimensionOutput) ToGetDataDimensionOutput() GetDataDimensionOutput {
+	return o
+}
+
+func (o GetDataDimensionOutput) ToGetDataDimensionOutputWithContext(ctx context.Context) GetDataDimensionOutput {
+	return o
+}
+
+// Instance dimension name, eg: `InstanceId` for cvm.
+func (o GetDataDimensionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDataDimension) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+func (o GetDataDimensionOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDataDimension) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetDataDimensionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDataDimensionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDataDimension)(nil)).Elem()
+}
+
+func (o GetDataDimensionArrayOutput) ToGetDataDimensionArrayOutput() GetDataDimensionArrayOutput {
+	return o
+}
+
+func (o GetDataDimensionArrayOutput) ToGetDataDimensionArrayOutputWithContext(ctx context.Context) GetDataDimensionArrayOutput {
+	return o
+}
+
+func (o GetDataDimensionArrayOutput) Index(i pulumi.IntInput) GetDataDimensionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDataDimension {
+		return vs[0].([]GetDataDimension)[vs[1].(int)]
+	}).(GetDataDimensionOutput)
+}
+
+type GetDataList struct {
+	// Statistical timestamp.
+	Timestamp int `pulumi:"timestamp"`
+	// Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+	Value float64 `pulumi:"value"`
+}
+
+// GetDataListInput is an input type that accepts GetDataListArgs and GetDataListOutput values.
+// You can construct a concrete instance of `GetDataListInput` via:
+//
+//          GetDataListArgs{...}
+type GetDataListInput interface {
+	pulumi.Input
+
+	ToGetDataListOutput() GetDataListOutput
+	ToGetDataListOutputWithContext(context.Context) GetDataListOutput
+}
+
+type GetDataListArgs struct {
+	// Statistical timestamp.
+	Timestamp pulumi.IntInput `pulumi:"timestamp"`
+	// Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+	Value pulumi.Float64Input `pulumi:"value"`
+}
+
+func (GetDataListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDataList)(nil)).Elem()
+}
+
+func (i GetDataListArgs) ToGetDataListOutput() GetDataListOutput {
+	return i.ToGetDataListOutputWithContext(context.Background())
+}
+
+func (i GetDataListArgs) ToGetDataListOutputWithContext(ctx context.Context) GetDataListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDataListOutput)
+}
+
+// GetDataListArrayInput is an input type that accepts GetDataListArray and GetDataListArrayOutput values.
+// You can construct a concrete instance of `GetDataListArrayInput` via:
+//
+//          GetDataListArray{ GetDataListArgs{...} }
+type GetDataListArrayInput interface {
+	pulumi.Input
+
+	ToGetDataListArrayOutput() GetDataListArrayOutput
+	ToGetDataListArrayOutputWithContext(context.Context) GetDataListArrayOutput
+}
+
+type GetDataListArray []GetDataListInput
+
+func (GetDataListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDataList)(nil)).Elem()
+}
+
+func (i GetDataListArray) ToGetDataListArrayOutput() GetDataListArrayOutput {
+	return i.ToGetDataListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDataListArray) ToGetDataListArrayOutputWithContext(ctx context.Context) GetDataListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDataListArrayOutput)
+}
+
+type GetDataListOutput struct{ *pulumi.OutputState }
+
+func (GetDataListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDataList)(nil)).Elem()
+}
+
+func (o GetDataListOutput) ToGetDataListOutput() GetDataListOutput {
+	return o
+}
+
+func (o GetDataListOutput) ToGetDataListOutputWithContext(ctx context.Context) GetDataListOutput {
+	return o
+}
+
+// Statistical timestamp.
+func (o GetDataListOutput) Timestamp() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDataList) int { return v.Timestamp }).(pulumi.IntOutput)
+}
+
+// Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+func (o GetDataListOutput) Value() pulumi.Float64Output {
+	return o.ApplyT(func(v GetDataList) float64 { return v.Value }).(pulumi.Float64Output)
+}
+
+type GetDataListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDataListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDataList)(nil)).Elem()
+}
+
+func (o GetDataListArrayOutput) ToGetDataListArrayOutput() GetDataListArrayOutput {
+	return o
+}
+
+func (o GetDataListArrayOutput) ToGetDataListArrayOutputWithContext(ctx context.Context) GetDataListArrayOutput {
+	return o
+}
+
+func (o GetDataListArrayOutput) Index(i pulumi.IntInput) GetDataListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDataList {
+		return vs[0].([]GetDataList)[vs[1].(int)]
+	}).(GetDataListOutput)
+}
+
+type GetPolicyConditionsList struct {
+	// A list of event condition metrics. Each element contains the following attributes:
+	EventMetrics []GetPolicyConditionsListEventMetric `pulumi:"eventMetrics"`
+	// Whether to support multi region.
+	IsSupportMultiRegion bool `pulumi:"isSupportMultiRegion"`
+	// A list of event condition metrics. Each element contains the following attributes:
+	Metrics []GetPolicyConditionsListMetric `pulumi:"metrics"`
+	// Name of the policy name, support partial matching, eg:`Cloud Virtual Machine`,`Virtual`,`Cloud Load Banlancer-Private CLB Listener`.
+	Name string `pulumi:"name"`
+	// Policy view name, eg:`cvmDevice`,`BANDWIDTHPACKAGE`, refer to `data.tencentcloud_monitor_policy_conditions(policy_view_name)`.
+	PolicyViewName string `pulumi:"policyViewName"`
+	// Support regions of this policy view.
+	SupportRegions []string `pulumi:"supportRegions"`
+}
+
+// GetPolicyConditionsListInput is an input type that accepts GetPolicyConditionsListArgs and GetPolicyConditionsListOutput values.
+// You can construct a concrete instance of `GetPolicyConditionsListInput` via:
+//
+//          GetPolicyConditionsListArgs{...}
+type GetPolicyConditionsListInput interface {
+	pulumi.Input
+
+	ToGetPolicyConditionsListOutput() GetPolicyConditionsListOutput
+	ToGetPolicyConditionsListOutputWithContext(context.Context) GetPolicyConditionsListOutput
+}
+
+type GetPolicyConditionsListArgs struct {
+	// A list of event condition metrics. Each element contains the following attributes:
+	EventMetrics GetPolicyConditionsListEventMetricArrayInput `pulumi:"eventMetrics"`
+	// Whether to support multi region.
+	IsSupportMultiRegion pulumi.BoolInput `pulumi:"isSupportMultiRegion"`
+	// A list of event condition metrics. Each element contains the following attributes:
+	Metrics GetPolicyConditionsListMetricArrayInput `pulumi:"metrics"`
+	// Name of the policy name, support partial matching, eg:`Cloud Virtual Machine`,`Virtual`,`Cloud Load Banlancer-Private CLB Listener`.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Policy view name, eg:`cvmDevice`,`BANDWIDTHPACKAGE`, refer to `data.tencentcloud_monitor_policy_conditions(policy_view_name)`.
+	PolicyViewName pulumi.StringInput `pulumi:"policyViewName"`
+	// Support regions of this policy view.
+	SupportRegions pulumi.StringArrayInput `pulumi:"supportRegions"`
+}
+
+func (GetPolicyConditionsListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyConditionsList)(nil)).Elem()
+}
+
+func (i GetPolicyConditionsListArgs) ToGetPolicyConditionsListOutput() GetPolicyConditionsListOutput {
+	return i.ToGetPolicyConditionsListOutputWithContext(context.Background())
+}
+
+func (i GetPolicyConditionsListArgs) ToGetPolicyConditionsListOutputWithContext(ctx context.Context) GetPolicyConditionsListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyConditionsListOutput)
+}
+
+// GetPolicyConditionsListArrayInput is an input type that accepts GetPolicyConditionsListArray and GetPolicyConditionsListArrayOutput values.
+// You can construct a concrete instance of `GetPolicyConditionsListArrayInput` via:
+//
+//          GetPolicyConditionsListArray{ GetPolicyConditionsListArgs{...} }
+type GetPolicyConditionsListArrayInput interface {
+	pulumi.Input
+
+	ToGetPolicyConditionsListArrayOutput() GetPolicyConditionsListArrayOutput
+	ToGetPolicyConditionsListArrayOutputWithContext(context.Context) GetPolicyConditionsListArrayOutput
+}
+
+type GetPolicyConditionsListArray []GetPolicyConditionsListInput
+
+func (GetPolicyConditionsListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyConditionsList)(nil)).Elem()
+}
+
+func (i GetPolicyConditionsListArray) ToGetPolicyConditionsListArrayOutput() GetPolicyConditionsListArrayOutput {
+	return i.ToGetPolicyConditionsListArrayOutputWithContext(context.Background())
+}
+
+func (i GetPolicyConditionsListArray) ToGetPolicyConditionsListArrayOutputWithContext(ctx context.Context) GetPolicyConditionsListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyConditionsListArrayOutput)
+}
+
+type GetPolicyConditionsListOutput struct{ *pulumi.OutputState }
+
+func (GetPolicyConditionsListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyConditionsList)(nil)).Elem()
+}
+
+func (o GetPolicyConditionsListOutput) ToGetPolicyConditionsListOutput() GetPolicyConditionsListOutput {
+	return o
+}
+
+func (o GetPolicyConditionsListOutput) ToGetPolicyConditionsListOutputWithContext(ctx context.Context) GetPolicyConditionsListOutput {
+	return o
+}
+
+// A list of event condition metrics. Each element contains the following attributes:
+func (o GetPolicyConditionsListOutput) EventMetrics() GetPolicyConditionsListEventMetricArrayOutput {
+	return o.ApplyT(func(v GetPolicyConditionsList) []GetPolicyConditionsListEventMetric { return v.EventMetrics }).(GetPolicyConditionsListEventMetricArrayOutput)
+}
+
+// Whether to support multi region.
+func (o GetPolicyConditionsListOutput) IsSupportMultiRegion() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetPolicyConditionsList) bool { return v.IsSupportMultiRegion }).(pulumi.BoolOutput)
+}
+
+// A list of event condition metrics. Each element contains the following attributes:
+func (o GetPolicyConditionsListOutput) Metrics() GetPolicyConditionsListMetricArrayOutput {
+	return o.ApplyT(func(v GetPolicyConditionsList) []GetPolicyConditionsListMetric { return v.Metrics }).(GetPolicyConditionsListMetricArrayOutput)
+}
+
+// Name of the policy name, support partial matching, eg:`Cloud Virtual Machine`,`Virtual`,`Cloud Load Banlancer-Private CLB Listener`.
+func (o GetPolicyConditionsListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Policy view name, eg:`cvmDevice`,`BANDWIDTHPACKAGE`, refer to `data.tencentcloud_monitor_policy_conditions(policy_view_name)`.
+func (o GetPolicyConditionsListOutput) PolicyViewName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsList) string { return v.PolicyViewName }).(pulumi.StringOutput)
+}
+
+// Support regions of this policy view.
+func (o GetPolicyConditionsListOutput) SupportRegions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetPolicyConditionsList) []string { return v.SupportRegions }).(pulumi.StringArrayOutput)
+}
+
+type GetPolicyConditionsListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPolicyConditionsListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyConditionsList)(nil)).Elem()
+}
+
+func (o GetPolicyConditionsListArrayOutput) ToGetPolicyConditionsListArrayOutput() GetPolicyConditionsListArrayOutput {
+	return o
+}
+
+func (o GetPolicyConditionsListArrayOutput) ToGetPolicyConditionsListArrayOutputWithContext(ctx context.Context) GetPolicyConditionsListArrayOutput {
+	return o
+}
+
+func (o GetPolicyConditionsListArrayOutput) Index(i pulumi.IntInput) GetPolicyConditionsListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPolicyConditionsList {
+		return vs[0].([]GetPolicyConditionsList)[vs[1].(int)]
+	}).(GetPolicyConditionsListOutput)
+}
+
+type GetPolicyConditionsListEventMetric struct {
+	// The ID of this event metric.
+	EventId int `pulumi:"eventId"`
+	// The name of this event metric.
 	EventShowName string `pulumi:"eventShowName"`
-	NeedRecovered bool   `pulumi:"needRecovered"`
+	// Whether to recover.
+	NeedRecovered bool `pulumi:"needRecovered"`
 }
 
-// PolicyConditionsListEventMetricInput is an input type that accepts PolicyConditionsListEventMetricArgs and PolicyConditionsListEventMetricOutput values.
-// You can construct a concrete instance of `PolicyConditionsListEventMetricInput` via:
+// GetPolicyConditionsListEventMetricInput is an input type that accepts GetPolicyConditionsListEventMetricArgs and GetPolicyConditionsListEventMetricOutput values.
+// You can construct a concrete instance of `GetPolicyConditionsListEventMetricInput` via:
 //
-//          PolicyConditionsListEventMetricArgs{...}
-type PolicyConditionsListEventMetricInput interface {
+//          GetPolicyConditionsListEventMetricArgs{...}
+type GetPolicyConditionsListEventMetricInput interface {
 	pulumi.Input
 
-	ToPolicyConditionsListEventMetricOutput() PolicyConditionsListEventMetricOutput
-	ToPolicyConditionsListEventMetricOutputWithContext(context.Context) PolicyConditionsListEventMetricOutput
+	ToGetPolicyConditionsListEventMetricOutput() GetPolicyConditionsListEventMetricOutput
+	ToGetPolicyConditionsListEventMetricOutputWithContext(context.Context) GetPolicyConditionsListEventMetricOutput
 }
 
-type PolicyConditionsListEventMetricArgs struct {
-	EventId       pulumi.IntInput    `pulumi:"eventId"`
+type GetPolicyConditionsListEventMetricArgs struct {
+	// The ID of this event metric.
+	EventId pulumi.IntInput `pulumi:"eventId"`
+	// The name of this event metric.
 	EventShowName pulumi.StringInput `pulumi:"eventShowName"`
-	NeedRecovered pulumi.BoolInput   `pulumi:"needRecovered"`
+	// Whether to recover.
+	NeedRecovered pulumi.BoolInput `pulumi:"needRecovered"`
 }
 
-func (PolicyConditionsListEventMetricArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyConditionsListEventMetric)(nil)).Elem()
+func (GetPolicyConditionsListEventMetricArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyConditionsListEventMetric)(nil)).Elem()
 }
 
-func (i PolicyConditionsListEventMetricArgs) ToPolicyConditionsListEventMetricOutput() PolicyConditionsListEventMetricOutput {
-	return i.ToPolicyConditionsListEventMetricOutputWithContext(context.Background())
+func (i GetPolicyConditionsListEventMetricArgs) ToGetPolicyConditionsListEventMetricOutput() GetPolicyConditionsListEventMetricOutput {
+	return i.ToGetPolicyConditionsListEventMetricOutputWithContext(context.Background())
 }
 
-func (i PolicyConditionsListEventMetricArgs) ToPolicyConditionsListEventMetricOutputWithContext(ctx context.Context) PolicyConditionsListEventMetricOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyConditionsListEventMetricOutput)
+func (i GetPolicyConditionsListEventMetricArgs) ToGetPolicyConditionsListEventMetricOutputWithContext(ctx context.Context) GetPolicyConditionsListEventMetricOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyConditionsListEventMetricOutput)
 }
 
-// PolicyConditionsListEventMetricArrayInput is an input type that accepts PolicyConditionsListEventMetricArray and PolicyConditionsListEventMetricArrayOutput values.
-// You can construct a concrete instance of `PolicyConditionsListEventMetricArrayInput` via:
+// GetPolicyConditionsListEventMetricArrayInput is an input type that accepts GetPolicyConditionsListEventMetricArray and GetPolicyConditionsListEventMetricArrayOutput values.
+// You can construct a concrete instance of `GetPolicyConditionsListEventMetricArrayInput` via:
 //
-//          PolicyConditionsListEventMetricArray{ PolicyConditionsListEventMetricArgs{...} }
-type PolicyConditionsListEventMetricArrayInput interface {
+//          GetPolicyConditionsListEventMetricArray{ GetPolicyConditionsListEventMetricArgs{...} }
+type GetPolicyConditionsListEventMetricArrayInput interface {
 	pulumi.Input
 
-	ToPolicyConditionsListEventMetricArrayOutput() PolicyConditionsListEventMetricArrayOutput
-	ToPolicyConditionsListEventMetricArrayOutputWithContext(context.Context) PolicyConditionsListEventMetricArrayOutput
+	ToGetPolicyConditionsListEventMetricArrayOutput() GetPolicyConditionsListEventMetricArrayOutput
+	ToGetPolicyConditionsListEventMetricArrayOutputWithContext(context.Context) GetPolicyConditionsListEventMetricArrayOutput
 }
 
-type PolicyConditionsListEventMetricArray []PolicyConditionsListEventMetricInput
+type GetPolicyConditionsListEventMetricArray []GetPolicyConditionsListEventMetricInput
 
-func (PolicyConditionsListEventMetricArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyConditionsListEventMetric)(nil)).Elem()
+func (GetPolicyConditionsListEventMetricArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyConditionsListEventMetric)(nil)).Elem()
 }
 
-func (i PolicyConditionsListEventMetricArray) ToPolicyConditionsListEventMetricArrayOutput() PolicyConditionsListEventMetricArrayOutput {
-	return i.ToPolicyConditionsListEventMetricArrayOutputWithContext(context.Background())
+func (i GetPolicyConditionsListEventMetricArray) ToGetPolicyConditionsListEventMetricArrayOutput() GetPolicyConditionsListEventMetricArrayOutput {
+	return i.ToGetPolicyConditionsListEventMetricArrayOutputWithContext(context.Background())
 }
 
-func (i PolicyConditionsListEventMetricArray) ToPolicyConditionsListEventMetricArrayOutputWithContext(ctx context.Context) PolicyConditionsListEventMetricArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyConditionsListEventMetricArrayOutput)
+func (i GetPolicyConditionsListEventMetricArray) ToGetPolicyConditionsListEventMetricArrayOutputWithContext(ctx context.Context) GetPolicyConditionsListEventMetricArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyConditionsListEventMetricArrayOutput)
 }
 
-type PolicyConditionsListEventMetricOutput struct{ *pulumi.OutputState }
+type GetPolicyConditionsListEventMetricOutput struct{ *pulumi.OutputState }
 
-func (PolicyConditionsListEventMetricOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyConditionsListEventMetric)(nil)).Elem()
+func (GetPolicyConditionsListEventMetricOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyConditionsListEventMetric)(nil)).Elem()
 }
 
-func (o PolicyConditionsListEventMetricOutput) ToPolicyConditionsListEventMetricOutput() PolicyConditionsListEventMetricOutput {
+func (o GetPolicyConditionsListEventMetricOutput) ToGetPolicyConditionsListEventMetricOutput() GetPolicyConditionsListEventMetricOutput {
 	return o
 }
 
-func (o PolicyConditionsListEventMetricOutput) ToPolicyConditionsListEventMetricOutputWithContext(ctx context.Context) PolicyConditionsListEventMetricOutput {
+func (o GetPolicyConditionsListEventMetricOutput) ToGetPolicyConditionsListEventMetricOutputWithContext(ctx context.Context) GetPolicyConditionsListEventMetricOutput {
 	return o
 }
 
-func (o PolicyConditionsListEventMetricOutput) EventId() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyConditionsListEventMetric) int { return v.EventId }).(pulumi.IntOutput)
+// The ID of this event metric.
+func (o GetPolicyConditionsListEventMetricOutput) EventId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListEventMetric) int { return v.EventId }).(pulumi.IntOutput)
 }
 
-func (o PolicyConditionsListEventMetricOutput) EventShowName() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListEventMetric) string { return v.EventShowName }).(pulumi.StringOutput)
+// The name of this event metric.
+func (o GetPolicyConditionsListEventMetricOutput) EventShowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListEventMetric) string { return v.EventShowName }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListEventMetricOutput) NeedRecovered() pulumi.BoolOutput {
-	return o.ApplyT(func(v PolicyConditionsListEventMetric) bool { return v.NeedRecovered }).(pulumi.BoolOutput)
+// Whether to recover.
+func (o GetPolicyConditionsListEventMetricOutput) NeedRecovered() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListEventMetric) bool { return v.NeedRecovered }).(pulumi.BoolOutput)
 }
 
-type PolicyConditionsListEventMetricArrayOutput struct{ *pulumi.OutputState }
+type GetPolicyConditionsListEventMetricArrayOutput struct{ *pulumi.OutputState }
 
-func (PolicyConditionsListEventMetricArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyConditionsListEventMetric)(nil)).Elem()
+func (GetPolicyConditionsListEventMetricArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyConditionsListEventMetric)(nil)).Elem()
 }
 
-func (o PolicyConditionsListEventMetricArrayOutput) ToPolicyConditionsListEventMetricArrayOutput() PolicyConditionsListEventMetricArrayOutput {
+func (o GetPolicyConditionsListEventMetricArrayOutput) ToGetPolicyConditionsListEventMetricArrayOutput() GetPolicyConditionsListEventMetricArrayOutput {
 	return o
 }
 
-func (o PolicyConditionsListEventMetricArrayOutput) ToPolicyConditionsListEventMetricArrayOutputWithContext(ctx context.Context) PolicyConditionsListEventMetricArrayOutput {
+func (o GetPolicyConditionsListEventMetricArrayOutput) ToGetPolicyConditionsListEventMetricArrayOutputWithContext(ctx context.Context) GetPolicyConditionsListEventMetricArrayOutput {
 	return o
 }
 
-func (o PolicyConditionsListEventMetricArrayOutput) Index(i pulumi.IntInput) PolicyConditionsListEventMetricOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PolicyConditionsListEventMetric {
-		return vs[0].([]PolicyConditionsListEventMetric)[vs[1].(int)]
-	}).(PolicyConditionsListEventMetricOutput)
+func (o GetPolicyConditionsListEventMetricArrayOutput) Index(i pulumi.IntInput) GetPolicyConditionsListEventMetricOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPolicyConditionsListEventMetric {
+		return vs[0].([]GetPolicyConditionsListEventMetric)[vs[1].(int)]
+	}).(GetPolicyConditionsListEventMetricOutput)
 }
 
-type PolicyConditionsListMetric struct {
-	CalcTypeKeys        []int  `pulumi:"calcTypeKeys"`
-	CalcTypeNeed        bool   `pulumi:"calcTypeNeed"`
-	CalcValueDefault    string `pulumi:"calcValueDefault"`
-	CalcValueFixed      string `pulumi:"calcValueFixed"`
-	CalcValueMax        string `pulumi:"calcValueMax"`
-	CalcValueMin        string `pulumi:"calcValueMin"`
-	CalcValueNeed       bool   `pulumi:"calcValueNeed"`
-	ContinueTimeDefault int    `pulumi:"continueTimeDefault"`
-	ContinueTimeKeys    []int  `pulumi:"continueTimeKeys"`
-	ContinueTimeNeed    bool   `pulumi:"continueTimeNeed"`
-	MetricId            int    `pulumi:"metricId"`
-	MetricShowName      string `pulumi:"metricShowName"`
-	MetricUnit          string `pulumi:"metricUnit"`
-	PeriodDefault       int    `pulumi:"periodDefault"`
-	PeriodKeys          []int  `pulumi:"periodKeys"`
-	PeriodNeed          bool   `pulumi:"periodNeed"`
-	PeriodNumDefault    int    `pulumi:"periodNumDefault"`
-	PeriodNumKeys       []int  `pulumi:"periodNumKeys"`
-	PeriodNumNeed       bool   `pulumi:"periodNumNeed"`
-	StatTypeP10         string `pulumi:"statTypeP10"`
-	StatTypeP1800       string `pulumi:"statTypeP1800"`
-	StatTypeP300        string `pulumi:"statTypeP300"`
-	StatTypeP3600       string `pulumi:"statTypeP3600"`
-	StatTypeP5          string `pulumi:"statTypeP5"`
-	StatTypeP60         string `pulumi:"statTypeP60"`
-	StatTypeP600        string `pulumi:"statTypeP600"`
-	StatTypeP86400      string `pulumi:"statTypeP86400"`
+type GetPolicyConditionsListMetric struct {
+	// Calculate type of this metric.
+	CalcTypeKeys []int `pulumi:"calcTypeKeys"`
+	// Whether `calcType` required in the configuration.
+	CalcTypeNeed bool `pulumi:"calcTypeNeed"`
+	// The default calculate value of this metric.
+	CalcValueDefault string `pulumi:"calcValueDefault"`
+	// The fixed calculate value of this metric.
+	CalcValueFixed string `pulumi:"calcValueFixed"`
+	// The max calculate value of this metric.
+	CalcValueMax string `pulumi:"calcValueMax"`
+	// The min calculate value of this metric.
+	CalcValueMin string `pulumi:"calcValueMin"`
+	// Whether `calcValue` required in the configuration.
+	CalcValueNeed bool `pulumi:"calcValueNeed"`
+	// The default continue time(seconds) config for this metric.
+	ContinueTimeDefault int `pulumi:"continueTimeDefault"`
+	// The continue time(seconds) keys for this metric.
+	ContinueTimeKeys []int `pulumi:"continueTimeKeys"`
+	// Whether `continueTime` required in the configuration.
+	ContinueTimeNeed bool `pulumi:"continueTimeNeed"`
+	// The ID of this metric.
+	MetricId int `pulumi:"metricId"`
+	// The name of this metric.
+	MetricShowName string `pulumi:"metricShowName"`
+	// The unit of this metric.
+	MetricUnit string `pulumi:"metricUnit"`
+	// The default data time(seconds) config for this metric.
+	PeriodDefault int `pulumi:"periodDefault"`
+	// The data time(seconds) keys for this metric.
+	PeriodKeys []int `pulumi:"periodKeys"`
+	// Whether `period` required in the configuration.
+	PeriodNeed bool `pulumi:"periodNeed"`
+	// The default period number config for this metric.
+	PeriodNumDefault int `pulumi:"periodNumDefault"`
+	// The period number keys for this metric.
+	PeriodNumKeys []int `pulumi:"periodNumKeys"`
+	// Whether `periodNum` required in the configuration.
+	PeriodNumNeed bool `pulumi:"periodNumNeed"`
+	// Data aggregation mode, cycle of 10 seconds.
+	StatTypeP10 string `pulumi:"statTypeP10"`
+	// Data aggregation mode, cycle of 1800 seconds.
+	StatTypeP1800 string `pulumi:"statTypeP1800"`
+	// Data aggregation mode, cycle of 300 seconds.
+	StatTypeP300 string `pulumi:"statTypeP300"`
+	// Data aggregation mode, cycle of 3600 seconds.
+	StatTypeP3600 string `pulumi:"statTypeP3600"`
+	// Data aggregation mode, cycle of 5 seconds.
+	StatTypeP5 string `pulumi:"statTypeP5"`
+	// Data aggregation mode, cycle of 60 seconds.
+	StatTypeP60 string `pulumi:"statTypeP60"`
+	// Data aggregation mode, cycle of 600 seconds.
+	StatTypeP600 string `pulumi:"statTypeP600"`
+	// Data aggregation mode, cycle of 86400 seconds.
+	StatTypeP86400 string `pulumi:"statTypeP86400"`
 }
 
-// PolicyConditionsListMetricInput is an input type that accepts PolicyConditionsListMetricArgs and PolicyConditionsListMetricOutput values.
-// You can construct a concrete instance of `PolicyConditionsListMetricInput` via:
+// GetPolicyConditionsListMetricInput is an input type that accepts GetPolicyConditionsListMetricArgs and GetPolicyConditionsListMetricOutput values.
+// You can construct a concrete instance of `GetPolicyConditionsListMetricInput` via:
 //
-//          PolicyConditionsListMetricArgs{...}
-type PolicyConditionsListMetricInput interface {
+//          GetPolicyConditionsListMetricArgs{...}
+type GetPolicyConditionsListMetricInput interface {
 	pulumi.Input
 
-	ToPolicyConditionsListMetricOutput() PolicyConditionsListMetricOutput
-	ToPolicyConditionsListMetricOutputWithContext(context.Context) PolicyConditionsListMetricOutput
+	ToGetPolicyConditionsListMetricOutput() GetPolicyConditionsListMetricOutput
+	ToGetPolicyConditionsListMetricOutputWithContext(context.Context) GetPolicyConditionsListMetricOutput
 }
 
-type PolicyConditionsListMetricArgs struct {
-	CalcTypeKeys        pulumi.IntArrayInput `pulumi:"calcTypeKeys"`
-	CalcTypeNeed        pulumi.BoolInput     `pulumi:"calcTypeNeed"`
-	CalcValueDefault    pulumi.StringInput   `pulumi:"calcValueDefault"`
-	CalcValueFixed      pulumi.StringInput   `pulumi:"calcValueFixed"`
-	CalcValueMax        pulumi.StringInput   `pulumi:"calcValueMax"`
-	CalcValueMin        pulumi.StringInput   `pulumi:"calcValueMin"`
-	CalcValueNeed       pulumi.BoolInput     `pulumi:"calcValueNeed"`
-	ContinueTimeDefault pulumi.IntInput      `pulumi:"continueTimeDefault"`
-	ContinueTimeKeys    pulumi.IntArrayInput `pulumi:"continueTimeKeys"`
-	ContinueTimeNeed    pulumi.BoolInput     `pulumi:"continueTimeNeed"`
-	MetricId            pulumi.IntInput      `pulumi:"metricId"`
-	MetricShowName      pulumi.StringInput   `pulumi:"metricShowName"`
-	MetricUnit          pulumi.StringInput   `pulumi:"metricUnit"`
-	PeriodDefault       pulumi.IntInput      `pulumi:"periodDefault"`
-	PeriodKeys          pulumi.IntArrayInput `pulumi:"periodKeys"`
-	PeriodNeed          pulumi.BoolInput     `pulumi:"periodNeed"`
-	PeriodNumDefault    pulumi.IntInput      `pulumi:"periodNumDefault"`
-	PeriodNumKeys       pulumi.IntArrayInput `pulumi:"periodNumKeys"`
-	PeriodNumNeed       pulumi.BoolInput     `pulumi:"periodNumNeed"`
-	StatTypeP10         pulumi.StringInput   `pulumi:"statTypeP10"`
-	StatTypeP1800       pulumi.StringInput   `pulumi:"statTypeP1800"`
-	StatTypeP300        pulumi.StringInput   `pulumi:"statTypeP300"`
-	StatTypeP3600       pulumi.StringInput   `pulumi:"statTypeP3600"`
-	StatTypeP5          pulumi.StringInput   `pulumi:"statTypeP5"`
-	StatTypeP60         pulumi.StringInput   `pulumi:"statTypeP60"`
-	StatTypeP600        pulumi.StringInput   `pulumi:"statTypeP600"`
-	StatTypeP86400      pulumi.StringInput   `pulumi:"statTypeP86400"`
+type GetPolicyConditionsListMetricArgs struct {
+	// Calculate type of this metric.
+	CalcTypeKeys pulumi.IntArrayInput `pulumi:"calcTypeKeys"`
+	// Whether `calcType` required in the configuration.
+	CalcTypeNeed pulumi.BoolInput `pulumi:"calcTypeNeed"`
+	// The default calculate value of this metric.
+	CalcValueDefault pulumi.StringInput `pulumi:"calcValueDefault"`
+	// The fixed calculate value of this metric.
+	CalcValueFixed pulumi.StringInput `pulumi:"calcValueFixed"`
+	// The max calculate value of this metric.
+	CalcValueMax pulumi.StringInput `pulumi:"calcValueMax"`
+	// The min calculate value of this metric.
+	CalcValueMin pulumi.StringInput `pulumi:"calcValueMin"`
+	// Whether `calcValue` required in the configuration.
+	CalcValueNeed pulumi.BoolInput `pulumi:"calcValueNeed"`
+	// The default continue time(seconds) config for this metric.
+	ContinueTimeDefault pulumi.IntInput `pulumi:"continueTimeDefault"`
+	// The continue time(seconds) keys for this metric.
+	ContinueTimeKeys pulumi.IntArrayInput `pulumi:"continueTimeKeys"`
+	// Whether `continueTime` required in the configuration.
+	ContinueTimeNeed pulumi.BoolInput `pulumi:"continueTimeNeed"`
+	// The ID of this metric.
+	MetricId pulumi.IntInput `pulumi:"metricId"`
+	// The name of this metric.
+	MetricShowName pulumi.StringInput `pulumi:"metricShowName"`
+	// The unit of this metric.
+	MetricUnit pulumi.StringInput `pulumi:"metricUnit"`
+	// The default data time(seconds) config for this metric.
+	PeriodDefault pulumi.IntInput `pulumi:"periodDefault"`
+	// The data time(seconds) keys for this metric.
+	PeriodKeys pulumi.IntArrayInput `pulumi:"periodKeys"`
+	// Whether `period` required in the configuration.
+	PeriodNeed pulumi.BoolInput `pulumi:"periodNeed"`
+	// The default period number config for this metric.
+	PeriodNumDefault pulumi.IntInput `pulumi:"periodNumDefault"`
+	// The period number keys for this metric.
+	PeriodNumKeys pulumi.IntArrayInput `pulumi:"periodNumKeys"`
+	// Whether `periodNum` required in the configuration.
+	PeriodNumNeed pulumi.BoolInput `pulumi:"periodNumNeed"`
+	// Data aggregation mode, cycle of 10 seconds.
+	StatTypeP10 pulumi.StringInput `pulumi:"statTypeP10"`
+	// Data aggregation mode, cycle of 1800 seconds.
+	StatTypeP1800 pulumi.StringInput `pulumi:"statTypeP1800"`
+	// Data aggregation mode, cycle of 300 seconds.
+	StatTypeP300 pulumi.StringInput `pulumi:"statTypeP300"`
+	// Data aggregation mode, cycle of 3600 seconds.
+	StatTypeP3600 pulumi.StringInput `pulumi:"statTypeP3600"`
+	// Data aggregation mode, cycle of 5 seconds.
+	StatTypeP5 pulumi.StringInput `pulumi:"statTypeP5"`
+	// Data aggregation mode, cycle of 60 seconds.
+	StatTypeP60 pulumi.StringInput `pulumi:"statTypeP60"`
+	// Data aggregation mode, cycle of 600 seconds.
+	StatTypeP600 pulumi.StringInput `pulumi:"statTypeP600"`
+	// Data aggregation mode, cycle of 86400 seconds.
+	StatTypeP86400 pulumi.StringInput `pulumi:"statTypeP86400"`
 }
 
-func (PolicyConditionsListMetricArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyConditionsListMetric)(nil)).Elem()
+func (GetPolicyConditionsListMetricArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyConditionsListMetric)(nil)).Elem()
 }
 
-func (i PolicyConditionsListMetricArgs) ToPolicyConditionsListMetricOutput() PolicyConditionsListMetricOutput {
-	return i.ToPolicyConditionsListMetricOutputWithContext(context.Background())
+func (i GetPolicyConditionsListMetricArgs) ToGetPolicyConditionsListMetricOutput() GetPolicyConditionsListMetricOutput {
+	return i.ToGetPolicyConditionsListMetricOutputWithContext(context.Background())
 }
 
-func (i PolicyConditionsListMetricArgs) ToPolicyConditionsListMetricOutputWithContext(ctx context.Context) PolicyConditionsListMetricOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyConditionsListMetricOutput)
+func (i GetPolicyConditionsListMetricArgs) ToGetPolicyConditionsListMetricOutputWithContext(ctx context.Context) GetPolicyConditionsListMetricOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyConditionsListMetricOutput)
 }
 
-// PolicyConditionsListMetricArrayInput is an input type that accepts PolicyConditionsListMetricArray and PolicyConditionsListMetricArrayOutput values.
-// You can construct a concrete instance of `PolicyConditionsListMetricArrayInput` via:
+// GetPolicyConditionsListMetricArrayInput is an input type that accepts GetPolicyConditionsListMetricArray and GetPolicyConditionsListMetricArrayOutput values.
+// You can construct a concrete instance of `GetPolicyConditionsListMetricArrayInput` via:
 //
-//          PolicyConditionsListMetricArray{ PolicyConditionsListMetricArgs{...} }
-type PolicyConditionsListMetricArrayInput interface {
+//          GetPolicyConditionsListMetricArray{ GetPolicyConditionsListMetricArgs{...} }
+type GetPolicyConditionsListMetricArrayInput interface {
 	pulumi.Input
 
-	ToPolicyConditionsListMetricArrayOutput() PolicyConditionsListMetricArrayOutput
-	ToPolicyConditionsListMetricArrayOutputWithContext(context.Context) PolicyConditionsListMetricArrayOutput
+	ToGetPolicyConditionsListMetricArrayOutput() GetPolicyConditionsListMetricArrayOutput
+	ToGetPolicyConditionsListMetricArrayOutputWithContext(context.Context) GetPolicyConditionsListMetricArrayOutput
 }
 
-type PolicyConditionsListMetricArray []PolicyConditionsListMetricInput
+type GetPolicyConditionsListMetricArray []GetPolicyConditionsListMetricInput
 
-func (PolicyConditionsListMetricArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyConditionsListMetric)(nil)).Elem()
+func (GetPolicyConditionsListMetricArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyConditionsListMetric)(nil)).Elem()
 }
 
-func (i PolicyConditionsListMetricArray) ToPolicyConditionsListMetricArrayOutput() PolicyConditionsListMetricArrayOutput {
-	return i.ToPolicyConditionsListMetricArrayOutputWithContext(context.Background())
+func (i GetPolicyConditionsListMetricArray) ToGetPolicyConditionsListMetricArrayOutput() GetPolicyConditionsListMetricArrayOutput {
+	return i.ToGetPolicyConditionsListMetricArrayOutputWithContext(context.Background())
 }
 
-func (i PolicyConditionsListMetricArray) ToPolicyConditionsListMetricArrayOutputWithContext(ctx context.Context) PolicyConditionsListMetricArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyConditionsListMetricArrayOutput)
+func (i GetPolicyConditionsListMetricArray) ToGetPolicyConditionsListMetricArrayOutputWithContext(ctx context.Context) GetPolicyConditionsListMetricArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyConditionsListMetricArrayOutput)
 }
 
-type PolicyConditionsListMetricOutput struct{ *pulumi.OutputState }
+type GetPolicyConditionsListMetricOutput struct{ *pulumi.OutputState }
 
-func (PolicyConditionsListMetricOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyConditionsListMetric)(nil)).Elem()
+func (GetPolicyConditionsListMetricOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyConditionsListMetric)(nil)).Elem()
 }
 
-func (o PolicyConditionsListMetricOutput) ToPolicyConditionsListMetricOutput() PolicyConditionsListMetricOutput {
+func (o GetPolicyConditionsListMetricOutput) ToGetPolicyConditionsListMetricOutput() GetPolicyConditionsListMetricOutput {
 	return o
 }
 
-func (o PolicyConditionsListMetricOutput) ToPolicyConditionsListMetricOutputWithContext(ctx context.Context) PolicyConditionsListMetricOutput {
+func (o GetPolicyConditionsListMetricOutput) ToGetPolicyConditionsListMetricOutputWithContext(ctx context.Context) GetPolicyConditionsListMetricOutput {
 	return o
 }
 
-func (o PolicyConditionsListMetricOutput) CalcTypeKeys() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) []int { return v.CalcTypeKeys }).(pulumi.IntArrayOutput)
+// Calculate type of this metric.
+func (o GetPolicyConditionsListMetricOutput) CalcTypeKeys() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) []int { return v.CalcTypeKeys }).(pulumi.IntArrayOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) CalcTypeNeed() pulumi.BoolOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) bool { return v.CalcTypeNeed }).(pulumi.BoolOutput)
+// Whether `calcType` required in the configuration.
+func (o GetPolicyConditionsListMetricOutput) CalcTypeNeed() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) bool { return v.CalcTypeNeed }).(pulumi.BoolOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) CalcValueDefault() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.CalcValueDefault }).(pulumi.StringOutput)
+// The default calculate value of this metric.
+func (o GetPolicyConditionsListMetricOutput) CalcValueDefault() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.CalcValueDefault }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) CalcValueFixed() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.CalcValueFixed }).(pulumi.StringOutput)
+// The fixed calculate value of this metric.
+func (o GetPolicyConditionsListMetricOutput) CalcValueFixed() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.CalcValueFixed }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) CalcValueMax() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.CalcValueMax }).(pulumi.StringOutput)
+// The max calculate value of this metric.
+func (o GetPolicyConditionsListMetricOutput) CalcValueMax() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.CalcValueMax }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) CalcValueMin() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.CalcValueMin }).(pulumi.StringOutput)
+// The min calculate value of this metric.
+func (o GetPolicyConditionsListMetricOutput) CalcValueMin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.CalcValueMin }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) CalcValueNeed() pulumi.BoolOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) bool { return v.CalcValueNeed }).(pulumi.BoolOutput)
+// Whether `calcValue` required in the configuration.
+func (o GetPolicyConditionsListMetricOutput) CalcValueNeed() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) bool { return v.CalcValueNeed }).(pulumi.BoolOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) ContinueTimeDefault() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) int { return v.ContinueTimeDefault }).(pulumi.IntOutput)
+// The default continue time(seconds) config for this metric.
+func (o GetPolicyConditionsListMetricOutput) ContinueTimeDefault() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) int { return v.ContinueTimeDefault }).(pulumi.IntOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) ContinueTimeKeys() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) []int { return v.ContinueTimeKeys }).(pulumi.IntArrayOutput)
+// The continue time(seconds) keys for this metric.
+func (o GetPolicyConditionsListMetricOutput) ContinueTimeKeys() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) []int { return v.ContinueTimeKeys }).(pulumi.IntArrayOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) ContinueTimeNeed() pulumi.BoolOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) bool { return v.ContinueTimeNeed }).(pulumi.BoolOutput)
+// Whether `continueTime` required in the configuration.
+func (o GetPolicyConditionsListMetricOutput) ContinueTimeNeed() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) bool { return v.ContinueTimeNeed }).(pulumi.BoolOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) MetricId() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) int { return v.MetricId }).(pulumi.IntOutput)
+// The ID of this metric.
+func (o GetPolicyConditionsListMetricOutput) MetricId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) int { return v.MetricId }).(pulumi.IntOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) MetricShowName() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.MetricShowName }).(pulumi.StringOutput)
+// The name of this metric.
+func (o GetPolicyConditionsListMetricOutput) MetricShowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.MetricShowName }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) MetricUnit() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.MetricUnit }).(pulumi.StringOutput)
+// The unit of this metric.
+func (o GetPolicyConditionsListMetricOutput) MetricUnit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.MetricUnit }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) PeriodDefault() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) int { return v.PeriodDefault }).(pulumi.IntOutput)
+// The default data time(seconds) config for this metric.
+func (o GetPolicyConditionsListMetricOutput) PeriodDefault() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) int { return v.PeriodDefault }).(pulumi.IntOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) PeriodKeys() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) []int { return v.PeriodKeys }).(pulumi.IntArrayOutput)
+// The data time(seconds) keys for this metric.
+func (o GetPolicyConditionsListMetricOutput) PeriodKeys() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) []int { return v.PeriodKeys }).(pulumi.IntArrayOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) PeriodNeed() pulumi.BoolOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) bool { return v.PeriodNeed }).(pulumi.BoolOutput)
+// Whether `period` required in the configuration.
+func (o GetPolicyConditionsListMetricOutput) PeriodNeed() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) bool { return v.PeriodNeed }).(pulumi.BoolOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) PeriodNumDefault() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) int { return v.PeriodNumDefault }).(pulumi.IntOutput)
+// The default period number config for this metric.
+func (o GetPolicyConditionsListMetricOutput) PeriodNumDefault() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) int { return v.PeriodNumDefault }).(pulumi.IntOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) PeriodNumKeys() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) []int { return v.PeriodNumKeys }).(pulumi.IntArrayOutput)
+// The period number keys for this metric.
+func (o GetPolicyConditionsListMetricOutput) PeriodNumKeys() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) []int { return v.PeriodNumKeys }).(pulumi.IntArrayOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) PeriodNumNeed() pulumi.BoolOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) bool { return v.PeriodNumNeed }).(pulumi.BoolOutput)
+// Whether `periodNum` required in the configuration.
+func (o GetPolicyConditionsListMetricOutput) PeriodNumNeed() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) bool { return v.PeriodNumNeed }).(pulumi.BoolOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) StatTypeP10() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.StatTypeP10 }).(pulumi.StringOutput)
+// Data aggregation mode, cycle of 10 seconds.
+func (o GetPolicyConditionsListMetricOutput) StatTypeP10() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.StatTypeP10 }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) StatTypeP1800() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.StatTypeP1800 }).(pulumi.StringOutput)
+// Data aggregation mode, cycle of 1800 seconds.
+func (o GetPolicyConditionsListMetricOutput) StatTypeP1800() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.StatTypeP1800 }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) StatTypeP300() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.StatTypeP300 }).(pulumi.StringOutput)
+// Data aggregation mode, cycle of 300 seconds.
+func (o GetPolicyConditionsListMetricOutput) StatTypeP300() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.StatTypeP300 }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) StatTypeP3600() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.StatTypeP3600 }).(pulumi.StringOutput)
+// Data aggregation mode, cycle of 3600 seconds.
+func (o GetPolicyConditionsListMetricOutput) StatTypeP3600() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.StatTypeP3600 }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) StatTypeP5() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.StatTypeP5 }).(pulumi.StringOutput)
+// Data aggregation mode, cycle of 5 seconds.
+func (o GetPolicyConditionsListMetricOutput) StatTypeP5() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.StatTypeP5 }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) StatTypeP60() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.StatTypeP60 }).(pulumi.StringOutput)
+// Data aggregation mode, cycle of 60 seconds.
+func (o GetPolicyConditionsListMetricOutput) StatTypeP60() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.StatTypeP60 }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) StatTypeP600() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.StatTypeP600 }).(pulumi.StringOutput)
+// Data aggregation mode, cycle of 600 seconds.
+func (o GetPolicyConditionsListMetricOutput) StatTypeP600() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.StatTypeP600 }).(pulumi.StringOutput)
 }
 
-func (o PolicyConditionsListMetricOutput) StatTypeP86400() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyConditionsListMetric) string { return v.StatTypeP86400 }).(pulumi.StringOutput)
+// Data aggregation mode, cycle of 86400 seconds.
+func (o GetPolicyConditionsListMetricOutput) StatTypeP86400() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyConditionsListMetric) string { return v.StatTypeP86400 }).(pulumi.StringOutput)
 }
 
-type PolicyConditionsListMetricArrayOutput struct{ *pulumi.OutputState }
+type GetPolicyConditionsListMetricArrayOutput struct{ *pulumi.OutputState }
 
-func (PolicyConditionsListMetricArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyConditionsListMetric)(nil)).Elem()
+func (GetPolicyConditionsListMetricArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyConditionsListMetric)(nil)).Elem()
 }
 
-func (o PolicyConditionsListMetricArrayOutput) ToPolicyConditionsListMetricArrayOutput() PolicyConditionsListMetricArrayOutput {
+func (o GetPolicyConditionsListMetricArrayOutput) ToGetPolicyConditionsListMetricArrayOutput() GetPolicyConditionsListMetricArrayOutput {
 	return o
 }
 
-func (o PolicyConditionsListMetricArrayOutput) ToPolicyConditionsListMetricArrayOutputWithContext(ctx context.Context) PolicyConditionsListMetricArrayOutput {
+func (o GetPolicyConditionsListMetricArrayOutput) ToGetPolicyConditionsListMetricArrayOutputWithContext(ctx context.Context) GetPolicyConditionsListMetricArrayOutput {
 	return o
 }
 
-func (o PolicyConditionsListMetricArrayOutput) Index(i pulumi.IntInput) PolicyConditionsListMetricOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PolicyConditionsListMetric {
-		return vs[0].([]PolicyConditionsListMetric)[vs[1].(int)]
-	}).(PolicyConditionsListMetricOutput)
+func (o GetPolicyConditionsListMetricArrayOutput) Index(i pulumi.IntInput) GetPolicyConditionsListMetricOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPolicyConditionsListMetric {
+		return vs[0].([]GetPolicyConditionsListMetric)[vs[1].(int)]
+	}).(GetPolicyConditionsListMetricOutput)
 }
 
-type PolicyGroupBindingObject struct {
-	DimensionsJson *string `pulumi:"dimensionsJson"`
-	IsShielded     *int    `pulumi:"isShielded"`
-	Region         *string `pulumi:"region"`
-	UniqueId       *string `pulumi:"uniqueId"`
+type GetPolicyGroupsList struct {
+	// Whether it can be set as the default policy.
+	CanSetDefault bool `pulumi:"canSetDefault"`
+	// A list of threshold rules. Each element contains the following attributes:
+	Conditions []GetPolicyGroupsListCondition `pulumi:"conditions"`
+	// A list of event rules. Each element contains the following attributes:
+	EventConditions []GetPolicyGroupsListEventCondition `pulumi:"eventConditions"`
+	// The policy group id.
+	GroupId int `pulumi:"groupId"`
+	// The policy group name.
+	GroupName string `pulumi:"groupName"`
+	// The policy group create timestamp.
+	InsertTime int `pulumi:"insertTime"`
+	// If is default policy group or not, `0` represents the non-default policy, and `1` represents the default policy.
+	IsDefault int `pulumi:"isDefault"`
+	// Whether open or not.
+	IsOpen bool `pulumi:"isOpen"`
+	// Recently edited user uin.
+	LastEditUin string `pulumi:"lastEditUin"`
+	// Number of unmasked instances of policy group bindings.
+	NoShieldedSum int `pulumi:"noShieldedSum"`
+	// Parent policy group ID.
+	ParentGroupId int `pulumi:"parentGroupId"`
+	// The policy group view name.
+	PolicyViewName string `pulumi:"policyViewName"`
+	// The project ID to which the policy group belongs.
+	ProjectId int `pulumi:"projectId"`
+	// A list of receivers. Each element contains the following attributes:
+	Receivers []GetPolicyGroupsListReceiver `pulumi:"receivers"`
+	// Policy group remarks.
+	Remark string `pulumi:"remark"`
+	// The policy group update timestamp.
+	UpdateTime int `pulumi:"updateTime"`
+	// Number of instances of policy group bindings.
+	UseSum int `pulumi:"useSum"`
 }
 
-// PolicyGroupBindingObjectInput is an input type that accepts PolicyGroupBindingObjectArgs and PolicyGroupBindingObjectOutput values.
-// You can construct a concrete instance of `PolicyGroupBindingObjectInput` via:
+// GetPolicyGroupsListInput is an input type that accepts GetPolicyGroupsListArgs and GetPolicyGroupsListOutput values.
+// You can construct a concrete instance of `GetPolicyGroupsListInput` via:
 //
-//          PolicyGroupBindingObjectArgs{...}
-type PolicyGroupBindingObjectInput interface {
+//          GetPolicyGroupsListArgs{...}
+type GetPolicyGroupsListInput interface {
 	pulumi.Input
 
-	ToPolicyGroupBindingObjectOutput() PolicyGroupBindingObjectOutput
-	ToPolicyGroupBindingObjectOutputWithContext(context.Context) PolicyGroupBindingObjectOutput
+	ToGetPolicyGroupsListOutput() GetPolicyGroupsListOutput
+	ToGetPolicyGroupsListOutputWithContext(context.Context) GetPolicyGroupsListOutput
 }
 
-type PolicyGroupBindingObjectArgs struct {
-	DimensionsJson pulumi.StringPtrInput `pulumi:"dimensionsJson"`
-	IsShielded     pulumi.IntPtrInput    `pulumi:"isShielded"`
-	Region         pulumi.StringPtrInput `pulumi:"region"`
-	UniqueId       pulumi.StringPtrInput `pulumi:"uniqueId"`
+type GetPolicyGroupsListArgs struct {
+	// Whether it can be set as the default policy.
+	CanSetDefault pulumi.BoolInput `pulumi:"canSetDefault"`
+	// A list of threshold rules. Each element contains the following attributes:
+	Conditions GetPolicyGroupsListConditionArrayInput `pulumi:"conditions"`
+	// A list of event rules. Each element contains the following attributes:
+	EventConditions GetPolicyGroupsListEventConditionArrayInput `pulumi:"eventConditions"`
+	// The policy group id.
+	GroupId pulumi.IntInput `pulumi:"groupId"`
+	// The policy group name.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// The policy group create timestamp.
+	InsertTime pulumi.IntInput `pulumi:"insertTime"`
+	// If is default policy group or not, `0` represents the non-default policy, and `1` represents the default policy.
+	IsDefault pulumi.IntInput `pulumi:"isDefault"`
+	// Whether open or not.
+	IsOpen pulumi.BoolInput `pulumi:"isOpen"`
+	// Recently edited user uin.
+	LastEditUin pulumi.StringInput `pulumi:"lastEditUin"`
+	// Number of unmasked instances of policy group bindings.
+	NoShieldedSum pulumi.IntInput `pulumi:"noShieldedSum"`
+	// Parent policy group ID.
+	ParentGroupId pulumi.IntInput `pulumi:"parentGroupId"`
+	// The policy group view name.
+	PolicyViewName pulumi.StringInput `pulumi:"policyViewName"`
+	// The project ID to which the policy group belongs.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// A list of receivers. Each element contains the following attributes:
+	Receivers GetPolicyGroupsListReceiverArrayInput `pulumi:"receivers"`
+	// Policy group remarks.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// The policy group update timestamp.
+	UpdateTime pulumi.IntInput `pulumi:"updateTime"`
+	// Number of instances of policy group bindings.
+	UseSum pulumi.IntInput `pulumi:"useSum"`
 }
 
-func (PolicyGroupBindingObjectArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupBindingObject)(nil)).Elem()
+func (GetPolicyGroupsListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyGroupsList)(nil)).Elem()
 }
 
-func (i PolicyGroupBindingObjectArgs) ToPolicyGroupBindingObjectOutput() PolicyGroupBindingObjectOutput {
-	return i.ToPolicyGroupBindingObjectOutputWithContext(context.Background())
+func (i GetPolicyGroupsListArgs) ToGetPolicyGroupsListOutput() GetPolicyGroupsListOutput {
+	return i.ToGetPolicyGroupsListOutputWithContext(context.Background())
 }
 
-func (i PolicyGroupBindingObjectArgs) ToPolicyGroupBindingObjectOutputWithContext(ctx context.Context) PolicyGroupBindingObjectOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupBindingObjectOutput)
+func (i GetPolicyGroupsListArgs) ToGetPolicyGroupsListOutputWithContext(ctx context.Context) GetPolicyGroupsListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyGroupsListOutput)
 }
 
-// PolicyGroupBindingObjectArrayInput is an input type that accepts PolicyGroupBindingObjectArray and PolicyGroupBindingObjectArrayOutput values.
-// You can construct a concrete instance of `PolicyGroupBindingObjectArrayInput` via:
+// GetPolicyGroupsListArrayInput is an input type that accepts GetPolicyGroupsListArray and GetPolicyGroupsListArrayOutput values.
+// You can construct a concrete instance of `GetPolicyGroupsListArrayInput` via:
 //
-//          PolicyGroupBindingObjectArray{ PolicyGroupBindingObjectArgs{...} }
-type PolicyGroupBindingObjectArrayInput interface {
+//          GetPolicyGroupsListArray{ GetPolicyGroupsListArgs{...} }
+type GetPolicyGroupsListArrayInput interface {
 	pulumi.Input
 
-	ToPolicyGroupBindingObjectArrayOutput() PolicyGroupBindingObjectArrayOutput
-	ToPolicyGroupBindingObjectArrayOutputWithContext(context.Context) PolicyGroupBindingObjectArrayOutput
+	ToGetPolicyGroupsListArrayOutput() GetPolicyGroupsListArrayOutput
+	ToGetPolicyGroupsListArrayOutputWithContext(context.Context) GetPolicyGroupsListArrayOutput
 }
 
-type PolicyGroupBindingObjectArray []PolicyGroupBindingObjectInput
+type GetPolicyGroupsListArray []GetPolicyGroupsListInput
 
-func (PolicyGroupBindingObjectArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupBindingObject)(nil)).Elem()
+func (GetPolicyGroupsListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyGroupsList)(nil)).Elem()
 }
 
-func (i PolicyGroupBindingObjectArray) ToPolicyGroupBindingObjectArrayOutput() PolicyGroupBindingObjectArrayOutput {
-	return i.ToPolicyGroupBindingObjectArrayOutputWithContext(context.Background())
+func (i GetPolicyGroupsListArray) ToGetPolicyGroupsListArrayOutput() GetPolicyGroupsListArrayOutput {
+	return i.ToGetPolicyGroupsListArrayOutputWithContext(context.Background())
 }
 
-func (i PolicyGroupBindingObjectArray) ToPolicyGroupBindingObjectArrayOutputWithContext(ctx context.Context) PolicyGroupBindingObjectArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupBindingObjectArrayOutput)
+func (i GetPolicyGroupsListArray) ToGetPolicyGroupsListArrayOutputWithContext(ctx context.Context) GetPolicyGroupsListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyGroupsListArrayOutput)
 }
 
-type PolicyGroupBindingObjectOutput struct{ *pulumi.OutputState }
+type GetPolicyGroupsListOutput struct{ *pulumi.OutputState }
 
-func (PolicyGroupBindingObjectOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupBindingObject)(nil)).Elem()
+func (GetPolicyGroupsListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyGroupsList)(nil)).Elem()
 }
 
-func (o PolicyGroupBindingObjectOutput) ToPolicyGroupBindingObjectOutput() PolicyGroupBindingObjectOutput {
+func (o GetPolicyGroupsListOutput) ToGetPolicyGroupsListOutput() GetPolicyGroupsListOutput {
 	return o
 }
 
-func (o PolicyGroupBindingObjectOutput) ToPolicyGroupBindingObjectOutputWithContext(ctx context.Context) PolicyGroupBindingObjectOutput {
+func (o GetPolicyGroupsListOutput) ToGetPolicyGroupsListOutputWithContext(ctx context.Context) GetPolicyGroupsListOutput {
 	return o
 }
 
-func (o PolicyGroupBindingObjectOutput) DimensionsJson() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v PolicyGroupBindingObject) *string { return v.DimensionsJson }).(pulumi.StringPtrOutput)
+// Whether it can be set as the default policy.
+func (o GetPolicyGroupsListOutput) CanSetDefault() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) bool { return v.CanSetDefault }).(pulumi.BoolOutput)
 }
 
-func (o PolicyGroupBindingObjectOutput) IsShielded() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v PolicyGroupBindingObject) *int { return v.IsShielded }).(pulumi.IntPtrOutput)
+// A list of threshold rules. Each element contains the following attributes:
+func (o GetPolicyGroupsListOutput) Conditions() GetPolicyGroupsListConditionArrayOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) []GetPolicyGroupsListCondition { return v.Conditions }).(GetPolicyGroupsListConditionArrayOutput)
 }
 
-func (o PolicyGroupBindingObjectOutput) Region() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v PolicyGroupBindingObject) *string { return v.Region }).(pulumi.StringPtrOutput)
+// A list of event rules. Each element contains the following attributes:
+func (o GetPolicyGroupsListOutput) EventConditions() GetPolicyGroupsListEventConditionArrayOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) []GetPolicyGroupsListEventCondition { return v.EventConditions }).(GetPolicyGroupsListEventConditionArrayOutput)
 }
 
-func (o PolicyGroupBindingObjectOutput) UniqueId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v PolicyGroupBindingObject) *string { return v.UniqueId }).(pulumi.StringPtrOutput)
+// The policy group id.
+func (o GetPolicyGroupsListOutput) GroupId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) int { return v.GroupId }).(pulumi.IntOutput)
 }
 
-type PolicyGroupBindingObjectArrayOutput struct{ *pulumi.OutputState }
-
-func (PolicyGroupBindingObjectArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupBindingObject)(nil)).Elem()
+// The policy group name.
+func (o GetPolicyGroupsListOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) string { return v.GroupName }).(pulumi.StringOutput)
 }
 
-func (o PolicyGroupBindingObjectArrayOutput) ToPolicyGroupBindingObjectArrayOutput() PolicyGroupBindingObjectArrayOutput {
+// The policy group create timestamp.
+func (o GetPolicyGroupsListOutput) InsertTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) int { return v.InsertTime }).(pulumi.IntOutput)
+}
+
+// If is default policy group or not, `0` represents the non-default policy, and `1` represents the default policy.
+func (o GetPolicyGroupsListOutput) IsDefault() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) int { return v.IsDefault }).(pulumi.IntOutput)
+}
+
+// Whether open or not.
+func (o GetPolicyGroupsListOutput) IsOpen() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) bool { return v.IsOpen }).(pulumi.BoolOutput)
+}
+
+// Recently edited user uin.
+func (o GetPolicyGroupsListOutput) LastEditUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) string { return v.LastEditUin }).(pulumi.StringOutput)
+}
+
+// Number of unmasked instances of policy group bindings.
+func (o GetPolicyGroupsListOutput) NoShieldedSum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) int { return v.NoShieldedSum }).(pulumi.IntOutput)
+}
+
+// Parent policy group ID.
+func (o GetPolicyGroupsListOutput) ParentGroupId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) int { return v.ParentGroupId }).(pulumi.IntOutput)
+}
+
+// The policy group view name.
+func (o GetPolicyGroupsListOutput) PolicyViewName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) string { return v.PolicyViewName }).(pulumi.StringOutput)
+}
+
+// The project ID to which the policy group belongs.
+func (o GetPolicyGroupsListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// A list of receivers. Each element contains the following attributes:
+func (o GetPolicyGroupsListOutput) Receivers() GetPolicyGroupsListReceiverArrayOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) []GetPolicyGroupsListReceiver { return v.Receivers }).(GetPolicyGroupsListReceiverArrayOutput)
+}
+
+// Policy group remarks.
+func (o GetPolicyGroupsListOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// The policy group update timestamp.
+func (o GetPolicyGroupsListOutput) UpdateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) int { return v.UpdateTime }).(pulumi.IntOutput)
+}
+
+// Number of instances of policy group bindings.
+func (o GetPolicyGroupsListOutput) UseSum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsList) int { return v.UseSum }).(pulumi.IntOutput)
+}
+
+type GetPolicyGroupsListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPolicyGroupsListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyGroupsList)(nil)).Elem()
+}
+
+func (o GetPolicyGroupsListArrayOutput) ToGetPolicyGroupsListArrayOutput() GetPolicyGroupsListArrayOutput {
 	return o
 }
 
-func (o PolicyGroupBindingObjectArrayOutput) ToPolicyGroupBindingObjectArrayOutputWithContext(ctx context.Context) PolicyGroupBindingObjectArrayOutput {
+func (o GetPolicyGroupsListArrayOutput) ToGetPolicyGroupsListArrayOutputWithContext(ctx context.Context) GetPolicyGroupsListArrayOutput {
 	return o
 }
 
-func (o PolicyGroupBindingObjectArrayOutput) Index(i pulumi.IntInput) PolicyGroupBindingObjectOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PolicyGroupBindingObject {
-		return vs[0].([]PolicyGroupBindingObject)[vs[1].(int)]
-	}).(PolicyGroupBindingObjectOutput)
+func (o GetPolicyGroupsListArrayOutput) Index(i pulumi.IntInput) GetPolicyGroupsListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPolicyGroupsList {
+		return vs[0].([]GetPolicyGroupsList)[vs[1].(int)]
+	}).(GetPolicyGroupsListOutput)
 }
 
-type PolicyGroupCondition struct {
-	AlarmNotifyPeriod int      `pulumi:"alarmNotifyPeriod"`
-	AlarmNotifyType   int      `pulumi:"alarmNotifyType"`
-	CalcPeriod        *int     `pulumi:"calcPeriod"`
-	CalcType          *int     `pulumi:"calcType"`
-	CalcValue         *float64 `pulumi:"calcValue"`
-	ContinuePeriod    *int     `pulumi:"continuePeriod"`
-	MetricId          int      `pulumi:"metricId"`
-}
-
-// PolicyGroupConditionInput is an input type that accepts PolicyGroupConditionArgs and PolicyGroupConditionOutput values.
-// You can construct a concrete instance of `PolicyGroupConditionInput` via:
-//
-//          PolicyGroupConditionArgs{...}
-type PolicyGroupConditionInput interface {
-	pulumi.Input
-
-	ToPolicyGroupConditionOutput() PolicyGroupConditionOutput
-	ToPolicyGroupConditionOutputWithContext(context.Context) PolicyGroupConditionOutput
-}
-
-type PolicyGroupConditionArgs struct {
-	AlarmNotifyPeriod pulumi.IntInput        `pulumi:"alarmNotifyPeriod"`
-	AlarmNotifyType   pulumi.IntInput        `pulumi:"alarmNotifyType"`
-	CalcPeriod        pulumi.IntPtrInput     `pulumi:"calcPeriod"`
-	CalcType          pulumi.IntPtrInput     `pulumi:"calcType"`
-	CalcValue         pulumi.Float64PtrInput `pulumi:"calcValue"`
-	ContinuePeriod    pulumi.IntPtrInput     `pulumi:"continuePeriod"`
-	MetricId          pulumi.IntInput        `pulumi:"metricId"`
-}
-
-func (PolicyGroupConditionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupCondition)(nil)).Elem()
-}
-
-func (i PolicyGroupConditionArgs) ToPolicyGroupConditionOutput() PolicyGroupConditionOutput {
-	return i.ToPolicyGroupConditionOutputWithContext(context.Background())
-}
-
-func (i PolicyGroupConditionArgs) ToPolicyGroupConditionOutputWithContext(ctx context.Context) PolicyGroupConditionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupConditionOutput)
-}
-
-// PolicyGroupConditionArrayInput is an input type that accepts PolicyGroupConditionArray and PolicyGroupConditionArrayOutput values.
-// You can construct a concrete instance of `PolicyGroupConditionArrayInput` via:
-//
-//          PolicyGroupConditionArray{ PolicyGroupConditionArgs{...} }
-type PolicyGroupConditionArrayInput interface {
-	pulumi.Input
-
-	ToPolicyGroupConditionArrayOutput() PolicyGroupConditionArrayOutput
-	ToPolicyGroupConditionArrayOutputWithContext(context.Context) PolicyGroupConditionArrayOutput
-}
-
-type PolicyGroupConditionArray []PolicyGroupConditionInput
-
-func (PolicyGroupConditionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupCondition)(nil)).Elem()
-}
-
-func (i PolicyGroupConditionArray) ToPolicyGroupConditionArrayOutput() PolicyGroupConditionArrayOutput {
-	return i.ToPolicyGroupConditionArrayOutputWithContext(context.Background())
-}
-
-func (i PolicyGroupConditionArray) ToPolicyGroupConditionArrayOutputWithContext(ctx context.Context) PolicyGroupConditionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupConditionArrayOutput)
-}
-
-type PolicyGroupConditionOutput struct{ *pulumi.OutputState }
-
-func (PolicyGroupConditionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupCondition)(nil)).Elem()
-}
-
-func (o PolicyGroupConditionOutput) ToPolicyGroupConditionOutput() PolicyGroupConditionOutput {
-	return o
-}
-
-func (o PolicyGroupConditionOutput) ToPolicyGroupConditionOutputWithContext(ctx context.Context) PolicyGroupConditionOutput {
-	return o
-}
-
-func (o PolicyGroupConditionOutput) AlarmNotifyPeriod() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupCondition) int { return v.AlarmNotifyPeriod }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupConditionOutput) AlarmNotifyType() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupCondition) int { return v.AlarmNotifyType }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupConditionOutput) CalcPeriod() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v PolicyGroupCondition) *int { return v.CalcPeriod }).(pulumi.IntPtrOutput)
-}
-
-func (o PolicyGroupConditionOutput) CalcType() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v PolicyGroupCondition) *int { return v.CalcType }).(pulumi.IntPtrOutput)
-}
-
-func (o PolicyGroupConditionOutput) CalcValue() pulumi.Float64PtrOutput {
-	return o.ApplyT(func(v PolicyGroupCondition) *float64 { return v.CalcValue }).(pulumi.Float64PtrOutput)
-}
-
-func (o PolicyGroupConditionOutput) ContinuePeriod() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v PolicyGroupCondition) *int { return v.ContinuePeriod }).(pulumi.IntPtrOutput)
-}
-
-func (o PolicyGroupConditionOutput) MetricId() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupCondition) int { return v.MetricId }).(pulumi.IntOutput)
-}
-
-type PolicyGroupConditionArrayOutput struct{ *pulumi.OutputState }
-
-func (PolicyGroupConditionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupCondition)(nil)).Elem()
-}
-
-func (o PolicyGroupConditionArrayOutput) ToPolicyGroupConditionArrayOutput() PolicyGroupConditionArrayOutput {
-	return o
-}
-
-func (o PolicyGroupConditionArrayOutput) ToPolicyGroupConditionArrayOutputWithContext(ctx context.Context) PolicyGroupConditionArrayOutput {
-	return o
-}
-
-func (o PolicyGroupConditionArrayOutput) Index(i pulumi.IntInput) PolicyGroupConditionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PolicyGroupCondition {
-		return vs[0].([]PolicyGroupCondition)[vs[1].(int)]
-	}).(PolicyGroupConditionOutput)
-}
-
-type PolicyGroupEventCondition struct {
+type GetPolicyGroupsListCondition struct {
+	// Alarm sending cycle per second. `<0` does not fire, `0` only fires once, and `>0` fires every triggerTime second.
 	AlarmNotifyPeriod int `pulumi:"alarmNotifyPeriod"`
-	AlarmNotifyType   int `pulumi:"alarmNotifyType"`
-	EventId           int `pulumi:"eventId"`
+	// Alarm sending convergence type. `0` continuous alarm, `1` index alarm.
+	AlarmNotifyType int `pulumi:"alarmNotifyType"`
+	// Compare type, `1` means more than, `2`  means greater than or equal, `3` means less than, `4` means less than or equal to, `5` means equal, `6` means not equal, `7` means days rose, `8` means days fell, `9` means weeks rose, `10` means weeks fell, `11` means period rise, `12` means period fell.
+	CalcType int `pulumi:"calcType"`
+	// Threshold value.
+	CalcValue string `pulumi:"calcValue"`
+	// How long does the triggering rule last (per second).
+	ContinueTime int `pulumi:"continueTime"`
+	// The ID of this metric.
+	MetricId int `pulumi:"metricId"`
+	// The name of this metric.
+	MetricShowName string `pulumi:"metricShowName"`
+	// The unit of this metric.
+	MetricUnit string `pulumi:"metricUnit"`
+	// Data aggregation cycle (unit second).
+	Period int `pulumi:"period"`
+	// Threshold rule ID.
+	RuleId int `pulumi:"ruleId"`
 }
 
-// PolicyGroupEventConditionInput is an input type that accepts PolicyGroupEventConditionArgs and PolicyGroupEventConditionOutput values.
-// You can construct a concrete instance of `PolicyGroupEventConditionInput` via:
+// GetPolicyGroupsListConditionInput is an input type that accepts GetPolicyGroupsListConditionArgs and GetPolicyGroupsListConditionOutput values.
+// You can construct a concrete instance of `GetPolicyGroupsListConditionInput` via:
 //
-//          PolicyGroupEventConditionArgs{...}
-type PolicyGroupEventConditionInput interface {
+//          GetPolicyGroupsListConditionArgs{...}
+type GetPolicyGroupsListConditionInput interface {
 	pulumi.Input
 
-	ToPolicyGroupEventConditionOutput() PolicyGroupEventConditionOutput
-	ToPolicyGroupEventConditionOutputWithContext(context.Context) PolicyGroupEventConditionOutput
+	ToGetPolicyGroupsListConditionOutput() GetPolicyGroupsListConditionOutput
+	ToGetPolicyGroupsListConditionOutputWithContext(context.Context) GetPolicyGroupsListConditionOutput
 }
 
-type PolicyGroupEventConditionArgs struct {
+type GetPolicyGroupsListConditionArgs struct {
+	// Alarm sending cycle per second. `<0` does not fire, `0` only fires once, and `>0` fires every triggerTime second.
 	AlarmNotifyPeriod pulumi.IntInput `pulumi:"alarmNotifyPeriod"`
-	AlarmNotifyType   pulumi.IntInput `pulumi:"alarmNotifyType"`
-	EventId           pulumi.IntInput `pulumi:"eventId"`
+	// Alarm sending convergence type. `0` continuous alarm, `1` index alarm.
+	AlarmNotifyType pulumi.IntInput `pulumi:"alarmNotifyType"`
+	// Compare type, `1` means more than, `2`  means greater than or equal, `3` means less than, `4` means less than or equal to, `5` means equal, `6` means not equal, `7` means days rose, `8` means days fell, `9` means weeks rose, `10` means weeks fell, `11` means period rise, `12` means period fell.
+	CalcType pulumi.IntInput `pulumi:"calcType"`
+	// Threshold value.
+	CalcValue pulumi.StringInput `pulumi:"calcValue"`
+	// How long does the triggering rule last (per second).
+	ContinueTime pulumi.IntInput `pulumi:"continueTime"`
+	// The ID of this metric.
+	MetricId pulumi.IntInput `pulumi:"metricId"`
+	// The name of this metric.
+	MetricShowName pulumi.StringInput `pulumi:"metricShowName"`
+	// The unit of this metric.
+	MetricUnit pulumi.StringInput `pulumi:"metricUnit"`
+	// Data aggregation cycle (unit second).
+	Period pulumi.IntInput `pulumi:"period"`
+	// Threshold rule ID.
+	RuleId pulumi.IntInput `pulumi:"ruleId"`
 }
 
-func (PolicyGroupEventConditionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupEventCondition)(nil)).Elem()
+func (GetPolicyGroupsListConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyGroupsListCondition)(nil)).Elem()
 }
 
-func (i PolicyGroupEventConditionArgs) ToPolicyGroupEventConditionOutput() PolicyGroupEventConditionOutput {
-	return i.ToPolicyGroupEventConditionOutputWithContext(context.Background())
+func (i GetPolicyGroupsListConditionArgs) ToGetPolicyGroupsListConditionOutput() GetPolicyGroupsListConditionOutput {
+	return i.ToGetPolicyGroupsListConditionOutputWithContext(context.Background())
 }
 
-func (i PolicyGroupEventConditionArgs) ToPolicyGroupEventConditionOutputWithContext(ctx context.Context) PolicyGroupEventConditionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupEventConditionOutput)
+func (i GetPolicyGroupsListConditionArgs) ToGetPolicyGroupsListConditionOutputWithContext(ctx context.Context) GetPolicyGroupsListConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyGroupsListConditionOutput)
 }
 
-// PolicyGroupEventConditionArrayInput is an input type that accepts PolicyGroupEventConditionArray and PolicyGroupEventConditionArrayOutput values.
-// You can construct a concrete instance of `PolicyGroupEventConditionArrayInput` via:
+// GetPolicyGroupsListConditionArrayInput is an input type that accepts GetPolicyGroupsListConditionArray and GetPolicyGroupsListConditionArrayOutput values.
+// You can construct a concrete instance of `GetPolicyGroupsListConditionArrayInput` via:
 //
-//          PolicyGroupEventConditionArray{ PolicyGroupEventConditionArgs{...} }
-type PolicyGroupEventConditionArrayInput interface {
+//          GetPolicyGroupsListConditionArray{ GetPolicyGroupsListConditionArgs{...} }
+type GetPolicyGroupsListConditionArrayInput interface {
 	pulumi.Input
 
-	ToPolicyGroupEventConditionArrayOutput() PolicyGroupEventConditionArrayOutput
-	ToPolicyGroupEventConditionArrayOutputWithContext(context.Context) PolicyGroupEventConditionArrayOutput
+	ToGetPolicyGroupsListConditionArrayOutput() GetPolicyGroupsListConditionArrayOutput
+	ToGetPolicyGroupsListConditionArrayOutputWithContext(context.Context) GetPolicyGroupsListConditionArrayOutput
 }
 
-type PolicyGroupEventConditionArray []PolicyGroupEventConditionInput
+type GetPolicyGroupsListConditionArray []GetPolicyGroupsListConditionInput
 
-func (PolicyGroupEventConditionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupEventCondition)(nil)).Elem()
+func (GetPolicyGroupsListConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyGroupsListCondition)(nil)).Elem()
 }
 
-func (i PolicyGroupEventConditionArray) ToPolicyGroupEventConditionArrayOutput() PolicyGroupEventConditionArrayOutput {
-	return i.ToPolicyGroupEventConditionArrayOutputWithContext(context.Background())
+func (i GetPolicyGroupsListConditionArray) ToGetPolicyGroupsListConditionArrayOutput() GetPolicyGroupsListConditionArrayOutput {
+	return i.ToGetPolicyGroupsListConditionArrayOutputWithContext(context.Background())
 }
 
-func (i PolicyGroupEventConditionArray) ToPolicyGroupEventConditionArrayOutputWithContext(ctx context.Context) PolicyGroupEventConditionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupEventConditionArrayOutput)
+func (i GetPolicyGroupsListConditionArray) ToGetPolicyGroupsListConditionArrayOutputWithContext(ctx context.Context) GetPolicyGroupsListConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyGroupsListConditionArrayOutput)
 }
 
-type PolicyGroupEventConditionOutput struct{ *pulumi.OutputState }
+type GetPolicyGroupsListConditionOutput struct{ *pulumi.OutputState }
 
-func (PolicyGroupEventConditionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupEventCondition)(nil)).Elem()
+func (GetPolicyGroupsListConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyGroupsListCondition)(nil)).Elem()
 }
 
-func (o PolicyGroupEventConditionOutput) ToPolicyGroupEventConditionOutput() PolicyGroupEventConditionOutput {
+func (o GetPolicyGroupsListConditionOutput) ToGetPolicyGroupsListConditionOutput() GetPolicyGroupsListConditionOutput {
 	return o
 }
 
-func (o PolicyGroupEventConditionOutput) ToPolicyGroupEventConditionOutputWithContext(ctx context.Context) PolicyGroupEventConditionOutput {
+func (o GetPolicyGroupsListConditionOutput) ToGetPolicyGroupsListConditionOutputWithContext(ctx context.Context) GetPolicyGroupsListConditionOutput {
 	return o
 }
 
-func (o PolicyGroupEventConditionOutput) AlarmNotifyPeriod() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupEventCondition) int { return v.AlarmNotifyPeriod }).(pulumi.IntOutput)
+// Alarm sending cycle per second. `<0` does not fire, `0` only fires once, and `>0` fires every triggerTime second.
+func (o GetPolicyGroupsListConditionOutput) AlarmNotifyPeriod() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListCondition) int { return v.AlarmNotifyPeriod }).(pulumi.IntOutput)
 }
 
-func (o PolicyGroupEventConditionOutput) AlarmNotifyType() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupEventCondition) int { return v.AlarmNotifyType }).(pulumi.IntOutput)
+// Alarm sending convergence type. `0` continuous alarm, `1` index alarm.
+func (o GetPolicyGroupsListConditionOutput) AlarmNotifyType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListCondition) int { return v.AlarmNotifyType }).(pulumi.IntOutput)
 }
 
-func (o PolicyGroupEventConditionOutput) EventId() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupEventCondition) int { return v.EventId }).(pulumi.IntOutput)
+// Compare type, `1` means more than, `2`  means greater than or equal, `3` means less than, `4` means less than or equal to, `5` means equal, `6` means not equal, `7` means days rose, `8` means days fell, `9` means weeks rose, `10` means weeks fell, `11` means period rise, `12` means period fell.
+func (o GetPolicyGroupsListConditionOutput) CalcType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListCondition) int { return v.CalcType }).(pulumi.IntOutput)
 }
 
-type PolicyGroupEventConditionArrayOutput struct{ *pulumi.OutputState }
-
-func (PolicyGroupEventConditionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupEventCondition)(nil)).Elem()
+// Threshold value.
+func (o GetPolicyGroupsListConditionOutput) CalcValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListCondition) string { return v.CalcValue }).(pulumi.StringOutput)
 }
 
-func (o PolicyGroupEventConditionArrayOutput) ToPolicyGroupEventConditionArrayOutput() PolicyGroupEventConditionArrayOutput {
+// How long does the triggering rule last (per second).
+func (o GetPolicyGroupsListConditionOutput) ContinueTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListCondition) int { return v.ContinueTime }).(pulumi.IntOutput)
+}
+
+// The ID of this metric.
+func (o GetPolicyGroupsListConditionOutput) MetricId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListCondition) int { return v.MetricId }).(pulumi.IntOutput)
+}
+
+// The name of this metric.
+func (o GetPolicyGroupsListConditionOutput) MetricShowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListCondition) string { return v.MetricShowName }).(pulumi.StringOutput)
+}
+
+// The unit of this metric.
+func (o GetPolicyGroupsListConditionOutput) MetricUnit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListCondition) string { return v.MetricUnit }).(pulumi.StringOutput)
+}
+
+// Data aggregation cycle (unit second).
+func (o GetPolicyGroupsListConditionOutput) Period() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListCondition) int { return v.Period }).(pulumi.IntOutput)
+}
+
+// Threshold rule ID.
+func (o GetPolicyGroupsListConditionOutput) RuleId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListCondition) int { return v.RuleId }).(pulumi.IntOutput)
+}
+
+type GetPolicyGroupsListConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPolicyGroupsListConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyGroupsListCondition)(nil)).Elem()
+}
+
+func (o GetPolicyGroupsListConditionArrayOutput) ToGetPolicyGroupsListConditionArrayOutput() GetPolicyGroupsListConditionArrayOutput {
 	return o
 }
 
-func (o PolicyGroupEventConditionArrayOutput) ToPolicyGroupEventConditionArrayOutputWithContext(ctx context.Context) PolicyGroupEventConditionArrayOutput {
+func (o GetPolicyGroupsListConditionArrayOutput) ToGetPolicyGroupsListConditionArrayOutputWithContext(ctx context.Context) GetPolicyGroupsListConditionArrayOutput {
 	return o
 }
 
-func (o PolicyGroupEventConditionArrayOutput) Index(i pulumi.IntInput) PolicyGroupEventConditionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PolicyGroupEventCondition {
-		return vs[0].([]PolicyGroupEventCondition)[vs[1].(int)]
-	}).(PolicyGroupEventConditionOutput)
+func (o GetPolicyGroupsListConditionArrayOutput) Index(i pulumi.IntInput) GetPolicyGroupsListConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPolicyGroupsListCondition {
+		return vs[0].([]GetPolicyGroupsListCondition)[vs[1].(int)]
+	}).(GetPolicyGroupsListConditionOutput)
 }
 
-type PolicyGroupReceiver struct {
-	EndTime            *int     `pulumi:"endTime"`
-	NeedSendNotice     *int     `pulumi:"needSendNotice"`
-	NotifyWays         []string `pulumi:"notifyWays"`
-	PersonInterval     *int     `pulumi:"personInterval"`
-	ReceiveLanguage    *string  `pulumi:"receiveLanguage"`
-	ReceiverGroupLists []int    `pulumi:"receiverGroupLists"`
-	ReceiverType       *string  `pulumi:"receiverType"`
-	ReceiverUserLists  []int    `pulumi:"receiverUserLists"`
-	RecoverNotifies    []string `pulumi:"recoverNotifies"`
-	RoundInterval      *int     `pulumi:"roundInterval"`
-	RoundNumber        *int     `pulumi:"roundNumber"`
-	SendFors           []string `pulumi:"sendFors"`
-	StartTime          *int     `pulumi:"startTime"`
-	UidLists           []int    `pulumi:"uidLists"`
+type GetPolicyGroupsListEventCondition struct {
+	// Alarm sending cycle per second. `<0` does not fire, `0` only fires once, and `>0` fires every triggerTime second.
+	AlarmNotifyPeriod int `pulumi:"alarmNotifyPeriod"`
+	// Alarm sending convergence type. `0` continuous alarm, `1` index alarm.
+	AlarmNotifyType int `pulumi:"alarmNotifyType"`
+	// The ID of this event metric.
+	EventId int `pulumi:"eventId"`
+	// The name of this event metric.
+	EventShowName string `pulumi:"eventShowName"`
+	// Threshold rule ID.
+	RuleId int `pulumi:"ruleId"`
 }
 
-// PolicyGroupReceiverInput is an input type that accepts PolicyGroupReceiverArgs and PolicyGroupReceiverOutput values.
-// You can construct a concrete instance of `PolicyGroupReceiverInput` via:
+// GetPolicyGroupsListEventConditionInput is an input type that accepts GetPolicyGroupsListEventConditionArgs and GetPolicyGroupsListEventConditionOutput values.
+// You can construct a concrete instance of `GetPolicyGroupsListEventConditionInput` via:
 //
-//          PolicyGroupReceiverArgs{...}
-type PolicyGroupReceiverInput interface {
+//          GetPolicyGroupsListEventConditionArgs{...}
+type GetPolicyGroupsListEventConditionInput interface {
 	pulumi.Input
 
-	ToPolicyGroupReceiverOutput() PolicyGroupReceiverOutput
-	ToPolicyGroupReceiverOutputWithContext(context.Context) PolicyGroupReceiverOutput
+	ToGetPolicyGroupsListEventConditionOutput() GetPolicyGroupsListEventConditionOutput
+	ToGetPolicyGroupsListEventConditionOutputWithContext(context.Context) GetPolicyGroupsListEventConditionOutput
 }
 
-type PolicyGroupReceiverArgs struct {
-	EndTime            pulumi.IntPtrInput      `pulumi:"endTime"`
-	NeedSendNotice     pulumi.IntPtrInput      `pulumi:"needSendNotice"`
-	NotifyWays         pulumi.StringArrayInput `pulumi:"notifyWays"`
-	PersonInterval     pulumi.IntPtrInput      `pulumi:"personInterval"`
-	ReceiveLanguage    pulumi.StringPtrInput   `pulumi:"receiveLanguage"`
-	ReceiverGroupLists pulumi.IntArrayInput    `pulumi:"receiverGroupLists"`
-	ReceiverType       pulumi.StringPtrInput   `pulumi:"receiverType"`
-	ReceiverUserLists  pulumi.IntArrayInput    `pulumi:"receiverUserLists"`
-	RecoverNotifies    pulumi.StringArrayInput `pulumi:"recoverNotifies"`
-	RoundInterval      pulumi.IntPtrInput      `pulumi:"roundInterval"`
-	RoundNumber        pulumi.IntPtrInput      `pulumi:"roundNumber"`
-	SendFors           pulumi.StringArrayInput `pulumi:"sendFors"`
-	StartTime          pulumi.IntPtrInput      `pulumi:"startTime"`
-	UidLists           pulumi.IntArrayInput    `pulumi:"uidLists"`
+type GetPolicyGroupsListEventConditionArgs struct {
+	// Alarm sending cycle per second. `<0` does not fire, `0` only fires once, and `>0` fires every triggerTime second.
+	AlarmNotifyPeriod pulumi.IntInput `pulumi:"alarmNotifyPeriod"`
+	// Alarm sending convergence type. `0` continuous alarm, `1` index alarm.
+	AlarmNotifyType pulumi.IntInput `pulumi:"alarmNotifyType"`
+	// The ID of this event metric.
+	EventId pulumi.IntInput `pulumi:"eventId"`
+	// The name of this event metric.
+	EventShowName pulumi.StringInput `pulumi:"eventShowName"`
+	// Threshold rule ID.
+	RuleId pulumi.IntInput `pulumi:"ruleId"`
 }
 
-func (PolicyGroupReceiverArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupReceiver)(nil)).Elem()
+func (GetPolicyGroupsListEventConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyGroupsListEventCondition)(nil)).Elem()
 }
 
-func (i PolicyGroupReceiverArgs) ToPolicyGroupReceiverOutput() PolicyGroupReceiverOutput {
-	return i.ToPolicyGroupReceiverOutputWithContext(context.Background())
+func (i GetPolicyGroupsListEventConditionArgs) ToGetPolicyGroupsListEventConditionOutput() GetPolicyGroupsListEventConditionOutput {
+	return i.ToGetPolicyGroupsListEventConditionOutputWithContext(context.Background())
 }
 
-func (i PolicyGroupReceiverArgs) ToPolicyGroupReceiverOutputWithContext(ctx context.Context) PolicyGroupReceiverOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupReceiverOutput)
+func (i GetPolicyGroupsListEventConditionArgs) ToGetPolicyGroupsListEventConditionOutputWithContext(ctx context.Context) GetPolicyGroupsListEventConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyGroupsListEventConditionOutput)
 }
 
-// PolicyGroupReceiverArrayInput is an input type that accepts PolicyGroupReceiverArray and PolicyGroupReceiverArrayOutput values.
-// You can construct a concrete instance of `PolicyGroupReceiverArrayInput` via:
+// GetPolicyGroupsListEventConditionArrayInput is an input type that accepts GetPolicyGroupsListEventConditionArray and GetPolicyGroupsListEventConditionArrayOutput values.
+// You can construct a concrete instance of `GetPolicyGroupsListEventConditionArrayInput` via:
 //
-//          PolicyGroupReceiverArray{ PolicyGroupReceiverArgs{...} }
-type PolicyGroupReceiverArrayInput interface {
+//          GetPolicyGroupsListEventConditionArray{ GetPolicyGroupsListEventConditionArgs{...} }
+type GetPolicyGroupsListEventConditionArrayInput interface {
 	pulumi.Input
 
-	ToPolicyGroupReceiverArrayOutput() PolicyGroupReceiverArrayOutput
-	ToPolicyGroupReceiverArrayOutputWithContext(context.Context) PolicyGroupReceiverArrayOutput
+	ToGetPolicyGroupsListEventConditionArrayOutput() GetPolicyGroupsListEventConditionArrayOutput
+	ToGetPolicyGroupsListEventConditionArrayOutputWithContext(context.Context) GetPolicyGroupsListEventConditionArrayOutput
 }
 
-type PolicyGroupReceiverArray []PolicyGroupReceiverInput
+type GetPolicyGroupsListEventConditionArray []GetPolicyGroupsListEventConditionInput
 
-func (PolicyGroupReceiverArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupReceiver)(nil)).Elem()
+func (GetPolicyGroupsListEventConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyGroupsListEventCondition)(nil)).Elem()
 }
 
-func (i PolicyGroupReceiverArray) ToPolicyGroupReceiverArrayOutput() PolicyGroupReceiverArrayOutput {
-	return i.ToPolicyGroupReceiverArrayOutputWithContext(context.Background())
+func (i GetPolicyGroupsListEventConditionArray) ToGetPolicyGroupsListEventConditionArrayOutput() GetPolicyGroupsListEventConditionArrayOutput {
+	return i.ToGetPolicyGroupsListEventConditionArrayOutputWithContext(context.Background())
 }
 
-func (i PolicyGroupReceiverArray) ToPolicyGroupReceiverArrayOutputWithContext(ctx context.Context) PolicyGroupReceiverArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupReceiverArrayOutput)
+func (i GetPolicyGroupsListEventConditionArray) ToGetPolicyGroupsListEventConditionArrayOutputWithContext(ctx context.Context) GetPolicyGroupsListEventConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyGroupsListEventConditionArrayOutput)
 }
 
-type PolicyGroupReceiverOutput struct{ *pulumi.OutputState }
+type GetPolicyGroupsListEventConditionOutput struct{ *pulumi.OutputState }
 
-func (PolicyGroupReceiverOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupReceiver)(nil)).Elem()
+func (GetPolicyGroupsListEventConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyGroupsListEventCondition)(nil)).Elem()
 }
 
-func (o PolicyGroupReceiverOutput) ToPolicyGroupReceiverOutput() PolicyGroupReceiverOutput {
+func (o GetPolicyGroupsListEventConditionOutput) ToGetPolicyGroupsListEventConditionOutput() GetPolicyGroupsListEventConditionOutput {
 	return o
 }
 
-func (o PolicyGroupReceiverOutput) ToPolicyGroupReceiverOutputWithContext(ctx context.Context) PolicyGroupReceiverOutput {
+func (o GetPolicyGroupsListEventConditionOutput) ToGetPolicyGroupsListEventConditionOutputWithContext(ctx context.Context) GetPolicyGroupsListEventConditionOutput {
 	return o
 }
 
-func (o PolicyGroupReceiverOutput) EndTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) *int { return v.EndTime }).(pulumi.IntPtrOutput)
+// Alarm sending cycle per second. `<0` does not fire, `0` only fires once, and `>0` fires every triggerTime second.
+func (o GetPolicyGroupsListEventConditionOutput) AlarmNotifyPeriod() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListEventCondition) int { return v.AlarmNotifyPeriod }).(pulumi.IntOutput)
 }
 
-func (o PolicyGroupReceiverOutput) NeedSendNotice() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) *int { return v.NeedSendNotice }).(pulumi.IntPtrOutput)
+// Alarm sending convergence type. `0` continuous alarm, `1` index alarm.
+func (o GetPolicyGroupsListEventConditionOutput) AlarmNotifyType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListEventCondition) int { return v.AlarmNotifyType }).(pulumi.IntOutput)
 }
 
-func (o PolicyGroupReceiverOutput) NotifyWays() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) []string { return v.NotifyWays }).(pulumi.StringArrayOutput)
+// The ID of this event metric.
+func (o GetPolicyGroupsListEventConditionOutput) EventId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListEventCondition) int { return v.EventId }).(pulumi.IntOutput)
 }
 
-func (o PolicyGroupReceiverOutput) PersonInterval() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) *int { return v.PersonInterval }).(pulumi.IntPtrOutput)
+// The name of this event metric.
+func (o GetPolicyGroupsListEventConditionOutput) EventShowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListEventCondition) string { return v.EventShowName }).(pulumi.StringOutput)
 }
 
-func (o PolicyGroupReceiverOutput) ReceiveLanguage() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) *string { return v.ReceiveLanguage }).(pulumi.StringPtrOutput)
+// Threshold rule ID.
+func (o GetPolicyGroupsListEventConditionOutput) RuleId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListEventCondition) int { return v.RuleId }).(pulumi.IntOutput)
 }
 
-func (o PolicyGroupReceiverOutput) ReceiverGroupLists() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) []int { return v.ReceiverGroupLists }).(pulumi.IntArrayOutput)
+type GetPolicyGroupsListEventConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPolicyGroupsListEventConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyGroupsListEventCondition)(nil)).Elem()
 }
 
-func (o PolicyGroupReceiverOutput) ReceiverType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) *string { return v.ReceiverType }).(pulumi.StringPtrOutput)
-}
-
-func (o PolicyGroupReceiverOutput) ReceiverUserLists() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) []int { return v.ReceiverUserLists }).(pulumi.IntArrayOutput)
-}
-
-func (o PolicyGroupReceiverOutput) RecoverNotifies() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) []string { return v.RecoverNotifies }).(pulumi.StringArrayOutput)
-}
-
-func (o PolicyGroupReceiverOutput) RoundInterval() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) *int { return v.RoundInterval }).(pulumi.IntPtrOutput)
-}
-
-func (o PolicyGroupReceiverOutput) RoundNumber() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) *int { return v.RoundNumber }).(pulumi.IntPtrOutput)
-}
-
-func (o PolicyGroupReceiverOutput) SendFors() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) []string { return v.SendFors }).(pulumi.StringArrayOutput)
-}
-
-func (o PolicyGroupReceiverOutput) StartTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) *int { return v.StartTime }).(pulumi.IntPtrOutput)
-}
-
-func (o PolicyGroupReceiverOutput) UidLists() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v PolicyGroupReceiver) []int { return v.UidLists }).(pulumi.IntArrayOutput)
-}
-
-type PolicyGroupReceiverArrayOutput struct{ *pulumi.OutputState }
-
-func (PolicyGroupReceiverArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupReceiver)(nil)).Elem()
-}
-
-func (o PolicyGroupReceiverArrayOutput) ToPolicyGroupReceiverArrayOutput() PolicyGroupReceiverArrayOutput {
+func (o GetPolicyGroupsListEventConditionArrayOutput) ToGetPolicyGroupsListEventConditionArrayOutput() GetPolicyGroupsListEventConditionArrayOutput {
 	return o
 }
 
-func (o PolicyGroupReceiverArrayOutput) ToPolicyGroupReceiverArrayOutputWithContext(ctx context.Context) PolicyGroupReceiverArrayOutput {
+func (o GetPolicyGroupsListEventConditionArrayOutput) ToGetPolicyGroupsListEventConditionArrayOutputWithContext(ctx context.Context) GetPolicyGroupsListEventConditionArrayOutput {
 	return o
 }
 
-func (o PolicyGroupReceiverArrayOutput) Index(i pulumi.IntInput) PolicyGroupReceiverOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PolicyGroupReceiver {
-		return vs[0].([]PolicyGroupReceiver)[vs[1].(int)]
-	}).(PolicyGroupReceiverOutput)
+func (o GetPolicyGroupsListEventConditionArrayOutput) Index(i pulumi.IntInput) GetPolicyGroupsListEventConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPolicyGroupsListEventCondition {
+		return vs[0].([]GetPolicyGroupsListEventCondition)[vs[1].(int)]
+	}).(GetPolicyGroupsListEventConditionOutput)
 }
 
-type PolicyGroupsList struct {
-	CanSetDefault   bool                             `pulumi:"canSetDefault"`
-	Conditions      []PolicyGroupsListCondition      `pulumi:"conditions"`
-	EventConditions []PolicyGroupsListEventCondition `pulumi:"eventConditions"`
-	GroupId         int                              `pulumi:"groupId"`
-	GroupName       string                           `pulumi:"groupName"`
-	InsertTime      int                              `pulumi:"insertTime"`
-	IsDefault       int                              `pulumi:"isDefault"`
-	IsOpen          bool                             `pulumi:"isOpen"`
-	LastEditUin     string                           `pulumi:"lastEditUin"`
-	NoShieldedSum   int                              `pulumi:"noShieldedSum"`
-	ParentGroupId   int                              `pulumi:"parentGroupId"`
-	PolicyViewName  string                           `pulumi:"policyViewName"`
-	ProjectId       int                              `pulumi:"projectId"`
-	Receivers       []PolicyGroupsListReceiver       `pulumi:"receivers"`
-	Remark          string                           `pulumi:"remark"`
-	UpdateTime      int                              `pulumi:"updateTime"`
-	UseSum          int                              `pulumi:"useSum"`
+type GetPolicyGroupsListReceiver struct {
+	// End of alarm period. Meaning with `startTime`.
+	EndTime int `pulumi:"endTime"`
+	// Do need a telephone alarm contact prompt.You don't need 0, you need 1.
+	NeedSendNotice int `pulumi:"needSendNotice"`
+	// Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+	NotifyWays []string `pulumi:"notifyWays"`
+	// Telephone warning to individual interval (seconds).
+	PersonInterval int `pulumi:"personInterval"`
+	// Alert sending language.
+	ReceiveLanguage string `pulumi:"receiveLanguage"`
+	// Alarm receive group ID list.
+	ReceiverGroupLists []int `pulumi:"receiverGroupLists"`
+	// Receive type. Optional 'group' or 'user'.
+	ReceiverType string `pulumi:"receiverType"`
+	// Alarm receiver ID list.
+	ReceiverUserLists []int `pulumi:"receiverUserLists"`
+	// Restore notification mode. Optional "SMS".
+	RecoverNotifies []string `pulumi:"recoverNotifies"`
+	// Telephone alarm interval per round (seconds).
+	RoundInterval int `pulumi:"roundInterval"`
+	// Telephone alarm number.
+	RoundNumber int `pulumi:"roundNumber"`
+	// Telephone warning time.Option "OCCUR", "RECOVER".
+	SendFors []string `pulumi:"sendFors"`
+	// Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+	StartTime int `pulumi:"startTime"`
+	// The phone alerts the receiver uid.
+	UidLists []int `pulumi:"uidLists"`
 }
 
-// PolicyGroupsListInput is an input type that accepts PolicyGroupsListArgs and PolicyGroupsListOutput values.
-// You can construct a concrete instance of `PolicyGroupsListInput` via:
+// GetPolicyGroupsListReceiverInput is an input type that accepts GetPolicyGroupsListReceiverArgs and GetPolicyGroupsListReceiverOutput values.
+// You can construct a concrete instance of `GetPolicyGroupsListReceiverInput` via:
 //
-//          PolicyGroupsListArgs{...}
-type PolicyGroupsListInput interface {
+//          GetPolicyGroupsListReceiverArgs{...}
+type GetPolicyGroupsListReceiverInput interface {
 	pulumi.Input
 
-	ToPolicyGroupsListOutput() PolicyGroupsListOutput
-	ToPolicyGroupsListOutputWithContext(context.Context) PolicyGroupsListOutput
+	ToGetPolicyGroupsListReceiverOutput() GetPolicyGroupsListReceiverOutput
+	ToGetPolicyGroupsListReceiverOutputWithContext(context.Context) GetPolicyGroupsListReceiverOutput
 }
 
-type PolicyGroupsListArgs struct {
-	CanSetDefault   pulumi.BoolInput                         `pulumi:"canSetDefault"`
-	Conditions      PolicyGroupsListConditionArrayInput      `pulumi:"conditions"`
-	EventConditions PolicyGroupsListEventConditionArrayInput `pulumi:"eventConditions"`
-	GroupId         pulumi.IntInput                          `pulumi:"groupId"`
-	GroupName       pulumi.StringInput                       `pulumi:"groupName"`
-	InsertTime      pulumi.IntInput                          `pulumi:"insertTime"`
-	IsDefault       pulumi.IntInput                          `pulumi:"isDefault"`
-	IsOpen          pulumi.BoolInput                         `pulumi:"isOpen"`
-	LastEditUin     pulumi.StringInput                       `pulumi:"lastEditUin"`
-	NoShieldedSum   pulumi.IntInput                          `pulumi:"noShieldedSum"`
-	ParentGroupId   pulumi.IntInput                          `pulumi:"parentGroupId"`
-	PolicyViewName  pulumi.StringInput                       `pulumi:"policyViewName"`
-	ProjectId       pulumi.IntInput                          `pulumi:"projectId"`
-	Receivers       PolicyGroupsListReceiverArrayInput       `pulumi:"receivers"`
-	Remark          pulumi.StringInput                       `pulumi:"remark"`
-	UpdateTime      pulumi.IntInput                          `pulumi:"updateTime"`
-	UseSum          pulumi.IntInput                          `pulumi:"useSum"`
+type GetPolicyGroupsListReceiverArgs struct {
+	// End of alarm period. Meaning with `startTime`.
+	EndTime pulumi.IntInput `pulumi:"endTime"`
+	// Do need a telephone alarm contact prompt.You don't need 0, you need 1.
+	NeedSendNotice pulumi.IntInput `pulumi:"needSendNotice"`
+	// Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+	NotifyWays pulumi.StringArrayInput `pulumi:"notifyWays"`
+	// Telephone warning to individual interval (seconds).
+	PersonInterval pulumi.IntInput `pulumi:"personInterval"`
+	// Alert sending language.
+	ReceiveLanguage pulumi.StringInput `pulumi:"receiveLanguage"`
+	// Alarm receive group ID list.
+	ReceiverGroupLists pulumi.IntArrayInput `pulumi:"receiverGroupLists"`
+	// Receive type. Optional 'group' or 'user'.
+	ReceiverType pulumi.StringInput `pulumi:"receiverType"`
+	// Alarm receiver ID list.
+	ReceiverUserLists pulumi.IntArrayInput `pulumi:"receiverUserLists"`
+	// Restore notification mode. Optional "SMS".
+	RecoverNotifies pulumi.StringArrayInput `pulumi:"recoverNotifies"`
+	// Telephone alarm interval per round (seconds).
+	RoundInterval pulumi.IntInput `pulumi:"roundInterval"`
+	// Telephone alarm number.
+	RoundNumber pulumi.IntInput `pulumi:"roundNumber"`
+	// Telephone warning time.Option "OCCUR", "RECOVER".
+	SendFors pulumi.StringArrayInput `pulumi:"sendFors"`
+	// Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+	StartTime pulumi.IntInput `pulumi:"startTime"`
+	// The phone alerts the receiver uid.
+	UidLists pulumi.IntArrayInput `pulumi:"uidLists"`
 }
 
-func (PolicyGroupsListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupsList)(nil)).Elem()
+func (GetPolicyGroupsListReceiverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyGroupsListReceiver)(nil)).Elem()
 }
 
-func (i PolicyGroupsListArgs) ToPolicyGroupsListOutput() PolicyGroupsListOutput {
-	return i.ToPolicyGroupsListOutputWithContext(context.Background())
+func (i GetPolicyGroupsListReceiverArgs) ToGetPolicyGroupsListReceiverOutput() GetPolicyGroupsListReceiverOutput {
+	return i.ToGetPolicyGroupsListReceiverOutputWithContext(context.Background())
 }
 
-func (i PolicyGroupsListArgs) ToPolicyGroupsListOutputWithContext(ctx context.Context) PolicyGroupsListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupsListOutput)
+func (i GetPolicyGroupsListReceiverArgs) ToGetPolicyGroupsListReceiverOutputWithContext(ctx context.Context) GetPolicyGroupsListReceiverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyGroupsListReceiverOutput)
 }
 
-// PolicyGroupsListArrayInput is an input type that accepts PolicyGroupsListArray and PolicyGroupsListArrayOutput values.
-// You can construct a concrete instance of `PolicyGroupsListArrayInput` via:
+// GetPolicyGroupsListReceiverArrayInput is an input type that accepts GetPolicyGroupsListReceiverArray and GetPolicyGroupsListReceiverArrayOutput values.
+// You can construct a concrete instance of `GetPolicyGroupsListReceiverArrayInput` via:
 //
-//          PolicyGroupsListArray{ PolicyGroupsListArgs{...} }
-type PolicyGroupsListArrayInput interface {
+//          GetPolicyGroupsListReceiverArray{ GetPolicyGroupsListReceiverArgs{...} }
+type GetPolicyGroupsListReceiverArrayInput interface {
 	pulumi.Input
 
-	ToPolicyGroupsListArrayOutput() PolicyGroupsListArrayOutput
-	ToPolicyGroupsListArrayOutputWithContext(context.Context) PolicyGroupsListArrayOutput
+	ToGetPolicyGroupsListReceiverArrayOutput() GetPolicyGroupsListReceiverArrayOutput
+	ToGetPolicyGroupsListReceiverArrayOutputWithContext(context.Context) GetPolicyGroupsListReceiverArrayOutput
 }
 
-type PolicyGroupsListArray []PolicyGroupsListInput
+type GetPolicyGroupsListReceiverArray []GetPolicyGroupsListReceiverInput
 
-func (PolicyGroupsListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupsList)(nil)).Elem()
+func (GetPolicyGroupsListReceiverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyGroupsListReceiver)(nil)).Elem()
 }
 
-func (i PolicyGroupsListArray) ToPolicyGroupsListArrayOutput() PolicyGroupsListArrayOutput {
-	return i.ToPolicyGroupsListArrayOutputWithContext(context.Background())
+func (i GetPolicyGroupsListReceiverArray) ToGetPolicyGroupsListReceiverArrayOutput() GetPolicyGroupsListReceiverArrayOutput {
+	return i.ToGetPolicyGroupsListReceiverArrayOutputWithContext(context.Background())
 }
 
-func (i PolicyGroupsListArray) ToPolicyGroupsListArrayOutputWithContext(ctx context.Context) PolicyGroupsListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupsListArrayOutput)
+func (i GetPolicyGroupsListReceiverArray) ToGetPolicyGroupsListReceiverArrayOutputWithContext(ctx context.Context) GetPolicyGroupsListReceiverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyGroupsListReceiverArrayOutput)
 }
 
-type PolicyGroupsListOutput struct{ *pulumi.OutputState }
+type GetPolicyGroupsListReceiverOutput struct{ *pulumi.OutputState }
 
-func (PolicyGroupsListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupsList)(nil)).Elem()
+func (GetPolicyGroupsListReceiverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyGroupsListReceiver)(nil)).Elem()
 }
 
-func (o PolicyGroupsListOutput) ToPolicyGroupsListOutput() PolicyGroupsListOutput {
+func (o GetPolicyGroupsListReceiverOutput) ToGetPolicyGroupsListReceiverOutput() GetPolicyGroupsListReceiverOutput {
 	return o
 }
 
-func (o PolicyGroupsListOutput) ToPolicyGroupsListOutputWithContext(ctx context.Context) PolicyGroupsListOutput {
+func (o GetPolicyGroupsListReceiverOutput) ToGetPolicyGroupsListReceiverOutputWithContext(ctx context.Context) GetPolicyGroupsListReceiverOutput {
 	return o
 }
 
-func (o PolicyGroupsListOutput) CanSetDefault() pulumi.BoolOutput {
-	return o.ApplyT(func(v PolicyGroupsList) bool { return v.CanSetDefault }).(pulumi.BoolOutput)
+// End of alarm period. Meaning with `startTime`.
+func (o GetPolicyGroupsListReceiverOutput) EndTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) int { return v.EndTime }).(pulumi.IntOutput)
 }
 
-func (o PolicyGroupsListOutput) Conditions() PolicyGroupsListConditionArrayOutput {
-	return o.ApplyT(func(v PolicyGroupsList) []PolicyGroupsListCondition { return v.Conditions }).(PolicyGroupsListConditionArrayOutput)
+// Do need a telephone alarm contact prompt.You don't need 0, you need 1.
+func (o GetPolicyGroupsListReceiverOutput) NeedSendNotice() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) int { return v.NeedSendNotice }).(pulumi.IntOutput)
 }
 
-func (o PolicyGroupsListOutput) EventConditions() PolicyGroupsListEventConditionArrayOutput {
-	return o.ApplyT(func(v PolicyGroupsList) []PolicyGroupsListEventCondition { return v.EventConditions }).(PolicyGroupsListEventConditionArrayOutput)
+// Method of warning notification.Optional `CALL`,`EMAIL`,`SITE`,`SMS`,`WECHAT`.
+func (o GetPolicyGroupsListReceiverOutput) NotifyWays() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) []string { return v.NotifyWays }).(pulumi.StringArrayOutput)
 }
 
-func (o PolicyGroupsListOutput) GroupId() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsList) int { return v.GroupId }).(pulumi.IntOutput)
+// Telephone warning to individual interval (seconds).
+func (o GetPolicyGroupsListReceiverOutput) PersonInterval() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) int { return v.PersonInterval }).(pulumi.IntOutput)
 }
 
-func (o PolicyGroupsListOutput) GroupName() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyGroupsList) string { return v.GroupName }).(pulumi.StringOutput)
+// Alert sending language.
+func (o GetPolicyGroupsListReceiverOutput) ReceiveLanguage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) string { return v.ReceiveLanguage }).(pulumi.StringOutput)
 }
 
-func (o PolicyGroupsListOutput) InsertTime() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsList) int { return v.InsertTime }).(pulumi.IntOutput)
+// Alarm receive group ID list.
+func (o GetPolicyGroupsListReceiverOutput) ReceiverGroupLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) []int { return v.ReceiverGroupLists }).(pulumi.IntArrayOutput)
 }
 
-func (o PolicyGroupsListOutput) IsDefault() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsList) int { return v.IsDefault }).(pulumi.IntOutput)
+// Receive type. Optional 'group' or 'user'.
+func (o GetPolicyGroupsListReceiverOutput) ReceiverType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) string { return v.ReceiverType }).(pulumi.StringOutput)
 }
 
-func (o PolicyGroupsListOutput) IsOpen() pulumi.BoolOutput {
-	return o.ApplyT(func(v PolicyGroupsList) bool { return v.IsOpen }).(pulumi.BoolOutput)
+// Alarm receiver ID list.
+func (o GetPolicyGroupsListReceiverOutput) ReceiverUserLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) []int { return v.ReceiverUserLists }).(pulumi.IntArrayOutput)
 }
 
-func (o PolicyGroupsListOutput) LastEditUin() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyGroupsList) string { return v.LastEditUin }).(pulumi.StringOutput)
+// Restore notification mode. Optional "SMS".
+func (o GetPolicyGroupsListReceiverOutput) RecoverNotifies() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) []string { return v.RecoverNotifies }).(pulumi.StringArrayOutput)
 }
 
-func (o PolicyGroupsListOutput) NoShieldedSum() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsList) int { return v.NoShieldedSum }).(pulumi.IntOutput)
+// Telephone alarm interval per round (seconds).
+func (o GetPolicyGroupsListReceiverOutput) RoundInterval() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) int { return v.RoundInterval }).(pulumi.IntOutput)
 }
 
-func (o PolicyGroupsListOutput) ParentGroupId() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsList) int { return v.ParentGroupId }).(pulumi.IntOutput)
+// Telephone alarm number.
+func (o GetPolicyGroupsListReceiverOutput) RoundNumber() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) int { return v.RoundNumber }).(pulumi.IntOutput)
 }
 
-func (o PolicyGroupsListOutput) PolicyViewName() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyGroupsList) string { return v.PolicyViewName }).(pulumi.StringOutput)
+// Telephone warning time.Option "OCCUR", "RECOVER".
+func (o GetPolicyGroupsListReceiverOutput) SendFors() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) []string { return v.SendFors }).(pulumi.StringArrayOutput)
 }
 
-func (o PolicyGroupsListOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsList) int { return v.ProjectId }).(pulumi.IntOutput)
+// Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.
+func (o GetPolicyGroupsListReceiverOutput) StartTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) int { return v.StartTime }).(pulumi.IntOutput)
 }
 
-func (o PolicyGroupsListOutput) Receivers() PolicyGroupsListReceiverArrayOutput {
-	return o.ApplyT(func(v PolicyGroupsList) []PolicyGroupsListReceiver { return v.Receivers }).(PolicyGroupsListReceiverArrayOutput)
+// The phone alerts the receiver uid.
+func (o GetPolicyGroupsListReceiverOutput) UidLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetPolicyGroupsListReceiver) []int { return v.UidLists }).(pulumi.IntArrayOutput)
 }
 
-func (o PolicyGroupsListOutput) Remark() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyGroupsList) string { return v.Remark }).(pulumi.StringOutput)
+type GetPolicyGroupsListReceiverArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPolicyGroupsListReceiverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyGroupsListReceiver)(nil)).Elem()
 }
 
-func (o PolicyGroupsListOutput) UpdateTime() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsList) int { return v.UpdateTime }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListOutput) UseSum() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsList) int { return v.UseSum }).(pulumi.IntOutput)
-}
-
-type PolicyGroupsListArrayOutput struct{ *pulumi.OutputState }
-
-func (PolicyGroupsListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupsList)(nil)).Elem()
-}
-
-func (o PolicyGroupsListArrayOutput) ToPolicyGroupsListArrayOutput() PolicyGroupsListArrayOutput {
+func (o GetPolicyGroupsListReceiverArrayOutput) ToGetPolicyGroupsListReceiverArrayOutput() GetPolicyGroupsListReceiverArrayOutput {
 	return o
 }
 
-func (o PolicyGroupsListArrayOutput) ToPolicyGroupsListArrayOutputWithContext(ctx context.Context) PolicyGroupsListArrayOutput {
+func (o GetPolicyGroupsListReceiverArrayOutput) ToGetPolicyGroupsListReceiverArrayOutputWithContext(ctx context.Context) GetPolicyGroupsListReceiverArrayOutput {
 	return o
 }
 
-func (o PolicyGroupsListArrayOutput) Index(i pulumi.IntInput) PolicyGroupsListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PolicyGroupsList {
-		return vs[0].([]PolicyGroupsList)[vs[1].(int)]
-	}).(PolicyGroupsListOutput)
-}
-
-type PolicyGroupsListCondition struct {
-	AlarmNotifyPeriod int    `pulumi:"alarmNotifyPeriod"`
-	AlarmNotifyType   int    `pulumi:"alarmNotifyType"`
-	CalcType          int    `pulumi:"calcType"`
-	CalcValue         string `pulumi:"calcValue"`
-	ContinueTime      int    `pulumi:"continueTime"`
-	MetricId          int    `pulumi:"metricId"`
-	MetricShowName    string `pulumi:"metricShowName"`
-	MetricUnit        string `pulumi:"metricUnit"`
-	Period            int    `pulumi:"period"`
-	RuleId            int    `pulumi:"ruleId"`
-}
-
-// PolicyGroupsListConditionInput is an input type that accepts PolicyGroupsListConditionArgs and PolicyGroupsListConditionOutput values.
-// You can construct a concrete instance of `PolicyGroupsListConditionInput` via:
-//
-//          PolicyGroupsListConditionArgs{...}
-type PolicyGroupsListConditionInput interface {
-	pulumi.Input
-
-	ToPolicyGroupsListConditionOutput() PolicyGroupsListConditionOutput
-	ToPolicyGroupsListConditionOutputWithContext(context.Context) PolicyGroupsListConditionOutput
-}
-
-type PolicyGroupsListConditionArgs struct {
-	AlarmNotifyPeriod pulumi.IntInput    `pulumi:"alarmNotifyPeriod"`
-	AlarmNotifyType   pulumi.IntInput    `pulumi:"alarmNotifyType"`
-	CalcType          pulumi.IntInput    `pulumi:"calcType"`
-	CalcValue         pulumi.StringInput `pulumi:"calcValue"`
-	ContinueTime      pulumi.IntInput    `pulumi:"continueTime"`
-	MetricId          pulumi.IntInput    `pulumi:"metricId"`
-	MetricShowName    pulumi.StringInput `pulumi:"metricShowName"`
-	MetricUnit        pulumi.StringInput `pulumi:"metricUnit"`
-	Period            pulumi.IntInput    `pulumi:"period"`
-	RuleId            pulumi.IntInput    `pulumi:"ruleId"`
-}
-
-func (PolicyGroupsListConditionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupsListCondition)(nil)).Elem()
-}
-
-func (i PolicyGroupsListConditionArgs) ToPolicyGroupsListConditionOutput() PolicyGroupsListConditionOutput {
-	return i.ToPolicyGroupsListConditionOutputWithContext(context.Background())
-}
-
-func (i PolicyGroupsListConditionArgs) ToPolicyGroupsListConditionOutputWithContext(ctx context.Context) PolicyGroupsListConditionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupsListConditionOutput)
-}
-
-// PolicyGroupsListConditionArrayInput is an input type that accepts PolicyGroupsListConditionArray and PolicyGroupsListConditionArrayOutput values.
-// You can construct a concrete instance of `PolicyGroupsListConditionArrayInput` via:
-//
-//          PolicyGroupsListConditionArray{ PolicyGroupsListConditionArgs{...} }
-type PolicyGroupsListConditionArrayInput interface {
-	pulumi.Input
-
-	ToPolicyGroupsListConditionArrayOutput() PolicyGroupsListConditionArrayOutput
-	ToPolicyGroupsListConditionArrayOutputWithContext(context.Context) PolicyGroupsListConditionArrayOutput
-}
-
-type PolicyGroupsListConditionArray []PolicyGroupsListConditionInput
-
-func (PolicyGroupsListConditionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupsListCondition)(nil)).Elem()
-}
-
-func (i PolicyGroupsListConditionArray) ToPolicyGroupsListConditionArrayOutput() PolicyGroupsListConditionArrayOutput {
-	return i.ToPolicyGroupsListConditionArrayOutputWithContext(context.Background())
-}
-
-func (i PolicyGroupsListConditionArray) ToPolicyGroupsListConditionArrayOutputWithContext(ctx context.Context) PolicyGroupsListConditionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupsListConditionArrayOutput)
-}
-
-type PolicyGroupsListConditionOutput struct{ *pulumi.OutputState }
-
-func (PolicyGroupsListConditionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupsListCondition)(nil)).Elem()
-}
-
-func (o PolicyGroupsListConditionOutput) ToPolicyGroupsListConditionOutput() PolicyGroupsListConditionOutput {
-	return o
-}
-
-func (o PolicyGroupsListConditionOutput) ToPolicyGroupsListConditionOutputWithContext(ctx context.Context) PolicyGroupsListConditionOutput {
-	return o
-}
-
-func (o PolicyGroupsListConditionOutput) AlarmNotifyPeriod() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListCondition) int { return v.AlarmNotifyPeriod }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListConditionOutput) AlarmNotifyType() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListCondition) int { return v.AlarmNotifyType }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListConditionOutput) CalcType() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListCondition) int { return v.CalcType }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListConditionOutput) CalcValue() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyGroupsListCondition) string { return v.CalcValue }).(pulumi.StringOutput)
-}
-
-func (o PolicyGroupsListConditionOutput) ContinueTime() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListCondition) int { return v.ContinueTime }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListConditionOutput) MetricId() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListCondition) int { return v.MetricId }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListConditionOutput) MetricShowName() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyGroupsListCondition) string { return v.MetricShowName }).(pulumi.StringOutput)
-}
-
-func (o PolicyGroupsListConditionOutput) MetricUnit() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyGroupsListCondition) string { return v.MetricUnit }).(pulumi.StringOutput)
-}
-
-func (o PolicyGroupsListConditionOutput) Period() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListCondition) int { return v.Period }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListConditionOutput) RuleId() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListCondition) int { return v.RuleId }).(pulumi.IntOutput)
-}
-
-type PolicyGroupsListConditionArrayOutput struct{ *pulumi.OutputState }
-
-func (PolicyGroupsListConditionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupsListCondition)(nil)).Elem()
-}
-
-func (o PolicyGroupsListConditionArrayOutput) ToPolicyGroupsListConditionArrayOutput() PolicyGroupsListConditionArrayOutput {
-	return o
-}
-
-func (o PolicyGroupsListConditionArrayOutput) ToPolicyGroupsListConditionArrayOutputWithContext(ctx context.Context) PolicyGroupsListConditionArrayOutput {
-	return o
-}
-
-func (o PolicyGroupsListConditionArrayOutput) Index(i pulumi.IntInput) PolicyGroupsListConditionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PolicyGroupsListCondition {
-		return vs[0].([]PolicyGroupsListCondition)[vs[1].(int)]
-	}).(PolicyGroupsListConditionOutput)
-}
-
-type PolicyGroupsListEventCondition struct {
-	AlarmNotifyPeriod int    `pulumi:"alarmNotifyPeriod"`
-	AlarmNotifyType   int    `pulumi:"alarmNotifyType"`
-	EventId           int    `pulumi:"eventId"`
-	EventShowName     string `pulumi:"eventShowName"`
-	RuleId            int    `pulumi:"ruleId"`
-}
-
-// PolicyGroupsListEventConditionInput is an input type that accepts PolicyGroupsListEventConditionArgs and PolicyGroupsListEventConditionOutput values.
-// You can construct a concrete instance of `PolicyGroupsListEventConditionInput` via:
-//
-//          PolicyGroupsListEventConditionArgs{...}
-type PolicyGroupsListEventConditionInput interface {
-	pulumi.Input
-
-	ToPolicyGroupsListEventConditionOutput() PolicyGroupsListEventConditionOutput
-	ToPolicyGroupsListEventConditionOutputWithContext(context.Context) PolicyGroupsListEventConditionOutput
-}
-
-type PolicyGroupsListEventConditionArgs struct {
-	AlarmNotifyPeriod pulumi.IntInput    `pulumi:"alarmNotifyPeriod"`
-	AlarmNotifyType   pulumi.IntInput    `pulumi:"alarmNotifyType"`
-	EventId           pulumi.IntInput    `pulumi:"eventId"`
-	EventShowName     pulumi.StringInput `pulumi:"eventShowName"`
-	RuleId            pulumi.IntInput    `pulumi:"ruleId"`
-}
-
-func (PolicyGroupsListEventConditionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupsListEventCondition)(nil)).Elem()
-}
-
-func (i PolicyGroupsListEventConditionArgs) ToPolicyGroupsListEventConditionOutput() PolicyGroupsListEventConditionOutput {
-	return i.ToPolicyGroupsListEventConditionOutputWithContext(context.Background())
-}
-
-func (i PolicyGroupsListEventConditionArgs) ToPolicyGroupsListEventConditionOutputWithContext(ctx context.Context) PolicyGroupsListEventConditionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupsListEventConditionOutput)
-}
-
-// PolicyGroupsListEventConditionArrayInput is an input type that accepts PolicyGroupsListEventConditionArray and PolicyGroupsListEventConditionArrayOutput values.
-// You can construct a concrete instance of `PolicyGroupsListEventConditionArrayInput` via:
-//
-//          PolicyGroupsListEventConditionArray{ PolicyGroupsListEventConditionArgs{...} }
-type PolicyGroupsListEventConditionArrayInput interface {
-	pulumi.Input
-
-	ToPolicyGroupsListEventConditionArrayOutput() PolicyGroupsListEventConditionArrayOutput
-	ToPolicyGroupsListEventConditionArrayOutputWithContext(context.Context) PolicyGroupsListEventConditionArrayOutput
-}
-
-type PolicyGroupsListEventConditionArray []PolicyGroupsListEventConditionInput
-
-func (PolicyGroupsListEventConditionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupsListEventCondition)(nil)).Elem()
-}
-
-func (i PolicyGroupsListEventConditionArray) ToPolicyGroupsListEventConditionArrayOutput() PolicyGroupsListEventConditionArrayOutput {
-	return i.ToPolicyGroupsListEventConditionArrayOutputWithContext(context.Background())
-}
-
-func (i PolicyGroupsListEventConditionArray) ToPolicyGroupsListEventConditionArrayOutputWithContext(ctx context.Context) PolicyGroupsListEventConditionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupsListEventConditionArrayOutput)
-}
-
-type PolicyGroupsListEventConditionOutput struct{ *pulumi.OutputState }
-
-func (PolicyGroupsListEventConditionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupsListEventCondition)(nil)).Elem()
-}
-
-func (o PolicyGroupsListEventConditionOutput) ToPolicyGroupsListEventConditionOutput() PolicyGroupsListEventConditionOutput {
-	return o
-}
-
-func (o PolicyGroupsListEventConditionOutput) ToPolicyGroupsListEventConditionOutputWithContext(ctx context.Context) PolicyGroupsListEventConditionOutput {
-	return o
-}
-
-func (o PolicyGroupsListEventConditionOutput) AlarmNotifyPeriod() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListEventCondition) int { return v.AlarmNotifyPeriod }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListEventConditionOutput) AlarmNotifyType() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListEventCondition) int { return v.AlarmNotifyType }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListEventConditionOutput) EventId() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListEventCondition) int { return v.EventId }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListEventConditionOutput) EventShowName() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyGroupsListEventCondition) string { return v.EventShowName }).(pulumi.StringOutput)
-}
-
-func (o PolicyGroupsListEventConditionOutput) RuleId() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListEventCondition) int { return v.RuleId }).(pulumi.IntOutput)
-}
-
-type PolicyGroupsListEventConditionArrayOutput struct{ *pulumi.OutputState }
-
-func (PolicyGroupsListEventConditionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupsListEventCondition)(nil)).Elem()
-}
-
-func (o PolicyGroupsListEventConditionArrayOutput) ToPolicyGroupsListEventConditionArrayOutput() PolicyGroupsListEventConditionArrayOutput {
-	return o
-}
-
-func (o PolicyGroupsListEventConditionArrayOutput) ToPolicyGroupsListEventConditionArrayOutputWithContext(ctx context.Context) PolicyGroupsListEventConditionArrayOutput {
-	return o
-}
-
-func (o PolicyGroupsListEventConditionArrayOutput) Index(i pulumi.IntInput) PolicyGroupsListEventConditionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PolicyGroupsListEventCondition {
-		return vs[0].([]PolicyGroupsListEventCondition)[vs[1].(int)]
-	}).(PolicyGroupsListEventConditionOutput)
-}
-
-type PolicyGroupsListReceiver struct {
-	EndTime            int      `pulumi:"endTime"`
-	NeedSendNotice     int      `pulumi:"needSendNotice"`
-	NotifyWays         []string `pulumi:"notifyWays"`
-	PersonInterval     int      `pulumi:"personInterval"`
-	ReceiveLanguage    string   `pulumi:"receiveLanguage"`
-	ReceiverGroupLists []int    `pulumi:"receiverGroupLists"`
-	ReceiverType       string   `pulumi:"receiverType"`
-	ReceiverUserLists  []int    `pulumi:"receiverUserLists"`
-	RecoverNotifies    []string `pulumi:"recoverNotifies"`
-	RoundInterval      int      `pulumi:"roundInterval"`
-	RoundNumber        int      `pulumi:"roundNumber"`
-	SendFors           []string `pulumi:"sendFors"`
-	StartTime          int      `pulumi:"startTime"`
-	UidLists           []int    `pulumi:"uidLists"`
-}
-
-// PolicyGroupsListReceiverInput is an input type that accepts PolicyGroupsListReceiverArgs and PolicyGroupsListReceiverOutput values.
-// You can construct a concrete instance of `PolicyGroupsListReceiverInput` via:
-//
-//          PolicyGroupsListReceiverArgs{...}
-type PolicyGroupsListReceiverInput interface {
-	pulumi.Input
-
-	ToPolicyGroupsListReceiverOutput() PolicyGroupsListReceiverOutput
-	ToPolicyGroupsListReceiverOutputWithContext(context.Context) PolicyGroupsListReceiverOutput
-}
-
-type PolicyGroupsListReceiverArgs struct {
-	EndTime            pulumi.IntInput         `pulumi:"endTime"`
-	NeedSendNotice     pulumi.IntInput         `pulumi:"needSendNotice"`
-	NotifyWays         pulumi.StringArrayInput `pulumi:"notifyWays"`
-	PersonInterval     pulumi.IntInput         `pulumi:"personInterval"`
-	ReceiveLanguage    pulumi.StringInput      `pulumi:"receiveLanguage"`
-	ReceiverGroupLists pulumi.IntArrayInput    `pulumi:"receiverGroupLists"`
-	ReceiverType       pulumi.StringInput      `pulumi:"receiverType"`
-	ReceiverUserLists  pulumi.IntArrayInput    `pulumi:"receiverUserLists"`
-	RecoverNotifies    pulumi.StringArrayInput `pulumi:"recoverNotifies"`
-	RoundInterval      pulumi.IntInput         `pulumi:"roundInterval"`
-	RoundNumber        pulumi.IntInput         `pulumi:"roundNumber"`
-	SendFors           pulumi.StringArrayInput `pulumi:"sendFors"`
-	StartTime          pulumi.IntInput         `pulumi:"startTime"`
-	UidLists           pulumi.IntArrayInput    `pulumi:"uidLists"`
-}
-
-func (PolicyGroupsListReceiverArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupsListReceiver)(nil)).Elem()
-}
-
-func (i PolicyGroupsListReceiverArgs) ToPolicyGroupsListReceiverOutput() PolicyGroupsListReceiverOutput {
-	return i.ToPolicyGroupsListReceiverOutputWithContext(context.Background())
-}
-
-func (i PolicyGroupsListReceiverArgs) ToPolicyGroupsListReceiverOutputWithContext(ctx context.Context) PolicyGroupsListReceiverOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupsListReceiverOutput)
-}
-
-// PolicyGroupsListReceiverArrayInput is an input type that accepts PolicyGroupsListReceiverArray and PolicyGroupsListReceiverArrayOutput values.
-// You can construct a concrete instance of `PolicyGroupsListReceiverArrayInput` via:
-//
-//          PolicyGroupsListReceiverArray{ PolicyGroupsListReceiverArgs{...} }
-type PolicyGroupsListReceiverArrayInput interface {
-	pulumi.Input
-
-	ToPolicyGroupsListReceiverArrayOutput() PolicyGroupsListReceiverArrayOutput
-	ToPolicyGroupsListReceiverArrayOutputWithContext(context.Context) PolicyGroupsListReceiverArrayOutput
-}
-
-type PolicyGroupsListReceiverArray []PolicyGroupsListReceiverInput
-
-func (PolicyGroupsListReceiverArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupsListReceiver)(nil)).Elem()
-}
-
-func (i PolicyGroupsListReceiverArray) ToPolicyGroupsListReceiverArrayOutput() PolicyGroupsListReceiverArrayOutput {
-	return i.ToPolicyGroupsListReceiverArrayOutputWithContext(context.Background())
-}
-
-func (i PolicyGroupsListReceiverArray) ToPolicyGroupsListReceiverArrayOutputWithContext(ctx context.Context) PolicyGroupsListReceiverArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PolicyGroupsListReceiverArrayOutput)
-}
-
-type PolicyGroupsListReceiverOutput struct{ *pulumi.OutputState }
-
-func (PolicyGroupsListReceiverOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PolicyGroupsListReceiver)(nil)).Elem()
-}
-
-func (o PolicyGroupsListReceiverOutput) ToPolicyGroupsListReceiverOutput() PolicyGroupsListReceiverOutput {
-	return o
-}
-
-func (o PolicyGroupsListReceiverOutput) ToPolicyGroupsListReceiverOutputWithContext(ctx context.Context) PolicyGroupsListReceiverOutput {
-	return o
-}
-
-func (o PolicyGroupsListReceiverOutput) EndTime() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) int { return v.EndTime }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) NeedSendNotice() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) int { return v.NeedSendNotice }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) NotifyWays() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) []string { return v.NotifyWays }).(pulumi.StringArrayOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) PersonInterval() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) int { return v.PersonInterval }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) ReceiveLanguage() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) string { return v.ReceiveLanguage }).(pulumi.StringOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) ReceiverGroupLists() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) []int { return v.ReceiverGroupLists }).(pulumi.IntArrayOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) ReceiverType() pulumi.StringOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) string { return v.ReceiverType }).(pulumi.StringOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) ReceiverUserLists() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) []int { return v.ReceiverUserLists }).(pulumi.IntArrayOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) RecoverNotifies() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) []string { return v.RecoverNotifies }).(pulumi.StringArrayOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) RoundInterval() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) int { return v.RoundInterval }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) RoundNumber() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) int { return v.RoundNumber }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) SendFors() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) []string { return v.SendFors }).(pulumi.StringArrayOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) StartTime() pulumi.IntOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) int { return v.StartTime }).(pulumi.IntOutput)
-}
-
-func (o PolicyGroupsListReceiverOutput) UidLists() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v PolicyGroupsListReceiver) []int { return v.UidLists }).(pulumi.IntArrayOutput)
-}
-
-type PolicyGroupsListReceiverArrayOutput struct{ *pulumi.OutputState }
-
-func (PolicyGroupsListReceiverArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PolicyGroupsListReceiver)(nil)).Elem()
-}
-
-func (o PolicyGroupsListReceiverArrayOutput) ToPolicyGroupsListReceiverArrayOutput() PolicyGroupsListReceiverArrayOutput {
-	return o
-}
-
-func (o PolicyGroupsListReceiverArrayOutput) ToPolicyGroupsListReceiverArrayOutputWithContext(ctx context.Context) PolicyGroupsListReceiverArrayOutput {
-	return o
-}
-
-func (o PolicyGroupsListReceiverArrayOutput) Index(i pulumi.IntInput) PolicyGroupsListReceiverOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PolicyGroupsListReceiver {
-		return vs[0].([]PolicyGroupsListReceiver)[vs[1].(int)]
-	}).(PolicyGroupsListReceiverOutput)
-}
-
-type ProductEventDimension struct {
-	Name  *string `pulumi:"name"`
+func (o GetPolicyGroupsListReceiverArrayOutput) Index(i pulumi.IntInput) GetPolicyGroupsListReceiverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPolicyGroupsListReceiver {
+		return vs[0].([]GetPolicyGroupsListReceiver)[vs[1].(int)]
+	}).(GetPolicyGroupsListReceiverOutput)
+}
+
+type GetProductEventDimension struct {
+	// Instance dimension name, eg: `deviceWanIp` for internet ip.
+	Name *string `pulumi:"name"`
+	// Instance dimension value, eg: `119.119.119.119` for internet ip.
 	Value *string `pulumi:"value"`
 }
 
-// ProductEventDimensionInput is an input type that accepts ProductEventDimensionArgs and ProductEventDimensionOutput values.
-// You can construct a concrete instance of `ProductEventDimensionInput` via:
+// GetProductEventDimensionInput is an input type that accepts GetProductEventDimensionArgs and GetProductEventDimensionOutput values.
+// You can construct a concrete instance of `GetProductEventDimensionInput` via:
 //
-//          ProductEventDimensionArgs{...}
-type ProductEventDimensionInput interface {
+//          GetProductEventDimensionArgs{...}
+type GetProductEventDimensionInput interface {
 	pulumi.Input
 
-	ToProductEventDimensionOutput() ProductEventDimensionOutput
-	ToProductEventDimensionOutputWithContext(context.Context) ProductEventDimensionOutput
+	ToGetProductEventDimensionOutput() GetProductEventDimensionOutput
+	ToGetProductEventDimensionOutputWithContext(context.Context) GetProductEventDimensionOutput
 }
 
-type ProductEventDimensionArgs struct {
-	Name  pulumi.StringPtrInput `pulumi:"name"`
+type GetProductEventDimensionArgs struct {
+	// Instance dimension name, eg: `deviceWanIp` for internet ip.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Instance dimension value, eg: `119.119.119.119` for internet ip.
 	Value pulumi.StringPtrInput `pulumi:"value"`
 }
 
-func (ProductEventDimensionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProductEventDimension)(nil)).Elem()
+func (GetProductEventDimensionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductEventDimension)(nil)).Elem()
 }
 
-func (i ProductEventDimensionArgs) ToProductEventDimensionOutput() ProductEventDimensionOutput {
-	return i.ToProductEventDimensionOutputWithContext(context.Background())
+func (i GetProductEventDimensionArgs) ToGetProductEventDimensionOutput() GetProductEventDimensionOutput {
+	return i.ToGetProductEventDimensionOutputWithContext(context.Background())
 }
 
-func (i ProductEventDimensionArgs) ToProductEventDimensionOutputWithContext(ctx context.Context) ProductEventDimensionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProductEventDimensionOutput)
+func (i GetProductEventDimensionArgs) ToGetProductEventDimensionOutputWithContext(ctx context.Context) GetProductEventDimensionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductEventDimensionOutput)
 }
 
-// ProductEventDimensionArrayInput is an input type that accepts ProductEventDimensionArray and ProductEventDimensionArrayOutput values.
-// You can construct a concrete instance of `ProductEventDimensionArrayInput` via:
+// GetProductEventDimensionArrayInput is an input type that accepts GetProductEventDimensionArray and GetProductEventDimensionArrayOutput values.
+// You can construct a concrete instance of `GetProductEventDimensionArrayInput` via:
 //
-//          ProductEventDimensionArray{ ProductEventDimensionArgs{...} }
-type ProductEventDimensionArrayInput interface {
+//          GetProductEventDimensionArray{ GetProductEventDimensionArgs{...} }
+type GetProductEventDimensionArrayInput interface {
 	pulumi.Input
 
-	ToProductEventDimensionArrayOutput() ProductEventDimensionArrayOutput
-	ToProductEventDimensionArrayOutputWithContext(context.Context) ProductEventDimensionArrayOutput
+	ToGetProductEventDimensionArrayOutput() GetProductEventDimensionArrayOutput
+	ToGetProductEventDimensionArrayOutputWithContext(context.Context) GetProductEventDimensionArrayOutput
 }
 
-type ProductEventDimensionArray []ProductEventDimensionInput
+type GetProductEventDimensionArray []GetProductEventDimensionInput
 
-func (ProductEventDimensionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProductEventDimension)(nil)).Elem()
+func (GetProductEventDimensionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductEventDimension)(nil)).Elem()
 }
 
-func (i ProductEventDimensionArray) ToProductEventDimensionArrayOutput() ProductEventDimensionArrayOutput {
-	return i.ToProductEventDimensionArrayOutputWithContext(context.Background())
+func (i GetProductEventDimensionArray) ToGetProductEventDimensionArrayOutput() GetProductEventDimensionArrayOutput {
+	return i.ToGetProductEventDimensionArrayOutputWithContext(context.Background())
 }
 
-func (i ProductEventDimensionArray) ToProductEventDimensionArrayOutputWithContext(ctx context.Context) ProductEventDimensionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProductEventDimensionArrayOutput)
+func (i GetProductEventDimensionArray) ToGetProductEventDimensionArrayOutputWithContext(ctx context.Context) GetProductEventDimensionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductEventDimensionArrayOutput)
 }
 
-type ProductEventDimensionOutput struct{ *pulumi.OutputState }
+type GetProductEventDimensionOutput struct{ *pulumi.OutputState }
 
-func (ProductEventDimensionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProductEventDimension)(nil)).Elem()
+func (GetProductEventDimensionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductEventDimension)(nil)).Elem()
 }
 
-func (o ProductEventDimensionOutput) ToProductEventDimensionOutput() ProductEventDimensionOutput {
+func (o GetProductEventDimensionOutput) ToGetProductEventDimensionOutput() GetProductEventDimensionOutput {
 	return o
 }
 
-func (o ProductEventDimensionOutput) ToProductEventDimensionOutputWithContext(ctx context.Context) ProductEventDimensionOutput {
+func (o GetProductEventDimensionOutput) ToGetProductEventDimensionOutputWithContext(ctx context.Context) GetProductEventDimensionOutput {
 	return o
 }
 
-func (o ProductEventDimensionOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProductEventDimension) *string { return v.Name }).(pulumi.StringPtrOutput)
+// Instance dimension name, eg: `deviceWanIp` for internet ip.
+func (o GetProductEventDimensionOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetProductEventDimension) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
-func (o ProductEventDimensionOutput) Value() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProductEventDimension) *string { return v.Value }).(pulumi.StringPtrOutput)
+// Instance dimension value, eg: `119.119.119.119` for internet ip.
+func (o GetProductEventDimensionOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetProductEventDimension) *string { return v.Value }).(pulumi.StringPtrOutput)
 }
 
-type ProductEventDimensionArrayOutput struct{ *pulumi.OutputState }
+type GetProductEventDimensionArrayOutput struct{ *pulumi.OutputState }
 
-func (ProductEventDimensionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProductEventDimension)(nil)).Elem()
+func (GetProductEventDimensionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductEventDimension)(nil)).Elem()
 }
 
-func (o ProductEventDimensionArrayOutput) ToProductEventDimensionArrayOutput() ProductEventDimensionArrayOutput {
+func (o GetProductEventDimensionArrayOutput) ToGetProductEventDimensionArrayOutput() GetProductEventDimensionArrayOutput {
 	return o
 }
 
-func (o ProductEventDimensionArrayOutput) ToProductEventDimensionArrayOutputWithContext(ctx context.Context) ProductEventDimensionArrayOutput {
+func (o GetProductEventDimensionArrayOutput) ToGetProductEventDimensionArrayOutputWithContext(ctx context.Context) GetProductEventDimensionArrayOutput {
 	return o
 }
 
-func (o ProductEventDimensionArrayOutput) Index(i pulumi.IntInput) ProductEventDimensionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProductEventDimension {
-		return vs[0].([]ProductEventDimension)[vs[1].(int)]
-	}).(ProductEventDimensionOutput)
+func (o GetProductEventDimensionArrayOutput) Index(i pulumi.IntInput) GetProductEventDimensionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProductEventDimension {
+		return vs[0].([]GetProductEventDimension)[vs[1].(int)]
+	}).(GetProductEventDimensionOutput)
 }
 
-type ProductEventList struct {
-	AdditionMsgs  []ProductEventListAdditionMsg `pulumi:"additionMsgs"`
-	Dimensions    []ProductEventListDimension   `pulumi:"dimensions"`
-	EventCname    string                        `pulumi:"eventCname"`
-	EventEname    string                        `pulumi:"eventEname"`
-	EventId       int                           `pulumi:"eventId"`
-	EventName     string                        `pulumi:"eventName"`
-	GroupInfos    []ProductEventListGroupInfo   `pulumi:"groupInfos"`
-	InstanceId    string                        `pulumi:"instanceId"`
-	InstanceName  string                        `pulumi:"instanceName"`
-	IsAlarmConfig int                           `pulumi:"isAlarmConfig"`
-	ProductCname  string                        `pulumi:"productCname"`
-	ProductEname  string                        `pulumi:"productEname"`
-	ProductName   string                        `pulumi:"productName"`
-	ProjectId     string                        `pulumi:"projectId"`
-	Region        string                        `pulumi:"region"`
-	StartTime     int                           `pulumi:"startTime"`
-	Status        string                        `pulumi:"status"`
-	SupportAlarm  int                           `pulumi:"supportAlarm"`
-	Type          string                        `pulumi:"type"`
-	UpdateTime    int                           `pulumi:"updateTime"`
+type GetProductEventList struct {
+	// A list of addition message. Each element contains the following attributes:
+	AdditionMsgs []GetProductEventListAdditionMsg `pulumi:"additionMsgs"`
+	// Dimensional composition of instance objects.
+	Dimensions []GetProductEventListDimension `pulumi:"dimensions"`
+	// Event chinese name.
+	EventCname string `pulumi:"eventCname"`
+	// Event english name.
+	EventEname string `pulumi:"eventEname"`
+	// Event ID.
+	EventId int `pulumi:"eventId"`
+	// Event name filtering, such as `guestReboot` indicates that the machine restart.
+	EventName string `pulumi:"eventName"`
+	// A list of group info. Each element contains the following attributes:
+	GroupInfos []GetProductEventListGroupInfo `pulumi:"groupInfos"`
+	// Affect objects, such as `ins-19708ino`.
+	InstanceId string `pulumi:"instanceId"`
+	// The name of this instance.
+	InstanceName string `pulumi:"instanceName"`
+	// Alarm status configuration filter, 1means configured, 0(default) means not configured.
+	IsAlarmConfig int `pulumi:"isAlarmConfig"`
+	// Product chinese name.
+	ProductCname string `pulumi:"productCname"`
+	// Product english name.
+	ProductEname string `pulumi:"productEname"`
+	// Product type filtering, such as `cvm` for cloud server.
+	ProductName string `pulumi:"productName"`
+	// Project ID filter.
+	ProjectId string `pulumi:"projectId"`
+	// The region of this instance.
+	Region string `pulumi:"region"`
+	// Start timestamp for this query, eg:`1588230000`. Default start time is `now-3600`.
+	StartTime int `pulumi:"startTime"`
+	// Event status filter, value range `-`,`alarm`,`recover`, indicating recovered, unrecovered and stateless.
+	Status string `pulumi:"status"`
+	// Whether to support alarm.
+	SupportAlarm int `pulumi:"supportAlarm"`
+	// Event type filtering, with value range `abnormal`,`statusChange`, indicating state change and abnormal events.
+	Type string `pulumi:"type"`
+	// The update timestamp of this event.
+	UpdateTime int `pulumi:"updateTime"`
 }
 
-// ProductEventListInput is an input type that accepts ProductEventListArgs and ProductEventListOutput values.
-// You can construct a concrete instance of `ProductEventListInput` via:
+// GetProductEventListInput is an input type that accepts GetProductEventListArgs and GetProductEventListOutput values.
+// You can construct a concrete instance of `GetProductEventListInput` via:
 //
-//          ProductEventListArgs{...}
-type ProductEventListInput interface {
+//          GetProductEventListArgs{...}
+type GetProductEventListInput interface {
 	pulumi.Input
 
-	ToProductEventListOutput() ProductEventListOutput
-	ToProductEventListOutputWithContext(context.Context) ProductEventListOutput
+	ToGetProductEventListOutput() GetProductEventListOutput
+	ToGetProductEventListOutputWithContext(context.Context) GetProductEventListOutput
 }
 
-type ProductEventListArgs struct {
-	AdditionMsgs  ProductEventListAdditionMsgArrayInput `pulumi:"additionMsgs"`
-	Dimensions    ProductEventListDimensionArrayInput   `pulumi:"dimensions"`
-	EventCname    pulumi.StringInput                    `pulumi:"eventCname"`
-	EventEname    pulumi.StringInput                    `pulumi:"eventEname"`
-	EventId       pulumi.IntInput                       `pulumi:"eventId"`
-	EventName     pulumi.StringInput                    `pulumi:"eventName"`
-	GroupInfos    ProductEventListGroupInfoArrayInput   `pulumi:"groupInfos"`
-	InstanceId    pulumi.StringInput                    `pulumi:"instanceId"`
-	InstanceName  pulumi.StringInput                    `pulumi:"instanceName"`
-	IsAlarmConfig pulumi.IntInput                       `pulumi:"isAlarmConfig"`
-	ProductCname  pulumi.StringInput                    `pulumi:"productCname"`
-	ProductEname  pulumi.StringInput                    `pulumi:"productEname"`
-	ProductName   pulumi.StringInput                    `pulumi:"productName"`
-	ProjectId     pulumi.StringInput                    `pulumi:"projectId"`
-	Region        pulumi.StringInput                    `pulumi:"region"`
-	StartTime     pulumi.IntInput                       `pulumi:"startTime"`
-	Status        pulumi.StringInput                    `pulumi:"status"`
-	SupportAlarm  pulumi.IntInput                       `pulumi:"supportAlarm"`
-	Type          pulumi.StringInput                    `pulumi:"type"`
-	UpdateTime    pulumi.IntInput                       `pulumi:"updateTime"`
+type GetProductEventListArgs struct {
+	// A list of addition message. Each element contains the following attributes:
+	AdditionMsgs GetProductEventListAdditionMsgArrayInput `pulumi:"additionMsgs"`
+	// Dimensional composition of instance objects.
+	Dimensions GetProductEventListDimensionArrayInput `pulumi:"dimensions"`
+	// Event chinese name.
+	EventCname pulumi.StringInput `pulumi:"eventCname"`
+	// Event english name.
+	EventEname pulumi.StringInput `pulumi:"eventEname"`
+	// Event ID.
+	EventId pulumi.IntInput `pulumi:"eventId"`
+	// Event name filtering, such as `guestReboot` indicates that the machine restart.
+	EventName pulumi.StringInput `pulumi:"eventName"`
+	// A list of group info. Each element contains the following attributes:
+	GroupInfos GetProductEventListGroupInfoArrayInput `pulumi:"groupInfos"`
+	// Affect objects, such as `ins-19708ino`.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// The name of this instance.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Alarm status configuration filter, 1means configured, 0(default) means not configured.
+	IsAlarmConfig pulumi.IntInput `pulumi:"isAlarmConfig"`
+	// Product chinese name.
+	ProductCname pulumi.StringInput `pulumi:"productCname"`
+	// Product english name.
+	ProductEname pulumi.StringInput `pulumi:"productEname"`
+	// Product type filtering, such as `cvm` for cloud server.
+	ProductName pulumi.StringInput `pulumi:"productName"`
+	// Project ID filter.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// The region of this instance.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Start timestamp for this query, eg:`1588230000`. Default start time is `now-3600`.
+	StartTime pulumi.IntInput `pulumi:"startTime"`
+	// Event status filter, value range `-`,`alarm`,`recover`, indicating recovered, unrecovered and stateless.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Whether to support alarm.
+	SupportAlarm pulumi.IntInput `pulumi:"supportAlarm"`
+	// Event type filtering, with value range `abnormal`,`statusChange`, indicating state change and abnormal events.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The update timestamp of this event.
+	UpdateTime pulumi.IntInput `pulumi:"updateTime"`
 }
 
-func (ProductEventListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProductEventList)(nil)).Elem()
+func (GetProductEventListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductEventList)(nil)).Elem()
 }
 
-func (i ProductEventListArgs) ToProductEventListOutput() ProductEventListOutput {
-	return i.ToProductEventListOutputWithContext(context.Background())
+func (i GetProductEventListArgs) ToGetProductEventListOutput() GetProductEventListOutput {
+	return i.ToGetProductEventListOutputWithContext(context.Background())
 }
 
-func (i ProductEventListArgs) ToProductEventListOutputWithContext(ctx context.Context) ProductEventListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProductEventListOutput)
+func (i GetProductEventListArgs) ToGetProductEventListOutputWithContext(ctx context.Context) GetProductEventListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductEventListOutput)
 }
 
-// ProductEventListArrayInput is an input type that accepts ProductEventListArray and ProductEventListArrayOutput values.
-// You can construct a concrete instance of `ProductEventListArrayInput` via:
+// GetProductEventListArrayInput is an input type that accepts GetProductEventListArray and GetProductEventListArrayOutput values.
+// You can construct a concrete instance of `GetProductEventListArrayInput` via:
 //
-//          ProductEventListArray{ ProductEventListArgs{...} }
-type ProductEventListArrayInput interface {
+//          GetProductEventListArray{ GetProductEventListArgs{...} }
+type GetProductEventListArrayInput interface {
 	pulumi.Input
 
-	ToProductEventListArrayOutput() ProductEventListArrayOutput
-	ToProductEventListArrayOutputWithContext(context.Context) ProductEventListArrayOutput
+	ToGetProductEventListArrayOutput() GetProductEventListArrayOutput
+	ToGetProductEventListArrayOutputWithContext(context.Context) GetProductEventListArrayOutput
 }
 
-type ProductEventListArray []ProductEventListInput
+type GetProductEventListArray []GetProductEventListInput
 
-func (ProductEventListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProductEventList)(nil)).Elem()
+func (GetProductEventListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductEventList)(nil)).Elem()
 }
 
-func (i ProductEventListArray) ToProductEventListArrayOutput() ProductEventListArrayOutput {
-	return i.ToProductEventListArrayOutputWithContext(context.Background())
+func (i GetProductEventListArray) ToGetProductEventListArrayOutput() GetProductEventListArrayOutput {
+	return i.ToGetProductEventListArrayOutputWithContext(context.Background())
 }
 
-func (i ProductEventListArray) ToProductEventListArrayOutputWithContext(ctx context.Context) ProductEventListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProductEventListArrayOutput)
+func (i GetProductEventListArray) ToGetProductEventListArrayOutputWithContext(ctx context.Context) GetProductEventListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductEventListArrayOutput)
 }
 
-type ProductEventListOutput struct{ *pulumi.OutputState }
+type GetProductEventListOutput struct{ *pulumi.OutputState }
 
-func (ProductEventListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProductEventList)(nil)).Elem()
+func (GetProductEventListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductEventList)(nil)).Elem()
 }
 
-func (o ProductEventListOutput) ToProductEventListOutput() ProductEventListOutput {
+func (o GetProductEventListOutput) ToGetProductEventListOutput() GetProductEventListOutput {
 	return o
 }
 
-func (o ProductEventListOutput) ToProductEventListOutputWithContext(ctx context.Context) ProductEventListOutput {
+func (o GetProductEventListOutput) ToGetProductEventListOutputWithContext(ctx context.Context) GetProductEventListOutput {
 	return o
 }
 
-func (o ProductEventListOutput) AdditionMsgs() ProductEventListAdditionMsgArrayOutput {
-	return o.ApplyT(func(v ProductEventList) []ProductEventListAdditionMsg { return v.AdditionMsgs }).(ProductEventListAdditionMsgArrayOutput)
+// A list of addition message. Each element contains the following attributes:
+func (o GetProductEventListOutput) AdditionMsgs() GetProductEventListAdditionMsgArrayOutput {
+	return o.ApplyT(func(v GetProductEventList) []GetProductEventListAdditionMsg { return v.AdditionMsgs }).(GetProductEventListAdditionMsgArrayOutput)
 }
 
-func (o ProductEventListOutput) Dimensions() ProductEventListDimensionArrayOutput {
-	return o.ApplyT(func(v ProductEventList) []ProductEventListDimension { return v.Dimensions }).(ProductEventListDimensionArrayOutput)
+// Dimensional composition of instance objects.
+func (o GetProductEventListOutput) Dimensions() GetProductEventListDimensionArrayOutput {
+	return o.ApplyT(func(v GetProductEventList) []GetProductEventListDimension { return v.Dimensions }).(GetProductEventListDimensionArrayOutput)
 }
 
-func (o ProductEventListOutput) EventCname() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventList) string { return v.EventCname }).(pulumi.StringOutput)
+// Event chinese name.
+func (o GetProductEventListOutput) EventCname() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventList) string { return v.EventCname }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListOutput) EventEname() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventList) string { return v.EventEname }).(pulumi.StringOutput)
+// Event english name.
+func (o GetProductEventListOutput) EventEname() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventList) string { return v.EventEname }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListOutput) EventId() pulumi.IntOutput {
-	return o.ApplyT(func(v ProductEventList) int { return v.EventId }).(pulumi.IntOutput)
+// Event ID.
+func (o GetProductEventListOutput) EventId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProductEventList) int { return v.EventId }).(pulumi.IntOutput)
 }
 
-func (o ProductEventListOutput) EventName() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventList) string { return v.EventName }).(pulumi.StringOutput)
+// Event name filtering, such as `guestReboot` indicates that the machine restart.
+func (o GetProductEventListOutput) EventName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventList) string { return v.EventName }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListOutput) GroupInfos() ProductEventListGroupInfoArrayOutput {
-	return o.ApplyT(func(v ProductEventList) []ProductEventListGroupInfo { return v.GroupInfos }).(ProductEventListGroupInfoArrayOutput)
+// A list of group info. Each element contains the following attributes:
+func (o GetProductEventListOutput) GroupInfos() GetProductEventListGroupInfoArrayOutput {
+	return o.ApplyT(func(v GetProductEventList) []GetProductEventListGroupInfo { return v.GroupInfos }).(GetProductEventListGroupInfoArrayOutput)
 }
 
-func (o ProductEventListOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventList) string { return v.InstanceId }).(pulumi.StringOutput)
+// Affect objects, such as `ins-19708ino`.
+func (o GetProductEventListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventList) string { return v.InstanceId }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListOutput) InstanceName() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventList) string { return v.InstanceName }).(pulumi.StringOutput)
+// The name of this instance.
+func (o GetProductEventListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventList) string { return v.InstanceName }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListOutput) IsAlarmConfig() pulumi.IntOutput {
-	return o.ApplyT(func(v ProductEventList) int { return v.IsAlarmConfig }).(pulumi.IntOutput)
+// Alarm status configuration filter, 1means configured, 0(default) means not configured.
+func (o GetProductEventListOutput) IsAlarmConfig() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProductEventList) int { return v.IsAlarmConfig }).(pulumi.IntOutput)
 }
 
-func (o ProductEventListOutput) ProductCname() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventList) string { return v.ProductCname }).(pulumi.StringOutput)
+// Product chinese name.
+func (o GetProductEventListOutput) ProductCname() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventList) string { return v.ProductCname }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListOutput) ProductEname() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventList) string { return v.ProductEname }).(pulumi.StringOutput)
+// Product english name.
+func (o GetProductEventListOutput) ProductEname() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventList) string { return v.ProductEname }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListOutput) ProductName() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventList) string { return v.ProductName }).(pulumi.StringOutput)
+// Product type filtering, such as `cvm` for cloud server.
+func (o GetProductEventListOutput) ProductName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventList) string { return v.ProductName }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListOutput) ProjectId() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventList) string { return v.ProjectId }).(pulumi.StringOutput)
+// Project ID filter.
+func (o GetProductEventListOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventList) string { return v.ProjectId }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListOutput) Region() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventList) string { return v.Region }).(pulumi.StringOutput)
+// The region of this instance.
+func (o GetProductEventListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventList) string { return v.Region }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListOutput) StartTime() pulumi.IntOutput {
-	return o.ApplyT(func(v ProductEventList) int { return v.StartTime }).(pulumi.IntOutput)
+// Start timestamp for this query, eg:`1588230000`. Default start time is `now-3600`.
+func (o GetProductEventListOutput) StartTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProductEventList) int { return v.StartTime }).(pulumi.IntOutput)
 }
 
-func (o ProductEventListOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventList) string { return v.Status }).(pulumi.StringOutput)
+// Event status filter, value range `-`,`alarm`,`recover`, indicating recovered, unrecovered and stateless.
+func (o GetProductEventListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventList) string { return v.Status }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListOutput) SupportAlarm() pulumi.IntOutput {
-	return o.ApplyT(func(v ProductEventList) int { return v.SupportAlarm }).(pulumi.IntOutput)
+// Whether to support alarm.
+func (o GetProductEventListOutput) SupportAlarm() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProductEventList) int { return v.SupportAlarm }).(pulumi.IntOutput)
 }
 
-func (o ProductEventListOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventList) string { return v.Type }).(pulumi.StringOutput)
+// Event type filtering, with value range `abnormal`,`statusChange`, indicating state change and abnormal events.
+func (o GetProductEventListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventList) string { return v.Type }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListOutput) UpdateTime() pulumi.IntOutput {
-	return o.ApplyT(func(v ProductEventList) int { return v.UpdateTime }).(pulumi.IntOutput)
+// The update timestamp of this event.
+func (o GetProductEventListOutput) UpdateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProductEventList) int { return v.UpdateTime }).(pulumi.IntOutput)
 }
 
-type ProductEventListArrayOutput struct{ *pulumi.OutputState }
+type GetProductEventListArrayOutput struct{ *pulumi.OutputState }
 
-func (ProductEventListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProductEventList)(nil)).Elem()
+func (GetProductEventListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductEventList)(nil)).Elem()
 }
 
-func (o ProductEventListArrayOutput) ToProductEventListArrayOutput() ProductEventListArrayOutput {
+func (o GetProductEventListArrayOutput) ToGetProductEventListArrayOutput() GetProductEventListArrayOutput {
 	return o
 }
 
-func (o ProductEventListArrayOutput) ToProductEventListArrayOutputWithContext(ctx context.Context) ProductEventListArrayOutput {
+func (o GetProductEventListArrayOutput) ToGetProductEventListArrayOutputWithContext(ctx context.Context) GetProductEventListArrayOutput {
 	return o
 }
 
-func (o ProductEventListArrayOutput) Index(i pulumi.IntInput) ProductEventListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProductEventList {
-		return vs[0].([]ProductEventList)[vs[1].(int)]
-	}).(ProductEventListOutput)
+func (o GetProductEventListArrayOutput) Index(i pulumi.IntInput) GetProductEventListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProductEventList {
+		return vs[0].([]GetProductEventList)[vs[1].(int)]
+	}).(GetProductEventListOutput)
 }
 
-type ProductEventListAdditionMsg struct {
-	Key   string `pulumi:"key"`
-	Name  string `pulumi:"name"`
+type GetProductEventListAdditionMsg struct {
+	// The key of this dimension.
+	Key string `pulumi:"key"`
+	// Instance dimension name, eg: `deviceWanIp` for internet ip.
+	Name string `pulumi:"name"`
+	// Instance dimension value, eg: `119.119.119.119` for internet ip.
 	Value string `pulumi:"value"`
 }
 
-// ProductEventListAdditionMsgInput is an input type that accepts ProductEventListAdditionMsgArgs and ProductEventListAdditionMsgOutput values.
-// You can construct a concrete instance of `ProductEventListAdditionMsgInput` via:
+// GetProductEventListAdditionMsgInput is an input type that accepts GetProductEventListAdditionMsgArgs and GetProductEventListAdditionMsgOutput values.
+// You can construct a concrete instance of `GetProductEventListAdditionMsgInput` via:
 //
-//          ProductEventListAdditionMsgArgs{...}
-type ProductEventListAdditionMsgInput interface {
+//          GetProductEventListAdditionMsgArgs{...}
+type GetProductEventListAdditionMsgInput interface {
 	pulumi.Input
 
-	ToProductEventListAdditionMsgOutput() ProductEventListAdditionMsgOutput
-	ToProductEventListAdditionMsgOutputWithContext(context.Context) ProductEventListAdditionMsgOutput
+	ToGetProductEventListAdditionMsgOutput() GetProductEventListAdditionMsgOutput
+	ToGetProductEventListAdditionMsgOutputWithContext(context.Context) GetProductEventListAdditionMsgOutput
 }
 
-type ProductEventListAdditionMsgArgs struct {
-	Key   pulumi.StringInput `pulumi:"key"`
-	Name  pulumi.StringInput `pulumi:"name"`
+type GetProductEventListAdditionMsgArgs struct {
+	// The key of this dimension.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Instance dimension name, eg: `deviceWanIp` for internet ip.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Instance dimension value, eg: `119.119.119.119` for internet ip.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
-func (ProductEventListAdditionMsgArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProductEventListAdditionMsg)(nil)).Elem()
+func (GetProductEventListAdditionMsgArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductEventListAdditionMsg)(nil)).Elem()
 }
 
-func (i ProductEventListAdditionMsgArgs) ToProductEventListAdditionMsgOutput() ProductEventListAdditionMsgOutput {
-	return i.ToProductEventListAdditionMsgOutputWithContext(context.Background())
+func (i GetProductEventListAdditionMsgArgs) ToGetProductEventListAdditionMsgOutput() GetProductEventListAdditionMsgOutput {
+	return i.ToGetProductEventListAdditionMsgOutputWithContext(context.Background())
 }
 
-func (i ProductEventListAdditionMsgArgs) ToProductEventListAdditionMsgOutputWithContext(ctx context.Context) ProductEventListAdditionMsgOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProductEventListAdditionMsgOutput)
+func (i GetProductEventListAdditionMsgArgs) ToGetProductEventListAdditionMsgOutputWithContext(ctx context.Context) GetProductEventListAdditionMsgOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductEventListAdditionMsgOutput)
 }
 
-// ProductEventListAdditionMsgArrayInput is an input type that accepts ProductEventListAdditionMsgArray and ProductEventListAdditionMsgArrayOutput values.
-// You can construct a concrete instance of `ProductEventListAdditionMsgArrayInput` via:
+// GetProductEventListAdditionMsgArrayInput is an input type that accepts GetProductEventListAdditionMsgArray and GetProductEventListAdditionMsgArrayOutput values.
+// You can construct a concrete instance of `GetProductEventListAdditionMsgArrayInput` via:
 //
-//          ProductEventListAdditionMsgArray{ ProductEventListAdditionMsgArgs{...} }
-type ProductEventListAdditionMsgArrayInput interface {
+//          GetProductEventListAdditionMsgArray{ GetProductEventListAdditionMsgArgs{...} }
+type GetProductEventListAdditionMsgArrayInput interface {
 	pulumi.Input
 
-	ToProductEventListAdditionMsgArrayOutput() ProductEventListAdditionMsgArrayOutput
-	ToProductEventListAdditionMsgArrayOutputWithContext(context.Context) ProductEventListAdditionMsgArrayOutput
+	ToGetProductEventListAdditionMsgArrayOutput() GetProductEventListAdditionMsgArrayOutput
+	ToGetProductEventListAdditionMsgArrayOutputWithContext(context.Context) GetProductEventListAdditionMsgArrayOutput
 }
 
-type ProductEventListAdditionMsgArray []ProductEventListAdditionMsgInput
+type GetProductEventListAdditionMsgArray []GetProductEventListAdditionMsgInput
 
-func (ProductEventListAdditionMsgArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProductEventListAdditionMsg)(nil)).Elem()
+func (GetProductEventListAdditionMsgArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductEventListAdditionMsg)(nil)).Elem()
 }
 
-func (i ProductEventListAdditionMsgArray) ToProductEventListAdditionMsgArrayOutput() ProductEventListAdditionMsgArrayOutput {
-	return i.ToProductEventListAdditionMsgArrayOutputWithContext(context.Background())
+func (i GetProductEventListAdditionMsgArray) ToGetProductEventListAdditionMsgArrayOutput() GetProductEventListAdditionMsgArrayOutput {
+	return i.ToGetProductEventListAdditionMsgArrayOutputWithContext(context.Background())
 }
 
-func (i ProductEventListAdditionMsgArray) ToProductEventListAdditionMsgArrayOutputWithContext(ctx context.Context) ProductEventListAdditionMsgArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProductEventListAdditionMsgArrayOutput)
+func (i GetProductEventListAdditionMsgArray) ToGetProductEventListAdditionMsgArrayOutputWithContext(ctx context.Context) GetProductEventListAdditionMsgArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductEventListAdditionMsgArrayOutput)
 }
 
-type ProductEventListAdditionMsgOutput struct{ *pulumi.OutputState }
+type GetProductEventListAdditionMsgOutput struct{ *pulumi.OutputState }
 
-func (ProductEventListAdditionMsgOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProductEventListAdditionMsg)(nil)).Elem()
+func (GetProductEventListAdditionMsgOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductEventListAdditionMsg)(nil)).Elem()
 }
 
-func (o ProductEventListAdditionMsgOutput) ToProductEventListAdditionMsgOutput() ProductEventListAdditionMsgOutput {
+func (o GetProductEventListAdditionMsgOutput) ToGetProductEventListAdditionMsgOutput() GetProductEventListAdditionMsgOutput {
 	return o
 }
 
-func (o ProductEventListAdditionMsgOutput) ToProductEventListAdditionMsgOutputWithContext(ctx context.Context) ProductEventListAdditionMsgOutput {
+func (o GetProductEventListAdditionMsgOutput) ToGetProductEventListAdditionMsgOutputWithContext(ctx context.Context) GetProductEventListAdditionMsgOutput {
 	return o
 }
 
-func (o ProductEventListAdditionMsgOutput) Key() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventListAdditionMsg) string { return v.Key }).(pulumi.StringOutput)
+// The key of this dimension.
+func (o GetProductEventListAdditionMsgOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventListAdditionMsg) string { return v.Key }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListAdditionMsgOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventListAdditionMsg) string { return v.Name }).(pulumi.StringOutput)
+// Instance dimension name, eg: `deviceWanIp` for internet ip.
+func (o GetProductEventListAdditionMsgOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventListAdditionMsg) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListAdditionMsgOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventListAdditionMsg) string { return v.Value }).(pulumi.StringOutput)
+// Instance dimension value, eg: `119.119.119.119` for internet ip.
+func (o GetProductEventListAdditionMsgOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventListAdditionMsg) string { return v.Value }).(pulumi.StringOutput)
 }
 
-type ProductEventListAdditionMsgArrayOutput struct{ *pulumi.OutputState }
+type GetProductEventListAdditionMsgArrayOutput struct{ *pulumi.OutputState }
 
-func (ProductEventListAdditionMsgArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProductEventListAdditionMsg)(nil)).Elem()
+func (GetProductEventListAdditionMsgArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductEventListAdditionMsg)(nil)).Elem()
 }
 
-func (o ProductEventListAdditionMsgArrayOutput) ToProductEventListAdditionMsgArrayOutput() ProductEventListAdditionMsgArrayOutput {
+func (o GetProductEventListAdditionMsgArrayOutput) ToGetProductEventListAdditionMsgArrayOutput() GetProductEventListAdditionMsgArrayOutput {
 	return o
 }
 
-func (o ProductEventListAdditionMsgArrayOutput) ToProductEventListAdditionMsgArrayOutputWithContext(ctx context.Context) ProductEventListAdditionMsgArrayOutput {
+func (o GetProductEventListAdditionMsgArrayOutput) ToGetProductEventListAdditionMsgArrayOutputWithContext(ctx context.Context) GetProductEventListAdditionMsgArrayOutput {
 	return o
 }
 
-func (o ProductEventListAdditionMsgArrayOutput) Index(i pulumi.IntInput) ProductEventListAdditionMsgOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProductEventListAdditionMsg {
-		return vs[0].([]ProductEventListAdditionMsg)[vs[1].(int)]
-	}).(ProductEventListAdditionMsgOutput)
+func (o GetProductEventListAdditionMsgArrayOutput) Index(i pulumi.IntInput) GetProductEventListAdditionMsgOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProductEventListAdditionMsg {
+		return vs[0].([]GetProductEventListAdditionMsg)[vs[1].(int)]
+	}).(GetProductEventListAdditionMsgOutput)
 }
 
-type ProductEventListDimension struct {
-	Key   string `pulumi:"key"`
-	Name  string `pulumi:"name"`
+type GetProductEventListDimension struct {
+	// The key of this dimension.
+	Key string `pulumi:"key"`
+	// Instance dimension name, eg: `deviceWanIp` for internet ip.
+	Name string `pulumi:"name"`
+	// Instance dimension value, eg: `119.119.119.119` for internet ip.
 	Value string `pulumi:"value"`
 }
 
-// ProductEventListDimensionInput is an input type that accepts ProductEventListDimensionArgs and ProductEventListDimensionOutput values.
-// You can construct a concrete instance of `ProductEventListDimensionInput` via:
+// GetProductEventListDimensionInput is an input type that accepts GetProductEventListDimensionArgs and GetProductEventListDimensionOutput values.
+// You can construct a concrete instance of `GetProductEventListDimensionInput` via:
 //
-//          ProductEventListDimensionArgs{...}
-type ProductEventListDimensionInput interface {
+//          GetProductEventListDimensionArgs{...}
+type GetProductEventListDimensionInput interface {
 	pulumi.Input
 
-	ToProductEventListDimensionOutput() ProductEventListDimensionOutput
-	ToProductEventListDimensionOutputWithContext(context.Context) ProductEventListDimensionOutput
+	ToGetProductEventListDimensionOutput() GetProductEventListDimensionOutput
+	ToGetProductEventListDimensionOutputWithContext(context.Context) GetProductEventListDimensionOutput
 }
 
-type ProductEventListDimensionArgs struct {
-	Key   pulumi.StringInput `pulumi:"key"`
-	Name  pulumi.StringInput `pulumi:"name"`
+type GetProductEventListDimensionArgs struct {
+	// The key of this dimension.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Instance dimension name, eg: `deviceWanIp` for internet ip.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Instance dimension value, eg: `119.119.119.119` for internet ip.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
-func (ProductEventListDimensionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProductEventListDimension)(nil)).Elem()
+func (GetProductEventListDimensionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductEventListDimension)(nil)).Elem()
 }
 
-func (i ProductEventListDimensionArgs) ToProductEventListDimensionOutput() ProductEventListDimensionOutput {
-	return i.ToProductEventListDimensionOutputWithContext(context.Background())
+func (i GetProductEventListDimensionArgs) ToGetProductEventListDimensionOutput() GetProductEventListDimensionOutput {
+	return i.ToGetProductEventListDimensionOutputWithContext(context.Background())
 }
 
-func (i ProductEventListDimensionArgs) ToProductEventListDimensionOutputWithContext(ctx context.Context) ProductEventListDimensionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProductEventListDimensionOutput)
+func (i GetProductEventListDimensionArgs) ToGetProductEventListDimensionOutputWithContext(ctx context.Context) GetProductEventListDimensionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductEventListDimensionOutput)
 }
 
-// ProductEventListDimensionArrayInput is an input type that accepts ProductEventListDimensionArray and ProductEventListDimensionArrayOutput values.
-// You can construct a concrete instance of `ProductEventListDimensionArrayInput` via:
+// GetProductEventListDimensionArrayInput is an input type that accepts GetProductEventListDimensionArray and GetProductEventListDimensionArrayOutput values.
+// You can construct a concrete instance of `GetProductEventListDimensionArrayInput` via:
 //
-//          ProductEventListDimensionArray{ ProductEventListDimensionArgs{...} }
-type ProductEventListDimensionArrayInput interface {
+//          GetProductEventListDimensionArray{ GetProductEventListDimensionArgs{...} }
+type GetProductEventListDimensionArrayInput interface {
 	pulumi.Input
 
-	ToProductEventListDimensionArrayOutput() ProductEventListDimensionArrayOutput
-	ToProductEventListDimensionArrayOutputWithContext(context.Context) ProductEventListDimensionArrayOutput
+	ToGetProductEventListDimensionArrayOutput() GetProductEventListDimensionArrayOutput
+	ToGetProductEventListDimensionArrayOutputWithContext(context.Context) GetProductEventListDimensionArrayOutput
 }
 
-type ProductEventListDimensionArray []ProductEventListDimensionInput
+type GetProductEventListDimensionArray []GetProductEventListDimensionInput
 
-func (ProductEventListDimensionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProductEventListDimension)(nil)).Elem()
+func (GetProductEventListDimensionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductEventListDimension)(nil)).Elem()
 }
 
-func (i ProductEventListDimensionArray) ToProductEventListDimensionArrayOutput() ProductEventListDimensionArrayOutput {
-	return i.ToProductEventListDimensionArrayOutputWithContext(context.Background())
+func (i GetProductEventListDimensionArray) ToGetProductEventListDimensionArrayOutput() GetProductEventListDimensionArrayOutput {
+	return i.ToGetProductEventListDimensionArrayOutputWithContext(context.Background())
 }
 
-func (i ProductEventListDimensionArray) ToProductEventListDimensionArrayOutputWithContext(ctx context.Context) ProductEventListDimensionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProductEventListDimensionArrayOutput)
+func (i GetProductEventListDimensionArray) ToGetProductEventListDimensionArrayOutputWithContext(ctx context.Context) GetProductEventListDimensionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductEventListDimensionArrayOutput)
 }
 
-type ProductEventListDimensionOutput struct{ *pulumi.OutputState }
+type GetProductEventListDimensionOutput struct{ *pulumi.OutputState }
 
-func (ProductEventListDimensionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProductEventListDimension)(nil)).Elem()
+func (GetProductEventListDimensionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductEventListDimension)(nil)).Elem()
 }
 
-func (o ProductEventListDimensionOutput) ToProductEventListDimensionOutput() ProductEventListDimensionOutput {
+func (o GetProductEventListDimensionOutput) ToGetProductEventListDimensionOutput() GetProductEventListDimensionOutput {
 	return o
 }
 
-func (o ProductEventListDimensionOutput) ToProductEventListDimensionOutputWithContext(ctx context.Context) ProductEventListDimensionOutput {
+func (o GetProductEventListDimensionOutput) ToGetProductEventListDimensionOutputWithContext(ctx context.Context) GetProductEventListDimensionOutput {
 	return o
 }
 
-func (o ProductEventListDimensionOutput) Key() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventListDimension) string { return v.Key }).(pulumi.StringOutput)
+// The key of this dimension.
+func (o GetProductEventListDimensionOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventListDimension) string { return v.Key }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListDimensionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventListDimension) string { return v.Name }).(pulumi.StringOutput)
+// Instance dimension name, eg: `deviceWanIp` for internet ip.
+func (o GetProductEventListDimensionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventListDimension) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListDimensionOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventListDimension) string { return v.Value }).(pulumi.StringOutput)
+// Instance dimension value, eg: `119.119.119.119` for internet ip.
+func (o GetProductEventListDimensionOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventListDimension) string { return v.Value }).(pulumi.StringOutput)
 }
 
-type ProductEventListDimensionArrayOutput struct{ *pulumi.OutputState }
+type GetProductEventListDimensionArrayOutput struct{ *pulumi.OutputState }
 
-func (ProductEventListDimensionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProductEventListDimension)(nil)).Elem()
+func (GetProductEventListDimensionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductEventListDimension)(nil)).Elem()
 }
 
-func (o ProductEventListDimensionArrayOutput) ToProductEventListDimensionArrayOutput() ProductEventListDimensionArrayOutput {
+func (o GetProductEventListDimensionArrayOutput) ToGetProductEventListDimensionArrayOutput() GetProductEventListDimensionArrayOutput {
 	return o
 }
 
-func (o ProductEventListDimensionArrayOutput) ToProductEventListDimensionArrayOutputWithContext(ctx context.Context) ProductEventListDimensionArrayOutput {
+func (o GetProductEventListDimensionArrayOutput) ToGetProductEventListDimensionArrayOutputWithContext(ctx context.Context) GetProductEventListDimensionArrayOutput {
 	return o
 }
 
-func (o ProductEventListDimensionArrayOutput) Index(i pulumi.IntInput) ProductEventListDimensionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProductEventListDimension {
-		return vs[0].([]ProductEventListDimension)[vs[1].(int)]
-	}).(ProductEventListDimensionOutput)
+func (o GetProductEventListDimensionArrayOutput) Index(i pulumi.IntInput) GetProductEventListDimensionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProductEventListDimension {
+		return vs[0].([]GetProductEventListDimension)[vs[1].(int)]
+	}).(GetProductEventListDimensionOutput)
 }
 
-type ProductEventListGroupInfo struct {
-	GroupId   string `pulumi:"groupId"`
+type GetProductEventListGroupInfo struct {
+	// Policy group ID.
+	GroupId string `pulumi:"groupId"`
+	// Policy group name.
 	GroupName string `pulumi:"groupName"`
 }
 
-// ProductEventListGroupInfoInput is an input type that accepts ProductEventListGroupInfoArgs and ProductEventListGroupInfoOutput values.
-// You can construct a concrete instance of `ProductEventListGroupInfoInput` via:
+// GetProductEventListGroupInfoInput is an input type that accepts GetProductEventListGroupInfoArgs and GetProductEventListGroupInfoOutput values.
+// You can construct a concrete instance of `GetProductEventListGroupInfoInput` via:
 //
-//          ProductEventListGroupInfoArgs{...}
-type ProductEventListGroupInfoInput interface {
+//          GetProductEventListGroupInfoArgs{...}
+type GetProductEventListGroupInfoInput interface {
 	pulumi.Input
 
-	ToProductEventListGroupInfoOutput() ProductEventListGroupInfoOutput
-	ToProductEventListGroupInfoOutputWithContext(context.Context) ProductEventListGroupInfoOutput
+	ToGetProductEventListGroupInfoOutput() GetProductEventListGroupInfoOutput
+	ToGetProductEventListGroupInfoOutputWithContext(context.Context) GetProductEventListGroupInfoOutput
 }
 
-type ProductEventListGroupInfoArgs struct {
-	GroupId   pulumi.StringInput `pulumi:"groupId"`
+type GetProductEventListGroupInfoArgs struct {
+	// Policy group ID.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Policy group name.
 	GroupName pulumi.StringInput `pulumi:"groupName"`
 }
 
-func (ProductEventListGroupInfoArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProductEventListGroupInfo)(nil)).Elem()
+func (GetProductEventListGroupInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductEventListGroupInfo)(nil)).Elem()
 }
 
-func (i ProductEventListGroupInfoArgs) ToProductEventListGroupInfoOutput() ProductEventListGroupInfoOutput {
-	return i.ToProductEventListGroupInfoOutputWithContext(context.Background())
+func (i GetProductEventListGroupInfoArgs) ToGetProductEventListGroupInfoOutput() GetProductEventListGroupInfoOutput {
+	return i.ToGetProductEventListGroupInfoOutputWithContext(context.Background())
 }
 
-func (i ProductEventListGroupInfoArgs) ToProductEventListGroupInfoOutputWithContext(ctx context.Context) ProductEventListGroupInfoOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProductEventListGroupInfoOutput)
+func (i GetProductEventListGroupInfoArgs) ToGetProductEventListGroupInfoOutputWithContext(ctx context.Context) GetProductEventListGroupInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductEventListGroupInfoOutput)
 }
 
-// ProductEventListGroupInfoArrayInput is an input type that accepts ProductEventListGroupInfoArray and ProductEventListGroupInfoArrayOutput values.
-// You can construct a concrete instance of `ProductEventListGroupInfoArrayInput` via:
+// GetProductEventListGroupInfoArrayInput is an input type that accepts GetProductEventListGroupInfoArray and GetProductEventListGroupInfoArrayOutput values.
+// You can construct a concrete instance of `GetProductEventListGroupInfoArrayInput` via:
 //
-//          ProductEventListGroupInfoArray{ ProductEventListGroupInfoArgs{...} }
-type ProductEventListGroupInfoArrayInput interface {
+//          GetProductEventListGroupInfoArray{ GetProductEventListGroupInfoArgs{...} }
+type GetProductEventListGroupInfoArrayInput interface {
 	pulumi.Input
 
-	ToProductEventListGroupInfoArrayOutput() ProductEventListGroupInfoArrayOutput
-	ToProductEventListGroupInfoArrayOutputWithContext(context.Context) ProductEventListGroupInfoArrayOutput
+	ToGetProductEventListGroupInfoArrayOutput() GetProductEventListGroupInfoArrayOutput
+	ToGetProductEventListGroupInfoArrayOutputWithContext(context.Context) GetProductEventListGroupInfoArrayOutput
 }
 
-type ProductEventListGroupInfoArray []ProductEventListGroupInfoInput
+type GetProductEventListGroupInfoArray []GetProductEventListGroupInfoInput
 
-func (ProductEventListGroupInfoArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProductEventListGroupInfo)(nil)).Elem()
+func (GetProductEventListGroupInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductEventListGroupInfo)(nil)).Elem()
 }
 
-func (i ProductEventListGroupInfoArray) ToProductEventListGroupInfoArrayOutput() ProductEventListGroupInfoArrayOutput {
-	return i.ToProductEventListGroupInfoArrayOutputWithContext(context.Background())
+func (i GetProductEventListGroupInfoArray) ToGetProductEventListGroupInfoArrayOutput() GetProductEventListGroupInfoArrayOutput {
+	return i.ToGetProductEventListGroupInfoArrayOutputWithContext(context.Background())
 }
 
-func (i ProductEventListGroupInfoArray) ToProductEventListGroupInfoArrayOutputWithContext(ctx context.Context) ProductEventListGroupInfoArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProductEventListGroupInfoArrayOutput)
+func (i GetProductEventListGroupInfoArray) ToGetProductEventListGroupInfoArrayOutputWithContext(ctx context.Context) GetProductEventListGroupInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductEventListGroupInfoArrayOutput)
 }
 
-type ProductEventListGroupInfoOutput struct{ *pulumi.OutputState }
+type GetProductEventListGroupInfoOutput struct{ *pulumi.OutputState }
 
-func (ProductEventListGroupInfoOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProductEventListGroupInfo)(nil)).Elem()
+func (GetProductEventListGroupInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductEventListGroupInfo)(nil)).Elem()
 }
 
-func (o ProductEventListGroupInfoOutput) ToProductEventListGroupInfoOutput() ProductEventListGroupInfoOutput {
+func (o GetProductEventListGroupInfoOutput) ToGetProductEventListGroupInfoOutput() GetProductEventListGroupInfoOutput {
 	return o
 }
 
-func (o ProductEventListGroupInfoOutput) ToProductEventListGroupInfoOutputWithContext(ctx context.Context) ProductEventListGroupInfoOutput {
+func (o GetProductEventListGroupInfoOutput) ToGetProductEventListGroupInfoOutputWithContext(ctx context.Context) GetProductEventListGroupInfoOutput {
 	return o
 }
 
-func (o ProductEventListGroupInfoOutput) GroupId() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventListGroupInfo) string { return v.GroupId }).(pulumi.StringOutput)
+// Policy group ID.
+func (o GetProductEventListGroupInfoOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventListGroupInfo) string { return v.GroupId }).(pulumi.StringOutput)
 }
 
-func (o ProductEventListGroupInfoOutput) GroupName() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductEventListGroupInfo) string { return v.GroupName }).(pulumi.StringOutput)
+// Policy group name.
+func (o GetProductEventListGroupInfoOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductEventListGroupInfo) string { return v.GroupName }).(pulumi.StringOutput)
 }
 
-type ProductEventListGroupInfoArrayOutput struct{ *pulumi.OutputState }
+type GetProductEventListGroupInfoArrayOutput struct{ *pulumi.OutputState }
 
-func (ProductEventListGroupInfoArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProductEventListGroupInfo)(nil)).Elem()
+func (GetProductEventListGroupInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductEventListGroupInfo)(nil)).Elem()
 }
 
-func (o ProductEventListGroupInfoArrayOutput) ToProductEventListGroupInfoArrayOutput() ProductEventListGroupInfoArrayOutput {
+func (o GetProductEventListGroupInfoArrayOutput) ToGetProductEventListGroupInfoArrayOutput() GetProductEventListGroupInfoArrayOutput {
 	return o
 }
 
-func (o ProductEventListGroupInfoArrayOutput) ToProductEventListGroupInfoArrayOutputWithContext(ctx context.Context) ProductEventListGroupInfoArrayOutput {
+func (o GetProductEventListGroupInfoArrayOutput) ToGetProductEventListGroupInfoArrayOutputWithContext(ctx context.Context) GetProductEventListGroupInfoArrayOutput {
 	return o
 }
 
-func (o ProductEventListGroupInfoArrayOutput) Index(i pulumi.IntInput) ProductEventListGroupInfoOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProductEventListGroupInfo {
-		return vs[0].([]ProductEventListGroupInfo)[vs[1].(int)]
-	}).(ProductEventListGroupInfoOutput)
+func (o GetProductEventListGroupInfoArrayOutput) Index(i pulumi.IntInput) GetProductEventListGroupInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProductEventListGroupInfo {
+		return vs[0].([]GetProductEventListGroupInfo)[vs[1].(int)]
+	}).(GetProductEventListGroupInfoOutput)
 }
 
-type ProductNamespaceList struct {
-	Namespace          string `pulumi:"namespace"`
+type GetProductNamespaceList struct {
+	// Namespace of each cloud product in monitor system.
+	Namespace string `pulumi:"namespace"`
+	// Chinese name of this product.
 	ProductChineseName string `pulumi:"productChineseName"`
-	ProductName        string `pulumi:"productName"`
+	// English name of this product.
+	ProductName string `pulumi:"productName"`
 }
 
-// ProductNamespaceListInput is an input type that accepts ProductNamespaceListArgs and ProductNamespaceListOutput values.
-// You can construct a concrete instance of `ProductNamespaceListInput` via:
+// GetProductNamespaceListInput is an input type that accepts GetProductNamespaceListArgs and GetProductNamespaceListOutput values.
+// You can construct a concrete instance of `GetProductNamespaceListInput` via:
 //
-//          ProductNamespaceListArgs{...}
-type ProductNamespaceListInput interface {
+//          GetProductNamespaceListArgs{...}
+type GetProductNamespaceListInput interface {
 	pulumi.Input
 
-	ToProductNamespaceListOutput() ProductNamespaceListOutput
-	ToProductNamespaceListOutputWithContext(context.Context) ProductNamespaceListOutput
+	ToGetProductNamespaceListOutput() GetProductNamespaceListOutput
+	ToGetProductNamespaceListOutputWithContext(context.Context) GetProductNamespaceListOutput
 }
 
-type ProductNamespaceListArgs struct {
-	Namespace          pulumi.StringInput `pulumi:"namespace"`
+type GetProductNamespaceListArgs struct {
+	// Namespace of each cloud product in monitor system.
+	Namespace pulumi.StringInput `pulumi:"namespace"`
+	// Chinese name of this product.
 	ProductChineseName pulumi.StringInput `pulumi:"productChineseName"`
-	ProductName        pulumi.StringInput `pulumi:"productName"`
+	// English name of this product.
+	ProductName pulumi.StringInput `pulumi:"productName"`
 }
 
-func (ProductNamespaceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProductNamespaceList)(nil)).Elem()
+func (GetProductNamespaceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductNamespaceList)(nil)).Elem()
 }
 
-func (i ProductNamespaceListArgs) ToProductNamespaceListOutput() ProductNamespaceListOutput {
-	return i.ToProductNamespaceListOutputWithContext(context.Background())
+func (i GetProductNamespaceListArgs) ToGetProductNamespaceListOutput() GetProductNamespaceListOutput {
+	return i.ToGetProductNamespaceListOutputWithContext(context.Background())
 }
 
-func (i ProductNamespaceListArgs) ToProductNamespaceListOutputWithContext(ctx context.Context) ProductNamespaceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProductNamespaceListOutput)
+func (i GetProductNamespaceListArgs) ToGetProductNamespaceListOutputWithContext(ctx context.Context) GetProductNamespaceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductNamespaceListOutput)
 }
 
-// ProductNamespaceListArrayInput is an input type that accepts ProductNamespaceListArray and ProductNamespaceListArrayOutput values.
-// You can construct a concrete instance of `ProductNamespaceListArrayInput` via:
+// GetProductNamespaceListArrayInput is an input type that accepts GetProductNamespaceListArray and GetProductNamespaceListArrayOutput values.
+// You can construct a concrete instance of `GetProductNamespaceListArrayInput` via:
 //
-//          ProductNamespaceListArray{ ProductNamespaceListArgs{...} }
-type ProductNamespaceListArrayInput interface {
+//          GetProductNamespaceListArray{ GetProductNamespaceListArgs{...} }
+type GetProductNamespaceListArrayInput interface {
 	pulumi.Input
 
-	ToProductNamespaceListArrayOutput() ProductNamespaceListArrayOutput
-	ToProductNamespaceListArrayOutputWithContext(context.Context) ProductNamespaceListArrayOutput
+	ToGetProductNamespaceListArrayOutput() GetProductNamespaceListArrayOutput
+	ToGetProductNamespaceListArrayOutputWithContext(context.Context) GetProductNamespaceListArrayOutput
 }
 
-type ProductNamespaceListArray []ProductNamespaceListInput
+type GetProductNamespaceListArray []GetProductNamespaceListInput
 
-func (ProductNamespaceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProductNamespaceList)(nil)).Elem()
+func (GetProductNamespaceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductNamespaceList)(nil)).Elem()
 }
 
-func (i ProductNamespaceListArray) ToProductNamespaceListArrayOutput() ProductNamespaceListArrayOutput {
-	return i.ToProductNamespaceListArrayOutputWithContext(context.Background())
+func (i GetProductNamespaceListArray) ToGetProductNamespaceListArrayOutput() GetProductNamespaceListArrayOutput {
+	return i.ToGetProductNamespaceListArrayOutputWithContext(context.Background())
 }
 
-func (i ProductNamespaceListArray) ToProductNamespaceListArrayOutputWithContext(ctx context.Context) ProductNamespaceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProductNamespaceListArrayOutput)
+func (i GetProductNamespaceListArray) ToGetProductNamespaceListArrayOutputWithContext(ctx context.Context) GetProductNamespaceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProductNamespaceListArrayOutput)
 }
 
-type ProductNamespaceListOutput struct{ *pulumi.OutputState }
+type GetProductNamespaceListOutput struct{ *pulumi.OutputState }
 
-func (ProductNamespaceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProductNamespaceList)(nil)).Elem()
+func (GetProductNamespaceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProductNamespaceList)(nil)).Elem()
 }
 
-func (o ProductNamespaceListOutput) ToProductNamespaceListOutput() ProductNamespaceListOutput {
+func (o GetProductNamespaceListOutput) ToGetProductNamespaceListOutput() GetProductNamespaceListOutput {
 	return o
 }
 
-func (o ProductNamespaceListOutput) ToProductNamespaceListOutputWithContext(ctx context.Context) ProductNamespaceListOutput {
+func (o GetProductNamespaceListOutput) ToGetProductNamespaceListOutputWithContext(ctx context.Context) GetProductNamespaceListOutput {
 	return o
 }
 
-func (o ProductNamespaceListOutput) Namespace() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductNamespaceList) string { return v.Namespace }).(pulumi.StringOutput)
+// Namespace of each cloud product in monitor system.
+func (o GetProductNamespaceListOutput) Namespace() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductNamespaceList) string { return v.Namespace }).(pulumi.StringOutput)
 }
 
-func (o ProductNamespaceListOutput) ProductChineseName() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductNamespaceList) string { return v.ProductChineseName }).(pulumi.StringOutput)
+// Chinese name of this product.
+func (o GetProductNamespaceListOutput) ProductChineseName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductNamespaceList) string { return v.ProductChineseName }).(pulumi.StringOutput)
 }
 
-func (o ProductNamespaceListOutput) ProductName() pulumi.StringOutput {
-	return o.ApplyT(func(v ProductNamespaceList) string { return v.ProductName }).(pulumi.StringOutput)
+// English name of this product.
+func (o GetProductNamespaceListOutput) ProductName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProductNamespaceList) string { return v.ProductName }).(pulumi.StringOutput)
 }
 
-type ProductNamespaceListArrayOutput struct{ *pulumi.OutputState }
+type GetProductNamespaceListArrayOutput struct{ *pulumi.OutputState }
 
-func (ProductNamespaceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProductNamespaceList)(nil)).Elem()
+func (GetProductNamespaceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProductNamespaceList)(nil)).Elem()
 }
 
-func (o ProductNamespaceListArrayOutput) ToProductNamespaceListArrayOutput() ProductNamespaceListArrayOutput {
+func (o GetProductNamespaceListArrayOutput) ToGetProductNamespaceListArrayOutput() GetProductNamespaceListArrayOutput {
 	return o
 }
 
-func (o ProductNamespaceListArrayOutput) ToProductNamespaceListArrayOutputWithContext(ctx context.Context) ProductNamespaceListArrayOutput {
+func (o GetProductNamespaceListArrayOutput) ToGetProductNamespaceListArrayOutputWithContext(ctx context.Context) GetProductNamespaceListArrayOutput {
 	return o
 }
 
-func (o ProductNamespaceListArrayOutput) Index(i pulumi.IntInput) ProductNamespaceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProductNamespaceList {
-		return vs[0].([]ProductNamespaceList)[vs[1].(int)]
-	}).(ProductNamespaceListOutput)
+func (o GetProductNamespaceListArrayOutput) Index(i pulumi.IntInput) GetProductNamespaceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProductNamespaceList {
+		return vs[0].([]GetProductNamespaceList)[vs[1].(int)]
+	}).(GetProductNamespaceListOutput)
 }
 
 func init() {
@@ -4066,52 +6133,68 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyPolicyTagArrayInput)(nil)).Elem(), AlarmPolicyPolicyTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyTriggerTaskInput)(nil)).Elem(), AlarmPolicyTriggerTaskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyTriggerTaskArrayInput)(nil)).Elem(), AlarmPolicyTriggerTaskArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BindingAlarmReceiverReceiversInput)(nil)).Elem(), BindingAlarmReceiverReceiversArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BindingAlarmReceiverReceiversPtrInput)(nil)).Elem(), BindingAlarmReceiverReceiversArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BindingObjectDimensionInput)(nil)).Elem(), BindingObjectDimensionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BindingObjectDimensionArrayInput)(nil)).Elem(), BindingObjectDimensionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BindingObjectsListInput)(nil)).Elem(), BindingObjectsListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BindingObjectsListArrayInput)(nil)).Elem(), BindingObjectsListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DataDimensionInput)(nil)).Elem(), DataDimensionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DataDimensionArrayInput)(nil)).Elem(), DataDimensionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DataListInput)(nil)).Elem(), DataListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DataListArrayInput)(nil)).Elem(), DataListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BindingReceiverReceiversInput)(nil)).Elem(), BindingReceiverReceiversArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BindingReceiverReceiversPtrInput)(nil)).Elem(), BindingReceiverReceiversArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PolicyBindingObjectDimensionInput)(nil)).Elem(), PolicyBindingObjectDimensionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PolicyBindingObjectDimensionArrayInput)(nil)).Elem(), PolicyBindingObjectDimensionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyConditionsListInput)(nil)).Elem(), PolicyConditionsListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyConditionsListArrayInput)(nil)).Elem(), PolicyConditionsListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyConditionsListEventMetricInput)(nil)).Elem(), PolicyConditionsListEventMetricArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyConditionsListEventMetricArrayInput)(nil)).Elem(), PolicyConditionsListEventMetricArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyConditionsListMetricInput)(nil)).Elem(), PolicyConditionsListMetricArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyConditionsListMetricArrayInput)(nil)).Elem(), PolicyConditionsListMetricArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupBindingObjectInput)(nil)).Elem(), PolicyGroupBindingObjectArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupBindingObjectArrayInput)(nil)).Elem(), PolicyGroupBindingObjectArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupConditionInput)(nil)).Elem(), PolicyGroupConditionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupConditionArrayInput)(nil)).Elem(), PolicyGroupConditionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupEventConditionInput)(nil)).Elem(), PolicyGroupEventConditionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupEventConditionArrayInput)(nil)).Elem(), PolicyGroupEventConditionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupReceiverInput)(nil)).Elem(), PolicyGroupReceiverArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupReceiverArrayInput)(nil)).Elem(), PolicyGroupReceiverArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupsListInput)(nil)).Elem(), PolicyGroupsListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupsListArrayInput)(nil)).Elem(), PolicyGroupsListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupsListConditionInput)(nil)).Elem(), PolicyGroupsListConditionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupsListConditionArrayInput)(nil)).Elem(), PolicyGroupsListConditionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupsListEventConditionInput)(nil)).Elem(), PolicyGroupsListEventConditionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupsListEventConditionArrayInput)(nil)).Elem(), PolicyGroupsListEventConditionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupsListReceiverInput)(nil)).Elem(), PolicyGroupsListReceiverArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PolicyGroupsListReceiverArrayInput)(nil)).Elem(), PolicyGroupsListReceiverArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProductEventDimensionInput)(nil)).Elem(), ProductEventDimensionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProductEventDimensionArrayInput)(nil)).Elem(), ProductEventDimensionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProductEventListInput)(nil)).Elem(), ProductEventListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProductEventListArrayInput)(nil)).Elem(), ProductEventListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProductEventListAdditionMsgInput)(nil)).Elem(), ProductEventListAdditionMsgArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProductEventListAdditionMsgArrayInput)(nil)).Elem(), ProductEventListAdditionMsgArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProductEventListDimensionInput)(nil)).Elem(), ProductEventListDimensionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProductEventListDimensionArrayInput)(nil)).Elem(), ProductEventListDimensionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProductEventListGroupInfoInput)(nil)).Elem(), ProductEventListGroupInfoArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProductEventListGroupInfoArrayInput)(nil)).Elem(), ProductEventListGroupInfoArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProductNamespaceListInput)(nil)).Elem(), ProductNamespaceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProductNamespaceListArrayInput)(nil)).Elem(), ProductNamespaceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertRuleAnnotationInput)(nil)).Elem(), TmpAlertRuleAnnotationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertRuleAnnotationArrayInput)(nil)).Elem(), TmpAlertRuleAnnotationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertRuleLabelInput)(nil)).Elem(), TmpAlertRuleLabelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertRuleLabelArrayInput)(nil)).Elem(), TmpAlertRuleLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRulePtrInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleNotificationInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleNotificationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleNotificationPtrInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleNotificationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleNotificationAlertManagerInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleArrayInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleAnnotationInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleRuleAnnotationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleLabelInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleRuleLabelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeAlertPolicyAlertRuleRuleLabelArrayInput)(nil)).Elem(), TmpTkeAlertPolicyAlertRuleRuleLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplateInput)(nil)).Elem(), TmpTkeTemplateTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplatePtrInput)(nil)).Elem(), TmpTkeTemplateTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplatePodMonitorInput)(nil)).Elem(), TmpTkeTemplateTemplatePodMonitorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplatePodMonitorArrayInput)(nil)).Elem(), TmpTkeTemplateTemplatePodMonitorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplateRawJobInput)(nil)).Elem(), TmpTkeTemplateTemplateRawJobArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplateRawJobArrayInput)(nil)).Elem(), TmpTkeTemplateTemplateRawJobArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplateRecordRuleInput)(nil)).Elem(), TmpTkeTemplateTemplateRecordRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplateRecordRuleArrayInput)(nil)).Elem(), TmpTkeTemplateTemplateRecordRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplateServiceMonitorInput)(nil)).Elem(), TmpTkeTemplateTemplateServiceMonitorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpTkeTemplateTemplateServiceMonitorArrayInput)(nil)).Elem(), TmpTkeTemplateTemplateServiceMonitorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBindingObjectsListInput)(nil)).Elem(), GetBindingObjectsListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBindingObjectsListArrayInput)(nil)).Elem(), GetBindingObjectsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDataDimensionInput)(nil)).Elem(), GetDataDimensionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDataDimensionArrayInput)(nil)).Elem(), GetDataDimensionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDataListInput)(nil)).Elem(), GetDataListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDataListArrayInput)(nil)).Elem(), GetDataListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyConditionsListInput)(nil)).Elem(), GetPolicyConditionsListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyConditionsListArrayInput)(nil)).Elem(), GetPolicyConditionsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyConditionsListEventMetricInput)(nil)).Elem(), GetPolicyConditionsListEventMetricArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyConditionsListEventMetricArrayInput)(nil)).Elem(), GetPolicyConditionsListEventMetricArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyConditionsListMetricInput)(nil)).Elem(), GetPolicyConditionsListMetricArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyConditionsListMetricArrayInput)(nil)).Elem(), GetPolicyConditionsListMetricArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyGroupsListInput)(nil)).Elem(), GetPolicyGroupsListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyGroupsListArrayInput)(nil)).Elem(), GetPolicyGroupsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyGroupsListConditionInput)(nil)).Elem(), GetPolicyGroupsListConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyGroupsListConditionArrayInput)(nil)).Elem(), GetPolicyGroupsListConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyGroupsListEventConditionInput)(nil)).Elem(), GetPolicyGroupsListEventConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyGroupsListEventConditionArrayInput)(nil)).Elem(), GetPolicyGroupsListEventConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyGroupsListReceiverInput)(nil)).Elem(), GetPolicyGroupsListReceiverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyGroupsListReceiverArrayInput)(nil)).Elem(), GetPolicyGroupsListReceiverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductEventDimensionInput)(nil)).Elem(), GetProductEventDimensionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductEventDimensionArrayInput)(nil)).Elem(), GetProductEventDimensionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductEventListInput)(nil)).Elem(), GetProductEventListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductEventListArrayInput)(nil)).Elem(), GetProductEventListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductEventListAdditionMsgInput)(nil)).Elem(), GetProductEventListAdditionMsgArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductEventListAdditionMsgArrayInput)(nil)).Elem(), GetProductEventListAdditionMsgArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductEventListDimensionInput)(nil)).Elem(), GetProductEventListDimensionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductEventListDimensionArrayInput)(nil)).Elem(), GetProductEventListDimensionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductEventListGroupInfoInput)(nil)).Elem(), GetProductEventListGroupInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductEventListGroupInfoArrayInput)(nil)).Elem(), GetProductEventListGroupInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductNamespaceListInput)(nil)).Elem(), GetProductNamespaceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProductNamespaceListArrayInput)(nil)).Elem(), GetProductNamespaceListArray{})
 	pulumi.RegisterOutputType(AlarmPolicyConditionsOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyConditionsPtrOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyConditionsRuleOutput{})
@@ -4126,50 +6209,66 @@ func init() {
 	pulumi.RegisterOutputType(AlarmPolicyPolicyTagArrayOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyTriggerTaskOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyTriggerTaskArrayOutput{})
-	pulumi.RegisterOutputType(BindingAlarmReceiverReceiversOutput{})
-	pulumi.RegisterOutputType(BindingAlarmReceiverReceiversPtrOutput{})
-	pulumi.RegisterOutputType(BindingObjectDimensionOutput{})
-	pulumi.RegisterOutputType(BindingObjectDimensionArrayOutput{})
-	pulumi.RegisterOutputType(BindingObjectsListOutput{})
-	pulumi.RegisterOutputType(BindingObjectsListArrayOutput{})
-	pulumi.RegisterOutputType(DataDimensionOutput{})
-	pulumi.RegisterOutputType(DataDimensionArrayOutput{})
-	pulumi.RegisterOutputType(DataListOutput{})
-	pulumi.RegisterOutputType(DataListArrayOutput{})
+	pulumi.RegisterOutputType(BindingReceiverReceiversOutput{})
+	pulumi.RegisterOutputType(BindingReceiverReceiversPtrOutput{})
 	pulumi.RegisterOutputType(PolicyBindingObjectDimensionOutput{})
 	pulumi.RegisterOutputType(PolicyBindingObjectDimensionArrayOutput{})
-	pulumi.RegisterOutputType(PolicyConditionsListOutput{})
-	pulumi.RegisterOutputType(PolicyConditionsListArrayOutput{})
-	pulumi.RegisterOutputType(PolicyConditionsListEventMetricOutput{})
-	pulumi.RegisterOutputType(PolicyConditionsListEventMetricArrayOutput{})
-	pulumi.RegisterOutputType(PolicyConditionsListMetricOutput{})
-	pulumi.RegisterOutputType(PolicyConditionsListMetricArrayOutput{})
-	pulumi.RegisterOutputType(PolicyGroupBindingObjectOutput{})
-	pulumi.RegisterOutputType(PolicyGroupBindingObjectArrayOutput{})
-	pulumi.RegisterOutputType(PolicyGroupConditionOutput{})
-	pulumi.RegisterOutputType(PolicyGroupConditionArrayOutput{})
-	pulumi.RegisterOutputType(PolicyGroupEventConditionOutput{})
-	pulumi.RegisterOutputType(PolicyGroupEventConditionArrayOutput{})
-	pulumi.RegisterOutputType(PolicyGroupReceiverOutput{})
-	pulumi.RegisterOutputType(PolicyGroupReceiverArrayOutput{})
-	pulumi.RegisterOutputType(PolicyGroupsListOutput{})
-	pulumi.RegisterOutputType(PolicyGroupsListArrayOutput{})
-	pulumi.RegisterOutputType(PolicyGroupsListConditionOutput{})
-	pulumi.RegisterOutputType(PolicyGroupsListConditionArrayOutput{})
-	pulumi.RegisterOutputType(PolicyGroupsListEventConditionOutput{})
-	pulumi.RegisterOutputType(PolicyGroupsListEventConditionArrayOutput{})
-	pulumi.RegisterOutputType(PolicyGroupsListReceiverOutput{})
-	pulumi.RegisterOutputType(PolicyGroupsListReceiverArrayOutput{})
-	pulumi.RegisterOutputType(ProductEventDimensionOutput{})
-	pulumi.RegisterOutputType(ProductEventDimensionArrayOutput{})
-	pulumi.RegisterOutputType(ProductEventListOutput{})
-	pulumi.RegisterOutputType(ProductEventListArrayOutput{})
-	pulumi.RegisterOutputType(ProductEventListAdditionMsgOutput{})
-	pulumi.RegisterOutputType(ProductEventListAdditionMsgArrayOutput{})
-	pulumi.RegisterOutputType(ProductEventListDimensionOutput{})
-	pulumi.RegisterOutputType(ProductEventListDimensionArrayOutput{})
-	pulumi.RegisterOutputType(ProductEventListGroupInfoOutput{})
-	pulumi.RegisterOutputType(ProductEventListGroupInfoArrayOutput{})
-	pulumi.RegisterOutputType(ProductNamespaceListOutput{})
-	pulumi.RegisterOutputType(ProductNamespaceListArrayOutput{})
+	pulumi.RegisterOutputType(TmpAlertRuleAnnotationOutput{})
+	pulumi.RegisterOutputType(TmpAlertRuleAnnotationArrayOutput{})
+	pulumi.RegisterOutputType(TmpAlertRuleLabelOutput{})
+	pulumi.RegisterOutputType(TmpAlertRuleLabelArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleOutput{})
+	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRulePtrOutput{})
+	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleNotificationOutput{})
+	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleNotificationPtrOutput{})
+	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput{})
+	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput{})
+	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleRuleOutput{})
+	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleRuleArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput{})
+	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleRuleLabelOutput{})
+	pulumi.RegisterOutputType(TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeTemplateTemplateOutput{})
+	pulumi.RegisterOutputType(TmpTkeTemplateTemplatePtrOutput{})
+	pulumi.RegisterOutputType(TmpTkeTemplateTemplatePodMonitorOutput{})
+	pulumi.RegisterOutputType(TmpTkeTemplateTemplatePodMonitorArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeTemplateTemplateRawJobOutput{})
+	pulumi.RegisterOutputType(TmpTkeTemplateTemplateRawJobArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeTemplateTemplateRecordRuleOutput{})
+	pulumi.RegisterOutputType(TmpTkeTemplateTemplateRecordRuleArrayOutput{})
+	pulumi.RegisterOutputType(TmpTkeTemplateTemplateServiceMonitorOutput{})
+	pulumi.RegisterOutputType(TmpTkeTemplateTemplateServiceMonitorArrayOutput{})
+	pulumi.RegisterOutputType(GetBindingObjectsListOutput{})
+	pulumi.RegisterOutputType(GetBindingObjectsListArrayOutput{})
+	pulumi.RegisterOutputType(GetDataDimensionOutput{})
+	pulumi.RegisterOutputType(GetDataDimensionArrayOutput{})
+	pulumi.RegisterOutputType(GetDataListOutput{})
+	pulumi.RegisterOutputType(GetDataListArrayOutput{})
+	pulumi.RegisterOutputType(GetPolicyConditionsListOutput{})
+	pulumi.RegisterOutputType(GetPolicyConditionsListArrayOutput{})
+	pulumi.RegisterOutputType(GetPolicyConditionsListEventMetricOutput{})
+	pulumi.RegisterOutputType(GetPolicyConditionsListEventMetricArrayOutput{})
+	pulumi.RegisterOutputType(GetPolicyConditionsListMetricOutput{})
+	pulumi.RegisterOutputType(GetPolicyConditionsListMetricArrayOutput{})
+	pulumi.RegisterOutputType(GetPolicyGroupsListOutput{})
+	pulumi.RegisterOutputType(GetPolicyGroupsListArrayOutput{})
+	pulumi.RegisterOutputType(GetPolicyGroupsListConditionOutput{})
+	pulumi.RegisterOutputType(GetPolicyGroupsListConditionArrayOutput{})
+	pulumi.RegisterOutputType(GetPolicyGroupsListEventConditionOutput{})
+	pulumi.RegisterOutputType(GetPolicyGroupsListEventConditionArrayOutput{})
+	pulumi.RegisterOutputType(GetPolicyGroupsListReceiverOutput{})
+	pulumi.RegisterOutputType(GetPolicyGroupsListReceiverArrayOutput{})
+	pulumi.RegisterOutputType(GetProductEventDimensionOutput{})
+	pulumi.RegisterOutputType(GetProductEventDimensionArrayOutput{})
+	pulumi.RegisterOutputType(GetProductEventListOutput{})
+	pulumi.RegisterOutputType(GetProductEventListArrayOutput{})
+	pulumi.RegisterOutputType(GetProductEventListAdditionMsgOutput{})
+	pulumi.RegisterOutputType(GetProductEventListAdditionMsgArrayOutput{})
+	pulumi.RegisterOutputType(GetProductEventListDimensionOutput{})
+	pulumi.RegisterOutputType(GetProductEventListDimensionArrayOutput{})
+	pulumi.RegisterOutputType(GetProductEventListGroupInfoOutput{})
+	pulumi.RegisterOutputType(GetProductEventListGroupInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetProductNamespaceListOutput{})
+	pulumi.RegisterOutputType(GetProductNamespaceListArrayOutput{})
 }

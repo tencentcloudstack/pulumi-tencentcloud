@@ -20,6 +20,12 @@ class InstanceBackupPlanArgs:
                  base_backup_retention_period: Optional[pulumi.Input[int]] = None,
                  max_backup_start_time: Optional[pulumi.Input[str]] = None,
                  min_backup_start_time: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] backup_periods: List of backup period per week, available values: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`. NOTE: At least specify two days.
+        :param pulumi.Input[int] base_backup_retention_period: Specify days of the retention.
+        :param pulumi.Input[str] max_backup_start_time: Specify latest backup start time, format `hh:mm:ss`.
+        :param pulumi.Input[str] min_backup_start_time: Specify earliest backup start time, format `hh:mm:ss`.
+        """
         if backup_periods is not None:
             pulumi.set(__self__, "backup_periods", backup_periods)
         if base_backup_retention_period is not None:
@@ -32,6 +38,9 @@ class InstanceBackupPlanArgs:
     @property
     @pulumi.getter(name="backupPeriods")
     def backup_periods(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of backup period per week, available values: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`. NOTE: At least specify two days.
+        """
         return pulumi.get(self, "backup_periods")
 
     @backup_periods.setter
@@ -41,6 +50,9 @@ class InstanceBackupPlanArgs:
     @property
     @pulumi.getter(name="baseBackupRetentionPeriod")
     def base_backup_retention_period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Specify days of the retention.
+        """
         return pulumi.get(self, "base_backup_retention_period")
 
     @base_backup_retention_period.setter
@@ -50,6 +62,9 @@ class InstanceBackupPlanArgs:
     @property
     @pulumi.getter(name="maxBackupStartTime")
     def max_backup_start_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify latest backup start time, format `hh:mm:ss`.
+        """
         return pulumi.get(self, "max_backup_start_time")
 
     @max_backup_start_time.setter
@@ -59,6 +74,9 @@ class InstanceBackupPlanArgs:
     @property
     @pulumi.getter(name="minBackupStartTime")
     def min_backup_start_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify earliest backup start time, format `hh:mm:ss`.
+        """
         return pulumi.get(self, "min_backup_start_time")
 
     @min_backup_start_time.setter
@@ -71,6 +89,10 @@ class InstanceDbNodeSetArgs:
     def __init__(__self__, *,
                  zone: pulumi.Input[str],
                  role: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] zone: Indicates the node available zone.
+        :param pulumi.Input[str] role: Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
+        """
         pulumi.set(__self__, "zone", zone)
         if role is not None:
             pulumi.set(__self__, "role", role)
@@ -78,6 +100,9 @@ class InstanceDbNodeSetArgs:
     @property
     @pulumi.getter
     def zone(self) -> pulumi.Input[str]:
+        """
+        Indicates the node available zone.
+        """
         return pulumi.get(self, "zone")
 
     @zone.setter
@@ -87,6 +112,9 @@ class InstanceDbNodeSetArgs:
     @property
     @pulumi.getter
     def role(self) -> Optional[pulumi.Input[str]]:
+        """
+        Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
+        """
         return pulumi.get(self, "role")
 
     @role.setter

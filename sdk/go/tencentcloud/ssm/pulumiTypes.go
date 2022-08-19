@@ -10,249 +10,279 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type SecretVersionsSecretVersionList struct {
+type GetSecretVersionsSecretVersionList struct {
+	// The base64-encoded binary secret.
 	SecretBinary string `pulumi:"secretBinary"`
+	// The string text of secret.
 	SecretString string `pulumi:"secretString"`
-	VersionId    string `pulumi:"versionId"`
+	// VersionId used to filter result.
+	VersionId string `pulumi:"versionId"`
 }
 
-// SecretVersionsSecretVersionListInput is an input type that accepts SecretVersionsSecretVersionListArgs and SecretVersionsSecretVersionListOutput values.
-// You can construct a concrete instance of `SecretVersionsSecretVersionListInput` via:
+// GetSecretVersionsSecretVersionListInput is an input type that accepts GetSecretVersionsSecretVersionListArgs and GetSecretVersionsSecretVersionListOutput values.
+// You can construct a concrete instance of `GetSecretVersionsSecretVersionListInput` via:
 //
-//          SecretVersionsSecretVersionListArgs{...}
-type SecretVersionsSecretVersionListInput interface {
+//          GetSecretVersionsSecretVersionListArgs{...}
+type GetSecretVersionsSecretVersionListInput interface {
 	pulumi.Input
 
-	ToSecretVersionsSecretVersionListOutput() SecretVersionsSecretVersionListOutput
-	ToSecretVersionsSecretVersionListOutputWithContext(context.Context) SecretVersionsSecretVersionListOutput
+	ToGetSecretVersionsSecretVersionListOutput() GetSecretVersionsSecretVersionListOutput
+	ToGetSecretVersionsSecretVersionListOutputWithContext(context.Context) GetSecretVersionsSecretVersionListOutput
 }
 
-type SecretVersionsSecretVersionListArgs struct {
+type GetSecretVersionsSecretVersionListArgs struct {
+	// The base64-encoded binary secret.
 	SecretBinary pulumi.StringInput `pulumi:"secretBinary"`
+	// The string text of secret.
 	SecretString pulumi.StringInput `pulumi:"secretString"`
-	VersionId    pulumi.StringInput `pulumi:"versionId"`
+	// VersionId used to filter result.
+	VersionId pulumi.StringInput `pulumi:"versionId"`
 }
 
-func (SecretVersionsSecretVersionListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecretVersionsSecretVersionList)(nil)).Elem()
+func (GetSecretVersionsSecretVersionListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSecretVersionsSecretVersionList)(nil)).Elem()
 }
 
-func (i SecretVersionsSecretVersionListArgs) ToSecretVersionsSecretVersionListOutput() SecretVersionsSecretVersionListOutput {
-	return i.ToSecretVersionsSecretVersionListOutputWithContext(context.Background())
+func (i GetSecretVersionsSecretVersionListArgs) ToGetSecretVersionsSecretVersionListOutput() GetSecretVersionsSecretVersionListOutput {
+	return i.ToGetSecretVersionsSecretVersionListOutputWithContext(context.Background())
 }
 
-func (i SecretVersionsSecretVersionListArgs) ToSecretVersionsSecretVersionListOutputWithContext(ctx context.Context) SecretVersionsSecretVersionListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretVersionsSecretVersionListOutput)
+func (i GetSecretVersionsSecretVersionListArgs) ToGetSecretVersionsSecretVersionListOutputWithContext(ctx context.Context) GetSecretVersionsSecretVersionListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSecretVersionsSecretVersionListOutput)
 }
 
-// SecretVersionsSecretVersionListArrayInput is an input type that accepts SecretVersionsSecretVersionListArray and SecretVersionsSecretVersionListArrayOutput values.
-// You can construct a concrete instance of `SecretVersionsSecretVersionListArrayInput` via:
+// GetSecretVersionsSecretVersionListArrayInput is an input type that accepts GetSecretVersionsSecretVersionListArray and GetSecretVersionsSecretVersionListArrayOutput values.
+// You can construct a concrete instance of `GetSecretVersionsSecretVersionListArrayInput` via:
 //
-//          SecretVersionsSecretVersionListArray{ SecretVersionsSecretVersionListArgs{...} }
-type SecretVersionsSecretVersionListArrayInput interface {
+//          GetSecretVersionsSecretVersionListArray{ GetSecretVersionsSecretVersionListArgs{...} }
+type GetSecretVersionsSecretVersionListArrayInput interface {
 	pulumi.Input
 
-	ToSecretVersionsSecretVersionListArrayOutput() SecretVersionsSecretVersionListArrayOutput
-	ToSecretVersionsSecretVersionListArrayOutputWithContext(context.Context) SecretVersionsSecretVersionListArrayOutput
+	ToGetSecretVersionsSecretVersionListArrayOutput() GetSecretVersionsSecretVersionListArrayOutput
+	ToGetSecretVersionsSecretVersionListArrayOutputWithContext(context.Context) GetSecretVersionsSecretVersionListArrayOutput
 }
 
-type SecretVersionsSecretVersionListArray []SecretVersionsSecretVersionListInput
+type GetSecretVersionsSecretVersionListArray []GetSecretVersionsSecretVersionListInput
 
-func (SecretVersionsSecretVersionListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecretVersionsSecretVersionList)(nil)).Elem()
+func (GetSecretVersionsSecretVersionListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSecretVersionsSecretVersionList)(nil)).Elem()
 }
 
-func (i SecretVersionsSecretVersionListArray) ToSecretVersionsSecretVersionListArrayOutput() SecretVersionsSecretVersionListArrayOutput {
-	return i.ToSecretVersionsSecretVersionListArrayOutputWithContext(context.Background())
+func (i GetSecretVersionsSecretVersionListArray) ToGetSecretVersionsSecretVersionListArrayOutput() GetSecretVersionsSecretVersionListArrayOutput {
+	return i.ToGetSecretVersionsSecretVersionListArrayOutputWithContext(context.Background())
 }
 
-func (i SecretVersionsSecretVersionListArray) ToSecretVersionsSecretVersionListArrayOutputWithContext(ctx context.Context) SecretVersionsSecretVersionListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretVersionsSecretVersionListArrayOutput)
+func (i GetSecretVersionsSecretVersionListArray) ToGetSecretVersionsSecretVersionListArrayOutputWithContext(ctx context.Context) GetSecretVersionsSecretVersionListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSecretVersionsSecretVersionListArrayOutput)
 }
 
-type SecretVersionsSecretVersionListOutput struct{ *pulumi.OutputState }
+type GetSecretVersionsSecretVersionListOutput struct{ *pulumi.OutputState }
 
-func (SecretVersionsSecretVersionListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecretVersionsSecretVersionList)(nil)).Elem()
+func (GetSecretVersionsSecretVersionListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSecretVersionsSecretVersionList)(nil)).Elem()
 }
 
-func (o SecretVersionsSecretVersionListOutput) ToSecretVersionsSecretVersionListOutput() SecretVersionsSecretVersionListOutput {
+func (o GetSecretVersionsSecretVersionListOutput) ToGetSecretVersionsSecretVersionListOutput() GetSecretVersionsSecretVersionListOutput {
 	return o
 }
 
-func (o SecretVersionsSecretVersionListOutput) ToSecretVersionsSecretVersionListOutputWithContext(ctx context.Context) SecretVersionsSecretVersionListOutput {
+func (o GetSecretVersionsSecretVersionListOutput) ToGetSecretVersionsSecretVersionListOutputWithContext(ctx context.Context) GetSecretVersionsSecretVersionListOutput {
 	return o
 }
 
-func (o SecretVersionsSecretVersionListOutput) SecretBinary() pulumi.StringOutput {
-	return o.ApplyT(func(v SecretVersionsSecretVersionList) string { return v.SecretBinary }).(pulumi.StringOutput)
+// The base64-encoded binary secret.
+func (o GetSecretVersionsSecretVersionListOutput) SecretBinary() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecretVersionsSecretVersionList) string { return v.SecretBinary }).(pulumi.StringOutput)
 }
 
-func (o SecretVersionsSecretVersionListOutput) SecretString() pulumi.StringOutput {
-	return o.ApplyT(func(v SecretVersionsSecretVersionList) string { return v.SecretString }).(pulumi.StringOutput)
+// The string text of secret.
+func (o GetSecretVersionsSecretVersionListOutput) SecretString() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecretVersionsSecretVersionList) string { return v.SecretString }).(pulumi.StringOutput)
 }
 
-func (o SecretVersionsSecretVersionListOutput) VersionId() pulumi.StringOutput {
-	return o.ApplyT(func(v SecretVersionsSecretVersionList) string { return v.VersionId }).(pulumi.StringOutput)
+// VersionId used to filter result.
+func (o GetSecretVersionsSecretVersionListOutput) VersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecretVersionsSecretVersionList) string { return v.VersionId }).(pulumi.StringOutput)
 }
 
-type SecretVersionsSecretVersionListArrayOutput struct{ *pulumi.OutputState }
+type GetSecretVersionsSecretVersionListArrayOutput struct{ *pulumi.OutputState }
 
-func (SecretVersionsSecretVersionListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecretVersionsSecretVersionList)(nil)).Elem()
+func (GetSecretVersionsSecretVersionListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSecretVersionsSecretVersionList)(nil)).Elem()
 }
 
-func (o SecretVersionsSecretVersionListArrayOutput) ToSecretVersionsSecretVersionListArrayOutput() SecretVersionsSecretVersionListArrayOutput {
+func (o GetSecretVersionsSecretVersionListArrayOutput) ToGetSecretVersionsSecretVersionListArrayOutput() GetSecretVersionsSecretVersionListArrayOutput {
 	return o
 }
 
-func (o SecretVersionsSecretVersionListArrayOutput) ToSecretVersionsSecretVersionListArrayOutputWithContext(ctx context.Context) SecretVersionsSecretVersionListArrayOutput {
+func (o GetSecretVersionsSecretVersionListArrayOutput) ToGetSecretVersionsSecretVersionListArrayOutputWithContext(ctx context.Context) GetSecretVersionsSecretVersionListArrayOutput {
 	return o
 }
 
-func (o SecretVersionsSecretVersionListArrayOutput) Index(i pulumi.IntInput) SecretVersionsSecretVersionListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecretVersionsSecretVersionList {
-		return vs[0].([]SecretVersionsSecretVersionList)[vs[1].(int)]
-	}).(SecretVersionsSecretVersionListOutput)
+func (o GetSecretVersionsSecretVersionListArrayOutput) Index(i pulumi.IntInput) GetSecretVersionsSecretVersionListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSecretVersionsSecretVersionList {
+		return vs[0].([]GetSecretVersionsSecretVersionList)[vs[1].(int)]
+	}).(GetSecretVersionsSecretVersionListOutput)
 }
 
-type SecretsSecretList struct {
-	CreateTime  int    `pulumi:"createTime"`
-	CreateUin   int    `pulumi:"createUin"`
-	DeleteTime  int    `pulumi:"deleteTime"`
+type GetSecretsSecretList struct {
+	// Create time of secret.
+	CreateTime int `pulumi:"createTime"`
+	// Uin of Creator.
+	CreateUin int `pulumi:"createUin"`
+	// Delete time of CMK.
+	DeleteTime int `pulumi:"deleteTime"`
+	// Description of secret.
 	Description string `pulumi:"description"`
-	KmsKeyId    string `pulumi:"kmsKeyId"`
-	SecretName  string `pulumi:"secretName"`
-	Status      string `pulumi:"status"`
+	// KMS keyId used to encrypt secret.
+	KmsKeyId string `pulumi:"kmsKeyId"`
+	// Secret name used to filter result.
+	SecretName string `pulumi:"secretName"`
+	// Status of secret.
+	Status string `pulumi:"status"`
 }
 
-// SecretsSecretListInput is an input type that accepts SecretsSecretListArgs and SecretsSecretListOutput values.
-// You can construct a concrete instance of `SecretsSecretListInput` via:
+// GetSecretsSecretListInput is an input type that accepts GetSecretsSecretListArgs and GetSecretsSecretListOutput values.
+// You can construct a concrete instance of `GetSecretsSecretListInput` via:
 //
-//          SecretsSecretListArgs{...}
-type SecretsSecretListInput interface {
+//          GetSecretsSecretListArgs{...}
+type GetSecretsSecretListInput interface {
 	pulumi.Input
 
-	ToSecretsSecretListOutput() SecretsSecretListOutput
-	ToSecretsSecretListOutputWithContext(context.Context) SecretsSecretListOutput
+	ToGetSecretsSecretListOutput() GetSecretsSecretListOutput
+	ToGetSecretsSecretListOutputWithContext(context.Context) GetSecretsSecretListOutput
 }
 
-type SecretsSecretListArgs struct {
-	CreateTime  pulumi.IntInput    `pulumi:"createTime"`
-	CreateUin   pulumi.IntInput    `pulumi:"createUin"`
-	DeleteTime  pulumi.IntInput    `pulumi:"deleteTime"`
+type GetSecretsSecretListArgs struct {
+	// Create time of secret.
+	CreateTime pulumi.IntInput `pulumi:"createTime"`
+	// Uin of Creator.
+	CreateUin pulumi.IntInput `pulumi:"createUin"`
+	// Delete time of CMK.
+	DeleteTime pulumi.IntInput `pulumi:"deleteTime"`
+	// Description of secret.
 	Description pulumi.StringInput `pulumi:"description"`
-	KmsKeyId    pulumi.StringInput `pulumi:"kmsKeyId"`
-	SecretName  pulumi.StringInput `pulumi:"secretName"`
-	Status      pulumi.StringInput `pulumi:"status"`
+	// KMS keyId used to encrypt secret.
+	KmsKeyId pulumi.StringInput `pulumi:"kmsKeyId"`
+	// Secret name used to filter result.
+	SecretName pulumi.StringInput `pulumi:"secretName"`
+	// Status of secret.
+	Status pulumi.StringInput `pulumi:"status"`
 }
 
-func (SecretsSecretListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecretsSecretList)(nil)).Elem()
+func (GetSecretsSecretListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSecretsSecretList)(nil)).Elem()
 }
 
-func (i SecretsSecretListArgs) ToSecretsSecretListOutput() SecretsSecretListOutput {
-	return i.ToSecretsSecretListOutputWithContext(context.Background())
+func (i GetSecretsSecretListArgs) ToGetSecretsSecretListOutput() GetSecretsSecretListOutput {
+	return i.ToGetSecretsSecretListOutputWithContext(context.Background())
 }
 
-func (i SecretsSecretListArgs) ToSecretsSecretListOutputWithContext(ctx context.Context) SecretsSecretListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsSecretListOutput)
+func (i GetSecretsSecretListArgs) ToGetSecretsSecretListOutputWithContext(ctx context.Context) GetSecretsSecretListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSecretsSecretListOutput)
 }
 
-// SecretsSecretListArrayInput is an input type that accepts SecretsSecretListArray and SecretsSecretListArrayOutput values.
-// You can construct a concrete instance of `SecretsSecretListArrayInput` via:
+// GetSecretsSecretListArrayInput is an input type that accepts GetSecretsSecretListArray and GetSecretsSecretListArrayOutput values.
+// You can construct a concrete instance of `GetSecretsSecretListArrayInput` via:
 //
-//          SecretsSecretListArray{ SecretsSecretListArgs{...} }
-type SecretsSecretListArrayInput interface {
+//          GetSecretsSecretListArray{ GetSecretsSecretListArgs{...} }
+type GetSecretsSecretListArrayInput interface {
 	pulumi.Input
 
-	ToSecretsSecretListArrayOutput() SecretsSecretListArrayOutput
-	ToSecretsSecretListArrayOutputWithContext(context.Context) SecretsSecretListArrayOutput
+	ToGetSecretsSecretListArrayOutput() GetSecretsSecretListArrayOutput
+	ToGetSecretsSecretListArrayOutputWithContext(context.Context) GetSecretsSecretListArrayOutput
 }
 
-type SecretsSecretListArray []SecretsSecretListInput
+type GetSecretsSecretListArray []GetSecretsSecretListInput
 
-func (SecretsSecretListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecretsSecretList)(nil)).Elem()
+func (GetSecretsSecretListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSecretsSecretList)(nil)).Elem()
 }
 
-func (i SecretsSecretListArray) ToSecretsSecretListArrayOutput() SecretsSecretListArrayOutput {
-	return i.ToSecretsSecretListArrayOutputWithContext(context.Background())
+func (i GetSecretsSecretListArray) ToGetSecretsSecretListArrayOutput() GetSecretsSecretListArrayOutput {
+	return i.ToGetSecretsSecretListArrayOutputWithContext(context.Background())
 }
 
-func (i SecretsSecretListArray) ToSecretsSecretListArrayOutputWithContext(ctx context.Context) SecretsSecretListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecretsSecretListArrayOutput)
+func (i GetSecretsSecretListArray) ToGetSecretsSecretListArrayOutputWithContext(ctx context.Context) GetSecretsSecretListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSecretsSecretListArrayOutput)
 }
 
-type SecretsSecretListOutput struct{ *pulumi.OutputState }
+type GetSecretsSecretListOutput struct{ *pulumi.OutputState }
 
-func (SecretsSecretListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecretsSecretList)(nil)).Elem()
+func (GetSecretsSecretListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSecretsSecretList)(nil)).Elem()
 }
 
-func (o SecretsSecretListOutput) ToSecretsSecretListOutput() SecretsSecretListOutput {
+func (o GetSecretsSecretListOutput) ToGetSecretsSecretListOutput() GetSecretsSecretListOutput {
 	return o
 }
 
-func (o SecretsSecretListOutput) ToSecretsSecretListOutputWithContext(ctx context.Context) SecretsSecretListOutput {
+func (o GetSecretsSecretListOutput) ToGetSecretsSecretListOutputWithContext(ctx context.Context) GetSecretsSecretListOutput {
 	return o
 }
 
-func (o SecretsSecretListOutput) CreateTime() pulumi.IntOutput {
-	return o.ApplyT(func(v SecretsSecretList) int { return v.CreateTime }).(pulumi.IntOutput)
+// Create time of secret.
+func (o GetSecretsSecretListOutput) CreateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) int { return v.CreateTime }).(pulumi.IntOutput)
 }
 
-func (o SecretsSecretListOutput) CreateUin() pulumi.IntOutput {
-	return o.ApplyT(func(v SecretsSecretList) int { return v.CreateUin }).(pulumi.IntOutput)
+// Uin of Creator.
+func (o GetSecretsSecretListOutput) CreateUin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) int { return v.CreateUin }).(pulumi.IntOutput)
 }
 
-func (o SecretsSecretListOutput) DeleteTime() pulumi.IntOutput {
-	return o.ApplyT(func(v SecretsSecretList) int { return v.DeleteTime }).(pulumi.IntOutput)
+// Delete time of CMK.
+func (o GetSecretsSecretListOutput) DeleteTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) int { return v.DeleteTime }).(pulumi.IntOutput)
 }
 
-func (o SecretsSecretListOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v SecretsSecretList) string { return v.Description }).(pulumi.StringOutput)
+// Description of secret.
+func (o GetSecretsSecretListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) string { return v.Description }).(pulumi.StringOutput)
 }
 
-func (o SecretsSecretListOutput) KmsKeyId() pulumi.StringOutput {
-	return o.ApplyT(func(v SecretsSecretList) string { return v.KmsKeyId }).(pulumi.StringOutput)
+// KMS keyId used to encrypt secret.
+func (o GetSecretsSecretListOutput) KmsKeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) string { return v.KmsKeyId }).(pulumi.StringOutput)
 }
 
-func (o SecretsSecretListOutput) SecretName() pulumi.StringOutput {
-	return o.ApplyT(func(v SecretsSecretList) string { return v.SecretName }).(pulumi.StringOutput)
+// Secret name used to filter result.
+func (o GetSecretsSecretListOutput) SecretName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) string { return v.SecretName }).(pulumi.StringOutput)
 }
 
-func (o SecretsSecretListOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v SecretsSecretList) string { return v.Status }).(pulumi.StringOutput)
+// Status of secret.
+func (o GetSecretsSecretListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) string { return v.Status }).(pulumi.StringOutput)
 }
 
-type SecretsSecretListArrayOutput struct{ *pulumi.OutputState }
+type GetSecretsSecretListArrayOutput struct{ *pulumi.OutputState }
 
-func (SecretsSecretListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecretsSecretList)(nil)).Elem()
+func (GetSecretsSecretListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSecretsSecretList)(nil)).Elem()
 }
 
-func (o SecretsSecretListArrayOutput) ToSecretsSecretListArrayOutput() SecretsSecretListArrayOutput {
+func (o GetSecretsSecretListArrayOutput) ToGetSecretsSecretListArrayOutput() GetSecretsSecretListArrayOutput {
 	return o
 }
 
-func (o SecretsSecretListArrayOutput) ToSecretsSecretListArrayOutputWithContext(ctx context.Context) SecretsSecretListArrayOutput {
+func (o GetSecretsSecretListArrayOutput) ToGetSecretsSecretListArrayOutputWithContext(ctx context.Context) GetSecretsSecretListArrayOutput {
 	return o
 }
 
-func (o SecretsSecretListArrayOutput) Index(i pulumi.IntInput) SecretsSecretListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecretsSecretList {
-		return vs[0].([]SecretsSecretList)[vs[1].(int)]
-	}).(SecretsSecretListOutput)
+func (o GetSecretsSecretListArrayOutput) Index(i pulumi.IntInput) GetSecretsSecretListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSecretsSecretList {
+		return vs[0].([]GetSecretsSecretList)[vs[1].(int)]
+	}).(GetSecretsSecretListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*SecretVersionsSecretVersionListInput)(nil)).Elem(), SecretVersionsSecretVersionListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecretVersionsSecretVersionListArrayInput)(nil)).Elem(), SecretVersionsSecretVersionListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecretsSecretListInput)(nil)).Elem(), SecretsSecretListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecretsSecretListArrayInput)(nil)).Elem(), SecretsSecretListArray{})
-	pulumi.RegisterOutputType(SecretVersionsSecretVersionListOutput{})
-	pulumi.RegisterOutputType(SecretVersionsSecretVersionListArrayOutput{})
-	pulumi.RegisterOutputType(SecretsSecretListOutput{})
-	pulumi.RegisterOutputType(SecretsSecretListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSecretVersionsSecretVersionListInput)(nil)).Elem(), GetSecretVersionsSecretVersionListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSecretVersionsSecretVersionListArrayInput)(nil)).Elem(), GetSecretVersionsSecretVersionListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSecretsSecretListInput)(nil)).Elem(), GetSecretsSecretListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSecretsSecretListArrayInput)(nil)).Elem(), GetSecretsSecretListArray{})
+	pulumi.RegisterOutputType(GetSecretVersionsSecretVersionListOutput{})
+	pulumi.RegisterOutputType(GetSecretVersionsSecretVersionListArrayOutput{})
+	pulumi.RegisterOutputType(GetSecretsSecretListOutput{})
+	pulumi.RegisterOutputType(GetSecretsSecretListArrayOutput{})
 }

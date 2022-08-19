@@ -13,9 +13,21 @@ namespace Pulumi.Tencentcloud.Scf.Outputs
     [OutputType]
     public sealed class LayerContent
     {
+        /// <summary>
+        /// Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zip_file`.
+        /// </summary>
         public readonly string? CosBucketName;
+        /// <summary>
+        /// Cos bucket region of the SCF layer, conflict with `zip_file`.
+        /// </summary>
         public readonly string? CosBucketRegion;
+        /// <summary>
+        /// Cos object name of the SCF layer, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
+        /// </summary>
         public readonly string? CosObjectName;
+        /// <summary>
+        /// Zip file of the SCF layer, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
+        /// </summary>
         public readonly string? ZipFile;
 
         [OutputConstructor]

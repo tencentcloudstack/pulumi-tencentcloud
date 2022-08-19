@@ -4,9 +4,44 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-export class IPStrategy extends pulumi.CustomResource {
+/**
+ * Use this resource to create IP strategy of API gateway.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const service = new tencentcloud.apigateway.Service("service", {
+ *     serviceName: "niceservice",
+ *     protocol: "http&https",
+ *     serviceDesc: "your nice service",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     ipVersion: "IPv4",
+ * });
+ * const test = new tencentcloud.apigateway.IpStrategy("test", {
+ *     serviceId: service.id,
+ *     strategyName: "tf_test",
+ *     strategyType: "BLACK",
+ *     strategyData: "9.9.9.9",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * IP strategy of API gateway can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:ApiGateway/ipStrategy:IpStrategy test service-ohxqslqe#IPStrategy-q1lk8ud2
+ * ```
+ */
+export class IpStrategy extends pulumi.CustomResource {
     /**
-     * Get an existing IPStrategy resource's state with the given name, ID, and optional extra
+     * Get an existing IpStrategy resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -14,22 +49,22 @@ export class IPStrategy extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: IPStrategyState, opts?: pulumi.CustomResourceOptions): IPStrategy {
-        return new IPStrategy(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: IpStrategyState, opts?: pulumi.CustomResourceOptions): IpStrategy {
+        return new IpStrategy(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:APIGateway/iPStrategy:IPStrategy';
+    public static readonly __pulumiType = 'tencentcloud:ApiGateway/ipStrategy:IpStrategy';
 
     /**
-     * Returns true if the given object is an instance of IPStrategy.  This is designed to work even
+     * Returns true if the given object is an instance of IpStrategy.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is IPStrategy {
+    public static isInstance(obj: any): obj is IpStrategy {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === IPStrategy.__pulumiType;
+        return obj['__pulumiType'] === IpStrategy.__pulumiType;
     }
 
     /**
@@ -58,18 +93,18 @@ export class IPStrategy extends pulumi.CustomResource {
     public readonly strategyType!: pulumi.Output<string>;
 
     /**
-     * Create a IPStrategy resource with the given unique name, arguments, and options.
+     * Create a IpStrategy resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: IPStrategyArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: IPStrategyArgs | IPStrategyState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: IpStrategyArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: IpStrategyArgs | IpStrategyState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as IPStrategyState | undefined;
+            const state = argsOrState as IpStrategyState | undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["serviceId"] = state ? state.serviceId : undefined;
             resourceInputs["strategyData"] = state ? state.strategyData : undefined;
@@ -77,7 +112,7 @@ export class IPStrategy extends pulumi.CustomResource {
             resourceInputs["strategyName"] = state ? state.strategyName : undefined;
             resourceInputs["strategyType"] = state ? state.strategyType : undefined;
         } else {
-            const args = argsOrState as IPStrategyArgs | undefined;
+            const args = argsOrState as IpStrategyArgs | undefined;
             if ((!args || args.serviceId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'serviceId'");
             }
@@ -98,14 +133,14 @@ export class IPStrategy extends pulumi.CustomResource {
             resourceInputs["strategyId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(IPStrategy.__pulumiType, name, resourceInputs, opts);
+        super(IpStrategy.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering IPStrategy resources.
+ * Input properties used for looking up and filtering IpStrategy resources.
  */
-export interface IPStrategyState {
+export interface IpStrategyState {
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
@@ -133,9 +168,9 @@ export interface IPStrategyState {
 }
 
 /**
- * The set of arguments for constructing a IPStrategy resource.
+ * The set of arguments for constructing a IpStrategy resource.
  */
-export interface IPStrategyArgs {
+export interface IpStrategyArgs {
     /**
      * The ID of the API gateway service.
      */

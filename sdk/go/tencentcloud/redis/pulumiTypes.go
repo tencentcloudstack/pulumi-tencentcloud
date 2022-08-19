@@ -10,464 +10,560 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type InstancesInstanceList struct {
-	ChargeType       string                          `pulumi:"chargeType"`
-	CreateTime       string                          `pulumi:"createTime"`
-	Ip               string                          `pulumi:"ip"`
-	MemSize          int                             `pulumi:"memSize"`
-	Name             string                          `pulumi:"name"`
-	NodeInfos        []InstancesInstanceListNodeInfo `pulumi:"nodeInfos"`
-	Port             int                             `pulumi:"port"`
-	ProjectId        int                             `pulumi:"projectId"`
-	RedisId          string                          `pulumi:"redisId"`
-	RedisReplicasNum int                             `pulumi:"redisReplicasNum"`
-	RedisShardNum    int                             `pulumi:"redisShardNum"`
-	Status           string                          `pulumi:"status"`
-	SubnetId         string                          `pulumi:"subnetId"`
-	Tags             map[string]interface{}          `pulumi:"tags"`
+type GetInstancesInstanceList struct {
+	// The charge type of instance. Valid values are `POSTPAID` and `PREPAID`.
+	ChargeType string `pulumi:"chargeType"`
+	// The time when the instance is created.
+	CreateTime string `pulumi:"createTime"`
+	// IP address of an instance.
+	Ip string `pulumi:"ip"`
+	// Memory size in MB.
+	MemSize int `pulumi:"memSize"`
+	// Name of a redis instance.
+	Name string `pulumi:"name"`
+	// List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.
+	NodeInfos []GetInstancesInstanceListNodeInfo `pulumi:"nodeInfos"`
+	// The port used to access a redis instance.
+	Port int `pulumi:"port"`
+	// ID of the project to which redis instance belongs.
+	ProjectId int `pulumi:"projectId"`
+	// ID of a redis instance.
+	RedisId string `pulumi:"redisId"`
+	// The number of instance copies.
+	RedisReplicasNum int `pulumi:"redisReplicasNum"`
+	// The number of instance shard.
+	RedisShardNum int `pulumi:"redisShardNum"`
+	// Current status of an instance, maybe: `init`, `processing`, `online`, `isolate` and `todelete`.
+	Status string `pulumi:"status"`
+	// ID of the vpc subnet.
+	SubnetId string `pulumi:"subnetId"`
+	// Tags of redis instance.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// (**Deprecated**) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `masterSlaveRedis`, `masterSlaveCkv`, `clusterCkv`, `clusterRedis` and `standaloneRedis`.
+	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
-	Type   string `pulumi:"type"`
-	TypeId int    `pulumi:"typeId"`
-	VpcId  string `pulumi:"vpcId"`
-	Zone   string `pulumi:"zone"`
+	Type string `pulumi:"type"`
+	// Instance type. Refer to `data.tencentcloud_redis_zone_config.list.type_id` get available values.
+	TypeId int `pulumi:"typeId"`
+	// ID of the vpc with which the instance is associated.
+	VpcId string `pulumi:"vpcId"`
+	// ID of an available zone.
+	Zone string `pulumi:"zone"`
 }
 
-// InstancesInstanceListInput is an input type that accepts InstancesInstanceListArgs and InstancesInstanceListOutput values.
-// You can construct a concrete instance of `InstancesInstanceListInput` via:
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          InstancesInstanceListArgs{...}
-type InstancesInstanceListInput interface {
+//          GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListOutput() InstancesInstanceListOutput
-	ToInstancesInstanceListOutputWithContext(context.Context) InstancesInstanceListOutput
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
 }
 
-type InstancesInstanceListArgs struct {
-	ChargeType       pulumi.StringInput                      `pulumi:"chargeType"`
-	CreateTime       pulumi.StringInput                      `pulumi:"createTime"`
-	Ip               pulumi.StringInput                      `pulumi:"ip"`
-	MemSize          pulumi.IntInput                         `pulumi:"memSize"`
-	Name             pulumi.StringInput                      `pulumi:"name"`
-	NodeInfos        InstancesInstanceListNodeInfoArrayInput `pulumi:"nodeInfos"`
-	Port             pulumi.IntInput                         `pulumi:"port"`
-	ProjectId        pulumi.IntInput                         `pulumi:"projectId"`
-	RedisId          pulumi.StringInput                      `pulumi:"redisId"`
-	RedisReplicasNum pulumi.IntInput                         `pulumi:"redisReplicasNum"`
-	RedisShardNum    pulumi.IntInput                         `pulumi:"redisShardNum"`
-	Status           pulumi.StringInput                      `pulumi:"status"`
-	SubnetId         pulumi.StringInput                      `pulumi:"subnetId"`
-	Tags             pulumi.MapInput                         `pulumi:"tags"`
+type GetInstancesInstanceListArgs struct {
+	// The charge type of instance. Valid values are `POSTPAID` and `PREPAID`.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// The time when the instance is created.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// IP address of an instance.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Memory size in MB.
+	MemSize pulumi.IntInput `pulumi:"memSize"`
+	// Name of a redis instance.
+	Name pulumi.StringInput `pulumi:"name"`
+	// List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.
+	NodeInfos GetInstancesInstanceListNodeInfoArrayInput `pulumi:"nodeInfos"`
+	// The port used to access a redis instance.
+	Port pulumi.IntInput `pulumi:"port"`
+	// ID of the project to which redis instance belongs.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// ID of a redis instance.
+	RedisId pulumi.StringInput `pulumi:"redisId"`
+	// The number of instance copies.
+	RedisReplicasNum pulumi.IntInput `pulumi:"redisReplicasNum"`
+	// The number of instance shard.
+	RedisShardNum pulumi.IntInput `pulumi:"redisShardNum"`
+	// Current status of an instance, maybe: `init`, `processing`, `online`, `isolate` and `todelete`.
+	Status pulumi.StringInput `pulumi:"status"`
+	// ID of the vpc subnet.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Tags of redis instance.
+	Tags pulumi.MapInput `pulumi:"tags"`
+	// (**Deprecated**) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `masterSlaveRedis`, `masterSlaveCkv`, `clusterCkv`, `clusterRedis` and `standaloneRedis`.
+	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
-	Type   pulumi.StringInput `pulumi:"type"`
-	TypeId pulumi.IntInput    `pulumi:"typeId"`
-	VpcId  pulumi.StringInput `pulumi:"vpcId"`
-	Zone   pulumi.StringInput `pulumi:"zone"`
+	Type pulumi.StringInput `pulumi:"type"`
+	// Instance type. Refer to `data.tencentcloud_redis_zone_config.list.type_id` get available values.
+	TypeId pulumi.IntInput `pulumi:"typeId"`
+	// ID of the vpc with which the instance is associated.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// ID of an available zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
 }
 
-func (InstancesInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
-	return i.ToInstancesInstanceListOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListOutput)
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
 }
 
-// InstancesInstanceListArrayInput is an input type that accepts InstancesInstanceListArray and InstancesInstanceListArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListArrayInput` via:
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          InstancesInstanceListArray{ InstancesInstanceListArgs{...} }
-type InstancesInstanceListArrayInput interface {
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput
-	ToInstancesInstanceListArrayOutputWithContext(context.Context) InstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
 }
 
-type InstancesInstanceListArray []InstancesInstanceListInput
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
 
-func (InstancesInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
-	return i.ToInstancesInstanceListArrayOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListArrayOutput)
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
 }
 
-type InstancesInstanceListOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
+// The charge type of instance. Valid values are `POSTPAID` and `PREPAID`.
+func (o GetInstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+// The time when the instance is created.
+func (o GetInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Ip() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Ip }).(pulumi.StringOutput)
+// IP address of an instance.
+func (o GetInstancesInstanceListOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Ip }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) MemSize() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.MemSize }).(pulumi.IntOutput)
+// Memory size in MB.
+func (o GetInstancesInstanceListOutput) MemSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.MemSize }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
+// Name of a redis instance.
+func (o GetInstancesInstanceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) NodeInfos() InstancesInstanceListNodeInfoArrayOutput {
-	return o.ApplyT(func(v InstancesInstanceList) []InstancesInstanceListNodeInfo { return v.NodeInfos }).(InstancesInstanceListNodeInfoArrayOutput)
+// List of instance node information. Currently, information about the node type (master or replica) and node availability zone can be passed in.
+func (o GetInstancesInstanceListOutput) NodeInfos() GetInstancesInstanceListNodeInfoArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []GetInstancesInstanceListNodeInfo { return v.NodeInfos }).(GetInstancesInstanceListNodeInfoArrayOutput)
 }
 
-func (o InstancesInstanceListOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Port }).(pulumi.IntOutput)
+// The port used to access a redis instance.
+func (o GetInstancesInstanceListOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Port }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
+// ID of the project to which redis instance belongs.
+func (o GetInstancesInstanceListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) RedisId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.RedisId }).(pulumi.StringOutput)
+// ID of a redis instance.
+func (o GetInstancesInstanceListOutput) RedisId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.RedisId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) RedisReplicasNum() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.RedisReplicasNum }).(pulumi.IntOutput)
+// The number of instance copies.
+func (o GetInstancesInstanceListOutput) RedisReplicasNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.RedisReplicasNum }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) RedisShardNum() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.RedisShardNum }).(pulumi.IntOutput)
+// The number of instance shard.
+func (o GetInstancesInstanceListOutput) RedisShardNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.RedisShardNum }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Status }).(pulumi.StringOutput)
+// Current status of an instance, maybe: `init`, `processing`, `online`, `isolate` and `todelete`.
+func (o GetInstancesInstanceListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Status }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
+// ID of the vpc subnet.
+func (o GetInstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v InstancesInstanceList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+// Tags of redis instance.
+func (o GetInstancesInstanceListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
 }
 
+// (**Deprecated**) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `masterSlaveRedis`, `masterSlaveCkv`, `clusterCkv`, `clusterRedis` and `standaloneRedis`.
+//
 // Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
-func (o InstancesInstanceListOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Type }).(pulumi.StringOutput)
+func (o GetInstancesInstanceListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Type }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) TypeId() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.TypeId }).(pulumi.IntOutput)
+// Instance type. Refer to `data.tencentcloud_redis_zone_config.list.type_id` get available values.
+func (o GetInstancesInstanceListOutput) TypeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.TypeId }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
+// ID of the vpc with which the instance is associated.
+func (o GetInstancesInstanceListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Zone() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Zone }).(pulumi.StringOutput)
+// ID of an available zone.
+func (o GetInstancesInstanceListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Zone }).(pulumi.StringOutput)
 }
 
-type InstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceList {
-		return vs[0].([]InstancesInstanceList)[vs[1].(int)]
-	}).(InstancesInstanceListOutput)
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
 }
 
-type InstancesInstanceListNodeInfo struct {
-	Id     int  `pulumi:"id"`
+type GetInstancesInstanceListNodeInfo struct {
+	// ID of the master or replica node.
+	Id int `pulumi:"id"`
+	// Indicates whether the node is master.
 	Master bool `pulumi:"master"`
-	ZoneId int  `pulumi:"zoneId"`
+	// ID of the availability zone of the master or replica node.
+	ZoneId int `pulumi:"zoneId"`
 }
 
-// InstancesInstanceListNodeInfoInput is an input type that accepts InstancesInstanceListNodeInfoArgs and InstancesInstanceListNodeInfoOutput values.
-// You can construct a concrete instance of `InstancesInstanceListNodeInfoInput` via:
+// GetInstancesInstanceListNodeInfoInput is an input type that accepts GetInstancesInstanceListNodeInfoArgs and GetInstancesInstanceListNodeInfoOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListNodeInfoInput` via:
 //
-//          InstancesInstanceListNodeInfoArgs{...}
-type InstancesInstanceListNodeInfoInput interface {
+//          GetInstancesInstanceListNodeInfoArgs{...}
+type GetInstancesInstanceListNodeInfoInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListNodeInfoOutput() InstancesInstanceListNodeInfoOutput
-	ToInstancesInstanceListNodeInfoOutputWithContext(context.Context) InstancesInstanceListNodeInfoOutput
+	ToGetInstancesInstanceListNodeInfoOutput() GetInstancesInstanceListNodeInfoOutput
+	ToGetInstancesInstanceListNodeInfoOutputWithContext(context.Context) GetInstancesInstanceListNodeInfoOutput
 }
 
-type InstancesInstanceListNodeInfoArgs struct {
-	Id     pulumi.IntInput  `pulumi:"id"`
+type GetInstancesInstanceListNodeInfoArgs struct {
+	// ID of the master or replica node.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Indicates whether the node is master.
 	Master pulumi.BoolInput `pulumi:"master"`
-	ZoneId pulumi.IntInput  `pulumi:"zoneId"`
+	// ID of the availability zone of the master or replica node.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
 }
 
-func (InstancesInstanceListNodeInfoArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceListNodeInfo)(nil)).Elem()
+func (GetInstancesInstanceListNodeInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListNodeInfo)(nil)).Elem()
 }
 
-func (i InstancesInstanceListNodeInfoArgs) ToInstancesInstanceListNodeInfoOutput() InstancesInstanceListNodeInfoOutput {
-	return i.ToInstancesInstanceListNodeInfoOutputWithContext(context.Background())
+func (i GetInstancesInstanceListNodeInfoArgs) ToGetInstancesInstanceListNodeInfoOutput() GetInstancesInstanceListNodeInfoOutput {
+	return i.ToGetInstancesInstanceListNodeInfoOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListNodeInfoArgs) ToInstancesInstanceListNodeInfoOutputWithContext(ctx context.Context) InstancesInstanceListNodeInfoOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListNodeInfoOutput)
+func (i GetInstancesInstanceListNodeInfoArgs) ToGetInstancesInstanceListNodeInfoOutputWithContext(ctx context.Context) GetInstancesInstanceListNodeInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListNodeInfoOutput)
 }
 
-// InstancesInstanceListNodeInfoArrayInput is an input type that accepts InstancesInstanceListNodeInfoArray and InstancesInstanceListNodeInfoArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListNodeInfoArrayInput` via:
+// GetInstancesInstanceListNodeInfoArrayInput is an input type that accepts GetInstancesInstanceListNodeInfoArray and GetInstancesInstanceListNodeInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListNodeInfoArrayInput` via:
 //
-//          InstancesInstanceListNodeInfoArray{ InstancesInstanceListNodeInfoArgs{...} }
-type InstancesInstanceListNodeInfoArrayInput interface {
+//          GetInstancesInstanceListNodeInfoArray{ GetInstancesInstanceListNodeInfoArgs{...} }
+type GetInstancesInstanceListNodeInfoArrayInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListNodeInfoArrayOutput() InstancesInstanceListNodeInfoArrayOutput
-	ToInstancesInstanceListNodeInfoArrayOutputWithContext(context.Context) InstancesInstanceListNodeInfoArrayOutput
+	ToGetInstancesInstanceListNodeInfoArrayOutput() GetInstancesInstanceListNodeInfoArrayOutput
+	ToGetInstancesInstanceListNodeInfoArrayOutputWithContext(context.Context) GetInstancesInstanceListNodeInfoArrayOutput
 }
 
-type InstancesInstanceListNodeInfoArray []InstancesInstanceListNodeInfoInput
+type GetInstancesInstanceListNodeInfoArray []GetInstancesInstanceListNodeInfoInput
 
-func (InstancesInstanceListNodeInfoArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceListNodeInfo)(nil)).Elem()
+func (GetInstancesInstanceListNodeInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListNodeInfo)(nil)).Elem()
 }
 
-func (i InstancesInstanceListNodeInfoArray) ToInstancesInstanceListNodeInfoArrayOutput() InstancesInstanceListNodeInfoArrayOutput {
-	return i.ToInstancesInstanceListNodeInfoArrayOutputWithContext(context.Background())
+func (i GetInstancesInstanceListNodeInfoArray) ToGetInstancesInstanceListNodeInfoArrayOutput() GetInstancesInstanceListNodeInfoArrayOutput {
+	return i.ToGetInstancesInstanceListNodeInfoArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListNodeInfoArray) ToInstancesInstanceListNodeInfoArrayOutputWithContext(ctx context.Context) InstancesInstanceListNodeInfoArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListNodeInfoArrayOutput)
+func (i GetInstancesInstanceListNodeInfoArray) ToGetInstancesInstanceListNodeInfoArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListNodeInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListNodeInfoArrayOutput)
 }
 
-type InstancesInstanceListNodeInfoOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListNodeInfoOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListNodeInfoOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceListNodeInfo)(nil)).Elem()
+func (GetInstancesInstanceListNodeInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListNodeInfo)(nil)).Elem()
 }
 
-func (o InstancesInstanceListNodeInfoOutput) ToInstancesInstanceListNodeInfoOutput() InstancesInstanceListNodeInfoOutput {
+func (o GetInstancesInstanceListNodeInfoOutput) ToGetInstancesInstanceListNodeInfoOutput() GetInstancesInstanceListNodeInfoOutput {
 	return o
 }
 
-func (o InstancesInstanceListNodeInfoOutput) ToInstancesInstanceListNodeInfoOutputWithContext(ctx context.Context) InstancesInstanceListNodeInfoOutput {
+func (o GetInstancesInstanceListNodeInfoOutput) ToGetInstancesInstanceListNodeInfoOutputWithContext(ctx context.Context) GetInstancesInstanceListNodeInfoOutput {
 	return o
 }
 
-func (o InstancesInstanceListNodeInfoOutput) Id() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceListNodeInfo) int { return v.Id }).(pulumi.IntOutput)
+// ID of the master or replica node.
+func (o GetInstancesInstanceListNodeInfoOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListNodeInfo) int { return v.Id }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListNodeInfoOutput) Master() pulumi.BoolOutput {
-	return o.ApplyT(func(v InstancesInstanceListNodeInfo) bool { return v.Master }).(pulumi.BoolOutput)
+// Indicates whether the node is master.
+func (o GetInstancesInstanceListNodeInfoOutput) Master() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListNodeInfo) bool { return v.Master }).(pulumi.BoolOutput)
 }
 
-func (o InstancesInstanceListNodeInfoOutput) ZoneId() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceListNodeInfo) int { return v.ZoneId }).(pulumi.IntOutput)
+// ID of the availability zone of the master or replica node.
+func (o GetInstancesInstanceListNodeInfoOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListNodeInfo) int { return v.ZoneId }).(pulumi.IntOutput)
 }
 
-type InstancesInstanceListNodeInfoArrayOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListNodeInfoArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListNodeInfoArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceListNodeInfo)(nil)).Elem()
+func (GetInstancesInstanceListNodeInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListNodeInfo)(nil)).Elem()
 }
 
-func (o InstancesInstanceListNodeInfoArrayOutput) ToInstancesInstanceListNodeInfoArrayOutput() InstancesInstanceListNodeInfoArrayOutput {
+func (o GetInstancesInstanceListNodeInfoArrayOutput) ToGetInstancesInstanceListNodeInfoArrayOutput() GetInstancesInstanceListNodeInfoArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListNodeInfoArrayOutput) ToInstancesInstanceListNodeInfoArrayOutputWithContext(ctx context.Context) InstancesInstanceListNodeInfoArrayOutput {
+func (o GetInstancesInstanceListNodeInfoArrayOutput) ToGetInstancesInstanceListNodeInfoArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListNodeInfoArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListNodeInfoArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListNodeInfoOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceListNodeInfo {
-		return vs[0].([]InstancesInstanceListNodeInfo)[vs[1].(int)]
-	}).(InstancesInstanceListNodeInfoOutput)
+func (o GetInstancesInstanceListNodeInfoArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListNodeInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListNodeInfo {
+		return vs[0].([]GetInstancesInstanceListNodeInfo)[vs[1].(int)]
+	}).(GetInstancesInstanceListNodeInfoOutput)
 }
 
-type ZoneConfigList struct {
+type GetZoneConfigList struct {
+	// (**Deprecated**) It has been deprecated from version 1.26.0. Use `shardMemories` instead. The memory volume of an available instance(in MB).
+	//
 	// Deprecated: It has been deprecated from version 1.26.0. Use `shard_memories` instead.
-	MemSizes          []int `pulumi:"memSizes"`
+	MemSizes []int `pulumi:"memSizes"`
+	// The support numbers of instance copies.
 	RedisReplicasNums []int `pulumi:"redisReplicasNums"`
-	RedisShardNums    []int `pulumi:"redisShardNums"`
-	ShardMemories     []int `pulumi:"shardMemories"`
+	// The support numbers of instance shard.
+	RedisShardNums []int `pulumi:"redisShardNums"`
+	// The memory volume list of an available instance shard(in MB).
+	ShardMemories []int `pulumi:"shardMemories"`
+	// (**Deprecated**) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `masterSlaveRedis`, `masterSlaveCkv`, `clusterCkv`, `clusterRedis` and `standaloneRedis`.
+	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
-	Type    string `pulumi:"type"`
-	TypeId  int    `pulumi:"typeId"`
+	Type string `pulumi:"type"`
+	// Instance type ID.
+	TypeId int `pulumi:"typeId"`
+	// Version description of an available instance. Possible values: `Redis 3.2`, `Redis 4.0`.
 	Version string `pulumi:"version"`
-	Zone    string `pulumi:"zone"`
+	// ID of available zone.
+	Zone string `pulumi:"zone"`
 }
 
-// ZoneConfigListInput is an input type that accepts ZoneConfigListArgs and ZoneConfigListOutput values.
-// You can construct a concrete instance of `ZoneConfigListInput` via:
+// GetZoneConfigListInput is an input type that accepts GetZoneConfigListArgs and GetZoneConfigListOutput values.
+// You can construct a concrete instance of `GetZoneConfigListInput` via:
 //
-//          ZoneConfigListArgs{...}
-type ZoneConfigListInput interface {
+//          GetZoneConfigListArgs{...}
+type GetZoneConfigListInput interface {
 	pulumi.Input
 
-	ToZoneConfigListOutput() ZoneConfigListOutput
-	ToZoneConfigListOutputWithContext(context.Context) ZoneConfigListOutput
+	ToGetZoneConfigListOutput() GetZoneConfigListOutput
+	ToGetZoneConfigListOutputWithContext(context.Context) GetZoneConfigListOutput
 }
 
-type ZoneConfigListArgs struct {
+type GetZoneConfigListArgs struct {
+	// (**Deprecated**) It has been deprecated from version 1.26.0. Use `shardMemories` instead. The memory volume of an available instance(in MB).
+	//
 	// Deprecated: It has been deprecated from version 1.26.0. Use `shard_memories` instead.
-	MemSizes          pulumi.IntArrayInput `pulumi:"memSizes"`
+	MemSizes pulumi.IntArrayInput `pulumi:"memSizes"`
+	// The support numbers of instance copies.
 	RedisReplicasNums pulumi.IntArrayInput `pulumi:"redisReplicasNums"`
-	RedisShardNums    pulumi.IntArrayInput `pulumi:"redisShardNums"`
-	ShardMemories     pulumi.IntArrayInput `pulumi:"shardMemories"`
+	// The support numbers of instance shard.
+	RedisShardNums pulumi.IntArrayInput `pulumi:"redisShardNums"`
+	// The memory volume list of an available instance shard(in MB).
+	ShardMemories pulumi.IntArrayInput `pulumi:"shardMemories"`
+	// (**Deprecated**) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `masterSlaveRedis`, `masterSlaveCkv`, `clusterCkv`, `clusterRedis` and `standaloneRedis`.
+	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
-	Type    pulumi.StringInput `pulumi:"type"`
-	TypeId  pulumi.IntInput    `pulumi:"typeId"`
+	Type pulumi.StringInput `pulumi:"type"`
+	// Instance type ID.
+	TypeId pulumi.IntInput `pulumi:"typeId"`
+	// Version description of an available instance. Possible values: `Redis 3.2`, `Redis 4.0`.
 	Version pulumi.StringInput `pulumi:"version"`
-	Zone    pulumi.StringInput `pulumi:"zone"`
+	// ID of available zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
 }
 
-func (ZoneConfigListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneConfigList)(nil)).Elem()
+func (GetZoneConfigListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigList)(nil)).Elem()
 }
 
-func (i ZoneConfigListArgs) ToZoneConfigListOutput() ZoneConfigListOutput {
-	return i.ToZoneConfigListOutputWithContext(context.Background())
+func (i GetZoneConfigListArgs) ToGetZoneConfigListOutput() GetZoneConfigListOutput {
+	return i.ToGetZoneConfigListOutputWithContext(context.Background())
 }
 
-func (i ZoneConfigListArgs) ToZoneConfigListOutputWithContext(ctx context.Context) ZoneConfigListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneConfigListOutput)
+func (i GetZoneConfigListArgs) ToGetZoneConfigListOutputWithContext(ctx context.Context) GetZoneConfigListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigListOutput)
 }
 
-// ZoneConfigListArrayInput is an input type that accepts ZoneConfigListArray and ZoneConfigListArrayOutput values.
-// You can construct a concrete instance of `ZoneConfigListArrayInput` via:
+// GetZoneConfigListArrayInput is an input type that accepts GetZoneConfigListArray and GetZoneConfigListArrayOutput values.
+// You can construct a concrete instance of `GetZoneConfigListArrayInput` via:
 //
-//          ZoneConfigListArray{ ZoneConfigListArgs{...} }
-type ZoneConfigListArrayInput interface {
+//          GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
+type GetZoneConfigListArrayInput interface {
 	pulumi.Input
 
-	ToZoneConfigListArrayOutput() ZoneConfigListArrayOutput
-	ToZoneConfigListArrayOutputWithContext(context.Context) ZoneConfigListArrayOutput
+	ToGetZoneConfigListArrayOutput() GetZoneConfigListArrayOutput
+	ToGetZoneConfigListArrayOutputWithContext(context.Context) GetZoneConfigListArrayOutput
 }
 
-type ZoneConfigListArray []ZoneConfigListInput
+type GetZoneConfigListArray []GetZoneConfigListInput
 
-func (ZoneConfigListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneConfigList)(nil)).Elem()
+func (GetZoneConfigListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigList)(nil)).Elem()
 }
 
-func (i ZoneConfigListArray) ToZoneConfigListArrayOutput() ZoneConfigListArrayOutput {
-	return i.ToZoneConfigListArrayOutputWithContext(context.Background())
+func (i GetZoneConfigListArray) ToGetZoneConfigListArrayOutput() GetZoneConfigListArrayOutput {
+	return i.ToGetZoneConfigListArrayOutputWithContext(context.Background())
 }
 
-func (i ZoneConfigListArray) ToZoneConfigListArrayOutputWithContext(ctx context.Context) ZoneConfigListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneConfigListArrayOutput)
+func (i GetZoneConfigListArray) ToGetZoneConfigListArrayOutputWithContext(ctx context.Context) GetZoneConfigListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigListArrayOutput)
 }
 
-type ZoneConfigListOutput struct{ *pulumi.OutputState }
+type GetZoneConfigListOutput struct{ *pulumi.OutputState }
 
-func (ZoneConfigListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneConfigList)(nil)).Elem()
+func (GetZoneConfigListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigList)(nil)).Elem()
 }
 
-func (o ZoneConfigListOutput) ToZoneConfigListOutput() ZoneConfigListOutput {
+func (o GetZoneConfigListOutput) ToGetZoneConfigListOutput() GetZoneConfigListOutput {
 	return o
 }
 
-func (o ZoneConfigListOutput) ToZoneConfigListOutputWithContext(ctx context.Context) ZoneConfigListOutput {
+func (o GetZoneConfigListOutput) ToGetZoneConfigListOutputWithContext(ctx context.Context) GetZoneConfigListOutput {
 	return o
 }
 
+// (**Deprecated**) It has been deprecated from version 1.26.0. Use `shardMemories` instead. The memory volume of an available instance(in MB).
+//
 // Deprecated: It has been deprecated from version 1.26.0. Use `shard_memories` instead.
-func (o ZoneConfigListOutput) MemSizes() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []int { return v.MemSizes }).(pulumi.IntArrayOutput)
+func (o GetZoneConfigListOutput) MemSizes() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []int { return v.MemSizes }).(pulumi.IntArrayOutput)
 }
 
-func (o ZoneConfigListOutput) RedisReplicasNums() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []int { return v.RedisReplicasNums }).(pulumi.IntArrayOutput)
+// The support numbers of instance copies.
+func (o GetZoneConfigListOutput) RedisReplicasNums() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []int { return v.RedisReplicasNums }).(pulumi.IntArrayOutput)
 }
 
-func (o ZoneConfigListOutput) RedisShardNums() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []int { return v.RedisShardNums }).(pulumi.IntArrayOutput)
+// The support numbers of instance shard.
+func (o GetZoneConfigListOutput) RedisShardNums() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []int { return v.RedisShardNums }).(pulumi.IntArrayOutput)
 }
 
-func (o ZoneConfigListOutput) ShardMemories() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v ZoneConfigList) []int { return v.ShardMemories }).(pulumi.IntArrayOutput)
+// The memory volume list of an available instance shard(in MB).
+func (o GetZoneConfigListOutput) ShardMemories() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetZoneConfigList) []int { return v.ShardMemories }).(pulumi.IntArrayOutput)
 }
 
+// (**Deprecated**) It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `masterSlaveRedis`, `masterSlaveCkv`, `clusterCkv`, `clusterRedis` and `standaloneRedis`.
+//
 // Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
-func (o ZoneConfigListOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigList) string { return v.Type }).(pulumi.StringOutput)
+func (o GetZoneConfigListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigList) string { return v.Type }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListOutput) TypeId() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigList) int { return v.TypeId }).(pulumi.IntOutput)
+// Instance type ID.
+func (o GetZoneConfigListOutput) TypeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.TypeId }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigListOutput) Version() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigList) string { return v.Version }).(pulumi.StringOutput)
+// Version description of an available instance. Possible values: `Redis 3.2`, `Redis 4.0`.
+func (o GetZoneConfigListOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigList) string { return v.Version }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListOutput) Zone() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigList) string { return v.Zone }).(pulumi.StringOutput)
+// ID of available zone.
+func (o GetZoneConfigListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigList) string { return v.Zone }).(pulumi.StringOutput)
 }
 
-type ZoneConfigListArrayOutput struct{ *pulumi.OutputState }
+type GetZoneConfigListArrayOutput struct{ *pulumi.OutputState }
 
-func (ZoneConfigListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneConfigList)(nil)).Elem()
+func (GetZoneConfigListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigList)(nil)).Elem()
 }
 
-func (o ZoneConfigListArrayOutput) ToZoneConfigListArrayOutput() ZoneConfigListArrayOutput {
+func (o GetZoneConfigListArrayOutput) ToGetZoneConfigListArrayOutput() GetZoneConfigListArrayOutput {
 	return o
 }
 
-func (o ZoneConfigListArrayOutput) ToZoneConfigListArrayOutputWithContext(ctx context.Context) ZoneConfigListArrayOutput {
+func (o GetZoneConfigListArrayOutput) ToGetZoneConfigListArrayOutputWithContext(ctx context.Context) GetZoneConfigListArrayOutput {
 	return o
 }
 
-func (o ZoneConfigListArrayOutput) Index(i pulumi.IntInput) ZoneConfigListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZoneConfigList {
-		return vs[0].([]ZoneConfigList)[vs[1].(int)]
-	}).(ZoneConfigListOutput)
+func (o GetZoneConfigListArrayOutput) Index(i pulumi.IntInput) GetZoneConfigListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZoneConfigList {
+		return vs[0].([]GetZoneConfigList)[vs[1].(int)]
+	}).(GetZoneConfigListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListInput)(nil)).Elem(), InstancesInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListArrayInput)(nil)).Elem(), InstancesInstanceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListNodeInfoInput)(nil)).Elem(), InstancesInstanceListNodeInfoArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListNodeInfoArrayInput)(nil)).Elem(), InstancesInstanceListNodeInfoArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneConfigListInput)(nil)).Elem(), ZoneConfigListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneConfigListArrayInput)(nil)).Elem(), ZoneConfigListArray{})
-	pulumi.RegisterOutputType(InstancesInstanceListOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListArrayOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListNodeInfoOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListNodeInfoArrayOutput{})
-	pulumi.RegisterOutputType(ZoneConfigListOutput{})
-	pulumi.RegisterOutputType(ZoneConfigListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListNodeInfoInput)(nil)).Elem(), GetInstancesInstanceListNodeInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListNodeInfoArrayInput)(nil)).Elem(), GetInstancesInstanceListNodeInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListInput)(nil)).Elem(), GetZoneConfigListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListArrayInput)(nil)).Elem(), GetZoneConfigListArray{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListNodeInfoOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListNodeInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigListOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigListArrayOutput{})
 }

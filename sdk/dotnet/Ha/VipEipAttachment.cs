@@ -9,6 +9,37 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Ha
 {
+    /// <summary>
+    /// Provides a resource to create a HA VIP EIP attachment.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Ha.VipEipAttachment("foo", new Tencentcloud.Ha.VipEipAttachmentArgs
+    ///         {
+    ///             AddressIp = "1.1.1.1",
+    ///             HavipId = "havip-kjqwe4ba",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// HA VIP EIP attachment can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Ha/vipEipAttachment:VipEipAttachment foo havip-kjqwe4ba#1.1.1.1
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Ha/vipEipAttachment:VipEipAttachment")]
     public partial class VipEipAttachment : Pulumi.CustomResource
     {

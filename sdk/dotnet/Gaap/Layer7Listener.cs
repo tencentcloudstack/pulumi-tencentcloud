@@ -9,12 +9,50 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Gaap
 {
+    /// <summary>
+    /// Provides a resource to create a layer7 listener of GAAP.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
+    ///         {
+    ///             Bandwidth = 10,
+    ///             Concurrent = 2,
+    ///             AccessRegion = "SouthChina",
+    ///             RealserverRegion = "NorthChina",
+    ///         });
+    ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
+    ///         {
+    ///             Protocol = "HTTP",
+    ///             Port = 80,
+    ///             ProxyId = fooProxy.Id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// GAAP layer7 listener can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/layer7Listener:Layer7Listener")]
     public partial class Layer7Listener : Pulumi.CustomResource
     {
         /// <summary>
-        /// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-        /// supports listeners of `HTTPS` protocol.
+        /// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         /// </summary>
         [Output("authType")]
         public Output<int?> AuthType { get; private set; } = null!;
@@ -26,15 +64,13 @@ namespace Pulumi.Tencentcloud.Gaap
         public Output<string?> CertificateId { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-        /// listeners of `HTTPS` protocol.
+        /// It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         /// </summary>
         [Output("clientCertificateId")]
         public Output<string> ClientCertificateId { get; private set; } = null!;
 
         /// <summary>
-        /// ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-        /// listeners of `HTTPS` protocol.
+        /// ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         /// </summary>
         [Output("clientCertificateIds")]
         public Output<ImmutableArray<string>> ClientCertificateIds { get; private set; } = null!;
@@ -128,8 +164,7 @@ namespace Pulumi.Tencentcloud.Gaap
     public sealed class Layer7ListenerArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-        /// supports listeners of `HTTPS` protocol.
+        /// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         /// </summary>
         [Input("authType")]
         public Input<int>? AuthType { get; set; }
@@ -141,8 +176,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Input<string>? CertificateId { get; set; }
 
         /// <summary>
-        /// ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-        /// listeners of `HTTPS` protocol.
+        /// It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         /// </summary>
         [Input("clientCertificateId")]
         public Input<string>? ClientCertificateId { get; set; }
@@ -151,8 +185,7 @@ namespace Pulumi.Tencentcloud.Gaap
         private InputList<string>? _clientCertificateIds;
 
         /// <summary>
-        /// ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-        /// listeners of `HTTPS` protocol.
+        /// ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         /// </summary>
         public InputList<string> ClientCertificateIds
         {
@@ -198,8 +231,7 @@ namespace Pulumi.Tencentcloud.Gaap
     public sealed class Layer7ListenerState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-        /// supports listeners of `HTTPS` protocol.
+        /// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         /// </summary>
         [Input("authType")]
         public Input<int>? AuthType { get; set; }
@@ -211,8 +243,7 @@ namespace Pulumi.Tencentcloud.Gaap
         public Input<string>? CertificateId { get; set; }
 
         /// <summary>
-        /// ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-        /// listeners of `HTTPS` protocol.
+        /// It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead. ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         /// </summary>
         [Input("clientCertificateId")]
         public Input<string>? ClientCertificateId { get; set; }
@@ -221,8 +252,7 @@ namespace Pulumi.Tencentcloud.Gaap
         private InputList<string>? _clientCertificateIds;
 
         /// <summary>
-        /// ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-        /// listeners of `HTTPS` protocol.
+        /// ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
         /// </summary>
         public InputList<string> ClientCertificateIds
         {

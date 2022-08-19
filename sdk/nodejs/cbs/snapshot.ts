@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CBS snapshot.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const snapshot = new tencentcloud.Cbs.Snapshot("snapshot", {
+ *     snapshotName: "unnamed",
+ *     storageId: "disk-kdt0sq6m",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CBS snapshot can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cbs/snapshot:Snapshot snapshot snap-3sa3f39b
+ * ```
+ */
 export class Snapshot extends pulumi.CustomResource {
     /**
      * Get an existing Snapshot resource's state with the given name, ID, and optional extra

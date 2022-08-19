@@ -9,6 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cfs
 {
+    /// <summary>
+    /// Provides a resource to create a cloud file system(CFS).
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cfs.FileSystem("foo", new Tencentcloud.Cfs.FileSystemArgs
+    ///         {
+    ///             AccessGroupId = "pgroup-7nx89k7l",
+    ///             AvailabilityZone = "ap-guangzhou-3",
+    ///             Protocol = "NFS",
+    ///             SubnetId = "subnet-9mu2t9iw",
+    ///             VpcId = "vpc-ah9fbkap",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Cloud file system can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/fileSystem:FileSystem")]
     public partial class FileSystem : Pulumi.CustomResource
     {

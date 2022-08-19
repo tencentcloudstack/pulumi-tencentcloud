@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CAM group membership.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.cam.GroupMembership("foo", {
+ *     groupId: tencentcloud_cam_group.foo.id,
+ *     userNames: [
+ *         tencentcloud_cam_user.foo.name,
+ *         tencentcloud_cam_user.bar.name,
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CAM group membership can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cam/groupMembership:GroupMembership foo 12515263
+ * ```
+ */
 export class GroupMembership extends pulumi.CustomResource {
     /**
      * Get an existing GroupMembership resource's state with the given name, ID, and optional extra
@@ -37,7 +63,7 @@ export class GroupMembership extends pulumi.CustomResource {
      */
     public readonly groupId!: pulumi.Output<string>;
     /**
-     * ID set of the CAM group members.
+     * It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
      *
      * @deprecated It has been deprecated from version 1.59.5. Use `user_names` instead.
      */
@@ -86,7 +112,7 @@ export interface GroupMembershipState {
      */
     groupId?: pulumi.Input<string>;
     /**
-     * ID set of the CAM group members.
+     * It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
      *
      * @deprecated It has been deprecated from version 1.59.5. Use `user_names` instead.
      */
@@ -106,7 +132,7 @@ export interface GroupMembershipArgs {
      */
     groupId: pulumi.Input<string>;
     /**
-     * ID set of the CAM group members.
+     * It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
      *
      * @deprecated It has been deprecated from version 1.59.5. Use `user_names` instead.
      */

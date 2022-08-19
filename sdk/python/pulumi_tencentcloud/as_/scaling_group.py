@@ -47,14 +47,10 @@ class ScalingGroupArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] load_balancer_ids: ID list of traditional load balancers.
         :param pulumi.Input[str] multi_zone_subnet_policy: Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
         :param pulumi.Input[int] project_id: Specifies to which project the scaling group belongs.
-        :param pulumi.Input[bool] replace_load_balancer_unhealthy: Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-               health check.
-        :param pulumi.Input[bool] replace_monitor_unhealthy: Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-               Cloud Monitor.
+        :param pulumi.Input[bool] replace_load_balancer_unhealthy: Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
+        :param pulumi.Input[bool] replace_monitor_unhealthy: Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
         :param pulumi.Input[str] retry_policy: Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.
-        :param pulumi.Input[str] scaling_mode: Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-               instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-               `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+        :param pulumi.Input[str] scaling_mode: Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subnet_ids: ID list of subnet, and for VPC it is required.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of a scaling group.
         :param pulumi.Input[str] termination_policies: Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.
@@ -230,8 +226,7 @@ class ScalingGroupArgs:
     @pulumi.getter(name="replaceLoadBalancerUnhealthy")
     def replace_load_balancer_unhealthy(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-        health check.
+        Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
         """
         return pulumi.get(self, "replace_load_balancer_unhealthy")
 
@@ -243,8 +238,7 @@ class ScalingGroupArgs:
     @pulumi.getter(name="replaceMonitorUnhealthy")
     def replace_monitor_unhealthy(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-        Cloud Monitor.
+        Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
         """
         return pulumi.get(self, "replace_monitor_unhealthy")
 
@@ -268,9 +262,7 @@ class ScalingGroupArgs:
     @pulumi.getter(name="scalingMode")
     def scaling_mode(self) -> Optional[pulumi.Input[str]]:
         """
-        Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-        instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-        `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+        Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
         """
         return pulumi.get(self, "scaling_mode")
 
@@ -365,15 +357,11 @@ class _ScalingGroupState:
         :param pulumi.Input[int] min_size: Minimum number of CVM instances. Valid value ranges: (0~2000).
         :param pulumi.Input[str] multi_zone_subnet_policy: Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
         :param pulumi.Input[int] project_id: Specifies to which project the scaling group belongs.
-        :param pulumi.Input[bool] replace_load_balancer_unhealthy: Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-               health check.
-        :param pulumi.Input[bool] replace_monitor_unhealthy: Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-               Cloud Monitor.
+        :param pulumi.Input[bool] replace_load_balancer_unhealthy: Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
+        :param pulumi.Input[bool] replace_monitor_unhealthy: Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
         :param pulumi.Input[str] retry_policy: Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.
         :param pulumi.Input[str] scaling_group_name: Name of a scaling group.
-        :param pulumi.Input[str] scaling_mode: Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-               instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-               `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+        :param pulumi.Input[str] scaling_mode: Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
         :param pulumi.Input[str] status: Current status of a scaling group.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subnet_ids: ID list of subnet, and for VPC it is required.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of a scaling group.
@@ -562,8 +550,7 @@ class _ScalingGroupState:
     @pulumi.getter(name="replaceLoadBalancerUnhealthy")
     def replace_load_balancer_unhealthy(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-        health check.
+        Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
         """
         return pulumi.get(self, "replace_load_balancer_unhealthy")
 
@@ -575,8 +562,7 @@ class _ScalingGroupState:
     @pulumi.getter(name="replaceMonitorUnhealthy")
     def replace_monitor_unhealthy(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-        Cloud Monitor.
+        Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
         """
         return pulumi.get(self, "replace_monitor_unhealthy")
 
@@ -612,9 +598,7 @@ class _ScalingGroupState:
     @pulumi.getter(name="scalingMode")
     def scaling_mode(self) -> Optional[pulumi.Input[str]]:
         """
-        Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-        instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-        `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+        Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
         """
         return pulumi.get(self, "scaling_mode")
 
@@ -721,7 +705,45 @@ class ScalingGroup(pulumi.CustomResource):
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a ScalingGroup resource with the given unique name, props, and options.
+        Provides a resource to create a group of AS (Auto scaling) instances.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        scaling_group = tencentcloud.as_.ScalingGroup("scalingGroup",
+            configuration_id="asc-oqio4yyj",
+            default_cooldown=400,
+            desired_capacity=1,
+            forward_balancer_ids=[tencentcloud.as..ScalingGroupForwardBalancerIdArgs(
+                listener_id="lbl-81wr497k",
+                load_balancer_id="lb-hk693b1l",
+                rule_id="loc-kiodx943",
+                target_attributes=[tencentcloud.as..ScalingGroupForwardBalancerIdTargetAttributeArgs(
+                    port=80,
+                    weight=90,
+                )],
+            )],
+            max_size=1,
+            min_size=0,
+            project_id=0,
+            retry_policy="INCREMENTAL_INTERVALS",
+            scaling_group_name="tf-as-scaling-group",
+            subnet_ids=["subnet-mc3egos"],
+            termination_policies="NEWEST_INSTANCE",
+            vpc_id="vpc-3efmz0z")
+        ```
+
+        ## Import
+
+        AutoScaling Groups can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:As/scalingGroup:ScalingGroup scaling_group asg-n32ymck2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] configuration_id: An available ID for a launch configuration.
@@ -733,15 +755,11 @@ class ScalingGroup(pulumi.CustomResource):
         :param pulumi.Input[int] min_size: Minimum number of CVM instances. Valid value ranges: (0~2000).
         :param pulumi.Input[str] multi_zone_subnet_policy: Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
         :param pulumi.Input[int] project_id: Specifies to which project the scaling group belongs.
-        :param pulumi.Input[bool] replace_load_balancer_unhealthy: Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-               health check.
-        :param pulumi.Input[bool] replace_monitor_unhealthy: Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-               Cloud Monitor.
+        :param pulumi.Input[bool] replace_load_balancer_unhealthy: Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
+        :param pulumi.Input[bool] replace_monitor_unhealthy: Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
         :param pulumi.Input[str] retry_policy: Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.
         :param pulumi.Input[str] scaling_group_name: Name of a scaling group.
-        :param pulumi.Input[str] scaling_mode: Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-               instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-               `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+        :param pulumi.Input[str] scaling_mode: Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subnet_ids: ID list of subnet, and for VPC it is required.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of a scaling group.
         :param pulumi.Input[str] termination_policies: Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.
@@ -755,7 +773,45 @@ class ScalingGroup(pulumi.CustomResource):
                  args: ScalingGroupArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ScalingGroup resource with the given unique name, props, and options.
+        Provides a resource to create a group of AS (Auto scaling) instances.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        scaling_group = tencentcloud.as_.ScalingGroup("scalingGroup",
+            configuration_id="asc-oqio4yyj",
+            default_cooldown=400,
+            desired_capacity=1,
+            forward_balancer_ids=[tencentcloud.as..ScalingGroupForwardBalancerIdArgs(
+                listener_id="lbl-81wr497k",
+                load_balancer_id="lb-hk693b1l",
+                rule_id="loc-kiodx943",
+                target_attributes=[tencentcloud.as..ScalingGroupForwardBalancerIdTargetAttributeArgs(
+                    port=80,
+                    weight=90,
+                )],
+            )],
+            max_size=1,
+            min_size=0,
+            project_id=0,
+            retry_policy="INCREMENTAL_INTERVALS",
+            scaling_group_name="tf-as-scaling-group",
+            subnet_ids=["subnet-mc3egos"],
+            termination_policies="NEWEST_INSTANCE",
+            vpc_id="vpc-3efmz0z")
+        ```
+
+        ## Import
+
+        AutoScaling Groups can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:As/scalingGroup:ScalingGroup scaling_group asg-n32ymck2
+        ```
+
         :param str resource_name: The name of the resource.
         :param ScalingGroupArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -884,15 +940,11 @@ class ScalingGroup(pulumi.CustomResource):
         :param pulumi.Input[int] min_size: Minimum number of CVM instances. Valid value ranges: (0~2000).
         :param pulumi.Input[str] multi_zone_subnet_policy: Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
         :param pulumi.Input[int] project_id: Specifies to which project the scaling group belongs.
-        :param pulumi.Input[bool] replace_load_balancer_unhealthy: Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-               health check.
-        :param pulumi.Input[bool] replace_monitor_unhealthy: Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-               Cloud Monitor.
+        :param pulumi.Input[bool] replace_load_balancer_unhealthy: Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
+        :param pulumi.Input[bool] replace_monitor_unhealthy: Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
         :param pulumi.Input[str] retry_policy: Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.
         :param pulumi.Input[str] scaling_group_name: Name of a scaling group.
-        :param pulumi.Input[str] scaling_mode: Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-               instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-               `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+        :param pulumi.Input[str] scaling_mode: Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
         :param pulumi.Input[str] status: Current status of a scaling group.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subnet_ids: ID list of subnet, and for VPC it is required.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of a scaling group.
@@ -1020,8 +1072,7 @@ class ScalingGroup(pulumi.CustomResource):
     @pulumi.getter(name="replaceLoadBalancerUnhealthy")
     def replace_load_balancer_unhealthy(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB
-        health check.
+        Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
         """
         return pulumi.get(self, "replace_load_balancer_unhealthy")
 
@@ -1029,8 +1080,7 @@ class ScalingGroup(pulumi.CustomResource):
     @pulumi.getter(name="replaceMonitorUnhealthy")
     def replace_monitor_unhealthy(self) -> pulumi.Output[Optional[bool]]:
         """
-        Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by
-        Cloud Monitor.
+        Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
         """
         return pulumi.get(self, "replace_monitor_unhealthy")
 
@@ -1054,9 +1104,7 @@ class ScalingGroup(pulumi.CustomResource):
     @pulumi.getter(name="scalingMode")
     def scaling_mode(self) -> pulumi.Output[Optional[str]]:
         """
-        Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped
-        instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`,
-        `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
+        Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
         """
         return pulumi.get(self, "scaling_mode")
 

@@ -7,10 +7,53 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway
+namespace Pulumi.Tencentcloud.ApiGateway
 {
-    [TencentcloudResourceType("tencentcloud:APIGateway/aPIKeyAttachment:APIKeyAttachment")]
-    public partial class APIKeyAttachment : Pulumi.CustomResource
+    /// <summary>
+    /// Use this resource to API gateway attach access key to usage plan.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var key = new Tencentcloud.ApiGateway.ApiKey("key", new Tencentcloud.ApiGateway.ApiKeyArgs
+    ///         {
+    ///             SecretName = "my_api_key",
+    ///             Status = "on",
+    ///         });
+    ///         var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new Tencentcloud.ApiGateway.UsagePlanArgs
+    ///         {
+    ///             UsagePlanName = "my_plan",
+    ///             UsagePlanDesc = "nice plan",
+    ///             MaxRequestNum = 100,
+    ///             MaxRequestNumPreSec = 10,
+    ///         });
+    ///         var attach = new Tencentcloud.ApiGateway.ApiKeyAttachment("attach", new Tencentcloud.ApiGateway.ApiKeyAttachmentArgs
+    ///         {
+    ///             ApiKeyId = key.Id,
+    ///             UsagePlanId = plan.Id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// API gateway attach access key can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment attach AKID110b8Rmuw7t0fP1N8bi809n327023Is7xN8f#usagePlan-gyeafpab
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment")]
+    public partial class ApiKeyAttachment : Pulumi.CustomResource
     {
         /// <summary>
         /// ID of API key.
@@ -26,19 +69,19 @@ namespace Pulumi.Tencentcloud.APIGateway
 
 
         /// <summary>
-        /// Create a APIKeyAttachment resource with the given unique name, arguments, and options.
+        /// Create a ApiKeyAttachment resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public APIKeyAttachment(string name, APIKeyAttachmentArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/aPIKeyAttachment:APIKeyAttachment", name, args ?? new APIKeyAttachmentArgs(), MakeResourceOptions(options, ""))
+        public ApiKeyAttachment(string name, ApiKeyAttachmentArgs args, CustomResourceOptions? options = null)
+            : base("tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment", name, args ?? new ApiKeyAttachmentArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private APIKeyAttachment(string name, Input<string> id, APIKeyAttachmentState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/aPIKeyAttachment:APIKeyAttachment", name, state, MakeResourceOptions(options, id))
+        private ApiKeyAttachment(string name, Input<string> id, ApiKeyAttachmentState? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -54,7 +97,7 @@ namespace Pulumi.Tencentcloud.APIGateway
             return merged;
         }
         /// <summary>
-        /// Get an existing APIKeyAttachment resource's state with the given name, ID, and optional extra
+        /// Get an existing ApiKeyAttachment resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -62,13 +105,13 @@ namespace Pulumi.Tencentcloud.APIGateway
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static APIKeyAttachment Get(string name, Input<string> id, APIKeyAttachmentState? state = null, CustomResourceOptions? options = null)
+        public static ApiKeyAttachment Get(string name, Input<string> id, ApiKeyAttachmentState? state = null, CustomResourceOptions? options = null)
         {
-            return new APIKeyAttachment(name, id, state, options);
+            return new ApiKeyAttachment(name, id, state, options);
         }
     }
 
-    public sealed class APIKeyAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class ApiKeyAttachmentArgs : Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of API key.
@@ -82,12 +125,12 @@ namespace Pulumi.Tencentcloud.APIGateway
         [Input("usagePlanId", required: true)]
         public Input<string> UsagePlanId { get; set; } = null!;
 
-        public APIKeyAttachmentArgs()
+        public ApiKeyAttachmentArgs()
         {
         }
     }
 
-    public sealed class APIKeyAttachmentState : Pulumi.ResourceArgs
+    public sealed class ApiKeyAttachmentState : Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of API key.
@@ -101,7 +144,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         [Input("usagePlanId")]
         public Input<string>? UsagePlanId { get; set; }
 
-        public APIKeyAttachmentState()
+        public ApiKeyAttachmentState()
         {
         }
     }

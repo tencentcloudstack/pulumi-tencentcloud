@@ -7,30 +7,48 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway.Inputs
+namespace Pulumi.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class APIRequestParameterGetArgs : Pulumi.ResourceArgs
+    public sealed class ApiRequestParameterGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Parameter default value.
+        /// </summary>
         [Input("defaultValue")]
         public Input<string>? DefaultValue { get; set; }
 
+        /// <summary>
+        /// Parameter description.
+        /// </summary>
         [Input("desc")]
         public Input<string>? Desc { get; set; }
 
+        /// <summary>
+        /// Parameter name.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// Parameter location.
+        /// </summary>
         [Input("position", required: true)]
         public Input<string> Position { get; set; } = null!;
 
+        /// <summary>
+        /// If this parameter required. Default value: `false`.
+        /// </summary>
         [Input("required")]
         public Input<bool>? Required { get; set; }
 
+        /// <summary>
+        /// Parameter type.
+        /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
 
-        public APIRequestParameterGetArgs()
+        public ApiRequestParameterGetArgs()
         {
         }
     }

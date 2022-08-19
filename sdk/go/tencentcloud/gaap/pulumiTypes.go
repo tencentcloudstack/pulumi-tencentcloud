@@ -10,449 +10,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type CertificatesCertificate struct {
-	BeginTime  string `pulumi:"beginTime"`
-	CreateTime string `pulumi:"createTime"`
-	EndTime    string `pulumi:"endTime"`
-	Id         string `pulumi:"id"`
-	IssuerCn   string `pulumi:"issuerCn"`
-	Name       string `pulumi:"name"`
-	SubjectCn  string `pulumi:"subjectCn"`
-	Type       string `pulumi:"type"`
-}
-
-// CertificatesCertificateInput is an input type that accepts CertificatesCertificateArgs and CertificatesCertificateOutput values.
-// You can construct a concrete instance of `CertificatesCertificateInput` via:
-//
-//          CertificatesCertificateArgs{...}
-type CertificatesCertificateInput interface {
-	pulumi.Input
-
-	ToCertificatesCertificateOutput() CertificatesCertificateOutput
-	ToCertificatesCertificateOutputWithContext(context.Context) CertificatesCertificateOutput
-}
-
-type CertificatesCertificateArgs struct {
-	BeginTime  pulumi.StringInput `pulumi:"beginTime"`
-	CreateTime pulumi.StringInput `pulumi:"createTime"`
-	EndTime    pulumi.StringInput `pulumi:"endTime"`
-	Id         pulumi.StringInput `pulumi:"id"`
-	IssuerCn   pulumi.StringInput `pulumi:"issuerCn"`
-	Name       pulumi.StringInput `pulumi:"name"`
-	SubjectCn  pulumi.StringInput `pulumi:"subjectCn"`
-	Type       pulumi.StringInput `pulumi:"type"`
-}
-
-func (CertificatesCertificateArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CertificatesCertificate)(nil)).Elem()
-}
-
-func (i CertificatesCertificateArgs) ToCertificatesCertificateOutput() CertificatesCertificateOutput {
-	return i.ToCertificatesCertificateOutputWithContext(context.Background())
-}
-
-func (i CertificatesCertificateArgs) ToCertificatesCertificateOutputWithContext(ctx context.Context) CertificatesCertificateOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertificatesCertificateOutput)
-}
-
-// CertificatesCertificateArrayInput is an input type that accepts CertificatesCertificateArray and CertificatesCertificateArrayOutput values.
-// You can construct a concrete instance of `CertificatesCertificateArrayInput` via:
-//
-//          CertificatesCertificateArray{ CertificatesCertificateArgs{...} }
-type CertificatesCertificateArrayInput interface {
-	pulumi.Input
-
-	ToCertificatesCertificateArrayOutput() CertificatesCertificateArrayOutput
-	ToCertificatesCertificateArrayOutputWithContext(context.Context) CertificatesCertificateArrayOutput
-}
-
-type CertificatesCertificateArray []CertificatesCertificateInput
-
-func (CertificatesCertificateArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CertificatesCertificate)(nil)).Elem()
-}
-
-func (i CertificatesCertificateArray) ToCertificatesCertificateArrayOutput() CertificatesCertificateArrayOutput {
-	return i.ToCertificatesCertificateArrayOutputWithContext(context.Background())
-}
-
-func (i CertificatesCertificateArray) ToCertificatesCertificateArrayOutputWithContext(ctx context.Context) CertificatesCertificateArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertificatesCertificateArrayOutput)
-}
-
-type CertificatesCertificateOutput struct{ *pulumi.OutputState }
-
-func (CertificatesCertificateOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CertificatesCertificate)(nil)).Elem()
-}
-
-func (o CertificatesCertificateOutput) ToCertificatesCertificateOutput() CertificatesCertificateOutput {
-	return o
-}
-
-func (o CertificatesCertificateOutput) ToCertificatesCertificateOutputWithContext(ctx context.Context) CertificatesCertificateOutput {
-	return o
-}
-
-func (o CertificatesCertificateOutput) BeginTime() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.BeginTime }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) EndTime() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.EndTime }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.Id }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) IssuerCn() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.IssuerCn }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) SubjectCn() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.SubjectCn }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.Type }).(pulumi.StringOutput)
-}
-
-type CertificatesCertificateArrayOutput struct{ *pulumi.OutputState }
-
-func (CertificatesCertificateArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CertificatesCertificate)(nil)).Elem()
-}
-
-func (o CertificatesCertificateArrayOutput) ToCertificatesCertificateArrayOutput() CertificatesCertificateArrayOutput {
-	return o
-}
-
-func (o CertificatesCertificateArrayOutput) ToCertificatesCertificateArrayOutputWithContext(ctx context.Context) CertificatesCertificateArrayOutput {
-	return o
-}
-
-func (o CertificatesCertificateArrayOutput) Index(i pulumi.IntInput) CertificatesCertificateOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CertificatesCertificate {
-		return vs[0].([]CertificatesCertificate)[vs[1].(int)]
-	}).(CertificatesCertificateOutput)
-}
-
-type DomainErrorPageInfoListErrorPageInfoList struct {
-	Body          string                 `pulumi:"body"`
-	ClearHeaders  []string               `pulumi:"clearHeaders"`
-	Domain        string                 `pulumi:"domain"`
-	ErrorCodes    []int                  `pulumi:"errorCodes"`
-	Id            string                 `pulumi:"id"`
-	ListenerId    string                 `pulumi:"listenerId"`
-	NewErrorCodes int                    `pulumi:"newErrorCodes"`
-	SetHeaders    map[string]interface{} `pulumi:"setHeaders"`
-}
-
-// DomainErrorPageInfoListErrorPageInfoListInput is an input type that accepts DomainErrorPageInfoListErrorPageInfoListArgs and DomainErrorPageInfoListErrorPageInfoListOutput values.
-// You can construct a concrete instance of `DomainErrorPageInfoListErrorPageInfoListInput` via:
-//
-//          DomainErrorPageInfoListErrorPageInfoListArgs{...}
-type DomainErrorPageInfoListErrorPageInfoListInput interface {
-	pulumi.Input
-
-	ToDomainErrorPageInfoListErrorPageInfoListOutput() DomainErrorPageInfoListErrorPageInfoListOutput
-	ToDomainErrorPageInfoListErrorPageInfoListOutputWithContext(context.Context) DomainErrorPageInfoListErrorPageInfoListOutput
-}
-
-type DomainErrorPageInfoListErrorPageInfoListArgs struct {
-	Body          pulumi.StringInput      `pulumi:"body"`
-	ClearHeaders  pulumi.StringArrayInput `pulumi:"clearHeaders"`
-	Domain        pulumi.StringInput      `pulumi:"domain"`
-	ErrorCodes    pulumi.IntArrayInput    `pulumi:"errorCodes"`
-	Id            pulumi.StringInput      `pulumi:"id"`
-	ListenerId    pulumi.StringInput      `pulumi:"listenerId"`
-	NewErrorCodes pulumi.IntInput         `pulumi:"newErrorCodes"`
-	SetHeaders    pulumi.MapInput         `pulumi:"setHeaders"`
-}
-
-func (DomainErrorPageInfoListErrorPageInfoListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainErrorPageInfoListErrorPageInfoList)(nil)).Elem()
-}
-
-func (i DomainErrorPageInfoListErrorPageInfoListArgs) ToDomainErrorPageInfoListErrorPageInfoListOutput() DomainErrorPageInfoListErrorPageInfoListOutput {
-	return i.ToDomainErrorPageInfoListErrorPageInfoListOutputWithContext(context.Background())
-}
-
-func (i DomainErrorPageInfoListErrorPageInfoListArgs) ToDomainErrorPageInfoListErrorPageInfoListOutputWithContext(ctx context.Context) DomainErrorPageInfoListErrorPageInfoListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainErrorPageInfoListErrorPageInfoListOutput)
-}
-
-// DomainErrorPageInfoListErrorPageInfoListArrayInput is an input type that accepts DomainErrorPageInfoListErrorPageInfoListArray and DomainErrorPageInfoListErrorPageInfoListArrayOutput values.
-// You can construct a concrete instance of `DomainErrorPageInfoListErrorPageInfoListArrayInput` via:
-//
-//          DomainErrorPageInfoListErrorPageInfoListArray{ DomainErrorPageInfoListErrorPageInfoListArgs{...} }
-type DomainErrorPageInfoListErrorPageInfoListArrayInput interface {
-	pulumi.Input
-
-	ToDomainErrorPageInfoListErrorPageInfoListArrayOutput() DomainErrorPageInfoListErrorPageInfoListArrayOutput
-	ToDomainErrorPageInfoListErrorPageInfoListArrayOutputWithContext(context.Context) DomainErrorPageInfoListErrorPageInfoListArrayOutput
-}
-
-type DomainErrorPageInfoListErrorPageInfoListArray []DomainErrorPageInfoListErrorPageInfoListInput
-
-func (DomainErrorPageInfoListErrorPageInfoListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainErrorPageInfoListErrorPageInfoList)(nil)).Elem()
-}
-
-func (i DomainErrorPageInfoListErrorPageInfoListArray) ToDomainErrorPageInfoListErrorPageInfoListArrayOutput() DomainErrorPageInfoListErrorPageInfoListArrayOutput {
-	return i.ToDomainErrorPageInfoListErrorPageInfoListArrayOutputWithContext(context.Background())
-}
-
-func (i DomainErrorPageInfoListErrorPageInfoListArray) ToDomainErrorPageInfoListErrorPageInfoListArrayOutputWithContext(ctx context.Context) DomainErrorPageInfoListErrorPageInfoListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DomainErrorPageInfoListErrorPageInfoListArrayOutput)
-}
-
-type DomainErrorPageInfoListErrorPageInfoListOutput struct{ *pulumi.OutputState }
-
-func (DomainErrorPageInfoListErrorPageInfoListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DomainErrorPageInfoListErrorPageInfoList)(nil)).Elem()
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListOutput) ToDomainErrorPageInfoListErrorPageInfoListOutput() DomainErrorPageInfoListErrorPageInfoListOutput {
-	return o
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListOutput) ToDomainErrorPageInfoListErrorPageInfoListOutputWithContext(ctx context.Context) DomainErrorPageInfoListErrorPageInfoListOutput {
-	return o
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListOutput) Body() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainErrorPageInfoListErrorPageInfoList) string { return v.Body }).(pulumi.StringOutput)
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListOutput) ClearHeaders() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v DomainErrorPageInfoListErrorPageInfoList) []string { return v.ClearHeaders }).(pulumi.StringArrayOutput)
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainErrorPageInfoListErrorPageInfoList) string { return v.Domain }).(pulumi.StringOutput)
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListOutput) ErrorCodes() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v DomainErrorPageInfoListErrorPageInfoList) []int { return v.ErrorCodes }).(pulumi.IntArrayOutput)
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainErrorPageInfoListErrorPageInfoList) string { return v.Id }).(pulumi.StringOutput)
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListOutput) ListenerId() pulumi.StringOutput {
-	return o.ApplyT(func(v DomainErrorPageInfoListErrorPageInfoList) string { return v.ListenerId }).(pulumi.StringOutput)
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListOutput) NewErrorCodes() pulumi.IntOutput {
-	return o.ApplyT(func(v DomainErrorPageInfoListErrorPageInfoList) int { return v.NewErrorCodes }).(pulumi.IntOutput)
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListOutput) SetHeaders() pulumi.MapOutput {
-	return o.ApplyT(func(v DomainErrorPageInfoListErrorPageInfoList) map[string]interface{} { return v.SetHeaders }).(pulumi.MapOutput)
-}
-
-type DomainErrorPageInfoListErrorPageInfoListArrayOutput struct{ *pulumi.OutputState }
-
-func (DomainErrorPageInfoListErrorPageInfoListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DomainErrorPageInfoListErrorPageInfoList)(nil)).Elem()
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListArrayOutput) ToDomainErrorPageInfoListErrorPageInfoListArrayOutput() DomainErrorPageInfoListErrorPageInfoListArrayOutput {
-	return o
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListArrayOutput) ToDomainErrorPageInfoListErrorPageInfoListArrayOutputWithContext(ctx context.Context) DomainErrorPageInfoListErrorPageInfoListArrayOutput {
-	return o
-}
-
-func (o DomainErrorPageInfoListErrorPageInfoListArrayOutput) Index(i pulumi.IntInput) DomainErrorPageInfoListErrorPageInfoListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainErrorPageInfoListErrorPageInfoList {
-		return vs[0].([]DomainErrorPageInfoListErrorPageInfoList)[vs[1].(int)]
-	}).(DomainErrorPageInfoListErrorPageInfoListOutput)
-}
-
-type HttpDomainsDomain struct {
-	BasicAuth     bool   `pulumi:"basicAuth"`
-	BasicAuthId   string `pulumi:"basicAuthId"`
-	CertificateId string `pulumi:"certificateId"`
-	// Deprecated: It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead.
-	ClientCertificateId         string   `pulumi:"clientCertificateId"`
-	ClientCertificateIds        []string `pulumi:"clientCertificateIds"`
-	Domain                      string   `pulumi:"domain"`
-	GaapAuth                    bool     `pulumi:"gaapAuth"`
-	GaapAuthId                  string   `pulumi:"gaapAuthId"`
-	RealserverAuth              bool     `pulumi:"realserverAuth"`
-	RealserverCertificateDomain string   `pulumi:"realserverCertificateDomain"`
-	// Deprecated: It has been deprecated from version 1.28.0. Use `realserver_certificate_ids` instead.
-	RealserverCertificateId  string   `pulumi:"realserverCertificateId"`
-	RealserverCertificateIds []string `pulumi:"realserverCertificateIds"`
-}
-
-// HttpDomainsDomainInput is an input type that accepts HttpDomainsDomainArgs and HttpDomainsDomainOutput values.
-// You can construct a concrete instance of `HttpDomainsDomainInput` via:
-//
-//          HttpDomainsDomainArgs{...}
-type HttpDomainsDomainInput interface {
-	pulumi.Input
-
-	ToHttpDomainsDomainOutput() HttpDomainsDomainOutput
-	ToHttpDomainsDomainOutputWithContext(context.Context) HttpDomainsDomainOutput
-}
-
-type HttpDomainsDomainArgs struct {
-	BasicAuth     pulumi.BoolInput   `pulumi:"basicAuth"`
-	BasicAuthId   pulumi.StringInput `pulumi:"basicAuthId"`
-	CertificateId pulumi.StringInput `pulumi:"certificateId"`
-	// Deprecated: It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead.
-	ClientCertificateId         pulumi.StringInput      `pulumi:"clientCertificateId"`
-	ClientCertificateIds        pulumi.StringArrayInput `pulumi:"clientCertificateIds"`
-	Domain                      pulumi.StringInput      `pulumi:"domain"`
-	GaapAuth                    pulumi.BoolInput        `pulumi:"gaapAuth"`
-	GaapAuthId                  pulumi.StringInput      `pulumi:"gaapAuthId"`
-	RealserverAuth              pulumi.BoolInput        `pulumi:"realserverAuth"`
-	RealserverCertificateDomain pulumi.StringInput      `pulumi:"realserverCertificateDomain"`
-	// Deprecated: It has been deprecated from version 1.28.0. Use `realserver_certificate_ids` instead.
-	RealserverCertificateId  pulumi.StringInput      `pulumi:"realserverCertificateId"`
-	RealserverCertificateIds pulumi.StringArrayInput `pulumi:"realserverCertificateIds"`
-}
-
-func (HttpDomainsDomainArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*HttpDomainsDomain)(nil)).Elem()
-}
-
-func (i HttpDomainsDomainArgs) ToHttpDomainsDomainOutput() HttpDomainsDomainOutput {
-	return i.ToHttpDomainsDomainOutputWithContext(context.Background())
-}
-
-func (i HttpDomainsDomainArgs) ToHttpDomainsDomainOutputWithContext(ctx context.Context) HttpDomainsDomainOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(HttpDomainsDomainOutput)
-}
-
-// HttpDomainsDomainArrayInput is an input type that accepts HttpDomainsDomainArray and HttpDomainsDomainArrayOutput values.
-// You can construct a concrete instance of `HttpDomainsDomainArrayInput` via:
-//
-//          HttpDomainsDomainArray{ HttpDomainsDomainArgs{...} }
-type HttpDomainsDomainArrayInput interface {
-	pulumi.Input
-
-	ToHttpDomainsDomainArrayOutput() HttpDomainsDomainArrayOutput
-	ToHttpDomainsDomainArrayOutputWithContext(context.Context) HttpDomainsDomainArrayOutput
-}
-
-type HttpDomainsDomainArray []HttpDomainsDomainInput
-
-func (HttpDomainsDomainArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]HttpDomainsDomain)(nil)).Elem()
-}
-
-func (i HttpDomainsDomainArray) ToHttpDomainsDomainArrayOutput() HttpDomainsDomainArrayOutput {
-	return i.ToHttpDomainsDomainArrayOutputWithContext(context.Background())
-}
-
-func (i HttpDomainsDomainArray) ToHttpDomainsDomainArrayOutputWithContext(ctx context.Context) HttpDomainsDomainArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(HttpDomainsDomainArrayOutput)
-}
-
-type HttpDomainsDomainOutput struct{ *pulumi.OutputState }
-
-func (HttpDomainsDomainOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*HttpDomainsDomain)(nil)).Elem()
-}
-
-func (o HttpDomainsDomainOutput) ToHttpDomainsDomainOutput() HttpDomainsDomainOutput {
-	return o
-}
-
-func (o HttpDomainsDomainOutput) ToHttpDomainsDomainOutputWithContext(ctx context.Context) HttpDomainsDomainOutput {
-	return o
-}
-
-func (o HttpDomainsDomainOutput) BasicAuth() pulumi.BoolOutput {
-	return o.ApplyT(func(v HttpDomainsDomain) bool { return v.BasicAuth }).(pulumi.BoolOutput)
-}
-
-func (o HttpDomainsDomainOutput) BasicAuthId() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpDomainsDomain) string { return v.BasicAuthId }).(pulumi.StringOutput)
-}
-
-func (o HttpDomainsDomainOutput) CertificateId() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpDomainsDomain) string { return v.CertificateId }).(pulumi.StringOutput)
-}
-
-// Deprecated: It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead.
-func (o HttpDomainsDomainOutput) ClientCertificateId() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpDomainsDomain) string { return v.ClientCertificateId }).(pulumi.StringOutput)
-}
-
-func (o HttpDomainsDomainOutput) ClientCertificateIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v HttpDomainsDomain) []string { return v.ClientCertificateIds }).(pulumi.StringArrayOutput)
-}
-
-func (o HttpDomainsDomainOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpDomainsDomain) string { return v.Domain }).(pulumi.StringOutput)
-}
-
-func (o HttpDomainsDomainOutput) GaapAuth() pulumi.BoolOutput {
-	return o.ApplyT(func(v HttpDomainsDomain) bool { return v.GaapAuth }).(pulumi.BoolOutput)
-}
-
-func (o HttpDomainsDomainOutput) GaapAuthId() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpDomainsDomain) string { return v.GaapAuthId }).(pulumi.StringOutput)
-}
-
-func (o HttpDomainsDomainOutput) RealserverAuth() pulumi.BoolOutput {
-	return o.ApplyT(func(v HttpDomainsDomain) bool { return v.RealserverAuth }).(pulumi.BoolOutput)
-}
-
-func (o HttpDomainsDomainOutput) RealserverCertificateDomain() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpDomainsDomain) string { return v.RealserverCertificateDomain }).(pulumi.StringOutput)
-}
-
-// Deprecated: It has been deprecated from version 1.28.0. Use `realserver_certificate_ids` instead.
-func (o HttpDomainsDomainOutput) RealserverCertificateId() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpDomainsDomain) string { return v.RealserverCertificateId }).(pulumi.StringOutput)
-}
-
-func (o HttpDomainsDomainOutput) RealserverCertificateIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v HttpDomainsDomain) []string { return v.RealserverCertificateIds }).(pulumi.StringArrayOutput)
-}
-
-type HttpDomainsDomainArrayOutput struct{ *pulumi.OutputState }
-
-func (HttpDomainsDomainArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]HttpDomainsDomain)(nil)).Elem()
-}
-
-func (o HttpDomainsDomainArrayOutput) ToHttpDomainsDomainArrayOutput() HttpDomainsDomainArrayOutput {
-	return o
-}
-
-func (o HttpDomainsDomainArrayOutput) ToHttpDomainsDomainArrayOutputWithContext(ctx context.Context) HttpDomainsDomainArrayOutput {
-	return o
-}
-
-func (o HttpDomainsDomainArrayOutput) Index(i pulumi.IntInput) HttpDomainsDomainOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) HttpDomainsDomain {
-		return vs[0].([]HttpDomainsDomain)[vs[1].(int)]
-	}).(HttpDomainsDomainOutput)
-}
-
 type HttpRuleRealserver struct {
-	Id     string `pulumi:"id"`
-	Ip     string `pulumi:"ip"`
-	Port   int    `pulumi:"port"`
-	Weight *int   `pulumi:"weight"`
+	// ID of the GAAP realserver.
+	Id string `pulumi:"id"`
+	// IP of the GAAP realserver.
+	Ip string `pulumi:"ip"`
+	// Port of the GAAP realserver.
+	Port int `pulumi:"port"`
+	// Scheduling weight, default value is `1`. Valid value ranges: (1~100).
+	Weight *int `pulumi:"weight"`
 }
 
 // HttpRuleRealserverInput is an input type that accepts HttpRuleRealserverArgs and HttpRuleRealserverOutput values.
@@ -467,9 +33,13 @@ type HttpRuleRealserverInput interface {
 }
 
 type HttpRuleRealserverArgs struct {
-	Id     pulumi.StringInput `pulumi:"id"`
-	Ip     pulumi.StringInput `pulumi:"ip"`
-	Port   pulumi.IntInput    `pulumi:"port"`
+	// ID of the GAAP realserver.
+	Id pulumi.StringInput `pulumi:"id"`
+	// IP of the GAAP realserver.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Port of the GAAP realserver.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Scheduling weight, default value is `1`. Valid value ranges: (1~100).
 	Weight pulumi.IntPtrInput `pulumi:"weight"`
 }
 
@@ -524,18 +94,22 @@ func (o HttpRuleRealserverOutput) ToHttpRuleRealserverOutputWithContext(ctx cont
 	return o
 }
 
+// ID of the GAAP realserver.
 func (o HttpRuleRealserverOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v HttpRuleRealserver) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// IP of the GAAP realserver.
 func (o HttpRuleRealserverOutput) Ip() pulumi.StringOutput {
 	return o.ApplyT(func(v HttpRuleRealserver) string { return v.Ip }).(pulumi.StringOutput)
 }
 
+// Port of the GAAP realserver.
 func (o HttpRuleRealserverOutput) Port() pulumi.IntOutput {
 	return o.ApplyT(func(v HttpRuleRealserver) int { return v.Port }).(pulumi.IntOutput)
 }
 
+// Scheduling weight, default value is `1`. Valid value ranges: (1~100).
 func (o HttpRuleRealserverOutput) Weight() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v HttpRuleRealserver) *int { return v.Weight }).(pulumi.IntPtrOutput)
 }
@@ -560,319 +134,15 @@ func (o HttpRuleRealserverArrayOutput) Index(i pulumi.IntInput) HttpRuleRealserv
 	}).(HttpRuleRealserverOutput)
 }
 
-type HttpRulesRule struct {
-	ConnectTimeout         int                       `pulumi:"connectTimeout"`
-	Domain                 string                    `pulumi:"domain"`
-	ForwardHost            string                    `pulumi:"forwardHost"`
-	HealthCheck            bool                      `pulumi:"healthCheck"`
-	HealthCheckMethod      string                    `pulumi:"healthCheckMethod"`
-	HealthCheckPath        string                    `pulumi:"healthCheckPath"`
-	HealthCheckStatusCodes []int                     `pulumi:"healthCheckStatusCodes"`
-	Id                     string                    `pulumi:"id"`
-	Interval               int                       `pulumi:"interval"`
-	ListenerId             string                    `pulumi:"listenerId"`
-	Path                   string                    `pulumi:"path"`
-	RealserverType         string                    `pulumi:"realserverType"`
-	Realservers            []HttpRulesRuleRealserver `pulumi:"realservers"`
-	Scheduler              string                    `pulumi:"scheduler"`
-	Sni                    string                    `pulumi:"sni"`
-	SniSwitch              string                    `pulumi:"sniSwitch"`
-}
-
-// HttpRulesRuleInput is an input type that accepts HttpRulesRuleArgs and HttpRulesRuleOutput values.
-// You can construct a concrete instance of `HttpRulesRuleInput` via:
-//
-//          HttpRulesRuleArgs{...}
-type HttpRulesRuleInput interface {
-	pulumi.Input
-
-	ToHttpRulesRuleOutput() HttpRulesRuleOutput
-	ToHttpRulesRuleOutputWithContext(context.Context) HttpRulesRuleOutput
-}
-
-type HttpRulesRuleArgs struct {
-	ConnectTimeout         pulumi.IntInput                   `pulumi:"connectTimeout"`
-	Domain                 pulumi.StringInput                `pulumi:"domain"`
-	ForwardHost            pulumi.StringInput                `pulumi:"forwardHost"`
-	HealthCheck            pulumi.BoolInput                  `pulumi:"healthCheck"`
-	HealthCheckMethod      pulumi.StringInput                `pulumi:"healthCheckMethod"`
-	HealthCheckPath        pulumi.StringInput                `pulumi:"healthCheckPath"`
-	HealthCheckStatusCodes pulumi.IntArrayInput              `pulumi:"healthCheckStatusCodes"`
-	Id                     pulumi.StringInput                `pulumi:"id"`
-	Interval               pulumi.IntInput                   `pulumi:"interval"`
-	ListenerId             pulumi.StringInput                `pulumi:"listenerId"`
-	Path                   pulumi.StringInput                `pulumi:"path"`
-	RealserverType         pulumi.StringInput                `pulumi:"realserverType"`
-	Realservers            HttpRulesRuleRealserverArrayInput `pulumi:"realservers"`
-	Scheduler              pulumi.StringInput                `pulumi:"scheduler"`
-	Sni                    pulumi.StringInput                `pulumi:"sni"`
-	SniSwitch              pulumi.StringInput                `pulumi:"sniSwitch"`
-}
-
-func (HttpRulesRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*HttpRulesRule)(nil)).Elem()
-}
-
-func (i HttpRulesRuleArgs) ToHttpRulesRuleOutput() HttpRulesRuleOutput {
-	return i.ToHttpRulesRuleOutputWithContext(context.Background())
-}
-
-func (i HttpRulesRuleArgs) ToHttpRulesRuleOutputWithContext(ctx context.Context) HttpRulesRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(HttpRulesRuleOutput)
-}
-
-// HttpRulesRuleArrayInput is an input type that accepts HttpRulesRuleArray and HttpRulesRuleArrayOutput values.
-// You can construct a concrete instance of `HttpRulesRuleArrayInput` via:
-//
-//          HttpRulesRuleArray{ HttpRulesRuleArgs{...} }
-type HttpRulesRuleArrayInput interface {
-	pulumi.Input
-
-	ToHttpRulesRuleArrayOutput() HttpRulesRuleArrayOutput
-	ToHttpRulesRuleArrayOutputWithContext(context.Context) HttpRulesRuleArrayOutput
-}
-
-type HttpRulesRuleArray []HttpRulesRuleInput
-
-func (HttpRulesRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]HttpRulesRule)(nil)).Elem()
-}
-
-func (i HttpRulesRuleArray) ToHttpRulesRuleArrayOutput() HttpRulesRuleArrayOutput {
-	return i.ToHttpRulesRuleArrayOutputWithContext(context.Background())
-}
-
-func (i HttpRulesRuleArray) ToHttpRulesRuleArrayOutputWithContext(ctx context.Context) HttpRulesRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(HttpRulesRuleArrayOutput)
-}
-
-type HttpRulesRuleOutput struct{ *pulumi.OutputState }
-
-func (HttpRulesRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*HttpRulesRule)(nil)).Elem()
-}
-
-func (o HttpRulesRuleOutput) ToHttpRulesRuleOutput() HttpRulesRuleOutput {
-	return o
-}
-
-func (o HttpRulesRuleOutput) ToHttpRulesRuleOutputWithContext(ctx context.Context) HttpRulesRuleOutput {
-	return o
-}
-
-func (o HttpRulesRuleOutput) ConnectTimeout() pulumi.IntOutput {
-	return o.ApplyT(func(v HttpRulesRule) int { return v.ConnectTimeout }).(pulumi.IntOutput)
-}
-
-func (o HttpRulesRuleOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRule) string { return v.Domain }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleOutput) ForwardHost() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRule) string { return v.ForwardHost }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleOutput) HealthCheck() pulumi.BoolOutput {
-	return o.ApplyT(func(v HttpRulesRule) bool { return v.HealthCheck }).(pulumi.BoolOutput)
-}
-
-func (o HttpRulesRuleOutput) HealthCheckMethod() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRule) string { return v.HealthCheckMethod }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleOutput) HealthCheckPath() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRule) string { return v.HealthCheckPath }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleOutput) HealthCheckStatusCodes() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v HttpRulesRule) []int { return v.HealthCheckStatusCodes }).(pulumi.IntArrayOutput)
-}
-
-func (o HttpRulesRuleOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRule) string { return v.Id }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleOutput) Interval() pulumi.IntOutput {
-	return o.ApplyT(func(v HttpRulesRule) int { return v.Interval }).(pulumi.IntOutput)
-}
-
-func (o HttpRulesRuleOutput) ListenerId() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRule) string { return v.ListenerId }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleOutput) Path() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRule) string { return v.Path }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleOutput) RealserverType() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRule) string { return v.RealserverType }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleOutput) Realservers() HttpRulesRuleRealserverArrayOutput {
-	return o.ApplyT(func(v HttpRulesRule) []HttpRulesRuleRealserver { return v.Realservers }).(HttpRulesRuleRealserverArrayOutput)
-}
-
-func (o HttpRulesRuleOutput) Scheduler() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRule) string { return v.Scheduler }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleOutput) Sni() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRule) string { return v.Sni }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleOutput) SniSwitch() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRule) string { return v.SniSwitch }).(pulumi.StringOutput)
-}
-
-type HttpRulesRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (HttpRulesRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]HttpRulesRule)(nil)).Elem()
-}
-
-func (o HttpRulesRuleArrayOutput) ToHttpRulesRuleArrayOutput() HttpRulesRuleArrayOutput {
-	return o
-}
-
-func (o HttpRulesRuleArrayOutput) ToHttpRulesRuleArrayOutputWithContext(ctx context.Context) HttpRulesRuleArrayOutput {
-	return o
-}
-
-func (o HttpRulesRuleArrayOutput) Index(i pulumi.IntInput) HttpRulesRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) HttpRulesRule {
-		return vs[0].([]HttpRulesRule)[vs[1].(int)]
-	}).(HttpRulesRuleOutput)
-}
-
-type HttpRulesRuleRealserver struct {
-	Domain string `pulumi:"domain"`
-	Id     string `pulumi:"id"`
-	Ip     string `pulumi:"ip"`
-	Port   int    `pulumi:"port"`
-	Status int    `pulumi:"status"`
-	Weight int    `pulumi:"weight"`
-}
-
-// HttpRulesRuleRealserverInput is an input type that accepts HttpRulesRuleRealserverArgs and HttpRulesRuleRealserverOutput values.
-// You can construct a concrete instance of `HttpRulesRuleRealserverInput` via:
-//
-//          HttpRulesRuleRealserverArgs{...}
-type HttpRulesRuleRealserverInput interface {
-	pulumi.Input
-
-	ToHttpRulesRuleRealserverOutput() HttpRulesRuleRealserverOutput
-	ToHttpRulesRuleRealserverOutputWithContext(context.Context) HttpRulesRuleRealserverOutput
-}
-
-type HttpRulesRuleRealserverArgs struct {
-	Domain pulumi.StringInput `pulumi:"domain"`
-	Id     pulumi.StringInput `pulumi:"id"`
-	Ip     pulumi.StringInput `pulumi:"ip"`
-	Port   pulumi.IntInput    `pulumi:"port"`
-	Status pulumi.IntInput    `pulumi:"status"`
-	Weight pulumi.IntInput    `pulumi:"weight"`
-}
-
-func (HttpRulesRuleRealserverArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*HttpRulesRuleRealserver)(nil)).Elem()
-}
-
-func (i HttpRulesRuleRealserverArgs) ToHttpRulesRuleRealserverOutput() HttpRulesRuleRealserverOutput {
-	return i.ToHttpRulesRuleRealserverOutputWithContext(context.Background())
-}
-
-func (i HttpRulesRuleRealserverArgs) ToHttpRulesRuleRealserverOutputWithContext(ctx context.Context) HttpRulesRuleRealserverOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(HttpRulesRuleRealserverOutput)
-}
-
-// HttpRulesRuleRealserverArrayInput is an input type that accepts HttpRulesRuleRealserverArray and HttpRulesRuleRealserverArrayOutput values.
-// You can construct a concrete instance of `HttpRulesRuleRealserverArrayInput` via:
-//
-//          HttpRulesRuleRealserverArray{ HttpRulesRuleRealserverArgs{...} }
-type HttpRulesRuleRealserverArrayInput interface {
-	pulumi.Input
-
-	ToHttpRulesRuleRealserverArrayOutput() HttpRulesRuleRealserverArrayOutput
-	ToHttpRulesRuleRealserverArrayOutputWithContext(context.Context) HttpRulesRuleRealserverArrayOutput
-}
-
-type HttpRulesRuleRealserverArray []HttpRulesRuleRealserverInput
-
-func (HttpRulesRuleRealserverArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]HttpRulesRuleRealserver)(nil)).Elem()
-}
-
-func (i HttpRulesRuleRealserverArray) ToHttpRulesRuleRealserverArrayOutput() HttpRulesRuleRealserverArrayOutput {
-	return i.ToHttpRulesRuleRealserverArrayOutputWithContext(context.Background())
-}
-
-func (i HttpRulesRuleRealserverArray) ToHttpRulesRuleRealserverArrayOutputWithContext(ctx context.Context) HttpRulesRuleRealserverArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(HttpRulesRuleRealserverArrayOutput)
-}
-
-type HttpRulesRuleRealserverOutput struct{ *pulumi.OutputState }
-
-func (HttpRulesRuleRealserverOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*HttpRulesRuleRealserver)(nil)).Elem()
-}
-
-func (o HttpRulesRuleRealserverOutput) ToHttpRulesRuleRealserverOutput() HttpRulesRuleRealserverOutput {
-	return o
-}
-
-func (o HttpRulesRuleRealserverOutput) ToHttpRulesRuleRealserverOutputWithContext(ctx context.Context) HttpRulesRuleRealserverOutput {
-	return o
-}
-
-func (o HttpRulesRuleRealserverOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRuleRealserver) string { return v.Domain }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleRealserverOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRuleRealserver) string { return v.Id }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleRealserverOutput) Ip() pulumi.StringOutput {
-	return o.ApplyT(func(v HttpRulesRuleRealserver) string { return v.Ip }).(pulumi.StringOutput)
-}
-
-func (o HttpRulesRuleRealserverOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func(v HttpRulesRuleRealserver) int { return v.Port }).(pulumi.IntOutput)
-}
-
-func (o HttpRulesRuleRealserverOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v HttpRulesRuleRealserver) int { return v.Status }).(pulumi.IntOutput)
-}
-
-func (o HttpRulesRuleRealserverOutput) Weight() pulumi.IntOutput {
-	return o.ApplyT(func(v HttpRulesRuleRealserver) int { return v.Weight }).(pulumi.IntOutput)
-}
-
-type HttpRulesRuleRealserverArrayOutput struct{ *pulumi.OutputState }
-
-func (HttpRulesRuleRealserverArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]HttpRulesRuleRealserver)(nil)).Elem()
-}
-
-func (o HttpRulesRuleRealserverArrayOutput) ToHttpRulesRuleRealserverArrayOutput() HttpRulesRuleRealserverArrayOutput {
-	return o
-}
-
-func (o HttpRulesRuleRealserverArrayOutput) ToHttpRulesRuleRealserverArrayOutputWithContext(ctx context.Context) HttpRulesRuleRealserverArrayOutput {
-	return o
-}
-
-func (o HttpRulesRuleRealserverArrayOutput) Index(i pulumi.IntInput) HttpRulesRuleRealserverOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) HttpRulesRuleRealserver {
-		return vs[0].([]HttpRulesRuleRealserver)[vs[1].(int)]
-	}).(HttpRulesRuleRealserverOutput)
-}
-
 type Layer4ListenerRealserverBindSet struct {
-	Id     string `pulumi:"id"`
-	Ip     string `pulumi:"ip"`
-	Port   int    `pulumi:"port"`
-	Weight *int   `pulumi:"weight"`
+	// ID of the GAAP realserver.
+	Id string `pulumi:"id"`
+	// IP of the GAAP realserver.
+	Ip string `pulumi:"ip"`
+	// Port of the GAAP realserver.
+	Port int `pulumi:"port"`
+	// Scheduling weight, default value is `1`. The range of values is [1,100].
+	Weight *int `pulumi:"weight"`
 }
 
 // Layer4ListenerRealserverBindSetInput is an input type that accepts Layer4ListenerRealserverBindSetArgs and Layer4ListenerRealserverBindSetOutput values.
@@ -887,9 +157,13 @@ type Layer4ListenerRealserverBindSetInput interface {
 }
 
 type Layer4ListenerRealserverBindSetArgs struct {
-	Id     pulumi.StringInput `pulumi:"id"`
-	Ip     pulumi.StringInput `pulumi:"ip"`
-	Port   pulumi.IntInput    `pulumi:"port"`
+	// ID of the GAAP realserver.
+	Id pulumi.StringInput `pulumi:"id"`
+	// IP of the GAAP realserver.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Port of the GAAP realserver.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Scheduling weight, default value is `1`. The range of values is [1,100].
 	Weight pulumi.IntPtrInput `pulumi:"weight"`
 }
 
@@ -944,18 +218,22 @@ func (o Layer4ListenerRealserverBindSetOutput) ToLayer4ListenerRealserverBindSet
 	return o
 }
 
+// ID of the GAAP realserver.
 func (o Layer4ListenerRealserverBindSetOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v Layer4ListenerRealserverBindSet) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// IP of the GAAP realserver.
 func (o Layer4ListenerRealserverBindSetOutput) Ip() pulumi.StringOutput {
 	return o.ApplyT(func(v Layer4ListenerRealserverBindSet) string { return v.Ip }).(pulumi.StringOutput)
 }
 
+// Port of the GAAP realserver.
 func (o Layer4ListenerRealserverBindSetOutput) Port() pulumi.IntOutput {
 	return o.ApplyT(func(v Layer4ListenerRealserverBindSet) int { return v.Port }).(pulumi.IntOutput)
 }
 
+// Scheduling weight, default value is `1`. The range of values is [1,100].
 func (o Layer4ListenerRealserverBindSetOutput) Weight() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v Layer4ListenerRealserverBindSet) *int { return v.Weight }).(pulumi.IntPtrOutput)
 }
@@ -980,802 +258,1860 @@ func (o Layer4ListenerRealserverBindSetArrayOutput) Index(i pulumi.IntInput) Lay
 	}).(Layer4ListenerRealserverBindSetOutput)
 }
 
-type Layer4ListenersListener struct {
-	ConnectTimeout int    `pulumi:"connectTimeout"`
-	CreateTime     string `pulumi:"createTime"`
-	HealthCheck    bool   `pulumi:"healthCheck"`
-	Id             string `pulumi:"id"`
-	Interval       int    `pulumi:"interval"`
-	Name           string `pulumi:"name"`
-	Port           int    `pulumi:"port"`
-	Protocol       string `pulumi:"protocol"`
-	RealserverType string `pulumi:"realserverType"`
-	Scheduler      string `pulumi:"scheduler"`
-	Status         int    `pulumi:"status"`
+type GetCertificatesCertificate struct {
+	// Beginning time of the certificate.
+	BeginTime string `pulumi:"beginTime"`
+	// Creation time of the certificate.
+	CreateTime string `pulumi:"createTime"`
+	// Ending time of the certificate.
+	EndTime string `pulumi:"endTime"`
+	// ID of the certificate to be queried.
+	Id string `pulumi:"id"`
+	// Issuer name of the certificate.
+	IssuerCn string `pulumi:"issuerCn"`
+	// Name of the certificate to be queried.
+	Name string `pulumi:"name"`
+	// Subject name of the certificate.
+	SubjectCn string `pulumi:"subjectCn"`
+	// Type of the certificate to be queried. Valid values: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
+	Type string `pulumi:"type"`
 }
 
-// Layer4ListenersListenerInput is an input type that accepts Layer4ListenersListenerArgs and Layer4ListenersListenerOutput values.
-// You can construct a concrete instance of `Layer4ListenersListenerInput` via:
+// GetCertificatesCertificateInput is an input type that accepts GetCertificatesCertificateArgs and GetCertificatesCertificateOutput values.
+// You can construct a concrete instance of `GetCertificatesCertificateInput` via:
 //
-//          Layer4ListenersListenerArgs{...}
-type Layer4ListenersListenerInput interface {
+//          GetCertificatesCertificateArgs{...}
+type GetCertificatesCertificateInput interface {
 	pulumi.Input
 
-	ToLayer4ListenersListenerOutput() Layer4ListenersListenerOutput
-	ToLayer4ListenersListenerOutputWithContext(context.Context) Layer4ListenersListenerOutput
+	ToGetCertificatesCertificateOutput() GetCertificatesCertificateOutput
+	ToGetCertificatesCertificateOutputWithContext(context.Context) GetCertificatesCertificateOutput
 }
 
-type Layer4ListenersListenerArgs struct {
-	ConnectTimeout pulumi.IntInput    `pulumi:"connectTimeout"`
-	CreateTime     pulumi.StringInput `pulumi:"createTime"`
-	HealthCheck    pulumi.BoolInput   `pulumi:"healthCheck"`
-	Id             pulumi.StringInput `pulumi:"id"`
-	Interval       pulumi.IntInput    `pulumi:"interval"`
-	Name           pulumi.StringInput `pulumi:"name"`
-	Port           pulumi.IntInput    `pulumi:"port"`
-	Protocol       pulumi.StringInput `pulumi:"protocol"`
-	RealserverType pulumi.StringInput `pulumi:"realserverType"`
-	Scheduler      pulumi.StringInput `pulumi:"scheduler"`
-	Status         pulumi.IntInput    `pulumi:"status"`
+type GetCertificatesCertificateArgs struct {
+	// Beginning time of the certificate.
+	BeginTime pulumi.StringInput `pulumi:"beginTime"`
+	// Creation time of the certificate.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Ending time of the certificate.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// ID of the certificate to be queried.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Issuer name of the certificate.
+	IssuerCn pulumi.StringInput `pulumi:"issuerCn"`
+	// Name of the certificate to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Subject name of the certificate.
+	SubjectCn pulumi.StringInput `pulumi:"subjectCn"`
+	// Type of the certificate to be queried. Valid values: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
-func (Layer4ListenersListenerArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*Layer4ListenersListener)(nil)).Elem()
+func (GetCertificatesCertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificatesCertificate)(nil)).Elem()
 }
 
-func (i Layer4ListenersListenerArgs) ToLayer4ListenersListenerOutput() Layer4ListenersListenerOutput {
-	return i.ToLayer4ListenersListenerOutputWithContext(context.Background())
+func (i GetCertificatesCertificateArgs) ToGetCertificatesCertificateOutput() GetCertificatesCertificateOutput {
+	return i.ToGetCertificatesCertificateOutputWithContext(context.Background())
 }
 
-func (i Layer4ListenersListenerArgs) ToLayer4ListenersListenerOutputWithContext(ctx context.Context) Layer4ListenersListenerOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(Layer4ListenersListenerOutput)
+func (i GetCertificatesCertificateArgs) ToGetCertificatesCertificateOutputWithContext(ctx context.Context) GetCertificatesCertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificatesCertificateOutput)
 }
 
-// Layer4ListenersListenerArrayInput is an input type that accepts Layer4ListenersListenerArray and Layer4ListenersListenerArrayOutput values.
-// You can construct a concrete instance of `Layer4ListenersListenerArrayInput` via:
+// GetCertificatesCertificateArrayInput is an input type that accepts GetCertificatesCertificateArray and GetCertificatesCertificateArrayOutput values.
+// You can construct a concrete instance of `GetCertificatesCertificateArrayInput` via:
 //
-//          Layer4ListenersListenerArray{ Layer4ListenersListenerArgs{...} }
-type Layer4ListenersListenerArrayInput interface {
+//          GetCertificatesCertificateArray{ GetCertificatesCertificateArgs{...} }
+type GetCertificatesCertificateArrayInput interface {
 	pulumi.Input
 
-	ToLayer4ListenersListenerArrayOutput() Layer4ListenersListenerArrayOutput
-	ToLayer4ListenersListenerArrayOutputWithContext(context.Context) Layer4ListenersListenerArrayOutput
+	ToGetCertificatesCertificateArrayOutput() GetCertificatesCertificateArrayOutput
+	ToGetCertificatesCertificateArrayOutputWithContext(context.Context) GetCertificatesCertificateArrayOutput
 }
 
-type Layer4ListenersListenerArray []Layer4ListenersListenerInput
+type GetCertificatesCertificateArray []GetCertificatesCertificateInput
 
-func (Layer4ListenersListenerArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]Layer4ListenersListener)(nil)).Elem()
+func (GetCertificatesCertificateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificatesCertificate)(nil)).Elem()
 }
 
-func (i Layer4ListenersListenerArray) ToLayer4ListenersListenerArrayOutput() Layer4ListenersListenerArrayOutput {
-	return i.ToLayer4ListenersListenerArrayOutputWithContext(context.Background())
+func (i GetCertificatesCertificateArray) ToGetCertificatesCertificateArrayOutput() GetCertificatesCertificateArrayOutput {
+	return i.ToGetCertificatesCertificateArrayOutputWithContext(context.Background())
 }
 
-func (i Layer4ListenersListenerArray) ToLayer4ListenersListenerArrayOutputWithContext(ctx context.Context) Layer4ListenersListenerArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(Layer4ListenersListenerArrayOutput)
+func (i GetCertificatesCertificateArray) ToGetCertificatesCertificateArrayOutputWithContext(ctx context.Context) GetCertificatesCertificateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificatesCertificateArrayOutput)
 }
 
-type Layer4ListenersListenerOutput struct{ *pulumi.OutputState }
+type GetCertificatesCertificateOutput struct{ *pulumi.OutputState }
 
-func (Layer4ListenersListenerOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*Layer4ListenersListener)(nil)).Elem()
+func (GetCertificatesCertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificatesCertificate)(nil)).Elem()
 }
 
-func (o Layer4ListenersListenerOutput) ToLayer4ListenersListenerOutput() Layer4ListenersListenerOutput {
+func (o GetCertificatesCertificateOutput) ToGetCertificatesCertificateOutput() GetCertificatesCertificateOutput {
 	return o
 }
 
-func (o Layer4ListenersListenerOutput) ToLayer4ListenersListenerOutputWithContext(ctx context.Context) Layer4ListenersListenerOutput {
+func (o GetCertificatesCertificateOutput) ToGetCertificatesCertificateOutputWithContext(ctx context.Context) GetCertificatesCertificateOutput {
 	return o
 }
 
-func (o Layer4ListenersListenerOutput) ConnectTimeout() pulumi.IntOutput {
-	return o.ApplyT(func(v Layer4ListenersListener) int { return v.ConnectTimeout }).(pulumi.IntOutput)
+// Beginning time of the certificate.
+func (o GetCertificatesCertificateOutput) BeginTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.BeginTime }).(pulumi.StringOutput)
 }
 
-func (o Layer4ListenersListenerOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer4ListenersListener) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the certificate.
+func (o GetCertificatesCertificateOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o Layer4ListenersListenerOutput) HealthCheck() pulumi.BoolOutput {
-	return o.ApplyT(func(v Layer4ListenersListener) bool { return v.HealthCheck }).(pulumi.BoolOutput)
+// Ending time of the certificate.
+func (o GetCertificatesCertificateOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.EndTime }).(pulumi.StringOutput)
 }
 
-func (o Layer4ListenersListenerOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer4ListenersListener) string { return v.Id }).(pulumi.StringOutput)
+// ID of the certificate to be queried.
+func (o GetCertificatesCertificateOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o Layer4ListenersListenerOutput) Interval() pulumi.IntOutput {
-	return o.ApplyT(func(v Layer4ListenersListener) int { return v.Interval }).(pulumi.IntOutput)
+// Issuer name of the certificate.
+func (o GetCertificatesCertificateOutput) IssuerCn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.IssuerCn }).(pulumi.StringOutput)
 }
 
-func (o Layer4ListenersListenerOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer4ListenersListener) string { return v.Name }).(pulumi.StringOutput)
+// Name of the certificate to be queried.
+func (o GetCertificatesCertificateOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o Layer4ListenersListenerOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func(v Layer4ListenersListener) int { return v.Port }).(pulumi.IntOutput)
+// Subject name of the certificate.
+func (o GetCertificatesCertificateOutput) SubjectCn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.SubjectCn }).(pulumi.StringOutput)
 }
 
-func (o Layer4ListenersListenerOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer4ListenersListener) string { return v.Protocol }).(pulumi.StringOutput)
+// Type of the certificate to be queried. Valid values: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
+func (o GetCertificatesCertificateOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.Type }).(pulumi.StringOutput)
 }
 
-func (o Layer4ListenersListenerOutput) RealserverType() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer4ListenersListener) string { return v.RealserverType }).(pulumi.StringOutput)
+type GetCertificatesCertificateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificatesCertificateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificatesCertificate)(nil)).Elem()
 }
 
-func (o Layer4ListenersListenerOutput) Scheduler() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer4ListenersListener) string { return v.Scheduler }).(pulumi.StringOutput)
-}
-
-func (o Layer4ListenersListenerOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v Layer4ListenersListener) int { return v.Status }).(pulumi.IntOutput)
-}
-
-type Layer4ListenersListenerArrayOutput struct{ *pulumi.OutputState }
-
-func (Layer4ListenersListenerArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]Layer4ListenersListener)(nil)).Elem()
-}
-
-func (o Layer4ListenersListenerArrayOutput) ToLayer4ListenersListenerArrayOutput() Layer4ListenersListenerArrayOutput {
+func (o GetCertificatesCertificateArrayOutput) ToGetCertificatesCertificateArrayOutput() GetCertificatesCertificateArrayOutput {
 	return o
 }
 
-func (o Layer4ListenersListenerArrayOutput) ToLayer4ListenersListenerArrayOutputWithContext(ctx context.Context) Layer4ListenersListenerArrayOutput {
+func (o GetCertificatesCertificateArrayOutput) ToGetCertificatesCertificateArrayOutputWithContext(ctx context.Context) GetCertificatesCertificateArrayOutput {
 	return o
 }
 
-func (o Layer4ListenersListenerArrayOutput) Index(i pulumi.IntInput) Layer4ListenersListenerOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) Layer4ListenersListener {
-		return vs[0].([]Layer4ListenersListener)[vs[1].(int)]
-	}).(Layer4ListenersListenerOutput)
+func (o GetCertificatesCertificateArrayOutput) Index(i pulumi.IntInput) GetCertificatesCertificateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificatesCertificate {
+		return vs[0].([]GetCertificatesCertificate)[vs[1].(int)]
+	}).(GetCertificatesCertificateOutput)
 }
 
-type Layer7ListenersListener struct {
-	AuthType      int    `pulumi:"authType"`
+type GetDomainErrorPagesErrorPageInfoList struct {
+	// New response body.
+	Body string `pulumi:"body"`
+	// Response headers to be removed.
+	ClearHeaders []string `pulumi:"clearHeaders"`
+	// HTTP domain to be queried.
+	Domain string `pulumi:"domain"`
+	// Original error codes.
+	ErrorCodes []int `pulumi:"errorCodes"`
+	// ID of the error page info.
+	Id string `pulumi:"id"`
+	// ID of the layer7 listener to be queried.
+	ListenerId string `pulumi:"listenerId"`
+	// New error code.
+	NewErrorCodes int `pulumi:"newErrorCodes"`
+	// Response headers to be set.
+	SetHeaders map[string]interface{} `pulumi:"setHeaders"`
+}
+
+// GetDomainErrorPagesErrorPageInfoListInput is an input type that accepts GetDomainErrorPagesErrorPageInfoListArgs and GetDomainErrorPagesErrorPageInfoListOutput values.
+// You can construct a concrete instance of `GetDomainErrorPagesErrorPageInfoListInput` via:
+//
+//          GetDomainErrorPagesErrorPageInfoListArgs{...}
+type GetDomainErrorPagesErrorPageInfoListInput interface {
+	pulumi.Input
+
+	ToGetDomainErrorPagesErrorPageInfoListOutput() GetDomainErrorPagesErrorPageInfoListOutput
+	ToGetDomainErrorPagesErrorPageInfoListOutputWithContext(context.Context) GetDomainErrorPagesErrorPageInfoListOutput
+}
+
+type GetDomainErrorPagesErrorPageInfoListArgs struct {
+	// New response body.
+	Body pulumi.StringInput `pulumi:"body"`
+	// Response headers to be removed.
+	ClearHeaders pulumi.StringArrayInput `pulumi:"clearHeaders"`
+	// HTTP domain to be queried.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Original error codes.
+	ErrorCodes pulumi.IntArrayInput `pulumi:"errorCodes"`
+	// ID of the error page info.
+	Id pulumi.StringInput `pulumi:"id"`
+	// ID of the layer7 listener to be queried.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// New error code.
+	NewErrorCodes pulumi.IntInput `pulumi:"newErrorCodes"`
+	// Response headers to be set.
+	SetHeaders pulumi.MapInput `pulumi:"setHeaders"`
+}
+
+func (GetDomainErrorPagesErrorPageInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainErrorPagesErrorPageInfoList)(nil)).Elem()
+}
+
+func (i GetDomainErrorPagesErrorPageInfoListArgs) ToGetDomainErrorPagesErrorPageInfoListOutput() GetDomainErrorPagesErrorPageInfoListOutput {
+	return i.ToGetDomainErrorPagesErrorPageInfoListOutputWithContext(context.Background())
+}
+
+func (i GetDomainErrorPagesErrorPageInfoListArgs) ToGetDomainErrorPagesErrorPageInfoListOutputWithContext(ctx context.Context) GetDomainErrorPagesErrorPageInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainErrorPagesErrorPageInfoListOutput)
+}
+
+// GetDomainErrorPagesErrorPageInfoListArrayInput is an input type that accepts GetDomainErrorPagesErrorPageInfoListArray and GetDomainErrorPagesErrorPageInfoListArrayOutput values.
+// You can construct a concrete instance of `GetDomainErrorPagesErrorPageInfoListArrayInput` via:
+//
+//          GetDomainErrorPagesErrorPageInfoListArray{ GetDomainErrorPagesErrorPageInfoListArgs{...} }
+type GetDomainErrorPagesErrorPageInfoListArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainErrorPagesErrorPageInfoListArrayOutput() GetDomainErrorPagesErrorPageInfoListArrayOutput
+	ToGetDomainErrorPagesErrorPageInfoListArrayOutputWithContext(context.Context) GetDomainErrorPagesErrorPageInfoListArrayOutput
+}
+
+type GetDomainErrorPagesErrorPageInfoListArray []GetDomainErrorPagesErrorPageInfoListInput
+
+func (GetDomainErrorPagesErrorPageInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainErrorPagesErrorPageInfoList)(nil)).Elem()
+}
+
+func (i GetDomainErrorPagesErrorPageInfoListArray) ToGetDomainErrorPagesErrorPageInfoListArrayOutput() GetDomainErrorPagesErrorPageInfoListArrayOutput {
+	return i.ToGetDomainErrorPagesErrorPageInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainErrorPagesErrorPageInfoListArray) ToGetDomainErrorPagesErrorPageInfoListArrayOutputWithContext(ctx context.Context) GetDomainErrorPagesErrorPageInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainErrorPagesErrorPageInfoListArrayOutput)
+}
+
+type GetDomainErrorPagesErrorPageInfoListOutput struct{ *pulumi.OutputState }
+
+func (GetDomainErrorPagesErrorPageInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainErrorPagesErrorPageInfoList)(nil)).Elem()
+}
+
+func (o GetDomainErrorPagesErrorPageInfoListOutput) ToGetDomainErrorPagesErrorPageInfoListOutput() GetDomainErrorPagesErrorPageInfoListOutput {
+	return o
+}
+
+func (o GetDomainErrorPagesErrorPageInfoListOutput) ToGetDomainErrorPagesErrorPageInfoListOutputWithContext(ctx context.Context) GetDomainErrorPagesErrorPageInfoListOutput {
+	return o
+}
+
+// New response body.
+func (o GetDomainErrorPagesErrorPageInfoListOutput) Body() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainErrorPagesErrorPageInfoList) string { return v.Body }).(pulumi.StringOutput)
+}
+
+// Response headers to be removed.
+func (o GetDomainErrorPagesErrorPageInfoListOutput) ClearHeaders() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDomainErrorPagesErrorPageInfoList) []string { return v.ClearHeaders }).(pulumi.StringArrayOutput)
+}
+
+// HTTP domain to be queried.
+func (o GetDomainErrorPagesErrorPageInfoListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainErrorPagesErrorPageInfoList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Original error codes.
+func (o GetDomainErrorPagesErrorPageInfoListOutput) ErrorCodes() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetDomainErrorPagesErrorPageInfoList) []int { return v.ErrorCodes }).(pulumi.IntArrayOutput)
+}
+
+// ID of the error page info.
+func (o GetDomainErrorPagesErrorPageInfoListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainErrorPagesErrorPageInfoList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// ID of the layer7 listener to be queried.
+func (o GetDomainErrorPagesErrorPageInfoListOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainErrorPagesErrorPageInfoList) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// New error code.
+func (o GetDomainErrorPagesErrorPageInfoListOutput) NewErrorCodes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainErrorPagesErrorPageInfoList) int { return v.NewErrorCodes }).(pulumi.IntOutput)
+}
+
+// Response headers to be set.
+func (o GetDomainErrorPagesErrorPageInfoListOutput) SetHeaders() pulumi.MapOutput {
+	return o.ApplyT(func(v GetDomainErrorPagesErrorPageInfoList) map[string]interface{} { return v.SetHeaders }).(pulumi.MapOutput)
+}
+
+type GetDomainErrorPagesErrorPageInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainErrorPagesErrorPageInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainErrorPagesErrorPageInfoList)(nil)).Elem()
+}
+
+func (o GetDomainErrorPagesErrorPageInfoListArrayOutput) ToGetDomainErrorPagesErrorPageInfoListArrayOutput() GetDomainErrorPagesErrorPageInfoListArrayOutput {
+	return o
+}
+
+func (o GetDomainErrorPagesErrorPageInfoListArrayOutput) ToGetDomainErrorPagesErrorPageInfoListArrayOutputWithContext(ctx context.Context) GetDomainErrorPagesErrorPageInfoListArrayOutput {
+	return o
+}
+
+func (o GetDomainErrorPagesErrorPageInfoListArrayOutput) Index(i pulumi.IntInput) GetDomainErrorPagesErrorPageInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainErrorPagesErrorPageInfoList {
+		return vs[0].([]GetDomainErrorPagesErrorPageInfoList)[vs[1].(int)]
+	}).(GetDomainErrorPagesErrorPageInfoListOutput)
+}
+
+type GetHttpDomainsDomain struct {
+	// Indicates whether basic authentication is enable.
+	BasicAuth bool `pulumi:"basicAuth"`
+	// ID of the basic authentication.
+	BasicAuthId string `pulumi:"basicAuthId"`
+	// ID of the server certificate.
 	CertificateId string `pulumi:"certificateId"`
+	// (**Deprecated**) It has been deprecated from version 1.26.0. Use `clientCertificateIds` instead. ID of the client certificate.
+	//
 	// Deprecated: It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead.
-	ClientCertificateId  string   `pulumi:"clientCertificateId"`
+	ClientCertificateId string `pulumi:"clientCertificateId"`
+	// ID list of the client certificate.
 	ClientCertificateIds []string `pulumi:"clientCertificateIds"`
-	CreateTime           string   `pulumi:"createTime"`
-	ForwardProtocol      string   `pulumi:"forwardProtocol"`
-	Id                   string   `pulumi:"id"`
-	Name                 string   `pulumi:"name"`
-	Port                 int      `pulumi:"port"`
-	Protocol             string   `pulumi:"protocol"`
-	Status               int      `pulumi:"status"`
+	// Forward domain of the layer7 listener to be queried.
+	Domain string `pulumi:"domain"`
+	// Indicates whether SSL certificate authentication is enable.
+	GaapAuth bool `pulumi:"gaapAuth"`
+	// ID of the SSL certificate.
+	GaapAuthId string `pulumi:"gaapAuthId"`
+	// Indicates whether realserver authentication is enable.
+	RealserverAuth bool `pulumi:"realserverAuth"`
+	// CA certificate domain of the realserver.
+	RealserverCertificateDomain string `pulumi:"realserverCertificateDomain"`
+	// (**Deprecated**) It has been deprecated from version 1.28.0. Use `realserverCertificateIds` instead. CA certificate ID of the realserver.
+	//
+	// Deprecated: It has been deprecated from version 1.28.0. Use `realserver_certificate_ids` instead.
+	RealserverCertificateId string `pulumi:"realserverCertificateId"`
+	// CA certificate ID list of the realserver.
+	RealserverCertificateIds []string `pulumi:"realserverCertificateIds"`
 }
 
-// Layer7ListenersListenerInput is an input type that accepts Layer7ListenersListenerArgs and Layer7ListenersListenerOutput values.
-// You can construct a concrete instance of `Layer7ListenersListenerInput` via:
+// GetHttpDomainsDomainInput is an input type that accepts GetHttpDomainsDomainArgs and GetHttpDomainsDomainOutput values.
+// You can construct a concrete instance of `GetHttpDomainsDomainInput` via:
 //
-//          Layer7ListenersListenerArgs{...}
-type Layer7ListenersListenerInput interface {
+//          GetHttpDomainsDomainArgs{...}
+type GetHttpDomainsDomainInput interface {
 	pulumi.Input
 
-	ToLayer7ListenersListenerOutput() Layer7ListenersListenerOutput
-	ToLayer7ListenersListenerOutputWithContext(context.Context) Layer7ListenersListenerOutput
+	ToGetHttpDomainsDomainOutput() GetHttpDomainsDomainOutput
+	ToGetHttpDomainsDomainOutputWithContext(context.Context) GetHttpDomainsDomainOutput
 }
 
-type Layer7ListenersListenerArgs struct {
-	AuthType      pulumi.IntInput    `pulumi:"authType"`
+type GetHttpDomainsDomainArgs struct {
+	// Indicates whether basic authentication is enable.
+	BasicAuth pulumi.BoolInput `pulumi:"basicAuth"`
+	// ID of the basic authentication.
+	BasicAuthId pulumi.StringInput `pulumi:"basicAuthId"`
+	// ID of the server certificate.
 	CertificateId pulumi.StringInput `pulumi:"certificateId"`
+	// (**Deprecated**) It has been deprecated from version 1.26.0. Use `clientCertificateIds` instead. ID of the client certificate.
+	//
 	// Deprecated: It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead.
-	ClientCertificateId  pulumi.StringInput      `pulumi:"clientCertificateId"`
+	ClientCertificateId pulumi.StringInput `pulumi:"clientCertificateId"`
+	// ID list of the client certificate.
 	ClientCertificateIds pulumi.StringArrayInput `pulumi:"clientCertificateIds"`
-	CreateTime           pulumi.StringInput      `pulumi:"createTime"`
-	ForwardProtocol      pulumi.StringInput      `pulumi:"forwardProtocol"`
-	Id                   pulumi.StringInput      `pulumi:"id"`
-	Name                 pulumi.StringInput      `pulumi:"name"`
-	Port                 pulumi.IntInput         `pulumi:"port"`
-	Protocol             pulumi.StringInput      `pulumi:"protocol"`
-	Status               pulumi.IntInput         `pulumi:"status"`
+	// Forward domain of the layer7 listener to be queried.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Indicates whether SSL certificate authentication is enable.
+	GaapAuth pulumi.BoolInput `pulumi:"gaapAuth"`
+	// ID of the SSL certificate.
+	GaapAuthId pulumi.StringInput `pulumi:"gaapAuthId"`
+	// Indicates whether realserver authentication is enable.
+	RealserverAuth pulumi.BoolInput `pulumi:"realserverAuth"`
+	// CA certificate domain of the realserver.
+	RealserverCertificateDomain pulumi.StringInput `pulumi:"realserverCertificateDomain"`
+	// (**Deprecated**) It has been deprecated from version 1.28.0. Use `realserverCertificateIds` instead. CA certificate ID of the realserver.
+	//
+	// Deprecated: It has been deprecated from version 1.28.0. Use `realserver_certificate_ids` instead.
+	RealserverCertificateId pulumi.StringInput `pulumi:"realserverCertificateId"`
+	// CA certificate ID list of the realserver.
+	RealserverCertificateIds pulumi.StringArrayInput `pulumi:"realserverCertificateIds"`
 }
 
-func (Layer7ListenersListenerArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*Layer7ListenersListener)(nil)).Elem()
+func (GetHttpDomainsDomainArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetHttpDomainsDomain)(nil)).Elem()
 }
 
-func (i Layer7ListenersListenerArgs) ToLayer7ListenersListenerOutput() Layer7ListenersListenerOutput {
-	return i.ToLayer7ListenersListenerOutputWithContext(context.Background())
+func (i GetHttpDomainsDomainArgs) ToGetHttpDomainsDomainOutput() GetHttpDomainsDomainOutput {
+	return i.ToGetHttpDomainsDomainOutputWithContext(context.Background())
 }
 
-func (i Layer7ListenersListenerArgs) ToLayer7ListenersListenerOutputWithContext(ctx context.Context) Layer7ListenersListenerOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(Layer7ListenersListenerOutput)
+func (i GetHttpDomainsDomainArgs) ToGetHttpDomainsDomainOutputWithContext(ctx context.Context) GetHttpDomainsDomainOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetHttpDomainsDomainOutput)
 }
 
-// Layer7ListenersListenerArrayInput is an input type that accepts Layer7ListenersListenerArray and Layer7ListenersListenerArrayOutput values.
-// You can construct a concrete instance of `Layer7ListenersListenerArrayInput` via:
+// GetHttpDomainsDomainArrayInput is an input type that accepts GetHttpDomainsDomainArray and GetHttpDomainsDomainArrayOutput values.
+// You can construct a concrete instance of `GetHttpDomainsDomainArrayInput` via:
 //
-//          Layer7ListenersListenerArray{ Layer7ListenersListenerArgs{...} }
-type Layer7ListenersListenerArrayInput interface {
+//          GetHttpDomainsDomainArray{ GetHttpDomainsDomainArgs{...} }
+type GetHttpDomainsDomainArrayInput interface {
 	pulumi.Input
 
-	ToLayer7ListenersListenerArrayOutput() Layer7ListenersListenerArrayOutput
-	ToLayer7ListenersListenerArrayOutputWithContext(context.Context) Layer7ListenersListenerArrayOutput
+	ToGetHttpDomainsDomainArrayOutput() GetHttpDomainsDomainArrayOutput
+	ToGetHttpDomainsDomainArrayOutputWithContext(context.Context) GetHttpDomainsDomainArrayOutput
 }
 
-type Layer7ListenersListenerArray []Layer7ListenersListenerInput
+type GetHttpDomainsDomainArray []GetHttpDomainsDomainInput
 
-func (Layer7ListenersListenerArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]Layer7ListenersListener)(nil)).Elem()
+func (GetHttpDomainsDomainArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetHttpDomainsDomain)(nil)).Elem()
 }
 
-func (i Layer7ListenersListenerArray) ToLayer7ListenersListenerArrayOutput() Layer7ListenersListenerArrayOutput {
-	return i.ToLayer7ListenersListenerArrayOutputWithContext(context.Background())
+func (i GetHttpDomainsDomainArray) ToGetHttpDomainsDomainArrayOutput() GetHttpDomainsDomainArrayOutput {
+	return i.ToGetHttpDomainsDomainArrayOutputWithContext(context.Background())
 }
 
-func (i Layer7ListenersListenerArray) ToLayer7ListenersListenerArrayOutputWithContext(ctx context.Context) Layer7ListenersListenerArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(Layer7ListenersListenerArrayOutput)
+func (i GetHttpDomainsDomainArray) ToGetHttpDomainsDomainArrayOutputWithContext(ctx context.Context) GetHttpDomainsDomainArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetHttpDomainsDomainArrayOutput)
 }
 
-type Layer7ListenersListenerOutput struct{ *pulumi.OutputState }
+type GetHttpDomainsDomainOutput struct{ *pulumi.OutputState }
 
-func (Layer7ListenersListenerOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*Layer7ListenersListener)(nil)).Elem()
+func (GetHttpDomainsDomainOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetHttpDomainsDomain)(nil)).Elem()
 }
 
-func (o Layer7ListenersListenerOutput) ToLayer7ListenersListenerOutput() Layer7ListenersListenerOutput {
+func (o GetHttpDomainsDomainOutput) ToGetHttpDomainsDomainOutput() GetHttpDomainsDomainOutput {
 	return o
 }
 
-func (o Layer7ListenersListenerOutput) ToLayer7ListenersListenerOutputWithContext(ctx context.Context) Layer7ListenersListenerOutput {
+func (o GetHttpDomainsDomainOutput) ToGetHttpDomainsDomainOutputWithContext(ctx context.Context) GetHttpDomainsDomainOutput {
 	return o
 }
 
-func (o Layer7ListenersListenerOutput) AuthType() pulumi.IntOutput {
-	return o.ApplyT(func(v Layer7ListenersListener) int { return v.AuthType }).(pulumi.IntOutput)
+// Indicates whether basic authentication is enable.
+func (o GetHttpDomainsDomainOutput) BasicAuth() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) bool { return v.BasicAuth }).(pulumi.BoolOutput)
 }
 
-func (o Layer7ListenersListenerOutput) CertificateId() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer7ListenersListener) string { return v.CertificateId }).(pulumi.StringOutput)
+// ID of the basic authentication.
+func (o GetHttpDomainsDomainOutput) BasicAuthId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) string { return v.BasicAuthId }).(pulumi.StringOutput)
 }
 
+// ID of the server certificate.
+func (o GetHttpDomainsDomainOutput) CertificateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) string { return v.CertificateId }).(pulumi.StringOutput)
+}
+
+// (**Deprecated**) It has been deprecated from version 1.26.0. Use `clientCertificateIds` instead. ID of the client certificate.
+//
 // Deprecated: It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead.
-func (o Layer7ListenersListenerOutput) ClientCertificateId() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer7ListenersListener) string { return v.ClientCertificateId }).(pulumi.StringOutput)
+func (o GetHttpDomainsDomainOutput) ClientCertificateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) string { return v.ClientCertificateId }).(pulumi.StringOutput)
 }
 
-func (o Layer7ListenersListenerOutput) ClientCertificateIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v Layer7ListenersListener) []string { return v.ClientCertificateIds }).(pulumi.StringArrayOutput)
+// ID list of the client certificate.
+func (o GetHttpDomainsDomainOutput) ClientCertificateIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) []string { return v.ClientCertificateIds }).(pulumi.StringArrayOutput)
 }
 
-func (o Layer7ListenersListenerOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer7ListenersListener) string { return v.CreateTime }).(pulumi.StringOutput)
+// Forward domain of the layer7 listener to be queried.
+func (o GetHttpDomainsDomainOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) string { return v.Domain }).(pulumi.StringOutput)
 }
 
-func (o Layer7ListenersListenerOutput) ForwardProtocol() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer7ListenersListener) string { return v.ForwardProtocol }).(pulumi.StringOutput)
+// Indicates whether SSL certificate authentication is enable.
+func (o GetHttpDomainsDomainOutput) GaapAuth() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) bool { return v.GaapAuth }).(pulumi.BoolOutput)
 }
 
-func (o Layer7ListenersListenerOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer7ListenersListener) string { return v.Id }).(pulumi.StringOutput)
+// ID of the SSL certificate.
+func (o GetHttpDomainsDomainOutput) GaapAuthId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) string { return v.GaapAuthId }).(pulumi.StringOutput)
 }
 
-func (o Layer7ListenersListenerOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer7ListenersListener) string { return v.Name }).(pulumi.StringOutput)
+// Indicates whether realserver authentication is enable.
+func (o GetHttpDomainsDomainOutput) RealserverAuth() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) bool { return v.RealserverAuth }).(pulumi.BoolOutput)
 }
 
-func (o Layer7ListenersListenerOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func(v Layer7ListenersListener) int { return v.Port }).(pulumi.IntOutput)
+// CA certificate domain of the realserver.
+func (o GetHttpDomainsDomainOutput) RealserverCertificateDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) string { return v.RealserverCertificateDomain }).(pulumi.StringOutput)
 }
 
-func (o Layer7ListenersListenerOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v Layer7ListenersListener) string { return v.Protocol }).(pulumi.StringOutput)
-}
-
-func (o Layer7ListenersListenerOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v Layer7ListenersListener) int { return v.Status }).(pulumi.IntOutput)
-}
-
-type Layer7ListenersListenerArrayOutput struct{ *pulumi.OutputState }
-
-func (Layer7ListenersListenerArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]Layer7ListenersListener)(nil)).Elem()
-}
-
-func (o Layer7ListenersListenerArrayOutput) ToLayer7ListenersListenerArrayOutput() Layer7ListenersListenerArrayOutput {
-	return o
-}
-
-func (o Layer7ListenersListenerArrayOutput) ToLayer7ListenersListenerArrayOutputWithContext(ctx context.Context) Layer7ListenersListenerArrayOutput {
-	return o
-}
-
-func (o Layer7ListenersListenerArrayOutput) Index(i pulumi.IntInput) Layer7ListenersListenerOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) Layer7ListenersListener {
-		return vs[0].([]Layer7ListenersListener)[vs[1].(int)]
-	}).(Layer7ListenersListenerOutput)
-}
-
-type ProxiesProxy struct {
-	AccessRegion     string                 `pulumi:"accessRegion"`
-	Bandwidth        int                    `pulumi:"bandwidth"`
-	Concurrent       int                    `pulumi:"concurrent"`
-	CreateTime       string                 `pulumi:"createTime"`
-	Domain           string                 `pulumi:"domain"`
-	ForwardIp        string                 `pulumi:"forwardIp"`
-	Id               string                 `pulumi:"id"`
-	Ip               string                 `pulumi:"ip"`
-	Name             string                 `pulumi:"name"`
-	PolicyId         string                 `pulumi:"policyId"`
-	ProjectId        int                    `pulumi:"projectId"`
-	RealserverRegion string                 `pulumi:"realserverRegion"`
-	Scalable         bool                   `pulumi:"scalable"`
-	Status           string                 `pulumi:"status"`
-	SupportProtocols []string               `pulumi:"supportProtocols"`
-	Tags             map[string]interface{} `pulumi:"tags"`
-	Version          string                 `pulumi:"version"`
-}
-
-// ProxiesProxyInput is an input type that accepts ProxiesProxyArgs and ProxiesProxyOutput values.
-// You can construct a concrete instance of `ProxiesProxyInput` via:
+// (**Deprecated**) It has been deprecated from version 1.28.0. Use `realserverCertificateIds` instead. CA certificate ID of the realserver.
 //
-//          ProxiesProxyArgs{...}
-type ProxiesProxyInput interface {
+// Deprecated: It has been deprecated from version 1.28.0. Use `realserver_certificate_ids` instead.
+func (o GetHttpDomainsDomainOutput) RealserverCertificateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) string { return v.RealserverCertificateId }).(pulumi.StringOutput)
+}
+
+// CA certificate ID list of the realserver.
+func (o GetHttpDomainsDomainOutput) RealserverCertificateIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) []string { return v.RealserverCertificateIds }).(pulumi.StringArrayOutput)
+}
+
+type GetHttpDomainsDomainArrayOutput struct{ *pulumi.OutputState }
+
+func (GetHttpDomainsDomainArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetHttpDomainsDomain)(nil)).Elem()
+}
+
+func (o GetHttpDomainsDomainArrayOutput) ToGetHttpDomainsDomainArrayOutput() GetHttpDomainsDomainArrayOutput {
+	return o
+}
+
+func (o GetHttpDomainsDomainArrayOutput) ToGetHttpDomainsDomainArrayOutputWithContext(ctx context.Context) GetHttpDomainsDomainArrayOutput {
+	return o
+}
+
+func (o GetHttpDomainsDomainArrayOutput) Index(i pulumi.IntInput) GetHttpDomainsDomainOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetHttpDomainsDomain {
+		return vs[0].([]GetHttpDomainsDomain)[vs[1].(int)]
+	}).(GetHttpDomainsDomainOutput)
+}
+
+type GetHttpRulesRule struct {
+	// Timeout of the health check response.
+	ConnectTimeout int `pulumi:"connectTimeout"`
+	// Forward domain of the layer7 listener to be queried.
+	Domain string `pulumi:"domain"`
+	// Requested host which is forwarded to the realserver by the listener to be queried.
+	ForwardHost string `pulumi:"forwardHost"`
+	// Indicates whether health check is enable.
+	HealthCheck bool `pulumi:"healthCheck"`
+	// Method of the health check.
+	HealthCheckMethod string `pulumi:"healthCheckMethod"`
+	// Path of health check.
+	HealthCheckPath string `pulumi:"healthCheckPath"`
+	// Return code of confirmed normal.
+	HealthCheckStatusCodes []int `pulumi:"healthCheckStatusCodes"`
+	// ID of the GAAP realserver.
+	Id string `pulumi:"id"`
+	// Interval of the health check.
+	Interval int `pulumi:"interval"`
+	// ID of the layer7 listener to be queried.
+	ListenerId string `pulumi:"listenerId"`
+	// Path of the forward rule to be queried.
+	Path string `pulumi:"path"`
+	// Type of the realserver.
+	RealserverType string `pulumi:"realserverType"`
+	// An information list of GAAP realserver. Each element contains the following attributes:
+	Realservers []GetHttpRulesRuleRealserver `pulumi:"realservers"`
+	// Scheduling policy of the forward rule.
+	Scheduler string `pulumi:"scheduler"`
+	// ServerNameIndication (SNI).
+	Sni string `pulumi:"sni"`
+	// ServerNameIndication (SNI) switch.
+	SniSwitch string `pulumi:"sniSwitch"`
+}
+
+// GetHttpRulesRuleInput is an input type that accepts GetHttpRulesRuleArgs and GetHttpRulesRuleOutput values.
+// You can construct a concrete instance of `GetHttpRulesRuleInput` via:
+//
+//          GetHttpRulesRuleArgs{...}
+type GetHttpRulesRuleInput interface {
 	pulumi.Input
 
-	ToProxiesProxyOutput() ProxiesProxyOutput
-	ToProxiesProxyOutputWithContext(context.Context) ProxiesProxyOutput
+	ToGetHttpRulesRuleOutput() GetHttpRulesRuleOutput
+	ToGetHttpRulesRuleOutputWithContext(context.Context) GetHttpRulesRuleOutput
 }
 
-type ProxiesProxyArgs struct {
-	AccessRegion     pulumi.StringInput      `pulumi:"accessRegion"`
-	Bandwidth        pulumi.IntInput         `pulumi:"bandwidth"`
-	Concurrent       pulumi.IntInput         `pulumi:"concurrent"`
-	CreateTime       pulumi.StringInput      `pulumi:"createTime"`
-	Domain           pulumi.StringInput      `pulumi:"domain"`
-	ForwardIp        pulumi.StringInput      `pulumi:"forwardIp"`
-	Id               pulumi.StringInput      `pulumi:"id"`
-	Ip               pulumi.StringInput      `pulumi:"ip"`
-	Name             pulumi.StringInput      `pulumi:"name"`
-	PolicyId         pulumi.StringInput      `pulumi:"policyId"`
-	ProjectId        pulumi.IntInput         `pulumi:"projectId"`
-	RealserverRegion pulumi.StringInput      `pulumi:"realserverRegion"`
-	Scalable         pulumi.BoolInput        `pulumi:"scalable"`
-	Status           pulumi.StringInput      `pulumi:"status"`
+type GetHttpRulesRuleArgs struct {
+	// Timeout of the health check response.
+	ConnectTimeout pulumi.IntInput `pulumi:"connectTimeout"`
+	// Forward domain of the layer7 listener to be queried.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Requested host which is forwarded to the realserver by the listener to be queried.
+	ForwardHost pulumi.StringInput `pulumi:"forwardHost"`
+	// Indicates whether health check is enable.
+	HealthCheck pulumi.BoolInput `pulumi:"healthCheck"`
+	// Method of the health check.
+	HealthCheckMethod pulumi.StringInput `pulumi:"healthCheckMethod"`
+	// Path of health check.
+	HealthCheckPath pulumi.StringInput `pulumi:"healthCheckPath"`
+	// Return code of confirmed normal.
+	HealthCheckStatusCodes pulumi.IntArrayInput `pulumi:"healthCheckStatusCodes"`
+	// ID of the GAAP realserver.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Interval of the health check.
+	Interval pulumi.IntInput `pulumi:"interval"`
+	// ID of the layer7 listener to be queried.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// Path of the forward rule to be queried.
+	Path pulumi.StringInput `pulumi:"path"`
+	// Type of the realserver.
+	RealserverType pulumi.StringInput `pulumi:"realserverType"`
+	// An information list of GAAP realserver. Each element contains the following attributes:
+	Realservers GetHttpRulesRuleRealserverArrayInput `pulumi:"realservers"`
+	// Scheduling policy of the forward rule.
+	Scheduler pulumi.StringInput `pulumi:"scheduler"`
+	// ServerNameIndication (SNI).
+	Sni pulumi.StringInput `pulumi:"sni"`
+	// ServerNameIndication (SNI) switch.
+	SniSwitch pulumi.StringInput `pulumi:"sniSwitch"`
+}
+
+func (GetHttpRulesRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetHttpRulesRule)(nil)).Elem()
+}
+
+func (i GetHttpRulesRuleArgs) ToGetHttpRulesRuleOutput() GetHttpRulesRuleOutput {
+	return i.ToGetHttpRulesRuleOutputWithContext(context.Background())
+}
+
+func (i GetHttpRulesRuleArgs) ToGetHttpRulesRuleOutputWithContext(ctx context.Context) GetHttpRulesRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetHttpRulesRuleOutput)
+}
+
+// GetHttpRulesRuleArrayInput is an input type that accepts GetHttpRulesRuleArray and GetHttpRulesRuleArrayOutput values.
+// You can construct a concrete instance of `GetHttpRulesRuleArrayInput` via:
+//
+//          GetHttpRulesRuleArray{ GetHttpRulesRuleArgs{...} }
+type GetHttpRulesRuleArrayInput interface {
+	pulumi.Input
+
+	ToGetHttpRulesRuleArrayOutput() GetHttpRulesRuleArrayOutput
+	ToGetHttpRulesRuleArrayOutputWithContext(context.Context) GetHttpRulesRuleArrayOutput
+}
+
+type GetHttpRulesRuleArray []GetHttpRulesRuleInput
+
+func (GetHttpRulesRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetHttpRulesRule)(nil)).Elem()
+}
+
+func (i GetHttpRulesRuleArray) ToGetHttpRulesRuleArrayOutput() GetHttpRulesRuleArrayOutput {
+	return i.ToGetHttpRulesRuleArrayOutputWithContext(context.Background())
+}
+
+func (i GetHttpRulesRuleArray) ToGetHttpRulesRuleArrayOutputWithContext(ctx context.Context) GetHttpRulesRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetHttpRulesRuleArrayOutput)
+}
+
+type GetHttpRulesRuleOutput struct{ *pulumi.OutputState }
+
+func (GetHttpRulesRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetHttpRulesRule)(nil)).Elem()
+}
+
+func (o GetHttpRulesRuleOutput) ToGetHttpRulesRuleOutput() GetHttpRulesRuleOutput {
+	return o
+}
+
+func (o GetHttpRulesRuleOutput) ToGetHttpRulesRuleOutputWithContext(ctx context.Context) GetHttpRulesRuleOutput {
+	return o
+}
+
+// Timeout of the health check response.
+func (o GetHttpRulesRuleOutput) ConnectTimeout() pulumi.IntOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) int { return v.ConnectTimeout }).(pulumi.IntOutput)
+}
+
+// Forward domain of the layer7 listener to be queried.
+func (o GetHttpRulesRuleOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Requested host which is forwarded to the realserver by the listener to be queried.
+func (o GetHttpRulesRuleOutput) ForwardHost() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) string { return v.ForwardHost }).(pulumi.StringOutput)
+}
+
+// Indicates whether health check is enable.
+func (o GetHttpRulesRuleOutput) HealthCheck() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) bool { return v.HealthCheck }).(pulumi.BoolOutput)
+}
+
+// Method of the health check.
+func (o GetHttpRulesRuleOutput) HealthCheckMethod() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) string { return v.HealthCheckMethod }).(pulumi.StringOutput)
+}
+
+// Path of health check.
+func (o GetHttpRulesRuleOutput) HealthCheckPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) string { return v.HealthCheckPath }).(pulumi.StringOutput)
+}
+
+// Return code of confirmed normal.
+func (o GetHttpRulesRuleOutput) HealthCheckStatusCodes() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) []int { return v.HealthCheckStatusCodes }).(pulumi.IntArrayOutput)
+}
+
+// ID of the GAAP realserver.
+func (o GetHttpRulesRuleOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Interval of the health check.
+func (o GetHttpRulesRuleOutput) Interval() pulumi.IntOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) int { return v.Interval }).(pulumi.IntOutput)
+}
+
+// ID of the layer7 listener to be queried.
+func (o GetHttpRulesRuleOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// Path of the forward rule to be queried.
+func (o GetHttpRulesRuleOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// Type of the realserver.
+func (o GetHttpRulesRuleOutput) RealserverType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) string { return v.RealserverType }).(pulumi.StringOutput)
+}
+
+// An information list of GAAP realserver. Each element contains the following attributes:
+func (o GetHttpRulesRuleOutput) Realservers() GetHttpRulesRuleRealserverArrayOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) []GetHttpRulesRuleRealserver { return v.Realservers }).(GetHttpRulesRuleRealserverArrayOutput)
+}
+
+// Scheduling policy of the forward rule.
+func (o GetHttpRulesRuleOutput) Scheduler() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) string { return v.Scheduler }).(pulumi.StringOutput)
+}
+
+// ServerNameIndication (SNI).
+func (o GetHttpRulesRuleOutput) Sni() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) string { return v.Sni }).(pulumi.StringOutput)
+}
+
+// ServerNameIndication (SNI) switch.
+func (o GetHttpRulesRuleOutput) SniSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRule) string { return v.SniSwitch }).(pulumi.StringOutput)
+}
+
+type GetHttpRulesRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetHttpRulesRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetHttpRulesRule)(nil)).Elem()
+}
+
+func (o GetHttpRulesRuleArrayOutput) ToGetHttpRulesRuleArrayOutput() GetHttpRulesRuleArrayOutput {
+	return o
+}
+
+func (o GetHttpRulesRuleArrayOutput) ToGetHttpRulesRuleArrayOutputWithContext(ctx context.Context) GetHttpRulesRuleArrayOutput {
+	return o
+}
+
+func (o GetHttpRulesRuleArrayOutput) Index(i pulumi.IntInput) GetHttpRulesRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetHttpRulesRule {
+		return vs[0].([]GetHttpRulesRule)[vs[1].(int)]
+	}).(GetHttpRulesRuleOutput)
+}
+
+type GetHttpRulesRuleRealserver struct {
+	// Forward domain of the layer7 listener to be queried.
+	Domain string `pulumi:"domain"`
+	// ID of the GAAP realserver.
+	Id string `pulumi:"id"`
+	// IP of the GAAP realserver.
+	Ip string `pulumi:"ip"`
+	// Port of the GAAP realserver.
+	Port int `pulumi:"port"`
+	// Status of the GAAP realserver.
+	Status int `pulumi:"status"`
+	// Scheduling weight.
+	Weight int `pulumi:"weight"`
+}
+
+// GetHttpRulesRuleRealserverInput is an input type that accepts GetHttpRulesRuleRealserverArgs and GetHttpRulesRuleRealserverOutput values.
+// You can construct a concrete instance of `GetHttpRulesRuleRealserverInput` via:
+//
+//          GetHttpRulesRuleRealserverArgs{...}
+type GetHttpRulesRuleRealserverInput interface {
+	pulumi.Input
+
+	ToGetHttpRulesRuleRealserverOutput() GetHttpRulesRuleRealserverOutput
+	ToGetHttpRulesRuleRealserverOutputWithContext(context.Context) GetHttpRulesRuleRealserverOutput
+}
+
+type GetHttpRulesRuleRealserverArgs struct {
+	// Forward domain of the layer7 listener to be queried.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// ID of the GAAP realserver.
+	Id pulumi.StringInput `pulumi:"id"`
+	// IP of the GAAP realserver.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Port of the GAAP realserver.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Status of the GAAP realserver.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Scheduling weight.
+	Weight pulumi.IntInput `pulumi:"weight"`
+}
+
+func (GetHttpRulesRuleRealserverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetHttpRulesRuleRealserver)(nil)).Elem()
+}
+
+func (i GetHttpRulesRuleRealserverArgs) ToGetHttpRulesRuleRealserverOutput() GetHttpRulesRuleRealserverOutput {
+	return i.ToGetHttpRulesRuleRealserverOutputWithContext(context.Background())
+}
+
+func (i GetHttpRulesRuleRealserverArgs) ToGetHttpRulesRuleRealserverOutputWithContext(ctx context.Context) GetHttpRulesRuleRealserverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetHttpRulesRuleRealserverOutput)
+}
+
+// GetHttpRulesRuleRealserverArrayInput is an input type that accepts GetHttpRulesRuleRealserverArray and GetHttpRulesRuleRealserverArrayOutput values.
+// You can construct a concrete instance of `GetHttpRulesRuleRealserverArrayInput` via:
+//
+//          GetHttpRulesRuleRealserverArray{ GetHttpRulesRuleRealserverArgs{...} }
+type GetHttpRulesRuleRealserverArrayInput interface {
+	pulumi.Input
+
+	ToGetHttpRulesRuleRealserverArrayOutput() GetHttpRulesRuleRealserverArrayOutput
+	ToGetHttpRulesRuleRealserverArrayOutputWithContext(context.Context) GetHttpRulesRuleRealserverArrayOutput
+}
+
+type GetHttpRulesRuleRealserverArray []GetHttpRulesRuleRealserverInput
+
+func (GetHttpRulesRuleRealserverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetHttpRulesRuleRealserver)(nil)).Elem()
+}
+
+func (i GetHttpRulesRuleRealserverArray) ToGetHttpRulesRuleRealserverArrayOutput() GetHttpRulesRuleRealserverArrayOutput {
+	return i.ToGetHttpRulesRuleRealserverArrayOutputWithContext(context.Background())
+}
+
+func (i GetHttpRulesRuleRealserverArray) ToGetHttpRulesRuleRealserverArrayOutputWithContext(ctx context.Context) GetHttpRulesRuleRealserverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetHttpRulesRuleRealserverArrayOutput)
+}
+
+type GetHttpRulesRuleRealserverOutput struct{ *pulumi.OutputState }
+
+func (GetHttpRulesRuleRealserverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetHttpRulesRuleRealserver)(nil)).Elem()
+}
+
+func (o GetHttpRulesRuleRealserverOutput) ToGetHttpRulesRuleRealserverOutput() GetHttpRulesRuleRealserverOutput {
+	return o
+}
+
+func (o GetHttpRulesRuleRealserverOutput) ToGetHttpRulesRuleRealserverOutputWithContext(ctx context.Context) GetHttpRulesRuleRealserverOutput {
+	return o
+}
+
+// Forward domain of the layer7 listener to be queried.
+func (o GetHttpRulesRuleRealserverOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRuleRealserver) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// ID of the GAAP realserver.
+func (o GetHttpRulesRuleRealserverOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRuleRealserver) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// IP of the GAAP realserver.
+func (o GetHttpRulesRuleRealserverOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetHttpRulesRuleRealserver) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Port of the GAAP realserver.
+func (o GetHttpRulesRuleRealserverOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetHttpRulesRuleRealserver) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Status of the GAAP realserver.
+func (o GetHttpRulesRuleRealserverOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetHttpRulesRuleRealserver) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Scheduling weight.
+func (o GetHttpRulesRuleRealserverOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetHttpRulesRuleRealserver) int { return v.Weight }).(pulumi.IntOutput)
+}
+
+type GetHttpRulesRuleRealserverArrayOutput struct{ *pulumi.OutputState }
+
+func (GetHttpRulesRuleRealserverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetHttpRulesRuleRealserver)(nil)).Elem()
+}
+
+func (o GetHttpRulesRuleRealserverArrayOutput) ToGetHttpRulesRuleRealserverArrayOutput() GetHttpRulesRuleRealserverArrayOutput {
+	return o
+}
+
+func (o GetHttpRulesRuleRealserverArrayOutput) ToGetHttpRulesRuleRealserverArrayOutputWithContext(ctx context.Context) GetHttpRulesRuleRealserverArrayOutput {
+	return o
+}
+
+func (o GetHttpRulesRuleRealserverArrayOutput) Index(i pulumi.IntInput) GetHttpRulesRuleRealserverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetHttpRulesRuleRealserver {
+		return vs[0].([]GetHttpRulesRuleRealserver)[vs[1].(int)]
+	}).(GetHttpRulesRuleRealserverOutput)
+}
+
+type GetLayer4ListenersListener struct {
+	// Timeout of the health check response.
+	ConnectTimeout int `pulumi:"connectTimeout"`
+	// Creation time of the layer4 listener.
+	CreateTime string `pulumi:"createTime"`
+	// Indicates whether health check is enable.
+	HealthCheck bool `pulumi:"healthCheck"`
+	// ID of the layer4 listener.
+	Id string `pulumi:"id"`
+	// Interval of the health check.
+	Interval int `pulumi:"interval"`
+	// Name of the layer4 listener.
+	Name string `pulumi:"name"`
+	// Port of the layer4 listener to be queried.
+	Port int `pulumi:"port"`
+	// Protocol of the layer4 listener to be queried. Valid values: `TCP` and `UDP`.
+	Protocol string `pulumi:"protocol"`
+	// Type of the realserver.
+	RealserverType string `pulumi:"realserverType"`
+	// Scheduling policy of the layer4 listener.
+	Scheduler string `pulumi:"scheduler"`
+	// Status of the layer4 listener.
+	Status int `pulumi:"status"`
+}
+
+// GetLayer4ListenersListenerInput is an input type that accepts GetLayer4ListenersListenerArgs and GetLayer4ListenersListenerOutput values.
+// You can construct a concrete instance of `GetLayer4ListenersListenerInput` via:
+//
+//          GetLayer4ListenersListenerArgs{...}
+type GetLayer4ListenersListenerInput interface {
+	pulumi.Input
+
+	ToGetLayer4ListenersListenerOutput() GetLayer4ListenersListenerOutput
+	ToGetLayer4ListenersListenerOutputWithContext(context.Context) GetLayer4ListenersListenerOutput
+}
+
+type GetLayer4ListenersListenerArgs struct {
+	// Timeout of the health check response.
+	ConnectTimeout pulumi.IntInput `pulumi:"connectTimeout"`
+	// Creation time of the layer4 listener.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Indicates whether health check is enable.
+	HealthCheck pulumi.BoolInput `pulumi:"healthCheck"`
+	// ID of the layer4 listener.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Interval of the health check.
+	Interval pulumi.IntInput `pulumi:"interval"`
+	// Name of the layer4 listener.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Port of the layer4 listener to be queried.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Protocol of the layer4 listener to be queried. Valid values: `TCP` and `UDP`.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Type of the realserver.
+	RealserverType pulumi.StringInput `pulumi:"realserverType"`
+	// Scheduling policy of the layer4 listener.
+	Scheduler pulumi.StringInput `pulumi:"scheduler"`
+	// Status of the layer4 listener.
+	Status pulumi.IntInput `pulumi:"status"`
+}
+
+func (GetLayer4ListenersListenerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLayer4ListenersListener)(nil)).Elem()
+}
+
+func (i GetLayer4ListenersListenerArgs) ToGetLayer4ListenersListenerOutput() GetLayer4ListenersListenerOutput {
+	return i.ToGetLayer4ListenersListenerOutputWithContext(context.Background())
+}
+
+func (i GetLayer4ListenersListenerArgs) ToGetLayer4ListenersListenerOutputWithContext(ctx context.Context) GetLayer4ListenersListenerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLayer4ListenersListenerOutput)
+}
+
+// GetLayer4ListenersListenerArrayInput is an input type that accepts GetLayer4ListenersListenerArray and GetLayer4ListenersListenerArrayOutput values.
+// You can construct a concrete instance of `GetLayer4ListenersListenerArrayInput` via:
+//
+//          GetLayer4ListenersListenerArray{ GetLayer4ListenersListenerArgs{...} }
+type GetLayer4ListenersListenerArrayInput interface {
+	pulumi.Input
+
+	ToGetLayer4ListenersListenerArrayOutput() GetLayer4ListenersListenerArrayOutput
+	ToGetLayer4ListenersListenerArrayOutputWithContext(context.Context) GetLayer4ListenersListenerArrayOutput
+}
+
+type GetLayer4ListenersListenerArray []GetLayer4ListenersListenerInput
+
+func (GetLayer4ListenersListenerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLayer4ListenersListener)(nil)).Elem()
+}
+
+func (i GetLayer4ListenersListenerArray) ToGetLayer4ListenersListenerArrayOutput() GetLayer4ListenersListenerArrayOutput {
+	return i.ToGetLayer4ListenersListenerArrayOutputWithContext(context.Background())
+}
+
+func (i GetLayer4ListenersListenerArray) ToGetLayer4ListenersListenerArrayOutputWithContext(ctx context.Context) GetLayer4ListenersListenerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLayer4ListenersListenerArrayOutput)
+}
+
+type GetLayer4ListenersListenerOutput struct{ *pulumi.OutputState }
+
+func (GetLayer4ListenersListenerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLayer4ListenersListener)(nil)).Elem()
+}
+
+func (o GetLayer4ListenersListenerOutput) ToGetLayer4ListenersListenerOutput() GetLayer4ListenersListenerOutput {
+	return o
+}
+
+func (o GetLayer4ListenersListenerOutput) ToGetLayer4ListenersListenerOutputWithContext(ctx context.Context) GetLayer4ListenersListenerOutput {
+	return o
+}
+
+// Timeout of the health check response.
+func (o GetLayer4ListenersListenerOutput) ConnectTimeout() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLayer4ListenersListener) int { return v.ConnectTimeout }).(pulumi.IntOutput)
+}
+
+// Creation time of the layer4 listener.
+func (o GetLayer4ListenersListenerOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer4ListenersListener) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Indicates whether health check is enable.
+func (o GetLayer4ListenersListenerOutput) HealthCheck() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetLayer4ListenersListener) bool { return v.HealthCheck }).(pulumi.BoolOutput)
+}
+
+// ID of the layer4 listener.
+func (o GetLayer4ListenersListenerOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer4ListenersListener) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Interval of the health check.
+func (o GetLayer4ListenersListenerOutput) Interval() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLayer4ListenersListener) int { return v.Interval }).(pulumi.IntOutput)
+}
+
+// Name of the layer4 listener.
+func (o GetLayer4ListenersListenerOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer4ListenersListener) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Port of the layer4 listener to be queried.
+func (o GetLayer4ListenersListenerOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLayer4ListenersListener) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Protocol of the layer4 listener to be queried. Valid values: `TCP` and `UDP`.
+func (o GetLayer4ListenersListenerOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer4ListenersListener) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Type of the realserver.
+func (o GetLayer4ListenersListenerOutput) RealserverType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer4ListenersListener) string { return v.RealserverType }).(pulumi.StringOutput)
+}
+
+// Scheduling policy of the layer4 listener.
+func (o GetLayer4ListenersListenerOutput) Scheduler() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer4ListenersListener) string { return v.Scheduler }).(pulumi.StringOutput)
+}
+
+// Status of the layer4 listener.
+func (o GetLayer4ListenersListenerOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLayer4ListenersListener) int { return v.Status }).(pulumi.IntOutput)
+}
+
+type GetLayer4ListenersListenerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLayer4ListenersListenerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLayer4ListenersListener)(nil)).Elem()
+}
+
+func (o GetLayer4ListenersListenerArrayOutput) ToGetLayer4ListenersListenerArrayOutput() GetLayer4ListenersListenerArrayOutput {
+	return o
+}
+
+func (o GetLayer4ListenersListenerArrayOutput) ToGetLayer4ListenersListenerArrayOutputWithContext(ctx context.Context) GetLayer4ListenersListenerArrayOutput {
+	return o
+}
+
+func (o GetLayer4ListenersListenerArrayOutput) Index(i pulumi.IntInput) GetLayer4ListenersListenerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLayer4ListenersListener {
+		return vs[0].([]GetLayer4ListenersListener)[vs[1].(int)]
+	}).(GetLayer4ListenersListenerOutput)
+}
+
+type GetLayer7ListenersListener struct {
+	// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication.
+	AuthType int `pulumi:"authType"`
+	// Certificate ID of the layer7 listener.
+	CertificateId string `pulumi:"certificateId"`
+	// (**Deprecated**) It has been deprecated from version 1.26.0. Use `clientCertificateIds` instead. ID of the client certificate.
+	//
+	// Deprecated: It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead.
+	ClientCertificateId string `pulumi:"clientCertificateId"`
+	// ID list of the client certificate.
+	ClientCertificateIds []string `pulumi:"clientCertificateIds"`
+	// Creation time of the layer7 listener.
+	CreateTime string `pulumi:"createTime"`
+	// Protocol type of the forwarding.
+	ForwardProtocol string `pulumi:"forwardProtocol"`
+	// ID of the layer7 listener.
+	Id string `pulumi:"id"`
+	// Name of the layer7 listener.
+	Name string `pulumi:"name"`
+	// Port of the layer7 listener to be queried.
+	Port int `pulumi:"port"`
+	// Protocol of the layer7 listener to be queried. Valid values: `HTTP` and `HTTPS`.
+	Protocol string `pulumi:"protocol"`
+	// Status of the layer7 listener.
+	Status int `pulumi:"status"`
+}
+
+// GetLayer7ListenersListenerInput is an input type that accepts GetLayer7ListenersListenerArgs and GetLayer7ListenersListenerOutput values.
+// You can construct a concrete instance of `GetLayer7ListenersListenerInput` via:
+//
+//          GetLayer7ListenersListenerArgs{...}
+type GetLayer7ListenersListenerInput interface {
+	pulumi.Input
+
+	ToGetLayer7ListenersListenerOutput() GetLayer7ListenersListenerOutput
+	ToGetLayer7ListenersListenerOutputWithContext(context.Context) GetLayer7ListenersListenerOutput
+}
+
+type GetLayer7ListenersListenerArgs struct {
+	// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication.
+	AuthType pulumi.IntInput `pulumi:"authType"`
+	// Certificate ID of the layer7 listener.
+	CertificateId pulumi.StringInput `pulumi:"certificateId"`
+	// (**Deprecated**) It has been deprecated from version 1.26.0. Use `clientCertificateIds` instead. ID of the client certificate.
+	//
+	// Deprecated: It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead.
+	ClientCertificateId pulumi.StringInput `pulumi:"clientCertificateId"`
+	// ID list of the client certificate.
+	ClientCertificateIds pulumi.StringArrayInput `pulumi:"clientCertificateIds"`
+	// Creation time of the layer7 listener.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Protocol type of the forwarding.
+	ForwardProtocol pulumi.StringInput `pulumi:"forwardProtocol"`
+	// ID of the layer7 listener.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Name of the layer7 listener.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Port of the layer7 listener to be queried.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Protocol of the layer7 listener to be queried. Valid values: `HTTP` and `HTTPS`.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Status of the layer7 listener.
+	Status pulumi.IntInput `pulumi:"status"`
+}
+
+func (GetLayer7ListenersListenerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLayer7ListenersListener)(nil)).Elem()
+}
+
+func (i GetLayer7ListenersListenerArgs) ToGetLayer7ListenersListenerOutput() GetLayer7ListenersListenerOutput {
+	return i.ToGetLayer7ListenersListenerOutputWithContext(context.Background())
+}
+
+func (i GetLayer7ListenersListenerArgs) ToGetLayer7ListenersListenerOutputWithContext(ctx context.Context) GetLayer7ListenersListenerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLayer7ListenersListenerOutput)
+}
+
+// GetLayer7ListenersListenerArrayInput is an input type that accepts GetLayer7ListenersListenerArray and GetLayer7ListenersListenerArrayOutput values.
+// You can construct a concrete instance of `GetLayer7ListenersListenerArrayInput` via:
+//
+//          GetLayer7ListenersListenerArray{ GetLayer7ListenersListenerArgs{...} }
+type GetLayer7ListenersListenerArrayInput interface {
+	pulumi.Input
+
+	ToGetLayer7ListenersListenerArrayOutput() GetLayer7ListenersListenerArrayOutput
+	ToGetLayer7ListenersListenerArrayOutputWithContext(context.Context) GetLayer7ListenersListenerArrayOutput
+}
+
+type GetLayer7ListenersListenerArray []GetLayer7ListenersListenerInput
+
+func (GetLayer7ListenersListenerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLayer7ListenersListener)(nil)).Elem()
+}
+
+func (i GetLayer7ListenersListenerArray) ToGetLayer7ListenersListenerArrayOutput() GetLayer7ListenersListenerArrayOutput {
+	return i.ToGetLayer7ListenersListenerArrayOutputWithContext(context.Background())
+}
+
+func (i GetLayer7ListenersListenerArray) ToGetLayer7ListenersListenerArrayOutputWithContext(ctx context.Context) GetLayer7ListenersListenerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLayer7ListenersListenerArrayOutput)
+}
+
+type GetLayer7ListenersListenerOutput struct{ *pulumi.OutputState }
+
+func (GetLayer7ListenersListenerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetLayer7ListenersListener)(nil)).Elem()
+}
+
+func (o GetLayer7ListenersListenerOutput) ToGetLayer7ListenersListenerOutput() GetLayer7ListenersListenerOutput {
+	return o
+}
+
+func (o GetLayer7ListenersListenerOutput) ToGetLayer7ListenersListenerOutputWithContext(ctx context.Context) GetLayer7ListenersListenerOutput {
+	return o
+}
+
+// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication.
+func (o GetLayer7ListenersListenerOutput) AuthType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) int { return v.AuthType }).(pulumi.IntOutput)
+}
+
+// Certificate ID of the layer7 listener.
+func (o GetLayer7ListenersListenerOutput) CertificateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) string { return v.CertificateId }).(pulumi.StringOutput)
+}
+
+// (**Deprecated**) It has been deprecated from version 1.26.0. Use `clientCertificateIds` instead. ID of the client certificate.
+//
+// Deprecated: It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead.
+func (o GetLayer7ListenersListenerOutput) ClientCertificateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) string { return v.ClientCertificateId }).(pulumi.StringOutput)
+}
+
+// ID list of the client certificate.
+func (o GetLayer7ListenersListenerOutput) ClientCertificateIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) []string { return v.ClientCertificateIds }).(pulumi.StringArrayOutput)
+}
+
+// Creation time of the layer7 listener.
+func (o GetLayer7ListenersListenerOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Protocol type of the forwarding.
+func (o GetLayer7ListenersListenerOutput) ForwardProtocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) string { return v.ForwardProtocol }).(pulumi.StringOutput)
+}
+
+// ID of the layer7 listener.
+func (o GetLayer7ListenersListenerOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Name of the layer7 listener.
+func (o GetLayer7ListenersListenerOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Port of the layer7 listener to be queried.
+func (o GetLayer7ListenersListenerOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Protocol of the layer7 listener to be queried. Valid values: `HTTP` and `HTTPS`.
+func (o GetLayer7ListenersListenerOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Status of the layer7 listener.
+func (o GetLayer7ListenersListenerOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) int { return v.Status }).(pulumi.IntOutput)
+}
+
+type GetLayer7ListenersListenerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetLayer7ListenersListenerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetLayer7ListenersListener)(nil)).Elem()
+}
+
+func (o GetLayer7ListenersListenerArrayOutput) ToGetLayer7ListenersListenerArrayOutput() GetLayer7ListenersListenerArrayOutput {
+	return o
+}
+
+func (o GetLayer7ListenersListenerArrayOutput) ToGetLayer7ListenersListenerArrayOutputWithContext(ctx context.Context) GetLayer7ListenersListenerArrayOutput {
+	return o
+}
+
+func (o GetLayer7ListenersListenerArrayOutput) Index(i pulumi.IntInput) GetLayer7ListenersListenerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLayer7ListenersListener {
+		return vs[0].([]GetLayer7ListenersListener)[vs[1].(int)]
+	}).(GetLayer7ListenersListenerOutput)
+}
+
+type GetProxiesProxy struct {
+	// Access region of the GAAP proxy to be queried. Conflict with `ids`.
+	AccessRegion string `pulumi:"accessRegion"`
+	// Maximum bandwidth of the GAAP proxy, unit is Mbps.
+	Bandwidth int `pulumi:"bandwidth"`
+	// Maximum concurrency of the GAAP proxy, unit is 10k.
+	Concurrent int `pulumi:"concurrent"`
+	// Creation time of the GAAP proxy.
+	CreateTime string `pulumi:"createTime"`
+	// Access domain of the GAAP proxy.
+	Domain string `pulumi:"domain"`
+	// Forwarding IP of the GAAP proxy.
+	ForwardIp string `pulumi:"forwardIp"`
+	// ID of the GAAP proxy.
+	Id string `pulumi:"id"`
+	// Access domain of the GAAP proxy.
+	Ip string `pulumi:"ip"`
+	// Name of the GAAP proxy.
+	Name string `pulumi:"name"`
+	// Security policy ID of the GAAP proxy.
+	PolicyId string `pulumi:"policyId"`
+	// Project ID of the GAAP proxy to be queried. Conflict with `ids`.
+	ProjectId int `pulumi:"projectId"`
+	// Region of the GAAP realserver to be queried. Conflict with `ids`.
+	RealserverRegion string `pulumi:"realserverRegion"`
+	// Indicates whether GAAP proxy can scalable.
+	Scalable bool `pulumi:"scalable"`
+	// Status of the GAAP proxy.
+	Status string `pulumi:"status"`
+	// Supported protocols of the GAAP proxy.
+	SupportProtocols []string `pulumi:"supportProtocols"`
+	// Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// Version of the GAAP proxy.
+	Version string `pulumi:"version"`
+}
+
+// GetProxiesProxyInput is an input type that accepts GetProxiesProxyArgs and GetProxiesProxyOutput values.
+// You can construct a concrete instance of `GetProxiesProxyInput` via:
+//
+//          GetProxiesProxyArgs{...}
+type GetProxiesProxyInput interface {
+	pulumi.Input
+
+	ToGetProxiesProxyOutput() GetProxiesProxyOutput
+	ToGetProxiesProxyOutputWithContext(context.Context) GetProxiesProxyOutput
+}
+
+type GetProxiesProxyArgs struct {
+	// Access region of the GAAP proxy to be queried. Conflict with `ids`.
+	AccessRegion pulumi.StringInput `pulumi:"accessRegion"`
+	// Maximum bandwidth of the GAAP proxy, unit is Mbps.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// Maximum concurrency of the GAAP proxy, unit is 10k.
+	Concurrent pulumi.IntInput `pulumi:"concurrent"`
+	// Creation time of the GAAP proxy.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Access domain of the GAAP proxy.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Forwarding IP of the GAAP proxy.
+	ForwardIp pulumi.StringInput `pulumi:"forwardIp"`
+	// ID of the GAAP proxy.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Access domain of the GAAP proxy.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Name of the GAAP proxy.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Security policy ID of the GAAP proxy.
+	PolicyId pulumi.StringInput `pulumi:"policyId"`
+	// Project ID of the GAAP proxy to be queried. Conflict with `ids`.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Region of the GAAP realserver to be queried. Conflict with `ids`.
+	RealserverRegion pulumi.StringInput `pulumi:"realserverRegion"`
+	// Indicates whether GAAP proxy can scalable.
+	Scalable pulumi.BoolInput `pulumi:"scalable"`
+	// Status of the GAAP proxy.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Supported protocols of the GAAP proxy.
 	SupportProtocols pulumi.StringArrayInput `pulumi:"supportProtocols"`
-	Tags             pulumi.MapInput         `pulumi:"tags"`
-	Version          pulumi.StringInput      `pulumi:"version"`
+	// Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
+	Tags pulumi.MapInput `pulumi:"tags"`
+	// Version of the GAAP proxy.
+	Version pulumi.StringInput `pulumi:"version"`
 }
 
-func (ProxiesProxyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProxiesProxy)(nil)).Elem()
+func (GetProxiesProxyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxiesProxy)(nil)).Elem()
 }
 
-func (i ProxiesProxyArgs) ToProxiesProxyOutput() ProxiesProxyOutput {
-	return i.ToProxiesProxyOutputWithContext(context.Background())
+func (i GetProxiesProxyArgs) ToGetProxiesProxyOutput() GetProxiesProxyOutput {
+	return i.ToGetProxiesProxyOutputWithContext(context.Background())
 }
 
-func (i ProxiesProxyArgs) ToProxiesProxyOutputWithContext(ctx context.Context) ProxiesProxyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProxiesProxyOutput)
+func (i GetProxiesProxyArgs) ToGetProxiesProxyOutputWithContext(ctx context.Context) GetProxiesProxyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxiesProxyOutput)
 }
 
-// ProxiesProxyArrayInput is an input type that accepts ProxiesProxyArray and ProxiesProxyArrayOutput values.
-// You can construct a concrete instance of `ProxiesProxyArrayInput` via:
+// GetProxiesProxyArrayInput is an input type that accepts GetProxiesProxyArray and GetProxiesProxyArrayOutput values.
+// You can construct a concrete instance of `GetProxiesProxyArrayInput` via:
 //
-//          ProxiesProxyArray{ ProxiesProxyArgs{...} }
-type ProxiesProxyArrayInput interface {
+//          GetProxiesProxyArray{ GetProxiesProxyArgs{...} }
+type GetProxiesProxyArrayInput interface {
 	pulumi.Input
 
-	ToProxiesProxyArrayOutput() ProxiesProxyArrayOutput
-	ToProxiesProxyArrayOutputWithContext(context.Context) ProxiesProxyArrayOutput
+	ToGetProxiesProxyArrayOutput() GetProxiesProxyArrayOutput
+	ToGetProxiesProxyArrayOutputWithContext(context.Context) GetProxiesProxyArrayOutput
 }
 
-type ProxiesProxyArray []ProxiesProxyInput
+type GetProxiesProxyArray []GetProxiesProxyInput
 
-func (ProxiesProxyArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProxiesProxy)(nil)).Elem()
+func (GetProxiesProxyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxiesProxy)(nil)).Elem()
 }
 
-func (i ProxiesProxyArray) ToProxiesProxyArrayOutput() ProxiesProxyArrayOutput {
-	return i.ToProxiesProxyArrayOutputWithContext(context.Background())
+func (i GetProxiesProxyArray) ToGetProxiesProxyArrayOutput() GetProxiesProxyArrayOutput {
+	return i.ToGetProxiesProxyArrayOutputWithContext(context.Background())
 }
 
-func (i ProxiesProxyArray) ToProxiesProxyArrayOutputWithContext(ctx context.Context) ProxiesProxyArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProxiesProxyArrayOutput)
+func (i GetProxiesProxyArray) ToGetProxiesProxyArrayOutputWithContext(ctx context.Context) GetProxiesProxyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxiesProxyArrayOutput)
 }
 
-type ProxiesProxyOutput struct{ *pulumi.OutputState }
+type GetProxiesProxyOutput struct{ *pulumi.OutputState }
 
-func (ProxiesProxyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProxiesProxy)(nil)).Elem()
+func (GetProxiesProxyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxiesProxy)(nil)).Elem()
 }
 
-func (o ProxiesProxyOutput) ToProxiesProxyOutput() ProxiesProxyOutput {
+func (o GetProxiesProxyOutput) ToGetProxiesProxyOutput() GetProxiesProxyOutput {
 	return o
 }
 
-func (o ProxiesProxyOutput) ToProxiesProxyOutputWithContext(ctx context.Context) ProxiesProxyOutput {
+func (o GetProxiesProxyOutput) ToGetProxiesProxyOutputWithContext(ctx context.Context) GetProxiesProxyOutput {
 	return o
 }
 
-func (o ProxiesProxyOutput) AccessRegion() pulumi.StringOutput {
-	return o.ApplyT(func(v ProxiesProxy) string { return v.AccessRegion }).(pulumi.StringOutput)
+// Access region of the GAAP proxy to be queried. Conflict with `ids`.
+func (o GetProxiesProxyOutput) AccessRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesProxy) string { return v.AccessRegion }).(pulumi.StringOutput)
 }
 
-func (o ProxiesProxyOutput) Bandwidth() pulumi.IntOutput {
-	return o.ApplyT(func(v ProxiesProxy) int { return v.Bandwidth }).(pulumi.IntOutput)
+// Maximum bandwidth of the GAAP proxy, unit is Mbps.
+func (o GetProxiesProxyOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxiesProxy) int { return v.Bandwidth }).(pulumi.IntOutput)
 }
 
-func (o ProxiesProxyOutput) Concurrent() pulumi.IntOutput {
-	return o.ApplyT(func(v ProxiesProxy) int { return v.Concurrent }).(pulumi.IntOutput)
+// Maximum concurrency of the GAAP proxy, unit is 10k.
+func (o GetProxiesProxyOutput) Concurrent() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxiesProxy) int { return v.Concurrent }).(pulumi.IntOutput)
 }
 
-func (o ProxiesProxyOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v ProxiesProxy) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the GAAP proxy.
+func (o GetProxiesProxyOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesProxy) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o ProxiesProxyOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v ProxiesProxy) string { return v.Domain }).(pulumi.StringOutput)
+// Access domain of the GAAP proxy.
+func (o GetProxiesProxyOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesProxy) string { return v.Domain }).(pulumi.StringOutput)
 }
 
-func (o ProxiesProxyOutput) ForwardIp() pulumi.StringOutput {
-	return o.ApplyT(func(v ProxiesProxy) string { return v.ForwardIp }).(pulumi.StringOutput)
+// Forwarding IP of the GAAP proxy.
+func (o GetProxiesProxyOutput) ForwardIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesProxy) string { return v.ForwardIp }).(pulumi.StringOutput)
 }
 
-func (o ProxiesProxyOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v ProxiesProxy) string { return v.Id }).(pulumi.StringOutput)
+// ID of the GAAP proxy.
+func (o GetProxiesProxyOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesProxy) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o ProxiesProxyOutput) Ip() pulumi.StringOutput {
-	return o.ApplyT(func(v ProxiesProxy) string { return v.Ip }).(pulumi.StringOutput)
+// Access domain of the GAAP proxy.
+func (o GetProxiesProxyOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesProxy) string { return v.Ip }).(pulumi.StringOutput)
 }
 
-func (o ProxiesProxyOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ProxiesProxy) string { return v.Name }).(pulumi.StringOutput)
+// Name of the GAAP proxy.
+func (o GetProxiesProxyOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesProxy) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o ProxiesProxyOutput) PolicyId() pulumi.StringOutput {
-	return o.ApplyT(func(v ProxiesProxy) string { return v.PolicyId }).(pulumi.StringOutput)
+// Security policy ID of the GAAP proxy.
+func (o GetProxiesProxyOutput) PolicyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesProxy) string { return v.PolicyId }).(pulumi.StringOutput)
 }
 
-func (o ProxiesProxyOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v ProxiesProxy) int { return v.ProjectId }).(pulumi.IntOutput)
+// Project ID of the GAAP proxy to be queried. Conflict with `ids`.
+func (o GetProxiesProxyOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxiesProxy) int { return v.ProjectId }).(pulumi.IntOutput)
 }
 
-func (o ProxiesProxyOutput) RealserverRegion() pulumi.StringOutput {
-	return o.ApplyT(func(v ProxiesProxy) string { return v.RealserverRegion }).(pulumi.StringOutput)
+// Region of the GAAP realserver to be queried. Conflict with `ids`.
+func (o GetProxiesProxyOutput) RealserverRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesProxy) string { return v.RealserverRegion }).(pulumi.StringOutput)
 }
 
-func (o ProxiesProxyOutput) Scalable() pulumi.BoolOutput {
-	return o.ApplyT(func(v ProxiesProxy) bool { return v.Scalable }).(pulumi.BoolOutput)
+// Indicates whether GAAP proxy can scalable.
+func (o GetProxiesProxyOutput) Scalable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetProxiesProxy) bool { return v.Scalable }).(pulumi.BoolOutput)
 }
 
-func (o ProxiesProxyOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v ProxiesProxy) string { return v.Status }).(pulumi.StringOutput)
+// Status of the GAAP proxy.
+func (o GetProxiesProxyOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesProxy) string { return v.Status }).(pulumi.StringOutput)
 }
 
-func (o ProxiesProxyOutput) SupportProtocols() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ProxiesProxy) []string { return v.SupportProtocols }).(pulumi.StringArrayOutput)
+// Supported protocols of the GAAP proxy.
+func (o GetProxiesProxyOutput) SupportProtocols() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetProxiesProxy) []string { return v.SupportProtocols }).(pulumi.StringArrayOutput)
 }
 
-func (o ProxiesProxyOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v ProxiesProxy) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+// Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
+func (o GetProxiesProxyOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetProxiesProxy) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
 }
 
-func (o ProxiesProxyOutput) Version() pulumi.StringOutput {
-	return o.ApplyT(func(v ProxiesProxy) string { return v.Version }).(pulumi.StringOutput)
+// Version of the GAAP proxy.
+func (o GetProxiesProxyOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxiesProxy) string { return v.Version }).(pulumi.StringOutput)
 }
 
-type ProxiesProxyArrayOutput struct{ *pulumi.OutputState }
+type GetProxiesProxyArrayOutput struct{ *pulumi.OutputState }
 
-func (ProxiesProxyArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProxiesProxy)(nil)).Elem()
+func (GetProxiesProxyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxiesProxy)(nil)).Elem()
 }
 
-func (o ProxiesProxyArrayOutput) ToProxiesProxyArrayOutput() ProxiesProxyArrayOutput {
+func (o GetProxiesProxyArrayOutput) ToGetProxiesProxyArrayOutput() GetProxiesProxyArrayOutput {
 	return o
 }
 
-func (o ProxiesProxyArrayOutput) ToProxiesProxyArrayOutputWithContext(ctx context.Context) ProxiesProxyArrayOutput {
+func (o GetProxiesProxyArrayOutput) ToGetProxiesProxyArrayOutputWithContext(ctx context.Context) GetProxiesProxyArrayOutput {
 	return o
 }
 
-func (o ProxiesProxyArrayOutput) Index(i pulumi.IntInput) ProxiesProxyOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProxiesProxy {
-		return vs[0].([]ProxiesProxy)[vs[1].(int)]
-	}).(ProxiesProxyOutput)
+func (o GetProxiesProxyArrayOutput) Index(i pulumi.IntInput) GetProxiesProxyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxiesProxy {
+		return vs[0].([]GetProxiesProxy)[vs[1].(int)]
+	}).(GetProxiesProxyOutput)
 }
 
-type RealserversRealserver struct {
-	Domain    string                 `pulumi:"domain"`
-	Id        string                 `pulumi:"id"`
-	Ip        string                 `pulumi:"ip"`
-	Name      string                 `pulumi:"name"`
-	ProjectId int                    `pulumi:"projectId"`
-	Tags      map[string]interface{} `pulumi:"tags"`
+type GetRealserversRealserver struct {
+	// Domain of the GAAP realserver to be queried, conflict with `ip`.
+	Domain string `pulumi:"domain"`
+	// ID of the GAAP realserver.
+	Id string `pulumi:"id"`
+	// IP of the GAAP realserver to be queried, conflict with `domain`.
+	Ip string `pulumi:"ip"`
+	// Name of the GAAP realserver to be queried, the maximum length is 30.
+	Name string `pulumi:"name"`
+	// ID of the project within the GAAP realserver to be queried, default value is `-1`, no set means all projects.
+	ProjectId int `pulumi:"projectId"`
+	// Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
-// RealserversRealserverInput is an input type that accepts RealserversRealserverArgs and RealserversRealserverOutput values.
-// You can construct a concrete instance of `RealserversRealserverInput` via:
+// GetRealserversRealserverInput is an input type that accepts GetRealserversRealserverArgs and GetRealserversRealserverOutput values.
+// You can construct a concrete instance of `GetRealserversRealserverInput` via:
 //
-//          RealserversRealserverArgs{...}
-type RealserversRealserverInput interface {
+//          GetRealserversRealserverArgs{...}
+type GetRealserversRealserverInput interface {
 	pulumi.Input
 
-	ToRealserversRealserverOutput() RealserversRealserverOutput
-	ToRealserversRealserverOutputWithContext(context.Context) RealserversRealserverOutput
+	ToGetRealserversRealserverOutput() GetRealserversRealserverOutput
+	ToGetRealserversRealserverOutputWithContext(context.Context) GetRealserversRealserverOutput
 }
 
-type RealserversRealserverArgs struct {
-	Domain    pulumi.StringInput `pulumi:"domain"`
-	Id        pulumi.StringInput `pulumi:"id"`
-	Ip        pulumi.StringInput `pulumi:"ip"`
-	Name      pulumi.StringInput `pulumi:"name"`
-	ProjectId pulumi.IntInput    `pulumi:"projectId"`
-	Tags      pulumi.MapInput    `pulumi:"tags"`
+type GetRealserversRealserverArgs struct {
+	// Domain of the GAAP realserver to be queried, conflict with `ip`.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// ID of the GAAP realserver.
+	Id pulumi.StringInput `pulumi:"id"`
+	// IP of the GAAP realserver to be queried, conflict with `domain`.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Name of the GAAP realserver to be queried, the maximum length is 30.
+	Name pulumi.StringInput `pulumi:"name"`
+	// ID of the project within the GAAP realserver to be queried, default value is `-1`, no set means all projects.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
+	Tags pulumi.MapInput `pulumi:"tags"`
 }
 
-func (RealserversRealserverArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*RealserversRealserver)(nil)).Elem()
+func (GetRealserversRealserverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRealserversRealserver)(nil)).Elem()
 }
 
-func (i RealserversRealserverArgs) ToRealserversRealserverOutput() RealserversRealserverOutput {
-	return i.ToRealserversRealserverOutputWithContext(context.Background())
+func (i GetRealserversRealserverArgs) ToGetRealserversRealserverOutput() GetRealserversRealserverOutput {
+	return i.ToGetRealserversRealserverOutputWithContext(context.Background())
 }
 
-func (i RealserversRealserverArgs) ToRealserversRealserverOutputWithContext(ctx context.Context) RealserversRealserverOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(RealserversRealserverOutput)
+func (i GetRealserversRealserverArgs) ToGetRealserversRealserverOutputWithContext(ctx context.Context) GetRealserversRealserverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRealserversRealserverOutput)
 }
 
-// RealserversRealserverArrayInput is an input type that accepts RealserversRealserverArray and RealserversRealserverArrayOutput values.
-// You can construct a concrete instance of `RealserversRealserverArrayInput` via:
+// GetRealserversRealserverArrayInput is an input type that accepts GetRealserversRealserverArray and GetRealserversRealserverArrayOutput values.
+// You can construct a concrete instance of `GetRealserversRealserverArrayInput` via:
 //
-//          RealserversRealserverArray{ RealserversRealserverArgs{...} }
-type RealserversRealserverArrayInput interface {
+//          GetRealserversRealserverArray{ GetRealserversRealserverArgs{...} }
+type GetRealserversRealserverArrayInput interface {
 	pulumi.Input
 
-	ToRealserversRealserverArrayOutput() RealserversRealserverArrayOutput
-	ToRealserversRealserverArrayOutputWithContext(context.Context) RealserversRealserverArrayOutput
+	ToGetRealserversRealserverArrayOutput() GetRealserversRealserverArrayOutput
+	ToGetRealserversRealserverArrayOutputWithContext(context.Context) GetRealserversRealserverArrayOutput
 }
 
-type RealserversRealserverArray []RealserversRealserverInput
+type GetRealserversRealserverArray []GetRealserversRealserverInput
 
-func (RealserversRealserverArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]RealserversRealserver)(nil)).Elem()
+func (GetRealserversRealserverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRealserversRealserver)(nil)).Elem()
 }
 
-func (i RealserversRealserverArray) ToRealserversRealserverArrayOutput() RealserversRealserverArrayOutput {
-	return i.ToRealserversRealserverArrayOutputWithContext(context.Background())
+func (i GetRealserversRealserverArray) ToGetRealserversRealserverArrayOutput() GetRealserversRealserverArrayOutput {
+	return i.ToGetRealserversRealserverArrayOutputWithContext(context.Background())
 }
 
-func (i RealserversRealserverArray) ToRealserversRealserverArrayOutputWithContext(ctx context.Context) RealserversRealserverArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(RealserversRealserverArrayOutput)
+func (i GetRealserversRealserverArray) ToGetRealserversRealserverArrayOutputWithContext(ctx context.Context) GetRealserversRealserverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRealserversRealserverArrayOutput)
 }
 
-type RealserversRealserverOutput struct{ *pulumi.OutputState }
+type GetRealserversRealserverOutput struct{ *pulumi.OutputState }
 
-func (RealserversRealserverOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*RealserversRealserver)(nil)).Elem()
+func (GetRealserversRealserverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRealserversRealserver)(nil)).Elem()
 }
 
-func (o RealserversRealserverOutput) ToRealserversRealserverOutput() RealserversRealserverOutput {
+func (o GetRealserversRealserverOutput) ToGetRealserversRealserverOutput() GetRealserversRealserverOutput {
 	return o
 }
 
-func (o RealserversRealserverOutput) ToRealserversRealserverOutputWithContext(ctx context.Context) RealserversRealserverOutput {
+func (o GetRealserversRealserverOutput) ToGetRealserversRealserverOutputWithContext(ctx context.Context) GetRealserversRealserverOutput {
 	return o
 }
 
-func (o RealserversRealserverOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v RealserversRealserver) string { return v.Domain }).(pulumi.StringOutput)
+// Domain of the GAAP realserver to be queried, conflict with `ip`.
+func (o GetRealserversRealserverOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRealserversRealserver) string { return v.Domain }).(pulumi.StringOutput)
 }
 
-func (o RealserversRealserverOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v RealserversRealserver) string { return v.Id }).(pulumi.StringOutput)
+// ID of the GAAP realserver.
+func (o GetRealserversRealserverOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRealserversRealserver) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o RealserversRealserverOutput) Ip() pulumi.StringOutput {
-	return o.ApplyT(func(v RealserversRealserver) string { return v.Ip }).(pulumi.StringOutput)
+// IP of the GAAP realserver to be queried, conflict with `domain`.
+func (o GetRealserversRealserverOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRealserversRealserver) string { return v.Ip }).(pulumi.StringOutput)
 }
 
-func (o RealserversRealserverOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v RealserversRealserver) string { return v.Name }).(pulumi.StringOutput)
+// Name of the GAAP realserver to be queried, the maximum length is 30.
+func (o GetRealserversRealserverOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRealserversRealserver) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o RealserversRealserverOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v RealserversRealserver) int { return v.ProjectId }).(pulumi.IntOutput)
+// ID of the project within the GAAP realserver to be queried, default value is `-1`, no set means all projects.
+func (o GetRealserversRealserverOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRealserversRealserver) int { return v.ProjectId }).(pulumi.IntOutput)
 }
 
-func (o RealserversRealserverOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v RealserversRealserver) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+// Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
+func (o GetRealserversRealserverOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetRealserversRealserver) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
 }
 
-type RealserversRealserverArrayOutput struct{ *pulumi.OutputState }
+type GetRealserversRealserverArrayOutput struct{ *pulumi.OutputState }
 
-func (RealserversRealserverArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]RealserversRealserver)(nil)).Elem()
+func (GetRealserversRealserverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRealserversRealserver)(nil)).Elem()
 }
 
-func (o RealserversRealserverArrayOutput) ToRealserversRealserverArrayOutput() RealserversRealserverArrayOutput {
+func (o GetRealserversRealserverArrayOutput) ToGetRealserversRealserverArrayOutput() GetRealserversRealserverArrayOutput {
 	return o
 }
 
-func (o RealserversRealserverArrayOutput) ToRealserversRealserverArrayOutputWithContext(ctx context.Context) RealserversRealserverArrayOutput {
+func (o GetRealserversRealserverArrayOutput) ToGetRealserversRealserverArrayOutputWithContext(ctx context.Context) GetRealserversRealserverArrayOutput {
 	return o
 }
 
-func (o RealserversRealserverArrayOutput) Index(i pulumi.IntInput) RealserversRealserverOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RealserversRealserver {
-		return vs[0].([]RealserversRealserver)[vs[1].(int)]
-	}).(RealserversRealserverOutput)
+func (o GetRealserversRealserverArrayOutput) Index(i pulumi.IntInput) GetRealserversRealserverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRealserversRealserver {
+		return vs[0].([]GetRealserversRealserver)[vs[1].(int)]
+	}).(GetRealserversRealserverOutput)
 }
 
-type SecurityRulesRule struct {
-	Action   string `pulumi:"action"`
-	CidrIp   string `pulumi:"cidrIp"`
-	Id       string `pulumi:"id"`
-	Name     string `pulumi:"name"`
-	Port     string `pulumi:"port"`
+type GetSecurityRulesRule struct {
+	// Policy of the rule to be queried.
+	Action string `pulumi:"action"`
+	// A network address block of the request source to be queried.
+	CidrIp string `pulumi:"cidrIp"`
+	// ID of the security policy rule.
+	Id string `pulumi:"id"`
+	// Name of the security policy rule to be queried.
+	Name string `pulumi:"name"`
+	// Port of the security policy rule to be queried.
+	Port string `pulumi:"port"`
+	// Protocol of the security policy rule to be queried.
 	Protocol string `pulumi:"protocol"`
 }
 
-// SecurityRulesRuleInput is an input type that accepts SecurityRulesRuleArgs and SecurityRulesRuleOutput values.
-// You can construct a concrete instance of `SecurityRulesRuleInput` via:
+// GetSecurityRulesRuleInput is an input type that accepts GetSecurityRulesRuleArgs and GetSecurityRulesRuleOutput values.
+// You can construct a concrete instance of `GetSecurityRulesRuleInput` via:
 //
-//          SecurityRulesRuleArgs{...}
-type SecurityRulesRuleInput interface {
+//          GetSecurityRulesRuleArgs{...}
+type GetSecurityRulesRuleInput interface {
 	pulumi.Input
 
-	ToSecurityRulesRuleOutput() SecurityRulesRuleOutput
-	ToSecurityRulesRuleOutputWithContext(context.Context) SecurityRulesRuleOutput
+	ToGetSecurityRulesRuleOutput() GetSecurityRulesRuleOutput
+	ToGetSecurityRulesRuleOutputWithContext(context.Context) GetSecurityRulesRuleOutput
 }
 
-type SecurityRulesRuleArgs struct {
-	Action   pulumi.StringInput `pulumi:"action"`
-	CidrIp   pulumi.StringInput `pulumi:"cidrIp"`
-	Id       pulumi.StringInput `pulumi:"id"`
-	Name     pulumi.StringInput `pulumi:"name"`
-	Port     pulumi.StringInput `pulumi:"port"`
+type GetSecurityRulesRuleArgs struct {
+	// Policy of the rule to be queried.
+	Action pulumi.StringInput `pulumi:"action"`
+	// A network address block of the request source to be queried.
+	CidrIp pulumi.StringInput `pulumi:"cidrIp"`
+	// ID of the security policy rule.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Name of the security policy rule to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Port of the security policy rule to be queried.
+	Port pulumi.StringInput `pulumi:"port"`
+	// Protocol of the security policy rule to be queried.
 	Protocol pulumi.StringInput `pulumi:"protocol"`
 }
 
-func (SecurityRulesRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityRulesRule)(nil)).Elem()
+func (GetSecurityRulesRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSecurityRulesRule)(nil)).Elem()
 }
 
-func (i SecurityRulesRuleArgs) ToSecurityRulesRuleOutput() SecurityRulesRuleOutput {
-	return i.ToSecurityRulesRuleOutputWithContext(context.Background())
+func (i GetSecurityRulesRuleArgs) ToGetSecurityRulesRuleOutput() GetSecurityRulesRuleOutput {
+	return i.ToGetSecurityRulesRuleOutputWithContext(context.Background())
 }
 
-func (i SecurityRulesRuleArgs) ToSecurityRulesRuleOutputWithContext(ctx context.Context) SecurityRulesRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityRulesRuleOutput)
+func (i GetSecurityRulesRuleArgs) ToGetSecurityRulesRuleOutputWithContext(ctx context.Context) GetSecurityRulesRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSecurityRulesRuleOutput)
 }
 
-// SecurityRulesRuleArrayInput is an input type that accepts SecurityRulesRuleArray and SecurityRulesRuleArrayOutput values.
-// You can construct a concrete instance of `SecurityRulesRuleArrayInput` via:
+// GetSecurityRulesRuleArrayInput is an input type that accepts GetSecurityRulesRuleArray and GetSecurityRulesRuleArrayOutput values.
+// You can construct a concrete instance of `GetSecurityRulesRuleArrayInput` via:
 //
-//          SecurityRulesRuleArray{ SecurityRulesRuleArgs{...} }
-type SecurityRulesRuleArrayInput interface {
+//          GetSecurityRulesRuleArray{ GetSecurityRulesRuleArgs{...} }
+type GetSecurityRulesRuleArrayInput interface {
 	pulumi.Input
 
-	ToSecurityRulesRuleArrayOutput() SecurityRulesRuleArrayOutput
-	ToSecurityRulesRuleArrayOutputWithContext(context.Context) SecurityRulesRuleArrayOutput
+	ToGetSecurityRulesRuleArrayOutput() GetSecurityRulesRuleArrayOutput
+	ToGetSecurityRulesRuleArrayOutputWithContext(context.Context) GetSecurityRulesRuleArrayOutput
 }
 
-type SecurityRulesRuleArray []SecurityRulesRuleInput
+type GetSecurityRulesRuleArray []GetSecurityRulesRuleInput
 
-func (SecurityRulesRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityRulesRule)(nil)).Elem()
+func (GetSecurityRulesRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSecurityRulesRule)(nil)).Elem()
 }
 
-func (i SecurityRulesRuleArray) ToSecurityRulesRuleArrayOutput() SecurityRulesRuleArrayOutput {
-	return i.ToSecurityRulesRuleArrayOutputWithContext(context.Background())
+func (i GetSecurityRulesRuleArray) ToGetSecurityRulesRuleArrayOutput() GetSecurityRulesRuleArrayOutput {
+	return i.ToGetSecurityRulesRuleArrayOutputWithContext(context.Background())
 }
 
-func (i SecurityRulesRuleArray) ToSecurityRulesRuleArrayOutputWithContext(ctx context.Context) SecurityRulesRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SecurityRulesRuleArrayOutput)
+func (i GetSecurityRulesRuleArray) ToGetSecurityRulesRuleArrayOutputWithContext(ctx context.Context) GetSecurityRulesRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSecurityRulesRuleArrayOutput)
 }
 
-type SecurityRulesRuleOutput struct{ *pulumi.OutputState }
+type GetSecurityRulesRuleOutput struct{ *pulumi.OutputState }
 
-func (SecurityRulesRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SecurityRulesRule)(nil)).Elem()
+func (GetSecurityRulesRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSecurityRulesRule)(nil)).Elem()
 }
 
-func (o SecurityRulesRuleOutput) ToSecurityRulesRuleOutput() SecurityRulesRuleOutput {
+func (o GetSecurityRulesRuleOutput) ToGetSecurityRulesRuleOutput() GetSecurityRulesRuleOutput {
 	return o
 }
 
-func (o SecurityRulesRuleOutput) ToSecurityRulesRuleOutputWithContext(ctx context.Context) SecurityRulesRuleOutput {
+func (o GetSecurityRulesRuleOutput) ToGetSecurityRulesRuleOutputWithContext(ctx context.Context) GetSecurityRulesRuleOutput {
 	return o
 }
 
-func (o SecurityRulesRuleOutput) Action() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityRulesRule) string { return v.Action }).(pulumi.StringOutput)
+// Policy of the rule to be queried.
+func (o GetSecurityRulesRuleOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecurityRulesRule) string { return v.Action }).(pulumi.StringOutput)
 }
 
-func (o SecurityRulesRuleOutput) CidrIp() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityRulesRule) string { return v.CidrIp }).(pulumi.StringOutput)
+// A network address block of the request source to be queried.
+func (o GetSecurityRulesRuleOutput) CidrIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecurityRulesRule) string { return v.CidrIp }).(pulumi.StringOutput)
 }
 
-func (o SecurityRulesRuleOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityRulesRule) string { return v.Id }).(pulumi.StringOutput)
+// ID of the security policy rule.
+func (o GetSecurityRulesRuleOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecurityRulesRule) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o SecurityRulesRuleOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityRulesRule) string { return v.Name }).(pulumi.StringOutput)
+// Name of the security policy rule to be queried.
+func (o GetSecurityRulesRuleOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecurityRulesRule) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o SecurityRulesRuleOutput) Port() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityRulesRule) string { return v.Port }).(pulumi.StringOutput)
+// Port of the security policy rule to be queried.
+func (o GetSecurityRulesRuleOutput) Port() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecurityRulesRule) string { return v.Port }).(pulumi.StringOutput)
 }
 
-func (o SecurityRulesRuleOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v SecurityRulesRule) string { return v.Protocol }).(pulumi.StringOutput)
+// Protocol of the security policy rule to be queried.
+func (o GetSecurityRulesRuleOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecurityRulesRule) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
-type SecurityRulesRuleArrayOutput struct{ *pulumi.OutputState }
+type GetSecurityRulesRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (SecurityRulesRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SecurityRulesRule)(nil)).Elem()
+func (GetSecurityRulesRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSecurityRulesRule)(nil)).Elem()
 }
 
-func (o SecurityRulesRuleArrayOutput) ToSecurityRulesRuleArrayOutput() SecurityRulesRuleArrayOutput {
+func (o GetSecurityRulesRuleArrayOutput) ToGetSecurityRulesRuleArrayOutput() GetSecurityRulesRuleArrayOutput {
 	return o
 }
 
-func (o SecurityRulesRuleArrayOutput) ToSecurityRulesRuleArrayOutputWithContext(ctx context.Context) SecurityRulesRuleArrayOutput {
+func (o GetSecurityRulesRuleArrayOutput) ToGetSecurityRulesRuleArrayOutputWithContext(ctx context.Context) GetSecurityRulesRuleArrayOutput {
 	return o
 }
 
-func (o SecurityRulesRuleArrayOutput) Index(i pulumi.IntInput) SecurityRulesRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SecurityRulesRule {
-		return vs[0].([]SecurityRulesRule)[vs[1].(int)]
-	}).(SecurityRulesRuleOutput)
+func (o GetSecurityRulesRuleArrayOutput) Index(i pulumi.IntInput) GetSecurityRulesRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSecurityRulesRule {
+		return vs[0].([]GetSecurityRulesRule)[vs[1].(int)]
+	}).(GetSecurityRulesRuleOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*CertificatesCertificateInput)(nil)).Elem(), CertificatesCertificateArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CertificatesCertificateArrayInput)(nil)).Elem(), CertificatesCertificateArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainErrorPageInfoListErrorPageInfoListInput)(nil)).Elem(), DomainErrorPageInfoListErrorPageInfoListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DomainErrorPageInfoListErrorPageInfoListArrayInput)(nil)).Elem(), DomainErrorPageInfoListErrorPageInfoListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*HttpDomainsDomainInput)(nil)).Elem(), HttpDomainsDomainArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*HttpDomainsDomainArrayInput)(nil)).Elem(), HttpDomainsDomainArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*HttpRuleRealserverInput)(nil)).Elem(), HttpRuleRealserverArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*HttpRuleRealserverArrayInput)(nil)).Elem(), HttpRuleRealserverArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*HttpRulesRuleInput)(nil)).Elem(), HttpRulesRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*HttpRulesRuleArrayInput)(nil)).Elem(), HttpRulesRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*HttpRulesRuleRealserverInput)(nil)).Elem(), HttpRulesRuleRealserverArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*HttpRulesRuleRealserverArrayInput)(nil)).Elem(), HttpRulesRuleRealserverArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*Layer4ListenerRealserverBindSetInput)(nil)).Elem(), Layer4ListenerRealserverBindSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*Layer4ListenerRealserverBindSetArrayInput)(nil)).Elem(), Layer4ListenerRealserverBindSetArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*Layer4ListenersListenerInput)(nil)).Elem(), Layer4ListenersListenerArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*Layer4ListenersListenerArrayInput)(nil)).Elem(), Layer4ListenersListenerArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*Layer7ListenersListenerInput)(nil)).Elem(), Layer7ListenersListenerArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*Layer7ListenersListenerArrayInput)(nil)).Elem(), Layer7ListenersListenerArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProxiesProxyInput)(nil)).Elem(), ProxiesProxyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProxiesProxyArrayInput)(nil)).Elem(), ProxiesProxyArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*RealserversRealserverInput)(nil)).Elem(), RealserversRealserverArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*RealserversRealserverArrayInput)(nil)).Elem(), RealserversRealserverArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityRulesRuleInput)(nil)).Elem(), SecurityRulesRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SecurityRulesRuleArrayInput)(nil)).Elem(), SecurityRulesRuleArray{})
-	pulumi.RegisterOutputType(CertificatesCertificateOutput{})
-	pulumi.RegisterOutputType(CertificatesCertificateArrayOutput{})
-	pulumi.RegisterOutputType(DomainErrorPageInfoListErrorPageInfoListOutput{})
-	pulumi.RegisterOutputType(DomainErrorPageInfoListErrorPageInfoListArrayOutput{})
-	pulumi.RegisterOutputType(HttpDomainsDomainOutput{})
-	pulumi.RegisterOutputType(HttpDomainsDomainArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateInput)(nil)).Elem(), GetCertificatesCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateArrayInput)(nil)).Elem(), GetCertificatesCertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainErrorPagesErrorPageInfoListInput)(nil)).Elem(), GetDomainErrorPagesErrorPageInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainErrorPagesErrorPageInfoListArrayInput)(nil)).Elem(), GetDomainErrorPagesErrorPageInfoListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetHttpDomainsDomainInput)(nil)).Elem(), GetHttpDomainsDomainArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetHttpDomainsDomainArrayInput)(nil)).Elem(), GetHttpDomainsDomainArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetHttpRulesRuleInput)(nil)).Elem(), GetHttpRulesRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetHttpRulesRuleArrayInput)(nil)).Elem(), GetHttpRulesRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetHttpRulesRuleRealserverInput)(nil)).Elem(), GetHttpRulesRuleRealserverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetHttpRulesRuleRealserverArrayInput)(nil)).Elem(), GetHttpRulesRuleRealserverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLayer4ListenersListenerInput)(nil)).Elem(), GetLayer4ListenersListenerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLayer4ListenersListenerArrayInput)(nil)).Elem(), GetLayer4ListenersListenerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLayer7ListenersListenerInput)(nil)).Elem(), GetLayer7ListenersListenerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLayer7ListenersListenerArrayInput)(nil)).Elem(), GetLayer7ListenersListenerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxiesProxyInput)(nil)).Elem(), GetProxiesProxyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxiesProxyArrayInput)(nil)).Elem(), GetProxiesProxyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRealserversRealserverInput)(nil)).Elem(), GetRealserversRealserverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRealserversRealserverArrayInput)(nil)).Elem(), GetRealserversRealserverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityRulesRuleInput)(nil)).Elem(), GetSecurityRulesRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSecurityRulesRuleArrayInput)(nil)).Elem(), GetSecurityRulesRuleArray{})
 	pulumi.RegisterOutputType(HttpRuleRealserverOutput{})
 	pulumi.RegisterOutputType(HttpRuleRealserverArrayOutput{})
-	pulumi.RegisterOutputType(HttpRulesRuleOutput{})
-	pulumi.RegisterOutputType(HttpRulesRuleArrayOutput{})
-	pulumi.RegisterOutputType(HttpRulesRuleRealserverOutput{})
-	pulumi.RegisterOutputType(HttpRulesRuleRealserverArrayOutput{})
 	pulumi.RegisterOutputType(Layer4ListenerRealserverBindSetOutput{})
 	pulumi.RegisterOutputType(Layer4ListenerRealserverBindSetArrayOutput{})
-	pulumi.RegisterOutputType(Layer4ListenersListenerOutput{})
-	pulumi.RegisterOutputType(Layer4ListenersListenerArrayOutput{})
-	pulumi.RegisterOutputType(Layer7ListenersListenerOutput{})
-	pulumi.RegisterOutputType(Layer7ListenersListenerArrayOutput{})
-	pulumi.RegisterOutputType(ProxiesProxyOutput{})
-	pulumi.RegisterOutputType(ProxiesProxyArrayOutput{})
-	pulumi.RegisterOutputType(RealserversRealserverOutput{})
-	pulumi.RegisterOutputType(RealserversRealserverArrayOutput{})
-	pulumi.RegisterOutputType(SecurityRulesRuleOutput{})
-	pulumi.RegisterOutputType(SecurityRulesRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificatesCertificateOutput{})
+	pulumi.RegisterOutputType(GetCertificatesCertificateArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainErrorPagesErrorPageInfoListOutput{})
+	pulumi.RegisterOutputType(GetDomainErrorPagesErrorPageInfoListArrayOutput{})
+	pulumi.RegisterOutputType(GetHttpDomainsDomainOutput{})
+	pulumi.RegisterOutputType(GetHttpDomainsDomainArrayOutput{})
+	pulumi.RegisterOutputType(GetHttpRulesRuleOutput{})
+	pulumi.RegisterOutputType(GetHttpRulesRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetHttpRulesRuleRealserverOutput{})
+	pulumi.RegisterOutputType(GetHttpRulesRuleRealserverArrayOutput{})
+	pulumi.RegisterOutputType(GetLayer4ListenersListenerOutput{})
+	pulumi.RegisterOutputType(GetLayer4ListenersListenerArrayOutput{})
+	pulumi.RegisterOutputType(GetLayer7ListenersListenerOutput{})
+	pulumi.RegisterOutputType(GetLayer7ListenersListenerArrayOutput{})
+	pulumi.RegisterOutputType(GetProxiesProxyOutput{})
+	pulumi.RegisterOutputType(GetProxiesProxyArrayOutput{})
+	pulumi.RegisterOutputType(GetRealserversRealserverOutput{})
+	pulumi.RegisterOutputType(GetRealserversRealserverArrayOutput{})
+	pulumi.RegisterOutputType(GetSecurityRulesRuleOutput{})
+	pulumi.RegisterOutputType(GetSecurityRulesRuleArrayOutput{})
 }

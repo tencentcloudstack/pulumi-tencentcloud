@@ -9,6 +9,36 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cfs
 {
+    /// <summary>
+    /// Provides a resource to create a CFS access group.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cfs.AccessGroup("foo", new Tencentcloud.Cfs.AccessGroupArgs
+    ///         {
+    ///             Description = "test",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CFS access group can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup foo pgroup-7nx89k7l
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/accessGroup:AccessGroup")]
     public partial class AccessGroup : Pulumi.CustomResource
     {

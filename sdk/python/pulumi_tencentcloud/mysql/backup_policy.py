@@ -21,9 +21,7 @@ class BackupPolicyArgs:
         The set of arguments for constructing a BackupPolicy resource.
         :param pulumi.Input[str] mysql_id: Instance ID to which policies will be applied.
         :param pulumi.Input[str] backup_model: Backup method. Supported values include: `physical` - physical backup.
-        :param pulumi.Input[str] backup_time: Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-               following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-               `22:00-02:00`.
+        :param pulumi.Input[str] backup_time: Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
         :param pulumi.Input[int] retention_period: Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
         """
         pulumi.set(__self__, "mysql_id", mysql_id)
@@ -62,9 +60,7 @@ class BackupPolicyArgs:
     @pulumi.getter(name="backupTime")
     def backup_time(self) -> Optional[pulumi.Input[str]]:
         """
-        Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-        following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-        `22:00-02:00`.
+        Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
         """
         return pulumi.get(self, "backup_time")
 
@@ -96,9 +92,7 @@ class _BackupPolicyState:
         """
         Input properties used for looking up and filtering BackupPolicy resources.
         :param pulumi.Input[str] backup_model: Backup method. Supported values include: `physical` - physical backup.
-        :param pulumi.Input[str] backup_time: Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-               following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-               `22:00-02:00`.
+        :param pulumi.Input[str] backup_time: Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
         :param pulumi.Input[int] binlog_period: Retention period for binlog in days.
         :param pulumi.Input[str] mysql_id: Instance ID to which policies will be applied.
         :param pulumi.Input[int] retention_period: Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
@@ -130,9 +124,7 @@ class _BackupPolicyState:
     @pulumi.getter(name="backupTime")
     def backup_time(self) -> Optional[pulumi.Input[str]]:
         """
-        Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-        following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-        `22:00-02:00`.
+        Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
         """
         return pulumi.get(self, "backup_time")
 
@@ -188,13 +180,23 @@ class BackupPolicy(pulumi.CustomResource):
                  retention_period: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a BackupPolicy resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        default = tencentcloud.mysql.BackupPolicy("default",
+            backup_model="physical",
+            backup_time="02:00-06:00",
+            mysql_id="cdb-dnqksd9f",
+            retention_period=7)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] backup_model: Backup method. Supported values include: `physical` - physical backup.
-        :param pulumi.Input[str] backup_time: Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-               following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-               `22:00-02:00`.
+        :param pulumi.Input[str] backup_time: Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
         :param pulumi.Input[str] mysql_id: Instance ID to which policies will be applied.
         :param pulumi.Input[int] retention_period: Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
         """
@@ -205,7 +207,19 @@ class BackupPolicy(pulumi.CustomResource):
                  args: BackupPolicyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a BackupPolicy resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        default = tencentcloud.mysql.BackupPolicy("default",
+            backup_model="physical",
+            backup_time="02:00-06:00",
+            mysql_id="cdb-dnqksd9f",
+            retention_period=7)
+        ```
+
         :param str resource_name: The name of the resource.
         :param BackupPolicyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -267,9 +281,7 @@ class BackupPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] backup_model: Backup method. Supported values include: `physical` - physical backup.
-        :param pulumi.Input[str] backup_time: Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-               following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-               `22:00-02:00`.
+        :param pulumi.Input[str] backup_time: Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
         :param pulumi.Input[int] binlog_period: Retention period for binlog in days.
         :param pulumi.Input[str] mysql_id: Instance ID to which policies will be applied.
         :param pulumi.Input[int] retention_period: Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
@@ -297,9 +309,7 @@ class BackupPolicy(pulumi.CustomResource):
     @pulumi.getter(name="backupTime")
     def backup_time(self) -> pulumi.Output[Optional[str]]:
         """
-        Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The
-        following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and
-        `22:00-02:00`.
+        Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
         """
         return pulumi.get(self, "backup_time")
 

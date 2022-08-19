@@ -50,16 +50,13 @@ class ContainerInstanceArgs:
         :param pulumi.Input[bool] auto_create_eip: Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existed_eip_ids`.
         :param pulumi.Input[str] cam_role_name: CAM role name authorized to access.
         :param pulumi.Input[Sequence[pulumi.Input['ContainerInstanceCbsVolumeArgs']]] cbs_volumes: List of CBS volume.
-        :param pulumi.Input[str] cpu_type: Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-               `intel` when `amd` sold out.
+        :param pulumi.Input[str] cpu_type: Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
         :param pulumi.Input[Mapping[str, Any]] dns_config_options: Map of DNS config options.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names_servers: IP Addresses of DNS Servers.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_searches: List of DNS Search Domain.
         :param pulumi.Input[bool] eip_delete_policy: Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
-        :param pulumi.Input[int] eip_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-               `existed_eip_ids`.
-        :param pulumi.Input[str] eip_service_provider: EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-               `existed_eip_ids`.
+        :param pulumi.Input[int] eip_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existed_eip_ids`.
+        :param pulumi.Input[str] eip_service_provider: EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existed_eip_ids`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] existed_eip_ids: Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
         :param pulumi.Input[int] gpu_count: Count of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
         :param pulumi.Input[str] gpu_type: Type of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
@@ -224,8 +221,7 @@ class ContainerInstanceArgs:
     @pulumi.getter(name="cpuType")
     def cpu_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-        `intel` when `amd` sold out.
+        Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
         """
         return pulumi.get(self, "cpu_type")
 
@@ -285,8 +281,7 @@ class ContainerInstanceArgs:
     @pulumi.getter(name="eipMaxBandwidthOut")
     def eip_max_bandwidth_out(self) -> Optional[pulumi.Input[int]]:
         """
-        Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-        `existed_eip_ids`.
+        Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existed_eip_ids`.
         """
         return pulumi.get(self, "eip_max_bandwidth_out")
 
@@ -298,8 +293,7 @@ class ContainerInstanceArgs:
     @pulumi.getter(name="eipServiceProvider")
     def eip_service_provider(self) -> Optional[pulumi.Input[str]]:
         """
-        EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-        `existed_eip_ids`.
+        EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existed_eip_ids`.
         """
         return pulumi.get(self, "eip_service_provider")
 
@@ -444,18 +438,15 @@ class _ContainerInstanceState:
         :param pulumi.Input[Sequence[pulumi.Input['ContainerInstanceCbsVolumeArgs']]] cbs_volumes: List of CBS volume.
         :param pulumi.Input[Sequence[pulumi.Input['ContainerInstanceContainerArgs']]] containers: List of container.
         :param pulumi.Input[float] cpu: The number of CPU cores. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
-        :param pulumi.Input[str] cpu_type: Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-               `intel` when `amd` sold out.
+        :param pulumi.Input[str] cpu_type: Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
         :param pulumi.Input[str] created_time: Container instance creation time.
         :param pulumi.Input[Mapping[str, Any]] dns_config_options: Map of DNS config options.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names_servers: IP Addresses of DNS Servers.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_searches: List of DNS Search Domain.
         :param pulumi.Input[str] eip_address: EIP address.
         :param pulumi.Input[bool] eip_delete_policy: Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
-        :param pulumi.Input[int] eip_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-               `existed_eip_ids`.
-        :param pulumi.Input[str] eip_service_provider: EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-               `existed_eip_ids`.
+        :param pulumi.Input[int] eip_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existed_eip_ids`.
+        :param pulumi.Input[str] eip_service_provider: EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existed_eip_ids`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] existed_eip_ids: Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
         :param pulumi.Input[int] gpu_count: Count of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
         :param pulumi.Input[str] gpu_type: Type of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
@@ -606,8 +597,7 @@ class _ContainerInstanceState:
     @pulumi.getter(name="cpuType")
     def cpu_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-        `intel` when `amd` sold out.
+        Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
         """
         return pulumi.get(self, "cpu_type")
 
@@ -691,8 +681,7 @@ class _ContainerInstanceState:
     @pulumi.getter(name="eipMaxBandwidthOut")
     def eip_max_bandwidth_out(self) -> Optional[pulumi.Input[int]]:
         """
-        Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-        `existed_eip_ids`.
+        Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existed_eip_ids`.
         """
         return pulumi.get(self, "eip_max_bandwidth_out")
 
@@ -704,8 +693,7 @@ class _ContainerInstanceState:
     @pulumi.getter(name="eipServiceProvider")
     def eip_service_provider(self) -> Optional[pulumi.Input[str]]:
         """
-        EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-        `existed_eip_ids`.
+        EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existed_eip_ids`.
         """
         return pulumi.get(self, "eip_service_provider")
 
@@ -913,7 +901,78 @@ class ContainerInstance(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a ContainerInstance resource with the given unique name, props, and options.
+        Provides an elastic kubernetes service container instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        group = tencentcloud.Security.get_groups()
+        zone = tencentcloud.Availability.get_zones_by_product(product="cvm")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/24")
+        sub = tencentcloud.subnet.Instance("sub",
+            availability_zone=zone.zones[0].name,
+            cidr_block="10.0.0.0/24",
+            vpc_id=vpc.id)
+        cbs = tencentcloud.cbs.Storage("cbs",
+            availability_zone=zone.zones[0].name,
+            storage_name="cbs1",
+            storage_size=10,
+            storage_type="CLOUD_PREMIUM")
+        eci1 = tencentcloud.eks.ContainerInstance("eci1",
+            vpc_id=vpc.id,
+            subnet_id=sub.id,
+            cpu=2,
+            cpu_type="intel",
+            restart_policy="Always",
+            memory=4,
+            security_groups=[group.security_groups[0].security_group_id],
+            cbs_volumes=[tencentcloud.eks.ContainerInstanceCbsVolumeArgs(
+                name="vol1",
+                disk_id=cbs.id,
+            )],
+            containers=[
+                tencentcloud.eks.ContainerInstanceContainerArgs(
+                    name="redis1",
+                    image="redis",
+                    liveness_probe=tencentcloud.eks.ContainerInstanceContainerLivenessProbeArgs(
+                        init_delay_seconds=1,
+                        timeout_seconds=3,
+                        period_seconds=11,
+                        success_threshold=1,
+                        failure_threshold=3,
+                        http_get_path="/",
+                        http_get_port=443,
+                        http_get_scheme="HTTPS",
+                    ),
+                    readiness_probe=tencentcloud.eks.ContainerInstanceContainerReadinessProbeArgs(
+                        init_delay_seconds=1,
+                        timeout_seconds=3,
+                        period_seconds=10,
+                        success_threshold=1,
+                        failure_threshold=3,
+                        tcp_socket_port=81,
+                    ),
+                ),
+                tencentcloud.eks.ContainerInstanceContainerArgs(
+                    name="nginx",
+                    image="nginx",
+                ),
+            ],
+            init_containers=[tencentcloud.eks.ContainerInstanceInitContainerArgs(
+                name="alpine",
+                image="alpine:latest",
+            )])
+        ```
+
+        ## Import
+
+        ```sh
+         $ pulumi import tencentcloud:Eks/containerInstance:ContainerInstance foo container-instance-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] auto_create_eip: Indicates whether to create EIP instead of specify existing EIPs. Conflict with `existed_eip_ids`.
@@ -921,16 +980,13 @@ class ContainerInstance(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ContainerInstanceCbsVolumeArgs']]]] cbs_volumes: List of CBS volume.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ContainerInstanceContainerArgs']]]] containers: List of container.
         :param pulumi.Input[float] cpu: The number of CPU cores. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
-        :param pulumi.Input[str] cpu_type: Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-               `intel` when `amd` sold out.
+        :param pulumi.Input[str] cpu_type: Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
         :param pulumi.Input[Mapping[str, Any]] dns_config_options: Map of DNS config options.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names_servers: IP Addresses of DNS Servers.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_searches: List of DNS Search Domain.
         :param pulumi.Input[bool] eip_delete_policy: Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
-        :param pulumi.Input[int] eip_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-               `existed_eip_ids`.
-        :param pulumi.Input[str] eip_service_provider: EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-               `existed_eip_ids`.
+        :param pulumi.Input[int] eip_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existed_eip_ids`.
+        :param pulumi.Input[str] eip_service_provider: EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existed_eip_ids`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] existed_eip_ids: Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
         :param pulumi.Input[int] gpu_count: Count of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
         :param pulumi.Input[str] gpu_type: Type of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
@@ -951,7 +1007,78 @@ class ContainerInstance(pulumi.CustomResource):
                  args: ContainerInstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ContainerInstance resource with the given unique name, props, and options.
+        Provides an elastic kubernetes service container instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        group = tencentcloud.Security.get_groups()
+        zone = tencentcloud.Availability.get_zones_by_product(product="cvm")
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/24")
+        sub = tencentcloud.subnet.Instance("sub",
+            availability_zone=zone.zones[0].name,
+            cidr_block="10.0.0.0/24",
+            vpc_id=vpc.id)
+        cbs = tencentcloud.cbs.Storage("cbs",
+            availability_zone=zone.zones[0].name,
+            storage_name="cbs1",
+            storage_size=10,
+            storage_type="CLOUD_PREMIUM")
+        eci1 = tencentcloud.eks.ContainerInstance("eci1",
+            vpc_id=vpc.id,
+            subnet_id=sub.id,
+            cpu=2,
+            cpu_type="intel",
+            restart_policy="Always",
+            memory=4,
+            security_groups=[group.security_groups[0].security_group_id],
+            cbs_volumes=[tencentcloud.eks.ContainerInstanceCbsVolumeArgs(
+                name="vol1",
+                disk_id=cbs.id,
+            )],
+            containers=[
+                tencentcloud.eks.ContainerInstanceContainerArgs(
+                    name="redis1",
+                    image="redis",
+                    liveness_probe=tencentcloud.eks.ContainerInstanceContainerLivenessProbeArgs(
+                        init_delay_seconds=1,
+                        timeout_seconds=3,
+                        period_seconds=11,
+                        success_threshold=1,
+                        failure_threshold=3,
+                        http_get_path="/",
+                        http_get_port=443,
+                        http_get_scheme="HTTPS",
+                    ),
+                    readiness_probe=tencentcloud.eks.ContainerInstanceContainerReadinessProbeArgs(
+                        init_delay_seconds=1,
+                        timeout_seconds=3,
+                        period_seconds=10,
+                        success_threshold=1,
+                        failure_threshold=3,
+                        tcp_socket_port=81,
+                    ),
+                ),
+                tencentcloud.eks.ContainerInstanceContainerArgs(
+                    name="nginx",
+                    image="nginx",
+                ),
+            ],
+            init_containers=[tencentcloud.eks.ContainerInstanceInitContainerArgs(
+                name="alpine",
+                image="alpine:latest",
+            )])
+        ```
+
+        ## Import
+
+        ```sh
+         $ pulumi import tencentcloud:Eks/containerInstance:ContainerInstance foo container-instance-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param ContainerInstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1096,18 +1223,15 @@ class ContainerInstance(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ContainerInstanceCbsVolumeArgs']]]] cbs_volumes: List of CBS volume.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ContainerInstanceContainerArgs']]]] containers: List of container.
         :param pulumi.Input[float] cpu: The number of CPU cores. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
-        :param pulumi.Input[str] cpu_type: Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-               `intel` when `amd` sold out.
+        :param pulumi.Input[str] cpu_type: Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
         :param pulumi.Input[str] created_time: Container instance creation time.
         :param pulumi.Input[Mapping[str, Any]] dns_config_options: Map of DNS config options.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names_servers: IP Addresses of DNS Servers.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_searches: List of DNS Search Domain.
         :param pulumi.Input[str] eip_address: EIP address.
         :param pulumi.Input[bool] eip_delete_policy: Indicates weather the EIP release or not after instance deleted. Conflict with `existed_eip_ids`.
-        :param pulumi.Input[int] eip_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-               `existed_eip_ids`.
-        :param pulumi.Input[str] eip_service_provider: EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-               `existed_eip_ids`.
+        :param pulumi.Input[int] eip_max_bandwidth_out: Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existed_eip_ids`.
+        :param pulumi.Input[str] eip_service_provider: EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existed_eip_ids`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] existed_eip_ids: Existed EIP ID List which used to bind container instance. Conflict with `auto_create_eip` and auto create EIP options.
         :param pulumi.Input[int] gpu_count: Count of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
         :param pulumi.Input[str] gpu_type: Type of GPU. Check https://intl.cloud.tencent.com/document/product/457/34057 for specification references.
@@ -1210,8 +1334,7 @@ class ContainerInstance(pulumi.CustomResource):
     @pulumi.getter(name="cpuType")
     def cpu_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using
-        `intel` when `amd` sold out.
+        Type of cpu, which can set to `intel` or `amd`. It also support backup list like `amd,intel` which indicates using `intel` when `amd` sold out.
         """
         return pulumi.get(self, "cpu_type")
 
@@ -1267,8 +1390,7 @@ class ContainerInstance(pulumi.CustomResource):
     @pulumi.getter(name="eipMaxBandwidthOut")
     def eip_max_bandwidth_out(self) -> pulumi.Output[Optional[int]]:
         """
-        Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with
-        `existed_eip_ids`.
+        Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). Conflict with `existed_eip_ids`.
         """
         return pulumi.get(self, "eip_max_bandwidth_out")
 
@@ -1276,8 +1398,7 @@ class ContainerInstance(pulumi.CustomResource):
     @pulumi.getter(name="eipServiceProvider")
     def eip_service_provider(self) -> pulumi.Output[Optional[str]]:
         """
-        EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with
-        `existed_eip_ids`.
+        EIP service provider. Default is `BGP`, values `CMCC`,`CTCC`,`CUCC` are available for whitelist customer. Conflict with `existed_eip_ids`.
         """
         return pulumi.get(self, "eip_service_provider")
 

@@ -9,6 +9,80 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Vod
 {
+    /// <summary>
+    /// Provide a resource to create a VOD adaptive dynamic streaming template.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplate("foo", new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplateArgs
+    ///         {
+    ///             Comment = "test",
+    ///             DisableHigherVideoBitrate = false,
+    ///             DisableHigherVideoResolution = false,
+    ///             DrmType = "SimpleAES",
+    ///             Format = "HLS",
+    ///             StreamInfos = 
+    ///             {
+    ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+    ///                 {
+    ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
+    ///                     {
+    ///                         AudioChannel = "dual",
+    ///                         Bitrate = 129,
+    ///                         Codec = "libmp3lame",
+    ///                         SampleRate = 44100,
+    ///                     },
+    ///                     RemoveAudio = false,
+    ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
+    ///                     {
+    ///                         Bitrate = 129,
+    ///                         Codec = "libx265",
+    ///                         FillType = "stretch",
+    ///                         Fps = 4,
+    ///                         Height = 128,
+    ///                         ResolutionAdaptive = false,
+    ///                         Width = 128,
+    ///                     },
+    ///                 },
+    ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+    ///                 {
+    ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
+    ///                     {
+    ///                         Bitrate = 256,
+    ///                         Codec = "libfdk_aac",
+    ///                         SampleRate = 44100,
+    ///                     },
+    ///                     RemoveAudio = true,
+    ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
+    ///                     {
+    ///                         Bitrate = 256,
+    ///                         Codec = "libx264",
+    ///                         Fps = 4,
+    ///                     },
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// VOD adaptive dynamic streaming template can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate foo 169141
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate")]
     public partial class AdaptiveDynamicStreamingTemplate : Pulumi.CustomResource
     {
@@ -25,15 +99,13 @@ namespace Pulumi.Tencentcloud.Vod
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-        /// `true`: yes. Default value: `false`.
+        /// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         /// </summary>
         [Output("disableHigherVideoBitrate")]
         public Output<bool?> DisableHigherVideoBitrate { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-        /// `true`: yes. Default value: `false`.
+        /// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         /// </summary>
         [Output("disableHigherVideoResolution")]
         public Output<bool?> DisableHigherVideoResolution { get; private set; } = null!;
@@ -57,16 +129,13 @@ namespace Pulumi.Tencentcloud.Vod
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-        /// substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-        /// first substream will be used as the output frame rate.
+        /// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
         /// </summary>
         [Output("streamInfos")]
         public Output<ImmutableArray<Outputs.AdaptiveDynamicStreamingTemplateStreamInfo>> StreamInfos { get; private set; } = null!;
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        /// field; otherwise, leave it empty.
+        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         /// </summary>
         [Output("subAppId")]
         public Output<int?> SubAppId { get; private set; } = null!;
@@ -130,15 +199,13 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string>? Comment { get; set; }
 
         /// <summary>
-        /// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-        /// `true`: yes. Default value: `false`.
+        /// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         /// </summary>
         [Input("disableHigherVideoBitrate")]
         public Input<bool>? DisableHigherVideoBitrate { get; set; }
 
         /// <summary>
-        /// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-        /// `true`: yes. Default value: `false`.
+        /// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         /// </summary>
         [Input("disableHigherVideoResolution")]
         public Input<bool>? DisableHigherVideoResolution { get; set; }
@@ -165,9 +232,7 @@ namespace Pulumi.Tencentcloud.Vod
         private InputList<Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs>? _streamInfos;
 
         /// <summary>
-        /// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-        /// substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-        /// first substream will be used as the output frame rate.
+        /// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
         /// </summary>
         public InputList<Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs> StreamInfos
         {
@@ -176,8 +241,7 @@ namespace Pulumi.Tencentcloud.Vod
         }
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        /// field; otherwise, leave it empty.
+        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
@@ -202,15 +266,13 @@ namespace Pulumi.Tencentcloud.Vod
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-        /// `true`: yes. Default value: `false`.
+        /// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         /// </summary>
         [Input("disableHigherVideoBitrate")]
         public Input<bool>? DisableHigherVideoBitrate { get; set; }
 
         /// <summary>
-        /// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-        /// `true`: yes. Default value: `false`.
+        /// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         /// </summary>
         [Input("disableHigherVideoResolution")]
         public Input<bool>? DisableHigherVideoResolution { get; set; }
@@ -237,9 +299,7 @@ namespace Pulumi.Tencentcloud.Vod
         private InputList<Inputs.AdaptiveDynamicStreamingTemplateStreamInfoGetArgs>? _streamInfos;
 
         /// <summary>
-        /// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-        /// substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-        /// first substream will be used as the output frame rate.
+        /// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
         /// </summary>
         public InputList<Inputs.AdaptiveDynamicStreamingTemplateStreamInfoGetArgs> StreamInfos
         {
@@ -248,8 +308,7 @@ namespace Pulumi.Tencentcloud.Vod
         }
 
         /// <summary>
-        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        /// field; otherwise, leave it empty.
+        /// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }

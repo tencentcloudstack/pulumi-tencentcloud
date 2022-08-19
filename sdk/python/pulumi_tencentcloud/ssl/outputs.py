@@ -9,101 +9,12 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'CertificatesCertificateResult',
-    'InstanceInformation',
+    'PayCertificateInformation',
+    'GetCertificatesCertificateResult',
 ]
 
 @pulumi.output_type
-class CertificatesCertificateResult(dict):
-    def __init__(__self__, *,
-                 begin_time: str,
-                 cert: str,
-                 create_time: str,
-                 domain: str,
-                 end_time: str,
-                 id: str,
-                 name: str,
-                 product_zh_name: str,
-                 project_id: int,
-                 status: int,
-                 subject_names: Sequence[str],
-                 type: str):
-        pulumi.set(__self__, "begin_time", begin_time)
-        pulumi.set(__self__, "cert", cert)
-        pulumi.set(__self__, "create_time", create_time)
-        pulumi.set(__self__, "domain", domain)
-        pulumi.set(__self__, "end_time", end_time)
-        pulumi.set(__self__, "id", id)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "product_zh_name", product_zh_name)
-        pulumi.set(__self__, "project_id", project_id)
-        pulumi.set(__self__, "status", status)
-        pulumi.set(__self__, "subject_names", subject_names)
-        pulumi.set(__self__, "type", type)
-
-    @property
-    @pulumi.getter(name="beginTime")
-    def begin_time(self) -> str:
-        return pulumi.get(self, "begin_time")
-
-    @property
-    @pulumi.getter
-    def cert(self) -> str:
-        return pulumi.get(self, "cert")
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> str:
-        return pulumi.get(self, "create_time")
-
-    @property
-    @pulumi.getter
-    def domain(self) -> str:
-        return pulumi.get(self, "domain")
-
-    @property
-    @pulumi.getter(name="endTime")
-    def end_time(self) -> str:
-        return pulumi.get(self, "end_time")
-
-    @property
-    @pulumi.getter
-    def id(self) -> str:
-        return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter(name="productZhName")
-    def product_zh_name(self) -> str:
-        return pulumi.get(self, "product_zh_name")
-
-    @property
-    @pulumi.getter(name="projectId")
-    def project_id(self) -> int:
-        return pulumi.get(self, "project_id")
-
-    @property
-    @pulumi.getter
-    def status(self) -> int:
-        return pulumi.get(self, "status")
-
-    @property
-    @pulumi.getter(name="subjectNames")
-    def subject_names(self) -> Sequence[str]:
-        return pulumi.get(self, "subject_names")
-
-    @property
-    @pulumi.getter
-    def type(self) -> str:
-        return pulumi.get(self, "type")
-
-
-@pulumi.output_type
-class InstanceInformation(dict):
+class PayCertificateInformation(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -159,14 +70,14 @@ class InstanceInformation(dict):
             suggest = "key_password"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in InstanceInformation. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in PayCertificateInformation. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        InstanceInformation.__key_warning(key)
+        PayCertificateInformation.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        InstanceInformation.__key_warning(key)
+        PayCertificateInformation.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -195,6 +106,33 @@ class InstanceInformation(dict):
                  csr_type: Optional[str] = None,
                  domain_lists: Optional[Sequence[str]] = None,
                  key_password: Optional[str] = None):
+        """
+        :param str admin_email: The administrator's email address.
+        :param str admin_first_name: The first name of the administrator.
+        :param str admin_last_name: The last name of the administrator.
+        :param str admin_phone_num: Manager mobile phone number.
+        :param str admin_position: Manager position.
+        :param str certificate_domain: Domain name for binding certificate.
+        :param str contact_email: Contact email address.
+        :param str contact_first_name: Contact first name.
+        :param str contact_last_name: Contact last name.
+        :param str contact_number: Contact phone number.
+        :param str contact_position: Contact position.
+        :param str organization_address: Company address.
+        :param str organization_city: Company city.
+        :param str organization_country: Country name, such as China: CN.
+        :param str organization_division: Department name.
+        :param str organization_name: Company name.
+        :param str organization_region: The province where the company is located.
+        :param str phone_area_code: Company landline area code.
+        :param str phone_number: Company landline number.
+        :param str postal_code: Company postal code.
+        :param str verify_type: Certificate verification method. Valid values: `DNS_AUTO`, `DNS`, `FILE`. `DNS_AUTO` means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, `DNS` means manual DNS verification, `FILE` means file verification.
+        :param str csr_content: CSR content uploaded.
+        :param str csr_type: CSR generation method. Valid values: `online`, `parse`. `online` means online generation, `parse` means manual upload.
+        :param Sequence[str] domain_lists: Array of uploaded domain names, multi-domain certificates can be uploaded.
+        :param str key_password: Private key password.
+        """
         pulumi.set(__self__, "admin_email", admin_email)
         pulumi.set(__self__, "admin_first_name", admin_first_name)
         pulumi.set(__self__, "admin_last_name", admin_last_name)
@@ -228,126 +166,340 @@ class InstanceInformation(dict):
     @property
     @pulumi.getter(name="adminEmail")
     def admin_email(self) -> str:
+        """
+        The administrator's email address.
+        """
         return pulumi.get(self, "admin_email")
 
     @property
     @pulumi.getter(name="adminFirstName")
     def admin_first_name(self) -> str:
+        """
+        The first name of the administrator.
+        """
         return pulumi.get(self, "admin_first_name")
 
     @property
     @pulumi.getter(name="adminLastName")
     def admin_last_name(self) -> str:
+        """
+        The last name of the administrator.
+        """
         return pulumi.get(self, "admin_last_name")
 
     @property
     @pulumi.getter(name="adminPhoneNum")
     def admin_phone_num(self) -> str:
+        """
+        Manager mobile phone number.
+        """
         return pulumi.get(self, "admin_phone_num")
 
     @property
     @pulumi.getter(name="adminPosition")
     def admin_position(self) -> str:
+        """
+        Manager position.
+        """
         return pulumi.get(self, "admin_position")
 
     @property
     @pulumi.getter(name="certificateDomain")
     def certificate_domain(self) -> str:
+        """
+        Domain name for binding certificate.
+        """
         return pulumi.get(self, "certificate_domain")
 
     @property
     @pulumi.getter(name="contactEmail")
     def contact_email(self) -> str:
+        """
+        Contact email address.
+        """
         return pulumi.get(self, "contact_email")
 
     @property
     @pulumi.getter(name="contactFirstName")
     def contact_first_name(self) -> str:
+        """
+        Contact first name.
+        """
         return pulumi.get(self, "contact_first_name")
 
     @property
     @pulumi.getter(name="contactLastName")
     def contact_last_name(self) -> str:
+        """
+        Contact last name.
+        """
         return pulumi.get(self, "contact_last_name")
 
     @property
     @pulumi.getter(name="contactNumber")
     def contact_number(self) -> str:
+        """
+        Contact phone number.
+        """
         return pulumi.get(self, "contact_number")
 
     @property
     @pulumi.getter(name="contactPosition")
     def contact_position(self) -> str:
+        """
+        Contact position.
+        """
         return pulumi.get(self, "contact_position")
 
     @property
     @pulumi.getter(name="organizationAddress")
     def organization_address(self) -> str:
+        """
+        Company address.
+        """
         return pulumi.get(self, "organization_address")
 
     @property
     @pulumi.getter(name="organizationCity")
     def organization_city(self) -> str:
+        """
+        Company city.
+        """
         return pulumi.get(self, "organization_city")
 
     @property
     @pulumi.getter(name="organizationCountry")
     def organization_country(self) -> str:
+        """
+        Country name, such as China: CN.
+        """
         return pulumi.get(self, "organization_country")
 
     @property
     @pulumi.getter(name="organizationDivision")
     def organization_division(self) -> str:
+        """
+        Department name.
+        """
         return pulumi.get(self, "organization_division")
 
     @property
     @pulumi.getter(name="organizationName")
     def organization_name(self) -> str:
+        """
+        Company name.
+        """
         return pulumi.get(self, "organization_name")
 
     @property
     @pulumi.getter(name="organizationRegion")
     def organization_region(self) -> str:
+        """
+        The province where the company is located.
+        """
         return pulumi.get(self, "organization_region")
 
     @property
     @pulumi.getter(name="phoneAreaCode")
     def phone_area_code(self) -> str:
+        """
+        Company landline area code.
+        """
         return pulumi.get(self, "phone_area_code")
 
     @property
     @pulumi.getter(name="phoneNumber")
     def phone_number(self) -> str:
+        """
+        Company landline number.
+        """
         return pulumi.get(self, "phone_number")
 
     @property
     @pulumi.getter(name="postalCode")
     def postal_code(self) -> str:
+        """
+        Company postal code.
+        """
         return pulumi.get(self, "postal_code")
 
     @property
     @pulumi.getter(name="verifyType")
     def verify_type(self) -> str:
+        """
+        Certificate verification method. Valid values: `DNS_AUTO`, `DNS`, `FILE`. `DNS_AUTO` means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, `DNS` means manual DNS verification, `FILE` means file verification.
+        """
         return pulumi.get(self, "verify_type")
 
     @property
     @pulumi.getter(name="csrContent")
     def csr_content(self) -> Optional[str]:
+        """
+        CSR content uploaded.
+        """
         return pulumi.get(self, "csr_content")
 
     @property
     @pulumi.getter(name="csrType")
     def csr_type(self) -> Optional[str]:
+        """
+        CSR generation method. Valid values: `online`, `parse`. `online` means online generation, `parse` means manual upload.
+        """
         return pulumi.get(self, "csr_type")
 
     @property
     @pulumi.getter(name="domainLists")
     def domain_lists(self) -> Optional[Sequence[str]]:
+        """
+        Array of uploaded domain names, multi-domain certificates can be uploaded.
+        """
         return pulumi.get(self, "domain_lists")
 
     @property
     @pulumi.getter(name="keyPassword")
     def key_password(self) -> Optional[str]:
+        """
+        Private key password.
+        """
         return pulumi.get(self, "key_password")
+
+
+@pulumi.output_type
+class GetCertificatesCertificateResult(dict):
+    def __init__(__self__, *,
+                 begin_time: str,
+                 cert: str,
+                 create_time: str,
+                 domain: str,
+                 end_time: str,
+                 id: str,
+                 name: str,
+                 product_zh_name: str,
+                 project_id: int,
+                 status: int,
+                 subject_names: Sequence[str],
+                 type: str):
+        """
+        :param str begin_time: Beginning time of the SSL certificate.
+        :param str cert: Content of the SSL certificate.
+        :param str create_time: Creation time of the SSL certificate.
+        :param str domain: Primary domain of the SSL certificate.
+        :param str end_time: Ending time of the SSL certificate.
+        :param str id: ID of the SSL certificate to be queried.
+        :param str name: Name of the SSL certificate to be queried.
+        :param str product_zh_name: Certificate authority.
+        :param int project_id: Project ID of the SSL certificate.
+        :param int status: Status of the SSL certificate.
+        :param Sequence[str] subject_names: ALL domains included in the SSL certificate. Including the primary domain name.
+        :param str type: Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
+        """
+        pulumi.set(__self__, "begin_time", begin_time)
+        pulumi.set(__self__, "cert", cert)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "product_zh_name", product_zh_name)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "subject_names", subject_names)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="beginTime")
+    def begin_time(self) -> str:
+        """
+        Beginning time of the SSL certificate.
+        """
+        return pulumi.get(self, "begin_time")
+
+    @property
+    @pulumi.getter
+    def cert(self) -> str:
+        """
+        Content of the SSL certificate.
+        """
+        return pulumi.get(self, "cert")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time of the SSL certificate.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        Primary domain of the SSL certificate.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        Ending time of the SSL certificate.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        ID of the SSL certificate to be queried.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of the SSL certificate to be queried.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="productZhName")
+    def product_zh_name(self) -> str:
+        """
+        Certificate authority.
+        """
+        return pulumi.get(self, "product_zh_name")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        Project ID of the SSL certificate.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Status of the SSL certificate.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="subjectNames")
+    def subject_names(self) -> Sequence[str]:
+        """
+        ALL domains included in the SSL certificate. Including the primary domain name.
+        """
+        return pulumi.get(self, "subject_names")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
+        """
+        return pulumi.get(self, "type")
 
 

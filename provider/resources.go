@@ -16,34 +16,22 @@ package tencentcloud
 
 import (
 	"fmt"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/provider/info"
 	"path/filepath"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/tencentcloudstack/pulumi-tencentcloud/provider/pkg/version"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/tencentcloudstack/terraform-provider-tencentcloud/tencentcloud"
 )
 
-// all of the token components used below.
 const (
-	// This variable controls the default name of the package in the package
-	// registries for nodejs and python:
 	mainPkg = "tencentcloud"
-	// modules:
 	mainMod = "index" // the tencentcloud module
 )
 
-// preConfigureCallback is called before the providerConfigure function of the underlying provider.
-// It should validate that the provider can be configured, and provide actionable errors in the case
-// it cannot be. Configuration variables can be read from `vars` using the `stringValue` function -
-// for example `stringValue(vars, "accessKey")`.
-func preConfigureCallback(vars resource.PropertyMap, c shim.ResourceConfig) error {
-	return nil
-}
-
-// Provider returns additional overlaid schema and metadata associated with the provider..
+// Provider returns additional overlaid schema and metadata associated with the provider.
+//go generate:
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
 	p := shimv2.NewProvider(tencentcloud.Provider())
@@ -52,35 +40,19 @@ func Provider() tfbridge.ProviderInfo {
 	prov := tfbridge.ProviderInfo{
 		P:    p,
 		Name: "tencentcloud",
-		// DisplayName is a way to be able to change the casing of the provider
-		// name when being displayed on the Pulumi registry
-		DisplayName: "",
-		// The default publisher for all packages is Pulumi.
-		// Change this to your personal name (or a company name) that you
-		// would like to be shown in the Pulumi Registry if this package is published
-		// there.
-		Publisher: "Pulumi",
-		// LogoURL is optional but useful to help identify your package in the Pulumi Registry
-		// if this package is published there.
-		//
-		// You may host a logo on a domain you control or add an SVG logo for your package
-		// in your repository and use the raw content URL for that file as your logo URL.
+		DisplayName: "Tencentcloud",
+		Publisher: "TencentCloudStack",
 		LogoURL: "",
 		// PluginDownloadURL is an optional URL used to download the Provider
 		// for use in Pulumi programs
 		// e.g https://github.com/org/pulumi-provider-name/releases/
 		PluginDownloadURL: "",
 		Description:       "A Pulumi package for creating and managing tencentcloud cloud resources.",
-		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
-		// For all available categories, see `Keywords` in
-		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
 		Keywords:   []string{"pulumi", "tencentcloud", "category/cloud"},
 		License:    "Apache-2.0",
 		Homepage:   "https://www.pulumi.com",
 		Repository: "https://github.com/tencentcloudstack/pulumi-tencentcloud",
-		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
-		// should match the TF provider module's require directive, not any replace directives.
-		GitHubOrg: "",
+		GitHubOrg: "tencentcloudstack",
 		Config:    map[string]*tfbridge.SchemaInfo{
 			"region": {
 				Default: &tfbridge.DefaultInfo{
@@ -103,9 +75,8 @@ func Provider() tfbridge.ProviderInfo {
 				},
 			},
 		},
-		PreConfigureCallback: preConfigureCallback,
-		Resources:            ResourceInfo,
-		DataSources:          DataSourceInfo,
+		Resources:            info.GetResourceInfo(mainPkg),
+		DataSources:          info.GetDataSourceInfo(mainPkg),
 		JavaScript: &tfbridge.JavaScriptInfo{
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
@@ -122,7 +93,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: filepath.Join(
-				fmt.Sprintf("github.com/pulumi/pulumi-%[1]s/sdk/", mainPkg),
+				fmt.Sprintf("github.com/tencentcloudstack/pulumi-%[1]s/sdk/", mainPkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
 				mainPkg,

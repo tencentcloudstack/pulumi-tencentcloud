@@ -11,20 +11,70 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create an ENI.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eni"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Subnet.NewInstance(ctx, "fooSubnet/instanceInstance", &Subnet.InstanceArgs{
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+// 			VpcId:            fooInstance.ID(),
+// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
+// 			IsMulticast:      pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Eni.NewInstance(ctx, "fooEni/instanceInstance", &Eni.InstanceArgs{
+// 			VpcId:       fooInstance.ID(),
+// 			SubnetId:    fooSubnet / instanceInstance.Id,
+// 			Description: pulumi.String("eni desc"),
+// 			Ipv4Count:   pulumi.Int(1),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// ENI can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Eni/instance:Instance tencentcloud_eni.foo eni-qka182br
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 
 	// Creation time of the ENI.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
-	// Description of the ENI, maximum length 60.
+	// Description of the IP, maximum length 25.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-	// intranet IPs, which conflict with `ipv4s`.
+	// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
 	Ipv4Count pulumi.IntPtrOutput `pulumi:"ipv4Count"`
 	// An information list of IPv4s. Each element contains the following attributes:
 	Ipv4Infos InstanceIpv4InfoArrayOutput `pulumi:"ipv4Infos"`
-	// Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-	// primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+	// Applying for intranet IPv4s collection, conflict with `ipv4Count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
 	Ipv4s InstanceIpv4ArrayOutput `pulumi:"ipv4s"`
 	// MAC address.
 	Mac pulumi.StringOutput `pulumi:"mac"`
@@ -81,15 +131,13 @@ func GetInstance(ctx *pulumi.Context,
 type instanceState struct {
 	// Creation time of the ENI.
 	CreateTime *string `pulumi:"createTime"`
-	// Description of the ENI, maximum length 60.
+	// Description of the IP, maximum length 25.
 	Description *string `pulumi:"description"`
-	// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-	// intranet IPs, which conflict with `ipv4s`.
+	// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
 	Ipv4Count *int `pulumi:"ipv4Count"`
 	// An information list of IPv4s. Each element contains the following attributes:
 	Ipv4Infos []InstanceIpv4Info `pulumi:"ipv4Infos"`
-	// Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-	// primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+	// Applying for intranet IPv4s collection, conflict with `ipv4Count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
 	Ipv4s []InstanceIpv4 `pulumi:"ipv4s"`
 	// MAC address.
 	Mac *string `pulumi:"mac"`
@@ -112,15 +160,13 @@ type instanceState struct {
 type InstanceState struct {
 	// Creation time of the ENI.
 	CreateTime pulumi.StringPtrInput
-	// Description of the ENI, maximum length 60.
+	// Description of the IP, maximum length 25.
 	Description pulumi.StringPtrInput
-	// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-	// intranet IPs, which conflict with `ipv4s`.
+	// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
 	Ipv4Count pulumi.IntPtrInput
 	// An information list of IPv4s. Each element contains the following attributes:
 	Ipv4Infos InstanceIpv4InfoArrayInput
-	// Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-	// primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+	// Applying for intranet IPv4s collection, conflict with `ipv4Count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
 	Ipv4s InstanceIpv4ArrayInput
 	// MAC address.
 	Mac pulumi.StringPtrInput
@@ -145,13 +191,11 @@ func (InstanceState) ElementType() reflect.Type {
 }
 
 type instanceArgs struct {
-	// Description of the ENI, maximum length 60.
+	// Description of the IP, maximum length 25.
 	Description *string `pulumi:"description"`
-	// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-	// intranet IPs, which conflict with `ipv4s`.
+	// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
 	Ipv4Count *int `pulumi:"ipv4Count"`
-	// Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-	// primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+	// Applying for intranet IPv4s collection, conflict with `ipv4Count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
 	Ipv4s []InstanceIpv4 `pulumi:"ipv4s"`
 	// Name of the ENI, maximum length 60.
 	Name *string `pulumi:"name"`
@@ -167,13 +211,11 @@ type instanceArgs struct {
 
 // The set of arguments for constructing a Instance resource.
 type InstanceArgs struct {
-	// Description of the ENI, maximum length 60.
+	// Description of the IP, maximum length 25.
 	Description pulumi.StringPtrInput
-	// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-	// intranet IPs, which conflict with `ipv4s`.
+	// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
 	Ipv4Count pulumi.IntPtrInput
-	// Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-	// primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+	// Applying for intranet IPv4s collection, conflict with `ipv4Count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
 	Ipv4s InstanceIpv4ArrayInput
 	// Name of the ENI, maximum length 60.
 	Name pulumi.StringPtrInput
@@ -279,13 +321,12 @@ func (o InstanceOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// Description of the ENI, maximum length 60.
+// Description of the IP, maximum length 25.
 func (o InstanceOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-// intranet IPs, which conflict with `ipv4s`.
+// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
 func (o InstanceOutput) Ipv4Count() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Ipv4Count }).(pulumi.IntPtrOutput)
 }
@@ -295,8 +336,7 @@ func (o InstanceOutput) Ipv4Infos() InstanceIpv4InfoArrayOutput {
 	return o.ApplyT(func(v *Instance) InstanceIpv4InfoArrayOutput { return v.Ipv4Infos }).(InstanceIpv4InfoArrayOutput)
 }
 
-// Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-// primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+// Applying for intranet IPv4s collection, conflict with `ipv4Count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
 func (o InstanceOutput) Ipv4s() InstanceIpv4ArrayOutput {
 	return o.ApplyT(func(v *Instance) InstanceIpv4ArrayOutput { return v.Ipv4s }).(InstanceIpv4ArrayOutput)
 }

@@ -9,6 +9,62 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cls
 {
+    /// <summary>
+    /// Provides a resource to create a cls config
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Tencentcloud.Cls.Config("config", new Tencentcloud.Cls.ConfigArgs
+    ///         {
+    ///             ExcludePaths = 
+    ///             {
+    ///                 new Tencentcloud.Cls.Inputs.ConfigExcludePathArgs
+    ///                 {
+    ///                     Type = "Path",
+    ///                     Value = "/data",
+    ///                 },
+    ///                 new Tencentcloud.Cls.Inputs.ConfigExcludePathArgs
+    ///                 {
+    ///                     Type = "File",
+    ///                     Value = "/file",
+    ///                 },
+    ///             },
+    ///             ExtractRule = new Tencentcloud.Cls.Inputs.ConfigExtractRuleArgs
+    ///             {
+    ///                 Backtracking = -1,
+    ///                 FilterKeyRegexes = 
+    ///                 {
+    ///                     new Tencentcloud.Cls.Inputs.ConfigExtractRuleFilterKeyRegexArgs
+    ///                     {
+    ///                         Key = "key1",
+    ///                         Regex = "value1",
+    ///                     },
+    ///                     new Tencentcloud.Cls.Inputs.ConfigExtractRuleFilterKeyRegexArgs
+    ///                     {
+    ///                         Key = "key2",
+    ///                         Regex = "value2",
+    ///                     },
+    ///                 },
+    ///                 UnMatchLogKey = "config",
+    ///                 UnMatchUpLoadSwitch = true,
+    ///             },
+    ///             LogType = "json_log",
+    ///             Output = "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
+    ///             Path = "/var/log/kubernetes",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/config:Config")]
     public partial class Config : Pulumi.CustomResource
     {
@@ -25,9 +81,7 @@ namespace Pulumi.Tencentcloud.Cls
         public Output<Outputs.ConfigExtractRule> ExtractRule { get; private set; } = null!;
 
         /// <summary>
-        /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-        /// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-        /// Default value: minimalist_log.
+        /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         /// </summary>
         [Output("logType")]
         public Output<string?> LogType { get; private set; } = null!;
@@ -121,9 +175,7 @@ namespace Pulumi.Tencentcloud.Cls
         public Input<Inputs.ConfigExtractRuleArgs> ExtractRule { get; set; } = null!;
 
         /// <summary>
-        /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-        /// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-        /// Default value: minimalist_log.
+        /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         /// </summary>
         [Input("logType")]
         public Input<string>? LogType { get; set; }
@@ -178,9 +230,7 @@ namespace Pulumi.Tencentcloud.Cls
         public Input<Inputs.ConfigExtractRuleGetArgs>? ExtractRule { get; set; }
 
         /// <summary>
-        /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-        /// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-        /// Default value: minimalist_log.
+        /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         /// </summary>
         [Input("logType")]
         public Input<string>? LogType { get; set; }

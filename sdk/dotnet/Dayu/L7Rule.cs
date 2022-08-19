@@ -9,6 +9,48 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dayu
 {
+    /// <summary>
+    /// Use this resource to create dayu layer 7 rule
+    /// 
+    /// &gt; **NOTE:** This resource only support resource Anti-DDoS of type `bgpip`
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var testRule = new Tencentcloud.Dayu.L7Rule("testRule", new Tencentcloud.Dayu.L7RuleArgs
+    ///         {
+    ///             Domain = "zhaoshaona.com",
+    ///             HealthCheckCode = 31,
+    ///             HealthCheckHealthNum = 5,
+    ///             HealthCheckInterval = 30,
+    ///             HealthCheckMethod = "GET",
+    ///             HealthCheckPath = "/",
+    ///             HealthCheckSwitch = true,
+    ///             HealthCheckUnhealthNum = 10,
+    ///             Protocol = "https",
+    ///             ResourceId = "bgpip-00000294",
+    ///             ResourceType = "bgpip",
+    ///             SourceLists = 
+    ///             {
+    ///                 "1.1.1.1:80",
+    ///                 "2.2.2.2",
+    ///             },
+    ///             SourceType = 2,
+    ///             SslId = "%s",
+    ///             Switch = true,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/l7Rule:L7Rule")]
     public partial class L7Rule : Pulumi.CustomResource
     {
@@ -19,17 +61,13 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<string> Domain { get; private set; } = null!;
 
         /// <summary>
-        /// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-        /// the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-        /// health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-        /// the corresponding values.
+        /// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
         /// </summary>
         [Output("healthCheckCode")]
         public Output<int> HealthCheckCode { get; private set; } = null!;
 
         /// <summary>
-        /// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-        /// consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+        /// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
         /// </summary>
         [Output("healthCheckHealthNum")]
         public Output<int> HealthCheckHealthNum { get; private set; } = null!;
@@ -59,8 +97,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<bool> HealthCheckSwitch { get; private set; } = null!;
 
         /// <summary>
-        /// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-        /// indicates that the forwarding is abnormal. The value range is [2-10].
+        /// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
         /// </summary>
         [Output("healthCheckUnhealthNum")]
         public Output<int> HealthCheckUnhealthNum { get; private set; } = null!;
@@ -96,8 +133,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<string> RuleId { get; private set; } = null!;
 
         /// <summary>
-        /// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-        /// 16.
+        /// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
         /// </summary>
         [Output("sourceLists")]
         public Output<ImmutableArray<string>> SourceLists { get; private set; } = null!;
@@ -115,8 +151,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<string?> SslId { get; private set; } = null!;
 
         /// <summary>
-        /// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete
-        /// failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
+        /// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
         /// </summary>
         [Output("status")]
         public Output<int> Status { get; private set; } = null!;
@@ -180,17 +215,13 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string> Domain { get; set; } = null!;
 
         /// <summary>
-        /// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-        /// the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-        /// health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-        /// the corresponding values.
+        /// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
         /// </summary>
         [Input("healthCheckCode")]
         public Input<int>? HealthCheckCode { get; set; }
 
         /// <summary>
-        /// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-        /// consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+        /// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
         /// </summary>
         [Input("healthCheckHealthNum")]
         public Input<int>? HealthCheckHealthNum { get; set; }
@@ -220,8 +251,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<bool>? HealthCheckSwitch { get; set; }
 
         /// <summary>
-        /// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-        /// indicates that the forwarding is abnormal. The value range is [2-10].
+        /// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
         /// </summary>
         [Input("healthCheckUnhealthNum")]
         public Input<int>? HealthCheckUnhealthNum { get; set; }
@@ -254,8 +284,7 @@ namespace Pulumi.Tencentcloud.Dayu
         private InputList<string>? _sourceLists;
 
         /// <summary>
-        /// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-        /// 16.
+        /// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
         /// </summary>
         public InputList<string> SourceLists
         {
@@ -295,17 +324,13 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string>? Domain { get; set; }
 
         /// <summary>
-        /// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-        /// the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-        /// health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-        /// the corresponding values.
+        /// HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
         /// </summary>
         [Input("healthCheckCode")]
         public Input<int>? HealthCheckCode { get; set; }
 
         /// <summary>
-        /// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-        /// consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+        /// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
         /// </summary>
         [Input("healthCheckHealthNum")]
         public Input<int>? HealthCheckHealthNum { get; set; }
@@ -335,8 +360,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<bool>? HealthCheckSwitch { get; set; }
 
         /// <summary>
-        /// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-        /// indicates that the forwarding is abnormal. The value range is [2-10].
+        /// Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
         /// </summary>
         [Input("healthCheckUnhealthNum")]
         public Input<int>? HealthCheckUnhealthNum { get; set; }
@@ -375,8 +399,7 @@ namespace Pulumi.Tencentcloud.Dayu
         private InputList<string>? _sourceLists;
 
         /// <summary>
-        /// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-        /// 16.
+        /// Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
         /// </summary>
         public InputList<string> SourceLists
         {
@@ -397,8 +420,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string>? SslId { get; set; }
 
         /// <summary>
-        /// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete
-        /// failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
+        /// Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
         /// </summary>
         [Input("status")]
         public Input<int>? Status { get; set; }

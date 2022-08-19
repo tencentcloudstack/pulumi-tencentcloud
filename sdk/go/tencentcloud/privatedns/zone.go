@@ -11,6 +11,63 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a Private Dns Zone.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := PrivateDns.NewZone(ctx, "foo", &PrivateDns.ZoneArgs{
+// 			AccountVpcSets: privatedns.ZoneAccountVpcSetArray{
+// 				&privatedns.ZoneAccountVpcSetArgs{
+// 					Region:    pulumi.String("ap-guangzhou"),
+// 					Uin:       pulumi.String("454xxxxxxx"),
+// 					UniqVpcId: pulumi.String("vpc-xxxxx"),
+// 					VpcName:   pulumi.String("test-redis"),
+// 				},
+// 			},
+// 			DnsForwardStatus: pulumi.String("DISABLED"),
+// 			Domain:           pulumi.String("domain.com"),
+// 			Remark:           pulumi.String("test"),
+// 			Tags: pulumi.AnyMap{
+// 				"created_by": pulumi.Any{
+// 					nil,
+// 				},
+// 				"terraform": pulumi.Any{
+// 					nil,
+// 				},
+// 			},
+// 			VpcSets: privatedns.ZoneVpcSetArray{
+// 				&privatedns.ZoneVpcSetArgs{
+// 					Region:    pulumi.String("ap-guangzhou"),
+// 					UniqVpcId: pulumi.String("vpc-xxxxx"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Private Dns Zone can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:PrivateDns/zone:Zone foo zone_id
+// ```
 type Zone struct {
 	pulumi.CustomResourceState
 
@@ -22,7 +79,7 @@ type Zone struct {
 	Domain pulumi.StringOutput `pulumi:"domain"`
 	// Remarks.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
-	// Tags the private domain when it is created.
+	// It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
 	//
 	// Deprecated: It has been deprecated from version 1.72.4. Use `tags` instead.
 	TagSets ZoneTagSetArrayOutput `pulumi:"tagSets"`
@@ -72,7 +129,7 @@ type zoneState struct {
 	Domain *string `pulumi:"domain"`
 	// Remarks.
 	Remark *string `pulumi:"remark"`
-	// Tags the private domain when it is created.
+	// It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
 	//
 	// Deprecated: It has been deprecated from version 1.72.4. Use `tags` instead.
 	TagSets []ZoneTagSet `pulumi:"tagSets"`
@@ -91,7 +148,7 @@ type ZoneState struct {
 	Domain pulumi.StringPtrInput
 	// Remarks.
 	Remark pulumi.StringPtrInput
-	// Tags the private domain when it is created.
+	// It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
 	//
 	// Deprecated: It has been deprecated from version 1.72.4. Use `tags` instead.
 	TagSets ZoneTagSetArrayInput
@@ -114,7 +171,7 @@ type zoneArgs struct {
 	Domain string `pulumi:"domain"`
 	// Remarks.
 	Remark *string `pulumi:"remark"`
-	// Tags the private domain when it is created.
+	// It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
 	//
 	// Deprecated: It has been deprecated from version 1.72.4. Use `tags` instead.
 	TagSets []ZoneTagSet `pulumi:"tagSets"`
@@ -134,7 +191,7 @@ type ZoneArgs struct {
 	Domain pulumi.StringInput
 	// Remarks.
 	Remark pulumi.StringPtrInput
-	// Tags the private domain when it is created.
+	// It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
 	//
 	// Deprecated: It has been deprecated from version 1.72.4. Use `tags` instead.
 	TagSets ZoneTagSetArrayInput
@@ -251,7 +308,7 @@ func (o ZoneOutput) Remark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Zone) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
 }
 
-// Tags the private domain when it is created.
+// It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
 //
 // Deprecated: It has been deprecated from version 1.72.4. Use `tags` instead.
 func (o ZoneOutput) TagSets() ZoneTagSetArrayOutput {

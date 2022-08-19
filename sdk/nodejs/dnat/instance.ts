@@ -4,6 +4,35 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a NAT forwarding.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Dnat.Instance("foo", {
+ *     description: "test",
+ *     elasticIp: "139.199.232.238",
+ *     elasticPort: "80",
+ *     natId: "nat-2515tdg",
+ *     privateIp: "10.0.0.1",
+ *     privatePort: "22",
+ *     protocol: "tcp",
+ *     vpcId: "vpc-asg3sfa3",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * NAT forwarding can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Dnat/instance:Instance foo tcp://vpc-asg3sfa3:nat-1asg3t63@127.15.2.3:8080
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra

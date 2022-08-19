@@ -12,17 +12,27 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
 
     public sealed class DdosPolicyV2DdosGeoIpBlockConfigGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Block action, take the value [`drop`, `trans`].
+        /// </summary>
         [Input("action", required: true)]
         public Input<string> Action { get; set; } = null!;
 
         [Input("areaLists", required: true)]
         private InputList<int>? _areaLists;
+
+        /// <summary>
+        /// When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.
+        /// </summary>
         public InputList<int> AreaLists
         {
             get => _areaLists ?? (_areaLists = new InputList<int>());
             set => _areaLists = value;
         }
 
+        /// <summary>
+        /// Zone type, value [oversea (overseas),china (domestic),customized (custom region)].
+        /// </summary>
         [Input("regionType", required: true)]
         public Input<string> RegionType { get; set; } = null!;
 

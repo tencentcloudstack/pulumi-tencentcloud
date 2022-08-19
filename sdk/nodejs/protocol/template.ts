@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to manage protocol template.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Protocol.Template("foo", {
+ *     protocols: [
+ *         "tcp:80",
+ *         "udp:all",
+ *         "icmp:10-30",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Protocol template can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Protocol/template:Template foo ppm-nwrggd14
+ * ```
+ */
 export class Template extends pulumi.CustomResource {
     /**
      * Get an existing Template resource's state with the given name, ID, and optional extra
@@ -37,8 +63,7 @@ export class Template extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-     * range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+     * Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
      */
     public readonly protocols!: pulumi.Output<string[]>;
 
@@ -79,8 +104,7 @@ export interface TemplateState {
      */
     name?: pulumi.Input<string>;
     /**
-     * Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-     * range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+     * Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
      */
     protocols?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -94,8 +118,7 @@ export interface TemplateArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-     * range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+     * Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
      */
     protocols: pulumi.Input<pulumi.Input<string>[]>;
 }

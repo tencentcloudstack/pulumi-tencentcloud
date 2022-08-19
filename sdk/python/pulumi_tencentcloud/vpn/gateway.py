@@ -27,19 +27,13 @@ class GatewayArgs:
         """
         The set of arguments for constructing a Gateway resource.
         :param pulumi.Input[str] zone: Zone of the VPN gateway.
-        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-               5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-               unsupported.
+        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
         :param pulumi.Input[str] cdc_id: CDC instance ID.
         :param pulumi.Input[str] charge_type: Charge Type of the VPN gateway. Valid value: `PREPAID`, `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
-        :param pulumi.Input[int] max_connection: Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-               is only required for SSL VPN gateways.
+        :param pulumi.Input[int] max_connection: Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         :param pulumi.Input[str] name: Name of the VPN gateway. The length of character is limited to 1-60.
-        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-               month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-               period. This para can only be set to take effect in create operation.
-        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-               `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
         :param pulumi.Input[str] type: Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
         :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
@@ -82,9 +76,7 @@ class GatewayArgs:
     @pulumi.getter
     def bandwidth(self) -> Optional[pulumi.Input[int]]:
         """
-        The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-        5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-        unsupported.
+        The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
         """
         return pulumi.get(self, "bandwidth")
 
@@ -120,8 +112,7 @@ class GatewayArgs:
     @pulumi.getter(name="maxConnection")
     def max_connection(self) -> Optional[pulumi.Input[int]]:
         """
-        Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-        is only required for SSL VPN gateways.
+        Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         """
         return pulumi.get(self, "max_connection")
 
@@ -145,9 +136,7 @@ class GatewayArgs:
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> Optional[pulumi.Input[int]]:
         """
-        Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-        month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-        period. This para can only be set to take effect in create operation.
+        Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -159,8 +148,7 @@ class GatewayArgs:
     @pulumi.getter(name="prepaidRenewFlag")
     def prepaid_renew_flag(self) -> Optional[pulumi.Input[str]]:
         """
-        Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-        `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
         """
         return pulumi.get(self, "prepaid_renew_flag")
 
@@ -228,23 +216,17 @@ class _GatewayState:
                  zone: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Gateway resources.
-        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-               5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-               unsupported.
+        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
         :param pulumi.Input[str] cdc_id: CDC instance ID.
         :param pulumi.Input[str] charge_type: Charge Type of the VPN gateway. Valid value: `PREPAID`, `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] create_time: Create time of the VPN gateway.
         :param pulumi.Input[str] expired_time: Expired time of the VPN gateway when charge type is `PREPAID`.
         :param pulumi.Input[bool] is_address_blocked: Indicates whether ip address is blocked.
-        :param pulumi.Input[int] max_connection: Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-               is only required for SSL VPN gateways.
+        :param pulumi.Input[int] max_connection: Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         :param pulumi.Input[str] name: Name of the VPN gateway. The length of character is limited to 1-60.
         :param pulumi.Input[str] new_purchase_plan: The plan of new purchase. Valid value: `PREPAID_TO_POSTPAID`.
-        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-               month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-               period. This para can only be set to take effect in create operation.
-        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-               `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
         :param pulumi.Input[str] public_ip_address: Public IP of the VPN gateway.
         :param pulumi.Input[str] restrict_state: Restrict state of gateway. Valid value: `PRETECIVELY_ISOLATED`, `NORMAL`.
         :param pulumi.Input[str] state: State of the VPN gateway. Valid value: `PENDING`, `DELETING`, `AVAILABLE`.
@@ -294,9 +276,7 @@ class _GatewayState:
     @pulumi.getter
     def bandwidth(self) -> Optional[pulumi.Input[int]]:
         """
-        The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-        5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-        unsupported.
+        The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
         """
         return pulumi.get(self, "bandwidth")
 
@@ -368,8 +348,7 @@ class _GatewayState:
     @pulumi.getter(name="maxConnection")
     def max_connection(self) -> Optional[pulumi.Input[int]]:
         """
-        Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-        is only required for SSL VPN gateways.
+        Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         """
         return pulumi.get(self, "max_connection")
 
@@ -405,9 +384,7 @@ class _GatewayState:
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> Optional[pulumi.Input[int]]:
         """
-        Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-        month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-        period. This para can only be set to take effect in create operation.
+        Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -419,8 +396,7 @@ class _GatewayState:
     @pulumi.getter(name="prepaidRenewFlag")
     def prepaid_renew_flag(self) -> Optional[pulumi.Input[str]]:
         """
-        Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-        `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
         """
         return pulumi.get(self, "prepaid_renew_flag")
 
@@ -531,22 +507,57 @@ class Gateway(pulumi.CustomResource):
                  zone: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Gateway resource with the given unique name, props, and options.
+        ## Example Usage
+
+        POSTPAID_BY_HOUR VPN gateway
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        my_cgw = tencentcloud.vpn.Gateway("myCgw",
+            bandwidth=5,
+            tags={
+                "test": "test",
+            },
+            vpc_id="vpc-dk8zmwuf",
+            zone="ap-guangzhou-3")
+        ```
+
+        PREPAID VPN gateway
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        my_cgw = tencentcloud.vpn.Gateway("myCgw",
+            bandwidth=5,
+            charge_type="PREPAID",
+            prepaid_period=1,
+            tags={
+                "test": "test",
+            },
+            vpc_id="vpc-dk8zmwuf",
+            zone="ap-guangzhou-3")
+        ```
+
+        ## Import
+
+        VPN gateway can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-               5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-               unsupported.
+        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
         :param pulumi.Input[str] cdc_id: CDC instance ID.
         :param pulumi.Input[str] charge_type: Charge Type of the VPN gateway. Valid value: `PREPAID`, `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
-        :param pulumi.Input[int] max_connection: Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-               is only required for SSL VPN gateways.
+        :param pulumi.Input[int] max_connection: Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         :param pulumi.Input[str] name: Name of the VPN gateway. The length of character is limited to 1-60.
-        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-               month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-               period. This para can only be set to take effect in create operation.
-        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-               `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
         :param pulumi.Input[str] type: Type of gateway instance. Valid value: `IPSEC`, `SSL` and `CCN`. Note: CCN type is only for whitelist customer now.
         :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
@@ -559,7 +570,48 @@ class Gateway(pulumi.CustomResource):
                  args: GatewayArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Gateway resource with the given unique name, props, and options.
+        ## Example Usage
+
+        POSTPAID_BY_HOUR VPN gateway
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        my_cgw = tencentcloud.vpn.Gateway("myCgw",
+            bandwidth=5,
+            tags={
+                "test": "test",
+            },
+            vpc_id="vpc-dk8zmwuf",
+            zone="ap-guangzhou-3")
+        ```
+
+        PREPAID VPN gateway
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        my_cgw = tencentcloud.vpn.Gateway("myCgw",
+            bandwidth=5,
+            charge_type="PREPAID",
+            prepaid_period=1,
+            tags={
+                "test": "test",
+            },
+            vpc_id="vpc-dk8zmwuf",
+            zone="ap-guangzhou-3")
+        ```
+
+        ## Import
+
+        VPN gateway can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
+        ```
+
         :param str resource_name: The name of the resource.
         :param GatewayArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -653,23 +705,17 @@ class Gateway(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-               5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-               unsupported.
+        :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
         :param pulumi.Input[str] cdc_id: CDC instance ID.
         :param pulumi.Input[str] charge_type: Charge Type of the VPN gateway. Valid value: `PREPAID`, `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] create_time: Create time of the VPN gateway.
         :param pulumi.Input[str] expired_time: Expired time of the VPN gateway when charge type is `PREPAID`.
         :param pulumi.Input[bool] is_address_blocked: Indicates whether ip address is blocked.
-        :param pulumi.Input[int] max_connection: Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-               is only required for SSL VPN gateways.
+        :param pulumi.Input[int] max_connection: Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         :param pulumi.Input[str] name: Name of the VPN gateway. The length of character is limited to 1-60.
         :param pulumi.Input[str] new_purchase_plan: The plan of new purchase. Valid value: `PREPAID_TO_POSTPAID`.
-        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-               month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-               period. This para can only be set to take effect in create operation.
-        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-               `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        :param pulumi.Input[int] prepaid_period: Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
+        :param pulumi.Input[str] prepaid_renew_flag: Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
         :param pulumi.Input[str] public_ip_address: Public IP of the VPN gateway.
         :param pulumi.Input[str] restrict_state: Restrict state of gateway. Valid value: `PRETECIVELY_ISOLATED`, `NORMAL`.
         :param pulumi.Input[str] state: State of the VPN gateway. Valid value: `PENDING`, `DELETING`, `AVAILABLE`.
@@ -706,9 +752,7 @@ class Gateway(pulumi.CustomResource):
     @pulumi.getter
     def bandwidth(self) -> pulumi.Output[Optional[int]]:
         """
-        The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-        5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-        unsupported.
+        The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
         """
         return pulumi.get(self, "bandwidth")
 
@@ -756,8 +800,7 @@ class Gateway(pulumi.CustomResource):
     @pulumi.getter(name="maxConnection")
     def max_connection(self) -> pulumi.Output[int]:
         """
-        Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-        is only required for SSL VPN gateways.
+        Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         """
         return pulumi.get(self, "max_connection")
 
@@ -781,9 +824,7 @@ class Gateway(pulumi.CustomResource):
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> pulumi.Output[Optional[int]]:
         """
-        Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-        month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-        period. This para can only be set to take effect in create operation.
+        Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -791,8 +832,7 @@ class Gateway(pulumi.CustomResource):
     @pulumi.getter(name="prepaidRenewFlag")
     def prepaid_renew_flag(self) -> pulumi.Output[Optional[str]]:
         """
-        Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-        `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
         """
         return pulumi.get(self, "prepaid_renew_flag")
 

@@ -9,6 +9,32 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cfs
 {
+    /// <summary>
+    /// Provides a resource to create a CFS access rule.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cfs.AccessRule("foo", new Tencentcloud.Cfs.AccessRuleArgs
+    ///         {
+    ///             AccessGroupId = "pgroup-7nx89k7l",
+    ///             AuthClientIp = "10.10.1.0/24",
+    ///             Priority = 1,
+    ///             RwPermission = "RO",
+    ///             UserPermission = "root_squash",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/accessRule:AccessRule")]
     public partial class AccessRule : Pulumi.CustomResource
     {
@@ -19,8 +45,7 @@ namespace Pulumi.Tencentcloud.Cfs
         public Output<string> AccessGroupId { get; private set; } = null!;
 
         /// <summary>
-        /// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-        /// note that the IP entered should be CVM's private IP.
+        /// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
         /// </summary>
         [Output("authClientIp")]
         public Output<string> AuthClientIp { get; private set; } = null!;
@@ -38,11 +63,7 @@ namespace Pulumi.Tencentcloud.Cfs
         public Output<string?> RwPermission { get; private set; } = null!;
 
         /// <summary>
-        /// The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-        /// and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-        /// `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-        /// after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-        /// `no_root_squash` indicates that access root users keep root account permission.
+        /// The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`. and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups; `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups; `no_root_squash` indicates that access root users keep root account permission.
         /// </summary>
         [Output("userPermission")]
         public Output<string?> UserPermission { get; private set; } = null!;
@@ -100,8 +121,7 @@ namespace Pulumi.Tencentcloud.Cfs
         public Input<string> AccessGroupId { get; set; } = null!;
 
         /// <summary>
-        /// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-        /// note that the IP entered should be CVM's private IP.
+        /// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
         /// </summary>
         [Input("authClientIp", required: true)]
         public Input<string> AuthClientIp { get; set; } = null!;
@@ -119,11 +139,7 @@ namespace Pulumi.Tencentcloud.Cfs
         public Input<string>? RwPermission { get; set; }
 
         /// <summary>
-        /// The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-        /// and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-        /// `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-        /// after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-        /// `no_root_squash` indicates that access root users keep root account permission.
+        /// The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`. and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups; `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups; `no_root_squash` indicates that access root users keep root account permission.
         /// </summary>
         [Input("userPermission")]
         public Input<string>? UserPermission { get; set; }
@@ -142,8 +158,7 @@ namespace Pulumi.Tencentcloud.Cfs
         public Input<string>? AccessGroupId { get; set; }
 
         /// <summary>
-        /// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please
-        /// note that the IP entered should be CVM's private IP.
+        /// A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.
         /// </summary>
         [Input("authClientIp")]
         public Input<string>? AuthClientIp { get; set; }
@@ -161,11 +176,7 @@ namespace Pulumi.Tencentcloud.Cfs
         public Input<string>? RwPermission { get; set; }
 
         /// <summary>
-        /// The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`.
-        /// and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups;
-        /// `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups
-        /// after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups;
-        /// `no_root_squash` indicates that access root users keep root account permission.
+        /// The permissions of accessing users. Valid values are `all_squash`, `no_all_squash`, `root_squash` and `no_root_squash`. and default is `root_squash`. `all_squash` indicates that all access users are mapped as anonymous users or user groups; `no_all_squash` indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; `root_squash` indicates that map access root users to anonymous users or user groups; `no_root_squash` indicates that access root users keep root account permission.
         /// </summary>
         [Input("userPermission")]
         public Input<string>? UserPermission { get; set; }

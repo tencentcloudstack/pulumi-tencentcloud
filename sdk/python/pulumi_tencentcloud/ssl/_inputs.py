@@ -9,11 +9,11 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'InstanceInformationArgs',
+    'PayCertificateInformationArgs',
 ]
 
 @pulumi.input_type
-class InstanceInformationArgs:
+class PayCertificateInformationArgs:
     def __init__(__self__, *,
                  admin_email: pulumi.Input[str],
                  admin_first_name: pulumi.Input[str],
@@ -40,6 +40,33 @@ class InstanceInformationArgs:
                  csr_type: Optional[pulumi.Input[str]] = None,
                  domain_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  key_password: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] admin_email: The administrator's email address.
+        :param pulumi.Input[str] admin_first_name: The first name of the administrator.
+        :param pulumi.Input[str] admin_last_name: The last name of the administrator.
+        :param pulumi.Input[str] admin_phone_num: Manager mobile phone number.
+        :param pulumi.Input[str] admin_position: Manager position.
+        :param pulumi.Input[str] certificate_domain: Domain name for binding certificate.
+        :param pulumi.Input[str] contact_email: Contact email address.
+        :param pulumi.Input[str] contact_first_name: Contact first name.
+        :param pulumi.Input[str] contact_last_name: Contact last name.
+        :param pulumi.Input[str] contact_number: Contact phone number.
+        :param pulumi.Input[str] contact_position: Contact position.
+        :param pulumi.Input[str] organization_address: Company address.
+        :param pulumi.Input[str] organization_city: Company city.
+        :param pulumi.Input[str] organization_country: Country name, such as China: CN.
+        :param pulumi.Input[str] organization_division: Department name.
+        :param pulumi.Input[str] organization_name: Company name.
+        :param pulumi.Input[str] organization_region: The province where the company is located.
+        :param pulumi.Input[str] phone_area_code: Company landline area code.
+        :param pulumi.Input[str] phone_number: Company landline number.
+        :param pulumi.Input[str] postal_code: Company postal code.
+        :param pulumi.Input[str] verify_type: Certificate verification method. Valid values: `DNS_AUTO`, `DNS`, `FILE`. `DNS_AUTO` means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, `DNS` means manual DNS verification, `FILE` means file verification.
+        :param pulumi.Input[str] csr_content: CSR content uploaded.
+        :param pulumi.Input[str] csr_type: CSR generation method. Valid values: `online`, `parse`. `online` means online generation, `parse` means manual upload.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] domain_lists: Array of uploaded domain names, multi-domain certificates can be uploaded.
+        :param pulumi.Input[str] key_password: Private key password.
+        """
         pulumi.set(__self__, "admin_email", admin_email)
         pulumi.set(__self__, "admin_first_name", admin_first_name)
         pulumi.set(__self__, "admin_last_name", admin_last_name)
@@ -73,6 +100,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="adminEmail")
     def admin_email(self) -> pulumi.Input[str]:
+        """
+        The administrator's email address.
+        """
         return pulumi.get(self, "admin_email")
 
     @admin_email.setter
@@ -82,6 +112,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="adminFirstName")
     def admin_first_name(self) -> pulumi.Input[str]:
+        """
+        The first name of the administrator.
+        """
         return pulumi.get(self, "admin_first_name")
 
     @admin_first_name.setter
@@ -91,6 +124,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="adminLastName")
     def admin_last_name(self) -> pulumi.Input[str]:
+        """
+        The last name of the administrator.
+        """
         return pulumi.get(self, "admin_last_name")
 
     @admin_last_name.setter
@@ -100,6 +136,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="adminPhoneNum")
     def admin_phone_num(self) -> pulumi.Input[str]:
+        """
+        Manager mobile phone number.
+        """
         return pulumi.get(self, "admin_phone_num")
 
     @admin_phone_num.setter
@@ -109,6 +148,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="adminPosition")
     def admin_position(self) -> pulumi.Input[str]:
+        """
+        Manager position.
+        """
         return pulumi.get(self, "admin_position")
 
     @admin_position.setter
@@ -118,6 +160,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="certificateDomain")
     def certificate_domain(self) -> pulumi.Input[str]:
+        """
+        Domain name for binding certificate.
+        """
         return pulumi.get(self, "certificate_domain")
 
     @certificate_domain.setter
@@ -127,6 +172,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="contactEmail")
     def contact_email(self) -> pulumi.Input[str]:
+        """
+        Contact email address.
+        """
         return pulumi.get(self, "contact_email")
 
     @contact_email.setter
@@ -136,6 +184,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="contactFirstName")
     def contact_first_name(self) -> pulumi.Input[str]:
+        """
+        Contact first name.
+        """
         return pulumi.get(self, "contact_first_name")
 
     @contact_first_name.setter
@@ -145,6 +196,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="contactLastName")
     def contact_last_name(self) -> pulumi.Input[str]:
+        """
+        Contact last name.
+        """
         return pulumi.get(self, "contact_last_name")
 
     @contact_last_name.setter
@@ -154,6 +208,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="contactNumber")
     def contact_number(self) -> pulumi.Input[str]:
+        """
+        Contact phone number.
+        """
         return pulumi.get(self, "contact_number")
 
     @contact_number.setter
@@ -163,6 +220,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="contactPosition")
     def contact_position(self) -> pulumi.Input[str]:
+        """
+        Contact position.
+        """
         return pulumi.get(self, "contact_position")
 
     @contact_position.setter
@@ -172,6 +232,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="organizationAddress")
     def organization_address(self) -> pulumi.Input[str]:
+        """
+        Company address.
+        """
         return pulumi.get(self, "organization_address")
 
     @organization_address.setter
@@ -181,6 +244,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="organizationCity")
     def organization_city(self) -> pulumi.Input[str]:
+        """
+        Company city.
+        """
         return pulumi.get(self, "organization_city")
 
     @organization_city.setter
@@ -190,6 +256,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="organizationCountry")
     def organization_country(self) -> pulumi.Input[str]:
+        """
+        Country name, such as China: CN.
+        """
         return pulumi.get(self, "organization_country")
 
     @organization_country.setter
@@ -199,6 +268,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="organizationDivision")
     def organization_division(self) -> pulumi.Input[str]:
+        """
+        Department name.
+        """
         return pulumi.get(self, "organization_division")
 
     @organization_division.setter
@@ -208,6 +280,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="organizationName")
     def organization_name(self) -> pulumi.Input[str]:
+        """
+        Company name.
+        """
         return pulumi.get(self, "organization_name")
 
     @organization_name.setter
@@ -217,6 +292,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="organizationRegion")
     def organization_region(self) -> pulumi.Input[str]:
+        """
+        The province where the company is located.
+        """
         return pulumi.get(self, "organization_region")
 
     @organization_region.setter
@@ -226,6 +304,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="phoneAreaCode")
     def phone_area_code(self) -> pulumi.Input[str]:
+        """
+        Company landline area code.
+        """
         return pulumi.get(self, "phone_area_code")
 
     @phone_area_code.setter
@@ -235,6 +316,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="phoneNumber")
     def phone_number(self) -> pulumi.Input[str]:
+        """
+        Company landline number.
+        """
         return pulumi.get(self, "phone_number")
 
     @phone_number.setter
@@ -244,6 +328,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="postalCode")
     def postal_code(self) -> pulumi.Input[str]:
+        """
+        Company postal code.
+        """
         return pulumi.get(self, "postal_code")
 
     @postal_code.setter
@@ -253,6 +340,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="verifyType")
     def verify_type(self) -> pulumi.Input[str]:
+        """
+        Certificate verification method. Valid values: `DNS_AUTO`, `DNS`, `FILE`. `DNS_AUTO` means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, `DNS` means manual DNS verification, `FILE` means file verification.
+        """
         return pulumi.get(self, "verify_type")
 
     @verify_type.setter
@@ -262,6 +352,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="csrContent")
     def csr_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        CSR content uploaded.
+        """
         return pulumi.get(self, "csr_content")
 
     @csr_content.setter
@@ -271,6 +364,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="csrType")
     def csr_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        CSR generation method. Valid values: `online`, `parse`. `online` means online generation, `parse` means manual upload.
+        """
         return pulumi.get(self, "csr_type")
 
     @csr_type.setter
@@ -280,6 +376,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="domainLists")
     def domain_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Array of uploaded domain names, multi-domain certificates can be uploaded.
+        """
         return pulumi.get(self, "domain_lists")
 
     @domain_lists.setter
@@ -289,6 +388,9 @@ class InstanceInformationArgs:
     @property
     @pulumi.getter(name="keyPassword")
     def key_password(self) -> Optional[pulumi.Input[str]]:
+        """
+        Private key password.
+        """
         return pulumi.get(self, "key_password")
 
     @key_password.setter

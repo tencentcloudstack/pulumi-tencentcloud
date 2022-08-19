@@ -11,7 +11,42 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type AccountDBAttachment struct {
+// Use this resource to create SQL Server account DB attachment
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Sqlserver.NewAccountDbAttachment(ctx, "foo", &Sqlserver.AccountDbAttachmentArgs{
+// 			InstanceId:  pulumi.String("mssql-3cdq7kx5"),
+// 			AccountName: pulumi.Any(tencentcloud_sqlserver_account.Example.Name),
+// 			DbName:      pulumi.Any(tencentcloud_sqlserver_db.Example.Name),
+// 			Privilege:   pulumi.String("ReadWrite"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// SQL Server account DB attachment can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment foo mssql-3cdq7kx5#tf_sqlserver_account#test111
+// ```
+type AccountDbAttachment struct {
 	pulumi.CustomResourceState
 
 	// SQL Server account name.
@@ -24,9 +59,9 @@ type AccountDBAttachment struct {
 	Privilege pulumi.StringOutput `pulumi:"privilege"`
 }
 
-// NewAccountDBAttachment registers a new resource with the given unique name, arguments, and options.
-func NewAccountDBAttachment(ctx *pulumi.Context,
-	name string, args *AccountDBAttachmentArgs, opts ...pulumi.ResourceOption) (*AccountDBAttachment, error) {
+// NewAccountDbAttachment registers a new resource with the given unique name, arguments, and options.
+func NewAccountDbAttachment(ctx *pulumi.Context,
+	name string, args *AccountDbAttachmentArgs, opts ...pulumi.ResourceOption) (*AccountDbAttachment, error) {
 	if args == nil {
 		return nil, errors.New("missing one or more required arguments")
 	}
@@ -43,28 +78,28 @@ func NewAccountDBAttachment(ctx *pulumi.Context,
 	if args.Privilege == nil {
 		return nil, errors.New("invalid value for required argument 'Privilege'")
 	}
-	var resource AccountDBAttachment
-	err := ctx.RegisterResource("tencentcloud:Sqlserver/accountDBAttachment:AccountDBAttachment", name, args, &resource, opts...)
+	var resource AccountDbAttachment
+	err := ctx.RegisterResource("tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// GetAccountDBAttachment gets an existing AccountDBAttachment resource's state with the given name, ID, and optional
+// GetAccountDbAttachment gets an existing AccountDbAttachment resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetAccountDBAttachment(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *AccountDBAttachmentState, opts ...pulumi.ResourceOption) (*AccountDBAttachment, error) {
-	var resource AccountDBAttachment
-	err := ctx.ReadResource("tencentcloud:Sqlserver/accountDBAttachment:AccountDBAttachment", name, id, state, &resource, opts...)
+func GetAccountDbAttachment(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *AccountDbAttachmentState, opts ...pulumi.ResourceOption) (*AccountDbAttachment, error) {
+	var resource AccountDbAttachment
+	err := ctx.ReadResource("tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// Input properties used for looking up and filtering AccountDBAttachment resources.
-type accountDBAttachmentState struct {
+// Input properties used for looking up and filtering AccountDbAttachment resources.
+type accountDbAttachmentState struct {
 	// SQL Server account name.
 	AccountName *string `pulumi:"accountName"`
 	// SQL Server DB name.
@@ -75,7 +110,7 @@ type accountDBAttachmentState struct {
 	Privilege *string `pulumi:"privilege"`
 }
 
-type AccountDBAttachmentState struct {
+type AccountDbAttachmentState struct {
 	// SQL Server account name.
 	AccountName pulumi.StringPtrInput
 	// SQL Server DB name.
@@ -86,11 +121,11 @@ type AccountDBAttachmentState struct {
 	Privilege pulumi.StringPtrInput
 }
 
-func (AccountDBAttachmentState) ElementType() reflect.Type {
-	return reflect.TypeOf((*accountDBAttachmentState)(nil)).Elem()
+func (AccountDbAttachmentState) ElementType() reflect.Type {
+	return reflect.TypeOf((*accountDbAttachmentState)(nil)).Elem()
 }
 
-type accountDBAttachmentArgs struct {
+type accountDbAttachmentArgs struct {
 	// SQL Server account name.
 	AccountName string `pulumi:"accountName"`
 	// SQL Server DB name.
@@ -101,8 +136,8 @@ type accountDBAttachmentArgs struct {
 	Privilege string `pulumi:"privilege"`
 }
 
-// The set of arguments for constructing a AccountDBAttachment resource.
-type AccountDBAttachmentArgs struct {
+// The set of arguments for constructing a AccountDbAttachment resource.
+type AccountDbAttachmentArgs struct {
 	// SQL Server account name.
 	AccountName pulumi.StringInput
 	// SQL Server DB name.
@@ -113,158 +148,158 @@ type AccountDBAttachmentArgs struct {
 	Privilege pulumi.StringInput
 }
 
-func (AccountDBAttachmentArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*accountDBAttachmentArgs)(nil)).Elem()
+func (AccountDbAttachmentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*accountDbAttachmentArgs)(nil)).Elem()
 }
 
-type AccountDBAttachmentInput interface {
+type AccountDbAttachmentInput interface {
 	pulumi.Input
 
-	ToAccountDBAttachmentOutput() AccountDBAttachmentOutput
-	ToAccountDBAttachmentOutputWithContext(ctx context.Context) AccountDBAttachmentOutput
+	ToAccountDbAttachmentOutput() AccountDbAttachmentOutput
+	ToAccountDbAttachmentOutputWithContext(ctx context.Context) AccountDbAttachmentOutput
 }
 
-func (*AccountDBAttachment) ElementType() reflect.Type {
-	return reflect.TypeOf((**AccountDBAttachment)(nil)).Elem()
+func (*AccountDbAttachment) ElementType() reflect.Type {
+	return reflect.TypeOf((**AccountDbAttachment)(nil)).Elem()
 }
 
-func (i *AccountDBAttachment) ToAccountDBAttachmentOutput() AccountDBAttachmentOutput {
-	return i.ToAccountDBAttachmentOutputWithContext(context.Background())
+func (i *AccountDbAttachment) ToAccountDbAttachmentOutput() AccountDbAttachmentOutput {
+	return i.ToAccountDbAttachmentOutputWithContext(context.Background())
 }
 
-func (i *AccountDBAttachment) ToAccountDBAttachmentOutputWithContext(ctx context.Context) AccountDBAttachmentOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AccountDBAttachmentOutput)
+func (i *AccountDbAttachment) ToAccountDbAttachmentOutputWithContext(ctx context.Context) AccountDbAttachmentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountDbAttachmentOutput)
 }
 
-// AccountDBAttachmentArrayInput is an input type that accepts AccountDBAttachmentArray and AccountDBAttachmentArrayOutput values.
-// You can construct a concrete instance of `AccountDBAttachmentArrayInput` via:
+// AccountDbAttachmentArrayInput is an input type that accepts AccountDbAttachmentArray and AccountDbAttachmentArrayOutput values.
+// You can construct a concrete instance of `AccountDbAttachmentArrayInput` via:
 //
-//          AccountDBAttachmentArray{ AccountDBAttachmentArgs{...} }
-type AccountDBAttachmentArrayInput interface {
+//          AccountDbAttachmentArray{ AccountDbAttachmentArgs{...} }
+type AccountDbAttachmentArrayInput interface {
 	pulumi.Input
 
-	ToAccountDBAttachmentArrayOutput() AccountDBAttachmentArrayOutput
-	ToAccountDBAttachmentArrayOutputWithContext(context.Context) AccountDBAttachmentArrayOutput
+	ToAccountDbAttachmentArrayOutput() AccountDbAttachmentArrayOutput
+	ToAccountDbAttachmentArrayOutputWithContext(context.Context) AccountDbAttachmentArrayOutput
 }
 
-type AccountDBAttachmentArray []AccountDBAttachmentInput
+type AccountDbAttachmentArray []AccountDbAttachmentInput
 
-func (AccountDBAttachmentArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*AccountDBAttachment)(nil)).Elem()
+func (AccountDbAttachmentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*AccountDbAttachment)(nil)).Elem()
 }
 
-func (i AccountDBAttachmentArray) ToAccountDBAttachmentArrayOutput() AccountDBAttachmentArrayOutput {
-	return i.ToAccountDBAttachmentArrayOutputWithContext(context.Background())
+func (i AccountDbAttachmentArray) ToAccountDbAttachmentArrayOutput() AccountDbAttachmentArrayOutput {
+	return i.ToAccountDbAttachmentArrayOutputWithContext(context.Background())
 }
 
-func (i AccountDBAttachmentArray) ToAccountDBAttachmentArrayOutputWithContext(ctx context.Context) AccountDBAttachmentArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AccountDBAttachmentArrayOutput)
+func (i AccountDbAttachmentArray) ToAccountDbAttachmentArrayOutputWithContext(ctx context.Context) AccountDbAttachmentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountDbAttachmentArrayOutput)
 }
 
-// AccountDBAttachmentMapInput is an input type that accepts AccountDBAttachmentMap and AccountDBAttachmentMapOutput values.
-// You can construct a concrete instance of `AccountDBAttachmentMapInput` via:
+// AccountDbAttachmentMapInput is an input type that accepts AccountDbAttachmentMap and AccountDbAttachmentMapOutput values.
+// You can construct a concrete instance of `AccountDbAttachmentMapInput` via:
 //
-//          AccountDBAttachmentMap{ "key": AccountDBAttachmentArgs{...} }
-type AccountDBAttachmentMapInput interface {
+//          AccountDbAttachmentMap{ "key": AccountDbAttachmentArgs{...} }
+type AccountDbAttachmentMapInput interface {
 	pulumi.Input
 
-	ToAccountDBAttachmentMapOutput() AccountDBAttachmentMapOutput
-	ToAccountDBAttachmentMapOutputWithContext(context.Context) AccountDBAttachmentMapOutput
+	ToAccountDbAttachmentMapOutput() AccountDbAttachmentMapOutput
+	ToAccountDbAttachmentMapOutputWithContext(context.Context) AccountDbAttachmentMapOutput
 }
 
-type AccountDBAttachmentMap map[string]AccountDBAttachmentInput
+type AccountDbAttachmentMap map[string]AccountDbAttachmentInput
 
-func (AccountDBAttachmentMap) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*AccountDBAttachment)(nil)).Elem()
+func (AccountDbAttachmentMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*AccountDbAttachment)(nil)).Elem()
 }
 
-func (i AccountDBAttachmentMap) ToAccountDBAttachmentMapOutput() AccountDBAttachmentMapOutput {
-	return i.ToAccountDBAttachmentMapOutputWithContext(context.Background())
+func (i AccountDbAttachmentMap) ToAccountDbAttachmentMapOutput() AccountDbAttachmentMapOutput {
+	return i.ToAccountDbAttachmentMapOutputWithContext(context.Background())
 }
 
-func (i AccountDBAttachmentMap) ToAccountDBAttachmentMapOutputWithContext(ctx context.Context) AccountDBAttachmentMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AccountDBAttachmentMapOutput)
+func (i AccountDbAttachmentMap) ToAccountDbAttachmentMapOutputWithContext(ctx context.Context) AccountDbAttachmentMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountDbAttachmentMapOutput)
 }
 
-type AccountDBAttachmentOutput struct{ *pulumi.OutputState }
+type AccountDbAttachmentOutput struct{ *pulumi.OutputState }
 
-func (AccountDBAttachmentOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**AccountDBAttachment)(nil)).Elem()
+func (AccountDbAttachmentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AccountDbAttachment)(nil)).Elem()
 }
 
-func (o AccountDBAttachmentOutput) ToAccountDBAttachmentOutput() AccountDBAttachmentOutput {
+func (o AccountDbAttachmentOutput) ToAccountDbAttachmentOutput() AccountDbAttachmentOutput {
 	return o
 }
 
-func (o AccountDBAttachmentOutput) ToAccountDBAttachmentOutputWithContext(ctx context.Context) AccountDBAttachmentOutput {
+func (o AccountDbAttachmentOutput) ToAccountDbAttachmentOutputWithContext(ctx context.Context) AccountDbAttachmentOutput {
 	return o
 }
 
 // SQL Server account name.
-func (o AccountDBAttachmentOutput) AccountName() pulumi.StringOutput {
-	return o.ApplyT(func(v *AccountDBAttachment) pulumi.StringOutput { return v.AccountName }).(pulumi.StringOutput)
+func (o AccountDbAttachmentOutput) AccountName() pulumi.StringOutput {
+	return o.ApplyT(func(v *AccountDbAttachment) pulumi.StringOutput { return v.AccountName }).(pulumi.StringOutput)
 }
 
 // SQL Server DB name.
-func (o AccountDBAttachmentOutput) DbName() pulumi.StringOutput {
-	return o.ApplyT(func(v *AccountDBAttachment) pulumi.StringOutput { return v.DbName }).(pulumi.StringOutput)
+func (o AccountDbAttachmentOutput) DbName() pulumi.StringOutput {
+	return o.ApplyT(func(v *AccountDbAttachment) pulumi.StringOutput { return v.DbName }).(pulumi.StringOutput)
 }
 
 // SQL Server instance ID that the account belongs to.
-func (o AccountDBAttachmentOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v *AccountDBAttachment) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
+func (o AccountDbAttachmentOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *AccountDbAttachment) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
 }
 
 // Privilege of the account on DB. Valid values: `ReadOnly`, `ReadWrite`.
-func (o AccountDBAttachmentOutput) Privilege() pulumi.StringOutput {
-	return o.ApplyT(func(v *AccountDBAttachment) pulumi.StringOutput { return v.Privilege }).(pulumi.StringOutput)
+func (o AccountDbAttachmentOutput) Privilege() pulumi.StringOutput {
+	return o.ApplyT(func(v *AccountDbAttachment) pulumi.StringOutput { return v.Privilege }).(pulumi.StringOutput)
 }
 
-type AccountDBAttachmentArrayOutput struct{ *pulumi.OutputState }
+type AccountDbAttachmentArrayOutput struct{ *pulumi.OutputState }
 
-func (AccountDBAttachmentArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*AccountDBAttachment)(nil)).Elem()
+func (AccountDbAttachmentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*AccountDbAttachment)(nil)).Elem()
 }
 
-func (o AccountDBAttachmentArrayOutput) ToAccountDBAttachmentArrayOutput() AccountDBAttachmentArrayOutput {
+func (o AccountDbAttachmentArrayOutput) ToAccountDbAttachmentArrayOutput() AccountDbAttachmentArrayOutput {
 	return o
 }
 
-func (o AccountDBAttachmentArrayOutput) ToAccountDBAttachmentArrayOutputWithContext(ctx context.Context) AccountDBAttachmentArrayOutput {
+func (o AccountDbAttachmentArrayOutput) ToAccountDbAttachmentArrayOutputWithContext(ctx context.Context) AccountDbAttachmentArrayOutput {
 	return o
 }
 
-func (o AccountDBAttachmentArrayOutput) Index(i pulumi.IntInput) AccountDBAttachmentOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *AccountDBAttachment {
-		return vs[0].([]*AccountDBAttachment)[vs[1].(int)]
-	}).(AccountDBAttachmentOutput)
+func (o AccountDbAttachmentArrayOutput) Index(i pulumi.IntInput) AccountDbAttachmentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *AccountDbAttachment {
+		return vs[0].([]*AccountDbAttachment)[vs[1].(int)]
+	}).(AccountDbAttachmentOutput)
 }
 
-type AccountDBAttachmentMapOutput struct{ *pulumi.OutputState }
+type AccountDbAttachmentMapOutput struct{ *pulumi.OutputState }
 
-func (AccountDBAttachmentMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*AccountDBAttachment)(nil)).Elem()
+func (AccountDbAttachmentMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*AccountDbAttachment)(nil)).Elem()
 }
 
-func (o AccountDBAttachmentMapOutput) ToAccountDBAttachmentMapOutput() AccountDBAttachmentMapOutput {
+func (o AccountDbAttachmentMapOutput) ToAccountDbAttachmentMapOutput() AccountDbAttachmentMapOutput {
 	return o
 }
 
-func (o AccountDBAttachmentMapOutput) ToAccountDBAttachmentMapOutputWithContext(ctx context.Context) AccountDBAttachmentMapOutput {
+func (o AccountDbAttachmentMapOutput) ToAccountDbAttachmentMapOutputWithContext(ctx context.Context) AccountDbAttachmentMapOutput {
 	return o
 }
 
-func (o AccountDBAttachmentMapOutput) MapIndex(k pulumi.StringInput) AccountDBAttachmentOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *AccountDBAttachment {
-		return vs[0].(map[string]*AccountDBAttachment)[vs[1].(string)]
-	}).(AccountDBAttachmentOutput)
+func (o AccountDbAttachmentMapOutput) MapIndex(k pulumi.StringInput) AccountDbAttachmentOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *AccountDbAttachment {
+		return vs[0].(map[string]*AccountDbAttachment)[vs[1].(string)]
+	}).(AccountDbAttachmentOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*AccountDBAttachmentInput)(nil)).Elem(), &AccountDBAttachment{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AccountDBAttachmentArrayInput)(nil)).Elem(), AccountDBAttachmentArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AccountDBAttachmentMapInput)(nil)).Elem(), AccountDBAttachmentMap{})
-	pulumi.RegisterOutputType(AccountDBAttachmentOutput{})
-	pulumi.RegisterOutputType(AccountDBAttachmentArrayOutput{})
-	pulumi.RegisterOutputType(AccountDBAttachmentMapOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountDbAttachmentInput)(nil)).Elem(), &AccountDbAttachment{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountDbAttachmentArrayInput)(nil)).Elem(), AccountDbAttachmentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountDbAttachmentMapInput)(nil)).Elem(), AccountDbAttachmentMap{})
+	pulumi.RegisterOutputType(AccountDbAttachmentOutput{})
+	pulumi.RegisterOutputType(AccountDbAttachmentArrayOutput{})
+	pulumi.RegisterOutputType(AccountDbAttachmentMapOutput{})
 }

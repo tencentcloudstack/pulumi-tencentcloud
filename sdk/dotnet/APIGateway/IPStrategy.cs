@@ -7,10 +7,55 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway
+namespace Pulumi.Tencentcloud.ApiGateway
 {
-    [TencentcloudResourceType("tencentcloud:APIGateway/iPStrategy:IPStrategy")]
-    public partial class IPStrategy : Pulumi.CustomResource
+    /// <summary>
+    /// Use this resource to create IP strategy of API gateway.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         {
+    ///             ServiceName = "niceservice",
+    ///             Protocol = "http&amp;https",
+    ///             ServiceDesc = "your nice service",
+    ///             NetTypes = 
+    ///             {
+    ///                 "INNER",
+    ///                 "OUTER",
+    ///             },
+    ///             IpVersion = "IPv4",
+    ///         });
+    ///         var test = new Tencentcloud.ApiGateway.IpStrategy("test", new Tencentcloud.ApiGateway.IpStrategyArgs
+    ///         {
+    ///             ServiceId = service.Id,
+    ///             StrategyName = "tf_test",
+    ///             StrategyType = "BLACK",
+    ///             StrategyData = "9.9.9.9",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// IP strategy of API gateway can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:ApiGateway/ipStrategy:IpStrategy test service-ohxqslqe#IPStrategy-q1lk8ud2
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:ApiGateway/ipStrategy:IpStrategy")]
+    public partial class IpStrategy : Pulumi.CustomResource
     {
         /// <summary>
         /// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -50,19 +95,19 @@ namespace Pulumi.Tencentcloud.APIGateway
 
 
         /// <summary>
-        /// Create a IPStrategy resource with the given unique name, arguments, and options.
+        /// Create a IpStrategy resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public IPStrategy(string name, IPStrategyArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/iPStrategy:IPStrategy", name, args ?? new IPStrategyArgs(), MakeResourceOptions(options, ""))
+        public IpStrategy(string name, IpStrategyArgs args, CustomResourceOptions? options = null)
+            : base("tencentcloud:ApiGateway/ipStrategy:IpStrategy", name, args ?? new IpStrategyArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private IPStrategy(string name, Input<string> id, IPStrategyState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/iPStrategy:IPStrategy", name, state, MakeResourceOptions(options, id))
+        private IpStrategy(string name, Input<string> id, IpStrategyState? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:ApiGateway/ipStrategy:IpStrategy", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -78,7 +123,7 @@ namespace Pulumi.Tencentcloud.APIGateway
             return merged;
         }
         /// <summary>
-        /// Get an existing IPStrategy resource's state with the given name, ID, and optional extra
+        /// Get an existing IpStrategy resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -86,13 +131,13 @@ namespace Pulumi.Tencentcloud.APIGateway
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static IPStrategy Get(string name, Input<string> id, IPStrategyState? state = null, CustomResourceOptions? options = null)
+        public static IpStrategy Get(string name, Input<string> id, IpStrategyState? state = null, CustomResourceOptions? options = null)
         {
-            return new IPStrategy(name, id, state, options);
+            return new IpStrategy(name, id, state, options);
         }
     }
 
-    public sealed class IPStrategyArgs : Pulumi.ResourceArgs
+    public sealed class IpStrategyArgs : Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of the API gateway service.
@@ -118,12 +163,12 @@ namespace Pulumi.Tencentcloud.APIGateway
         [Input("strategyType", required: true)]
         public Input<string> StrategyType { get; set; } = null!;
 
-        public IPStrategyArgs()
+        public IpStrategyArgs()
         {
         }
     }
 
-    public sealed class IPStrategyState : Pulumi.ResourceArgs
+    public sealed class IpStrategyState : Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -161,7 +206,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         [Input("strategyType")]
         public Input<string>? StrategyType { get; set; }
 
-        public IPStrategyState()
+        public IpStrategyState()
         {
         }
     }

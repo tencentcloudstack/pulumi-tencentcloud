@@ -9,6 +9,38 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Tcr
 {
+    /// <summary>
+    /// Use this resource to create tcr vpc attachment to manage access of internal endpoint.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Tcr.VpcAttachment("foo", new Tencentcloud.Tcr.VpcAttachmentArgs
+    ///         {
+    ///             InstanceId = "cls-satg5125",
+    ///             SubnetId = "subnet-1uwh63so",
+    ///             VpcId = "vpc-asg3sfa3",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// tcr vpc attachment can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo tcrId#vpcId#subnetId
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/vpcAttachment:VpcAttachment")]
     public partial class VpcAttachment : Pulumi.CustomResource
     {

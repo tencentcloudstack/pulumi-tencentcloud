@@ -12,15 +12,24 @@ namespace Pulumi.Tencentcloud.Scf.Inputs
 
     public sealed class FunctionCfsConfigArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// File system instance ID.
+        /// </summary>
         [Input("cfsId", required: true)]
         public Input<string> CfsId { get; set; } = null!;
 
         [Input("ipAddress")]
         public Input<string>? IpAddress { get; set; }
 
+        /// <summary>
+        /// Local mount directory.
+        /// </summary>
         [Input("localMountDir", required: true)]
         public Input<string> LocalMountDir { get; set; } = null!;
 
+        /// <summary>
+        /// File system mount instance ID.
+        /// </summary>
         [Input("mountInsId", required: true)]
         public Input<string> MountInsId { get; set; } = null!;
 
@@ -30,12 +39,21 @@ namespace Pulumi.Tencentcloud.Scf.Inputs
         [Input("mountVpcId")]
         public Input<string>? MountVpcId { get; set; }
 
+        /// <summary>
+        /// Remote mount directory.
+        /// </summary>
         [Input("remoteMountDir", required: true)]
         public Input<string> RemoteMountDir { get; set; } = null!;
 
+        /// <summary>
+        /// ID of user group.
+        /// </summary>
         [Input("userGroupId", required: true)]
         public Input<string> UserGroupId { get; set; } = null!;
 
+        /// <summary>
+        /// ID of user.
+        /// </summary>
         [Input("userId", required: true)]
         public Input<string> UserId { get; set; } = null!;
 

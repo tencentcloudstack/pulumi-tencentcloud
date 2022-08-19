@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -21,18 +21,12 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
-	case "tencentcloud:Vpc/aCL:ACL":
-		r = &ACL{}
+	case "tencentcloud:Vpc/acl:Acl":
+		r = &Acl{}
 	case "tencentcloud:Vpc/aclAttachment:AclAttachment":
 		r = &AclAttachment{}
 	case "tencentcloud:Vpc/instance:Instance":
 		r = &Instance{}
-	case "tencentcloud:Vpc/routeEntry:RouteEntry":
-		r = &RouteEntry{}
-	case "tencentcloud:Vpc/routeTable:RouteTable":
-		r = &RouteTable{}
-	case "tencentcloud:Vpc/subnet:Subnet":
-		r = &Subnet{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -48,7 +42,7 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Vpc/aCL",
+		"Vpc/acl",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -59,21 +53,6 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Vpc/instance",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Vpc/routeEntry",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Vpc/routeTable",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Vpc/subnet",
 		&module{version},
 	)
 }

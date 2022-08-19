@@ -11,14 +11,23 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
 {
 
     [OutputType]
-    public sealed class CCHttpsPolicyRuleList
+    public sealed class CcHttpsPolicyRuleList
     {
+        /// <summary>
+        /// Operator of the rule. Valid values are `include` and `equal`.
+        /// </summary>
         public readonly string Operator;
+        /// <summary>
+        /// Key of the rule. Valid values are `cgi`, `ua` and `referer`.
+        /// </summary>
         public readonly string Skey;
+        /// <summary>
+        /// Rule value, then length should be less than 31 bytes.
+        /// </summary>
         public readonly string Value;
 
         [OutputConstructor]
-        private CCHttpsPolicyRuleList(
+        private CcHttpsPolicyRuleList(
             string @operator,
 
             string skey,

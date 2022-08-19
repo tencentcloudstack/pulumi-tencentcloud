@@ -11,6 +11,58 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a cls config
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cls.NewConfig(ctx, "config", &Cls.ConfigArgs{
+// 			ExcludePaths: cls.ConfigExcludePathArray{
+// 				&cls.ConfigExcludePathArgs{
+// 					Type:  pulumi.String("Path"),
+// 					Value: pulumi.String("/data"),
+// 				},
+// 				&cls.ConfigExcludePathArgs{
+// 					Type:  pulumi.String("File"),
+// 					Value: pulumi.String("/file"),
+// 				},
+// 			},
+// 			ExtractRule: &cls.ConfigExtractRuleArgs{
+// 				Backtracking: -1,
+// 				FilterKeyRegexes: cls.ConfigExtractRuleFilterKeyRegexArray{
+// 					&cls.ConfigExtractRuleFilterKeyRegexArgs{
+// 						Key:   pulumi.String("key1"),
+// 						Regex: pulumi.String("value1"),
+// 					},
+// 					&cls.ConfigExtractRuleFilterKeyRegexArgs{
+// 						Key:   pulumi.String("key2"),
+// 						Regex: pulumi.String("value2"),
+// 					},
+// 				},
+// 				UnMatchLogKey:       pulumi.String("config"),
+// 				UnMatchUpLoadSwitch: pulumi.Bool(true),
+// 			},
+// 			LogType: pulumi.String("json_log"),
+// 			Output:  pulumi.String("4d07fba0-b93e-4e0b-9a7f-d58542560bbb"),
+// 			Path:    pulumi.String("/var/log/kubernetes"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type Config struct {
 	pulumi.CustomResourceState
 
@@ -18,9 +70,7 @@ type Config struct {
 	ExcludePaths ConfigExcludePathArrayOutput `pulumi:"excludePaths"`
 	// Extraction rule. If ExtractRule is set, LogType must be set.
 	ExtractRule ConfigExtractRuleOutput `pulumi:"extractRule"`
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-	// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-	// Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
 	LogType pulumi.StringPtrOutput `pulumi:"logType"`
 	// Collection configuration name.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -68,9 +118,7 @@ type configState struct {
 	ExcludePaths []ConfigExcludePath `pulumi:"excludePaths"`
 	// Extraction rule. If ExtractRule is set, LogType must be set.
 	ExtractRule *ConfigExtractRule `pulumi:"extractRule"`
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-	// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-	// Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
 	LogType *string `pulumi:"logType"`
 	// Collection configuration name.
 	Name *string `pulumi:"name"`
@@ -87,9 +135,7 @@ type ConfigState struct {
 	ExcludePaths ConfigExcludePathArrayInput
 	// Extraction rule. If ExtractRule is set, LogType must be set.
 	ExtractRule ConfigExtractRulePtrInput
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-	// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-	// Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
 	LogType pulumi.StringPtrInput
 	// Collection configuration name.
 	Name pulumi.StringPtrInput
@@ -110,9 +156,7 @@ type configArgs struct {
 	ExcludePaths []ConfigExcludePath `pulumi:"excludePaths"`
 	// Extraction rule. If ExtractRule is set, LogType must be set.
 	ExtractRule ConfigExtractRule `pulumi:"extractRule"`
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-	// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-	// Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
 	LogType *string `pulumi:"logType"`
 	// Collection configuration name.
 	Name *string `pulumi:"name"`
@@ -130,9 +174,7 @@ type ConfigArgs struct {
 	ExcludePaths ConfigExcludePathArrayInput
 	// Extraction rule. If ExtractRule is set, LogType must be set.
 	ExtractRule ConfigExtractRuleInput
-	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-	// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-	// Default value: minimalist_log.
+	// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
 	LogType pulumi.StringPtrInput
 	// Collection configuration name.
 	Name pulumi.StringPtrInput
@@ -241,9 +283,7 @@ func (o ConfigOutput) ExtractRule() ConfigExtractRuleOutput {
 	return o.ApplyT(func(v *Config) ConfigExtractRuleOutput { return v.ExtractRule }).(ConfigExtractRuleOutput)
 }
 
-// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-// Default value: minimalist_log.
+// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
 func (o ConfigOutput) LogType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Config) pulumi.StringPtrOutput { return v.LogType }).(pulumi.StringPtrOutput)
 }

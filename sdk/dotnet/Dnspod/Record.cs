@@ -9,6 +9,32 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dnspod
 {
+    /// <summary>
+    /// Provide a resource to create a DnsPod record.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var demo = new Tencentcloud.Dnspod.Record("demo", new Tencentcloud.Dnspod.RecordArgs
+    ///         {
+    ///             Domain = "mikatong.com",
+    ///             RecordLine = "默认",
+    ///             RecordType = "A",
+    ///             SubDomain = "demo",
+    ///             Value = "1.2.3.9",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/record:Record")]
     public partial class Record : Pulumi.CustomResource
     {
@@ -43,8 +69,7 @@ namespace Pulumi.Tencentcloud.Dnspod
         public Output<string> RecordType { get; private set; } = null!;
 
         /// <summary>
-        /// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-        /// in, resolution will not take effect and the limits of load balancing will not be verified.
+        /// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         /// </summary>
         [Output("status")]
         public Output<string?> Status { get; private set; } = null!;
@@ -68,8 +93,7 @@ namespace Pulumi.Tencentcloud.Dnspod
         public Output<string> Value { get; private set; } = null!;
 
         /// <summary>
-        /// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-        /// this parameter, means that the weight information is not set. Default is 0.
+        /// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
         /// </summary>
         [Output("weight")]
         public Output<int?> Weight { get; private set; } = null!;
@@ -145,8 +169,7 @@ namespace Pulumi.Tencentcloud.Dnspod
         public Input<string> RecordType { get; set; } = null!;
 
         /// <summary>
-        /// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-        /// in, resolution will not take effect and the limits of load balancing will not be verified.
+        /// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
@@ -170,8 +193,7 @@ namespace Pulumi.Tencentcloud.Dnspod
         public Input<string> Value { get; set; } = null!;
 
         /// <summary>
-        /// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-        /// this parameter, means that the weight information is not set. Default is 0.
+        /// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
         /// </summary>
         [Input("weight")]
         public Input<int>? Weight { get; set; }
@@ -214,8 +236,7 @@ namespace Pulumi.Tencentcloud.Dnspod
         public Input<string>? RecordType { get; set; }
 
         /// <summary>
-        /// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-        /// in, resolution will not take effect and the limits of load balancing will not be verified.
+        /// Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
@@ -239,8 +260,7 @@ namespace Pulumi.Tencentcloud.Dnspod
         public Input<string>? Value { get; set; }
 
         /// <summary>
-        /// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-        /// this parameter, means that the weight information is not set. Default is 0.
+        /// Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
         /// </summary>
         [Input("weight")]
         public Input<int>? Weight { get; set; }

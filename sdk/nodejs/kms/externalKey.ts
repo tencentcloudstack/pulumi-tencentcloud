@@ -4,6 +4,33 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a KMS external key.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Kms.ExternalKey("foo", {
+ *     alias: "test",
+ *     description: "describe key test message.",
+ *     isEnabled: true,
+ *     keyMaterialBase64: "MTIzMTIzMTIzMTIzMTIzQQ==",
+ *     validTo: 2147443200,
+ *     wrappingAlgorithm: "RSAES_PKCS1_V1_5",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * KMS external keys can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Kms/externalKey:ExternalKey foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+ * ```
+ */
 export class ExternalKey extends pulumi.CustomResource {
     /**
      * Get an existing ExternalKey resource's state with the given name, ID, and optional extra
@@ -33,8 +60,7 @@ export class ExternalKey extends pulumi.CustomResource {
     }
 
     /**
-     * Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-     * a letter or number.
+     * Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     public readonly alias!: pulumi.Output<string>;
     /**
@@ -42,19 +68,15 @@ export class ExternalKey extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-     * is `Enabled`, `Disabled`, `Archived`.
+     * Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
     public readonly isArchived!: pulumi.Output<boolean | undefined>;
     /**
-     * Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-     * is `Enabled`, `Disabled`, `Archived`.
+     * Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
     public readonly isEnabled!: pulumi.Output<boolean | undefined>;
     /**
-     * The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-     * of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-     * imported key material is required to be 256 bits.
+     * The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
      */
     public readonly keyMaterialBase64!: pulumi.Output<string | undefined>;
     /**
@@ -62,8 +84,7 @@ export class ExternalKey extends pulumi.CustomResource {
      */
     public /*out*/ readonly keyState!: pulumi.Output<string>;
     /**
-     * Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-     * Defaults to 7 days.
+     * Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
      */
     public readonly pendingDeleteWindowInDays!: pulumi.Output<number | undefined>;
     /**
@@ -71,13 +92,11 @@ export class ExternalKey extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
-     * This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-     * current timestamp, the maximum support is 2147443200.
+     * This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
      */
     public readonly validTo!: pulumi.Output<number | undefined>;
     /**
-     * The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-     * `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+     * The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
      */
     public readonly wrappingAlgorithm!: pulumi.Output<string | undefined>;
 
@@ -130,8 +149,7 @@ export class ExternalKey extends pulumi.CustomResource {
  */
 export interface ExternalKeyState {
     /**
-     * Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-     * a letter or number.
+     * Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     alias?: pulumi.Input<string>;
     /**
@@ -139,19 +157,15 @@ export interface ExternalKeyState {
      */
     description?: pulumi.Input<string>;
     /**
-     * Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-     * is `Enabled`, `Disabled`, `Archived`.
+     * Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
     isArchived?: pulumi.Input<boolean>;
     /**
-     * Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-     * is `Enabled`, `Disabled`, `Archived`.
+     * Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
     isEnabled?: pulumi.Input<boolean>;
     /**
-     * The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-     * of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-     * imported key material is required to be 256 bits.
+     * The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
      */
     keyMaterialBase64?: pulumi.Input<string>;
     /**
@@ -159,8 +173,7 @@ export interface ExternalKeyState {
      */
     keyState?: pulumi.Input<string>;
     /**
-     * Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-     * Defaults to 7 days.
+     * Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
      */
     pendingDeleteWindowInDays?: pulumi.Input<number>;
     /**
@@ -168,13 +181,11 @@ export interface ExternalKeyState {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-     * current timestamp, the maximum support is 2147443200.
+     * This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
      */
     validTo?: pulumi.Input<number>;
     /**
-     * The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-     * `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+     * The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
      */
     wrappingAlgorithm?: pulumi.Input<string>;
 }
@@ -184,8 +195,7 @@ export interface ExternalKeyState {
  */
 export interface ExternalKeyArgs {
     /**
-     * Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be
-     * a letter or number.
+     * Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     alias: pulumi.Input<string>;
     /**
@@ -193,24 +203,19 @@ export interface ExternalKeyArgs {
      */
     description?: pulumi.Input<string>;
     /**
-     * Specify whether to archive key. Default value is `false`. This field is conflict with `is_enabled`, valid when key_state
-     * is `Enabled`, `Disabled`, `Archived`.
+     * Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
     isArchived?: pulumi.Input<boolean>;
     /**
-     * Specify whether to enable key. Default value is `false`. This field is conflict with `is_archived`, valid when key_state
-     * is `Enabled`, `Disabled`, `Archived`.
+     * Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
     isEnabled?: pulumi.Input<boolean>;
     /**
-     * The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length
-     * of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the
-     * imported key material is required to be 256 bits.
+     * The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
      */
     keyMaterialBase64?: pulumi.Input<string>;
     /**
-     * Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days.
-     * Defaults to 7 days.
+     * Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
      */
     pendingDeleteWindowInDays?: pulumi.Input<number>;
     /**
@@ -218,13 +223,11 @@ export interface ExternalKeyArgs {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the
-     * current timestamp, the maximum support is 2147443200.
+     * This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
      */
     validTo?: pulumi.Input<number>;
     /**
-     * The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and
-     * `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
+     * The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
      */
     wrappingAlgorithm?: pulumi.Input<string>;
 }

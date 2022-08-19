@@ -9,6 +9,65 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Mysql
 {
+    /// <summary>
+    /// Provides a mysql instance resource to create master database instances.
+    /// 
+    /// &gt; **NOTE:** If this mysql has readonly instance, the terminate operation of the mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var @default = new Tencentcloud.Mysql.Instance("default", new Tencentcloud.Mysql.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = "ap-guangzhou-4",
+    ///             ChargeType = "POSTPAID",
+    ///             EngineVersion = "5.7",
+    ///             FirstSlaveZone = "ap-guangzhou-4",
+    ///             InstanceName = "myTestMysql",
+    ///             InternetService = 1,
+    ///             IntranetPort = 3306,
+    ///             MemSize = 128000,
+    ///             Parameters = 
+    ///             {
+    ///                 { "max_connections", "1000" },
+    ///             },
+    ///             ProjectId = 201901010001,
+    ///             RootPassword = "********",
+    ///             SecondSlaveZone = "ap-guangzhou-4",
+    ///             SecurityGroups = 
+    ///             {
+    ///                 "sg-ot8eclwz",
+    ///             },
+    ///             SlaveDeployMode = 0,
+    ///             SlaveSyncMode = 1,
+    ///             SubnetId = "subnet-9uivyb1g",
+    ///             Tags = 
+    ///             {
+    ///                 { "name", "test" },
+    ///             },
+    ///             VolumeSize = 250,
+    ///             VpcId = "vpc-12mt3l31",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// MySQL instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678"
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
@@ -61,9 +120,7 @@ namespace Pulumi.Tencentcloud.Mysql
         public Output<string?> FirstSlaveZone { get; private set; } = null!;
 
         /// <summary>
-        /// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-        /// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-        /// para of the readonly mysql instance will not take effect.
+        /// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
         /// </summary>
         [Output("forceDelete")]
         public Output<bool?> ForceDelete { get; private set; } = null!;
@@ -135,13 +192,13 @@ namespace Pulumi.Tencentcloud.Mysql
         public Output<ImmutableDictionary<string, object>?> Parameters { get; private set; } = null!;
 
         /// <summary>
-        /// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+        /// It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
         /// </summary>
         [Output("payType")]
         public Output<int?> PayType { get; private set; } = null!;
 
         /// <summary>
-        /// Period of instance. NOTES: Only supported prepaid instance.
+        /// It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         /// </summary>
         [Output("period")]
         public Output<int?> Period { get; private set; } = null!;
@@ -159,8 +216,7 @@ namespace Pulumi.Tencentcloud.Mysql
         public Output<int?> ProjectId { get; private set; } = null!;
 
         /// <summary>
-        /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-        /// when you purchase read-only instances or disaster recovery instances.
+        /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         /// </summary>
         [Output("rootPassword")]
         public Output<string?> RootPassword { get; private set; } = null!;
@@ -320,9 +376,7 @@ namespace Pulumi.Tencentcloud.Mysql
         public Input<string>? FirstSlaveZone { get; set; }
 
         /// <summary>
-        /// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-        /// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-        /// para of the readonly mysql instance will not take effect.
+        /// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
@@ -370,13 +424,13 @@ namespace Pulumi.Tencentcloud.Mysql
         }
 
         /// <summary>
-        /// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+        /// It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
         /// </summary>
         [Input("payType")]
         public Input<int>? PayType { get; set; }
 
         /// <summary>
-        /// Period of instance. NOTES: Only supported prepaid instance.
+        /// It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         /// </summary>
         [Input("period")]
         public Input<int>? Period { get; set; }
@@ -394,8 +448,7 @@ namespace Pulumi.Tencentcloud.Mysql
         public Input<int>? ProjectId { get; set; }
 
         /// <summary>
-        /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-        /// when you purchase read-only instances or disaster recovery instances.
+        /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         /// </summary>
         [Input("rootPassword")]
         public Input<string>? RootPassword { get; set; }
@@ -516,9 +569,7 @@ namespace Pulumi.Tencentcloud.Mysql
         public Input<string>? FirstSlaveZone { get; set; }
 
         /// <summary>
-        /// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted
-        /// instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this
-        /// para of the readonly mysql instance will not take effect.
+        /// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
@@ -596,13 +647,13 @@ namespace Pulumi.Tencentcloud.Mysql
         }
 
         /// <summary>
-        /// Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
+        /// It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
         /// </summary>
         [Input("payType")]
         public Input<int>? PayType { get; set; }
 
         /// <summary>
-        /// Period of instance. NOTES: Only supported prepaid instance.
+        /// It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         /// </summary>
         [Input("period")]
         public Input<int>? Period { get; set; }
@@ -620,8 +671,7 @@ namespace Pulumi.Tencentcloud.Mysql
         public Input<int>? ProjectId { get; set; }
 
         /// <summary>
-        /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored
-        /// when you purchase read-only instances or disaster recovery instances.
+        /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         /// </summary>
         [Input("rootPassword")]
         public Input<string>? RootPassword { get; set; }

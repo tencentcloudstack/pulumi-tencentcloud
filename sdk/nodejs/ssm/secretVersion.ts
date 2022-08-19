@@ -4,6 +4,39 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a SSM secret version.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.ssm.Secret("foo", {
+ *     secretName: "test",
+ *     description: "test secret",
+ *     recoveryWindowInDays: 0,
+ *     isEnabled: true,
+ *     tags: {
+ *         "test-tag": "test",
+ *     },
+ * });
+ * const v1 = new tencentcloud.ssm.SecretVersion("v1", {
+ *     secretName: foo.secretName,
+ *     versionId: "v1",
+ *     secretBinary: "MTIzMTIzMTIzMTIzMTIzQQ==",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * SSM secret version can be imported using the secretName#versionId, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
+ * ```
+ */
 export class SecretVersion extends pulumi.CustomResource {
     /**
      * Get an existing SecretVersion resource's state with the given name, ID, and optional extra
@@ -33,23 +66,19 @@ export class SecretVersion extends pulumi.CustomResource {
     }
 
     /**
-     * The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-     * bytes. When secret status is `Disabled`, this field will not update anymore.
+     * The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
      */
     public readonly secretBinary!: pulumi.Output<string | undefined>;
     /**
-     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-     * English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     public readonly secretName!: pulumi.Output<string>;
     /**
-     * The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-     * When secret status is `Disabled`, this field will not update anymore.
+     * The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
      */
     public readonly secretString!: pulumi.Output<string | undefined>;
     /**
-     * Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-     * and hyphen '-'. The first character must be a letter or number.
+     * Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     public readonly versionId!: pulumi.Output<string>;
 
@@ -93,23 +122,19 @@ export class SecretVersion extends pulumi.CustomResource {
  */
 export interface SecretVersionState {
     /**
-     * The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-     * bytes. When secret status is `Disabled`, this field will not update anymore.
+     * The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
      */
     secretBinary?: pulumi.Input<string>;
     /**
-     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-     * English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     secretName?: pulumi.Input<string>;
     /**
-     * The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-     * When secret status is `Disabled`, this field will not update anymore.
+     * The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
      */
     secretString?: pulumi.Input<string>;
     /**
-     * Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-     * and hyphen '-'. The first character must be a letter or number.
+     * Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     versionId?: pulumi.Input<string>;
 }
@@ -119,23 +144,19 @@ export interface SecretVersionState {
  */
 export interface SecretVersionArgs {
     /**
-     * The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096
-     * bytes. When secret status is `Disabled`, this field will not update anymore.
+     * The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
      */
     secretBinary?: pulumi.Input<string>;
     /**
-     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-     * English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     secretName: pulumi.Input<string>;
     /**
-     * The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes.
-     * When secret status is `Disabled`, this field will not update anymore.
+     * The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
      */
     secretString?: pulumi.Input<string>;
     /**
-     * Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore
-     * and hyphen '-'. The first character must be a letter or number.
+     * Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     versionId: pulumi.Input<string>;
 }

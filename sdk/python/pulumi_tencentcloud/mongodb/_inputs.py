@@ -17,6 +17,10 @@ class InstanceStandbyInstanceListArgs:
     def __init__(__self__, *,
                  standby_instance_id: Optional[pulumi.Input[str]] = None,
                  standby_instance_region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] standby_instance_id: Indicates the ID of standby instance.
+        :param pulumi.Input[str] standby_instance_region: Indicates the region of standby instance.
+        """
         if standby_instance_id is not None:
             pulumi.set(__self__, "standby_instance_id", standby_instance_id)
         if standby_instance_region is not None:
@@ -25,6 +29,9 @@ class InstanceStandbyInstanceListArgs:
     @property
     @pulumi.getter(name="standbyInstanceId")
     def standby_instance_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Indicates the ID of standby instance.
+        """
         return pulumi.get(self, "standby_instance_id")
 
     @standby_instance_id.setter
@@ -34,6 +41,9 @@ class InstanceStandbyInstanceListArgs:
     @property
     @pulumi.getter(name="standbyInstanceRegion")
     def standby_instance_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        Indicates the region of standby instance.
+        """
         return pulumi.get(self, "standby_instance_region")
 
     @standby_instance_region.setter

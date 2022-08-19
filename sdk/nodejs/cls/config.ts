@@ -5,6 +5,47 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a cls config
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const config = new tencentcloud.Cls.Config("config", {
+ *     excludePaths: [
+ *         {
+ *             type: "Path",
+ *             value: "/data",
+ *         },
+ *         {
+ *             type: "File",
+ *             value: "/file",
+ *         },
+ *     ],
+ *     extractRule: {
+ *         backtracking: -1,
+ *         filterKeyRegexes: [
+ *             {
+ *                 key: "key1",
+ *                 regex: "value1",
+ *             },
+ *             {
+ *                 key: "key2",
+ *                 regex: "value2",
+ *             },
+ *         ],
+ *         unMatchLogKey: "config",
+ *         unMatchUpLoadSwitch: true,
+ *     },
+ *     logType: "json_log",
+ *     output: "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
+ *     path: "/var/log/kubernetes",
+ * });
+ * ```
+ */
 export class Config extends pulumi.CustomResource {
     /**
      * Get an existing Config resource's state with the given name, ID, and optional extra
@@ -42,9 +83,7 @@ export class Config extends pulumi.CustomResource {
      */
     public readonly extractRule!: pulumi.Output<outputs.Cls.ConfigExtractRule>;
     /**
-     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-     * minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-     * Default value: minimalist_log.
+     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
     public readonly logType!: pulumi.Output<string | undefined>;
     /**
@@ -115,9 +154,7 @@ export interface ConfigState {
      */
     extractRule?: pulumi.Input<inputs.Cls.ConfigExtractRule>;
     /**
-     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-     * minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-     * Default value: minimalist_log.
+     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
     logType?: pulumi.Input<string>;
     /**
@@ -151,9 +188,7 @@ export interface ConfigArgs {
      */
     extractRule: pulumi.Input<inputs.Cls.ConfigExtractRule>;
     /**
-     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-     * minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-     * Default value: minimalist_log.
+     * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
     logType?: pulumi.Input<string>;
     /**

@@ -11,21 +11,51 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create custom domain of API gateway.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := ApiGateway.NewCustomDomain(ctx, "foo", &ApiGateway.CustomDomainArgs{
+// 			DefaultDomain:    pulumi.String("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"),
+// 			IsDefaultMapping: pulumi.Bool(false),
+// 			NetType:          pulumi.String("OUTER"),
+// 			PathMappings: pulumi.StringArray{
+// 				pulumi.String("/good#test"),
+// 				pulumi.String("/root#release"),
+// 			},
+// 			Protocol:  pulumi.String("http"),
+// 			ServiceId: pulumi.String("service-ohxqslqe"),
+// 			SubDomain: pulumi.String("tic-test.dnsv1.com"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type CustomDomain struct {
 	pulumi.CustomResourceState
 
-	// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-	// `https` or `http&https`.
+	// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
 	CertificateId pulumi.StringOutput `pulumi:"certificateId"`
 	// Default domain name.
 	DefaultDomain pulumi.StringOutput `pulumi:"defaultDomain"`
-	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-	// In this case, the `path_mappings` attribute is required.
+	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
 	IsDefaultMapping pulumi.BoolPtrOutput `pulumi:"isDefaultMapping"`
 	// Network type. Valid values: `OUTER`, `INNER`.
 	NetType pulumi.StringOutput `pulumi:"netType"`
-	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-	// `prepub`, and `release`.
+	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
 	PathMappings pulumi.StringArrayOutput `pulumi:"pathMappings"`
 	// Protocol supported by service. Valid values: `http`, `https`, `http&https`.
 	Protocol pulumi.StringOutput `pulumi:"protocol"`
@@ -60,7 +90,7 @@ func NewCustomDomain(ctx *pulumi.Context,
 		return nil, errors.New("invalid value for required argument 'SubDomain'")
 	}
 	var resource CustomDomain
-	err := ctx.RegisterResource("tencentcloud:APIGateway/customDomain:CustomDomain", name, args, &resource, opts...)
+	err := ctx.RegisterResource("tencentcloud:ApiGateway/customDomain:CustomDomain", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +102,7 @@ func NewCustomDomain(ctx *pulumi.Context,
 func GetCustomDomain(ctx *pulumi.Context,
 	name string, id pulumi.IDInput, state *CustomDomainState, opts ...pulumi.ResourceOption) (*CustomDomain, error) {
 	var resource CustomDomain
-	err := ctx.ReadResource("tencentcloud:APIGateway/customDomain:CustomDomain", name, id, state, &resource, opts...)
+	err := ctx.ReadResource("tencentcloud:ApiGateway/customDomain:CustomDomain", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -81,18 +111,15 @@ func GetCustomDomain(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering CustomDomain resources.
 type customDomainState struct {
-	// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-	// `https` or `http&https`.
+	// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
 	CertificateId *string `pulumi:"certificateId"`
 	// Default domain name.
 	DefaultDomain *string `pulumi:"defaultDomain"`
-	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-	// In this case, the `path_mappings` attribute is required.
+	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
 	IsDefaultMapping *bool `pulumi:"isDefaultMapping"`
 	// Network type. Valid values: `OUTER`, `INNER`.
 	NetType *string `pulumi:"netType"`
-	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-	// `prepub`, and `release`.
+	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
 	PathMappings []string `pulumi:"pathMappings"`
 	// Protocol supported by service. Valid values: `http`, `https`, `http&https`.
 	Protocol *string `pulumi:"protocol"`
@@ -105,18 +132,15 @@ type customDomainState struct {
 }
 
 type CustomDomainState struct {
-	// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-	// `https` or `http&https`.
+	// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
 	CertificateId pulumi.StringPtrInput
 	// Default domain name.
 	DefaultDomain pulumi.StringPtrInput
-	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-	// In this case, the `path_mappings` attribute is required.
+	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
 	IsDefaultMapping pulumi.BoolPtrInput
 	// Network type. Valid values: `OUTER`, `INNER`.
 	NetType pulumi.StringPtrInput
-	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-	// `prepub`, and `release`.
+	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
 	PathMappings pulumi.StringArrayInput
 	// Protocol supported by service. Valid values: `http`, `https`, `http&https`.
 	Protocol pulumi.StringPtrInput
@@ -133,18 +157,15 @@ func (CustomDomainState) ElementType() reflect.Type {
 }
 
 type customDomainArgs struct {
-	// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-	// `https` or `http&https`.
+	// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
 	CertificateId *string `pulumi:"certificateId"`
 	// Default domain name.
 	DefaultDomain string `pulumi:"defaultDomain"`
-	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-	// In this case, the `path_mappings` attribute is required.
+	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
 	IsDefaultMapping *bool `pulumi:"isDefaultMapping"`
 	// Network type. Valid values: `OUTER`, `INNER`.
 	NetType string `pulumi:"netType"`
-	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-	// `prepub`, and `release`.
+	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
 	PathMappings []string `pulumi:"pathMappings"`
 	// Protocol supported by service. Valid values: `http`, `https`, `http&https`.
 	Protocol string `pulumi:"protocol"`
@@ -156,18 +177,15 @@ type customDomainArgs struct {
 
 // The set of arguments for constructing a CustomDomain resource.
 type CustomDomainArgs struct {
-	// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-	// `https` or `http&https`.
+	// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
 	CertificateId pulumi.StringPtrInput
 	// Default domain name.
 	DefaultDomain pulumi.StringInput
-	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-	// In this case, the `path_mappings` attribute is required.
+	// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
 	IsDefaultMapping pulumi.BoolPtrInput
 	// Network type. Valid values: `OUTER`, `INNER`.
 	NetType pulumi.StringInput
-	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-	// `prepub`, and `release`.
+	// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
 	PathMappings pulumi.StringArrayInput
 	// Protocol supported by service. Valid values: `http`, `https`, `http&https`.
 	Protocol pulumi.StringInput
@@ -264,8 +282,7 @@ func (o CustomDomainOutput) ToCustomDomainOutputWithContext(ctx context.Context)
 	return o
 }
 
-// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value
-// `https` or `http&https`.
+// Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
 func (o CustomDomainOutput) CertificateId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomDomain) pulumi.StringOutput { return v.CertificateId }).(pulumi.StringOutput)
 }
@@ -275,8 +292,7 @@ func (o CustomDomainOutput) DefaultDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomDomain) pulumi.StringOutput { return v.DefaultDomain }).(pulumi.StringOutput)
 }
 
-// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping.
-// In this case, the `path_mappings` attribute is required.
+// Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
 func (o CustomDomainOutput) IsDefaultMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CustomDomain) pulumi.BoolPtrOutput { return v.IsDefaultMapping }).(pulumi.BoolPtrOutput)
 }
@@ -286,8 +302,7 @@ func (o CustomDomainOutput) NetType() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomDomain) pulumi.StringOutput { return v.NetType }).(pulumi.StringOutput)
 }
 
-// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`,
-// `prepub`, and `release`.
+// Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
 func (o CustomDomainOutput) PathMappings() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *CustomDomain) pulumi.StringArrayOutput { return v.PathMappings }).(pulumi.StringArrayOutput)
 }

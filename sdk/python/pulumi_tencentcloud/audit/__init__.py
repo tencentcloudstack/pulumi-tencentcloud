@@ -5,7 +5,7 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
-from .cos_regions import *
+from .get_cos_regions import *
+from .get_key_alias import *
 from .instance import *
-from .key_alias import *
 from . import outputs

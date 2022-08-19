@@ -5,21 +5,31 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./cdnDomain";
-export * from "./domains";
+export * from "./domain";
+export * from "./getDomains";
+export * from "./urlPurge";
+export * from "./urlPush";
 
 // Import resources to register:
-import { CdnDomain } from "./cdnDomain";
+import { Domain } from "./domain";
+import { UrlPurge } from "./urlPurge";
+import { UrlPush } from "./urlPush";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "tencentcloud:Cdn/cdnDomain:CdnDomain":
-                return new CdnDomain(name, <any>undefined, { urn })
+            case "tencentcloud:Cdn/domain:Domain":
+                return new Domain(name, <any>undefined, { urn })
+            case "tencentcloud:Cdn/urlPurge:UrlPurge":
+                return new UrlPurge(name, <any>undefined, { urn })
+            case "tencentcloud:Cdn/urlPush:UrlPush":
+                return new UrlPush(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
-pulumi.runtime.registerResourceModule("tencentcloud", "Cdn/cdnDomain", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cdn/domain", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cdn/urlPurge", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cdn/urlPush", _module)

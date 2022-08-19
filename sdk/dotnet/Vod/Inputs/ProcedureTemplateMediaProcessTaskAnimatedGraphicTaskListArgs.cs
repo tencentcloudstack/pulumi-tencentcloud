@@ -12,12 +12,21 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
     public sealed class ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Animated image generating template ID.
+        /// </summary>
         [Input("definition", required: true)]
         public Input<string> Definition { get; set; } = null!;
 
+        /// <summary>
+        /// End time of animated image in video in seconds.
+        /// </summary>
         [Input("endTimeOffset", required: true)]
         public Input<double> EndTimeOffset { get; set; } = null!;
 
+        /// <summary>
+        /// Start time of animated image in video in seconds.
+        /// </summary>
         [Input("startTimeOffset", required: true)]
         public Input<double> StartTimeOffset { get; set; } = null!;
 

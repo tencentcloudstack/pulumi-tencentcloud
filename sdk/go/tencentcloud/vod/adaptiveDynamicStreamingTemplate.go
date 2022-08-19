@@ -11,6 +11,76 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a VOD adaptive dynamic streaming template.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vod.NewAdaptiveDynamicStreamingTemplate(ctx, "foo", &Vod.AdaptiveDynamicStreamingTemplateArgs{
+// 			Comment:                      pulumi.String("test"),
+// 			DisableHigherVideoBitrate:    pulumi.Bool(false),
+// 			DisableHigherVideoResolution: pulumi.Bool(false),
+// 			DrmType:                      pulumi.String("SimpleAES"),
+// 			Format:                       pulumi.String("HLS"),
+// 			StreamInfos: vod.AdaptiveDynamicStreamingTemplateStreamInfoArray{
+// 				&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
+// 					Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
+// 						AudioChannel: pulumi.String("dual"),
+// 						Bitrate:      pulumi.Int(129),
+// 						Codec:        pulumi.String("libmp3lame"),
+// 						SampleRate:   pulumi.Int(44100),
+// 					},
+// 					RemoveAudio: pulumi.Bool(false),
+// 					Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
+// 						Bitrate:            pulumi.Int(129),
+// 						Codec:              pulumi.String("libx265"),
+// 						FillType:           pulumi.String("stretch"),
+// 						Fps:                pulumi.Int(4),
+// 						Height:             pulumi.Int(128),
+// 						ResolutionAdaptive: pulumi.Bool(false),
+// 						Width:              pulumi.Int(128),
+// 					},
+// 				},
+// 				&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
+// 					Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
+// 						Bitrate:    pulumi.Int(256),
+// 						Codec:      pulumi.String("libfdk_aac"),
+// 						SampleRate: pulumi.Int(44100),
+// 					},
+// 					RemoveAudio: pulumi.Bool(true),
+// 					Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
+// 						Bitrate: pulumi.Int(256),
+// 						Codec:   pulumi.String("libx264"),
+// 						Fps:     pulumi.Int(4),
+// 					},
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// VOD adaptive dynamic streaming template can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate foo 169141
+// ```
 type AdaptiveDynamicStreamingTemplate struct {
 	pulumi.CustomResourceState
 
@@ -18,11 +88,9 @@ type AdaptiveDynamicStreamingTemplate struct {
 	Comment pulumi.StringPtrOutput `pulumi:"comment"`
 	// Creation time of template in ISO date format.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
-	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-	// `true`: yes. Default value: `false`.
+	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
 	DisableHigherVideoBitrate pulumi.BoolPtrOutput `pulumi:"disableHigherVideoBitrate"`
-	// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-	// `true`: yes. Default value: `false`.
+	// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
 	DisableHigherVideoResolution pulumi.BoolPtrOutput `pulumi:"disableHigherVideoResolution"`
 	// DRM scheme type. Valid values: `SimpleAES`. If this field is an empty string, DRM will not be performed on the video.
 	DrmType pulumi.StringPtrOutput `pulumi:"drmType"`
@@ -30,12 +98,9 @@ type AdaptiveDynamicStreamingTemplate struct {
 	Format pulumi.StringOutput `pulumi:"format"`
 	// Template name. Length limit: 64 characters.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-	// substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-	// first substream will be used as the output frame rate.
+	// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
 	StreamInfos AdaptiveDynamicStreamingTemplateStreamInfoArrayOutput `pulumi:"streamInfos"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId pulumi.IntPtrOutput `pulumi:"subAppId"`
 	// Last modified time of template in ISO date format.
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
@@ -80,11 +145,9 @@ type adaptiveDynamicStreamingTemplateState struct {
 	Comment *string `pulumi:"comment"`
 	// Creation time of template in ISO date format.
 	CreateTime *string `pulumi:"createTime"`
-	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-	// `true`: yes. Default value: `false`.
+	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
 	DisableHigherVideoBitrate *bool `pulumi:"disableHigherVideoBitrate"`
-	// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-	// `true`: yes. Default value: `false`.
+	// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
 	DisableHigherVideoResolution *bool `pulumi:"disableHigherVideoResolution"`
 	// DRM scheme type. Valid values: `SimpleAES`. If this field is an empty string, DRM will not be performed on the video.
 	DrmType *string `pulumi:"drmType"`
@@ -92,12 +155,9 @@ type adaptiveDynamicStreamingTemplateState struct {
 	Format *string `pulumi:"format"`
 	// Template name. Length limit: 64 characters.
 	Name *string `pulumi:"name"`
-	// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-	// substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-	// first substream will be used as the output frame rate.
+	// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
 	StreamInfos []AdaptiveDynamicStreamingTemplateStreamInfo `pulumi:"streamInfos"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *int `pulumi:"subAppId"`
 	// Last modified time of template in ISO date format.
 	UpdateTime *string `pulumi:"updateTime"`
@@ -108,11 +168,9 @@ type AdaptiveDynamicStreamingTemplateState struct {
 	Comment pulumi.StringPtrInput
 	// Creation time of template in ISO date format.
 	CreateTime pulumi.StringPtrInput
-	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-	// `true`: yes. Default value: `false`.
+	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
 	DisableHigherVideoBitrate pulumi.BoolPtrInput
-	// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-	// `true`: yes. Default value: `false`.
+	// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
 	DisableHigherVideoResolution pulumi.BoolPtrInput
 	// DRM scheme type. Valid values: `SimpleAES`. If this field is an empty string, DRM will not be performed on the video.
 	DrmType pulumi.StringPtrInput
@@ -120,12 +178,9 @@ type AdaptiveDynamicStreamingTemplateState struct {
 	Format pulumi.StringPtrInput
 	// Template name. Length limit: 64 characters.
 	Name pulumi.StringPtrInput
-	// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-	// substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-	// first substream will be used as the output frame rate.
+	// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
 	StreamInfos AdaptiveDynamicStreamingTemplateStreamInfoArrayInput
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId pulumi.IntPtrInput
 	// Last modified time of template in ISO date format.
 	UpdateTime pulumi.StringPtrInput
@@ -138,11 +193,9 @@ func (AdaptiveDynamicStreamingTemplateState) ElementType() reflect.Type {
 type adaptiveDynamicStreamingTemplateArgs struct {
 	// Template description. Length limit: 256 characters.
 	Comment *string `pulumi:"comment"`
-	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-	// `true`: yes. Default value: `false`.
+	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
 	DisableHigherVideoBitrate *bool `pulumi:"disableHigherVideoBitrate"`
-	// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-	// `true`: yes. Default value: `false`.
+	// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
 	DisableHigherVideoResolution *bool `pulumi:"disableHigherVideoResolution"`
 	// DRM scheme type. Valid values: `SimpleAES`. If this field is an empty string, DRM will not be performed on the video.
 	DrmType *string `pulumi:"drmType"`
@@ -150,12 +203,9 @@ type adaptiveDynamicStreamingTemplateArgs struct {
 	Format string `pulumi:"format"`
 	// Template name. Length limit: 64 characters.
 	Name *string `pulumi:"name"`
-	// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-	// substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-	// first substream will be used as the output frame rate.
+	// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
 	StreamInfos []AdaptiveDynamicStreamingTemplateStreamInfo `pulumi:"streamInfos"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *int `pulumi:"subAppId"`
 }
 
@@ -163,11 +213,9 @@ type adaptiveDynamicStreamingTemplateArgs struct {
 type AdaptiveDynamicStreamingTemplateArgs struct {
 	// Template description. Length limit: 256 characters.
 	Comment pulumi.StringPtrInput
-	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-	// `true`: yes. Default value: `false`.
+	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
 	DisableHigherVideoBitrate pulumi.BoolPtrInput
-	// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-	// `true`: yes. Default value: `false`.
+	// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
 	DisableHigherVideoResolution pulumi.BoolPtrInput
 	// DRM scheme type. Valid values: `SimpleAES`. If this field is an empty string, DRM will not be performed on the video.
 	DrmType pulumi.StringPtrInput
@@ -175,12 +223,9 @@ type AdaptiveDynamicStreamingTemplateArgs struct {
 	Format pulumi.StringInput
 	// Template name. Length limit: 64 characters.
 	Name pulumi.StringPtrInput
-	// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-	// substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-	// first substream will be used as the output frame rate.
+	// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
 	StreamInfos AdaptiveDynamicStreamingTemplateStreamInfoArrayInput
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-	// field; otherwise, leave it empty.
+	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId pulumi.IntPtrInput
 }
 
@@ -281,14 +326,12 @@ func (o AdaptiveDynamicStreamingTemplateOutput) CreateTime() pulumi.StringOutput
 	return o.ApplyT(func(v *AdaptiveDynamicStreamingTemplate) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-// `true`: yes. Default value: `false`.
+// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
 func (o AdaptiveDynamicStreamingTemplateOutput) DisableHigherVideoBitrate() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AdaptiveDynamicStreamingTemplate) pulumi.BoolPtrOutput { return v.DisableHigherVideoBitrate }).(pulumi.BoolPtrOutput)
 }
 
-// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-// `true`: yes. Default value: `false`.
+// Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
 func (o AdaptiveDynamicStreamingTemplateOutput) DisableHigherVideoResolution() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *AdaptiveDynamicStreamingTemplate) pulumi.BoolPtrOutput { return v.DisableHigherVideoResolution }).(pulumi.BoolPtrOutput)
 }
@@ -308,17 +351,14 @@ func (o AdaptiveDynamicStreamingTemplateOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AdaptiveDynamicStreamingTemplate) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-// substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-// first substream will be used as the output frame rate.
+// List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
 func (o AdaptiveDynamicStreamingTemplateOutput) StreamInfos() AdaptiveDynamicStreamingTemplateStreamInfoArrayOutput {
 	return o.ApplyT(func(v *AdaptiveDynamicStreamingTemplate) AdaptiveDynamicStreamingTemplateStreamInfoArrayOutput {
 		return v.StreamInfos
 	}).(AdaptiveDynamicStreamingTemplateStreamInfoArrayOutput)
 }
 
-// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-// field; otherwise, leave it empty.
+// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 func (o AdaptiveDynamicStreamingTemplateOutput) SubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *AdaptiveDynamicStreamingTemplate) pulumi.IntPtrOutput { return v.SubAppId }).(pulumi.IntPtrOutput)
 }

@@ -19,7 +19,7 @@ class UserPolicyAttachmentArgs:
         """
         The set of arguments for constructing a UserPolicyAttachment resource.
         :param pulumi.Input[str] policy_id: ID of the policy.
-        :param pulumi.Input[str] user_id: ID of the attached CAM user.
+        :param pulumi.Input[str] user_id: It has been deprecated from version 1.59.5. Use `user_name` instead. ID of the attached CAM user.
         :param pulumi.Input[str] user_name: Name of the attached CAM user as uniq key.
         """
         pulumi.set(__self__, "policy_id", policy_id)
@@ -47,7 +47,7 @@ class UserPolicyAttachmentArgs:
     @pulumi.getter(name="userId")
     def user_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the attached CAM user.
+        It has been deprecated from version 1.59.5. Use `user_name` instead. ID of the attached CAM user.
         """
         return pulumi.get(self, "user_id")
 
@@ -80,13 +80,12 @@ class _UserPolicyAttachmentState:
                  user_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering UserPolicyAttachment resources.
-        :param pulumi.Input[int] create_mode: Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and
-               the others indicate syntax strategy ways.
+        :param pulumi.Input[int] create_mode: Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
         :param pulumi.Input[str] create_time: Create time of the CAM user policy attachment.
         :param pulumi.Input[str] policy_id: ID of the policy.
         :param pulumi.Input[str] policy_name: Name of the policy.
         :param pulumi.Input[str] policy_type: Type of the policy strategy. `User` means customer strategy and `QCS` means preset strategy.
-        :param pulumi.Input[str] user_id: ID of the attached CAM user.
+        :param pulumi.Input[str] user_id: It has been deprecated from version 1.59.5. Use `user_name` instead. ID of the attached CAM user.
         :param pulumi.Input[str] user_name: Name of the attached CAM user as uniq key.
         """
         if create_mode is not None:
@@ -111,8 +110,7 @@ class _UserPolicyAttachmentState:
     @pulumi.getter(name="createMode")
     def create_mode(self) -> Optional[pulumi.Input[int]]:
         """
-        Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and
-        the others indicate syntax strategy ways.
+        Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
         """
         return pulumi.get(self, "create_mode")
 
@@ -172,7 +170,7 @@ class _UserPolicyAttachmentState:
     @pulumi.getter(name="userId")
     def user_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the attached CAM user.
+        It has been deprecated from version 1.59.5. Use `user_name` instead. ID of the attached CAM user.
         """
         return pulumi.get(self, "user_id")
 
@@ -203,11 +201,31 @@ class UserPolicyAttachment(pulumi.CustomResource):
                  user_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a UserPolicyAttachment resource with the given unique name, props, and options.
+        Provides a resource to create a CAM user policy attachment.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.UserPolicyAttachment("foo",
+            user_id=tencentcloud_cam_user["foo"]["id"],
+            policy_id=tencentcloud_cam_policy["foo"]["id"])
+        ```
+
+        ## Import
+
+        CAM user policy attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] policy_id: ID of the policy.
-        :param pulumi.Input[str] user_id: ID of the attached CAM user.
+        :param pulumi.Input[str] user_id: It has been deprecated from version 1.59.5. Use `user_name` instead. ID of the attached CAM user.
         :param pulumi.Input[str] user_name: Name of the attached CAM user as uniq key.
         """
         ...
@@ -217,7 +235,27 @@ class UserPolicyAttachment(pulumi.CustomResource):
                  args: UserPolicyAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a UserPolicyAttachment resource with the given unique name, props, and options.
+        Provides a resource to create a CAM user policy attachment.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cam.UserPolicyAttachment("foo",
+            user_id=tencentcloud_cam_user["foo"]["id"],
+            policy_id=tencentcloud_cam_policy["foo"]["id"])
+        ```
+
+        ## Import
+
+        CAM user policy attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
+        ```
+
         :param str resource_name: The name of the resource.
         :param UserPolicyAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -284,13 +322,12 @@ class UserPolicyAttachment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] create_mode: Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and
-               the others indicate syntax strategy ways.
+        :param pulumi.Input[int] create_mode: Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
         :param pulumi.Input[str] create_time: Create time of the CAM user policy attachment.
         :param pulumi.Input[str] policy_id: ID of the policy.
         :param pulumi.Input[str] policy_name: Name of the policy.
         :param pulumi.Input[str] policy_type: Type of the policy strategy. `User` means customer strategy and `QCS` means preset strategy.
-        :param pulumi.Input[str] user_id: ID of the attached CAM user.
+        :param pulumi.Input[str] user_id: It has been deprecated from version 1.59.5. Use `user_name` instead. ID of the attached CAM user.
         :param pulumi.Input[str] user_name: Name of the attached CAM user as uniq key.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -310,8 +347,7 @@ class UserPolicyAttachment(pulumi.CustomResource):
     @pulumi.getter(name="createMode")
     def create_mode(self) -> pulumi.Output[int]:
         """
-        Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and
-        the others indicate syntax strategy ways.
+        Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
         """
         return pulumi.get(self, "create_mode")
 
@@ -351,7 +387,7 @@ class UserPolicyAttachment(pulumi.CustomResource):
     @pulumi.getter(name="userId")
     def user_id(self) -> pulumi.Output[Optional[str]]:
         """
-        ID of the attached CAM user.
+        It has been deprecated from version 1.59.5. Use `user_name` instead. ID of the attached CAM user.
         """
         return pulumi.get(self, "user_id")
 

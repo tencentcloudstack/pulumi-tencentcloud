@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -21,8 +21,10 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
-	case "tencentcloud:Route/entry:Entry":
-		r = &Entry{}
+	case "tencentcloud:Route/table:Table":
+		r = &Table{}
+	case "tencentcloud:Route/tableEntry:TableEntry":
+		r = &TableEntry{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -38,7 +40,12 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Route/entry",
+		"Route/table",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Route/tableEntry",
 		&module{version},
 	)
 }

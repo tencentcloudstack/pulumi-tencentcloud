@@ -9,6 +9,69 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Ckafka
 {
+    /// <summary>
+    /// Use this resource to create ckafka instance.
+    /// 
+    /// &gt; **NOTE:** It only support create profession ckafka instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Ckafka.Instance("foo", new Tencentcloud.Ckafka.InstanceArgs
+    ///         {
+    ///             BandWidth = 40,
+    ///             Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
+    ///             {
+    ///                 AutoCreateTopicEnable = true,
+    ///                 DefaultNumPartitions = 3,
+    ///                 DefaultReplicationFactor = 3,
+    ///             },
+    ///             DiskSize = 500,
+    ///             DiskType = "CLOUD_BASIC",
+    ///             DynamicRetentionConfig = new Tencentcloud.Ckafka.Inputs.InstanceDynamicRetentionConfigArgs
+    ///             {
+    ///                 BottomRetention = 0,
+    ///                 DiskQuotaPercentage = 0,
+    ///                 Enable = 1,
+    ///                 StepForwardPercentage = 0,
+    ///             },
+    ///             InstanceName = "ckafka-instance-tf-test",
+    ///             KafkaVersion = "1.1.1",
+    ///             MsgRetentionTime = 1300,
+    ///             MultiZoneFlag = true,
+    ///             Partition = 800,
+    ///             Period = 1,
+    ///             PublicNetwork = 3,
+    ///             RenewFlag = 0,
+    ///             SubnetId = "subnet-4vwihrzk",
+    ///             VpcId = "vpc-82p1t1nv",
+    ///             ZoneId = 100006,
+    ///             ZoneIds = 
+    ///             {
+    ///                 100006,
+    ///                 100007,
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// ckafka instance can be imported using the instance_id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
@@ -25,8 +88,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Output<Outputs.InstanceConfig?> Config { get; private set; } = null!;
 
         /// <summary>
-        /// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-        /// the control. If it is not within the interval, the plan will cause a change when first created.
+        /// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         /// </summary>
         [Output("diskSize")]
         public Output<int> DiskSize { get; private set; } = null!;
@@ -56,8 +118,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Output<string> KafkaVersion { get; private set; } = null!;
 
         /// <summary>
-        /// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-        /// default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+        /// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         /// </summary>
         [Output("msgRetentionTime")]
         public Output<int> MsgRetentionTime { get; private set; } = null!;
@@ -69,8 +130,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Output<bool?> MultiZoneFlag { get; private set; } = null!;
 
         /// <summary>
-        /// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-        /// through the control. If it is not within the interval, the plan will cause a change when first created.
+        /// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         /// </summary>
         [Output("partition")]
         public Output<int> Partition { get; private set; } = null!;
@@ -94,8 +154,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Output<int?> RebalanceTime { get; private set; } = null!;
 
         /// <summary>
-        /// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-        /// no automatic renewal (user setting).
+        /// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         /// </summary>
         [Output("renewFlag")]
         public Output<int> RenewFlag { get; private set; } = null!;
@@ -201,8 +260,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Input<Inputs.InstanceConfigArgs>? Config { get; set; }
 
         /// <summary>
-        /// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-        /// the control. If it is not within the interval, the plan will cause a change when first created.
+        /// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         /// </summary>
         [Input("diskSize")]
         public Input<int>? DiskSize { get; set; }
@@ -232,8 +290,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Input<string>? KafkaVersion { get; set; }
 
         /// <summary>
-        /// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-        /// default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+        /// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         /// </summary>
         [Input("msgRetentionTime")]
         public Input<int>? MsgRetentionTime { get; set; }
@@ -245,8 +302,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Input<bool>? MultiZoneFlag { get; set; }
 
         /// <summary>
-        /// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-        /// through the control. If it is not within the interval, the plan will cause a change when first created.
+        /// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         /// </summary>
         [Input("partition")]
         public Input<int>? Partition { get; set; }
@@ -270,8 +326,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Input<int>? RebalanceTime { get; set; }
 
         /// <summary>
-        /// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-        /// no automatic renewal (user setting).
+        /// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         /// </summary>
         [Input("renewFlag")]
         public Input<int>? RenewFlag { get; set; }
@@ -338,8 +393,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Input<Inputs.InstanceConfigGetArgs>? Config { get; set; }
 
         /// <summary>
-        /// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-        /// the control. If it is not within the interval, the plan will cause a change when first created.
+        /// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         /// </summary>
         [Input("diskSize")]
         public Input<int>? DiskSize { get; set; }
@@ -369,8 +423,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Input<string>? KafkaVersion { get; set; }
 
         /// <summary>
-        /// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-        /// default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+        /// The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         /// </summary>
         [Input("msgRetentionTime")]
         public Input<int>? MsgRetentionTime { get; set; }
@@ -382,8 +435,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Input<bool>? MultiZoneFlag { get; set; }
 
         /// <summary>
-        /// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-        /// through the control. If it is not within the interval, the plan will cause a change when first created.
+        /// Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         /// </summary>
         [Input("partition")]
         public Input<int>? Partition { get; set; }
@@ -407,8 +459,7 @@ namespace Pulumi.Tencentcloud.Ckafka
         public Input<int>? RebalanceTime { get; set; }
 
         /// <summary>
-        /// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-        /// no automatic renewal (user setting).
+        /// Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         /// </summary>
         [Input("renewFlag")]
         public Input<int>? RenewFlag { get; set; }

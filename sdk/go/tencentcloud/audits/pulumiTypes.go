@@ -10,127 +10,142 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type InstancesAuditList struct {
-	AuditSwitch   bool   `pulumi:"auditSwitch"`
-	CosBucket     string `pulumi:"cosBucket"`
-	Id            string `pulumi:"id"`
+type GetInstanceAuditList struct {
+	// Indicate whether audit start logging or not.
+	AuditSwitch bool `pulumi:"auditSwitch"`
+	// Cos bucket name where audit save logs.
+	CosBucket string `pulumi:"cosBucket"`
+	// ID of the audit.
+	Id string `pulumi:"id"`
+	// Prefix of the log file of the audit.
 	LogFilePrefix string `pulumi:"logFilePrefix"`
-	Name          string `pulumi:"name"`
+	// Name of the audits.
+	Name string `pulumi:"name"`
 }
 
-// InstancesAuditListInput is an input type that accepts InstancesAuditListArgs and InstancesAuditListOutput values.
-// You can construct a concrete instance of `InstancesAuditListInput` via:
+// GetInstanceAuditListInput is an input type that accepts GetInstanceAuditListArgs and GetInstanceAuditListOutput values.
+// You can construct a concrete instance of `GetInstanceAuditListInput` via:
 //
-//          InstancesAuditListArgs{...}
-type InstancesAuditListInput interface {
+//          GetInstanceAuditListArgs{...}
+type GetInstanceAuditListInput interface {
 	pulumi.Input
 
-	ToInstancesAuditListOutput() InstancesAuditListOutput
-	ToInstancesAuditListOutputWithContext(context.Context) InstancesAuditListOutput
+	ToGetInstanceAuditListOutput() GetInstanceAuditListOutput
+	ToGetInstanceAuditListOutputWithContext(context.Context) GetInstanceAuditListOutput
 }
 
-type InstancesAuditListArgs struct {
-	AuditSwitch   pulumi.BoolInput   `pulumi:"auditSwitch"`
-	CosBucket     pulumi.StringInput `pulumi:"cosBucket"`
-	Id            pulumi.StringInput `pulumi:"id"`
+type GetInstanceAuditListArgs struct {
+	// Indicate whether audit start logging or not.
+	AuditSwitch pulumi.BoolInput `pulumi:"auditSwitch"`
+	// Cos bucket name where audit save logs.
+	CosBucket pulumi.StringInput `pulumi:"cosBucket"`
+	// ID of the audit.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Prefix of the log file of the audit.
 	LogFilePrefix pulumi.StringInput `pulumi:"logFilePrefix"`
-	Name          pulumi.StringInput `pulumi:"name"`
+	// Name of the audits.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
-func (InstancesAuditListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesAuditList)(nil)).Elem()
+func (GetInstanceAuditListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceAuditList)(nil)).Elem()
 }
 
-func (i InstancesAuditListArgs) ToInstancesAuditListOutput() InstancesAuditListOutput {
-	return i.ToInstancesAuditListOutputWithContext(context.Background())
+func (i GetInstanceAuditListArgs) ToGetInstanceAuditListOutput() GetInstanceAuditListOutput {
+	return i.ToGetInstanceAuditListOutputWithContext(context.Background())
 }
 
-func (i InstancesAuditListArgs) ToInstancesAuditListOutputWithContext(ctx context.Context) InstancesAuditListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesAuditListOutput)
+func (i GetInstanceAuditListArgs) ToGetInstanceAuditListOutputWithContext(ctx context.Context) GetInstanceAuditListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceAuditListOutput)
 }
 
-// InstancesAuditListArrayInput is an input type that accepts InstancesAuditListArray and InstancesAuditListArrayOutput values.
-// You can construct a concrete instance of `InstancesAuditListArrayInput` via:
+// GetInstanceAuditListArrayInput is an input type that accepts GetInstanceAuditListArray and GetInstanceAuditListArrayOutput values.
+// You can construct a concrete instance of `GetInstanceAuditListArrayInput` via:
 //
-//          InstancesAuditListArray{ InstancesAuditListArgs{...} }
-type InstancesAuditListArrayInput interface {
+//          GetInstanceAuditListArray{ GetInstanceAuditListArgs{...} }
+type GetInstanceAuditListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesAuditListArrayOutput() InstancesAuditListArrayOutput
-	ToInstancesAuditListArrayOutputWithContext(context.Context) InstancesAuditListArrayOutput
+	ToGetInstanceAuditListArrayOutput() GetInstanceAuditListArrayOutput
+	ToGetInstanceAuditListArrayOutputWithContext(context.Context) GetInstanceAuditListArrayOutput
 }
 
-type InstancesAuditListArray []InstancesAuditListInput
+type GetInstanceAuditListArray []GetInstanceAuditListInput
 
-func (InstancesAuditListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesAuditList)(nil)).Elem()
+func (GetInstanceAuditListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceAuditList)(nil)).Elem()
 }
 
-func (i InstancesAuditListArray) ToInstancesAuditListArrayOutput() InstancesAuditListArrayOutput {
-	return i.ToInstancesAuditListArrayOutputWithContext(context.Background())
+func (i GetInstanceAuditListArray) ToGetInstanceAuditListArrayOutput() GetInstanceAuditListArrayOutput {
+	return i.ToGetInstanceAuditListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesAuditListArray) ToInstancesAuditListArrayOutputWithContext(ctx context.Context) InstancesAuditListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesAuditListArrayOutput)
+func (i GetInstanceAuditListArray) ToGetInstanceAuditListArrayOutputWithContext(ctx context.Context) GetInstanceAuditListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceAuditListArrayOutput)
 }
 
-type InstancesAuditListOutput struct{ *pulumi.OutputState }
+type GetInstanceAuditListOutput struct{ *pulumi.OutputState }
 
-func (InstancesAuditListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesAuditList)(nil)).Elem()
+func (GetInstanceAuditListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceAuditList)(nil)).Elem()
 }
 
-func (o InstancesAuditListOutput) ToInstancesAuditListOutput() InstancesAuditListOutput {
+func (o GetInstanceAuditListOutput) ToGetInstanceAuditListOutput() GetInstanceAuditListOutput {
 	return o
 }
 
-func (o InstancesAuditListOutput) ToInstancesAuditListOutputWithContext(ctx context.Context) InstancesAuditListOutput {
+func (o GetInstanceAuditListOutput) ToGetInstanceAuditListOutputWithContext(ctx context.Context) GetInstanceAuditListOutput {
 	return o
 }
 
-func (o InstancesAuditListOutput) AuditSwitch() pulumi.BoolOutput {
-	return o.ApplyT(func(v InstancesAuditList) bool { return v.AuditSwitch }).(pulumi.BoolOutput)
+// Indicate whether audit start logging or not.
+func (o GetInstanceAuditListOutput) AuditSwitch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstanceAuditList) bool { return v.AuditSwitch }).(pulumi.BoolOutput)
 }
 
-func (o InstancesAuditListOutput) CosBucket() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesAuditList) string { return v.CosBucket }).(pulumi.StringOutput)
+// Cos bucket name where audit save logs.
+func (o GetInstanceAuditListOutput) CosBucket() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceAuditList) string { return v.CosBucket }).(pulumi.StringOutput)
 }
 
-func (o InstancesAuditListOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesAuditList) string { return v.Id }).(pulumi.StringOutput)
+// ID of the audit.
+func (o GetInstanceAuditListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceAuditList) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o InstancesAuditListOutput) LogFilePrefix() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesAuditList) string { return v.LogFilePrefix }).(pulumi.StringOutput)
+// Prefix of the log file of the audit.
+func (o GetInstanceAuditListOutput) LogFilePrefix() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceAuditList) string { return v.LogFilePrefix }).(pulumi.StringOutput)
 }
 
-func (o InstancesAuditListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesAuditList) string { return v.Name }).(pulumi.StringOutput)
+// Name of the audits.
+func (o GetInstanceAuditListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceAuditList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-type InstancesAuditListArrayOutput struct{ *pulumi.OutputState }
+type GetInstanceAuditListArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesAuditListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesAuditList)(nil)).Elem()
+func (GetInstanceAuditListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceAuditList)(nil)).Elem()
 }
 
-func (o InstancesAuditListArrayOutput) ToInstancesAuditListArrayOutput() InstancesAuditListArrayOutput {
+func (o GetInstanceAuditListArrayOutput) ToGetInstanceAuditListArrayOutput() GetInstanceAuditListArrayOutput {
 	return o
 }
 
-func (o InstancesAuditListArrayOutput) ToInstancesAuditListArrayOutputWithContext(ctx context.Context) InstancesAuditListArrayOutput {
+func (o GetInstanceAuditListArrayOutput) ToGetInstanceAuditListArrayOutputWithContext(ctx context.Context) GetInstanceAuditListArrayOutput {
 	return o
 }
 
-func (o InstancesAuditListArrayOutput) Index(i pulumi.IntInput) InstancesAuditListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesAuditList {
-		return vs[0].([]InstancesAuditList)[vs[1].(int)]
-	}).(InstancesAuditListOutput)
+func (o GetInstanceAuditListArrayOutput) Index(i pulumi.IntInput) GetInstanceAuditListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceAuditList {
+		return vs[0].([]GetInstanceAuditList)[vs[1].(int)]
+	}).(GetInstanceAuditListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesAuditListInput)(nil)).Elem(), InstancesAuditListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesAuditListArrayInput)(nil)).Elem(), InstancesAuditListArray{})
-	pulumi.RegisterOutputType(InstancesAuditListOutput{})
-	pulumi.RegisterOutputType(InstancesAuditListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceAuditListInput)(nil)).Elem(), GetInstanceAuditListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceAuditListArrayInput)(nil)).Elem(), GetInstanceAuditListArray{})
+	pulumi.RegisterOutputType(GetInstanceAuditListOutput{})
+	pulumi.RegisterOutputType(GetInstanceAuditListArrayOutput{})
 }

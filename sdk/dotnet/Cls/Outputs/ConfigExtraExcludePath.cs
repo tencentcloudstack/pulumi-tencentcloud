@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Cls.Outputs
     [OutputType]
     public sealed class ConfigExtraExcludePath
     {
+        /// <summary>
+        /// Type. Valid values: File, Path.
+        /// </summary>
         public readonly string? Type;
+        /// <summary>
+        /// Specific content corresponding to Type.
+        /// </summary>
         public readonly string? Value;
 
         [OutputConstructor]

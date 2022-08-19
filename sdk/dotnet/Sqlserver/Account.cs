@@ -9,6 +9,38 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Sqlserver
 {
+    /// <summary>
+    /// Use this resource to create SQL Server account
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Sqlserver.Account("foo", new Tencentcloud.Sqlserver.AccountArgs
+    ///         {
+    ///             InstanceId = tencentcloud_sqlserver_instance.Example.Id,
+    ///             Password = "test1233",
+    ///             Remark = "testt",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// SQL Server account can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Sqlserver/account:Account foo mssql-3cdq7kx5#tf_sqlserver_account
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/account:Account")]
     public partial class Account : Pulumi.CustomResource
     {
@@ -49,8 +81,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         public Output<string?> Remark { get; private set; } = null!;
 
         /// <summary>
-        /// Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for
-        /// resetting password, -1 for deleting.
+        /// Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
         /// </summary>
         [Output("status")]
         public Output<int> Status { get; private set; } = null!;
@@ -181,8 +212,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         public Input<string>? Remark { get; set; }
 
         /// <summary>
-        /// Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for
-        /// resetting password, -1 for deleting.
+        /// Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
         /// </summary>
         [Input("status")]
         public Input<int>? Status { get; set; }

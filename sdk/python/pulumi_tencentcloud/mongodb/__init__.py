@@ -5,10 +5,10 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .get_instances import *
+from .get_zone_config import *
 from .instance import *
-from .instances import *
 from .sharding_instance import *
 from .standby_instance import *
-from .zone_config import *
 from ._inputs import *
 from . import outputs

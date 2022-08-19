@@ -9,6 +9,41 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Protocol
 {
+    /// <summary>
+    /// Provides a resource to manage protocol template.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Protocol.Template("foo", new Tencentcloud.Protocol.TemplateArgs
+    ///         {
+    ///             Protocols = 
+    ///             {
+    ///                 "tcp:80",
+    ///                 "udp:all",
+    ///                 "icmp:10-30",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Protocol template can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Protocol/template:Template foo ppm-nwrggd14
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Protocol/template:Template")]
     public partial class Template : Pulumi.CustomResource
     {
@@ -19,8 +54,7 @@ namespace Pulumi.Tencentcloud.Protocol
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-        /// range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+        /// Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
         /// </summary>
         [Output("protocols")]
         public Output<ImmutableArray<string>> Protocols { get; private set; } = null!;
@@ -81,8 +115,7 @@ namespace Pulumi.Tencentcloud.Protocol
         private InputList<string>? _protocols;
 
         /// <summary>
-        /// Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-        /// range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+        /// Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
         /// </summary>
         public InputList<string> Protocols
         {
@@ -107,8 +140,7 @@ namespace Pulumi.Tencentcloud.Protocol
         private InputList<string>? _protocols;
 
         /// <summary>
-        /// Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-        /// range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+        /// Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
         /// </summary>
         public InputList<string> Protocols
         {

@@ -6,15 +6,14 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .account import *
-from .account_privilege import *
-from .backup_list import *
 from .backup_policy import *
-from .default_params import *
+from .get_backup_list import *
+from .get_default_params import *
+from .get_instance import *
+from .get_parameter_list import *
+from .get_zone_config import *
 from .instance import *
-from .instances import *
-from .parameter_list import *
 from .privilege import *
 from .readonly_instance import *
-from .zone_config import *
 from ._inputs import *
 from . import outputs

@@ -5,25 +5,27 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./attachment";
 export * from "./customizedConfig";
+export * from "./getAttachments";
+export * from "./getInstances";
+export * from "./getListenerRules";
+export * from "./getListeners";
+export * from "./getRedirections";
+export * from "./getTargetGroups";
 export * from "./instance";
-export * from "./instances";
 export * from "./listener";
 export * from "./listenerRule";
-export * from "./listenerRules";
-export * from "./listeners";
 export * from "./logSet";
 export * from "./logTopic";
 export * from "./redirection";
-export * from "./redirections";
-export * from "./serverAttachment";
-export * from "./serverAttachments";
+export * from "./snatIp";
 export * from "./targetGroup";
 export * from "./targetGroupAttachment";
-export * from "./targetGroups";
-export * from "./tgattachmentInstance";
+export * from "./targetGroupInstanceAttachment";
 
 // Import resources to register:
+import { Attachment } from "./attachment";
 import { CustomizedConfig } from "./customizedConfig";
 import { Instance } from "./instance";
 import { Listener } from "./listener";
@@ -31,15 +33,17 @@ import { ListenerRule } from "./listenerRule";
 import { LogSet } from "./logSet";
 import { LogTopic } from "./logTopic";
 import { Redirection } from "./redirection";
-import { ServerAttachment } from "./serverAttachment";
-import { TGAttachmentInstance } from "./tgattachmentInstance";
+import { SnatIp } from "./snatIp";
 import { TargetGroup } from "./targetGroup";
 import { TargetGroupAttachment } from "./targetGroupAttachment";
+import { TargetGroupInstanceAttachment } from "./targetGroupInstanceAttachment";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Clb/attachment:Attachment":
+                return new Attachment(name, <any>undefined, { urn })
             case "tencentcloud:Clb/customizedConfig:CustomizedConfig":
                 return new CustomizedConfig(name, <any>undefined, { urn })
             case "tencentcloud:Clb/instance:Instance":
@@ -54,19 +58,20 @@ const _module = {
                 return new LogTopic(name, <any>undefined, { urn })
             case "tencentcloud:Clb/redirection:Redirection":
                 return new Redirection(name, <any>undefined, { urn })
-            case "tencentcloud:Clb/serverAttachment:ServerAttachment":
-                return new ServerAttachment(name, <any>undefined, { urn })
-            case "tencentcloud:Clb/tGAttachmentInstance:TGAttachmentInstance":
-                return new TGAttachmentInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Clb/snatIp:SnatIp":
+                return new SnatIp(name, <any>undefined, { urn })
             case "tencentcloud:Clb/targetGroup:TargetGroup":
                 return new TargetGroup(name, <any>undefined, { urn })
             case "tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment":
                 return new TargetGroupAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Clb/targetGroupInstanceAttachment:TargetGroupInstanceAttachment":
+                return new TargetGroupInstanceAttachment(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Clb/attachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/customizedConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/listener", _module)
@@ -74,7 +79,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Clb/listenerRule", _modul
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/logSet", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/logTopic", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/redirection", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Clb/serverAttachment", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Clb/tGAttachmentInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clb/snatIp", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/targetGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/targetGroupAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clb/targetGroupInstanceAttachment", _module)

@@ -9,7 +9,6 @@ export * from "./provider";
 
 // Export sub-modules:
 import * as address from "./address";
-import * as api from "./api";
 import * as apigateway from "./apigateway";
 import * as as from "./as";
 import * as audit from "./audit";
@@ -23,12 +22,9 @@ import * as cdn from "./cdn";
 import * as cfs from "./cfs";
 import * as ckafka from "./ckafka";
 import * as clb from "./clb";
-import * as cloud from "./cloud";
 import * as cls from "./cls";
 import * as config from "./config";
-import * as container from "./container";
 import * as cos from "./cos";
-import * as cvm from "./cvm";
 import * as cynosdb from "./cynosdb";
 import * as dayu from "./dayu";
 import * as dc from "./dc";
@@ -36,6 +32,7 @@ import * as dcx from "./dcx";
 import * as dnat from "./dnat";
 import * as dnats from "./dnats";
 import * as dnspod from "./dnspod";
+import * as domains from "./domains";
 import * as eip from "./eip";
 import * as eips from "./eips";
 import * as eks from "./eks";
@@ -46,14 +43,17 @@ import * as enis from "./enis";
 import * as gaap from "./gaap";
 import * as ha from "./ha";
 import * as image from "./image";
+import * as images from "./images";
+import * as instance from "./instance";
 import * as instances from "./instances";
 import * as key from "./key";
 import * as kms from "./kms";
+import * as kubernetes from "./kubernetes";
+import * as lighthouse from "./lighthouse";
 import * as mongodb from "./mongodb";
 import * as monitor from "./monitor";
 import * as mysql from "./mysql";
 import * as nat from "./nat";
-import * as nats from "./nats";
 import * as placement from "./placement";
 import * as postgresql from "./postgresql";
 import * as privatedns from "./privatedns";
@@ -70,7 +70,6 @@ import * as subnet from "./subnet";
 import * as tcaplus from "./tcaplus";
 import * as tcr from "./tcr";
 import * as tdmq from "./tdmq";
-import * as tke from "./tke";
 import * as types from "./types";
 import * as user from "./user";
 import * as vod from "./vod";
@@ -79,7 +78,6 @@ import * as vpn from "./vpn";
 
 export {
     address,
-    api,
     apigateway,
     as,
     audit,
@@ -93,12 +91,9 @@ export {
     cfs,
     ckafka,
     clb,
-    cloud,
     cls,
     config,
-    container,
     cos,
-    cvm,
     cynosdb,
     dayu,
     dc,
@@ -106,6 +101,7 @@ export {
     dnat,
     dnats,
     dnspod,
+    domains,
     eip,
     eips,
     eks,
@@ -116,14 +112,17 @@ export {
     gaap,
     ha,
     image,
+    images,
+    instance,
     instances,
     key,
     kms,
+    kubernetes,
+    lighthouse,
     mongodb,
     monitor,
     mysql,
     nat,
-    nats,
     placement,
     postgresql,
     privatedns,
@@ -140,7 +139,6 @@ export {
     tcaplus,
     tcr,
     tdmq,
-    tke,
     types,
     user,
     vod,

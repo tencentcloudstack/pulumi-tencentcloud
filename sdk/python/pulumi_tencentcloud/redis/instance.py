@@ -37,39 +37,25 @@ class InstanceArgs:
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] availability_zone: The available zone ID of an instance to be created, please refer to `tencentcloud_redis_zone_config.list`.
-        :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to
-               `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-               of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         :param pulumi.Input[int] auto_renew_flag: Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.
-        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-               International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-               new with new charge type.
-        :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-               instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+        :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[bool] no_auth: Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
-        :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-               empty.
-        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-               the Redis instance will be recreated.
-        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-               Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
+        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
         :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions.
-        :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-               read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-               to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-               recommended number of replicas >=2.
+        :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
-        :param pulumi.Input[str] type: Instance type. Available values:
-               `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-               specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
-        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-               [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        :param pulumi.Input[str] type: It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `_redis.get_zone_config`.
+        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
         :param pulumi.Input[str] vpc_id: ID of the vpc with which the instance is to be associated.
         """
         pulumi.set(__self__, "availability_zone", availability_zone)
@@ -132,9 +118,7 @@ class InstanceArgs:
     @pulumi.getter(name="memSize")
     def mem_size(self) -> pulumi.Input[int]:
         """
-        The memory volume of an available instance(in MB), please refer to
-        `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-        of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         """
         return pulumi.get(self, "mem_size")
 
@@ -158,9 +142,7 @@ class InstanceArgs:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-        International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-        new with new charge type.
+        The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
         """
         return pulumi.get(self, "charge_type")
 
@@ -172,8 +154,7 @@ class InstanceArgs:
     @pulumi.getter(name="forceDelete")
     def force_delete(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-        instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
         """
         return pulumi.get(self, "force_delete")
 
@@ -209,8 +190,7 @@ class InstanceArgs:
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
         """
-        Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-        empty.
+        Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         """
         return pulumi.get(self, "password")
 
@@ -222,8 +202,7 @@ class InstanceArgs:
     @pulumi.getter
     def port(self) -> Optional[pulumi.Input[int]]:
         """
-        The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-        the Redis instance will be recreated.
+        The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
         """
         return pulumi.get(self, "port")
 
@@ -235,8 +214,7 @@ class InstanceArgs:
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> Optional[pulumi.Input[int]]:
         """
-        The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-        Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -296,10 +274,7 @@ class InstanceArgs:
     @pulumi.getter(name="replicasReadOnly")
     def replicas_read_only(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-        read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-        to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-        recommended number of replicas >=2.
+        Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         """
         return pulumi.get(self, "replicas_read_only")
 
@@ -347,9 +322,7 @@ class InstanceArgs:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        Instance type. Available values:
-        `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-        specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
+        It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `_redis.get_zone_config`.
         """
         return pulumi.get(self, "type")
 
@@ -361,8 +334,7 @@ class InstanceArgs:
     @pulumi.getter(name="typeId")
     def type_id(self) -> Optional[pulumi.Input[int]]:
         """
-        Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-        [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
         """
         return pulumi.get(self, "type_id")
 
@@ -414,41 +386,27 @@ class _InstanceState:
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[int] auto_renew_flag: Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.
         :param pulumi.Input[str] availability_zone: The available zone ID of an instance to be created, please refer to `tencentcloud_redis_zone_config.list`.
-        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-               International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-               new with new charge type.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
         :param pulumi.Input[str] create_time: The time when the instance was created.
-        :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-               instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
         :param pulumi.Input[str] ip: IP address of an instance.
-        :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to
-               `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-               of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[bool] no_auth: Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
-        :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-               empty.
-        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-               the Redis instance will be recreated.
-        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-               Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
+        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
         :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions.
-        :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-               read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-               to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-               recommended number of replicas >=2.
+        :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] status: Current status of an instance, maybe: init, processing, online, isolate and todelete.
         :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
-        :param pulumi.Input[str] type: Instance type. Available values:
-               `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-               specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
-        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-               [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        :param pulumi.Input[str] type: It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `_redis.get_zone_config`.
+        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
         :param pulumi.Input[str] vpc_id: ID of the vpc with which the instance is to be associated.
         """
         if auto_renew_flag is not None:
@@ -531,9 +489,7 @@ class _InstanceState:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-        International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-        new with new charge type.
+        The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
         """
         return pulumi.get(self, "charge_type")
 
@@ -557,8 +513,7 @@ class _InstanceState:
     @pulumi.getter(name="forceDelete")
     def force_delete(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-        instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
         """
         return pulumi.get(self, "force_delete")
 
@@ -582,9 +537,7 @@ class _InstanceState:
     @pulumi.getter(name="memSize")
     def mem_size(self) -> Optional[pulumi.Input[int]]:
         """
-        The memory volume of an available instance(in MB), please refer to
-        `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-        of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         """
         return pulumi.get(self, "mem_size")
 
@@ -620,8 +573,7 @@ class _InstanceState:
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
         """
-        Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-        empty.
+        Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         """
         return pulumi.get(self, "password")
 
@@ -633,8 +585,7 @@ class _InstanceState:
     @pulumi.getter
     def port(self) -> Optional[pulumi.Input[int]]:
         """
-        The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-        the Redis instance will be recreated.
+        The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
         """
         return pulumi.get(self, "port")
 
@@ -646,8 +597,7 @@ class _InstanceState:
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> Optional[pulumi.Input[int]]:
         """
-        The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-        Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -707,10 +657,7 @@ class _InstanceState:
     @pulumi.getter(name="replicasReadOnly")
     def replicas_read_only(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-        read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-        to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-        recommended number of replicas >=2.
+        Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         """
         return pulumi.get(self, "replicas_read_only")
 
@@ -770,9 +717,7 @@ class _InstanceState:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        Instance type. Available values:
-        `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-        specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
+        It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `_redis.get_zone_config`.
         """
         return pulumi.get(self, "type")
 
@@ -784,8 +729,7 @@ class _InstanceState:
     @pulumi.getter(name="typeId")
     def type_id(self) -> Optional[pulumi.Input[int]]:
         """
-        Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-        [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
         """
         return pulumi.get(self, "type_id")
 
@@ -834,43 +778,38 @@ class Instance(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a resource to create a Redis instance and set its attributes.
+
+        ## Import
+
+        Redis instance can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] auto_renew_flag: Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.
         :param pulumi.Input[str] availability_zone: The available zone ID of an instance to be created, please refer to `tencentcloud_redis_zone_config.list`.
-        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-               International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-               new with new charge type.
-        :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-               instead of staying recycle bin. Note: only works for `PREPAID` instance.
-        :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to
-               `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-               of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+        :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[bool] no_auth: Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
-        :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-               empty.
-        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-               the Redis instance will be recreated.
-        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-               Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
+        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
         :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions.
-        :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-               read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-               to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-               recommended number of replicas >=2.
+        :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
-        :param pulumi.Input[str] type: Instance type. Available values:
-               `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-               specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
-        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-               [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        :param pulumi.Input[str] type: It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `_redis.get_zone_config`.
+        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
         :param pulumi.Input[str] vpc_id: ID of the vpc with which the instance is to be associated.
         """
         ...
@@ -880,7 +819,16 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a resource to create a Redis instance and set its attributes.
+
+        ## Import
+
+        Redis instance can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1003,41 +951,27 @@ class Instance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] auto_renew_flag: Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.
         :param pulumi.Input[str] availability_zone: The available zone ID of an instance to be created, please refer to `tencentcloud_redis_zone_config.list`.
-        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-               International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-               new with new charge type.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
         :param pulumi.Input[str] create_time: The time when the instance was created.
-        :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-               instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        :param pulumi.Input[bool] force_delete: Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
         :param pulumi.Input[str] ip: IP address of an instance.
-        :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to
-               `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-               of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        :param pulumi.Input[int] mem_size: The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[bool] no_auth: Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
-        :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-               empty.
-        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-               the Redis instance will be recreated.
-        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-               Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        :param pulumi.Input[str] password: Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
+        :param pulumi.Input[int] port: The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
+        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[int] project_id: Specifies which project the instance should belong to.
         :param pulumi.Input[int] redis_replicas_num: The number of instance copies. This is not required for standalone and master slave versions.
         :param pulumi.Input[int] redis_shard_num: The number of instance shard, default is 1. This is not required for standalone and master slave versions.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] replica_zone_ids: ID of replica nodes available zone. This is not required for standalone and master slave versions.
-        :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-               read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-               to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-               recommended number of replicas >=2.
+        :param pulumi.Input[bool] replicas_read_only: Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
         :param pulumi.Input[str] status: Current status of an instance, maybe: init, processing, online, isolate and todelete.
         :param pulumi.Input[str] subnet_id: Specifies which subnet the instance should belong to.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
-        :param pulumi.Input[str] type: Instance type. Available values:
-               `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-               specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
-        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-               [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        :param pulumi.Input[str] type: It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `_redis.get_zone_config`.
+        :param pulumi.Input[int] type_id: Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
         :param pulumi.Input[str] vpc_id: ID of the vpc with which the instance is to be associated.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -1090,9 +1024,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> pulumi.Output[Optional[str]]:
         """
-        The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-        International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-        new with new charge type.
+        The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
         """
         return pulumi.get(self, "charge_type")
 
@@ -1108,8 +1040,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="forceDelete")
     def force_delete(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-        instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
         """
         return pulumi.get(self, "force_delete")
 
@@ -1125,9 +1056,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="memSize")
     def mem_size(self) -> pulumi.Output[int]:
         """
-        The memory volume of an available instance(in MB), please refer to
-        `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-        of the instance; when Redis is cluster type, it represents memory size of per sharding.
+        The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
         """
         return pulumi.get(self, "mem_size")
 
@@ -1151,8 +1080,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def password(self) -> pulumi.Output[Optional[str]]:
         """
-        Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-        empty.
+        Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
         """
         return pulumi.get(self, "password")
 
@@ -1160,8 +1088,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def port(self) -> pulumi.Output[Optional[int]]:
         """
-        The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-        the Redis instance will be recreated.
+        The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
         """
         return pulumi.get(self, "port")
 
@@ -1169,8 +1096,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> pulumi.Output[Optional[int]]:
         """
-        The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-        Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -1210,10 +1136,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="replicasReadOnly")
     def replicas_read_only(self) -> pulumi.Output[bool]:
         """
-        Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-        read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-        to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-        recommended number of replicas >=2.
+        Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
         """
         return pulumi.get(self, "replicas_read_only")
 
@@ -1253,9 +1176,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def type(self) -> pulumi.Output[Optional[str]]:
         """
-        Instance type. Available values:
-        `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-        specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
+        It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`, specific region support specific types, need to refer data `_redis.get_zone_config`.
         """
         return pulumi.get(self, "type")
 
@@ -1263,8 +1184,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="typeId")
     def type_id(self) -> pulumi.Output[Optional[int]]:
         """
-        Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-        [document](https://intl.cloud.tencent.com/document/product/239/32069).
+        Instance type. Available values reference data source `_redis.get_zone_config` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
         """
         return pulumi.get(self, "type_id")
 

@@ -11,6 +11,31 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a CBS snapshot policy attachment resource.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cbs.NewSnapshotPolicyAttachment(ctx, "foo", &Cbs.SnapshotPolicyAttachmentArgs{
+// 			StorageId:        pulumi.Any(tencentcloud_cbs_storage.Foo.Id),
+// 			SnapshotPolicyId: pulumi.Any(tencentcloud_cbs_snapshot_policy.Policy.Id),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type SnapshotPolicyAttachment struct {
 	pulumi.CustomResourceState
 

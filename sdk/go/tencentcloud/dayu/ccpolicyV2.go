@@ -11,29 +11,109 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type CCPolicyV2 struct {
+// Use this resource to create a dayu CC policy
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dayu.NewCcPolicyV2(ctx, "demo", &Dayu.CcPolicyV2Args{
+// 			Business: pulumi.String("bgpip"),
+// 			CcBlackWhiteIps: dayu.CcPolicyV2CcBlackWhiteIpArray{
+// 				&dayu.CcPolicyV2CcBlackWhiteIpArgs{
+// 					BlackWhiteIp: pulumi.String("1.2.3.4"),
+// 					Domain:       pulumi.String("12.com"),
+// 					Protocol:     pulumi.String("http"),
+// 					Type:         pulumi.String("black"),
+// 				},
+// 			},
+// 			CcGeoIpPolicys: dayu.CcPolicyV2CcGeoIpPolicyArray{
+// 				&dayu.CcPolicyV2CcGeoIpPolicyArgs{
+// 					Action:     pulumi.String("drop"),
+// 					Domain:     pulumi.String("12.com"),
+// 					Protocol:   pulumi.String("http"),
+// 					RegionType: pulumi.String("china"),
+// 				},
+// 			},
+// 			CcPrecisionPolicys: dayu.CcPolicyV2CcPrecisionPolicyArray{
+// 				&dayu.CcPolicyV2CcPrecisionPolicyArgs{
+// 					Domain:       pulumi.String("1.com"),
+// 					Ip:           pulumi.String("162.62.163.34"),
+// 					PolicyAction: pulumi.String("drop"),
+// 					Policys: dayu.CcPolicyV2CcPrecisionPolicyPolicyArray{
+// 						&dayu.CcPolicyV2CcPrecisionPolicyPolicyArgs{
+// 							FieldName:     pulumi.String("cgi"),
+// 							FieldType:     pulumi.String("value"),
+// 							Value:         pulumi.String("12123.com"),
+// 							ValueOperator: pulumi.String("equal"),
+// 						},
+// 					},
+// 					Protocol: pulumi.String("http"),
+// 				},
+// 			},
+// 			CcPrecisionReqLimits: dayu.CcPolicyV2CcPrecisionReqLimitArray{
+// 				&dayu.CcPolicyV2CcPrecisionReqLimitArgs{
+// 					Domain: pulumi.String("11.com"),
+// 					Level:  pulumi.String("loose"),
+// 					Policys: dayu.CcPolicyV2CcPrecisionReqLimitPolicyArray{
+// 						&dayu.CcPolicyV2CcPrecisionReqLimitPolicyArgs{
+// 							Action:          pulumi.String("alg"),
+// 							ExecuteDuration: pulumi.Int(2),
+// 							Mode:            pulumi.String("equal"),
+// 							Period:          pulumi.Int(5),
+// 							RequestNum:      pulumi.Int(12),
+// 							Uri:             pulumi.String("15.com"),
+// 						},
+// 					},
+// 					Protocol: pulumi.String("http"),
+// 				},
+// 			},
+// 			ResourceId: pulumi.String("bgpip-000004xf"),
+// 			Thresholds: dayu.CcPolicyV2ThresholdArray{
+// 				&dayu.CcPolicyV2ThresholdArgs{
+// 					Domain:    pulumi.String("12.com"),
+// 					Threshold: pulumi.Int(0),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+type CcPolicyV2 struct {
 	pulumi.CustomResourceState
 
-	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-	// packet; net indicates anti-anti-ip pro version.
+	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
 	Business pulumi.StringOutput `pulumi:"business"`
 	// Blacklist and whitelist.
-	CcBlackWhiteIps CCPolicyV2CcBlackWhiteIpArrayOutput `pulumi:"ccBlackWhiteIps"`
+	CcBlackWhiteIps CcPolicyV2CcBlackWhiteIpArrayOutput `pulumi:"ccBlackWhiteIps"`
 	// Details of the CC region blocking policy list.
-	CcGeoIpPolicys CCPolicyV2CcGeoIpPolicyArrayOutput `pulumi:"ccGeoIpPolicys"`
+	CcGeoIpPolicys CcPolicyV2CcGeoIpPolicyArrayOutput `pulumi:"ccGeoIpPolicys"`
 	// CC Precision Protection List.
-	CcPrecisionPolicys CCPolicyV2CcPrecisionPolicyArrayOutput `pulumi:"ccPrecisionPolicys"`
+	CcPrecisionPolicys CcPolicyV2CcPrecisionPolicyArrayOutput `pulumi:"ccPrecisionPolicys"`
 	// CC frequency throttling policy.
-	CcPrecisionReqLimits CCPolicyV2CcPrecisionReqLimitArrayOutput `pulumi:"ccPrecisionReqLimits"`
+	CcPrecisionReqLimits CcPolicyV2CcPrecisionReqLimitArrayOutput `pulumi:"ccPrecisionReqLimits"`
 	// The ID of the resource instance.
 	ResourceId pulumi.StringOutput `pulumi:"resourceId"`
 	// List of protection threshold configurations.
-	Thresholds CCPolicyV2ThresholdArrayOutput `pulumi:"thresholds"`
+	Thresholds CcPolicyV2ThresholdArrayOutput `pulumi:"thresholds"`
 }
 
-// NewCCPolicyV2 registers a new resource with the given unique name, arguments, and options.
-func NewCCPolicyV2(ctx *pulumi.Context,
-	name string, args *CCPolicyV2Args, opts ...pulumi.ResourceOption) (*CCPolicyV2, error) {
+// NewCcPolicyV2 registers a new resource with the given unique name, arguments, and options.
+func NewCcPolicyV2(ctx *pulumi.Context,
+	name string, args *CcPolicyV2Args, opts ...pulumi.ResourceOption) (*CcPolicyV2, error) {
 	if args == nil {
 		return nil, errors.New("missing one or more required arguments")
 	}
@@ -44,272 +124,267 @@ func NewCCPolicyV2(ctx *pulumi.Context,
 	if args.ResourceId == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceId'")
 	}
-	var resource CCPolicyV2
-	err := ctx.RegisterResource("tencentcloud:Dayu/cCPolicyV2:CCPolicyV2", name, args, &resource, opts...)
+	var resource CcPolicyV2
+	err := ctx.RegisterResource("tencentcloud:Dayu/ccPolicyV2:CcPolicyV2", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// GetCCPolicyV2 gets an existing CCPolicyV2 resource's state with the given name, ID, and optional
+// GetCcPolicyV2 gets an existing CcPolicyV2 resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetCCPolicyV2(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *CCPolicyV2State, opts ...pulumi.ResourceOption) (*CCPolicyV2, error) {
-	var resource CCPolicyV2
-	err := ctx.ReadResource("tencentcloud:Dayu/cCPolicyV2:CCPolicyV2", name, id, state, &resource, opts...)
+func GetCcPolicyV2(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *CcPolicyV2State, opts ...pulumi.ResourceOption) (*CcPolicyV2, error) {
+	var resource CcPolicyV2
+	err := ctx.ReadResource("tencentcloud:Dayu/ccPolicyV2:CcPolicyV2", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// Input properties used for looking up and filtering CCPolicyV2 resources.
-type ccpolicyV2State struct {
-	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-	// packet; net indicates anti-anti-ip pro version.
+// Input properties used for looking up and filtering CcPolicyV2 resources.
+type ccPolicyV2State struct {
+	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
 	Business *string `pulumi:"business"`
 	// Blacklist and whitelist.
-	CcBlackWhiteIps []CCPolicyV2CcBlackWhiteIp `pulumi:"ccBlackWhiteIps"`
+	CcBlackWhiteIps []CcPolicyV2CcBlackWhiteIp `pulumi:"ccBlackWhiteIps"`
 	// Details of the CC region blocking policy list.
-	CcGeoIpPolicys []CCPolicyV2CcGeoIpPolicy `pulumi:"ccGeoIpPolicys"`
+	CcGeoIpPolicys []CcPolicyV2CcGeoIpPolicy `pulumi:"ccGeoIpPolicys"`
 	// CC Precision Protection List.
-	CcPrecisionPolicys []CCPolicyV2CcPrecisionPolicy `pulumi:"ccPrecisionPolicys"`
+	CcPrecisionPolicys []CcPolicyV2CcPrecisionPolicy `pulumi:"ccPrecisionPolicys"`
 	// CC frequency throttling policy.
-	CcPrecisionReqLimits []CCPolicyV2CcPrecisionReqLimit `pulumi:"ccPrecisionReqLimits"`
+	CcPrecisionReqLimits []CcPolicyV2CcPrecisionReqLimit `pulumi:"ccPrecisionReqLimits"`
 	// The ID of the resource instance.
 	ResourceId *string `pulumi:"resourceId"`
 	// List of protection threshold configurations.
-	Thresholds []CCPolicyV2Threshold `pulumi:"thresholds"`
+	Thresholds []CcPolicyV2Threshold `pulumi:"thresholds"`
 }
 
-type CCPolicyV2State struct {
-	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-	// packet; net indicates anti-anti-ip pro version.
+type CcPolicyV2State struct {
+	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
 	Business pulumi.StringPtrInput
 	// Blacklist and whitelist.
-	CcBlackWhiteIps CCPolicyV2CcBlackWhiteIpArrayInput
+	CcBlackWhiteIps CcPolicyV2CcBlackWhiteIpArrayInput
 	// Details of the CC region blocking policy list.
-	CcGeoIpPolicys CCPolicyV2CcGeoIpPolicyArrayInput
+	CcGeoIpPolicys CcPolicyV2CcGeoIpPolicyArrayInput
 	// CC Precision Protection List.
-	CcPrecisionPolicys CCPolicyV2CcPrecisionPolicyArrayInput
+	CcPrecisionPolicys CcPolicyV2CcPrecisionPolicyArrayInput
 	// CC frequency throttling policy.
-	CcPrecisionReqLimits CCPolicyV2CcPrecisionReqLimitArrayInput
+	CcPrecisionReqLimits CcPolicyV2CcPrecisionReqLimitArrayInput
 	// The ID of the resource instance.
 	ResourceId pulumi.StringPtrInput
 	// List of protection threshold configurations.
-	Thresholds CCPolicyV2ThresholdArrayInput
+	Thresholds CcPolicyV2ThresholdArrayInput
 }
 
-func (CCPolicyV2State) ElementType() reflect.Type {
-	return reflect.TypeOf((*ccpolicyV2State)(nil)).Elem()
+func (CcPolicyV2State) ElementType() reflect.Type {
+	return reflect.TypeOf((*ccPolicyV2State)(nil)).Elem()
 }
 
-type ccpolicyV2Args struct {
-	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-	// packet; net indicates anti-anti-ip pro version.
+type ccPolicyV2Args struct {
+	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
 	Business string `pulumi:"business"`
 	// Blacklist and whitelist.
-	CcBlackWhiteIps []CCPolicyV2CcBlackWhiteIp `pulumi:"ccBlackWhiteIps"`
+	CcBlackWhiteIps []CcPolicyV2CcBlackWhiteIp `pulumi:"ccBlackWhiteIps"`
 	// Details of the CC region blocking policy list.
-	CcGeoIpPolicys []CCPolicyV2CcGeoIpPolicy `pulumi:"ccGeoIpPolicys"`
+	CcGeoIpPolicys []CcPolicyV2CcGeoIpPolicy `pulumi:"ccGeoIpPolicys"`
 	// CC Precision Protection List.
-	CcPrecisionPolicys []CCPolicyV2CcPrecisionPolicy `pulumi:"ccPrecisionPolicys"`
+	CcPrecisionPolicys []CcPolicyV2CcPrecisionPolicy `pulumi:"ccPrecisionPolicys"`
 	// CC frequency throttling policy.
-	CcPrecisionReqLimits []CCPolicyV2CcPrecisionReqLimit `pulumi:"ccPrecisionReqLimits"`
+	CcPrecisionReqLimits []CcPolicyV2CcPrecisionReqLimit `pulumi:"ccPrecisionReqLimits"`
 	// The ID of the resource instance.
 	ResourceId string `pulumi:"resourceId"`
 	// List of protection threshold configurations.
-	Thresholds []CCPolicyV2Threshold `pulumi:"thresholds"`
+	Thresholds []CcPolicyV2Threshold `pulumi:"thresholds"`
 }
 
-// The set of arguments for constructing a CCPolicyV2 resource.
-type CCPolicyV2Args struct {
-	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-	// packet; net indicates anti-anti-ip pro version.
+// The set of arguments for constructing a CcPolicyV2 resource.
+type CcPolicyV2Args struct {
+	// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
 	Business pulumi.StringInput
 	// Blacklist and whitelist.
-	CcBlackWhiteIps CCPolicyV2CcBlackWhiteIpArrayInput
+	CcBlackWhiteIps CcPolicyV2CcBlackWhiteIpArrayInput
 	// Details of the CC region blocking policy list.
-	CcGeoIpPolicys CCPolicyV2CcGeoIpPolicyArrayInput
+	CcGeoIpPolicys CcPolicyV2CcGeoIpPolicyArrayInput
 	// CC Precision Protection List.
-	CcPrecisionPolicys CCPolicyV2CcPrecisionPolicyArrayInput
+	CcPrecisionPolicys CcPolicyV2CcPrecisionPolicyArrayInput
 	// CC frequency throttling policy.
-	CcPrecisionReqLimits CCPolicyV2CcPrecisionReqLimitArrayInput
+	CcPrecisionReqLimits CcPolicyV2CcPrecisionReqLimitArrayInput
 	// The ID of the resource instance.
 	ResourceId pulumi.StringInput
 	// List of protection threshold configurations.
-	Thresholds CCPolicyV2ThresholdArrayInput
+	Thresholds CcPolicyV2ThresholdArrayInput
 }
 
-func (CCPolicyV2Args) ElementType() reflect.Type {
-	return reflect.TypeOf((*ccpolicyV2Args)(nil)).Elem()
+func (CcPolicyV2Args) ElementType() reflect.Type {
+	return reflect.TypeOf((*ccPolicyV2Args)(nil)).Elem()
 }
 
-type CCPolicyV2Input interface {
+type CcPolicyV2Input interface {
 	pulumi.Input
 
-	ToCCPolicyV2Output() CCPolicyV2Output
-	ToCCPolicyV2OutputWithContext(ctx context.Context) CCPolicyV2Output
+	ToCcPolicyV2Output() CcPolicyV2Output
+	ToCcPolicyV2OutputWithContext(ctx context.Context) CcPolicyV2Output
 }
 
-func (*CCPolicyV2) ElementType() reflect.Type {
-	return reflect.TypeOf((**CCPolicyV2)(nil)).Elem()
+func (*CcPolicyV2) ElementType() reflect.Type {
+	return reflect.TypeOf((**CcPolicyV2)(nil)).Elem()
 }
 
-func (i *CCPolicyV2) ToCCPolicyV2Output() CCPolicyV2Output {
-	return i.ToCCPolicyV2OutputWithContext(context.Background())
+func (i *CcPolicyV2) ToCcPolicyV2Output() CcPolicyV2Output {
+	return i.ToCcPolicyV2OutputWithContext(context.Background())
 }
 
-func (i *CCPolicyV2) ToCCPolicyV2OutputWithContext(ctx context.Context) CCPolicyV2Output {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2Output)
+func (i *CcPolicyV2) ToCcPolicyV2OutputWithContext(ctx context.Context) CcPolicyV2Output {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2Output)
 }
 
-// CCPolicyV2ArrayInput is an input type that accepts CCPolicyV2Array and CCPolicyV2ArrayOutput values.
-// You can construct a concrete instance of `CCPolicyV2ArrayInput` via:
+// CcPolicyV2ArrayInput is an input type that accepts CcPolicyV2Array and CcPolicyV2ArrayOutput values.
+// You can construct a concrete instance of `CcPolicyV2ArrayInput` via:
 //
-//          CCPolicyV2Array{ CCPolicyV2Args{...} }
-type CCPolicyV2ArrayInput interface {
+//          CcPolicyV2Array{ CcPolicyV2Args{...} }
+type CcPolicyV2ArrayInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2ArrayOutput() CCPolicyV2ArrayOutput
-	ToCCPolicyV2ArrayOutputWithContext(context.Context) CCPolicyV2ArrayOutput
+	ToCcPolicyV2ArrayOutput() CcPolicyV2ArrayOutput
+	ToCcPolicyV2ArrayOutputWithContext(context.Context) CcPolicyV2ArrayOutput
 }
 
-type CCPolicyV2Array []CCPolicyV2Input
+type CcPolicyV2Array []CcPolicyV2Input
 
-func (CCPolicyV2Array) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*CCPolicyV2)(nil)).Elem()
+func (CcPolicyV2Array) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*CcPolicyV2)(nil)).Elem()
 }
 
-func (i CCPolicyV2Array) ToCCPolicyV2ArrayOutput() CCPolicyV2ArrayOutput {
-	return i.ToCCPolicyV2ArrayOutputWithContext(context.Background())
+func (i CcPolicyV2Array) ToCcPolicyV2ArrayOutput() CcPolicyV2ArrayOutput {
+	return i.ToCcPolicyV2ArrayOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2Array) ToCCPolicyV2ArrayOutputWithContext(ctx context.Context) CCPolicyV2ArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2ArrayOutput)
+func (i CcPolicyV2Array) ToCcPolicyV2ArrayOutputWithContext(ctx context.Context) CcPolicyV2ArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2ArrayOutput)
 }
 
-// CCPolicyV2MapInput is an input type that accepts CCPolicyV2Map and CCPolicyV2MapOutput values.
-// You can construct a concrete instance of `CCPolicyV2MapInput` via:
+// CcPolicyV2MapInput is an input type that accepts CcPolicyV2Map and CcPolicyV2MapOutput values.
+// You can construct a concrete instance of `CcPolicyV2MapInput` via:
 //
-//          CCPolicyV2Map{ "key": CCPolicyV2Args{...} }
-type CCPolicyV2MapInput interface {
+//          CcPolicyV2Map{ "key": CcPolicyV2Args{...} }
+type CcPolicyV2MapInput interface {
 	pulumi.Input
 
-	ToCCPolicyV2MapOutput() CCPolicyV2MapOutput
-	ToCCPolicyV2MapOutputWithContext(context.Context) CCPolicyV2MapOutput
+	ToCcPolicyV2MapOutput() CcPolicyV2MapOutput
+	ToCcPolicyV2MapOutputWithContext(context.Context) CcPolicyV2MapOutput
 }
 
-type CCPolicyV2Map map[string]CCPolicyV2Input
+type CcPolicyV2Map map[string]CcPolicyV2Input
 
-func (CCPolicyV2Map) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*CCPolicyV2)(nil)).Elem()
+func (CcPolicyV2Map) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*CcPolicyV2)(nil)).Elem()
 }
 
-func (i CCPolicyV2Map) ToCCPolicyV2MapOutput() CCPolicyV2MapOutput {
-	return i.ToCCPolicyV2MapOutputWithContext(context.Background())
+func (i CcPolicyV2Map) ToCcPolicyV2MapOutput() CcPolicyV2MapOutput {
+	return i.ToCcPolicyV2MapOutputWithContext(context.Background())
 }
 
-func (i CCPolicyV2Map) ToCCPolicyV2MapOutputWithContext(ctx context.Context) CCPolicyV2MapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CCPolicyV2MapOutput)
+func (i CcPolicyV2Map) ToCcPolicyV2MapOutputWithContext(ctx context.Context) CcPolicyV2MapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CcPolicyV2MapOutput)
 }
 
-type CCPolicyV2Output struct{ *pulumi.OutputState }
+type CcPolicyV2Output struct{ *pulumi.OutputState }
 
-func (CCPolicyV2Output) ElementType() reflect.Type {
-	return reflect.TypeOf((**CCPolicyV2)(nil)).Elem()
+func (CcPolicyV2Output) ElementType() reflect.Type {
+	return reflect.TypeOf((**CcPolicyV2)(nil)).Elem()
 }
 
-func (o CCPolicyV2Output) ToCCPolicyV2Output() CCPolicyV2Output {
+func (o CcPolicyV2Output) ToCcPolicyV2Output() CcPolicyV2Output {
 	return o
 }
 
-func (o CCPolicyV2Output) ToCCPolicyV2OutputWithContext(ctx context.Context) CCPolicyV2Output {
+func (o CcPolicyV2Output) ToCcPolicyV2OutputWithContext(ctx context.Context) CcPolicyV2Output {
 	return o
 }
 
-// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-// packet; net indicates anti-anti-ip pro version.
-func (o CCPolicyV2Output) Business() pulumi.StringOutput {
-	return o.ApplyT(func(v *CCPolicyV2) pulumi.StringOutput { return v.Business }).(pulumi.StringOutput)
+// Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
+func (o CcPolicyV2Output) Business() pulumi.StringOutput {
+	return o.ApplyT(func(v *CcPolicyV2) pulumi.StringOutput { return v.Business }).(pulumi.StringOutput)
 }
 
 // Blacklist and whitelist.
-func (o CCPolicyV2Output) CcBlackWhiteIps() CCPolicyV2CcBlackWhiteIpArrayOutput {
-	return o.ApplyT(func(v *CCPolicyV2) CCPolicyV2CcBlackWhiteIpArrayOutput { return v.CcBlackWhiteIps }).(CCPolicyV2CcBlackWhiteIpArrayOutput)
+func (o CcPolicyV2Output) CcBlackWhiteIps() CcPolicyV2CcBlackWhiteIpArrayOutput {
+	return o.ApplyT(func(v *CcPolicyV2) CcPolicyV2CcBlackWhiteIpArrayOutput { return v.CcBlackWhiteIps }).(CcPolicyV2CcBlackWhiteIpArrayOutput)
 }
 
 // Details of the CC region blocking policy list.
-func (o CCPolicyV2Output) CcGeoIpPolicys() CCPolicyV2CcGeoIpPolicyArrayOutput {
-	return o.ApplyT(func(v *CCPolicyV2) CCPolicyV2CcGeoIpPolicyArrayOutput { return v.CcGeoIpPolicys }).(CCPolicyV2CcGeoIpPolicyArrayOutput)
+func (o CcPolicyV2Output) CcGeoIpPolicys() CcPolicyV2CcGeoIpPolicyArrayOutput {
+	return o.ApplyT(func(v *CcPolicyV2) CcPolicyV2CcGeoIpPolicyArrayOutput { return v.CcGeoIpPolicys }).(CcPolicyV2CcGeoIpPolicyArrayOutput)
 }
 
 // CC Precision Protection List.
-func (o CCPolicyV2Output) CcPrecisionPolicys() CCPolicyV2CcPrecisionPolicyArrayOutput {
-	return o.ApplyT(func(v *CCPolicyV2) CCPolicyV2CcPrecisionPolicyArrayOutput { return v.CcPrecisionPolicys }).(CCPolicyV2CcPrecisionPolicyArrayOutput)
+func (o CcPolicyV2Output) CcPrecisionPolicys() CcPolicyV2CcPrecisionPolicyArrayOutput {
+	return o.ApplyT(func(v *CcPolicyV2) CcPolicyV2CcPrecisionPolicyArrayOutput { return v.CcPrecisionPolicys }).(CcPolicyV2CcPrecisionPolicyArrayOutput)
 }
 
 // CC frequency throttling policy.
-func (o CCPolicyV2Output) CcPrecisionReqLimits() CCPolicyV2CcPrecisionReqLimitArrayOutput {
-	return o.ApplyT(func(v *CCPolicyV2) CCPolicyV2CcPrecisionReqLimitArrayOutput { return v.CcPrecisionReqLimits }).(CCPolicyV2CcPrecisionReqLimitArrayOutput)
+func (o CcPolicyV2Output) CcPrecisionReqLimits() CcPolicyV2CcPrecisionReqLimitArrayOutput {
+	return o.ApplyT(func(v *CcPolicyV2) CcPolicyV2CcPrecisionReqLimitArrayOutput { return v.CcPrecisionReqLimits }).(CcPolicyV2CcPrecisionReqLimitArrayOutput)
 }
 
 // The ID of the resource instance.
-func (o CCPolicyV2Output) ResourceId() pulumi.StringOutput {
-	return o.ApplyT(func(v *CCPolicyV2) pulumi.StringOutput { return v.ResourceId }).(pulumi.StringOutput)
+func (o CcPolicyV2Output) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *CcPolicyV2) pulumi.StringOutput { return v.ResourceId }).(pulumi.StringOutput)
 }
 
 // List of protection threshold configurations.
-func (o CCPolicyV2Output) Thresholds() CCPolicyV2ThresholdArrayOutput {
-	return o.ApplyT(func(v *CCPolicyV2) CCPolicyV2ThresholdArrayOutput { return v.Thresholds }).(CCPolicyV2ThresholdArrayOutput)
+func (o CcPolicyV2Output) Thresholds() CcPolicyV2ThresholdArrayOutput {
+	return o.ApplyT(func(v *CcPolicyV2) CcPolicyV2ThresholdArrayOutput { return v.Thresholds }).(CcPolicyV2ThresholdArrayOutput)
 }
 
-type CCPolicyV2ArrayOutput struct{ *pulumi.OutputState }
+type CcPolicyV2ArrayOutput struct{ *pulumi.OutputState }
 
-func (CCPolicyV2ArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*CCPolicyV2)(nil)).Elem()
+func (CcPolicyV2ArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*CcPolicyV2)(nil)).Elem()
 }
 
-func (o CCPolicyV2ArrayOutput) ToCCPolicyV2ArrayOutput() CCPolicyV2ArrayOutput {
+func (o CcPolicyV2ArrayOutput) ToCcPolicyV2ArrayOutput() CcPolicyV2ArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2ArrayOutput) ToCCPolicyV2ArrayOutputWithContext(ctx context.Context) CCPolicyV2ArrayOutput {
+func (o CcPolicyV2ArrayOutput) ToCcPolicyV2ArrayOutputWithContext(ctx context.Context) CcPolicyV2ArrayOutput {
 	return o
 }
 
-func (o CCPolicyV2ArrayOutput) Index(i pulumi.IntInput) CCPolicyV2Output {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *CCPolicyV2 {
-		return vs[0].([]*CCPolicyV2)[vs[1].(int)]
-	}).(CCPolicyV2Output)
+func (o CcPolicyV2ArrayOutput) Index(i pulumi.IntInput) CcPolicyV2Output {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *CcPolicyV2 {
+		return vs[0].([]*CcPolicyV2)[vs[1].(int)]
+	}).(CcPolicyV2Output)
 }
 
-type CCPolicyV2MapOutput struct{ *pulumi.OutputState }
+type CcPolicyV2MapOutput struct{ *pulumi.OutputState }
 
-func (CCPolicyV2MapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*CCPolicyV2)(nil)).Elem()
+func (CcPolicyV2MapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*CcPolicyV2)(nil)).Elem()
 }
 
-func (o CCPolicyV2MapOutput) ToCCPolicyV2MapOutput() CCPolicyV2MapOutput {
+func (o CcPolicyV2MapOutput) ToCcPolicyV2MapOutput() CcPolicyV2MapOutput {
 	return o
 }
 
-func (o CCPolicyV2MapOutput) ToCCPolicyV2MapOutputWithContext(ctx context.Context) CCPolicyV2MapOutput {
+func (o CcPolicyV2MapOutput) ToCcPolicyV2MapOutputWithContext(ctx context.Context) CcPolicyV2MapOutput {
 	return o
 }
 
-func (o CCPolicyV2MapOutput) MapIndex(k pulumi.StringInput) CCPolicyV2Output {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *CCPolicyV2 {
-		return vs[0].(map[string]*CCPolicyV2)[vs[1].(string)]
-	}).(CCPolicyV2Output)
+func (o CcPolicyV2MapOutput) MapIndex(k pulumi.StringInput) CcPolicyV2Output {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *CcPolicyV2 {
+		return vs[0].(map[string]*CcPolicyV2)[vs[1].(string)]
+	}).(CcPolicyV2Output)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2Input)(nil)).Elem(), &CCPolicyV2{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2ArrayInput)(nil)).Elem(), CCPolicyV2Array{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CCPolicyV2MapInput)(nil)).Elem(), CCPolicyV2Map{})
-	pulumi.RegisterOutputType(CCPolicyV2Output{})
-	pulumi.RegisterOutputType(CCPolicyV2ArrayOutput{})
-	pulumi.RegisterOutputType(CCPolicyV2MapOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2Input)(nil)).Elem(), &CcPolicyV2{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2ArrayInput)(nil)).Elem(), CcPolicyV2Array{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CcPolicyV2MapInput)(nil)).Elem(), CcPolicyV2Map{})
+	pulumi.RegisterOutputType(CcPolicyV2Output{})
+	pulumi.RegisterOutputType(CcPolicyV2ArrayOutput{})
+	pulumi.RegisterOutputType(CcPolicyV2MapOutput{})
 }

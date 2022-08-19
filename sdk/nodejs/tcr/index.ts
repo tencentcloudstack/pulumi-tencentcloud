@@ -5,17 +5,22 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getInstances";
+export * from "./getNamespaces";
+export * from "./getRepositories";
+export * from "./getTokens";
+export * from "./getVpcAttachments";
 export * from "./instance";
 export * from "./namespace";
 export * from "./repository";
-export * from "./tcrToken";
+export * from "./token";
 export * from "./vpcAttachment";
 
 // Import resources to register:
 import { Instance } from "./instance";
 import { Namespace } from "./namespace";
 import { Repository } from "./repository";
-import { TcrToken } from "./tcrToken";
+import { Token } from "./token";
 import { VpcAttachment } from "./vpcAttachment";
 
 const _module = {
@@ -28,8 +33,8 @@ const _module = {
                 return new Namespace(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/repository:Repository":
                 return new Repository(name, <any>undefined, { urn })
-            case "tencentcloud:Tcr/tcrToken:TcrToken":
-                return new TcrToken(name, <any>undefined, { urn })
+            case "tencentcloud:Tcr/token:Token":
+                return new Token(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/vpcAttachment:VpcAttachment":
                 return new VpcAttachment(name, <any>undefined, { urn })
             default:
@@ -40,5 +45,5 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/namespace", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/repository", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/tcrToken", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/token", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/vpcAttachment", _module)

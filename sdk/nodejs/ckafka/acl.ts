@@ -4,6 +4,36 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a Ckafka Acl.
+ *
+ * ## Example Usage
+ *
+ * Ckafka Acl
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.ckafka.Acl("foo", {
+ *     instanceId: "ckafka-f9ife4zz",
+ *     resourceType: "TOPIC",
+ *     resourceName: "topic-tf-test",
+ *     operationType: "WRITE",
+ *     permissionType: "ALLOW",
+ *     host: "*",
+ *     principal: tencentcloud_ckafka_user.foo.account_name,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Ckafka acl can be imported using the instance_id#permission_type#principal#host#operation_type#resource_type#resource_name, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Ckafka/acl:Acl foo ckafka-f9ife4zz#ALLOW#test#*#WRITE#TOPIC#topic-tf-test
+ * ```
+ */
 export class Acl extends pulumi.CustomResource {
     /**
      * Get an existing Acl resource's state with the given name, ID, and optional extra
@@ -41,29 +71,23 @@ export class Acl extends pulumi.CustomResource {
      */
     public readonly instanceId!: pulumi.Output<string>;
     /**
-     * ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`,
-     * `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
+     * ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
      */
     public readonly operationType!: pulumi.Output<string>;
     /**
-     * ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports
-     * `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+     * ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
      */
     public readonly permissionType!: pulumi.Output<string | undefined>;
     /**
-     * User list. The default value is `*`, which means that any user can access. The current user can only be one included in
-     * the user list.
+     * User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
      */
     public readonly principal!: pulumi.Output<string | undefined>;
     /**
-     * ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates
-     * the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
+     * ACL resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name.
      */
     public readonly resourceName!: pulumi.Output<string>;
     /**
-     * ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by
-     * default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source
-     * Kafka.
+     * ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
      */
     public readonly resourceType!: pulumi.Output<string | undefined>;
 
@@ -124,29 +148,23 @@ export interface AclState {
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`,
-     * `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
+     * ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
      */
     operationType?: pulumi.Input<string>;
     /**
-     * ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports
-     * `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+     * ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
      */
     permissionType?: pulumi.Input<string>;
     /**
-     * User list. The default value is `*`, which means that any user can access. The current user can only be one included in
-     * the user list.
+     * User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
      */
     principal?: pulumi.Input<string>;
     /**
-     * ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates
-     * the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
+     * ACL resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name.
      */
     resourceName?: pulumi.Input<string>;
     /**
-     * ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by
-     * default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source
-     * Kafka.
+     * ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
      */
     resourceType?: pulumi.Input<string>;
 }
@@ -164,29 +182,23 @@ export interface AclArgs {
      */
     instanceId: pulumi.Input<string>;
     /**
-     * ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`,
-     * `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
+     * ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
      */
     operationType: pulumi.Input<string>;
     /**
-     * ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports
-     * `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+     * ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
      */
     permissionType?: pulumi.Input<string>;
     /**
-     * User list. The default value is `*`, which means that any user can access. The current user can only be one included in
-     * the user list.
+     * User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
      */
     principal?: pulumi.Input<string>;
     /**
-     * ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates
-     * the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
+     * ACL resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name.
      */
     resourceName: pulumi.Input<string>;
     /**
-     * ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by
-     * default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source
-     * Kafka.
+     * ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
      */
     resourceType?: pulumi.Input<string>;
 }

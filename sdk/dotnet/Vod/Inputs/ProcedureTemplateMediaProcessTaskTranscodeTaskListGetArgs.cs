@@ -12,11 +12,18 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
     public sealed class ProcedureTemplateMediaProcessTaskTranscodeTaskListGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Video transcoding template ID.
+        /// </summary>
         [Input("definition", required: true)]
         public Input<string> Definition { get; set; } = null!;
 
         [Input("mosaicLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListGetArgs>? _mosaicLists;
+
+        /// <summary>
+        /// List of blurs. Up to 10 ones can be supported.
+        /// </summary>
         public InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListGetArgs> MosaicLists
         {
             get => _mosaicLists ?? (_mosaicLists = new InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListGetArgs>());
@@ -25,6 +32,10 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
         [Input("watermarkLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListGetArgs>? _watermarkLists;
+
+        /// <summary>
+        /// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListGetArgs> WatermarkLists
         {
             get => _watermarkLists ?? (_watermarkLists = new InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListGetArgs>());

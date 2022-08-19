@@ -9,6 +9,17 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Clb
 {
+    /// <summary>
+    /// Provides a resource to create an exclusive CLB Logset.
+    /// 
+    /// ## Import
+    /// 
+    /// CLB log set can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Clb/logSet:LogSet foo 4eb9e3a8-9c42-4b32-9ddf-e215e9c92764
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/logSet:LogSet")]
     public partial class LogSet : Pulumi.CustomResource
     {

@@ -326,7 +326,34 @@ class SslServer(pulumi.CustomResource):
                  vpn_gateway_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a SslServer resource with the given unique name, props, and options.
+        Provide a resource to create a VPN SSL Server.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        server = tencentcloud.vpn.SslServer("server",
+            compress=True,
+            encrypt_algorithm="AES-128-CBC",
+            integrity_algorithm="MD5",
+            local_addresses=["10.0.0.0/17"],
+            remote_address="11.0.0.0/16",
+            ssl_vpn_port=1194,
+            ssl_vpn_protocol="UDP",
+            ssl_vpn_server_name="helloworld",
+            vpn_gateway_id="vpngw-335lwf7d")
+        ```
+
+        ## Import
+
+        VPN SSL Server can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] compress: need compressed. Default value: False.
@@ -346,7 +373,34 @@ class SslServer(pulumi.CustomResource):
                  args: SslServerArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a SslServer resource with the given unique name, props, and options.
+        Provide a resource to create a VPN SSL Server.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        server = tencentcloud.vpn.SslServer("server",
+            compress=True,
+            encrypt_algorithm="AES-128-CBC",
+            integrity_algorithm="MD5",
+            local_addresses=["10.0.0.0/17"],
+            remote_address="11.0.0.0/16",
+            ssl_vpn_port=1194,
+            ssl_vpn_protocol="UDP",
+            ssl_vpn_server_name="helloworld",
+            vpn_gateway_id="vpngw-335lwf7d")
+        ```
+
+        ## Import
+
+        VPN SSL Server can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param SslServerArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

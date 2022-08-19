@@ -418,7 +418,69 @@ class Table(pulumi.CustomResource):
                  tablegroup_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Table resource with the given unique name, props, and options.
+        Use this resource to create TcaplusDB table.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test = tencentcloud.tcaplus.Cluster("test",
+            idl_type="PROTO",
+            cluster_name="tf_tcaplus_cluster_test",
+            vpc_id="vpc-7k6gzox6",
+            subnet_id="subnet-akwgvfa3",
+            password="1qaA2k1wgvfa3ZZZ",
+            old_password_expire_last=3600)
+        tablegroup = tencentcloud.tcaplus.Tablegroup("tablegroup",
+            cluster_id=test.id,
+            tablegroup_name="tf_test_group_name")
+        main = tencentcloud.tcaplus.Idl("main",
+            cluster_id=test.id,
+            tablegroup_id=tablegroup.id,
+            file_name="tf_idl_test_2",
+            file_type="PROTO",
+            file_ext_type="proto",
+            file_content=\"\"\"    syntax = "proto2";
+            package myTcaplusTable;
+            import "tcaplusservice.optionv1.proto";
+            message tb_online {
+               option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+                required int64 uin = 1;
+                required string name = 2;
+                required int32 region = 3;
+                required int32 gamesvrid = 4;
+                optional int32 logintime = 5 [default = 1];
+                repeated int64 lockid = 6 [packed = true];
+                optional bool is_available = 7 [default = false];
+                optional pay_info pay = 8;
+            }
+
+            message pay_info {
+                required int64 pay_id = 1;
+                optional uint64 total_money = 2;
+                optional uint64 pay_times = 3;
+                optional pay_auth_info auth = 4;
+                message pay_auth_info {
+                    required string pay_keys = 1;
+                    optional int64 update_time = 2;
+                }
+            }
+        \"\"\")
+        table = tencentcloud.tcaplus.Table("table",
+            cluster_id=test.id,
+            tablegroup_id=tablegroup.id,
+            table_name="tb_online",
+            table_type="GENERIC",
+            description="test",
+            idl_id=main.id,
+            table_idl_type="PROTO",
+            reserved_read_cu=1000,
+            reserved_write_cu=20,
+            reserved_volume=1)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: ID of the TcaplusDB cluster to which the table belongs.
@@ -439,7 +501,69 @@ class Table(pulumi.CustomResource):
                  args: TableArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Table resource with the given unique name, props, and options.
+        Use this resource to create TcaplusDB table.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test = tencentcloud.tcaplus.Cluster("test",
+            idl_type="PROTO",
+            cluster_name="tf_tcaplus_cluster_test",
+            vpc_id="vpc-7k6gzox6",
+            subnet_id="subnet-akwgvfa3",
+            password="1qaA2k1wgvfa3ZZZ",
+            old_password_expire_last=3600)
+        tablegroup = tencentcloud.tcaplus.Tablegroup("tablegroup",
+            cluster_id=test.id,
+            tablegroup_name="tf_test_group_name")
+        main = tencentcloud.tcaplus.Idl("main",
+            cluster_id=test.id,
+            tablegroup_id=tablegroup.id,
+            file_name="tf_idl_test_2",
+            file_type="PROTO",
+            file_ext_type="proto",
+            file_content=\"\"\"    syntax = "proto2";
+            package myTcaplusTable;
+            import "tcaplusservice.optionv1.proto";
+            message tb_online {
+               option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+                required int64 uin = 1;
+                required string name = 2;
+                required int32 region = 3;
+                required int32 gamesvrid = 4;
+                optional int32 logintime = 5 [default = 1];
+                repeated int64 lockid = 6 [packed = true];
+                optional bool is_available = 7 [default = false];
+                optional pay_info pay = 8;
+            }
+
+            message pay_info {
+                required int64 pay_id = 1;
+                optional uint64 total_money = 2;
+                optional uint64 pay_times = 3;
+                optional pay_auth_info auth = 4;
+                message pay_auth_info {
+                    required string pay_keys = 1;
+                    optional int64 update_time = 2;
+                }
+            }
+        \"\"\")
+        table = tencentcloud.tcaplus.Table("table",
+            cluster_id=test.id,
+            tablegroup_id=tablegroup.id,
+            table_name="tb_online",
+            table_type="GENERIC",
+            description="test",
+            idl_id=main.id,
+            table_idl_type="PROTO",
+            reserved_read_cu=1000,
+            reserved_write_cu=20,
+            reserved_volume=1)
+        ```
+
         :param str resource_name: The name of the resource.
         :param TableArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

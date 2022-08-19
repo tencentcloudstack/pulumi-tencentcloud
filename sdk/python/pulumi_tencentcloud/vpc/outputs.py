@@ -10,26 +10,35 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
-    'AclsAclListResult',
-    'AclsAclListEgressResult',
-    'AclsAclListIngressResult',
-    'AclsAclListSubnetResult',
-    'RouteTablesInstanceListResult',
-    'RouteTablesInstanceListRouteEntryInfoResult',
-    'SubnetsInstanceListResult',
-    'VpcInstancesInstanceListResult',
+    'GetAclsAclListResult',
+    'GetAclsAclListEgressResult',
+    'GetAclsAclListIngressResult',
+    'GetAclsAclListSubnetResult',
+    'GetInstancesInstanceListResult',
+    'GetRouteTablesInstanceListResult',
+    'GetRouteTablesInstanceListRouteEntryInfoResult',
+    'GetSubnetsInstanceListResult',
 ]
 
 @pulumi.output_type
-class AclsAclListResult(dict):
+class GetAclsAclListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
-                 egresses: Sequence['outputs.AclsAclListEgressResult'],
+                 egresses: Sequence['outputs.GetAclsAclListEgressResult'],
                  id: str,
-                 ingresses: Sequence['outputs.AclsAclListIngressResult'],
+                 ingresses: Sequence['outputs.GetAclsAclListIngressResult'],
                  name: str,
-                 subnets: Sequence['outputs.AclsAclListSubnetResult'],
+                 subnets: Sequence['outputs.GetAclsAclListSubnetResult'],
                  vpc_id: str):
+        """
+        :param str create_time: Creation time.
+        :param Sequence['GetAclsAclListEgressArgs'] egresses: Outbound rules of the network ACL.
+        :param str id: ID of the network ACL instance.
+        :param Sequence['GetAclsAclListIngressArgs'] ingresses: Inbound rules of the network ACL.
+        :param str name: Name of the network ACL.
+        :param Sequence['GetAclsAclListSubnetArgs'] subnets: Subnets associated with the network ACL.
+        :param str vpc_id: ID of the VPC instance.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "egresses", egresses)
         pulumi.set(__self__, "id", id)
@@ -41,47 +50,75 @@ class AclsAclListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
-    def egresses(self) -> Sequence['outputs.AclsAclListEgressResult']:
+    def egresses(self) -> Sequence['outputs.GetAclsAclListEgressResult']:
+        """
+        Outbound rules of the network ACL.
+        """
         return pulumi.get(self, "egresses")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the network ACL instance.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
-    def ingresses(self) -> Sequence['outputs.AclsAclListIngressResult']:
+    def ingresses(self) -> Sequence['outputs.GetAclsAclListIngressResult']:
+        """
+        Inbound rules of the network ACL.
+        """
         return pulumi.get(self, "ingresses")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the network ACL.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
-    def subnets(self) -> Sequence['outputs.AclsAclListSubnetResult']:
+    def subnets(self) -> Sequence['outputs.GetAclsAclListSubnetResult']:
+        """
+        Subnets associated with the network ACL.
+        """
         return pulumi.get(self, "subnets")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the VPC instance.
+        """
         return pulumi.get(self, "vpc_id")
 
 
 @pulumi.output_type
-class AclsAclListEgressResult(dict):
+class GetAclsAclListEgressResult(dict):
     def __init__(__self__, *,
                  cidr_block: str,
                  description: str,
                  policy: str,
                  port: str,
                  protocol: str):
+        """
+        :param str cidr_block: The IPv4 CIDR of the subnet.
+        :param str description: Rule description.
+        :param str policy: Rule policy of Network ACL.
+        :param str port: Range of the port.
+        :param str protocol: Type of IP protocol.
+        """
         pulumi.set(__self__, "cidr_block", cidr_block)
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "policy", policy)
@@ -91,37 +128,59 @@ class AclsAclListEgressResult(dict):
     @property
     @pulumi.getter(name="cidrBlock")
     def cidr_block(self) -> str:
+        """
+        The IPv4 CIDR of the subnet.
+        """
         return pulumi.get(self, "cidr_block")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Rule description.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter
     def policy(self) -> str:
+        """
+        Rule policy of Network ACL.
+        """
         return pulumi.get(self, "policy")
 
     @property
     @pulumi.getter
     def port(self) -> str:
+        """
+        Range of the port.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Type of IP protocol.
+        """
         return pulumi.get(self, "protocol")
 
 
 @pulumi.output_type
-class AclsAclListIngressResult(dict):
+class GetAclsAclListIngressResult(dict):
     def __init__(__self__, *,
                  cidr_block: str,
                  description: str,
                  policy: str,
                  port: str,
                  protocol: str):
+        """
+        :param str cidr_block: The IPv4 CIDR of the subnet.
+        :param str description: Rule description.
+        :param str policy: Rule policy of Network ACL.
+        :param str port: Range of the port.
+        :param str protocol: Type of IP protocol.
+        """
         pulumi.set(__self__, "cidr_block", cidr_block)
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "policy", policy)
@@ -131,37 +190,59 @@ class AclsAclListIngressResult(dict):
     @property
     @pulumi.getter(name="cidrBlock")
     def cidr_block(self) -> str:
+        """
+        The IPv4 CIDR of the subnet.
+        """
         return pulumi.get(self, "cidr_block")
 
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Rule description.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter
     def policy(self) -> str:
+        """
+        Rule policy of Network ACL.
+        """
         return pulumi.get(self, "policy")
 
     @property
     @pulumi.getter
     def port(self) -> str:
+        """
+        Range of the port.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Type of IP protocol.
+        """
         return pulumi.get(self, "protocol")
 
 
 @pulumi.output_type
-class AclsAclListSubnetResult(dict):
+class GetAclsAclListSubnetResult(dict):
     def __init__(__self__, *,
                  cidr_block: str,
                  subnet_id: str,
                  subnet_name: str,
                  tags: Mapping[str, Any],
                  vpc_id: str):
+        """
+        :param str cidr_block: The IPv4 CIDR of the subnet.
+        :param str subnet_id: Subnet instance ID.
+        :param str subnet_name: Subnet name.
+        :param Mapping[str, Any] tags: Tags of the subnet.
+        :param str vpc_id: ID of the VPC instance.
+        """
         pulumi.set(__self__, "cidr_block", cidr_block)
         pulumi.set(__self__, "subnet_id", subnet_id)
         pulumi.set(__self__, "subnet_name", subnet_name)
@@ -171,40 +252,171 @@ class AclsAclListSubnetResult(dict):
     @property
     @pulumi.getter(name="cidrBlock")
     def cidr_block(self) -> str:
+        """
+        The IPv4 CIDR of the subnet.
+        """
         return pulumi.get(self, "cidr_block")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        Subnet instance ID.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter(name="subnetName")
     def subnet_name(self) -> str:
+        """
+        Subnet name.
+        """
         return pulumi.get(self, "subnet_name")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the subnet.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the VPC instance.
+        """
         return pulumi.get(self, "vpc_id")
 
 
 @pulumi.output_type
-class RouteTablesInstanceListResult(dict):
+class GetInstancesInstanceListResult(dict):
+    def __init__(__self__, *,
+                 cidr_block: str,
+                 create_time: str,
+                 dns_servers: Sequence[str],
+                 is_default: bool,
+                 is_multicast: bool,
+                 name: str,
+                 subnet_ids: Sequence[str],
+                 tags: Mapping[str, Any],
+                 vpc_id: str):
+        """
+        :param str cidr_block: Filter VPC with this CIDR.
+        :param str create_time: Creation time of VPC.
+        :param Sequence[str] dns_servers: A list of DNS servers which can be used within the VPC.
+        :param bool is_default: Filter default or no default VPC.
+        :param bool is_multicast: Indicates whether VPC multicast is enabled.
+        :param str name: Name of the VPC to be queried.
+        :param Sequence[str] subnet_ids: A ID list of subnets within this VPC.
+        :param Mapping[str, Any] tags: Tags of the VPC to be queried.
+        :param str vpc_id: ID of the VPC to be queried.
+        """
+        pulumi.set(__self__, "cidr_block", cidr_block)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "dns_servers", dns_servers)
+        pulumi.set(__self__, "is_default", is_default)
+        pulumi.set(__self__, "is_multicast", is_multicast)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "subnet_ids", subnet_ids)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> str:
+        """
+        Filter VPC with this CIDR.
+        """
+        return pulumi.get(self, "cidr_block")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time of VPC.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="dnsServers")
+    def dns_servers(self) -> Sequence[str]:
+        """
+        A list of DNS servers which can be used within the VPC.
+        """
+        return pulumi.get(self, "dns_servers")
+
+    @property
+    @pulumi.getter(name="isDefault")
+    def is_default(self) -> bool:
+        """
+        Filter default or no default VPC.
+        """
+        return pulumi.get(self, "is_default")
+
+    @property
+    @pulumi.getter(name="isMulticast")
+    def is_multicast(self) -> bool:
+        """
+        Indicates whether VPC multicast is enabled.
+        """
+        return pulumi.get(self, "is_multicast")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of the VPC to be queried.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="subnetIds")
+    def subnet_ids(self) -> Sequence[str]:
+        """
+        A ID list of subnets within this VPC.
+        """
+        return pulumi.get(self, "subnet_ids")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the VPC to be queried.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        ID of the VPC to be queried.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetRouteTablesInstanceListResult(dict):
     def __init__(__self__, *,
                  create_time: str,
                  is_default: bool,
                  name: str,
-                 route_entry_infos: Sequence['outputs.RouteTablesInstanceListRouteEntryInfoResult'],
+                 route_entry_infos: Sequence['outputs.GetRouteTablesInstanceListRouteEntryInfoResult'],
                  route_table_id: str,
                  subnet_ids: Sequence[str],
                  tags: Mapping[str, Any],
                  vpc_id: str):
+        """
+        :param str create_time: Creation time of the routing table.
+        :param bool is_default: Indicates whether it is the default routing table.
+        :param str name: Name of the routing table to be queried.
+        :param Sequence['GetRouteTablesInstanceListRouteEntryInfoArgs'] route_entry_infos: Detailed information of each entry of the route table.
+        :param str route_table_id: ID of the routing table to be queried.
+        :param Sequence[str] subnet_ids: List of subnet IDs bound to the route table.
+        :param Mapping[str, Any] tags: Tags of the routing table to be queried.
+        :param str vpc_id: ID of the VPC to be queried.
+        """
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "is_default", is_default)
         pulumi.set(__self__, "name", name)
@@ -217,52 +429,83 @@ class RouteTablesInstanceListResult(dict):
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the routing table.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="isDefault")
     def is_default(self) -> bool:
+        """
+        Indicates whether it is the default routing table.
+        """
         return pulumi.get(self, "is_default")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the routing table to be queried.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="routeEntryInfos")
-    def route_entry_infos(self) -> Sequence['outputs.RouteTablesInstanceListRouteEntryInfoResult']:
+    def route_entry_infos(self) -> Sequence['outputs.GetRouteTablesInstanceListRouteEntryInfoResult']:
+        """
+        Detailed information of each entry of the route table.
+        """
         return pulumi.get(self, "route_entry_infos")
 
     @property
     @pulumi.getter(name="routeTableId")
     def route_table_id(self) -> str:
+        """
+        ID of the routing table to be queried.
+        """
         return pulumi.get(self, "route_table_id")
 
     @property
     @pulumi.getter(name="subnetIds")
     def subnet_ids(self) -> Sequence[str]:
+        """
+        List of subnet IDs bound to the route table.
+        """
         return pulumi.get(self, "subnet_ids")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the routing table to be queried.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the VPC to be queried.
+        """
         return pulumi.get(self, "vpc_id")
 
 
 @pulumi.output_type
-class RouteTablesInstanceListRouteEntryInfoResult(dict):
+class GetRouteTablesInstanceListRouteEntryInfoResult(dict):
     def __init__(__self__, *,
                  description: str,
                  destination_cidr_block: str,
                  next_hub: str,
                  next_type: str,
                  route_entry_id: str):
+        """
+        :param str description: Description information user defined for a route table rule.
+        :param str destination_cidr_block: The destination address block.
+        :param str next_hub: ID of next-hop gateway. Note: when 'next_type' is EIP, GatewayId will fix the value `0`.
+        :param str next_type: Type of next-hop, and available values include `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+        :param str route_entry_id: ID of a route table entry.
+        """
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "destination_cidr_block", destination_cidr_block)
         pulumi.set(__self__, "next_hub", next_hub)
@@ -272,31 +515,46 @@ class RouteTablesInstanceListRouteEntryInfoResult(dict):
     @property
     @pulumi.getter
     def description(self) -> str:
+        """
+        Description information user defined for a route table rule.
+        """
         return pulumi.get(self, "description")
 
     @property
     @pulumi.getter(name="destinationCidrBlock")
     def destination_cidr_block(self) -> str:
+        """
+        The destination address block.
+        """
         return pulumi.get(self, "destination_cidr_block")
 
     @property
     @pulumi.getter(name="nextHub")
     def next_hub(self) -> str:
+        """
+        ID of next-hop gateway. Note: when 'next_type' is EIP, GatewayId will fix the value `0`.
+        """
         return pulumi.get(self, "next_hub")
 
     @property
     @pulumi.getter(name="nextType")
     def next_type(self) -> str:
+        """
+        Type of next-hop, and available values include `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `SSLVPN`, `NAT`, `NORMAL_CVM`, `EIP` and `CCN`.
+        """
         return pulumi.get(self, "next_type")
 
     @property
     @pulumi.getter(name="routeEntryId")
     def route_entry_id(self) -> str:
+        """
+        ID of a route table entry.
+        """
         return pulumi.get(self, "route_entry_id")
 
 
 @pulumi.output_type
-class SubnetsInstanceListResult(dict):
+class GetSubnetsInstanceListResult(dict):
     def __init__(__self__, *,
                  availability_zone: str,
                  available_ip_count: int,
@@ -309,6 +567,19 @@ class SubnetsInstanceListResult(dict):
                  subnet_id: str,
                  tags: Mapping[str, Any],
                  vpc_id: str):
+        """
+        :param str availability_zone: Zone of the subnet to be queried.
+        :param int available_ip_count: The number of available IPs.
+        :param str cidr_block: Filter subnet with this CIDR.
+        :param str create_time: Creation time of the subnet resource.
+        :param bool is_default: Filter default or no default subnets.
+        :param bool is_multicast: Indicates whether multicast is enabled.
+        :param str name: Name of the subnet to be queried.
+        :param str route_table_id: ID of the routing table.
+        :param str subnet_id: ID of the subnet to be queried.
+        :param Mapping[str, Any] tags: Tags of the subnet to be queried.
+        :param str vpc_id: ID of the VPC to be queried.
+        """
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "available_ip_count", available_ip_count)
         pulumi.set(__self__, "cidr_block", cidr_block)
@@ -324,124 +595,89 @@ class SubnetsInstanceListResult(dict):
     @property
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> str:
+        """
+        Zone of the subnet to be queried.
+        """
         return pulumi.get(self, "availability_zone")
 
     @property
     @pulumi.getter(name="availableIpCount")
     def available_ip_count(self) -> int:
+        """
+        The number of available IPs.
+        """
         return pulumi.get(self, "available_ip_count")
 
     @property
     @pulumi.getter(name="cidrBlock")
     def cidr_block(self) -> str:
+        """
+        Filter subnet with this CIDR.
+        """
         return pulumi.get(self, "cidr_block")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the subnet resource.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="isDefault")
     def is_default(self) -> bool:
+        """
+        Filter default or no default subnets.
+        """
         return pulumi.get(self, "is_default")
 
     @property
     @pulumi.getter(name="isMulticast")
     def is_multicast(self) -> bool:
+        """
+        Indicates whether multicast is enabled.
+        """
         return pulumi.get(self, "is_multicast")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the subnet to be queried.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="routeTableId")
     def route_table_id(self) -> str:
+        """
+        ID of the routing table.
+        """
         return pulumi.get(self, "route_table_id")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        ID of the subnet to be queried.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of the subnet to be queried.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
-        return pulumi.get(self, "vpc_id")
-
-
-@pulumi.output_type
-class VpcInstancesInstanceListResult(dict):
-    def __init__(__self__, *,
-                 cidr_block: str,
-                 create_time: str,
-                 dns_servers: Sequence[str],
-                 is_default: bool,
-                 is_multicast: bool,
-                 name: str,
-                 subnet_ids: Sequence[str],
-                 tags: Mapping[str, Any],
-                 vpc_id: str):
-        pulumi.set(__self__, "cidr_block", cidr_block)
-        pulumi.set(__self__, "create_time", create_time)
-        pulumi.set(__self__, "dns_servers", dns_servers)
-        pulumi.set(__self__, "is_default", is_default)
-        pulumi.set(__self__, "is_multicast", is_multicast)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "subnet_ids", subnet_ids)
-        pulumi.set(__self__, "tags", tags)
-        pulumi.set(__self__, "vpc_id", vpc_id)
-
-    @property
-    @pulumi.getter(name="cidrBlock")
-    def cidr_block(self) -> str:
-        return pulumi.get(self, "cidr_block")
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> str:
-        return pulumi.get(self, "create_time")
-
-    @property
-    @pulumi.getter(name="dnsServers")
-    def dns_servers(self) -> Sequence[str]:
-        return pulumi.get(self, "dns_servers")
-
-    @property
-    @pulumi.getter(name="isDefault")
-    def is_default(self) -> bool:
-        return pulumi.get(self, "is_default")
-
-    @property
-    @pulumi.getter(name="isMulticast")
-    def is_multicast(self) -> bool:
-        return pulumi.get(self, "is_multicast")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter(name="subnetIds")
-    def subnet_ids(self) -> Sequence[str]:
-        return pulumi.get(self, "subnet_ids")
-
-    @property
-    @pulumi.getter
-    def tags(self) -> Mapping[str, Any]:
-        return pulumi.get(self, "tags")
-
-    @property
-    @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> str:
+        """
+        ID of the VPC to be queried.
+        """
         return pulumi.get(self, "vpc_id")
 
 

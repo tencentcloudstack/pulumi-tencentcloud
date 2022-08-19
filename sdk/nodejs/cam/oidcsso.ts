@@ -4,9 +4,41 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-export class OIDCSSO extends pulumi.CustomResource {
+/**
+ * Provides a resource to create a CAM-OIDC-SSO.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Cam.OidcSso("foo", {
+ *     authorizationEndpoint: "https://login.microsoftonline.com/.../oauth2/v2.0/authorize",
+ *     clientId: "...",
+ *     identityKey: "...",
+ *     identityUrl: "https://login.microsoftonline.com/.../v2.0",
+ *     mappingFiled: "name",
+ *     responseMode: "form_post",
+ *     responseType: "id_token",
+ *     scopes: [
+ *         "openid",
+ *         "email",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CAM-OIDC-SSO can be imported using the client_id or any string which can identifier resource, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx
+ * ```
+ */
+export class OidcSso extends pulumi.CustomResource {
     /**
-     * Get an existing OIDCSSO resource's state with the given name, ID, and optional extra
+     * Get an existing OidcSso resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -14,27 +46,26 @@ export class OIDCSSO extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: OIDCSSOState, opts?: pulumi.CustomResourceOptions): OIDCSSO {
-        return new OIDCSSO(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: OidcSsoState, opts?: pulumi.CustomResourceOptions): OidcSso {
+        return new OidcSso(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:Cam/oIDCSSO:OIDCSSO';
+    public static readonly __pulumiType = 'tencentcloud:Cam/oidcSso:OidcSso';
 
     /**
-     * Returns true if the given object is an instance of OIDCSSO.  This is designed to work even
+     * Returns true if the given object is an instance of OidcSso.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is OIDCSSO {
+    public static isInstance(obj: any): obj is OidcSso {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === OIDCSSO.__pulumiType;
+        return obj['__pulumiType'] === OidcSso.__pulumiType;
     }
 
     /**
-     * Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the
-     * `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
+     * Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorizationEndpoint` field in the Openid-configuration provided by the Enterprise IdP.
      */
     public readonly authorizationEndpoint!: pulumi.Output<string>;
     /**
@@ -42,22 +73,19 @@ export class OIDCSSO extends pulumi.CustomResource {
      */
     public readonly clientId!: pulumi.Output<string>;
     /**
-     * The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID
-     * Token. For the security of your account, we recommend that you rotate the signed public key regularly.
+     * The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
      */
     public readonly identityKey!: pulumi.Output<string>;
     /**
-     * Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the
-     * Openid-configuration provided by the Enterprise IdP.
+     * Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
      */
     public readonly identityUrl!: pulumi.Output<string>;
     /**
-     * Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.
+     * Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.
      */
     public readonly mappingFiled!: pulumi.Output<string>;
     /**
-     * Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes,
-     * recommended to select form_post mode.
+     * Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.
      */
     public readonly responseMode!: pulumi.Output<string>;
     /**
@@ -65,24 +93,23 @@ export class OIDCSSO extends pulumi.CustomResource {
      */
     public readonly responseType!: pulumi.Output<string>;
     /**
-     * Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required
-     * openid.
+     * Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
      */
     public readonly scopes!: pulumi.Output<string[] | undefined>;
 
     /**
-     * Create a OIDCSSO resource with the given unique name, arguments, and options.
+     * Create a OidcSso resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: OIDCSSOArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: OIDCSSOArgs | OIDCSSOState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: OidcSsoArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: OidcSsoArgs | OidcSsoState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as OIDCSSOState | undefined;
+            const state = argsOrState as OidcSsoState | undefined;
             resourceInputs["authorizationEndpoint"] = state ? state.authorizationEndpoint : undefined;
             resourceInputs["clientId"] = state ? state.clientId : undefined;
             resourceInputs["identityKey"] = state ? state.identityKey : undefined;
@@ -92,7 +119,7 @@ export class OIDCSSO extends pulumi.CustomResource {
             resourceInputs["responseType"] = state ? state.responseType : undefined;
             resourceInputs["scopes"] = state ? state.scopes : undefined;
         } else {
-            const args = argsOrState as OIDCSSOArgs | undefined;
+            const args = argsOrState as OidcSsoArgs | undefined;
             if ((!args || args.authorizationEndpoint === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'authorizationEndpoint'");
             }
@@ -124,17 +151,16 @@ export class OIDCSSO extends pulumi.CustomResource {
             resourceInputs["scopes"] = args ? args.scopes : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(OIDCSSO.__pulumiType, name, resourceInputs, opts);
+        super(OidcSso.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering OIDCSSO resources.
+ * Input properties used for looking up and filtering OidcSso resources.
  */
-export interface OIDCSSOState {
+export interface OidcSsoState {
     /**
-     * Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the
-     * `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
+     * Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorizationEndpoint` field in the Openid-configuration provided by the Enterprise IdP.
      */
     authorizationEndpoint?: pulumi.Input<string>;
     /**
@@ -142,22 +168,19 @@ export interface OIDCSSOState {
      */
     clientId?: pulumi.Input<string>;
     /**
-     * The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID
-     * Token. For the security of your account, we recommend that you rotate the signed public key regularly.
+     * The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
      */
     identityKey?: pulumi.Input<string>;
     /**
-     * Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the
-     * Openid-configuration provided by the Enterprise IdP.
+     * Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
      */
     identityUrl?: pulumi.Input<string>;
     /**
-     * Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.
+     * Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.
      */
     mappingFiled?: pulumi.Input<string>;
     /**
-     * Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes,
-     * recommended to select form_post mode.
+     * Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.
      */
     responseMode?: pulumi.Input<string>;
     /**
@@ -165,19 +188,17 @@ export interface OIDCSSOState {
      */
     responseType?: pulumi.Input<string>;
     /**
-     * Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required
-     * openid.
+     * Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
      */
     scopes?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
- * The set of arguments for constructing a OIDCSSO resource.
+ * The set of arguments for constructing a OidcSso resource.
  */
-export interface OIDCSSOArgs {
+export interface OidcSsoArgs {
     /**
-     * Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the
-     * `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
+     * Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorizationEndpoint` field in the Openid-configuration provided by the Enterprise IdP.
      */
     authorizationEndpoint: pulumi.Input<string>;
     /**
@@ -185,22 +206,19 @@ export interface OIDCSSOArgs {
      */
     clientId: pulumi.Input<string>;
     /**
-     * The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID
-     * Token. For the security of your account, we recommend that you rotate the signed public key regularly.
+     * The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
      */
     identityKey: pulumi.Input<string>;
     /**
-     * Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the
-     * Openid-configuration provided by the Enterprise IdP.
+     * Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
      */
     identityUrl: pulumi.Input<string>;
     /**
-     * Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.
+     * Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.
      */
     mappingFiled: pulumi.Input<string>;
     /**
-     * Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes,
-     * recommended to select form_post mode.
+     * Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.
      */
     responseMode: pulumi.Input<string>;
     /**
@@ -208,8 +226,7 @@ export interface OIDCSSOArgs {
      */
     responseType: pulumi.Input<string>;
     /**
-     * Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required
-     * openid.
+     * Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
      */
     scopes?: pulumi.Input<pulumi.Input<string>[]>;
 }

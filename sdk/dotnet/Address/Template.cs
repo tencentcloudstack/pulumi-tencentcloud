@@ -9,6 +9,41 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Address
 {
+    /// <summary>
+    /// Provides a resource to manage address template.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Address.Template("foo", new Tencentcloud.Address.TemplateArgs
+    ///         {
+    ///             Addresses = 
+    ///             {
+    ///                 "10.0.0.1",
+    ///                 "10.0.1.0/24",
+    ///                 "10.0.0.1-10.0.0.100",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Address template can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Address/template:Template foo ipm-makf7k9e"
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Address/template:Template")]
     public partial class Template : Pulumi.CustomResource
     {

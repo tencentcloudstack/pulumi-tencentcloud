@@ -4,6 +4,52 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a VPC.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Vpc.Instance("foo", {
+ *     cidrBlock: "10.0.0.0/16",
+ *     dnsServers: [
+ *         "119.29.29.29",
+ *         "8.8.8.8",
+ *     ],
+ *     isMulticast: false,
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * ```
+ *
+ * Using Assistant CIDR
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Vpc.Instance("foo", {
+ *     assistantCidr: ["172.16.0.0/24"],
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Vpc instance can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -37,8 +83,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly assistantCidrs!: pulumi.Output<string[]>;
     /**
-     * A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-     * 192.168.0.0/16).
+     * A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
      */
     public readonly cidrBlock!: pulumi.Output<string>;
     /**
@@ -121,8 +166,7 @@ export interface InstanceState {
      */
     assistantCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-     * 192.168.0.0/16).
+     * A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
      */
     cidrBlock?: pulumi.Input<string>;
     /**
@@ -164,8 +208,7 @@ export interface InstanceArgs {
      */
     assistantCidrs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and
-     * 192.168.0.0/16).
+     * A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
      */
     cidrBlock: pulumi.Input<string>;
     /**

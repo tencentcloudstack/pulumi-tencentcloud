@@ -11,7 +11,43 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type TableGroup struct {
+// Use this resource to create TcaplusDB table group.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		test, err := Tcaplus.NewCluster(ctx, "test", &Tcaplus.ClusterArgs{
+// 			IdlType:               pulumi.String("PROTO"),
+// 			ClusterName:           pulumi.String("tf_tcaplus_cluster_test"),
+// 			VpcId:                 pulumi.String("vpc-7k6gzox6"),
+// 			SubnetId:              pulumi.String("subnet-akwgvfa3"),
+// 			Password:              pulumi.String("1qaA2k1wgvfa3ZZZ"),
+// 			OldPasswordExpireLast: pulumi.Int(3600),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tcaplus.NewTablegroup(ctx, "tablegroup", &Tcaplus.TablegroupArgs{
+// 			ClusterId:      test.ID(),
+// 			TablegroupName: pulumi.String("tf_test_group_name"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+type Tablegroup struct {
 	pulumi.CustomResourceState
 
 	// ID of the TcaplusDB cluster to which the table group belongs.
@@ -26,9 +62,9 @@ type TableGroup struct {
 	TotalSize pulumi.IntOutput `pulumi:"totalSize"`
 }
 
-// NewTableGroup registers a new resource with the given unique name, arguments, and options.
-func NewTableGroup(ctx *pulumi.Context,
-	name string, args *TableGroupArgs, opts ...pulumi.ResourceOption) (*TableGroup, error) {
+// NewTablegroup registers a new resource with the given unique name, arguments, and options.
+func NewTablegroup(ctx *pulumi.Context,
+	name string, args *TablegroupArgs, opts ...pulumi.ResourceOption) (*Tablegroup, error) {
 	if args == nil {
 		return nil, errors.New("missing one or more required arguments")
 	}
@@ -39,28 +75,28 @@ func NewTableGroup(ctx *pulumi.Context,
 	if args.TablegroupName == nil {
 		return nil, errors.New("invalid value for required argument 'TablegroupName'")
 	}
-	var resource TableGroup
-	err := ctx.RegisterResource("tencentcloud:Tcaplus/tableGroup:TableGroup", name, args, &resource, opts...)
+	var resource Tablegroup
+	err := ctx.RegisterResource("tencentcloud:Tcaplus/tablegroup:Tablegroup", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// GetTableGroup gets an existing TableGroup resource's state with the given name, ID, and optional
+// GetTablegroup gets an existing Tablegroup resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetTableGroup(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *TableGroupState, opts ...pulumi.ResourceOption) (*TableGroup, error) {
-	var resource TableGroup
-	err := ctx.ReadResource("tencentcloud:Tcaplus/tableGroup:TableGroup", name, id, state, &resource, opts...)
+func GetTablegroup(ctx *pulumi.Context,
+	name string, id pulumi.IDInput, state *TablegroupState, opts ...pulumi.ResourceOption) (*Tablegroup, error) {
+	var resource Tablegroup
+	err := ctx.ReadResource("tencentcloud:Tcaplus/tablegroup:Tablegroup", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-// Input properties used for looking up and filtering TableGroup resources.
-type tableGroupState struct {
+// Input properties used for looking up and filtering Tablegroup resources.
+type tablegroupState struct {
 	// ID of the TcaplusDB cluster to which the table group belongs.
 	ClusterId *string `pulumi:"clusterId"`
 	// Create time of the TcaplusDB table group.
@@ -73,7 +109,7 @@ type tableGroupState struct {
 	TotalSize *int `pulumi:"totalSize"`
 }
 
-type TableGroupState struct {
+type TablegroupState struct {
 	// ID of the TcaplusDB cluster to which the table group belongs.
 	ClusterId pulumi.StringPtrInput
 	// Create time of the TcaplusDB table group.
@@ -86,182 +122,182 @@ type TableGroupState struct {
 	TotalSize pulumi.IntPtrInput
 }
 
-func (TableGroupState) ElementType() reflect.Type {
-	return reflect.TypeOf((*tableGroupState)(nil)).Elem()
+func (TablegroupState) ElementType() reflect.Type {
+	return reflect.TypeOf((*tablegroupState)(nil)).Elem()
 }
 
-type tableGroupArgs struct {
+type tablegroupArgs struct {
 	// ID of the TcaplusDB cluster to which the table group belongs.
 	ClusterId string `pulumi:"clusterId"`
 	// Name of the TcaplusDB table group. Name length should be between 1 and 30.
 	TablegroupName string `pulumi:"tablegroupName"`
 }
 
-// The set of arguments for constructing a TableGroup resource.
-type TableGroupArgs struct {
+// The set of arguments for constructing a Tablegroup resource.
+type TablegroupArgs struct {
 	// ID of the TcaplusDB cluster to which the table group belongs.
 	ClusterId pulumi.StringInput
 	// Name of the TcaplusDB table group. Name length should be between 1 and 30.
 	TablegroupName pulumi.StringInput
 }
 
-func (TableGroupArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*tableGroupArgs)(nil)).Elem()
+func (TablegroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*tablegroupArgs)(nil)).Elem()
 }
 
-type TableGroupInput interface {
+type TablegroupInput interface {
 	pulumi.Input
 
-	ToTableGroupOutput() TableGroupOutput
-	ToTableGroupOutputWithContext(ctx context.Context) TableGroupOutput
+	ToTablegroupOutput() TablegroupOutput
+	ToTablegroupOutputWithContext(ctx context.Context) TablegroupOutput
 }
 
-func (*TableGroup) ElementType() reflect.Type {
-	return reflect.TypeOf((**TableGroup)(nil)).Elem()
+func (*Tablegroup) ElementType() reflect.Type {
+	return reflect.TypeOf((**Tablegroup)(nil)).Elem()
 }
 
-func (i *TableGroup) ToTableGroupOutput() TableGroupOutput {
-	return i.ToTableGroupOutputWithContext(context.Background())
+func (i *Tablegroup) ToTablegroupOutput() TablegroupOutput {
+	return i.ToTablegroupOutputWithContext(context.Background())
 }
 
-func (i *TableGroup) ToTableGroupOutputWithContext(ctx context.Context) TableGroupOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TableGroupOutput)
+func (i *Tablegroup) ToTablegroupOutputWithContext(ctx context.Context) TablegroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TablegroupOutput)
 }
 
-// TableGroupArrayInput is an input type that accepts TableGroupArray and TableGroupArrayOutput values.
-// You can construct a concrete instance of `TableGroupArrayInput` via:
+// TablegroupArrayInput is an input type that accepts TablegroupArray and TablegroupArrayOutput values.
+// You can construct a concrete instance of `TablegroupArrayInput` via:
 //
-//          TableGroupArray{ TableGroupArgs{...} }
-type TableGroupArrayInput interface {
+//          TablegroupArray{ TablegroupArgs{...} }
+type TablegroupArrayInput interface {
 	pulumi.Input
 
-	ToTableGroupArrayOutput() TableGroupArrayOutput
-	ToTableGroupArrayOutputWithContext(context.Context) TableGroupArrayOutput
+	ToTablegroupArrayOutput() TablegroupArrayOutput
+	ToTablegroupArrayOutputWithContext(context.Context) TablegroupArrayOutput
 }
 
-type TableGroupArray []TableGroupInput
+type TablegroupArray []TablegroupInput
 
-func (TableGroupArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*TableGroup)(nil)).Elem()
+func (TablegroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*Tablegroup)(nil)).Elem()
 }
 
-func (i TableGroupArray) ToTableGroupArrayOutput() TableGroupArrayOutput {
-	return i.ToTableGroupArrayOutputWithContext(context.Background())
+func (i TablegroupArray) ToTablegroupArrayOutput() TablegroupArrayOutput {
+	return i.ToTablegroupArrayOutputWithContext(context.Background())
 }
 
-func (i TableGroupArray) ToTableGroupArrayOutputWithContext(ctx context.Context) TableGroupArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TableGroupArrayOutput)
+func (i TablegroupArray) ToTablegroupArrayOutputWithContext(ctx context.Context) TablegroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TablegroupArrayOutput)
 }
 
-// TableGroupMapInput is an input type that accepts TableGroupMap and TableGroupMapOutput values.
-// You can construct a concrete instance of `TableGroupMapInput` via:
+// TablegroupMapInput is an input type that accepts TablegroupMap and TablegroupMapOutput values.
+// You can construct a concrete instance of `TablegroupMapInput` via:
 //
-//          TableGroupMap{ "key": TableGroupArgs{...} }
-type TableGroupMapInput interface {
+//          TablegroupMap{ "key": TablegroupArgs{...} }
+type TablegroupMapInput interface {
 	pulumi.Input
 
-	ToTableGroupMapOutput() TableGroupMapOutput
-	ToTableGroupMapOutputWithContext(context.Context) TableGroupMapOutput
+	ToTablegroupMapOutput() TablegroupMapOutput
+	ToTablegroupMapOutputWithContext(context.Context) TablegroupMapOutput
 }
 
-type TableGroupMap map[string]TableGroupInput
+type TablegroupMap map[string]TablegroupInput
 
-func (TableGroupMap) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*TableGroup)(nil)).Elem()
+func (TablegroupMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*Tablegroup)(nil)).Elem()
 }
 
-func (i TableGroupMap) ToTableGroupMapOutput() TableGroupMapOutput {
-	return i.ToTableGroupMapOutputWithContext(context.Background())
+func (i TablegroupMap) ToTablegroupMapOutput() TablegroupMapOutput {
+	return i.ToTablegroupMapOutputWithContext(context.Background())
 }
 
-func (i TableGroupMap) ToTableGroupMapOutputWithContext(ctx context.Context) TableGroupMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(TableGroupMapOutput)
+func (i TablegroupMap) ToTablegroupMapOutputWithContext(ctx context.Context) TablegroupMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TablegroupMapOutput)
 }
 
-type TableGroupOutput struct{ *pulumi.OutputState }
+type TablegroupOutput struct{ *pulumi.OutputState }
 
-func (TableGroupOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**TableGroup)(nil)).Elem()
+func (TablegroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Tablegroup)(nil)).Elem()
 }
 
-func (o TableGroupOutput) ToTableGroupOutput() TableGroupOutput {
+func (o TablegroupOutput) ToTablegroupOutput() TablegroupOutput {
 	return o
 }
 
-func (o TableGroupOutput) ToTableGroupOutputWithContext(ctx context.Context) TableGroupOutput {
+func (o TablegroupOutput) ToTablegroupOutputWithContext(ctx context.Context) TablegroupOutput {
 	return o
 }
 
 // ID of the TcaplusDB cluster to which the table group belongs.
-func (o TableGroupOutput) ClusterId() pulumi.StringOutput {
-	return o.ApplyT(func(v *TableGroup) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
+func (o TablegroupOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Tablegroup) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
 // Create time of the TcaplusDB table group.
-func (o TableGroupOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v *TableGroup) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
+func (o TablegroupOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v *Tablegroup) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
 // Number of tables.
-func (o TableGroupOutput) TableCount() pulumi.IntOutput {
-	return o.ApplyT(func(v *TableGroup) pulumi.IntOutput { return v.TableCount }).(pulumi.IntOutput)
+func (o TablegroupOutput) TableCount() pulumi.IntOutput {
+	return o.ApplyT(func(v *Tablegroup) pulumi.IntOutput { return v.TableCount }).(pulumi.IntOutput)
 }
 
 // Name of the TcaplusDB table group. Name length should be between 1 and 30.
-func (o TableGroupOutput) TablegroupName() pulumi.StringOutput {
-	return o.ApplyT(func(v *TableGroup) pulumi.StringOutput { return v.TablegroupName }).(pulumi.StringOutput)
+func (o TablegroupOutput) TablegroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v *Tablegroup) pulumi.StringOutput { return v.TablegroupName }).(pulumi.StringOutput)
 }
 
 // Total storage size (MB).
-func (o TableGroupOutput) TotalSize() pulumi.IntOutput {
-	return o.ApplyT(func(v *TableGroup) pulumi.IntOutput { return v.TotalSize }).(pulumi.IntOutput)
+func (o TablegroupOutput) TotalSize() pulumi.IntOutput {
+	return o.ApplyT(func(v *Tablegroup) pulumi.IntOutput { return v.TotalSize }).(pulumi.IntOutput)
 }
 
-type TableGroupArrayOutput struct{ *pulumi.OutputState }
+type TablegroupArrayOutput struct{ *pulumi.OutputState }
 
-func (TableGroupArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]*TableGroup)(nil)).Elem()
+func (TablegroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]*Tablegroup)(nil)).Elem()
 }
 
-func (o TableGroupArrayOutput) ToTableGroupArrayOutput() TableGroupArrayOutput {
+func (o TablegroupArrayOutput) ToTablegroupArrayOutput() TablegroupArrayOutput {
 	return o
 }
 
-func (o TableGroupArrayOutput) ToTableGroupArrayOutputWithContext(ctx context.Context) TableGroupArrayOutput {
+func (o TablegroupArrayOutput) ToTablegroupArrayOutputWithContext(ctx context.Context) TablegroupArrayOutput {
 	return o
 }
 
-func (o TableGroupArrayOutput) Index(i pulumi.IntInput) TableGroupOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *TableGroup {
-		return vs[0].([]*TableGroup)[vs[1].(int)]
-	}).(TableGroupOutput)
+func (o TablegroupArrayOutput) Index(i pulumi.IntInput) TablegroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Tablegroup {
+		return vs[0].([]*Tablegroup)[vs[1].(int)]
+	}).(TablegroupOutput)
 }
 
-type TableGroupMapOutput struct{ *pulumi.OutputState }
+type TablegroupMapOutput struct{ *pulumi.OutputState }
 
-func (TableGroupMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]*TableGroup)(nil)).Elem()
+func (TablegroupMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]*Tablegroup)(nil)).Elem()
 }
 
-func (o TableGroupMapOutput) ToTableGroupMapOutput() TableGroupMapOutput {
+func (o TablegroupMapOutput) ToTablegroupMapOutput() TablegroupMapOutput {
 	return o
 }
 
-func (o TableGroupMapOutput) ToTableGroupMapOutputWithContext(ctx context.Context) TableGroupMapOutput {
+func (o TablegroupMapOutput) ToTablegroupMapOutputWithContext(ctx context.Context) TablegroupMapOutput {
 	return o
 }
 
-func (o TableGroupMapOutput) MapIndex(k pulumi.StringInput) TableGroupOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *TableGroup {
-		return vs[0].(map[string]*TableGroup)[vs[1].(string)]
-	}).(TableGroupOutput)
+func (o TablegroupMapOutput) MapIndex(k pulumi.StringInput) TablegroupOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *Tablegroup {
+		return vs[0].(map[string]*Tablegroup)[vs[1].(string)]
+	}).(TablegroupOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*TableGroupInput)(nil)).Elem(), &TableGroup{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TableGroupArrayInput)(nil)).Elem(), TableGroupArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*TableGroupMapInput)(nil)).Elem(), TableGroupMap{})
-	pulumi.RegisterOutputType(TableGroupOutput{})
-	pulumi.RegisterOutputType(TableGroupArrayOutput{})
-	pulumi.RegisterOutputType(TableGroupMapOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TablegroupInput)(nil)).Elem(), &Tablegroup{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TablegroupArrayInput)(nil)).Elem(), TablegroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TablegroupMapInput)(nil)).Elem(), TablegroupMap{})
+	pulumi.RegisterOutputType(TablegroupOutput{})
+	pulumi.RegisterOutputType(TablegroupArrayOutput{})
+	pulumi.RegisterOutputType(TablegroupMapOutput{})
 }

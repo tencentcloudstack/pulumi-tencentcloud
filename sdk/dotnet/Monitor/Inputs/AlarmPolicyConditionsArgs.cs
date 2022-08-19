@@ -12,11 +12,18 @@ namespace Pulumi.Tencentcloud.Monitor.Inputs
 
     public sealed class AlarmPolicyConditionsArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The and or relation of indicator alarm rule.
+        /// </summary>
         [Input("isUnionRule")]
         public Input<int>? IsUnionRule { get; set; }
 
         [Input("rules")]
         private InputList<Inputs.AlarmPolicyConditionsRuleArgs>? _rules;
+
+        /// <summary>
+        /// A list of metric trigger condition.
+        /// </summary>
         public InputList<Inputs.AlarmPolicyConditionsRuleArgs> Rules
         {
             get => _rules ?? (_rules = new InputList<Inputs.AlarmPolicyConditionsRuleArgs>());

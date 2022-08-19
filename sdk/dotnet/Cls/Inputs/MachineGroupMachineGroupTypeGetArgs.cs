@@ -12,11 +12,18 @@ namespace Pulumi.Tencentcloud.Cls.Inputs
 
     public sealed class MachineGroupMachineGroupTypeGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
+        /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
 
         [Input("values", required: true)]
         private InputList<string>? _values;
+
+        /// <summary>
+        /// Machine description list.
+        /// </summary>
         public InputList<string> Values
         {
             get => _values ?? (_values = new InputList<string>());

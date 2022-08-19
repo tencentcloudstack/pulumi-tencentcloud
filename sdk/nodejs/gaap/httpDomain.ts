@@ -4,6 +4,40 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a forward domain of layer7 listener.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+ *     bandwidth: 10,
+ *     concurrent: 2,
+ *     accessRegion: "SouthChina",
+ *     realserverRegion: "NorthChina",
+ * });
+ * const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
+ *     protocol: "HTTP",
+ *     port: 80,
+ *     proxyId: fooProxy.id,
+ * });
+ * const fooHttpDomain = new tencentcloud.gaap.HttpDomain("fooHttpDomain", {
+ *     listenerId: fooLayer7Listener.id,
+ *     domain: "www.qq.com",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * GAAP http domain can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain tencentcloud_gaap_http_domain.foo listener-11112222+HTTP+www.qq.com
+ * ```
+ */
 export class HttpDomain extends pulumi.CustomResource {
     /**
      * Get an existing HttpDomain resource's state with the given name, ID, and optional extra
@@ -45,7 +79,7 @@ export class HttpDomain extends pulumi.CustomResource {
      */
     public readonly certificateId!: pulumi.Output<string | undefined>;
     /**
-     * ID of the client certificate, default value is `default`.
+     * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate, default value is `default`.
      *
      * @deprecated It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
      */
@@ -79,7 +113,7 @@ export class HttpDomain extends pulumi.CustomResource {
      */
     public readonly realserverCertificateDomain!: pulumi.Output<string>;
     /**
-     * CA certificate ID of the realserver.
+     * It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead. CA certificate ID of the realserver.
      *
      * @deprecated It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead.
      */
@@ -159,7 +193,7 @@ export interface HttpDomainState {
      */
     certificateId?: pulumi.Input<string>;
     /**
-     * ID of the client certificate, default value is `default`.
+     * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate, default value is `default`.
      *
      * @deprecated It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
      */
@@ -193,7 +227,7 @@ export interface HttpDomainState {
      */
     realserverCertificateDomain?: pulumi.Input<string>;
     /**
-     * CA certificate ID of the realserver.
+     * It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead. CA certificate ID of the realserver.
      *
      * @deprecated It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead.
      */
@@ -221,7 +255,7 @@ export interface HttpDomainArgs {
      */
     certificateId?: pulumi.Input<string>;
     /**
-     * ID of the client certificate, default value is `default`.
+     * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate, default value is `default`.
      *
      * @deprecated It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
      */
@@ -255,7 +289,7 @@ export interface HttpDomainArgs {
      */
     realserverCertificateDomain?: pulumi.Input<string>;
     /**
-     * CA certificate ID of the realserver.
+     * It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead. CA certificate ID of the realserver.
      *
      * @deprecated It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead.
      */

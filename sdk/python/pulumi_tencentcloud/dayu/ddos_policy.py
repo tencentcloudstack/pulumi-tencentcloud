@@ -361,7 +361,73 @@ class DdosPolicy(pulumi.CustomResource):
                  white_ips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a DdosPolicy resource with the given unique name, props, and options.
+        Use this resource to create dayu DDoS policy
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test_policy = tencentcloud.dayu.DdosPolicy("testPolicy",
+            black_ips=["1.1.1.1"],
+            drop_options=[tencentcloud.dayu.DdosPolicyDropOptionArgs(
+                bad_conn_threshold=100,
+                check_sync_conn=True,
+                conn_timeout=500,
+                d_conn_limit=100,
+                d_new_limit=100,
+                drop_abroad=True,
+                drop_icmp=True,
+                drop_other=True,
+                drop_tcp=True,
+                drop_udp=True,
+                icmp_mbps_limit=100,
+                null_conn_enable=True,
+                other_mbps_limit=100,
+                s_conn_limit=100,
+                s_new_limit=100,
+                syn_limit=100,
+                syn_rate=50,
+                tcp_mbps_limit=100,
+                udp_mbps_limit=100,
+            )],
+            packet_filters=[tencentcloud.dayu.DdosPolicyPacketFilterArgs(
+                action="drop",
+                d_end_port=1500,
+                d_start_port=1000,
+                depth=1000,
+                is_include=True,
+                match_begin="begin_l5",
+                match_type="pcre",
+                offset=500,
+                pkt_length_max=1400,
+                pkt_length_min=1000,
+                protocol="tcp",
+                s_end_port=2500,
+                s_start_port=2000,
+            )],
+            port_filters=[tencentcloud.dayu.DdosPolicyPortFilterArgs(
+                action="drop",
+                end_port=2500,
+                kind=1,
+                protocol="all",
+                start_port=2000,
+            )],
+            resource_type="bgpip",
+            watermark_filters=[tencentcloud.dayu.DdosPolicyWatermarkFilterArgs(
+                auto_remove=True,
+                offset=50,
+                open_switch=True,
+                tcp_port_lists=[
+                    "2000-3000",
+                    "3500-4000",
+                ],
+                udp_port_lists=["5000-6000"],
+            )],
+            white_ips=["2.2.2.2"])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] black_ips: Black IP list.
@@ -380,7 +446,73 @@ class DdosPolicy(pulumi.CustomResource):
                  args: DdosPolicyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a DdosPolicy resource with the given unique name, props, and options.
+        Use this resource to create dayu DDoS policy
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test_policy = tencentcloud.dayu.DdosPolicy("testPolicy",
+            black_ips=["1.1.1.1"],
+            drop_options=[tencentcloud.dayu.DdosPolicyDropOptionArgs(
+                bad_conn_threshold=100,
+                check_sync_conn=True,
+                conn_timeout=500,
+                d_conn_limit=100,
+                d_new_limit=100,
+                drop_abroad=True,
+                drop_icmp=True,
+                drop_other=True,
+                drop_tcp=True,
+                drop_udp=True,
+                icmp_mbps_limit=100,
+                null_conn_enable=True,
+                other_mbps_limit=100,
+                s_conn_limit=100,
+                s_new_limit=100,
+                syn_limit=100,
+                syn_rate=50,
+                tcp_mbps_limit=100,
+                udp_mbps_limit=100,
+            )],
+            packet_filters=[tencentcloud.dayu.DdosPolicyPacketFilterArgs(
+                action="drop",
+                d_end_port=1500,
+                d_start_port=1000,
+                depth=1000,
+                is_include=True,
+                match_begin="begin_l5",
+                match_type="pcre",
+                offset=500,
+                pkt_length_max=1400,
+                pkt_length_min=1000,
+                protocol="tcp",
+                s_end_port=2500,
+                s_start_port=2000,
+            )],
+            port_filters=[tencentcloud.dayu.DdosPolicyPortFilterArgs(
+                action="drop",
+                end_port=2500,
+                kind=1,
+                protocol="all",
+                start_port=2000,
+            )],
+            resource_type="bgpip",
+            watermark_filters=[tencentcloud.dayu.DdosPolicyWatermarkFilterArgs(
+                auto_remove=True,
+                offset=50,
+                open_switch=True,
+                tcp_port_lists=[
+                    "2000-3000",
+                    "3500-4000",
+                ],
+                udp_port_lists=["5000-6000"],
+            )],
+            white_ips=["2.2.2.2"])
+        ```
+
         :param str resource_name: The name of the resource.
         :param DdosPolicyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

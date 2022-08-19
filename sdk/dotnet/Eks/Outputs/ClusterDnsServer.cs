@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Eks.Outputs
     [OutputType]
     public sealed class ClusterDnsServer
     {
+        /// <summary>
+        /// DNS Server domain. Empty indicates all domain.
+        /// </summary>
         public readonly string? Domain;
+        /// <summary>
+        /// List of DNS Server IP address, pattern: "ip[:port]".
+        /// </summary>
         public readonly ImmutableArray<string> Servers;
 
         [OutputConstructor]

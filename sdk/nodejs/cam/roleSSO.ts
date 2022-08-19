@@ -4,9 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-export class RoleSSO extends pulumi.CustomResource {
+/**
+ * Provides a resource to create a CAM-ROLE-SSO (Only support OIDC).
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Cam.RoleSso("foo", {
+ *     clientIds: ["..."],
+ *     description: "this is a description",
+ *     identityKey: "...",
+ *     identityUrl: "https://login.microsoftonline.com/.../v2.0",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CAM-ROLE-SSO can be imported using the `name`, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
+ * ```
+ */
+export class RoleSso extends pulumi.CustomResource {
     /**
-     * Get an existing RoleSSO resource's state with the given name, ID, and optional extra
+     * Get an existing RoleSso resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -14,22 +39,22 @@ export class RoleSSO extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: RoleSSOState, opts?: pulumi.CustomResourceOptions): RoleSSO {
-        return new RoleSSO(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: RoleSsoState, opts?: pulumi.CustomResourceOptions): RoleSso {
+        return new RoleSso(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:Cam/roleSSO:RoleSSO';
+    public static readonly __pulumiType = 'tencentcloud:Cam/roleSso:RoleSso';
 
     /**
-     * Returns true if the given object is an instance of RoleSSO.  This is designed to work even
+     * Returns true if the given object is an instance of RoleSso.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is RoleSSO {
+    public static isInstance(obj: any): obj is RoleSso {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === RoleSSO.__pulumiType;
+        return obj['__pulumiType'] === RoleSso.__pulumiType;
     }
 
     /**
@@ -54,25 +79,25 @@ export class RoleSSO extends pulumi.CustomResource {
     public readonly name!: pulumi.Output<string>;
 
     /**
-     * Create a RoleSSO resource with the given unique name, arguments, and options.
+     * Create a RoleSso resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: RoleSSOArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: RoleSSOArgs | RoleSSOState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: RoleSsoArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: RoleSsoArgs | RoleSsoState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as RoleSSOState | undefined;
+            const state = argsOrState as RoleSsoState | undefined;
             resourceInputs["clientIds"] = state ? state.clientIds : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["identityKey"] = state ? state.identityKey : undefined;
             resourceInputs["identityUrl"] = state ? state.identityUrl : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
         } else {
-            const args = argsOrState as RoleSSOArgs | undefined;
+            const args = argsOrState as RoleSsoArgs | undefined;
             if ((!args || args.clientIds === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'clientIds'");
             }
@@ -89,14 +114,14 @@ export class RoleSSO extends pulumi.CustomResource {
             resourceInputs["name"] = args ? args.name : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(RoleSSO.__pulumiType, name, resourceInputs, opts);
+        super(RoleSso.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering RoleSSO resources.
+ * Input properties used for looking up and filtering RoleSso resources.
  */
-export interface RoleSSOState {
+export interface RoleSsoState {
     /**
      * Client ids.
      */
@@ -120,9 +145,9 @@ export interface RoleSSOState {
 }
 
 /**
- * The set of arguments for constructing a RoleSSO resource.
+ * The set of arguments for constructing a RoleSso resource.
  */
-export interface RoleSSOArgs {
+export interface RoleSsoArgs {
     /**
      * Client ids.
      */

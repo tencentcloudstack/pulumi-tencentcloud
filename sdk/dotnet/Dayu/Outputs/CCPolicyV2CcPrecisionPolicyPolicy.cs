@@ -11,15 +11,27 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
 {
 
     [OutputType]
-    public sealed class CCPolicyV2CcPrecisionPolicyPolicy
+    public sealed class CcPolicyV2CcPrecisionPolicyPolicy
     {
+        /// <summary>
+        /// Configuration item types, currently only support value.
+        /// </summary>
         public readonly string FieldName;
+        /// <summary>
+        /// Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.
+        /// </summary>
         public readonly string FieldType;
+        /// <summary>
+        /// Configure the value.
+        /// </summary>
         public readonly string Value;
+        /// <summary>
+        /// Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.
+        /// </summary>
         public readonly string ValueOperator;
 
         [OutputConstructor]
-        private CCPolicyV2CcPrecisionPolicyPolicy(
+        private CcPolicyV2CcPrecisionPolicyPolicy(
             string fieldName,
 
             string fieldType,

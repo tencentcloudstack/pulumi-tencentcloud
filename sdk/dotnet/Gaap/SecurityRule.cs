@@ -9,6 +9,51 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Gaap
 {
+    /// <summary>
+    /// Provides a resource to create a security policy rule.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
+    ///         {
+    ///             Bandwidth = 10,
+    ///             Concurrent = 2,
+    ///             AccessRegion = "SouthChina",
+    ///             RealserverRegion = "NorthChina",
+    ///         });
+    ///         var fooSecurityPolicy = new Tencentcloud.Gaap.SecurityPolicy("fooSecurityPolicy", new Tencentcloud.Gaap.SecurityPolicyArgs
+    ///         {
+    ///             ProxyId = fooProxy.Id,
+    ///             Action = "ACCEPT",
+    ///         });
+    ///         var fooSecurityRule = new Tencentcloud.Gaap.SecurityRule("fooSecurityRule", new Tencentcloud.Gaap.SecurityRuleArgs
+    ///         {
+    ///             PolicyId = fooSecurityPolicy.Id,
+    ///             CidrIp = "1.1.1.1",
+    ///             Action = "ACCEPT",
+    ///             Protocol = "TCP",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// GAAP security rule can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Gaap/securityRule:SecurityRule tencentcloud_gaap_security_rule.foo sr-xxxxxxxx
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/securityRule:SecurityRule")]
     public partial class SecurityRule : Pulumi.CustomResource
     {

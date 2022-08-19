@@ -9,6 +9,43 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cdh
 {
+    /// <summary>
+    /// Provides a resource to manage CDH instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///         var foo = new Tencentcloud.Cdh.Instance("foo", new Tencentcloud.Cdh.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = availabilityZone,
+    ///             HostType = "HC20",
+    ///             ChargeType = "PREPAID",
+    ///             PrepaidPeriod = 1,
+    ///             HostName = "test",
+    ///             PrepaidRenewFlag = "NOTIFY_AND_MANUAL_RENEW",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CDH instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cdh/instance:Instance foo host-d6s7i5q4
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cdh/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
@@ -67,18 +104,13 @@ namespace Pulumi.Tencentcloud.Cdh
         public Output<string?> HostType { get; private set; } = null!;
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-        /// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         /// </summary>
         [Output("prepaidPeriod")]
         public Output<int?> PrepaidPeriod { get; private set; } = null!;
 
         /// <summary>
-        /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-        /// `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-        /// neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-        /// specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-        /// balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Output("prepaidRenewFlag")]
         public Output<string> PrepaidRenewFlag { get; private set; } = null!;
@@ -160,18 +192,13 @@ namespace Pulumi.Tencentcloud.Cdh
         public Input<string>? HostType { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-        /// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
 
         /// <summary>
-        /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-        /// `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-        /// neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-        /// specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-        /// balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Input("prepaidRenewFlag")]
         public Input<string>? PrepaidRenewFlag { get; set; }
@@ -256,18 +283,13 @@ namespace Pulumi.Tencentcloud.Cdh
         public Input<string>? HostType { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-        /// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
 
         /// <summary>
-        /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-        /// `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-        /// neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-        /// specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-        /// balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
+        /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when charge_type is set to `PREPAID`.
         /// </summary>
         [Input("prepaidRenewFlag")]
         public Input<string>? PrepaidRenewFlag { get; set; }

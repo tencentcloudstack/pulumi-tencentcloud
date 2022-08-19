@@ -9,19 +9,46 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.As
 {
+    /// <summary>
+    /// Provides a resource for an AS (Auto scaling) lifecycle hook.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var lifecycleHook = new Tencentcloud.As.LifecycleHook("lifecycleHook", new Tencentcloud.As.LifecycleHookArgs
+    ///         {
+    ///             DefaultResult = "CONTINUE",
+    ///             HeartbeatTimeout = 500,
+    ///             LifecycleHookName = "tf-as-lifecycle-hook",
+    ///             LifecycleTransition = "INSTANCE_LAUNCHING",
+    ///             NotificationMetadata = "tf test",
+    ///             NotificationQueueName = "lifcyclehook",
+    ///             NotificationTargetType = "CMQ_QUEUE",
+    ///             ScalingGroupId = "sg-12af45",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:As/lifecycleHook:LifecycleHook")]
     public partial class LifecycleHook : Pulumi.CustomResource
     {
         /// <summary>
-        /// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-        /// Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+        /// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
         /// </summary>
         [Output("defaultResult")]
         public Output<string?> DefaultResult { get; private set; } = null!;
 
         /// <summary>
-        /// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-        /// (30~7200). and default value is `300`.
+        /// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
         /// </summary>
         [Output("heartbeatTimeout")]
         public Output<int?> HeartbeatTimeout { get; private set; } = null!;
@@ -33,8 +60,7 @@ namespace Pulumi.Tencentcloud.As
         public Output<string> LifecycleHookName { get; private set; } = null!;
 
         /// <summary>
-        /// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-        /// `INSTANCE_TERMINATING`.
+        /// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
         /// </summary>
         [Output("lifecycleTransition")]
         public Output<string> LifecycleTransition { get; private set; } = null!;
@@ -116,15 +142,13 @@ namespace Pulumi.Tencentcloud.As
     public sealed class LifecycleHookArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-        /// Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+        /// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
         /// </summary>
         [Input("defaultResult")]
         public Input<string>? DefaultResult { get; set; }
 
         /// <summary>
-        /// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-        /// (30~7200). and default value is `300`.
+        /// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
         /// </summary>
         [Input("heartbeatTimeout")]
         public Input<int>? HeartbeatTimeout { get; set; }
@@ -136,8 +160,7 @@ namespace Pulumi.Tencentcloud.As
         public Input<string> LifecycleHookName { get; set; } = null!;
 
         /// <summary>
-        /// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-        /// `INSTANCE_TERMINATING`.
+        /// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
         /// </summary>
         [Input("lifecycleTransition", required: true)]
         public Input<string> LifecycleTransition { get; set; } = null!;
@@ -180,15 +203,13 @@ namespace Pulumi.Tencentcloud.As
     public sealed class LifecycleHookState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-        /// Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+        /// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
         /// </summary>
         [Input("defaultResult")]
         public Input<string>? DefaultResult { get; set; }
 
         /// <summary>
-        /// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-        /// (30~7200). and default value is `300`.
+        /// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
         /// </summary>
         [Input("heartbeatTimeout")]
         public Input<int>? HeartbeatTimeout { get; set; }
@@ -200,8 +221,7 @@ namespace Pulumi.Tencentcloud.As
         public Input<string>? LifecycleHookName { get; set; }
 
         /// <summary>
-        /// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-        /// `INSTANCE_TERMINATING`.
+        /// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
         /// </summary>
         [Input("lifecycleTransition")]
         public Input<string>? LifecycleTransition { get; set; }

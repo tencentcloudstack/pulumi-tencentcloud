@@ -12,12 +12,21 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
     public sealed class AdaptiveDynamicStreamingTemplateStreamInfoGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Audio parameter information.
+        /// </summary>
         [Input("audio", required: true)]
         public Input<Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioGetArgs> Audio { get; set; } = null!;
 
+        /// <summary>
+        /// Whether to remove audio stream. Valid values: `false`: no, `true`: yes. `false` by default.
+        /// </summary>
         [Input("removeAudio")]
         public Input<bool>? RemoveAudio { get; set; }
 
+        /// <summary>
+        /// Video parameter information.
+        /// </summary>
         [Input("video", required: true)]
         public Input<Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoGetArgs> Video { get; set; } = null!;
 

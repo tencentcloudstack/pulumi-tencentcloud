@@ -11,7 +11,9 @@ import (
 )
 
 type GroupRuleAddressTemplate struct {
-	GroupId    *string `pulumi:"groupId"`
+	// Address template group ID, conflicts with `templateId`.
+	GroupId *string `pulumi:"groupId"`
+	// Address template ID, conflicts with `groupId`.
 	TemplateId *string `pulumi:"templateId"`
 }
 
@@ -27,7 +29,9 @@ type GroupRuleAddressTemplateInput interface {
 }
 
 type GroupRuleAddressTemplateArgs struct {
-	GroupId    pulumi.StringPtrInput `pulumi:"groupId"`
+	// Address template group ID, conflicts with `templateId`.
+	GroupId pulumi.StringPtrInput `pulumi:"groupId"`
+	// Address template ID, conflicts with `groupId`.
 	TemplateId pulumi.StringPtrInput `pulumi:"templateId"`
 }
 
@@ -108,10 +112,12 @@ func (o GroupRuleAddressTemplateOutput) ToGroupRuleAddressTemplatePtrOutputWithC
 	}).(GroupRuleAddressTemplatePtrOutput)
 }
 
+// Address template group ID, conflicts with `templateId`.
 func (o GroupRuleAddressTemplateOutput) GroupId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleAddressTemplate) *string { return v.GroupId }).(pulumi.StringPtrOutput)
 }
 
+// Address template ID, conflicts with `groupId`.
 func (o GroupRuleAddressTemplateOutput) TemplateId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleAddressTemplate) *string { return v.TemplateId }).(pulumi.StringPtrOutput)
 }
@@ -140,6 +146,7 @@ func (o GroupRuleAddressTemplatePtrOutput) Elem() GroupRuleAddressTemplateOutput
 	}).(GroupRuleAddressTemplateOutput)
 }
 
+// Address template group ID, conflicts with `templateId`.
 func (o GroupRuleAddressTemplatePtrOutput) GroupId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GroupRuleAddressTemplate) *string {
 		if v == nil {
@@ -149,6 +156,7 @@ func (o GroupRuleAddressTemplatePtrOutput) GroupId() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Address template ID, conflicts with `groupId`.
 func (o GroupRuleAddressTemplatePtrOutput) TemplateId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GroupRuleAddressTemplate) *string {
 		if v == nil {
@@ -159,7 +167,9 @@ func (o GroupRuleAddressTemplatePtrOutput) TemplateId() pulumi.StringPtrOutput {
 }
 
 type GroupRuleProtocolTemplate struct {
-	GroupId    *string `pulumi:"groupId"`
+	// Address template group ID, conflicts with `templateId`.
+	GroupId *string `pulumi:"groupId"`
+	// Address template ID, conflicts with `groupId`.
 	TemplateId *string `pulumi:"templateId"`
 }
 
@@ -175,7 +185,9 @@ type GroupRuleProtocolTemplateInput interface {
 }
 
 type GroupRuleProtocolTemplateArgs struct {
-	GroupId    pulumi.StringPtrInput `pulumi:"groupId"`
+	// Address template group ID, conflicts with `templateId`.
+	GroupId pulumi.StringPtrInput `pulumi:"groupId"`
+	// Address template ID, conflicts with `groupId`.
 	TemplateId pulumi.StringPtrInput `pulumi:"templateId"`
 }
 
@@ -256,10 +268,12 @@ func (o GroupRuleProtocolTemplateOutput) ToGroupRuleProtocolTemplatePtrOutputWit
 	}).(GroupRuleProtocolTemplatePtrOutput)
 }
 
+// Address template group ID, conflicts with `templateId`.
 func (o GroupRuleProtocolTemplateOutput) GroupId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleProtocolTemplate) *string { return v.GroupId }).(pulumi.StringPtrOutput)
 }
 
+// Address template ID, conflicts with `groupId`.
 func (o GroupRuleProtocolTemplateOutput) TemplateId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleProtocolTemplate) *string { return v.TemplateId }).(pulumi.StringPtrOutput)
 }
@@ -288,6 +302,7 @@ func (o GroupRuleProtocolTemplatePtrOutput) Elem() GroupRuleProtocolTemplateOutp
 	}).(GroupRuleProtocolTemplateOutput)
 }
 
+// Address template group ID, conflicts with `templateId`.
 func (o GroupRuleProtocolTemplatePtrOutput) GroupId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GroupRuleProtocolTemplate) *string {
 		if v == nil {
@@ -297,6 +312,7 @@ func (o GroupRuleProtocolTemplatePtrOutput) GroupId() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Address template ID, conflicts with `groupId`.
 func (o GroupRuleProtocolTemplatePtrOutput) TemplateId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GroupRuleProtocolTemplate) *string {
 		if v == nil {
@@ -306,146 +322,173 @@ func (o GroupRuleProtocolTemplatePtrOutput) TemplateId() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
-type GroupsSecurityGroup struct {
-	BeAssociateCount int                    `pulumi:"beAssociateCount"`
-	CreateTime       string                 `pulumi:"createTime"`
-	Description      string                 `pulumi:"description"`
-	Egresses         []string               `pulumi:"egresses"`
-	Ingresses        []string               `pulumi:"ingresses"`
-	Name             string                 `pulumi:"name"`
-	ProjectId        int                    `pulumi:"projectId"`
-	SecurityGroupId  string                 `pulumi:"securityGroupId"`
-	Tags             map[string]interface{} `pulumi:"tags"`
+type GetGroupsSecurityGroup struct {
+	// Number of security group binding resources.
+	BeAssociateCount int `pulumi:"beAssociateCount"`
+	// Creation time of security group.
+	CreateTime string `pulumi:"createTime"`
+	// Description of the security group.
+	Description string `pulumi:"description"`
+	// Egress rules set. For items like `[action]#[cidrIp]#[port]#[protocol]`, it means a regular rule; for items like `sg-XXXX`, it means a nested security group.
+	Egresses []string `pulumi:"egresses"`
+	// Ingress rules set. For items like `[action]#[cidrIp]#[port]#[protocol]`, it means a regular rule; for items like `sg-XXXX`, it means a nested security group.
+	Ingresses []string `pulumi:"ingresses"`
+	// Name of the security group to be queried. Conflict with `securityGroupId`.
+	Name string `pulumi:"name"`
+	// Project ID of the security group to be queried. Conflict with `securityGroupId`.
+	ProjectId int `pulumi:"projectId"`
+	// ID of the security group to be queried. Conflict with `name` and `projectId`.
+	SecurityGroupId string `pulumi:"securityGroupId"`
+	// Tags of the security group to be queried. Conflict with `securityGroupId`.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
-// GroupsSecurityGroupInput is an input type that accepts GroupsSecurityGroupArgs and GroupsSecurityGroupOutput values.
-// You can construct a concrete instance of `GroupsSecurityGroupInput` via:
+// GetGroupsSecurityGroupInput is an input type that accepts GetGroupsSecurityGroupArgs and GetGroupsSecurityGroupOutput values.
+// You can construct a concrete instance of `GetGroupsSecurityGroupInput` via:
 //
-//          GroupsSecurityGroupArgs{...}
-type GroupsSecurityGroupInput interface {
+//          GetGroupsSecurityGroupArgs{...}
+type GetGroupsSecurityGroupInput interface {
 	pulumi.Input
 
-	ToGroupsSecurityGroupOutput() GroupsSecurityGroupOutput
-	ToGroupsSecurityGroupOutputWithContext(context.Context) GroupsSecurityGroupOutput
+	ToGetGroupsSecurityGroupOutput() GetGroupsSecurityGroupOutput
+	ToGetGroupsSecurityGroupOutputWithContext(context.Context) GetGroupsSecurityGroupOutput
 }
 
-type GroupsSecurityGroupArgs struct {
-	BeAssociateCount pulumi.IntInput         `pulumi:"beAssociateCount"`
-	CreateTime       pulumi.StringInput      `pulumi:"createTime"`
-	Description      pulumi.StringInput      `pulumi:"description"`
-	Egresses         pulumi.StringArrayInput `pulumi:"egresses"`
-	Ingresses        pulumi.StringArrayInput `pulumi:"ingresses"`
-	Name             pulumi.StringInput      `pulumi:"name"`
-	ProjectId        pulumi.IntInput         `pulumi:"projectId"`
-	SecurityGroupId  pulumi.StringInput      `pulumi:"securityGroupId"`
-	Tags             pulumi.MapInput         `pulumi:"tags"`
+type GetGroupsSecurityGroupArgs struct {
+	// Number of security group binding resources.
+	BeAssociateCount pulumi.IntInput `pulumi:"beAssociateCount"`
+	// Creation time of security group.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Description of the security group.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Egress rules set. For items like `[action]#[cidrIp]#[port]#[protocol]`, it means a regular rule; for items like `sg-XXXX`, it means a nested security group.
+	Egresses pulumi.StringArrayInput `pulumi:"egresses"`
+	// Ingress rules set. For items like `[action]#[cidrIp]#[port]#[protocol]`, it means a regular rule; for items like `sg-XXXX`, it means a nested security group.
+	Ingresses pulumi.StringArrayInput `pulumi:"ingresses"`
+	// Name of the security group to be queried. Conflict with `securityGroupId`.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Project ID of the security group to be queried. Conflict with `securityGroupId`.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// ID of the security group to be queried. Conflict with `name` and `projectId`.
+	SecurityGroupId pulumi.StringInput `pulumi:"securityGroupId"`
+	// Tags of the security group to be queried. Conflict with `securityGroupId`.
+	Tags pulumi.MapInput `pulumi:"tags"`
 }
 
-func (GroupsSecurityGroupArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GroupsSecurityGroup)(nil)).Elem()
+func (GetGroupsSecurityGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsSecurityGroup)(nil)).Elem()
 }
 
-func (i GroupsSecurityGroupArgs) ToGroupsSecurityGroupOutput() GroupsSecurityGroupOutput {
-	return i.ToGroupsSecurityGroupOutputWithContext(context.Background())
+func (i GetGroupsSecurityGroupArgs) ToGetGroupsSecurityGroupOutput() GetGroupsSecurityGroupOutput {
+	return i.ToGetGroupsSecurityGroupOutputWithContext(context.Background())
 }
 
-func (i GroupsSecurityGroupArgs) ToGroupsSecurityGroupOutputWithContext(ctx context.Context) GroupsSecurityGroupOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GroupsSecurityGroupOutput)
+func (i GetGroupsSecurityGroupArgs) ToGetGroupsSecurityGroupOutputWithContext(ctx context.Context) GetGroupsSecurityGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsSecurityGroupOutput)
 }
 
-// GroupsSecurityGroupArrayInput is an input type that accepts GroupsSecurityGroupArray and GroupsSecurityGroupArrayOutput values.
-// You can construct a concrete instance of `GroupsSecurityGroupArrayInput` via:
+// GetGroupsSecurityGroupArrayInput is an input type that accepts GetGroupsSecurityGroupArray and GetGroupsSecurityGroupArrayOutput values.
+// You can construct a concrete instance of `GetGroupsSecurityGroupArrayInput` via:
 //
-//          GroupsSecurityGroupArray{ GroupsSecurityGroupArgs{...} }
-type GroupsSecurityGroupArrayInput interface {
+//          GetGroupsSecurityGroupArray{ GetGroupsSecurityGroupArgs{...} }
+type GetGroupsSecurityGroupArrayInput interface {
 	pulumi.Input
 
-	ToGroupsSecurityGroupArrayOutput() GroupsSecurityGroupArrayOutput
-	ToGroupsSecurityGroupArrayOutputWithContext(context.Context) GroupsSecurityGroupArrayOutput
+	ToGetGroupsSecurityGroupArrayOutput() GetGroupsSecurityGroupArrayOutput
+	ToGetGroupsSecurityGroupArrayOutputWithContext(context.Context) GetGroupsSecurityGroupArrayOutput
 }
 
-type GroupsSecurityGroupArray []GroupsSecurityGroupInput
+type GetGroupsSecurityGroupArray []GetGroupsSecurityGroupInput
 
-func (GroupsSecurityGroupArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GroupsSecurityGroup)(nil)).Elem()
+func (GetGroupsSecurityGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsSecurityGroup)(nil)).Elem()
 }
 
-func (i GroupsSecurityGroupArray) ToGroupsSecurityGroupArrayOutput() GroupsSecurityGroupArrayOutput {
-	return i.ToGroupsSecurityGroupArrayOutputWithContext(context.Background())
+func (i GetGroupsSecurityGroupArray) ToGetGroupsSecurityGroupArrayOutput() GetGroupsSecurityGroupArrayOutput {
+	return i.ToGetGroupsSecurityGroupArrayOutputWithContext(context.Background())
 }
 
-func (i GroupsSecurityGroupArray) ToGroupsSecurityGroupArrayOutputWithContext(ctx context.Context) GroupsSecurityGroupArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GroupsSecurityGroupArrayOutput)
+func (i GetGroupsSecurityGroupArray) ToGetGroupsSecurityGroupArrayOutputWithContext(ctx context.Context) GetGroupsSecurityGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsSecurityGroupArrayOutput)
 }
 
-type GroupsSecurityGroupOutput struct{ *pulumi.OutputState }
+type GetGroupsSecurityGroupOutput struct{ *pulumi.OutputState }
 
-func (GroupsSecurityGroupOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GroupsSecurityGroup)(nil)).Elem()
+func (GetGroupsSecurityGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsSecurityGroup)(nil)).Elem()
 }
 
-func (o GroupsSecurityGroupOutput) ToGroupsSecurityGroupOutput() GroupsSecurityGroupOutput {
+func (o GetGroupsSecurityGroupOutput) ToGetGroupsSecurityGroupOutput() GetGroupsSecurityGroupOutput {
 	return o
 }
 
-func (o GroupsSecurityGroupOutput) ToGroupsSecurityGroupOutputWithContext(ctx context.Context) GroupsSecurityGroupOutput {
+func (o GetGroupsSecurityGroupOutput) ToGetGroupsSecurityGroupOutputWithContext(ctx context.Context) GetGroupsSecurityGroupOutput {
 	return o
 }
 
-func (o GroupsSecurityGroupOutput) BeAssociateCount() pulumi.IntOutput {
-	return o.ApplyT(func(v GroupsSecurityGroup) int { return v.BeAssociateCount }).(pulumi.IntOutput)
+// Number of security group binding resources.
+func (o GetGroupsSecurityGroupOutput) BeAssociateCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsSecurityGroup) int { return v.BeAssociateCount }).(pulumi.IntOutput)
 }
 
-func (o GroupsSecurityGroupOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v GroupsSecurityGroup) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of security group.
+func (o GetGroupsSecurityGroupOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsSecurityGroup) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o GroupsSecurityGroupOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v GroupsSecurityGroup) string { return v.Description }).(pulumi.StringOutput)
+// Description of the security group.
+func (o GetGroupsSecurityGroupOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsSecurityGroup) string { return v.Description }).(pulumi.StringOutput)
 }
 
-func (o GroupsSecurityGroupOutput) Egresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v GroupsSecurityGroup) []string { return v.Egresses }).(pulumi.StringArrayOutput)
+// Egress rules set. For items like `[action]#[cidrIp]#[port]#[protocol]`, it means a regular rule; for items like `sg-XXXX`, it means a nested security group.
+func (o GetGroupsSecurityGroupOutput) Egresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGroupsSecurityGroup) []string { return v.Egresses }).(pulumi.StringArrayOutput)
 }
 
-func (o GroupsSecurityGroupOutput) Ingresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v GroupsSecurityGroup) []string { return v.Ingresses }).(pulumi.StringArrayOutput)
+// Ingress rules set. For items like `[action]#[cidrIp]#[port]#[protocol]`, it means a regular rule; for items like `sg-XXXX`, it means a nested security group.
+func (o GetGroupsSecurityGroupOutput) Ingresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetGroupsSecurityGroup) []string { return v.Ingresses }).(pulumi.StringArrayOutput)
 }
 
-func (o GroupsSecurityGroupOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v GroupsSecurityGroup) string { return v.Name }).(pulumi.StringOutput)
+// Name of the security group to be queried. Conflict with `securityGroupId`.
+func (o GetGroupsSecurityGroupOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsSecurityGroup) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o GroupsSecurityGroupOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v GroupsSecurityGroup) int { return v.ProjectId }).(pulumi.IntOutput)
+// Project ID of the security group to be queried. Conflict with `securityGroupId`.
+func (o GetGroupsSecurityGroupOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetGroupsSecurityGroup) int { return v.ProjectId }).(pulumi.IntOutput)
 }
 
-func (o GroupsSecurityGroupOutput) SecurityGroupId() pulumi.StringOutput {
-	return o.ApplyT(func(v GroupsSecurityGroup) string { return v.SecurityGroupId }).(pulumi.StringOutput)
+// ID of the security group to be queried. Conflict with `name` and `projectId`.
+func (o GetGroupsSecurityGroupOutput) SecurityGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsSecurityGroup) string { return v.SecurityGroupId }).(pulumi.StringOutput)
 }
 
-func (o GroupsSecurityGroupOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v GroupsSecurityGroup) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+// Tags of the security group to be queried. Conflict with `securityGroupId`.
+func (o GetGroupsSecurityGroupOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetGroupsSecurityGroup) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
 }
 
-type GroupsSecurityGroupArrayOutput struct{ *pulumi.OutputState }
+type GetGroupsSecurityGroupArrayOutput struct{ *pulumi.OutputState }
 
-func (GroupsSecurityGroupArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GroupsSecurityGroup)(nil)).Elem()
+func (GetGroupsSecurityGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsSecurityGroup)(nil)).Elem()
 }
 
-func (o GroupsSecurityGroupArrayOutput) ToGroupsSecurityGroupArrayOutput() GroupsSecurityGroupArrayOutput {
+func (o GetGroupsSecurityGroupArrayOutput) ToGetGroupsSecurityGroupArrayOutput() GetGroupsSecurityGroupArrayOutput {
 	return o
 }
 
-func (o GroupsSecurityGroupArrayOutput) ToGroupsSecurityGroupArrayOutputWithContext(ctx context.Context) GroupsSecurityGroupArrayOutput {
+func (o GetGroupsSecurityGroupArrayOutput) ToGetGroupsSecurityGroupArrayOutputWithContext(ctx context.Context) GetGroupsSecurityGroupArrayOutput {
 	return o
 }
 
-func (o GroupsSecurityGroupArrayOutput) Index(i pulumi.IntInput) GroupsSecurityGroupOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GroupsSecurityGroup {
-		return vs[0].([]GroupsSecurityGroup)[vs[1].(int)]
-	}).(GroupsSecurityGroupOutput)
+func (o GetGroupsSecurityGroupArrayOutput) Index(i pulumi.IntInput) GetGroupsSecurityGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsSecurityGroup {
+		return vs[0].([]GetGroupsSecurityGroup)[vs[1].(int)]
+	}).(GetGroupsSecurityGroupOutput)
 }
 
 func init() {
@@ -453,12 +496,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GroupRuleAddressTemplatePtrInput)(nil)).Elem(), GroupRuleAddressTemplateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GroupRuleProtocolTemplateInput)(nil)).Elem(), GroupRuleProtocolTemplateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GroupRuleProtocolTemplatePtrInput)(nil)).Elem(), GroupRuleProtocolTemplateArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GroupsSecurityGroupInput)(nil)).Elem(), GroupsSecurityGroupArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GroupsSecurityGroupArrayInput)(nil)).Elem(), GroupsSecurityGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsSecurityGroupInput)(nil)).Elem(), GetGroupsSecurityGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsSecurityGroupArrayInput)(nil)).Elem(), GetGroupsSecurityGroupArray{})
 	pulumi.RegisterOutputType(GroupRuleAddressTemplateOutput{})
 	pulumi.RegisterOutputType(GroupRuleAddressTemplatePtrOutput{})
 	pulumi.RegisterOutputType(GroupRuleProtocolTemplateOutput{})
 	pulumi.RegisterOutputType(GroupRuleProtocolTemplatePtrOutput{})
-	pulumi.RegisterOutputType(GroupsSecurityGroupOutput{})
-	pulumi.RegisterOutputType(GroupsSecurityGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetGroupsSecurityGroupOutput{})
+	pulumi.RegisterOutputType(GetGroupsSecurityGroupArrayOutput{})
 }

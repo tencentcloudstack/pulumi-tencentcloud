@@ -31,12 +31,9 @@ class Layer4ListenerArgs:
         :param pulumi.Input[int] port: Port of the layer4 listener.
         :param pulumi.Input[str] protocol: Protocol of the layer4 listener. Valid value: `TCP` and `UDP`.
         :param pulumi.Input[str] proxy_id: ID of the GAAP proxy.
-        :param pulumi.Input[str] realserver_type: Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-               `scheduler` is specified as `wrr`, the item can only be set to `IP`.
-        :param pulumi.Input[int] client_ip_method: The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-               listeners of `TCP` protocol.
-        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-               `TCP` protocol and require less than `interval`.
+        :param pulumi.Input[str] realserver_type: Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        :param pulumi.Input[int] client_ip_method: The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
+        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
         :param pulumi.Input[bool] health_check: Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
         :param pulumi.Input[int] interval: Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
         :param pulumi.Input[str] name: Name of the layer4 listener, the maximum length is 30.
@@ -102,8 +99,7 @@ class Layer4ListenerArgs:
     @pulumi.getter(name="realserverType")
     def realserver_type(self) -> pulumi.Input[str]:
         """
-        Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-        `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
         """
         return pulumi.get(self, "realserver_type")
 
@@ -115,8 +111,7 @@ class Layer4ListenerArgs:
     @pulumi.getter(name="clientIpMethod")
     def client_ip_method(self) -> Optional[pulumi.Input[int]]:
         """
-        The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-        listeners of `TCP` protocol.
+        The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
         """
         return pulumi.get(self, "client_ip_method")
 
@@ -128,8 +123,7 @@ class Layer4ListenerArgs:
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> Optional[pulumi.Input[int]]:
         """
-        Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-        `TCP` protocol and require less than `interval`.
+        Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
         """
         return pulumi.get(self, "connect_timeout")
 
@@ -216,10 +210,8 @@ class _Layer4ListenerState:
                  status: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering Layer4Listener resources.
-        :param pulumi.Input[int] client_ip_method: The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-               listeners of `TCP` protocol.
-        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-               `TCP` protocol and require less than `interval`.
+        :param pulumi.Input[int] client_ip_method: The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
+        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
         :param pulumi.Input[str] create_time: Creation time of the layer4 listener.
         :param pulumi.Input[bool] health_check: Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
         :param pulumi.Input[int] interval: Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
@@ -228,8 +220,7 @@ class _Layer4ListenerState:
         :param pulumi.Input[str] protocol: Protocol of the layer4 listener. Valid value: `TCP` and `UDP`.
         :param pulumi.Input[str] proxy_id: ID of the GAAP proxy.
         :param pulumi.Input[Sequence[pulumi.Input['Layer4ListenerRealserverBindSetArgs']]] realserver_bind_sets: An information list of GAAP realserver.
-        :param pulumi.Input[str] realserver_type: Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-               `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        :param pulumi.Input[str] realserver_type: Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
         :param pulumi.Input[str] scheduler: Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
         :param pulumi.Input[int] status: Status of the layer4 listener.
         """
@@ -264,8 +255,7 @@ class _Layer4ListenerState:
     @pulumi.getter(name="clientIpMethod")
     def client_ip_method(self) -> Optional[pulumi.Input[int]]:
         """
-        The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-        listeners of `TCP` protocol.
+        The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
         """
         return pulumi.get(self, "client_ip_method")
 
@@ -277,8 +267,7 @@ class _Layer4ListenerState:
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> Optional[pulumi.Input[int]]:
         """
-        Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-        `TCP` protocol and require less than `interval`.
+        Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
         """
         return pulumi.get(self, "connect_timeout")
 
@@ -386,8 +375,7 @@ class _Layer4ListenerState:
     @pulumi.getter(name="realserverType")
     def realserver_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-        `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
         """
         return pulumi.get(self, "realserver_type")
 
@@ -438,13 +426,53 @@ class Layer4Listener(pulumi.CustomResource):
                  scheduler: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Layer4Listener resource with the given unique name, props, and options.
+        Provides a resource to create a layer4 listener of GAAP.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+            bandwidth=10,
+            concurrent=2,
+            access_region="SouthChina",
+            realserver_region="NorthChina")
+        foo_realserver = tencentcloud.gaap.Realserver("fooRealserver", ip="1.1.1.1")
+        bar = tencentcloud.gaap.Realserver("bar", ip="119.29.29.29")
+        foo_layer4_listener = tencentcloud.gaap.Layer4Listener("fooLayer4Listener",
+            protocol="TCP",
+            port=80,
+            realserver_type="IP",
+            proxy_id=foo_proxy.id,
+            health_check=True,
+            realserver_bind_sets=[
+                tencentcloud.gaap.Layer4ListenerRealserverBindSetArgs(
+                    id=foo_realserver.id,
+                    ip=foo_realserver.ip,
+                    port=80,
+                ),
+                tencentcloud.gaap.Layer4ListenerRealserverBindSetArgs(
+                    id=bar.id,
+                    ip=bar.ip,
+                    port=80,
+                ),
+            ])
+        ```
+
+        ## Import
+
+        GAAP layer4 listener can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener tencentcloud_gaap_layer4_listener.foo listener-11112222
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] client_ip_method: The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-               listeners of `TCP` protocol.
-        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-               `TCP` protocol and require less than `interval`.
+        :param pulumi.Input[int] client_ip_method: The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
+        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
         :param pulumi.Input[bool] health_check: Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
         :param pulumi.Input[int] interval: Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
         :param pulumi.Input[str] name: Name of the layer4 listener, the maximum length is 30.
@@ -452,8 +480,7 @@ class Layer4Listener(pulumi.CustomResource):
         :param pulumi.Input[str] protocol: Protocol of the layer4 listener. Valid value: `TCP` and `UDP`.
         :param pulumi.Input[str] proxy_id: ID of the GAAP proxy.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['Layer4ListenerRealserverBindSetArgs']]]] realserver_bind_sets: An information list of GAAP realserver.
-        :param pulumi.Input[str] realserver_type: Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-               `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        :param pulumi.Input[str] realserver_type: Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
         :param pulumi.Input[str] scheduler: Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
         """
         ...
@@ -463,7 +490,49 @@ class Layer4Listener(pulumi.CustomResource):
                  args: Layer4ListenerArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Layer4Listener resource with the given unique name, props, and options.
+        Provides a resource to create a layer4 listener of GAAP.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+            bandwidth=10,
+            concurrent=2,
+            access_region="SouthChina",
+            realserver_region="NorthChina")
+        foo_realserver = tencentcloud.gaap.Realserver("fooRealserver", ip="1.1.1.1")
+        bar = tencentcloud.gaap.Realserver("bar", ip="119.29.29.29")
+        foo_layer4_listener = tencentcloud.gaap.Layer4Listener("fooLayer4Listener",
+            protocol="TCP",
+            port=80,
+            realserver_type="IP",
+            proxy_id=foo_proxy.id,
+            health_check=True,
+            realserver_bind_sets=[
+                tencentcloud.gaap.Layer4ListenerRealserverBindSetArgs(
+                    id=foo_realserver.id,
+                    ip=foo_realserver.ip,
+                    port=80,
+                ),
+                tencentcloud.gaap.Layer4ListenerRealserverBindSetArgs(
+                    id=bar.id,
+                    ip=bar.ip,
+                    port=80,
+                ),
+            ])
+        ```
+
+        ## Import
+
+        GAAP layer4 listener can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener tencentcloud_gaap_layer4_listener.foo listener-11112222
+        ```
+
         :param str resource_name: The name of the resource.
         :param Layer4ListenerArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -553,10 +622,8 @@ class Layer4Listener(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] client_ip_method: The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-               listeners of `TCP` protocol.
-        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-               `TCP` protocol and require less than `interval`.
+        :param pulumi.Input[int] client_ip_method: The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
+        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
         :param pulumi.Input[str] create_time: Creation time of the layer4 listener.
         :param pulumi.Input[bool] health_check: Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
         :param pulumi.Input[int] interval: Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
@@ -565,8 +632,7 @@ class Layer4Listener(pulumi.CustomResource):
         :param pulumi.Input[str] protocol: Protocol of the layer4 listener. Valid value: `TCP` and `UDP`.
         :param pulumi.Input[str] proxy_id: ID of the GAAP proxy.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['Layer4ListenerRealserverBindSetArgs']]]] realserver_bind_sets: An information list of GAAP realserver.
-        :param pulumi.Input[str] realserver_type: Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-               `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        :param pulumi.Input[str] realserver_type: Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
         :param pulumi.Input[str] scheduler: Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
         :param pulumi.Input[int] status: Status of the layer4 listener.
         """
@@ -593,8 +659,7 @@ class Layer4Listener(pulumi.CustomResource):
     @pulumi.getter(name="clientIpMethod")
     def client_ip_method(self) -> pulumi.Output[Optional[int]]:
         """
-        The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports
-        listeners of `TCP` protocol.
+        The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
         """
         return pulumi.get(self, "client_ip_method")
 
@@ -602,8 +667,7 @@ class Layer4Listener(pulumi.CustomResource):
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> pulumi.Output[Optional[int]]:
         """
-        Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of
-        `TCP` protocol and require less than `interval`.
+        Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
         """
         return pulumi.get(self, "connect_timeout")
 
@@ -675,8 +739,7 @@ class Layer4Listener(pulumi.CustomResource):
     @pulumi.getter(name="realserverType")
     def realserver_type(self) -> pulumi.Output[str]:
         """
-        Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the
-        `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
         """
         return pulumi.get(self, "realserver_type")
 

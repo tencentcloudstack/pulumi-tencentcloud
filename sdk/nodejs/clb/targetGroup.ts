@@ -5,6 +5,45 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CLB target group.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const test = new tencentcloud.Clb.TargetGroup("test", {
+ *     port: 33,
+ *     targetGroupName: "test",
+ * });
+ * ```
+ *
+ * Create target group
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const test = new tencentcloud.Clb.TargetGroup("test", {
+ *     port: 18082,
+ *     targetGroupInstances: [{
+ *         bindIp: "10.0.0.4",
+ *         port: 18080,
+ *     }],
+ *     targetGroupName: "hello1",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CLB target group can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
+ * ```
+ */
 export class TargetGroup extends pulumi.CustomResource {
     /**
      * Get an existing TargetGroup resource's state with the given name, ID, and optional extra

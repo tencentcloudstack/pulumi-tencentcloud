@@ -25,6 +25,14 @@ __all__ = [
     'CosShipperContentCsvArgs',
     'CosShipperContentJsonArgs',
     'CosShipperFilterRuleArgs',
+    'IndexRuleArgs',
+    'IndexRuleFullTextArgs',
+    'IndexRuleKeyValueArgs',
+    'IndexRuleKeyValueKeyValueArgs',
+    'IndexRuleKeyValueKeyValueValueArgs',
+    'IndexRuleTagArgs',
+    'IndexRuleTagKeyValueArgs',
+    'IndexRuleTagKeyValueValueArgs',
     'MachineGroupMachineGroupTypeArgs',
 ]
 
@@ -33,6 +41,10 @@ class ConfigExcludePathArgs:
     def __init__(__self__, *,
                  type: Optional[pulumi.Input[str]] = None,
                  value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Type. Valid values: File, Path.
+        :param pulumi.Input[str] value: Specific content corresponding to Type.
+        """
         if type is not None:
             pulumi.set(__self__, "type", type)
         if value is not None:
@@ -41,6 +53,9 @@ class ConfigExcludePathArgs:
     @property
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type. Valid values: File, Path.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -50,6 +65,9 @@ class ConfigExcludePathArgs:
     @property
     @pulumi.getter
     def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specific content corresponding to Type.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -68,6 +86,16 @@ class ConfigExtraContainerFileArgs:
                  exclude_namespace: Optional[pulumi.Input[str]] = None,
                  include_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  workload: Optional[pulumi.Input['ConfigExtraContainerFileWorkloadArgs']] = None):
+        """
+        :param pulumi.Input[str] container: Container name.
+        :param pulumi.Input[str] file_pattern: log name.
+        :param pulumi.Input[str] log_path: Log Path.
+        :param pulumi.Input[str] namespace: Namespace. There can be multiple namespaces, separated by separators, such as A, B.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] exclude_labels: Pod label to be excluded.
+        :param pulumi.Input[str] exclude_namespace: Namespaces to be excluded, separated by separators, such as A, B.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] include_labels: Pod label info.
+        :param pulumi.Input['ConfigExtraContainerFileWorkloadArgs'] workload: Workload info.
+        """
         pulumi.set(__self__, "container", container)
         pulumi.set(__self__, "file_pattern", file_pattern)
         pulumi.set(__self__, "log_path", log_path)
@@ -84,6 +112,9 @@ class ConfigExtraContainerFileArgs:
     @property
     @pulumi.getter
     def container(self) -> pulumi.Input[str]:
+        """
+        Container name.
+        """
         return pulumi.get(self, "container")
 
     @container.setter
@@ -93,6 +124,9 @@ class ConfigExtraContainerFileArgs:
     @property
     @pulumi.getter(name="filePattern")
     def file_pattern(self) -> pulumi.Input[str]:
+        """
+        log name.
+        """
         return pulumi.get(self, "file_pattern")
 
     @file_pattern.setter
@@ -102,6 +136,9 @@ class ConfigExtraContainerFileArgs:
     @property
     @pulumi.getter(name="logPath")
     def log_path(self) -> pulumi.Input[str]:
+        """
+        Log Path.
+        """
         return pulumi.get(self, "log_path")
 
     @log_path.setter
@@ -111,6 +148,9 @@ class ConfigExtraContainerFileArgs:
     @property
     @pulumi.getter
     def namespace(self) -> pulumi.Input[str]:
+        """
+        Namespace. There can be multiple namespaces, separated by separators, such as A, B.
+        """
         return pulumi.get(self, "namespace")
 
     @namespace.setter
@@ -120,6 +160,9 @@ class ConfigExtraContainerFileArgs:
     @property
     @pulumi.getter(name="excludeLabels")
     def exclude_labels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Pod label to be excluded.
+        """
         return pulumi.get(self, "exclude_labels")
 
     @exclude_labels.setter
@@ -129,6 +172,9 @@ class ConfigExtraContainerFileArgs:
     @property
     @pulumi.getter(name="excludeNamespace")
     def exclude_namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        Namespaces to be excluded, separated by separators, such as A, B.
+        """
         return pulumi.get(self, "exclude_namespace")
 
     @exclude_namespace.setter
@@ -138,6 +184,9 @@ class ConfigExtraContainerFileArgs:
     @property
     @pulumi.getter(name="includeLabels")
     def include_labels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Pod label info.
+        """
         return pulumi.get(self, "include_labels")
 
     @include_labels.setter
@@ -147,6 +196,9 @@ class ConfigExtraContainerFileArgs:
     @property
     @pulumi.getter
     def workload(self) -> Optional[pulumi.Input['ConfigExtraContainerFileWorkloadArgs']]:
+        """
+        Workload info.
+        """
         return pulumi.get(self, "workload")
 
     @workload.setter
@@ -161,6 +213,12 @@ class ConfigExtraContainerFileWorkloadArgs:
                  name: pulumi.Input[str],
                  container: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] kind: workload type.
+        :param pulumi.Input[str] name: workload name.
+        :param pulumi.Input[str] container: container name.
+        :param pulumi.Input[str] namespace: namespace.
+        """
         pulumi.set(__self__, "kind", kind)
         pulumi.set(__self__, "name", name)
         if container is not None:
@@ -171,6 +229,9 @@ class ConfigExtraContainerFileWorkloadArgs:
     @property
     @pulumi.getter
     def kind(self) -> pulumi.Input[str]:
+        """
+        workload type.
+        """
         return pulumi.get(self, "kind")
 
     @kind.setter
@@ -180,6 +241,9 @@ class ConfigExtraContainerFileWorkloadArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        workload name.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -189,6 +253,9 @@ class ConfigExtraContainerFileWorkloadArgs:
     @property
     @pulumi.getter
     def container(self) -> Optional[pulumi.Input[str]]:
+        """
+        container name.
+        """
         return pulumi.get(self, "container")
 
     @container.setter
@@ -198,6 +265,9 @@ class ConfigExtraContainerFileWorkloadArgs:
     @property
     @pulumi.getter
     def namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        namespace.
+        """
         return pulumi.get(self, "namespace")
 
     @namespace.setter
@@ -214,6 +284,14 @@ class ConfigExtraContainerStdoutArgs:
                  include_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
                  workloads: Optional[pulumi.Input[Sequence[pulumi.Input['ConfigExtraContainerStdoutWorkloadArgs']]]] = None):
+        """
+        :param pulumi.Input[bool] all_containers: Is all containers.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] exclude_labels: Pod label to be excluded.
+        :param pulumi.Input[str] exclude_namespace: Namespaces to be excluded, separated by separators, such as A, B.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] include_labels: Pod label info.
+        :param pulumi.Input[str] namespace: Namespace. There can be multiple namespaces, separated by separators, such as A, B.
+        :param pulumi.Input[Sequence[pulumi.Input['ConfigExtraContainerStdoutWorkloadArgs']]] workloads: Workload info.
+        """
         pulumi.set(__self__, "all_containers", all_containers)
         if exclude_labels is not None:
             pulumi.set(__self__, "exclude_labels", exclude_labels)
@@ -229,6 +307,9 @@ class ConfigExtraContainerStdoutArgs:
     @property
     @pulumi.getter(name="allContainers")
     def all_containers(self) -> pulumi.Input[bool]:
+        """
+        Is all containers.
+        """
         return pulumi.get(self, "all_containers")
 
     @all_containers.setter
@@ -238,6 +319,9 @@ class ConfigExtraContainerStdoutArgs:
     @property
     @pulumi.getter(name="excludeLabels")
     def exclude_labels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Pod label to be excluded.
+        """
         return pulumi.get(self, "exclude_labels")
 
     @exclude_labels.setter
@@ -247,6 +331,9 @@ class ConfigExtraContainerStdoutArgs:
     @property
     @pulumi.getter(name="excludeNamespace")
     def exclude_namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        Namespaces to be excluded, separated by separators, such as A, B.
+        """
         return pulumi.get(self, "exclude_namespace")
 
     @exclude_namespace.setter
@@ -256,6 +343,9 @@ class ConfigExtraContainerStdoutArgs:
     @property
     @pulumi.getter(name="includeLabels")
     def include_labels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Pod label info.
+        """
         return pulumi.get(self, "include_labels")
 
     @include_labels.setter
@@ -265,6 +355,9 @@ class ConfigExtraContainerStdoutArgs:
     @property
     @pulumi.getter
     def namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        Namespace. There can be multiple namespaces, separated by separators, such as A, B.
+        """
         return pulumi.get(self, "namespace")
 
     @namespace.setter
@@ -274,6 +367,9 @@ class ConfigExtraContainerStdoutArgs:
     @property
     @pulumi.getter
     def workloads(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ConfigExtraContainerStdoutWorkloadArgs']]]]:
+        """
+        Workload info.
+        """
         return pulumi.get(self, "workloads")
 
     @workloads.setter
@@ -288,6 +384,12 @@ class ConfigExtraContainerStdoutWorkloadArgs:
                  name: pulumi.Input[str],
                  container: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] kind: workload type.
+        :param pulumi.Input[str] name: workload name.
+        :param pulumi.Input[str] container: container name.
+        :param pulumi.Input[str] namespace: namespace.
+        """
         pulumi.set(__self__, "kind", kind)
         pulumi.set(__self__, "name", name)
         if container is not None:
@@ -298,6 +400,9 @@ class ConfigExtraContainerStdoutWorkloadArgs:
     @property
     @pulumi.getter
     def kind(self) -> pulumi.Input[str]:
+        """
+        workload type.
+        """
         return pulumi.get(self, "kind")
 
     @kind.setter
@@ -307,6 +412,9 @@ class ConfigExtraContainerStdoutWorkloadArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        workload name.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -316,6 +424,9 @@ class ConfigExtraContainerStdoutWorkloadArgs:
     @property
     @pulumi.getter
     def container(self) -> Optional[pulumi.Input[str]]:
+        """
+        container name.
+        """
         return pulumi.get(self, "container")
 
     @container.setter
@@ -325,6 +436,9 @@ class ConfigExtraContainerStdoutWorkloadArgs:
     @property
     @pulumi.getter
     def namespace(self) -> Optional[pulumi.Input[str]]:
+        """
+        namespace.
+        """
         return pulumi.get(self, "namespace")
 
     @namespace.setter
@@ -337,6 +451,10 @@ class ConfigExtraExcludePathArgs:
     def __init__(__self__, *,
                  type: Optional[pulumi.Input[str]] = None,
                  value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Type. Valid values: File, Path.
+        :param pulumi.Input[str] value: Specific content corresponding to Type.
+        """
         if type is not None:
             pulumi.set(__self__, "type", type)
         if value is not None:
@@ -345,6 +463,9 @@ class ConfigExtraExcludePathArgs:
     @property
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type. Valid values: File, Path.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -354,6 +475,9 @@ class ConfigExtraExcludePathArgs:
     @property
     @pulumi.getter
     def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specific content corresponding to Type.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -374,6 +498,18 @@ class ConfigExtraExtractRuleArgs:
                  time_key: Optional[pulumi.Input[str]] = None,
                  un_match_log_key: Optional[pulumi.Input[str]] = None,
                  un_match_up_load_switch: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[int] backtracking: Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+        :param pulumi.Input[str] begin_regex: First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.
+        :param pulumi.Input[str] delimiter: Delimiter for delimited log, which is valid only if log_type is delimiter_log.
+        :param pulumi.Input[Sequence[pulumi.Input['ConfigExtraExtractRuleFilterKeyRegexArgs']]] filter_key_regexes: Log keys to be filtered and the corresponding regex.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] keys: Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.
+        :param pulumi.Input[str] log_regex: Full log matching rule, which is valid only if log_type is fullregex_log.
+        :param pulumi.Input[str] time_format: Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+        :param pulumi.Input[str] time_key: Time field key name. time_key and time_format must appear in pair.
+        :param pulumi.Input[str] un_match_log_key: Unmatched log key.
+        :param pulumi.Input[bool] un_match_up_load_switch: Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+        """
         if backtracking is not None:
             pulumi.set(__self__, "backtracking", backtracking)
         if begin_regex is not None:
@@ -398,6 +534,9 @@ class ConfigExtraExtractRuleArgs:
     @property
     @pulumi.getter
     def backtracking(self) -> Optional[pulumi.Input[int]]:
+        """
+        Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+        """
         return pulumi.get(self, "backtracking")
 
     @backtracking.setter
@@ -407,6 +546,9 @@ class ConfigExtraExtractRuleArgs:
     @property
     @pulumi.getter(name="beginRegex")
     def begin_regex(self) -> Optional[pulumi.Input[str]]:
+        """
+        First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.
+        """
         return pulumi.get(self, "begin_regex")
 
     @begin_regex.setter
@@ -416,6 +558,9 @@ class ConfigExtraExtractRuleArgs:
     @property
     @pulumi.getter
     def delimiter(self) -> Optional[pulumi.Input[str]]:
+        """
+        Delimiter for delimited log, which is valid only if log_type is delimiter_log.
+        """
         return pulumi.get(self, "delimiter")
 
     @delimiter.setter
@@ -425,6 +570,9 @@ class ConfigExtraExtractRuleArgs:
     @property
     @pulumi.getter(name="filterKeyRegexes")
     def filter_key_regexes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ConfigExtraExtractRuleFilterKeyRegexArgs']]]]:
+        """
+        Log keys to be filtered and the corresponding regex.
+        """
         return pulumi.get(self, "filter_key_regexes")
 
     @filter_key_regexes.setter
@@ -434,6 +582,9 @@ class ConfigExtraExtractRuleArgs:
     @property
     @pulumi.getter
     def keys(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.
+        """
         return pulumi.get(self, "keys")
 
     @keys.setter
@@ -443,6 +594,9 @@ class ConfigExtraExtractRuleArgs:
     @property
     @pulumi.getter(name="logRegex")
     def log_regex(self) -> Optional[pulumi.Input[str]]:
+        """
+        Full log matching rule, which is valid only if log_type is fullregex_log.
+        """
         return pulumi.get(self, "log_regex")
 
     @log_regex.setter
@@ -452,6 +606,9 @@ class ConfigExtraExtractRuleArgs:
     @property
     @pulumi.getter(name="timeFormat")
     def time_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+        """
         return pulumi.get(self, "time_format")
 
     @time_format.setter
@@ -461,6 +618,9 @@ class ConfigExtraExtractRuleArgs:
     @property
     @pulumi.getter(name="timeKey")
     def time_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Time field key name. time_key and time_format must appear in pair.
+        """
         return pulumi.get(self, "time_key")
 
     @time_key.setter
@@ -470,6 +630,9 @@ class ConfigExtraExtractRuleArgs:
     @property
     @pulumi.getter(name="unMatchLogKey")
     def un_match_log_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Unmatched log key.
+        """
         return pulumi.get(self, "un_match_log_key")
 
     @un_match_log_key.setter
@@ -479,6 +642,9 @@ class ConfigExtraExtractRuleArgs:
     @property
     @pulumi.getter(name="unMatchUpLoadSwitch")
     def un_match_up_load_switch(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+        """
         return pulumi.get(self, "un_match_up_load_switch")
 
     @un_match_up_load_switch.setter
@@ -491,6 +657,10 @@ class ConfigExtraExtractRuleFilterKeyRegexArgs:
     def __init__(__self__, *,
                  key: Optional[pulumi.Input[str]] = None,
                  regex: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] key: Log key to be filtered.
+        :param pulumi.Input[str] regex: Filter rule regex corresponding to key.
+        """
         if key is not None:
             pulumi.set(__self__, "key", key)
         if regex is not None:
@@ -499,6 +669,9 @@ class ConfigExtraExtractRuleFilterKeyRegexArgs:
     @property
     @pulumi.getter
     def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Log key to be filtered.
+        """
         return pulumi.get(self, "key")
 
     @key.setter
@@ -508,6 +681,9 @@ class ConfigExtraExtractRuleFilterKeyRegexArgs:
     @property
     @pulumi.getter
     def regex(self) -> Optional[pulumi.Input[str]]:
+        """
+        Filter rule regex corresponding to key.
+        """
         return pulumi.get(self, "regex")
 
     @regex.setter
@@ -521,6 +697,11 @@ class ConfigExtraHostFileArgs:
                  file_pattern: pulumi.Input[str],
                  log_path: pulumi.Input[str],
                  custom_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] file_pattern: Log file name.
+        :param pulumi.Input[str] log_path: Log file dir.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] custom_labels: Metadata info.
+        """
         pulumi.set(__self__, "file_pattern", file_pattern)
         pulumi.set(__self__, "log_path", log_path)
         if custom_labels is not None:
@@ -529,6 +710,9 @@ class ConfigExtraHostFileArgs:
     @property
     @pulumi.getter(name="filePattern")
     def file_pattern(self) -> pulumi.Input[str]:
+        """
+        Log file name.
+        """
         return pulumi.get(self, "file_pattern")
 
     @file_pattern.setter
@@ -538,6 +722,9 @@ class ConfigExtraHostFileArgs:
     @property
     @pulumi.getter(name="logPath")
     def log_path(self) -> pulumi.Input[str]:
+        """
+        Log file dir.
+        """
         return pulumi.get(self, "log_path")
 
     @log_path.setter
@@ -547,6 +734,9 @@ class ConfigExtraHostFileArgs:
     @property
     @pulumi.getter(name="customLabels")
     def custom_labels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Metadata info.
+        """
         return pulumi.get(self, "custom_labels")
 
     @custom_labels.setter
@@ -567,6 +757,18 @@ class ConfigExtractRuleArgs:
                  time_key: Optional[pulumi.Input[str]] = None,
                  un_match_log_key: Optional[pulumi.Input[str]] = None,
                  un_match_up_load_switch: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[int] backtracking: Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+        :param pulumi.Input[str] begin_regex: First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.
+        :param pulumi.Input[str] delimiter: Delimiter for delimited log, which is valid only if log_type is delimiter_log.
+        :param pulumi.Input[Sequence[pulumi.Input['ConfigExtractRuleFilterKeyRegexArgs']]] filter_key_regexes: Log keys to be filtered and the corresponding regex.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] keys: Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.
+        :param pulumi.Input[str] log_regex: Full log matching rule, which is valid only if log_type is fullregex_log.
+        :param pulumi.Input[str] time_format: Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+        :param pulumi.Input[str] time_key: Time field key name. time_key and time_format must appear in pair.
+        :param pulumi.Input[str] un_match_log_key: Unmatched log key.
+        :param pulumi.Input[bool] un_match_up_load_switch: Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+        """
         if backtracking is not None:
             pulumi.set(__self__, "backtracking", backtracking)
         if begin_regex is not None:
@@ -591,6 +793,9 @@ class ConfigExtractRuleArgs:
     @property
     @pulumi.getter
     def backtracking(self) -> Optional[pulumi.Input[int]]:
+        """
+        Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+        """
         return pulumi.get(self, "backtracking")
 
     @backtracking.setter
@@ -600,6 +805,9 @@ class ConfigExtractRuleArgs:
     @property
     @pulumi.getter(name="beginRegex")
     def begin_regex(self) -> Optional[pulumi.Input[str]]:
+        """
+        First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.
+        """
         return pulumi.get(self, "begin_regex")
 
     @begin_regex.setter
@@ -609,6 +817,9 @@ class ConfigExtractRuleArgs:
     @property
     @pulumi.getter
     def delimiter(self) -> Optional[pulumi.Input[str]]:
+        """
+        Delimiter for delimited log, which is valid only if log_type is delimiter_log.
+        """
         return pulumi.get(self, "delimiter")
 
     @delimiter.setter
@@ -618,6 +829,9 @@ class ConfigExtractRuleArgs:
     @property
     @pulumi.getter(name="filterKeyRegexes")
     def filter_key_regexes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ConfigExtractRuleFilterKeyRegexArgs']]]]:
+        """
+        Log keys to be filtered and the corresponding regex.
+        """
         return pulumi.get(self, "filter_key_regexes")
 
     @filter_key_regexes.setter
@@ -627,6 +841,9 @@ class ConfigExtractRuleArgs:
     @property
     @pulumi.getter
     def keys(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.
+        """
         return pulumi.get(self, "keys")
 
     @keys.setter
@@ -636,6 +853,9 @@ class ConfigExtractRuleArgs:
     @property
     @pulumi.getter(name="logRegex")
     def log_regex(self) -> Optional[pulumi.Input[str]]:
+        """
+        Full log matching rule, which is valid only if log_type is fullregex_log.
+        """
         return pulumi.get(self, "log_regex")
 
     @log_regex.setter
@@ -645,6 +865,9 @@ class ConfigExtractRuleArgs:
     @property
     @pulumi.getter(name="timeFormat")
     def time_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+        """
         return pulumi.get(self, "time_format")
 
     @time_format.setter
@@ -654,6 +877,9 @@ class ConfigExtractRuleArgs:
     @property
     @pulumi.getter(name="timeKey")
     def time_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Time field key name. time_key and time_format must appear in pair.
+        """
         return pulumi.get(self, "time_key")
 
     @time_key.setter
@@ -663,6 +889,9 @@ class ConfigExtractRuleArgs:
     @property
     @pulumi.getter(name="unMatchLogKey")
     def un_match_log_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Unmatched log key.
+        """
         return pulumi.get(self, "un_match_log_key")
 
     @un_match_log_key.setter
@@ -672,6 +901,9 @@ class ConfigExtractRuleArgs:
     @property
     @pulumi.getter(name="unMatchUpLoadSwitch")
     def un_match_up_load_switch(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+        """
         return pulumi.get(self, "un_match_up_load_switch")
 
     @un_match_up_load_switch.setter
@@ -684,6 +916,10 @@ class ConfigExtractRuleFilterKeyRegexArgs:
     def __init__(__self__, *,
                  key: Optional[pulumi.Input[str]] = None,
                  regex: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] key: Log key to be filtered.
+        :param pulumi.Input[str] regex: Filter rule regex corresponding to key.
+        """
         if key is not None:
             pulumi.set(__self__, "key", key)
         if regex is not None:
@@ -692,6 +928,9 @@ class ConfigExtractRuleFilterKeyRegexArgs:
     @property
     @pulumi.getter
     def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Log key to be filtered.
+        """
         return pulumi.get(self, "key")
 
     @key.setter
@@ -701,6 +940,9 @@ class ConfigExtractRuleFilterKeyRegexArgs:
     @property
     @pulumi.getter
     def regex(self) -> Optional[pulumi.Input[str]]:
+        """
+        Filter rule regex corresponding to key.
+        """
         return pulumi.get(self, "regex")
 
     @regex.setter
@@ -712,11 +954,17 @@ class ConfigExtractRuleFilterKeyRegexArgs:
 class CosShipperCompressArgs:
     def __init__(__self__, *,
                  format: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] format: Compression format. Valid values: gzip, lzop, none (no compression).
+        """
         pulumi.set(__self__, "format", format)
 
     @property
     @pulumi.getter
     def format(self) -> pulumi.Input[str]:
+        """
+        Compression format. Valid values: gzip, lzop, none (no compression).
+        """
         return pulumi.get(self, "format")
 
     @format.setter
@@ -730,6 +978,11 @@ class CosShipperContentArgs:
                  format: pulumi.Input[str],
                  csv: Optional[pulumi.Input['CosShipperContentCsvArgs']] = None,
                  json: Optional[pulumi.Input['CosShipperContentJsonArgs']] = None):
+        """
+        :param pulumi.Input[str] format: Content format. Valid values: json, csv.
+        :param pulumi.Input['CosShipperContentCsvArgs'] csv: CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input['CosShipperContentJsonArgs'] json: JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.
+        """
         pulumi.set(__self__, "format", format)
         if csv is not None:
             pulumi.set(__self__, "csv", csv)
@@ -739,6 +992,9 @@ class CosShipperContentArgs:
     @property
     @pulumi.getter
     def format(self) -> pulumi.Input[str]:
+        """
+        Content format. Valid values: json, csv.
+        """
         return pulumi.get(self, "format")
 
     @format.setter
@@ -748,6 +1004,9 @@ class CosShipperContentArgs:
     @property
     @pulumi.getter
     def csv(self) -> Optional[pulumi.Input['CosShipperContentCsvArgs']]:
+        """
+        CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "csv")
 
     @csv.setter
@@ -757,6 +1016,9 @@ class CosShipperContentArgs:
     @property
     @pulumi.getter
     def json(self) -> Optional[pulumi.Input['CosShipperContentJsonArgs']]:
+        """
+        JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "json")
 
     @json.setter
@@ -772,6 +1034,13 @@ class CosShipperContentCsvArgs:
                  keys: pulumi.Input[Sequence[pulumi.Input[str]]],
                  non_existing_field: pulumi.Input[str],
                  print_key: pulumi.Input[bool]):
+        """
+        :param pulumi.Input[str] delimiter: Field delimiter.
+        :param pulumi.Input[str] escape_char: Field delimiter.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] keys: Names of keys.Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] non_existing_field: Content used to populate non-existing fields.
+        :param pulumi.Input[bool] print_key: Whether to print key on the first row of the CSV file.
+        """
         pulumi.set(__self__, "delimiter", delimiter)
         pulumi.set(__self__, "escape_char", escape_char)
         pulumi.set(__self__, "keys", keys)
@@ -781,6 +1050,9 @@ class CosShipperContentCsvArgs:
     @property
     @pulumi.getter
     def delimiter(self) -> pulumi.Input[str]:
+        """
+        Field delimiter.
+        """
         return pulumi.get(self, "delimiter")
 
     @delimiter.setter
@@ -790,6 +1062,9 @@ class CosShipperContentCsvArgs:
     @property
     @pulumi.getter(name="escapeChar")
     def escape_char(self) -> pulumi.Input[str]:
+        """
+        Field delimiter.
+        """
         return pulumi.get(self, "escape_char")
 
     @escape_char.setter
@@ -799,6 +1074,9 @@ class CosShipperContentCsvArgs:
     @property
     @pulumi.getter
     def keys(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Names of keys.Note: this field may return null, indicating that no valid values can be obtained.
+        """
         return pulumi.get(self, "keys")
 
     @keys.setter
@@ -808,6 +1086,9 @@ class CosShipperContentCsvArgs:
     @property
     @pulumi.getter(name="nonExistingField")
     def non_existing_field(self) -> pulumi.Input[str]:
+        """
+        Content used to populate non-existing fields.
+        """
         return pulumi.get(self, "non_existing_field")
 
     @non_existing_field.setter
@@ -817,6 +1098,9 @@ class CosShipperContentCsvArgs:
     @property
     @pulumi.getter(name="printKey")
     def print_key(self) -> pulumi.Input[bool]:
+        """
+        Whether to print key on the first row of the CSV file.
+        """
         return pulumi.get(self, "print_key")
 
     @print_key.setter
@@ -829,12 +1113,20 @@ class CosShipperContentJsonArgs:
     def __init__(__self__, *,
                  enable_tag: pulumi.Input[bool],
                  meta_fields: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[bool] enable_tag: Enablement flag.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] meta_fields: Metadata information list
+               Note: this field may return null, indicating that no valid values can be obtained..
+        """
         pulumi.set(__self__, "enable_tag", enable_tag)
         pulumi.set(__self__, "meta_fields", meta_fields)
 
     @property
     @pulumi.getter(name="enableTag")
     def enable_tag(self) -> pulumi.Input[bool]:
+        """
+        Enablement flag.
+        """
         return pulumi.get(self, "enable_tag")
 
     @enable_tag.setter
@@ -844,6 +1136,10 @@ class CosShipperContentJsonArgs:
     @property
     @pulumi.getter(name="metaFields")
     def meta_fields(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Metadata information list
+        Note: this field may return null, indicating that no valid values can be obtained..
+        """
         return pulumi.get(self, "meta_fields")
 
     @meta_fields.setter
@@ -857,6 +1153,11 @@ class CosShipperFilterRuleArgs:
                  key: pulumi.Input[str],
                  regex: pulumi.Input[str],
                  value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: Filter rule key.
+        :param pulumi.Input[str] regex: Filter rule.
+        :param pulumi.Input[str] value: Filter rule value.
+        """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "regex", regex)
         pulumi.set(__self__, "value", value)
@@ -864,6 +1165,9 @@ class CosShipperFilterRuleArgs:
     @property
     @pulumi.getter
     def key(self) -> pulumi.Input[str]:
+        """
+        Filter rule key.
+        """
         return pulumi.get(self, "key")
 
     @key.setter
@@ -873,6 +1177,9 @@ class CosShipperFilterRuleArgs:
     @property
     @pulumi.getter
     def regex(self) -> pulumi.Input[str]:
+        """
+        Filter rule.
+        """
         return pulumi.get(self, "regex")
 
     @regex.setter
@@ -882,6 +1189,9 @@ class CosShipperFilterRuleArgs:
     @property
     @pulumi.getter
     def value(self) -> pulumi.Input[str]:
+        """
+        Filter rule value.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -890,16 +1200,422 @@ class CosShipperFilterRuleArgs:
 
 
 @pulumi.input_type
+class IndexRuleArgs:
+    def __init__(__self__, *,
+                 full_text: Optional[pulumi.Input['IndexRuleFullTextArgs']] = None,
+                 key_value: Optional[pulumi.Input['IndexRuleKeyValueArgs']] = None,
+                 tag: Optional[pulumi.Input['IndexRuleTagArgs']] = None):
+        """
+        :param pulumi.Input['IndexRuleFullTextArgs'] full_text: Full-Text index configuration.
+        :param pulumi.Input['IndexRuleKeyValueArgs'] key_value: Key-Value index configuration.
+        :param pulumi.Input['IndexRuleTagArgs'] tag: Metafield index configuration.
+        """
+        if full_text is not None:
+            pulumi.set(__self__, "full_text", full_text)
+        if key_value is not None:
+            pulumi.set(__self__, "key_value", key_value)
+        if tag is not None:
+            pulumi.set(__self__, "tag", tag)
+
+    @property
+    @pulumi.getter(name="fullText")
+    def full_text(self) -> Optional[pulumi.Input['IndexRuleFullTextArgs']]:
+        """
+        Full-Text index configuration.
+        """
+        return pulumi.get(self, "full_text")
+
+    @full_text.setter
+    def full_text(self, value: Optional[pulumi.Input['IndexRuleFullTextArgs']]):
+        pulumi.set(self, "full_text", value)
+
+    @property
+    @pulumi.getter(name="keyValue")
+    def key_value(self) -> Optional[pulumi.Input['IndexRuleKeyValueArgs']]:
+        """
+        Key-Value index configuration.
+        """
+        return pulumi.get(self, "key_value")
+
+    @key_value.setter
+    def key_value(self, value: Optional[pulumi.Input['IndexRuleKeyValueArgs']]):
+        pulumi.set(self, "key_value", value)
+
+    @property
+    @pulumi.getter
+    def tag(self) -> Optional[pulumi.Input['IndexRuleTagArgs']]:
+        """
+        Metafield index configuration.
+        """
+        return pulumi.get(self, "tag")
+
+    @tag.setter
+    def tag(self, value: Optional[pulumi.Input['IndexRuleTagArgs']]):
+        pulumi.set(self, "tag", value)
+
+
+@pulumi.input_type
+class IndexRuleFullTextArgs:
+    def __init__(__self__, *,
+                 case_sensitive: pulumi.Input[bool],
+                 contain_zh: pulumi.Input[bool],
+                 tokenizer: pulumi.Input[str]):
+        """
+        :param pulumi.Input[bool] case_sensitive: Case sensitivity.
+        :param pulumi.Input[bool] contain_zh: Whether Chinese characters are contained.
+        :param pulumi.Input[str] tokenizer: Full-Text index delimiter. Each character in the string represents a delimiter.
+        """
+        pulumi.set(__self__, "case_sensitive", case_sensitive)
+        pulumi.set(__self__, "contain_zh", contain_zh)
+        pulumi.set(__self__, "tokenizer", tokenizer)
+
+    @property
+    @pulumi.getter(name="caseSensitive")
+    def case_sensitive(self) -> pulumi.Input[bool]:
+        """
+        Case sensitivity.
+        """
+        return pulumi.get(self, "case_sensitive")
+
+    @case_sensitive.setter
+    def case_sensitive(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "case_sensitive", value)
+
+    @property
+    @pulumi.getter(name="containZH")
+    def contain_zh(self) -> pulumi.Input[bool]:
+        """
+        Whether Chinese characters are contained.
+        """
+        return pulumi.get(self, "contain_zh")
+
+    @contain_zh.setter
+    def contain_zh(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "contain_zh", value)
+
+    @property
+    @pulumi.getter
+    def tokenizer(self) -> pulumi.Input[str]:
+        """
+        Full-Text index delimiter. Each character in the string represents a delimiter.
+        """
+        return pulumi.get(self, "tokenizer")
+
+    @tokenizer.setter
+    def tokenizer(self, value: pulumi.Input[str]):
+        pulumi.set(self, "tokenizer", value)
+
+
+@pulumi.input_type
+class IndexRuleKeyValueArgs:
+    def __init__(__self__, *,
+                 case_sensitive: pulumi.Input[bool],
+                 key_values: Optional[pulumi.Input[Sequence[pulumi.Input['IndexRuleKeyValueKeyValueArgs']]]] = None):
+        """
+        :param pulumi.Input[bool] case_sensitive: Case sensitivity.
+        :param pulumi.Input[Sequence[pulumi.Input['IndexRuleKeyValueKeyValueArgs']]] key_values: Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+        """
+        pulumi.set(__self__, "case_sensitive", case_sensitive)
+        if key_values is not None:
+            pulumi.set(__self__, "key_values", key_values)
+
+    @property
+    @pulumi.getter(name="caseSensitive")
+    def case_sensitive(self) -> pulumi.Input[bool]:
+        """
+        Case sensitivity.
+        """
+        return pulumi.get(self, "case_sensitive")
+
+    @case_sensitive.setter
+    def case_sensitive(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "case_sensitive", value)
+
+    @property
+    @pulumi.getter(name="keyValues")
+    def key_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['IndexRuleKeyValueKeyValueArgs']]]]:
+        """
+        Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+        """
+        return pulumi.get(self, "key_values")
+
+    @key_values.setter
+    def key_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['IndexRuleKeyValueKeyValueArgs']]]]):
+        pulumi.set(self, "key_values", value)
+
+
+@pulumi.input_type
+class IndexRuleKeyValueKeyValueArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 value: Optional[pulumi.Input['IndexRuleKeyValueKeyValueValueArgs']] = None):
+        """
+        :param pulumi.Input[str] key: When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+        :param pulumi.Input['IndexRuleKeyValueKeyValueValueArgs'] value: Field index description information.
+        """
+        pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input['IndexRuleKeyValueKeyValueValueArgs']]:
+        """
+        Field index description information.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input['IndexRuleKeyValueKeyValueValueArgs']]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class IndexRuleKeyValueKeyValueValueArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 contain_zh: Optional[pulumi.Input[bool]] = None,
+                 sql_flag: Optional[pulumi.Input[bool]] = None,
+                 tokenizer: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Field type. Valid values: long, text, double.
+        :param pulumi.Input[bool] contain_zh: Whether Chinese characters are contained.
+        :param pulumi.Input[bool] sql_flag: Whether the analysis feature is enabled for the field.
+        :param pulumi.Input[str] tokenizer: Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+        """
+        pulumi.set(__self__, "type", type)
+        if contain_zh is not None:
+            pulumi.set(__self__, "contain_zh", contain_zh)
+        if sql_flag is not None:
+            pulumi.set(__self__, "sql_flag", sql_flag)
+        if tokenizer is not None:
+            pulumi.set(__self__, "tokenizer", tokenizer)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Field type. Valid values: long, text, double.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="containZH")
+    def contain_zh(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether Chinese characters are contained.
+        """
+        return pulumi.get(self, "contain_zh")
+
+    @contain_zh.setter
+    def contain_zh(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "contain_zh", value)
+
+    @property
+    @pulumi.getter(name="sqlFlag")
+    def sql_flag(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the analysis feature is enabled for the field.
+        """
+        return pulumi.get(self, "sql_flag")
+
+    @sql_flag.setter
+    def sql_flag(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "sql_flag", value)
+
+    @property
+    @pulumi.getter
+    def tokenizer(self) -> Optional[pulumi.Input[str]]:
+        """
+        Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+        """
+        return pulumi.get(self, "tokenizer")
+
+    @tokenizer.setter
+    def tokenizer(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "tokenizer", value)
+
+
+@pulumi.input_type
+class IndexRuleTagArgs:
+    def __init__(__self__, *,
+                 case_sensitive: pulumi.Input[bool],
+                 key_values: Optional[pulumi.Input[Sequence[pulumi.Input['IndexRuleTagKeyValueArgs']]]] = None):
+        """
+        :param pulumi.Input[bool] case_sensitive: Case sensitivity.
+        :param pulumi.Input[Sequence[pulumi.Input['IndexRuleTagKeyValueArgs']]] key_values: Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+        """
+        pulumi.set(__self__, "case_sensitive", case_sensitive)
+        if key_values is not None:
+            pulumi.set(__self__, "key_values", key_values)
+
+    @property
+    @pulumi.getter(name="caseSensitive")
+    def case_sensitive(self) -> pulumi.Input[bool]:
+        """
+        Case sensitivity.
+        """
+        return pulumi.get(self, "case_sensitive")
+
+    @case_sensitive.setter
+    def case_sensitive(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "case_sensitive", value)
+
+    @property
+    @pulumi.getter(name="keyValues")
+    def key_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['IndexRuleTagKeyValueArgs']]]]:
+        """
+        Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+        """
+        return pulumi.get(self, "key_values")
+
+    @key_values.setter
+    def key_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['IndexRuleTagKeyValueArgs']]]]):
+        pulumi.set(self, "key_values", value)
+
+
+@pulumi.input_type
+class IndexRuleTagKeyValueArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 value: Optional[pulumi.Input['IndexRuleTagKeyValueValueArgs']] = None):
+        """
+        :param pulumi.Input[str] key: When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+        :param pulumi.Input['IndexRuleTagKeyValueValueArgs'] value: Field index description information.
+        """
+        pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input['IndexRuleTagKeyValueValueArgs']]:
+        """
+        Field index description information.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input['IndexRuleTagKeyValueValueArgs']]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class IndexRuleTagKeyValueValueArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 contain_zh: Optional[pulumi.Input[bool]] = None,
+                 sql_flag: Optional[pulumi.Input[bool]] = None,
+                 tokenizer: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Field type. Valid values: long, text, double.
+        :param pulumi.Input[bool] contain_zh: Whether Chinese characters are contained.
+        :param pulumi.Input[bool] sql_flag: Whether the analysis feature is enabled for the field.
+        :param pulumi.Input[str] tokenizer: Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+        """
+        pulumi.set(__self__, "type", type)
+        if contain_zh is not None:
+            pulumi.set(__self__, "contain_zh", contain_zh)
+        if sql_flag is not None:
+            pulumi.set(__self__, "sql_flag", sql_flag)
+        if tokenizer is not None:
+            pulumi.set(__self__, "tokenizer", tokenizer)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Field type. Valid values: long, text, double.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="containZH")
+    def contain_zh(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether Chinese characters are contained.
+        """
+        return pulumi.get(self, "contain_zh")
+
+    @contain_zh.setter
+    def contain_zh(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "contain_zh", value)
+
+    @property
+    @pulumi.getter(name="sqlFlag")
+    def sql_flag(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the analysis feature is enabled for the field.
+        """
+        return pulumi.get(self, "sql_flag")
+
+    @sql_flag.setter
+    def sql_flag(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "sql_flag", value)
+
+    @property
+    @pulumi.getter
+    def tokenizer(self) -> Optional[pulumi.Input[str]]:
+        """
+        Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+        """
+        return pulumi.get(self, "tokenizer")
+
+    @tokenizer.setter
+    def tokenizer(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "tokenizer", value)
+
+
+@pulumi.input_type
 class MachineGroupMachineGroupTypeArgs:
     def __init__(__self__, *,
                  type: pulumi.Input[str],
                  values: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[str] type: Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] values: Machine description list.
+        """
         pulumi.set(__self__, "type", type)
         pulumi.set(__self__, "values", values)
 
     @property
     @pulumi.getter
     def type(self) -> pulumi.Input[str]:
+        """
+        Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -909,6 +1625,9 @@ class MachineGroupMachineGroupTypeArgs:
     @property
     @pulumi.getter
     def values(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Machine description list.
+        """
         return pulumi.get(self, "values")
 
     @values.setter

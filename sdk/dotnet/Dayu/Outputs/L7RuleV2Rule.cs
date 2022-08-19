@@ -13,16 +13,46 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
     [OutputType]
     public sealed class L7RuleV2Rule
     {
+        /// <summary>
+        /// HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.
+        /// </summary>
         public readonly int? CcEnable;
+        /// <summary>
+        /// The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.
+        /// </summary>
         public readonly int? CertType;
+        /// <summary>
+        /// Domain of the rule.
+        /// </summary>
         public readonly string Domain;
+        /// <summary>
+        /// Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.
+        /// </summary>
         public readonly int? HttpsToHttpEnable;
+        /// <summary>
+        /// session hold switch.
+        /// </summary>
         public readonly int KeepEnable;
+        /// <summary>
+        /// The keeptime of the layer 4 rule.
+        /// </summary>
         public readonly int Keeptime;
+        /// <summary>
+        /// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+        /// </summary>
         public readonly int LbType;
+        /// <summary>
+        /// Protocol of the rule.
+        /// </summary>
         public readonly string Protocol;
         public readonly ImmutableArray<Outputs.L7RuleV2RuleSourceList> SourceLists;
+        /// <summary>
+        /// Source type, `1` for source of host, `2` for source of IP.
+        /// </summary>
         public readonly int SourceType;
+        /// <summary>
+        /// When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.
+        /// </summary>
         public readonly string? SslId;
 
         [OutputConstructor]

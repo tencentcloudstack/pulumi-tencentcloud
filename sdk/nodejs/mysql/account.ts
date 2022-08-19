@@ -4,6 +4,22 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a MySQL account resource for database management. A MySQL instance supports multiple database account.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const defaultAccount = new tencentcloud.Mysql.Account("default", {
+ *     description: "My test account",
+ *     mysqlId: "my-test-database",
+ *     password: "********",
+ * });
+ * ```
+ */
 export class Account extends pulumi.CustomResource {
     /**
      * Get an existing Account resource's state with the given name, ID, and optional extra

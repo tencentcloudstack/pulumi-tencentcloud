@@ -13,10 +13,22 @@ namespace Pulumi.Tencentcloud.Eks.Outputs
     [OutputType]
     public sealed class ClusterPublicLb
     {
+        /// <summary>
+        /// List of CIDRs which allowed to access.
+        /// </summary>
         public readonly ImmutableArray<string> AllowFromCidrs;
+        /// <summary>
+        /// Indicates weather the public access LB enabled.
+        /// </summary>
         public readonly bool Enabled;
+        /// <summary>
+        /// Extra param text json.
+        /// </summary>
         public readonly string? ExtraParam;
         public readonly string? SecurityGroup;
+        /// <summary>
+        /// List of security allow IP or CIDRs, default deny all.
+        /// </summary>
         public readonly ImmutableArray<string> SecurityPolicies;
 
         [OutputConstructor]

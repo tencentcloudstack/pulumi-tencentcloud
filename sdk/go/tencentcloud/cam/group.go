@@ -10,6 +10,38 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CAM group.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cam.NewGroup(ctx, "foo", &Cam.GroupArgs{
+// 			Remark: pulumi.String("test"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CAM group can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cam/group:Group foo 90496
+// ```
 type Group struct {
 	pulumi.CustomResourceState
 

@@ -460,7 +460,212 @@ class AlarmPolicy(pulumi.CustomResource):
                  trigger_tasks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AlarmPolicyTriggerTaskArgs']]]]] = None,
                  __props__=None):
         """
-        Create a AlarmPolicy resource with the given unique name, props, and options.
+        Provides a alarm policy resource for monitor.
+
+        ## Example Usage
+
+        cvm_device alarm policy
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        group = tencentcloud.monitor.AlarmPolicy("group",
+            conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
+                is_union_rule=1,
+                rules=[tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                    continue_period=1,
+                    is_power_notice=0,
+                    metric_name="CpuUsage",
+                    notice_frequency=3600,
+                    operator="ge",
+                    period=60,
+                    value="89.9",
+                )],
+            ),
+            enable=1,
+            event_conditions=[
+                tencentcloud.monitor.AlarmPolicyEventConditionArgs(
+                    metric_name="ping_unreachable",
+                ),
+                tencentcloud.monitor.AlarmPolicyEventConditionArgs(
+                    metric_name="guest_reboot",
+                ),
+            ],
+            monitor_type="MT_QCE",
+            namespace="cvm_device",
+            notice_ids=["notice-l9ziyxw6"],
+            policy_name="hello",
+            project_id=1244035,
+            trigger_tasks=[tencentcloud.monitor.AlarmPolicyTriggerTaskArgs(
+                task_config="{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
+                type="AS",
+            )])
+        ```
+
+        k8s_cluster alarm policy
+
+        ```python
+        import pulumi
+        import json
+        import pulumi_tencentcloud as tencentcloud
+
+        policy = tencentcloud.monitor.AlarmPolicy("policy",
+            enable=1,
+            monitor_type="MT_QCE",
+            namespace="k8s_cluster",
+            notice_ids=["notice-l9ziyxw6"],
+            policy_name="TkeClusterNew",
+            project_id=1244035,
+            conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
+                is_union_rule=0,
+                rules=[
+                    tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                        continue_period=3,
+                        description="Allocatable Pods",
+                        is_power_notice=0,
+                        metric_name="K8sClusterAllocatablePodsTotal",
+                        notice_frequency=3600,
+                        operator="gt",
+                        period=60,
+                        rule_type="STATIC",
+                        unit="Count",
+                        value="10",
+                        filter=tencentcloud.monitor.AlarmPolicyConditionsRuleFilterArgs(
+                            dimensions=json.dumps([[
+                                {
+                                    "Key": "region",
+                                    "Operator": "eq",
+                                    "Value": ["ap-guangzhou"],
+                                },
+                                {
+                                    "Key": "tke_cluster_instance_id",
+                                    "Operator": "in",
+                                    "Value": ["cls-czhtobea"],
+                                },
+                            ]]),
+                            type="DIMENSION",
+                        ),
+                    ),
+                    tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                        continue_period=3,
+                        description="Total CPU Cores",
+                        is_power_notice=0,
+                        metric_name="K8sClusterCpuCoreTotal",
+                        notice_frequency=3600,
+                        operator="gt",
+                        period=60,
+                        rule_type="STATIC",
+                        unit="Core",
+                        value="2",
+                        filter=tencentcloud.monitor.AlarmPolicyConditionsRuleFilterArgs(
+                            dimensions=json.dumps([[
+                                {
+                                    "Key": "region",
+                                    "Operator": "eq",
+                                    "Value": ["ap-guangzhou"],
+                                },
+                                {
+                                    "Key": "tke_cluster_instance_id",
+                                    "Operator": "in",
+                                    "Value": ["cls-czhtobea"],
+                                },
+                            ]]),
+                            type="DIMENSION",
+                        ),
+                    ),
+                ],
+            ))
+        ```
+
+        cvm_device alarm policy binding cvm by tag
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        policy = tencentcloud.monitor.AlarmPolicy("policy",
+            conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
+                is_union_rule=0,
+                rules=[
+                    tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                        continue_period=5,
+                        description="CPUUtilization",
+                        is_power_notice=0,
+                        metric_name="CpuUsage",
+                        notice_frequency=7200,
+                        operator="gt",
+                        period=60,
+                        rule_type="STATIC",
+                        unit="%",
+                        value="95",
+                    ),
+                    tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                        continue_period=5,
+                        description="PublicBandwidthUtilization",
+                        is_power_notice=0,
+                        metric_name="Outratio",
+                        notice_frequency=7200,
+                        operator="gt",
+                        period=60,
+                        rule_type="STATIC",
+                        unit="%",
+                        value="95",
+                    ),
+                    tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                        continue_period=5,
+                        description="MemoryUtilization",
+                        is_power_notice=0,
+                        metric_name="MemUsage",
+                        notice_frequency=7200,
+                        operator="gt",
+                        period=60,
+                        rule_type="STATIC",
+                        unit="%",
+                        value="95",
+                    ),
+                    tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                        continue_period=5,
+                        description="DiskUtilization",
+                        is_power_notice=0,
+                        metric_name="CvmDiskUsage",
+                        notice_frequency=7200,
+                        operator="gt",
+                        period=60,
+                        rule_type="STATIC",
+                        unit="%",
+                        value="95",
+                    ),
+                ],
+            ),
+            enable=1,
+            event_conditions=[tencentcloud.monitor.AlarmPolicyEventConditionArgs(
+                continue_period=0,
+                description="DiskReadonly",
+                is_power_notice=0,
+                metric_name="disk_readonly",
+                notice_frequency=0,
+                period=0,
+            )],
+            monitor_type="MT_QCE",
+            namespace="cvm_device",
+            notice_ids=["notice-l9ziyxw6"],
+            policy_name="policy",
+            policy_tags=[tencentcloud.monitor.AlarmPolicyPolicyTagArgs(
+                key="test-tag",
+                value="unit-test",
+            )],
+            project_id=0)
+        ```
+
+        ## Import
+
+        Alarm policy instance can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Monitor/alarmPolicy:AlarmPolicy policy policy-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[pulumi.InputType['AlarmPolicyConditionsArgs']] conditions: A list of metric trigger condition.
@@ -483,7 +688,212 @@ class AlarmPolicy(pulumi.CustomResource):
                  args: AlarmPolicyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AlarmPolicy resource with the given unique name, props, and options.
+        Provides a alarm policy resource for monitor.
+
+        ## Example Usage
+
+        cvm_device alarm policy
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        group = tencentcloud.monitor.AlarmPolicy("group",
+            conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
+                is_union_rule=1,
+                rules=[tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                    continue_period=1,
+                    is_power_notice=0,
+                    metric_name="CpuUsage",
+                    notice_frequency=3600,
+                    operator="ge",
+                    period=60,
+                    value="89.9",
+                )],
+            ),
+            enable=1,
+            event_conditions=[
+                tencentcloud.monitor.AlarmPolicyEventConditionArgs(
+                    metric_name="ping_unreachable",
+                ),
+                tencentcloud.monitor.AlarmPolicyEventConditionArgs(
+                    metric_name="guest_reboot",
+                ),
+            ],
+            monitor_type="MT_QCE",
+            namespace="cvm_device",
+            notice_ids=["notice-l9ziyxw6"],
+            policy_name="hello",
+            project_id=1244035,
+            trigger_tasks=[tencentcloud.monitor.AlarmPolicyTriggerTaskArgs(
+                task_config="{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
+                type="AS",
+            )])
+        ```
+
+        k8s_cluster alarm policy
+
+        ```python
+        import pulumi
+        import json
+        import pulumi_tencentcloud as tencentcloud
+
+        policy = tencentcloud.monitor.AlarmPolicy("policy",
+            enable=1,
+            monitor_type="MT_QCE",
+            namespace="k8s_cluster",
+            notice_ids=["notice-l9ziyxw6"],
+            policy_name="TkeClusterNew",
+            project_id=1244035,
+            conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
+                is_union_rule=0,
+                rules=[
+                    tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                        continue_period=3,
+                        description="Allocatable Pods",
+                        is_power_notice=0,
+                        metric_name="K8sClusterAllocatablePodsTotal",
+                        notice_frequency=3600,
+                        operator="gt",
+                        period=60,
+                        rule_type="STATIC",
+                        unit="Count",
+                        value="10",
+                        filter=tencentcloud.monitor.AlarmPolicyConditionsRuleFilterArgs(
+                            dimensions=json.dumps([[
+                                {
+                                    "Key": "region",
+                                    "Operator": "eq",
+                                    "Value": ["ap-guangzhou"],
+                                },
+                                {
+                                    "Key": "tke_cluster_instance_id",
+                                    "Operator": "in",
+                                    "Value": ["cls-czhtobea"],
+                                },
+                            ]]),
+                            type="DIMENSION",
+                        ),
+                    ),
+                    tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                        continue_period=3,
+                        description="Total CPU Cores",
+                        is_power_notice=0,
+                        metric_name="K8sClusterCpuCoreTotal",
+                        notice_frequency=3600,
+                        operator="gt",
+                        period=60,
+                        rule_type="STATIC",
+                        unit="Core",
+                        value="2",
+                        filter=tencentcloud.monitor.AlarmPolicyConditionsRuleFilterArgs(
+                            dimensions=json.dumps([[
+                                {
+                                    "Key": "region",
+                                    "Operator": "eq",
+                                    "Value": ["ap-guangzhou"],
+                                },
+                                {
+                                    "Key": "tke_cluster_instance_id",
+                                    "Operator": "in",
+                                    "Value": ["cls-czhtobea"],
+                                },
+                            ]]),
+                            type="DIMENSION",
+                        ),
+                    ),
+                ],
+            ))
+        ```
+
+        cvm_device alarm policy binding cvm by tag
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        policy = tencentcloud.monitor.AlarmPolicy("policy",
+            conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
+                is_union_rule=0,
+                rules=[
+                    tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                        continue_period=5,
+                        description="CPUUtilization",
+                        is_power_notice=0,
+                        metric_name="CpuUsage",
+                        notice_frequency=7200,
+                        operator="gt",
+                        period=60,
+                        rule_type="STATIC",
+                        unit="%",
+                        value="95",
+                    ),
+                    tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                        continue_period=5,
+                        description="PublicBandwidthUtilization",
+                        is_power_notice=0,
+                        metric_name="Outratio",
+                        notice_frequency=7200,
+                        operator="gt",
+                        period=60,
+                        rule_type="STATIC",
+                        unit="%",
+                        value="95",
+                    ),
+                    tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                        continue_period=5,
+                        description="MemoryUtilization",
+                        is_power_notice=0,
+                        metric_name="MemUsage",
+                        notice_frequency=7200,
+                        operator="gt",
+                        period=60,
+                        rule_type="STATIC",
+                        unit="%",
+                        value="95",
+                    ),
+                    tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
+                        continue_period=5,
+                        description="DiskUtilization",
+                        is_power_notice=0,
+                        metric_name="CvmDiskUsage",
+                        notice_frequency=7200,
+                        operator="gt",
+                        period=60,
+                        rule_type="STATIC",
+                        unit="%",
+                        value="95",
+                    ),
+                ],
+            ),
+            enable=1,
+            event_conditions=[tencentcloud.monitor.AlarmPolicyEventConditionArgs(
+                continue_period=0,
+                description="DiskReadonly",
+                is_power_notice=0,
+                metric_name="disk_readonly",
+                notice_frequency=0,
+                period=0,
+            )],
+            monitor_type="MT_QCE",
+            namespace="cvm_device",
+            notice_ids=["notice-l9ziyxw6"],
+            policy_name="policy",
+            policy_tags=[tencentcloud.monitor.AlarmPolicyPolicyTagArgs(
+                key="test-tag",
+                value="unit-test",
+            )],
+            project_id=0)
+        ```
+
+        ## Import
+
+        Alarm policy instance can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Monitor/alarmPolicy:AlarmPolicy policy policy-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param AlarmPolicyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

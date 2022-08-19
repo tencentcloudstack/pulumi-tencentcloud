@@ -22,12 +22,10 @@ class PublishSubscribeArgs:
                  publish_subscribe_name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a PublishSubscribe resource.
-        :param pulumi.Input[Sequence[pulumi.Input['PublishSubscribeDatabaseTupleArgs']]] database_tuples: Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-               modification is not allowed.
+        :param pulumi.Input[Sequence[pulumi.Input['PublishSubscribeDatabaseTupleArgs']]] database_tuples: Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
         :param pulumi.Input[str] publish_instance_id: ID of the SQL Server instance which publish.
         :param pulumi.Input[str] subscribe_instance_id: ID of the SQL Server instance which subscribe.
-        :param pulumi.Input[bool] delete_subscribe_db: Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-               database, `false` for does not delete the subscribe database. default is `false`.
+        :param pulumi.Input[bool] delete_subscribe_db: Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
         :param pulumi.Input[str] publish_subscribe_name: The name of the Publish and Subscribe. Default is `default_name`.
         """
         pulumi.set(__self__, "database_tuples", database_tuples)
@@ -42,8 +40,7 @@ class PublishSubscribeArgs:
     @pulumi.getter(name="databaseTuples")
     def database_tuples(self) -> pulumi.Input[Sequence[pulumi.Input['PublishSubscribeDatabaseTupleArgs']]]:
         """
-        Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-        modification is not allowed.
+        Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
         """
         return pulumi.get(self, "database_tuples")
 
@@ -79,8 +76,7 @@ class PublishSubscribeArgs:
     @pulumi.getter(name="deleteSubscribeDb")
     def delete_subscribe_db(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-        database, `false` for does not delete the subscribe database. default is `false`.
+        Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
         """
         return pulumi.get(self, "delete_subscribe_db")
 
@@ -111,10 +107,8 @@ class _PublishSubscribeState:
                  subscribe_instance_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering PublishSubscribe resources.
-        :param pulumi.Input[Sequence[pulumi.Input['PublishSubscribeDatabaseTupleArgs']]] database_tuples: Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-               modification is not allowed.
-        :param pulumi.Input[bool] delete_subscribe_db: Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-               database, `false` for does not delete the subscribe database. default is `false`.
+        :param pulumi.Input[Sequence[pulumi.Input['PublishSubscribeDatabaseTupleArgs']]] database_tuples: Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
+        :param pulumi.Input[bool] delete_subscribe_db: Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
         :param pulumi.Input[str] publish_instance_id: ID of the SQL Server instance which publish.
         :param pulumi.Input[str] publish_subscribe_name: The name of the Publish and Subscribe. Default is `default_name`.
         :param pulumi.Input[str] subscribe_instance_id: ID of the SQL Server instance which subscribe.
@@ -134,8 +128,7 @@ class _PublishSubscribeState:
     @pulumi.getter(name="databaseTuples")
     def database_tuples(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['PublishSubscribeDatabaseTupleArgs']]]]:
         """
-        Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-        modification is not allowed.
+        Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
         """
         return pulumi.get(self, "database_tuples")
 
@@ -147,8 +140,7 @@ class _PublishSubscribeState:
     @pulumi.getter(name="deleteSubscribeDb")
     def delete_subscribe_db(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-        database, `false` for does not delete the subscribe database. default is `false`.
+        Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
         """
         return pulumi.get(self, "delete_subscribe_db")
 
@@ -205,13 +197,36 @@ class PublishSubscribe(pulumi.CustomResource):
                  subscribe_instance_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a PublishSubscribe resource with the given unique name, props, and options.
+        Provides a SQL Server PublishSubscribe resource belongs to SQL Server instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        example = tencentcloud.sqlserver.PublishSubscribe("example",
+            publish_instance_id=tencentcloud_sqlserver_instance["publish_instance"]["id"],
+            subscribe_instance_id=tencentcloud_sqlserver_instance["subscribe_instance"]["id"],
+            publish_subscribe_name="example",
+            delete_subscribe_db=False,
+            database_tuples=[tencentcloud.sqlserver.PublishSubscribeDatabaseTupleArgs(
+                publish_database=tencentcloud_sqlserver_db["test_publish_subscribe"]["name"],
+            )])
+        ```
+
+        ## Import
+
+        SQL Server PublishSubscribe can be imported using the publish_sqlserver_id#subscribe_sqlserver_id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe foo publish_sqlserver_id#subscribe_sqlserver_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PublishSubscribeDatabaseTupleArgs']]]] database_tuples: Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-               modification is not allowed.
-        :param pulumi.Input[bool] delete_subscribe_db: Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-               database, `false` for does not delete the subscribe database. default is `false`.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PublishSubscribeDatabaseTupleArgs']]]] database_tuples: Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
+        :param pulumi.Input[bool] delete_subscribe_db: Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
         :param pulumi.Input[str] publish_instance_id: ID of the SQL Server instance which publish.
         :param pulumi.Input[str] publish_subscribe_name: The name of the Publish and Subscribe. Default is `default_name`.
         :param pulumi.Input[str] subscribe_instance_id: ID of the SQL Server instance which subscribe.
@@ -223,7 +238,32 @@ class PublishSubscribe(pulumi.CustomResource):
                  args: PublishSubscribeArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a PublishSubscribe resource with the given unique name, props, and options.
+        Provides a SQL Server PublishSubscribe resource belongs to SQL Server instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        example = tencentcloud.sqlserver.PublishSubscribe("example",
+            publish_instance_id=tencentcloud_sqlserver_instance["publish_instance"]["id"],
+            subscribe_instance_id=tencentcloud_sqlserver_instance["subscribe_instance"]["id"],
+            publish_subscribe_name="example",
+            delete_subscribe_db=False,
+            database_tuples=[tencentcloud.sqlserver.PublishSubscribeDatabaseTupleArgs(
+                publish_database=tencentcloud_sqlserver_db["test_publish_subscribe"]["name"],
+            )])
+        ```
+
+        ## Import
+
+        SQL Server PublishSubscribe can be imported using the publish_sqlserver_id#subscribe_sqlserver_id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe foo publish_sqlserver_id#subscribe_sqlserver_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param PublishSubscribeArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -289,10 +329,8 @@ class PublishSubscribe(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PublishSubscribeDatabaseTupleArgs']]]] database_tuples: Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-               modification is not allowed.
-        :param pulumi.Input[bool] delete_subscribe_db: Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-               database, `false` for does not delete the subscribe database. default is `false`.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PublishSubscribeDatabaseTupleArgs']]]] database_tuples: Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
+        :param pulumi.Input[bool] delete_subscribe_db: Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
         :param pulumi.Input[str] publish_instance_id: ID of the SQL Server instance which publish.
         :param pulumi.Input[str] publish_subscribe_name: The name of the Publish and Subscribe. Default is `default_name`.
         :param pulumi.Input[str] subscribe_instance_id: ID of the SQL Server instance which subscribe.
@@ -312,8 +350,7 @@ class PublishSubscribe(pulumi.CustomResource):
     @pulumi.getter(name="databaseTuples")
     def database_tuples(self) -> pulumi.Output[Sequence['outputs.PublishSubscribeDatabaseTuple']]:
         """
-        Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-        modification is not allowed.
+        Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
         """
         return pulumi.get(self, "database_tuples")
 
@@ -321,8 +358,7 @@ class PublishSubscribe(pulumi.CustomResource):
     @pulumi.getter(name="deleteSubscribeDb")
     def delete_subscribe_db(self) -> pulumi.Output[Optional[bool]]:
         """
-        Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-        database, `false` for does not delete the subscribe database. default is `false`.
+        Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
         """
         return pulumi.get(self, "delete_subscribe_db")
 

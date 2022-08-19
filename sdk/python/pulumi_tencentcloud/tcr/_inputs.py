@@ -19,6 +19,10 @@ class InstanceSecurityPolicyArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  index: Optional[pulumi.Input[int]] = None,
                  version: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cidr_block: The public network IP address of the access source.
+        :param pulumi.Input[str] description: Remarks of policy.
+        """
         if cidr_block is not None:
             pulumi.set(__self__, "cidr_block", cidr_block)
         if description is not None:
@@ -31,6 +35,9 @@ class InstanceSecurityPolicyArgs:
     @property
     @pulumi.getter(name="cidrBlock")
     def cidr_block(self) -> Optional[pulumi.Input[str]]:
+        """
+        The public network IP address of the access source.
+        """
         return pulumi.get(self, "cidr_block")
 
     @cidr_block.setter
@@ -40,6 +47,9 @@ class InstanceSecurityPolicyArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Remarks of policy.
+        """
         return pulumi.get(self, "description")
 
     @description.setter

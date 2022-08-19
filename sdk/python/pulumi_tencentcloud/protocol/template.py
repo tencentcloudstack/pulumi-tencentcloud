@@ -17,8 +17,7 @@ class TemplateArgs:
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Template resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-               range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
         :param pulumi.Input[str] name: Name of the protocol template.
         """
         pulumi.set(__self__, "protocols", protocols)
@@ -29,8 +28,7 @@ class TemplateArgs:
     @pulumi.getter
     def protocols(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
         """
-        Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-        range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+        Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
         """
         return pulumi.get(self, "protocols")
 
@@ -59,8 +57,7 @@ class _TemplateState:
         """
         Input properties used for looking up and filtering Template resources.
         :param pulumi.Input[str] name: Name of the protocol template.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-               range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
         """
         if name is not None:
             pulumi.set(__self__, "name", name)
@@ -83,8 +80,7 @@ class _TemplateState:
     @pulumi.getter
     def protocols(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-        range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+        Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
         """
         return pulumi.get(self, "protocols")
 
@@ -102,12 +98,33 @@ class Template(pulumi.CustomResource):
                  protocols: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a Template resource with the given unique name, props, and options.
+        Provides a resource to manage protocol template.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.protocol.Template("foo", protocols=[
+            "tcp:80",
+            "udp:all",
+            "icmp:10-30",
+        ])
+        ```
+
+        ## Import
+
+        Protocol template can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Protocol/template:Template foo ppm-nwrggd14
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of the protocol template.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-               range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
         """
         ...
     @overload
@@ -116,7 +133,29 @@ class Template(pulumi.CustomResource):
                  args: TemplateArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Template resource with the given unique name, props, and options.
+        Provides a resource to manage protocol template.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.protocol.Template("foo", protocols=[
+            "tcp:80",
+            "udp:all",
+            "icmp:10-30",
+        ])
+        ```
+
+        ## Import
+
+        Protocol template can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Protocol/template:Template foo ppm-nwrggd14
+        ```
+
         :param str resource_name: The name of the resource.
         :param TemplateArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -170,8 +209,7 @@ class Template(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of the protocol template.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-               range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] protocols: Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -193,8 +231,7 @@ class Template(pulumi.CustomResource):
     @pulumi.getter
     def protocols(self) -> pulumi.Output[Sequence[str]]:
         """
-        Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-        range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+        Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
         """
         return pulumi.get(self, "protocols")
 

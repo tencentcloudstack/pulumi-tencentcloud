@@ -9,46 +9,25 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'AttachmentTargetArgs',
     'InstanceSnatIpArgs',
-    'ServerAttachmentTargetArgs',
+    'SnatIpIpArgs',
     'TargetGroupTargetGroupInstanceArgs',
 ]
 
 @pulumi.input_type
-class InstanceSnatIpArgs:
-    def __init__(__self__, *,
-                 subnet_id: pulumi.Input[str],
-                 ip: Optional[pulumi.Input[str]] = None):
-        pulumi.set(__self__, "subnet_id", subnet_id)
-        if ip is not None:
-            pulumi.set(__self__, "ip", ip)
-
-    @property
-    @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> pulumi.Input[str]:
-        return pulumi.get(self, "subnet_id")
-
-    @subnet_id.setter
-    def subnet_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "subnet_id", value)
-
-    @property
-    @pulumi.getter
-    def ip(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "ip")
-
-    @ip.setter
-    def ip(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "ip", value)
-
-
-@pulumi.input_type
-class ServerAttachmentTargetArgs:
+class AttachmentTargetArgs:
     def __init__(__self__, *,
                  port: pulumi.Input[int],
                  eni_ip: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  weight: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] port: Port of the backend server. Valid value ranges: (0~65535).
+        :param pulumi.Input[str] eni_ip: Eni IP address of the backend server, conflict with `instance_id` but must specify one of them.
+        :param pulumi.Input[str] instance_id: CVM Instance Id of the backend server, conflict with `eni_ip` but must specify one of them.
+        :param pulumi.Input[int] weight: Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to `10`.
+        """
         pulumi.set(__self__, "port", port)
         if eni_ip is not None:
             pulumi.set(__self__, "eni_ip", eni_ip)
@@ -60,6 +39,9 @@ class ServerAttachmentTargetArgs:
     @property
     @pulumi.getter
     def port(self) -> pulumi.Input[int]:
+        """
+        Port of the backend server. Valid value ranges: (0~65535).
+        """
         return pulumi.get(self, "port")
 
     @port.setter
@@ -69,6 +51,9 @@ class ServerAttachmentTargetArgs:
     @property
     @pulumi.getter(name="eniIp")
     def eni_ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Eni IP address of the backend server, conflict with `instance_id` but must specify one of them.
+        """
         return pulumi.get(self, "eni_ip")
 
     @eni_ip.setter
@@ -78,6 +63,9 @@ class ServerAttachmentTargetArgs:
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        CVM Instance Id of the backend server, conflict with `eni_ip` but must specify one of them.
+        """
         return pulumi.get(self, "instance_id")
 
     @instance_id.setter
@@ -87,11 +75,89 @@ class ServerAttachmentTargetArgs:
     @property
     @pulumi.getter
     def weight(self) -> Optional[pulumi.Input[int]]:
+        """
+        Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to `10`.
+        """
         return pulumi.get(self, "weight")
 
     @weight.setter
     def weight(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "weight", value)
+
+
+@pulumi.input_type
+class InstanceSnatIpArgs:
+    def __init__(__self__, *,
+                 subnet_id: pulumi.Input[str],
+                 ip: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] subnet_id: Snat subnet ID.
+        :param pulumi.Input[str] ip: Snat IP address, If set to empty will auto allocated.
+        """
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        if ip is not None:
+            pulumi.set(__self__, "ip", ip)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> pulumi.Input[str]:
+        """
+        Snat subnet ID.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "subnet_id", value)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Snat IP address, If set to empty will auto allocated.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ip", value)
+
+
+@pulumi.input_type
+class SnatIpIpArgs:
+    def __init__(__self__, *,
+                 ip: pulumi.Input[str],
+                 subnet_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] ip: Snat IP.
+        :param pulumi.Input[str] subnet_id: Subnet ID.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> pulumi.Input[str]:
+        """
+        Snat IP.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: pulumi.Input[str]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> pulumi.Input[str]:
+        """
+        Subnet ID.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @subnet_id.setter
+    def subnet_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "subnet_id", value)
 
 
 @pulumi.input_type
@@ -101,6 +167,12 @@ class TargetGroupTargetGroupInstanceArgs:
                  port: pulumi.Input[int],
                  new_port: Optional[pulumi.Input[int]] = None,
                  weight: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] bind_ip: The internal ip of target group instance.
+        :param pulumi.Input[int] port: The port of target group instance.
+        :param pulumi.Input[int] new_port: The new port of target group instance.
+        :param pulumi.Input[int] weight: The weight of target group instance.
+        """
         pulumi.set(__self__, "bind_ip", bind_ip)
         pulumi.set(__self__, "port", port)
         if new_port is not None:
@@ -111,6 +183,9 @@ class TargetGroupTargetGroupInstanceArgs:
     @property
     @pulumi.getter(name="bindIp")
     def bind_ip(self) -> pulumi.Input[str]:
+        """
+        The internal ip of target group instance.
+        """
         return pulumi.get(self, "bind_ip")
 
     @bind_ip.setter
@@ -120,6 +195,9 @@ class TargetGroupTargetGroupInstanceArgs:
     @property
     @pulumi.getter
     def port(self) -> pulumi.Input[int]:
+        """
+        The port of target group instance.
+        """
         return pulumi.get(self, "port")
 
     @port.setter
@@ -129,6 +207,9 @@ class TargetGroupTargetGroupInstanceArgs:
     @property
     @pulumi.getter(name="newPort")
     def new_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        The new port of target group instance.
+        """
         return pulumi.get(self, "new_port")
 
     @new_port.setter
@@ -138,6 +219,9 @@ class TargetGroupTargetGroupInstanceArgs:
     @property
     @pulumi.getter
     def weight(self) -> Optional[pulumi.Input[int]]:
+        """
+        The weight of target group instance.
+        """
         return pulumi.get(self, "weight")
 
     @weight.setter

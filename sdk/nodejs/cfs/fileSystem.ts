@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a cloud file system(CFS).
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Cfs.FileSystem("foo", {
+ *     accessGroupId: "pgroup-7nx89k7l",
+ *     availabilityZone: "ap-guangzhou-3",
+ *     protocol: "NFS",
+ *     subnetId: "subnet-9mu2t9iw",
+ *     vpcId: "vpc-ah9fbkap",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Cloud file system can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
+ * ```
+ */
 export class FileSystem extends pulumi.CustomResource {
     /**
      * Get an existing FileSystem resource's state with the given name, ID, and optional extra

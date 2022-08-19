@@ -6,20 +6,18 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./account";
-export * from "./accountPrivilege";
-export * from "./backupList";
 export * from "./backupPolicy";
-export * from "./defaultParams";
+export * from "./getBackupList";
+export * from "./getDefaultParams";
+export * from "./getInstance";
+export * from "./getParameterList";
+export * from "./getZoneConfig";
 export * from "./instance";
-export * from "./instances";
-export * from "./parameterList";
 export * from "./privilege";
 export * from "./readonlyInstance";
-export * from "./zoneConfig";
 
 // Import resources to register:
 import { Account } from "./account";
-import { AccountPrivilege } from "./accountPrivilege";
 import { BackupPolicy } from "./backupPolicy";
 import { Instance } from "./instance";
 import { Privilege } from "./privilege";
@@ -31,8 +29,6 @@ const _module = {
         switch (type) {
             case "tencentcloud:Mysql/account:Account":
                 return new Account(name, <any>undefined, { urn })
-            case "tencentcloud:Mysql/accountPrivilege:AccountPrivilege":
-                return new AccountPrivilege(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/backupPolicy:BackupPolicy":
                 return new BackupPolicy(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/instance:Instance":
@@ -47,7 +43,6 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/account", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/accountPrivilege", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/privilege", _module)

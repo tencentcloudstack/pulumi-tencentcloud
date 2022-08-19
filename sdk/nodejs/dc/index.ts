@@ -5,28 +5,28 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./gatewayCCNRoutes";
-export * from "./gatewayCcnRouteInstance";
-export * from "./gatewayInstance";
-export * from "./gatewayInstances";
-export * from "./instances";
+export * from "./gateway";
+export * from "./gatewayCcnRoute";
+export * from "./getGatewayCcnRoutes";
+export * from "./getGatewayInstances";
+export * from "./getInstances";
 
 // Import resources to register:
-import { GatewayCcnRouteInstance } from "./gatewayCcnRouteInstance";
-import { GatewayInstance } from "./gatewayInstance";
+import { Gateway } from "./gateway";
+import { GatewayCcnRoute } from "./gatewayCcnRoute";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "tencentcloud:Dc/gatewayCcnRouteInstance:GatewayCcnRouteInstance":
-                return new GatewayCcnRouteInstance(name, <any>undefined, { urn })
-            case "tencentcloud:Dc/gatewayInstance:GatewayInstance":
-                return new GatewayInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Dc/gateway:Gateway":
+                return new Gateway(name, <any>undefined, { urn })
+            case "tencentcloud:Dc/gatewayCcnRoute:GatewayCcnRoute":
+                return new GatewayCcnRoute(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
-pulumi.runtime.registerResourceModule("tencentcloud", "Dc/gatewayCcnRouteInstance", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Dc/gatewayInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dc/gateway", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dc/gatewayCcnRoute", _module)

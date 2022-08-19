@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.As.Outputs
     [OutputType]
     public sealed class ScalingConfigInstanceNameSettings
     {
+        /// <summary>
+        /// CVM instance name.
+        /// </summary>
         public readonly string InstanceName;
+        /// <summary>
+        /// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default is `ORIGINAL`.
+        /// </summary>
         public readonly string? InstanceNameStyle;
 
         [OutputConstructor]

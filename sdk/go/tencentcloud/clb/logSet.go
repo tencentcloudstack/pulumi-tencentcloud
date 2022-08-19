@@ -10,12 +10,21 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create an exclusive CLB Logset.
+//
+// ## Import
+//
+// CLB log set can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Clb/logSet:LogSet foo 4eb9e3a8-9c42-4b32-9ddf-e215e9c92764
+// ```
 type LogSet struct {
 	pulumi.CustomResourceState
 
 	// Logset creation time.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
-	// Logset name, which unique and fixed `clb_logset` among all CLS logsets.
+	// Logset name, which unique and fixed `clbLogset` among all CLS logsets.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Logset retention period in days. Maximun value is `90`.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
@@ -54,7 +63,7 @@ func GetLogSet(ctx *pulumi.Context,
 type logSetState struct {
 	// Logset creation time.
 	CreateTime *string `pulumi:"createTime"`
-	// Logset name, which unique and fixed `clb_logset` among all CLS logsets.
+	// Logset name, which unique and fixed `clbLogset` among all CLS logsets.
 	Name *string `pulumi:"name"`
 	// Logset retention period in days. Maximun value is `90`.
 	Period *int `pulumi:"period"`
@@ -65,7 +74,7 @@ type logSetState struct {
 type LogSetState struct {
 	// Logset creation time.
 	CreateTime pulumi.StringPtrInput
-	// Logset name, which unique and fixed `clb_logset` among all CLS logsets.
+	// Logset name, which unique and fixed `clbLogset` among all CLS logsets.
 	Name pulumi.StringPtrInput
 	// Logset retention period in days. Maximun value is `90`.
 	Period pulumi.IntPtrInput
@@ -180,7 +189,7 @@ func (o LogSetOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogSet) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// Logset name, which unique and fixed `clb_logset` among all CLS logsets.
+// Logset name, which unique and fixed `clbLogset` among all CLS logsets.
 func (o LogSetOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogSet) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }

@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to manage image.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const imageSnap = new tencentcloud.Image.Instance("image_snap", {
+ *     forcePoweroff: true,
+ *     imageDescription: "create image with snapshot",
+ *     imageName: "image-snapshot-keep",
+ *     snapshotIds: [
+ *         "snap-nbp3xy1d",
+ *         "snap-nvzu3dmh",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * image instance can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Image/instance:Instance image_snap img-gf7jspk6
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -33,13 +61,11 @@ export class Instance extends pulumi.CustomResource {
     }
 
     /**
-     * Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-     * image.
+     * Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
      */
     public readonly dataDiskIds!: pulumi.Output<string[]>;
     /**
-     * Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-     * will be made after shutdown.
+     * Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
      */
     public readonly forcePoweroff!: pulumi.Output<boolean | undefined>;
     /**
@@ -55,13 +81,11 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly instanceId!: pulumi.Output<string | undefined>;
     /**
-     * Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-     * passed in simultaneously with InstanceId.
+     * Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
      */
     public readonly snapshotIds!: pulumi.Output<string[] | undefined>;
     /**
-     * Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-     * Syspre function.
+     * Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
      */
     public readonly sysprep!: pulumi.Output<boolean | undefined>;
 
@@ -108,13 +132,11 @@ export class Instance extends pulumi.CustomResource {
  */
 export interface InstanceState {
     /**
-     * Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-     * image.
+     * Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
      */
     dataDiskIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-     * will be made after shutdown.
+     * Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
      */
     forcePoweroff?: pulumi.Input<boolean>;
     /**
@@ -130,13 +152,11 @@ export interface InstanceState {
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-     * passed in simultaneously with InstanceId.
+     * Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
      */
     snapshotIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-     * Syspre function.
+     * Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
      */
     sysprep?: pulumi.Input<boolean>;
 }
@@ -146,13 +166,11 @@ export interface InstanceState {
  */
 export interface InstanceArgs {
     /**
-     * Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the
-     * image.
+     * Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
      */
     dataDiskIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror
-     * will be made after shutdown.
+     * Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
      */
     forcePoweroff?: pulumi.Input<boolean>;
     /**
@@ -168,13 +186,11 @@ export interface InstanceArgs {
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be
-     * passed in simultaneously with InstanceId.
+     * Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
      */
     snapshotIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the
-     * Syspre function.
+     * Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
      */
     sysprep?: pulumi.Input<boolean>;
 }

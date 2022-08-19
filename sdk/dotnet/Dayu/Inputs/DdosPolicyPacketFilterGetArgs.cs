@@ -12,45 +12,87 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
 
     public sealed class DdosPolicyPacketFilterGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Action of port to take. Valid values: `drop`, `drop_black`,`drop_rst`,`drop_black_rst`,`transmit`.`drop`(drop the packet), `drop_black`(drop the packet and black the ip),`drop_rst`(drop the packet and disconnect),`drop_black_rst`(drop the packet, black the ip and disconnect),`transmit`(transmit the packet).
+        /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
+        /// <summary>
+        /// End port of the destination. Valid value ranges: (0~65535). It must be greater than `d_start_port`.
+        /// </summary>
         [Input("dEndPort")]
         public Input<int>? DEndPort { get; set; }
 
+        /// <summary>
+        /// Start port of the destination. Valid value ranges: (0~65535).
+        /// </summary>
         [Input("dStartPort")]
         public Input<int>? DStartPort { get; set; }
 
+        /// <summary>
+        /// The depth of match. Valid value ranges: (0~1500).
+        /// </summary>
         [Input("depth")]
         public Input<int>? Depth { get; set; }
 
+        /// <summary>
+        /// Indicate whether to include the key word/regular expression or not.
+        /// </summary>
         [Input("isInclude")]
         public Input<bool>? IsInclude { get; set; }
 
+        /// <summary>
+        /// Indicate whether to check load or not, `begin_l5` means to match and `no_match` means not.
+        /// </summary>
         [Input("matchBegin")]
         public Input<string>? MatchBegin { get; set; }
 
+        /// <summary>
+        /// The key word or regular expression.
+        /// </summary>
         [Input("matchStr")]
         public Input<string>? MatchStr { get; set; }
 
+        /// <summary>
+        /// Match type. Valid values: `sunday` and `pcre`. `sunday` means key word match while `pcre` means regular match.
+        /// </summary>
         [Input("matchType")]
         public Input<string>? MatchType { get; set; }
 
+        /// <summary>
+        /// The offset of match. Valid value ranges: (0~1500).
+        /// </summary>
         [Input("offset")]
         public Input<int>? Offset { get; set; }
 
+        /// <summary>
+        /// The max length of the packet. Valid value ranges: (0~1500)(Mbps). It must be greater than `pkt_length_min`.
+        /// </summary>
         [Input("pktLengthMax")]
         public Input<int>? PktLengthMax { get; set; }
 
+        /// <summary>
+        /// The minimum length of the packet. Valid value ranges: (0~1500)(Mbps).
+        /// </summary>
         [Input("pktLengthMin")]
         public Input<int>? PktLengthMin { get; set; }
 
+        /// <summary>
+        /// Protocol. Valid values: `tcp`, `udp`, `icmp`, `all`.
+        /// </summary>
         [Input("protocol")]
         public Input<string>? Protocol { get; set; }
 
+        /// <summary>
+        /// End port of the source. Valid value ranges: (0~65535). It must be greater than `s_start_port`.
+        /// </summary>
         [Input("sEndPort")]
         public Input<int>? SEndPort { get; set; }
 
+        /// <summary>
+        /// Start port of the source. Valid value ranges: (0~65535).
+        /// </summary>
         [Input("sStartPort")]
         public Input<int>? SStartPort { get; set; }
 

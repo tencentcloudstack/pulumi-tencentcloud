@@ -5,6 +5,58 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a CynosDB cluster.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Cynosdb.Cluster("foo", {
+ *     availableZone: "ap-guangzhou-4",
+ *     clusterName: "tf-cynosdb",
+ *     dbType: "MYSQL",
+ *     dbVersion: "5.7",
+ *     forceDelete: false,
+ *     instanceCpuCore: 1,
+ *     instanceMaintainDuration: 7200,
+ *     instanceMaintainStartTime: 10800,
+ *     instanceMaintainWeekdays: [
+ *         "Fri",
+ *         "Mon",
+ *         "Sat",
+ *         "Sun",
+ *         "Thu",
+ *         "Wed",
+ *         "Tue",
+ *     ],
+ *     instanceMemorySize: 2,
+ *     paramItem: [{
+ *         currentValue: "utf8mb4",
+ *         name: "character_set_server",
+ *     }],
+ *     password: "cynos@123",
+ *     roGroupSgs: ["sg-ibyjkl6r"],
+ *     rwGroupSgs: ["sg-ibyjkl6r"],
+ *     storageLimit: 1000,
+ *     subnetId: "subnet-q6fhy1mi",
+ *     tags: {
+ *         test: "test",
+ *     },
+ *     vpcId: "vpc-h70b6b49",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CynosDB cluster can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cynosdb/cluster:Cluster foo cynosdbmysql-dzj5l8gz
+ * ```
+ */
 export class Cluster extends pulumi.CustomResource {
     /**
      * Get an existing Cluster resource's state with the given name, ID, and optional extra
@@ -34,8 +86,7 @@ export class Cluster extends pulumi.CustomResource {
     }
 
     /**
-     * Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID
-     * cluster.
+     * Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
      */
     public readonly autoRenewFlag!: pulumi.Output<number | undefined>;
     /**
@@ -67,18 +118,15 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly dbType!: pulumi.Output<string>;
     /**
-     * Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+     * Version of CynosDB, which is related to `dbType`. For `MYSQL`, available value is `5.7`.
      */
     public readonly dbVersion!: pulumi.Output<string>;
     /**
-     * Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All
-     * RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR`
-     * cluster.
+     * Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
      */
     public readonly forceDelete!: pulumi.Output<boolean | undefined>;
     /**
-     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take
-     * effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     public readonly instanceCpuCore!: pulumi.Output<number>;
     /**
@@ -98,8 +146,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly instanceMaintainWeekdays!: pulumi.Output<string[]>;
     /**
-     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately,
-     * if want to upgrade on maintenance window, please upgrade from console.
+     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     public readonly instanceMemorySize!: pulumi.Output<number>;
     /**
@@ -127,8 +174,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly port!: pulumi.Output<number | undefined>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`,
-     * `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
+     * The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     public readonly prepaidPeriod!: pulumi.Output<number | undefined>;
     /**
@@ -148,7 +194,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public /*out*/ readonly roGroupInstances!: pulumi.Output<outputs.Cynosdb.ClusterRoGroupInstance[]>;
     /**
-     * IDs of security group for `ro_group`.
+     * IDs of security group for `roGroup`.
      */
     public readonly roGroupSgs!: pulumi.Output<string[] | undefined>;
     /**
@@ -164,13 +210,11 @@ export class Cluster extends pulumi.CustomResource {
      */
     public /*out*/ readonly rwGroupInstances!: pulumi.Output<outputs.Cynosdb.ClusterRwGroupInstance[]>;
     /**
-     * IDs of security group for `rw_group`.
+     * IDs of security group for `rwGroup`.
      */
     public readonly rwGroupSgs!: pulumi.Output<string[] | undefined>;
     /**
-     * Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If
-     * db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU
-     * and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+     * Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
      */
     public readonly storageLimit!: pulumi.Output<number | undefined>;
     /**
@@ -317,8 +361,7 @@ export class Cluster extends pulumi.CustomResource {
  */
 export interface ClusterState {
     /**
-     * Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID
-     * cluster.
+     * Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
      */
     autoRenewFlag?: pulumi.Input<number>;
     /**
@@ -350,18 +393,15 @@ export interface ClusterState {
      */
     dbType?: pulumi.Input<string>;
     /**
-     * Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+     * Version of CynosDB, which is related to `dbType`. For `MYSQL`, available value is `5.7`.
      */
     dbVersion?: pulumi.Input<string>;
     /**
-     * Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All
-     * RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR`
-     * cluster.
+     * Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
-     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take
-     * effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     instanceCpuCore?: pulumi.Input<number>;
     /**
@@ -381,8 +421,7 @@ export interface ClusterState {
      */
     instanceMaintainWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately,
-     * if want to upgrade on maintenance window, please upgrade from console.
+     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     instanceMemorySize?: pulumi.Input<number>;
     /**
@@ -410,8 +449,7 @@ export interface ClusterState {
      */
     port?: pulumi.Input<number>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`,
-     * `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
+     * The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
@@ -431,7 +469,7 @@ export interface ClusterState {
      */
     roGroupInstances?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ClusterRoGroupInstance>[]>;
     /**
-     * IDs of security group for `ro_group`.
+     * IDs of security group for `roGroup`.
      */
     roGroupSgs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -447,13 +485,11 @@ export interface ClusterState {
      */
     rwGroupInstances?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ClusterRwGroupInstance>[]>;
     /**
-     * IDs of security group for `rw_group`.
+     * IDs of security group for `rwGroup`.
      */
     rwGroupSgs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If
-     * db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU
-     * and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+     * Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
      */
     storageLimit?: pulumi.Input<number>;
     /**
@@ -479,8 +515,7 @@ export interface ClusterState {
  */
 export interface ClusterArgs {
     /**
-     * Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID
-     * cluster.
+     * Auto renew flag. Valid values are `0`(MANUAL_RENEW), `1`(AUTO_RENEW). Default value is `0`. Only works for PREPAID cluster.
      */
     autoRenewFlag?: pulumi.Input<number>;
     /**
@@ -500,18 +535,15 @@ export interface ClusterArgs {
      */
     dbType: pulumi.Input<string>;
     /**
-     * Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+     * Version of CynosDB, which is related to `dbType`. For `MYSQL`, available value is `5.7`.
      */
     dbVersion: pulumi.Input<string>;
     /**
-     * Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All
-     * RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR`
-     * cluster.
+     * Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
-     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take
-     * effect immediately, if want to upgrade on maintenance window, please upgrade from console.
+     * The number of CPU cores of read-write type instance in the CynosDB cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     instanceCpuCore: pulumi.Input<number>;
     /**
@@ -527,8 +559,7 @@ export interface ClusterArgs {
      */
     instanceMaintainWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately,
-     * if want to upgrade on maintenance window, please upgrade from console.
+     * Memory capacity of read-write type instance, unit in GB. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
     instanceMemorySize: pulumi.Input<number>;
     /**
@@ -544,8 +575,7 @@ export interface ClusterArgs {
      */
     port?: pulumi.Input<number>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`,
-     * `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
+     * The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
@@ -553,17 +583,15 @@ export interface ClusterArgs {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * IDs of security group for `ro_group`.
+     * IDs of security group for `roGroup`.
      */
     roGroupSgs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * IDs of security group for `rw_group`.
+     * IDs of security group for `rwGroup`.
      */
     rwGroupSgs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If
-     * db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU
-     * and memory specifications, when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
+     * Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
      */
     storageLimit?: pulumi.Input<number>;
     /**

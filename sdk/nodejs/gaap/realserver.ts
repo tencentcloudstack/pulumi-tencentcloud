@@ -4,6 +4,31 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a GAAP realserver.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Gaap.Realserver("foo", {
+ *     ip: "1.1.1.1",
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * GAAP realserver can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Gaap/realserver:Realserver tencentcloud_gaap_realserver.foo rs-4ftghy6
+ * ```
+ */
 export class Realserver extends pulumi.CustomResource {
     /**
      * Get an existing Realserver resource's state with the given name, ID, and optional extra

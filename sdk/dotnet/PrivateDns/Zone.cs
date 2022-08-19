@@ -9,6 +9,67 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.PrivateDns
 {
+    /// <summary>
+    /// Provide a resource to create a Private Dns Zone.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.PrivateDns.Zone("foo", new Tencentcloud.PrivateDns.ZoneArgs
+    ///         {
+    ///             AccountVpcSets = 
+    ///             {
+    ///                 new Tencentcloud.PrivateDns.Inputs.ZoneAccountVpcSetArgs
+    ///                 {
+    ///                     Region = "ap-guangzhou",
+    ///                     Uin = "454xxxxxxx",
+    ///                     UniqVpcId = "vpc-xxxxx",
+    ///                     VpcName = "test-redis",
+    ///                 },
+    ///             },
+    ///             DnsForwardStatus = "DISABLED",
+    ///             Domain = "domain.com",
+    ///             Remark = "test",
+    ///             Tags = 
+    ///             {
+    ///                 { "created_by", 
+    ///                 {
+    ///                     ,
+    ///                 } },
+    ///                 { "terraform", 
+    ///                 {
+    ///                     ,
+    ///                 } },
+    ///             },
+    ///             VpcSets = 
+    ///             {
+    ///                 new Tencentcloud.PrivateDns.Inputs.ZoneVpcSetArgs
+    ///                 {
+    ///                     Region = "ap-guangzhou",
+    ///                     UniqVpcId = "vpc-xxxxx",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Private Dns Zone can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:PrivateDns/zone:Zone foo zone_id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:PrivateDns/zone:Zone")]
     public partial class Zone : Pulumi.CustomResource
     {
@@ -37,7 +98,7 @@ namespace Pulumi.Tencentcloud.PrivateDns
         public Output<string?> Remark { get; private set; } = null!;
 
         /// <summary>
-        /// Tags the private domain when it is created.
+        /// It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
         /// </summary>
         [Output("tagSets")]
         public Output<ImmutableArray<Outputs.ZoneTagSet>> TagSets { get; private set; } = null!;
@@ -134,7 +195,7 @@ namespace Pulumi.Tencentcloud.PrivateDns
         private InputList<Inputs.ZoneTagSetArgs>? _tagSets;
 
         /// <summary>
-        /// Tags the private domain when it is created.
+        /// It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
         /// </summary>
         [Obsolete(@"It has been deprecated from version 1.72.4. Use `tags` instead.")]
         public InputList<Inputs.ZoneTagSetArgs> TagSets
@@ -208,7 +269,7 @@ namespace Pulumi.Tencentcloud.PrivateDns
         private InputList<Inputs.ZoneTagSetGetArgs>? _tagSets;
 
         /// <summary>
-        /// Tags the private domain when it is created.
+        /// It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
         /// </summary>
         [Obsolete(@"It has been deprecated from version 1.72.4. Use `tags` instead.")]
         public InputList<Inputs.ZoneTagSetGetArgs> TagSets

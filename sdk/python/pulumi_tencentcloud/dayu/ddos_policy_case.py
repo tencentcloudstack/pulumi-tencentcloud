@@ -50,10 +50,8 @@ class DdosPolicyCaseArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] web_api_urls: Web API url set.
         :param pulumi.Input[str] has_initiate_udp: Indicate whether the actively initiate UDP requests or not. Valid values: `no` and `yes`.
         :param pulumi.Input[str] has_vpn: Indicate whether the service involves VPN service or not. Valid values: `no` and `yes`.
-        :param pulumi.Input[str] max_tcp_package_len: The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-               greater than `min_tcp_package_len`.
-        :param pulumi.Input[str] max_udp_package_len: The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-               greater than `min_udp_package_len`.
+        :param pulumi.Input[str] max_tcp_package_len: The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_tcp_package_len`.
+        :param pulumi.Input[str] max_udp_package_len: The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_udp_package_len`.
         :param pulumi.Input[str] min_tcp_package_len: The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.
         :param pulumi.Input[str] min_udp_package_len: The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.
         :param pulumi.Input[str] name: Name of the DDoS policy case. Length should between 1 and 64.
@@ -256,8 +254,7 @@ class DdosPolicyCaseArgs:
     @pulumi.getter(name="maxTcpPackageLen")
     def max_tcp_package_len(self) -> Optional[pulumi.Input[str]]:
         """
-        The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-        greater than `min_tcp_package_len`.
+        The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_tcp_package_len`.
         """
         return pulumi.get(self, "max_tcp_package_len")
 
@@ -269,8 +266,7 @@ class DdosPolicyCaseArgs:
     @pulumi.getter(name="maxUdpPackageLen")
     def max_udp_package_len(self) -> Optional[pulumi.Input[str]]:
         """
-        The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-        greater than `min_udp_package_len`.
+        The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_udp_package_len`.
         """
         return pulumi.get(self, "max_udp_package_len")
 
@@ -399,10 +395,8 @@ class _DdosPolicyCaseState:
         :param pulumi.Input[str] has_initiate_tcp: Indicate whether the service actively initiates TCP requests or not. Valid values: `no` and `yes`.
         :param pulumi.Input[str] has_initiate_udp: Indicate whether the actively initiate UDP requests or not. Valid values: `no` and `yes`.
         :param pulumi.Input[str] has_vpn: Indicate whether the service involves VPN service or not. Valid values: `no` and `yes`.
-        :param pulumi.Input[str] max_tcp_package_len: The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-               greater than `min_tcp_package_len`.
-        :param pulumi.Input[str] max_udp_package_len: The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-               greater than `min_udp_package_len`.
+        :param pulumi.Input[str] max_tcp_package_len: The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_tcp_package_len`.
+        :param pulumi.Input[str] max_udp_package_len: The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_udp_package_len`.
         :param pulumi.Input[str] min_tcp_package_len: The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.
         :param pulumi.Input[str] min_udp_package_len: The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.
         :param pulumi.Input[str] name: Name of the DDoS policy case. Length should between 1 and 64.
@@ -556,8 +550,7 @@ class _DdosPolicyCaseState:
     @pulumi.getter(name="maxTcpPackageLen")
     def max_tcp_package_len(self) -> Optional[pulumi.Input[str]]:
         """
-        The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-        greater than `min_tcp_package_len`.
+        The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_tcp_package_len`.
         """
         return pulumi.get(self, "max_tcp_package_len")
 
@@ -569,8 +562,7 @@ class _DdosPolicyCaseState:
     @pulumi.getter(name="maxUdpPackageLen")
     def max_udp_package_len(self) -> Optional[pulumi.Input[str]]:
         """
-        The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-        greater than `min_udp_package_len`.
+        The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_udp_package_len`.
         """
         return pulumi.get(self, "max_udp_package_len")
 
@@ -788,7 +780,49 @@ class DdosPolicyCase(pulumi.CustomResource):
                  web_api_urls: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a DdosPolicyCase resource with the given unique name, props, and options.
+        Use this resource to create dayu DDoS policy case
+
+        > **NOTE:** when a dayu DDoS policy case is created, there will be a dayu DDoS policy created with the same prefix name in the same time. This resource only supports Anti-DDoS of type `bgp`, `bgp-multip` and `bgpip`. One Anti-DDoS resource can only has one DDoS policy case resource. When there is only one Anti-DDoS resource and one policy case, those two resource will be bind automatically.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.dayu.DdosPolicyCase("foo",
+            app_protocols=[
+                "tcp",
+                "udp",
+            ],
+            app_type="WEB",
+            has_abroad="yes",
+            has_initiate_tcp="yes",
+            has_initiate_udp="yes",
+            has_vpn="yes",
+            max_tcp_package_len="1200",
+            max_udp_package_len="1200",
+            min_tcp_package_len="1000",
+            min_udp_package_len="1000",
+            peer_tcp_port="1111",
+            peer_udp_port="3333",
+            platform_types=[
+                "PC",
+                "MOBILE",
+            ],
+            resource_type="bgpip",
+            tcp_end_port="2000",
+            tcp_footprint="511",
+            tcp_start_port="1000",
+            udp_end_port="4000",
+            udp_footprint="500",
+            udp_start_port="3000",
+            web_api_urls=[
+                "abc.com",
+                "test.cn/aaa.png",
+            ])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] app_protocols: App protocol set of the DDoS policy case.
@@ -797,10 +831,8 @@ class DdosPolicyCase(pulumi.CustomResource):
         :param pulumi.Input[str] has_initiate_tcp: Indicate whether the service actively initiates TCP requests or not. Valid values: `no` and `yes`.
         :param pulumi.Input[str] has_initiate_udp: Indicate whether the actively initiate UDP requests or not. Valid values: `no` and `yes`.
         :param pulumi.Input[str] has_vpn: Indicate whether the service involves VPN service or not. Valid values: `no` and `yes`.
-        :param pulumi.Input[str] max_tcp_package_len: The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-               greater than `min_tcp_package_len`.
-        :param pulumi.Input[str] max_udp_package_len: The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-               greater than `min_udp_package_len`.
+        :param pulumi.Input[str] max_tcp_package_len: The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_tcp_package_len`.
+        :param pulumi.Input[str] max_udp_package_len: The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_udp_package_len`.
         :param pulumi.Input[str] min_tcp_package_len: The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.
         :param pulumi.Input[str] min_udp_package_len: The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.
         :param pulumi.Input[str] name: Name of the DDoS policy case. Length should between 1 and 64.
@@ -823,7 +855,49 @@ class DdosPolicyCase(pulumi.CustomResource):
                  args: DdosPolicyCaseArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a DdosPolicyCase resource with the given unique name, props, and options.
+        Use this resource to create dayu DDoS policy case
+
+        > **NOTE:** when a dayu DDoS policy case is created, there will be a dayu DDoS policy created with the same prefix name in the same time. This resource only supports Anti-DDoS of type `bgp`, `bgp-multip` and `bgpip`. One Anti-DDoS resource can only has one DDoS policy case resource. When there is only one Anti-DDoS resource and one policy case, those two resource will be bind automatically.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.dayu.DdosPolicyCase("foo",
+            app_protocols=[
+                "tcp",
+                "udp",
+            ],
+            app_type="WEB",
+            has_abroad="yes",
+            has_initiate_tcp="yes",
+            has_initiate_udp="yes",
+            has_vpn="yes",
+            max_tcp_package_len="1200",
+            max_udp_package_len="1200",
+            min_tcp_package_len="1000",
+            min_udp_package_len="1000",
+            peer_tcp_port="1111",
+            peer_udp_port="3333",
+            platform_types=[
+                "PC",
+                "MOBILE",
+            ],
+            resource_type="bgpip",
+            tcp_end_port="2000",
+            tcp_footprint="511",
+            tcp_start_port="1000",
+            udp_end_port="4000",
+            udp_footprint="500",
+            udp_start_port="3000",
+            web_api_urls=[
+                "abc.com",
+                "test.cn/aaa.png",
+            ])
+        ```
+
         :param str resource_name: The name of the resource.
         :param DdosPolicyCaseArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -967,10 +1041,8 @@ class DdosPolicyCase(pulumi.CustomResource):
         :param pulumi.Input[str] has_initiate_tcp: Indicate whether the service actively initiates TCP requests or not. Valid values: `no` and `yes`.
         :param pulumi.Input[str] has_initiate_udp: Indicate whether the actively initiate UDP requests or not. Valid values: `no` and `yes`.
         :param pulumi.Input[str] has_vpn: Indicate whether the service involves VPN service or not. Valid values: `no` and `yes`.
-        :param pulumi.Input[str] max_tcp_package_len: The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-               greater than `min_tcp_package_len`.
-        :param pulumi.Input[str] max_udp_package_len: The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-               greater than `min_udp_package_len`.
+        :param pulumi.Input[str] max_tcp_package_len: The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_tcp_package_len`.
+        :param pulumi.Input[str] max_udp_package_len: The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_udp_package_len`.
         :param pulumi.Input[str] min_tcp_package_len: The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.
         :param pulumi.Input[str] min_udp_package_len: The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.
         :param pulumi.Input[str] name: Name of the DDoS policy case. Length should between 1 and 64.
@@ -1077,8 +1149,7 @@ class DdosPolicyCase(pulumi.CustomResource):
     @pulumi.getter(name="maxTcpPackageLen")
     def max_tcp_package_len(self) -> pulumi.Output[Optional[str]]:
         """
-        The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be
-        greater than `min_tcp_package_len`.
+        The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_tcp_package_len`.
         """
         return pulumi.get(self, "max_tcp_package_len")
 
@@ -1086,8 +1157,7 @@ class DdosPolicyCase(pulumi.CustomResource):
     @pulumi.getter(name="maxUdpPackageLen")
     def max_udp_package_len(self) -> pulumi.Output[Optional[str]]:
         """
-        The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be
-        greater than `min_udp_package_len`.
+        The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `min_udp_package_len`.
         """
         return pulumi.get(self, "max_udp_package_len")
 

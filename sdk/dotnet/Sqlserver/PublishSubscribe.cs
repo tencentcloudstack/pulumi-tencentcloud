@@ -9,19 +9,57 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Sqlserver
 {
+    /// <summary>
+    /// Provides a SQL Server PublishSubscribe resource belongs to SQL Server instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example = new Tencentcloud.Sqlserver.PublishSubscribe("example", new Tencentcloud.Sqlserver.PublishSubscribeArgs
+    ///         {
+    ///             PublishInstanceId = tencentcloud_sqlserver_instance.Publish_instance.Id,
+    ///             SubscribeInstanceId = tencentcloud_sqlserver_instance.Subscribe_instance.Id,
+    ///             PublishSubscribeName = "example",
+    ///             DeleteSubscribeDb = false,
+    ///             DatabaseTuples = 
+    ///             {
+    ///                 new Tencentcloud.Sqlserver.Inputs.PublishSubscribeDatabaseTupleArgs
+    ///                 {
+    ///                     PublishDatabase = tencentcloud_sqlserver_db.Test_publish_subscribe.Name,
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// SQL Server PublishSubscribe can be imported using the publish_sqlserver_id#subscribe_sqlserver_id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe foo publish_sqlserver_id#subscribe_sqlserver_id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/publishSubscribe:PublishSubscribe")]
     public partial class PublishSubscribe : Pulumi.CustomResource
     {
         /// <summary>
-        /// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-        /// modification is not allowed.
+        /// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
         /// </summary>
         [Output("databaseTuples")]
         public Output<ImmutableArray<Outputs.PublishSubscribeDatabaseTuple>> DatabaseTuples { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-        /// database, `false` for does not delete the subscribe database. default is `false`.
+        /// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
         /// </summary>
         [Output("deleteSubscribeDb")]
         public Output<bool?> DeleteSubscribeDb { get; private set; } = null!;
@@ -94,8 +132,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         private InputList<Inputs.PublishSubscribeDatabaseTupleArgs>? _databaseTuples;
 
         /// <summary>
-        /// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-        /// modification is not allowed.
+        /// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
         /// </summary>
         public InputList<Inputs.PublishSubscribeDatabaseTupleArgs> DatabaseTuples
         {
@@ -104,8 +141,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         }
 
         /// <summary>
-        /// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-        /// database, `false` for does not delete the subscribe database. default is `false`.
+        /// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
         /// </summary>
         [Input("deleteSubscribeDb")]
         public Input<bool>? DeleteSubscribeDb { get; set; }
@@ -139,8 +175,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         private InputList<Inputs.PublishSubscribeDatabaseTupleGetArgs>? _databaseTuples;
 
         /// <summary>
-        /// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but
-        /// modification is not allowed.
+        /// Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
         /// </summary>
         public InputList<Inputs.PublishSubscribeDatabaseTupleGetArgs> DatabaseTuples
         {
@@ -149,8 +184,7 @@ namespace Pulumi.Tencentcloud.Sqlserver
         }
 
         /// <summary>
-        /// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe
-        /// database, `false` for does not delete the subscribe database. default is `false`.
+        /// Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
         /// </summary>
         [Input("deleteSubscribeDb")]
         public Input<bool>? DeleteSubscribeDb { get; set; }

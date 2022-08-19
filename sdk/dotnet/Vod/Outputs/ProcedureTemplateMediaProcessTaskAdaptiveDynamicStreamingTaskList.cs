@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Vod.Outputs
     [OutputType]
     public sealed class ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskList
     {
+        /// <summary>
+        /// Adaptive bitrate streaming template ID.
+        /// </summary>
         public readonly string Definition;
+        /// <summary>
+        /// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkList> WatermarkLists;
 
         [OutputConstructor]

@@ -13,9 +13,21 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
     [OutputType]
     public sealed class DdosPolicyWatermarkKey
     {
+        /// <summary>
+        /// Content of the watermark.
+        /// </summary>
         public readonly string? Content;
+        /// <summary>
+        /// Create time of the DDoS policy.
+        /// </summary>
         public readonly string? CreateTime;
+        /// <summary>
+        /// Id of the watermark.
+        /// </summary>
         public readonly string? Id;
+        /// <summary>
+        /// Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+        /// </summary>
         public readonly bool? OpenSwitch;
 
         [OutputConstructor]

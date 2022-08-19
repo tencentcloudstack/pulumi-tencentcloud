@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Monitor.Inputs
 
     public sealed class AlarmPolicyTriggerTaskArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Configuration information in JSON format.
+        /// </summary>
         [Input("taskConfig", required: true)]
         public Input<string> TaskConfig { get; set; } = null!;
 
+        /// <summary>
+        /// Triggered task type.
+        /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
 

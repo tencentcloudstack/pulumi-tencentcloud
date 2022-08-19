@@ -8,23 +8,20 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
-__all__ = ['DBArgs', 'DB']
+__all__ = ['DbArgs', 'Db']
 
 @pulumi.input_type
-class DBArgs:
+class DbArgs:
     def __init__(__self__, *,
                  instance_id: pulumi.Input[str],
                  charset: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  remark: Optional[pulumi.Input[str]] = None):
         """
-        The set of arguments for constructing a DB resource.
+        The set of arguments for constructing a Db resource.
         :param pulumi.Input[str] instance_id: SQL Server instance ID which DB belongs to.
-        :param pulumi.Input[str] charset: Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-               `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-               `Chinese_PRC_CI_AS`.
-        :param pulumi.Input[str] name: Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-               first one can not be underline.
+        :param pulumi.Input[str] charset: Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
+        :param pulumi.Input[str] name: Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
         :param pulumi.Input[str] remark: Remark of the DB.
         """
         pulumi.set(__self__, "instance_id", instance_id)
@@ -51,9 +48,7 @@ class DBArgs:
     @pulumi.getter
     def charset(self) -> Optional[pulumi.Input[str]]:
         """
-        Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-        `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-        `Chinese_PRC_CI_AS`.
+        Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
         """
         return pulumi.get(self, "charset")
 
@@ -65,8 +60,7 @@ class DBArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-        first one can not be underline.
+        Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
         """
         return pulumi.get(self, "name")
 
@@ -88,7 +82,7 @@ class DBArgs:
 
 
 @pulumi.input_type
-class _DBState:
+class _DbState:
     def __init__(__self__, *,
                  charset: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
@@ -97,14 +91,11 @@ class _DBState:
                  remark: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None):
         """
-        Input properties used for looking up and filtering DB resources.
-        :param pulumi.Input[str] charset: Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-               `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-               `Chinese_PRC_CI_AS`.
+        Input properties used for looking up and filtering Db resources.
+        :param pulumi.Input[str] charset: Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
         :param pulumi.Input[str] create_time: Database creation time.
         :param pulumi.Input[str] instance_id: SQL Server instance ID which DB belongs to.
-        :param pulumi.Input[str] name: Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-               first one can not be underline.
+        :param pulumi.Input[str] name: Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
         :param pulumi.Input[str] remark: Remark of the DB.
         :param pulumi.Input[str] status: Database status, could be `creating`, `running`, `modifying` which means changing the remark, and `deleting`.
         """
@@ -125,9 +116,7 @@ class _DBState:
     @pulumi.getter
     def charset(self) -> Optional[pulumi.Input[str]]:
         """
-        Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-        `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-        `Chinese_PRC_CI_AS`.
+        Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
         """
         return pulumi.get(self, "charset")
 
@@ -163,8 +152,7 @@ class _DBState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-        first one can not be underline.
+        Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
         """
         return pulumi.get(self, "name")
 
@@ -197,7 +185,7 @@ class _DBState:
         pulumi.set(self, "status", value)
 
 
-class DB(pulumi.CustomResource):
+class Db(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -208,32 +196,71 @@ class DB(pulumi.CustomResource):
                  remark: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a DB resource with the given unique name, props, and options.
+        Provides a SQL Server DB resource belongs to SQL Server instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        example = tencentcloud.sqlserver.Db("example",
+            instance_id=tencentcloud_sqlserver_instance["example"]["id"],
+            charset="Chinese_PRC_BIN",
+            remark="test-remark")
+        ```
+
+        ## Import
+
+        SQL Server DB can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Sqlserver/db:Db foo mssql-3cdq7kx5#db_name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] charset: Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-               `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-               `Chinese_PRC_CI_AS`.
+        :param pulumi.Input[str] charset: Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
         :param pulumi.Input[str] instance_id: SQL Server instance ID which DB belongs to.
-        :param pulumi.Input[str] name: Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-               first one can not be underline.
+        :param pulumi.Input[str] name: Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
         :param pulumi.Input[str] remark: Remark of the DB.
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: DBArgs,
+                 args: DbArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a DB resource with the given unique name, props, and options.
+        Provides a SQL Server DB resource belongs to SQL Server instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        example = tencentcloud.sqlserver.Db("example",
+            instance_id=tencentcloud_sqlserver_instance["example"]["id"],
+            charset="Chinese_PRC_BIN",
+            remark="test-remark")
+        ```
+
+        ## Import
+
+        SQL Server DB can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Sqlserver/db:Db foo mssql-3cdq7kx5#db_name
+        ```
+
         :param str resource_name: The name of the resource.
-        :param DBArgs args: The arguments to use to populate this resource's properties.
+        :param DbArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(DBArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(DbArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -256,7 +283,7 @@ class DB(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = DBArgs.__new__(DBArgs)
+            __props__ = DbArgs.__new__(DbArgs)
 
             __props__.__dict__["charset"] = charset
             if instance_id is None and not opts.urn:
@@ -266,8 +293,8 @@ class DB(pulumi.CustomResource):
             __props__.__dict__["remark"] = remark
             __props__.__dict__["create_time"] = None
             __props__.__dict__["status"] = None
-        super(DB, __self__).__init__(
-            'tencentcloud:Sqlserver/dB:DB',
+        super(Db, __self__).__init__(
+            'tencentcloud:Sqlserver/db:Db',
             resource_name,
             __props__,
             opts)
@@ -281,27 +308,24 @@ class DB(pulumi.CustomResource):
             instance_id: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             remark: Optional[pulumi.Input[str]] = None,
-            status: Optional[pulumi.Input[str]] = None) -> 'DB':
+            status: Optional[pulumi.Input[str]] = None) -> 'Db':
         """
-        Get an existing DB resource's state with the given name, id, and optional extra
+        Get an existing Db resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] charset: Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-               `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-               `Chinese_PRC_CI_AS`.
+        :param pulumi.Input[str] charset: Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
         :param pulumi.Input[str] create_time: Database creation time.
         :param pulumi.Input[str] instance_id: SQL Server instance ID which DB belongs to.
-        :param pulumi.Input[str] name: Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-               first one can not be underline.
+        :param pulumi.Input[str] name: Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
         :param pulumi.Input[str] remark: Remark of the DB.
         :param pulumi.Input[str] status: Database status, could be `creating`, `running`, `modifying` which means changing the remark, and `deleting`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = _DBState.__new__(_DBState)
+        __props__ = _DbState.__new__(_DbState)
 
         __props__.__dict__["charset"] = charset
         __props__.__dict__["create_time"] = create_time
@@ -309,15 +333,13 @@ class DB(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["remark"] = remark
         __props__.__dict__["status"] = status
-        return DB(resource_name, opts=opts, __props__=__props__)
+        return Db(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter
     def charset(self) -> pulumi.Output[Optional[str]]:
         """
-        Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`,
-        `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is
-        `Chinese_PRC_CI_AS`.
+        Character set DB uses. Valid values: `Chinese_PRC_CI_AS`, `Chinese_PRC_CS_AS`, `Chinese_PRC_BIN`, `Chinese_Taiwan_Stroke_CI_AS`, `SQL_Latin1_General_CP1_CI_AS`, and `SQL_Latin1_General_CP1_CS_AS`. Default value is `Chinese_PRC_CI_AS`.
         """
         return pulumi.get(self, "charset")
 
@@ -341,8 +363,7 @@ class DB(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the
-        first one can not be underline.
+        Name of SQL Server DB. The database name must be unique and must be composed of numbers, letters and underlines, and the first one can not be underline.
         """
         return pulumi.get(self, "name")
 

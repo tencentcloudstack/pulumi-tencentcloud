@@ -12,12 +12,21 @@ namespace Pulumi.Tencentcloud.Eni.Inputs
 
     public sealed class InstanceIpv4InfoArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Description of the IP, maximum length 25.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// Intranet IP.
+        /// </summary>
         [Input("ip")]
         public Input<string>? Ip { get; set; }
 
+        /// <summary>
+        /// Indicates whether the IP is primary.
+        /// </summary>
         [Input("primary")]
         public Input<bool>? Primary { get; set; }
 

@@ -4,6 +4,72 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CAM role.
+ *
+ * ## Example Usage
+ *
+ * Create normally
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Cam.Role("foo", {
+ *     consoleLogin: true,
+ *     description: "test",
+ *     document: `{
+ *   "version": "2.0",
+ *   "statement": [
+ *     {
+ *       "action": ["name/sts:AssumeRole"],
+ *       "effect": "allow",
+ *       "principal": {
+ *         "qcs": ["qcs::cam::uin/<your-account-id>:uin/<your-account-id>"]
+ *       }
+ *     }
+ *   ]
+ * }
+ * `,
+ *     tags: {
+ *         test: "tf-cam-role",
+ *     },
+ * });
+ * ```
+ *
+ * Create with SAML provider
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const boo = new tencentcloud.Cam.Role("boo", {
+ *     consoleLogin: true,
+ *     description: "test",
+ *     document: `{
+ *   "version": "2.0",
+ *   "statement": [
+ *     {
+ *       "action": ["name/sts:AssumeRole", "name/sts:AssumeRoleWithWebIdentity"],
+ *       "effect": "allow",
+ *       "principal": {
+ *         "federated": ["qcs::cam::uin/<your-account-id>:saml-provider/<your-name>"]
+ *       }
+ *     }
+ *   ]
+ * }
+ * `,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CAM role can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cam/role:Role foo 4611686018427733635
+ * ```
+ */
 export class Role extends pulumi.CustomResource {
     /**
      * Get an existing Role resource's state with the given name, ID, and optional extra

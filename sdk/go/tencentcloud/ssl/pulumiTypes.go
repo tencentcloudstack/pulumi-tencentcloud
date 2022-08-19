@@ -10,436 +10,352 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type CertificatesCertificate struct {
-	BeginTime     string   `pulumi:"beginTime"`
-	Cert          string   `pulumi:"cert"`
-	CreateTime    string   `pulumi:"createTime"`
-	Domain        string   `pulumi:"domain"`
-	EndTime       string   `pulumi:"endTime"`
-	Id            string   `pulumi:"id"`
-	Name          string   `pulumi:"name"`
-	ProductZhName string   `pulumi:"productZhName"`
-	ProjectId     int      `pulumi:"projectId"`
-	Status        int      `pulumi:"status"`
-	SubjectNames  []string `pulumi:"subjectNames"`
-	Type          string   `pulumi:"type"`
+type PayCertificateInformation struct {
+	// The administrator's email address.
+	AdminEmail string `pulumi:"adminEmail"`
+	// The first name of the administrator.
+	AdminFirstName string `pulumi:"adminFirstName"`
+	// The last name of the administrator.
+	AdminLastName string `pulumi:"adminLastName"`
+	// Manager mobile phone number.
+	AdminPhoneNum string `pulumi:"adminPhoneNum"`
+	// Manager position.
+	AdminPosition string `pulumi:"adminPosition"`
+	// Domain name for binding certificate.
+	CertificateDomain string `pulumi:"certificateDomain"`
+	// Contact email address.
+	ContactEmail string `pulumi:"contactEmail"`
+	// Contact first name.
+	ContactFirstName string `pulumi:"contactFirstName"`
+	// Contact last name.
+	ContactLastName string `pulumi:"contactLastName"`
+	// Contact phone number.
+	ContactNumber string `pulumi:"contactNumber"`
+	// Contact position.
+	ContactPosition string `pulumi:"contactPosition"`
+	// CSR content uploaded.
+	CsrContent *string `pulumi:"csrContent"`
+	// CSR generation method. Valid values: `online`, `parse`. `online` means online generation, `parse` means manual upload.
+	CsrType *string `pulumi:"csrType"`
+	// Array of uploaded domain names, multi-domain certificates can be uploaded.
+	DomainLists []string `pulumi:"domainLists"`
+	// Private key password.
+	KeyPassword *string `pulumi:"keyPassword"`
+	// Company address.
+	OrganizationAddress string `pulumi:"organizationAddress"`
+	// Company city.
+	OrganizationCity string `pulumi:"organizationCity"`
+	// Country name, such as China: CN.
+	OrganizationCountry string `pulumi:"organizationCountry"`
+	// Department name.
+	OrganizationDivision string `pulumi:"organizationDivision"`
+	// Company name.
+	OrganizationName string `pulumi:"organizationName"`
+	// The province where the company is located.
+	OrganizationRegion string `pulumi:"organizationRegion"`
+	// Company landline area code.
+	PhoneAreaCode string `pulumi:"phoneAreaCode"`
+	// Company landline number.
+	PhoneNumber string `pulumi:"phoneNumber"`
+	// Company postal code.
+	PostalCode string `pulumi:"postalCode"`
+	// Certificate verification method. Valid values: `DNS_AUTO`, `DNS`, `FILE`. `DNS_AUTO` means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, `DNS` means manual DNS verification, `FILE` means file verification.
+	VerifyType string `pulumi:"verifyType"`
 }
 
-// CertificatesCertificateInput is an input type that accepts CertificatesCertificateArgs and CertificatesCertificateOutput values.
-// You can construct a concrete instance of `CertificatesCertificateInput` via:
+// PayCertificateInformationInput is an input type that accepts PayCertificateInformationArgs and PayCertificateInformationOutput values.
+// You can construct a concrete instance of `PayCertificateInformationInput` via:
 //
-//          CertificatesCertificateArgs{...}
-type CertificatesCertificateInput interface {
+//          PayCertificateInformationArgs{...}
+type PayCertificateInformationInput interface {
 	pulumi.Input
 
-	ToCertificatesCertificateOutput() CertificatesCertificateOutput
-	ToCertificatesCertificateOutputWithContext(context.Context) CertificatesCertificateOutput
+	ToPayCertificateInformationOutput() PayCertificateInformationOutput
+	ToPayCertificateInformationOutputWithContext(context.Context) PayCertificateInformationOutput
 }
 
-type CertificatesCertificateArgs struct {
-	BeginTime     pulumi.StringInput      `pulumi:"beginTime"`
-	Cert          pulumi.StringInput      `pulumi:"cert"`
-	CreateTime    pulumi.StringInput      `pulumi:"createTime"`
-	Domain        pulumi.StringInput      `pulumi:"domain"`
-	EndTime       pulumi.StringInput      `pulumi:"endTime"`
-	Id            pulumi.StringInput      `pulumi:"id"`
-	Name          pulumi.StringInput      `pulumi:"name"`
-	ProductZhName pulumi.StringInput      `pulumi:"productZhName"`
-	ProjectId     pulumi.IntInput         `pulumi:"projectId"`
-	Status        pulumi.IntInput         `pulumi:"status"`
-	SubjectNames  pulumi.StringArrayInput `pulumi:"subjectNames"`
-	Type          pulumi.StringInput      `pulumi:"type"`
+type PayCertificateInformationArgs struct {
+	// The administrator's email address.
+	AdminEmail pulumi.StringInput `pulumi:"adminEmail"`
+	// The first name of the administrator.
+	AdminFirstName pulumi.StringInput `pulumi:"adminFirstName"`
+	// The last name of the administrator.
+	AdminLastName pulumi.StringInput `pulumi:"adminLastName"`
+	// Manager mobile phone number.
+	AdminPhoneNum pulumi.StringInput `pulumi:"adminPhoneNum"`
+	// Manager position.
+	AdminPosition pulumi.StringInput `pulumi:"adminPosition"`
+	// Domain name for binding certificate.
+	CertificateDomain pulumi.StringInput `pulumi:"certificateDomain"`
+	// Contact email address.
+	ContactEmail pulumi.StringInput `pulumi:"contactEmail"`
+	// Contact first name.
+	ContactFirstName pulumi.StringInput `pulumi:"contactFirstName"`
+	// Contact last name.
+	ContactLastName pulumi.StringInput `pulumi:"contactLastName"`
+	// Contact phone number.
+	ContactNumber pulumi.StringInput `pulumi:"contactNumber"`
+	// Contact position.
+	ContactPosition pulumi.StringInput `pulumi:"contactPosition"`
+	// CSR content uploaded.
+	CsrContent pulumi.StringPtrInput `pulumi:"csrContent"`
+	// CSR generation method. Valid values: `online`, `parse`. `online` means online generation, `parse` means manual upload.
+	CsrType pulumi.StringPtrInput `pulumi:"csrType"`
+	// Array of uploaded domain names, multi-domain certificates can be uploaded.
+	DomainLists pulumi.StringArrayInput `pulumi:"domainLists"`
+	// Private key password.
+	KeyPassword pulumi.StringPtrInput `pulumi:"keyPassword"`
+	// Company address.
+	OrganizationAddress pulumi.StringInput `pulumi:"organizationAddress"`
+	// Company city.
+	OrganizationCity pulumi.StringInput `pulumi:"organizationCity"`
+	// Country name, such as China: CN.
+	OrganizationCountry pulumi.StringInput `pulumi:"organizationCountry"`
+	// Department name.
+	OrganizationDivision pulumi.StringInput `pulumi:"organizationDivision"`
+	// Company name.
+	OrganizationName pulumi.StringInput `pulumi:"organizationName"`
+	// The province where the company is located.
+	OrganizationRegion pulumi.StringInput `pulumi:"organizationRegion"`
+	// Company landline area code.
+	PhoneAreaCode pulumi.StringInput `pulumi:"phoneAreaCode"`
+	// Company landline number.
+	PhoneNumber pulumi.StringInput `pulumi:"phoneNumber"`
+	// Company postal code.
+	PostalCode pulumi.StringInput `pulumi:"postalCode"`
+	// Certificate verification method. Valid values: `DNS_AUTO`, `DNS`, `FILE`. `DNS_AUTO` means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, `DNS` means manual DNS verification, `FILE` means file verification.
+	VerifyType pulumi.StringInput `pulumi:"verifyType"`
 }
 
-func (CertificatesCertificateArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CertificatesCertificate)(nil)).Elem()
+func (PayCertificateInformationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*PayCertificateInformation)(nil)).Elem()
 }
 
-func (i CertificatesCertificateArgs) ToCertificatesCertificateOutput() CertificatesCertificateOutput {
-	return i.ToCertificatesCertificateOutputWithContext(context.Background())
+func (i PayCertificateInformationArgs) ToPayCertificateInformationOutput() PayCertificateInformationOutput {
+	return i.ToPayCertificateInformationOutputWithContext(context.Background())
 }
 
-func (i CertificatesCertificateArgs) ToCertificatesCertificateOutputWithContext(ctx context.Context) CertificatesCertificateOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertificatesCertificateOutput)
+func (i PayCertificateInformationArgs) ToPayCertificateInformationOutputWithContext(ctx context.Context) PayCertificateInformationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PayCertificateInformationOutput)
 }
 
-// CertificatesCertificateArrayInput is an input type that accepts CertificatesCertificateArray and CertificatesCertificateArrayOutput values.
-// You can construct a concrete instance of `CertificatesCertificateArrayInput` via:
+func (i PayCertificateInformationArgs) ToPayCertificateInformationPtrOutput() PayCertificateInformationPtrOutput {
+	return i.ToPayCertificateInformationPtrOutputWithContext(context.Background())
+}
+
+func (i PayCertificateInformationArgs) ToPayCertificateInformationPtrOutputWithContext(ctx context.Context) PayCertificateInformationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PayCertificateInformationOutput).ToPayCertificateInformationPtrOutputWithContext(ctx)
+}
+
+// PayCertificateInformationPtrInput is an input type that accepts PayCertificateInformationArgs, PayCertificateInformationPtr and PayCertificateInformationPtrOutput values.
+// You can construct a concrete instance of `PayCertificateInformationPtrInput` via:
 //
-//          CertificatesCertificateArray{ CertificatesCertificateArgs{...} }
-type CertificatesCertificateArrayInput interface {
-	pulumi.Input
-
-	ToCertificatesCertificateArrayOutput() CertificatesCertificateArrayOutput
-	ToCertificatesCertificateArrayOutputWithContext(context.Context) CertificatesCertificateArrayOutput
-}
-
-type CertificatesCertificateArray []CertificatesCertificateInput
-
-func (CertificatesCertificateArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CertificatesCertificate)(nil)).Elem()
-}
-
-func (i CertificatesCertificateArray) ToCertificatesCertificateArrayOutput() CertificatesCertificateArrayOutput {
-	return i.ToCertificatesCertificateArrayOutputWithContext(context.Background())
-}
-
-func (i CertificatesCertificateArray) ToCertificatesCertificateArrayOutputWithContext(ctx context.Context) CertificatesCertificateArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertificatesCertificateArrayOutput)
-}
-
-type CertificatesCertificateOutput struct{ *pulumi.OutputState }
-
-func (CertificatesCertificateOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CertificatesCertificate)(nil)).Elem()
-}
-
-func (o CertificatesCertificateOutput) ToCertificatesCertificateOutput() CertificatesCertificateOutput {
-	return o
-}
-
-func (o CertificatesCertificateOutput) ToCertificatesCertificateOutputWithContext(ctx context.Context) CertificatesCertificateOutput {
-	return o
-}
-
-func (o CertificatesCertificateOutput) BeginTime() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.BeginTime }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) Cert() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.Cert }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.Domain }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) EndTime() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.EndTime }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.Id }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.Name }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) ProductZhName() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.ProductZhName }).(pulumi.StringOutput)
-}
-
-func (o CertificatesCertificateOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v CertificatesCertificate) int { return v.ProjectId }).(pulumi.IntOutput)
-}
-
-func (o CertificatesCertificateOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v CertificatesCertificate) int { return v.Status }).(pulumi.IntOutput)
-}
-
-func (o CertificatesCertificateOutput) SubjectNames() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CertificatesCertificate) []string { return v.SubjectNames }).(pulumi.StringArrayOutput)
-}
-
-func (o CertificatesCertificateOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v CertificatesCertificate) string { return v.Type }).(pulumi.StringOutput)
-}
-
-type CertificatesCertificateArrayOutput struct{ *pulumi.OutputState }
-
-func (CertificatesCertificateArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CertificatesCertificate)(nil)).Elem()
-}
-
-func (o CertificatesCertificateArrayOutput) ToCertificatesCertificateArrayOutput() CertificatesCertificateArrayOutput {
-	return o
-}
-
-func (o CertificatesCertificateArrayOutput) ToCertificatesCertificateArrayOutputWithContext(ctx context.Context) CertificatesCertificateArrayOutput {
-	return o
-}
-
-func (o CertificatesCertificateArrayOutput) Index(i pulumi.IntInput) CertificatesCertificateOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CertificatesCertificate {
-		return vs[0].([]CertificatesCertificate)[vs[1].(int)]
-	}).(CertificatesCertificateOutput)
-}
-
-type InstanceInformation struct {
-	AdminEmail           string   `pulumi:"adminEmail"`
-	AdminFirstName       string   `pulumi:"adminFirstName"`
-	AdminLastName        string   `pulumi:"adminLastName"`
-	AdminPhoneNum        string   `pulumi:"adminPhoneNum"`
-	AdminPosition        string   `pulumi:"adminPosition"`
-	CertificateDomain    string   `pulumi:"certificateDomain"`
-	ContactEmail         string   `pulumi:"contactEmail"`
-	ContactFirstName     string   `pulumi:"contactFirstName"`
-	ContactLastName      string   `pulumi:"contactLastName"`
-	ContactNumber        string   `pulumi:"contactNumber"`
-	ContactPosition      string   `pulumi:"contactPosition"`
-	CsrContent           *string  `pulumi:"csrContent"`
-	CsrType              *string  `pulumi:"csrType"`
-	DomainLists          []string `pulumi:"domainLists"`
-	KeyPassword          *string  `pulumi:"keyPassword"`
-	OrganizationAddress  string   `pulumi:"organizationAddress"`
-	OrganizationCity     string   `pulumi:"organizationCity"`
-	OrganizationCountry  string   `pulumi:"organizationCountry"`
-	OrganizationDivision string   `pulumi:"organizationDivision"`
-	OrganizationName     string   `pulumi:"organizationName"`
-	OrganizationRegion   string   `pulumi:"organizationRegion"`
-	PhoneAreaCode        string   `pulumi:"phoneAreaCode"`
-	PhoneNumber          string   `pulumi:"phoneNumber"`
-	PostalCode           string   `pulumi:"postalCode"`
-	VerifyType           string   `pulumi:"verifyType"`
-}
-
-// InstanceInformationInput is an input type that accepts InstanceInformationArgs and InstanceInformationOutput values.
-// You can construct a concrete instance of `InstanceInformationInput` via:
-//
-//          InstanceInformationArgs{...}
-type InstanceInformationInput interface {
-	pulumi.Input
-
-	ToInstanceInformationOutput() InstanceInformationOutput
-	ToInstanceInformationOutputWithContext(context.Context) InstanceInformationOutput
-}
-
-type InstanceInformationArgs struct {
-	AdminEmail           pulumi.StringInput      `pulumi:"adminEmail"`
-	AdminFirstName       pulumi.StringInput      `pulumi:"adminFirstName"`
-	AdminLastName        pulumi.StringInput      `pulumi:"adminLastName"`
-	AdminPhoneNum        pulumi.StringInput      `pulumi:"adminPhoneNum"`
-	AdminPosition        pulumi.StringInput      `pulumi:"adminPosition"`
-	CertificateDomain    pulumi.StringInput      `pulumi:"certificateDomain"`
-	ContactEmail         pulumi.StringInput      `pulumi:"contactEmail"`
-	ContactFirstName     pulumi.StringInput      `pulumi:"contactFirstName"`
-	ContactLastName      pulumi.StringInput      `pulumi:"contactLastName"`
-	ContactNumber        pulumi.StringInput      `pulumi:"contactNumber"`
-	ContactPosition      pulumi.StringInput      `pulumi:"contactPosition"`
-	CsrContent           pulumi.StringPtrInput   `pulumi:"csrContent"`
-	CsrType              pulumi.StringPtrInput   `pulumi:"csrType"`
-	DomainLists          pulumi.StringArrayInput `pulumi:"domainLists"`
-	KeyPassword          pulumi.StringPtrInput   `pulumi:"keyPassword"`
-	OrganizationAddress  pulumi.StringInput      `pulumi:"organizationAddress"`
-	OrganizationCity     pulumi.StringInput      `pulumi:"organizationCity"`
-	OrganizationCountry  pulumi.StringInput      `pulumi:"organizationCountry"`
-	OrganizationDivision pulumi.StringInput      `pulumi:"organizationDivision"`
-	OrganizationName     pulumi.StringInput      `pulumi:"organizationName"`
-	OrganizationRegion   pulumi.StringInput      `pulumi:"organizationRegion"`
-	PhoneAreaCode        pulumi.StringInput      `pulumi:"phoneAreaCode"`
-	PhoneNumber          pulumi.StringInput      `pulumi:"phoneNumber"`
-	PostalCode           pulumi.StringInput      `pulumi:"postalCode"`
-	VerifyType           pulumi.StringInput      `pulumi:"verifyType"`
-}
-
-func (InstanceInformationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstanceInformation)(nil)).Elem()
-}
-
-func (i InstanceInformationArgs) ToInstanceInformationOutput() InstanceInformationOutput {
-	return i.ToInstanceInformationOutputWithContext(context.Background())
-}
-
-func (i InstanceInformationArgs) ToInstanceInformationOutputWithContext(ctx context.Context) InstanceInformationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstanceInformationOutput)
-}
-
-func (i InstanceInformationArgs) ToInstanceInformationPtrOutput() InstanceInformationPtrOutput {
-	return i.ToInstanceInformationPtrOutputWithContext(context.Background())
-}
-
-func (i InstanceInformationArgs) ToInstanceInformationPtrOutputWithContext(ctx context.Context) InstanceInformationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstanceInformationOutput).ToInstanceInformationPtrOutputWithContext(ctx)
-}
-
-// InstanceInformationPtrInput is an input type that accepts InstanceInformationArgs, InstanceInformationPtr and InstanceInformationPtrOutput values.
-// You can construct a concrete instance of `InstanceInformationPtrInput` via:
-//
-//          InstanceInformationArgs{...}
+//          PayCertificateInformationArgs{...}
 //
 //  or:
 //
 //          nil
-type InstanceInformationPtrInput interface {
+type PayCertificateInformationPtrInput interface {
 	pulumi.Input
 
-	ToInstanceInformationPtrOutput() InstanceInformationPtrOutput
-	ToInstanceInformationPtrOutputWithContext(context.Context) InstanceInformationPtrOutput
+	ToPayCertificateInformationPtrOutput() PayCertificateInformationPtrOutput
+	ToPayCertificateInformationPtrOutputWithContext(context.Context) PayCertificateInformationPtrOutput
 }
 
-type instanceInformationPtrType InstanceInformationArgs
+type payCertificateInformationPtrType PayCertificateInformationArgs
 
-func InstanceInformationPtr(v *InstanceInformationArgs) InstanceInformationPtrInput {
-	return (*instanceInformationPtrType)(v)
+func PayCertificateInformationPtr(v *PayCertificateInformationArgs) PayCertificateInformationPtrInput {
+	return (*payCertificateInformationPtrType)(v)
 }
 
-func (*instanceInformationPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**InstanceInformation)(nil)).Elem()
+func (*payCertificateInformationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**PayCertificateInformation)(nil)).Elem()
 }
 
-func (i *instanceInformationPtrType) ToInstanceInformationPtrOutput() InstanceInformationPtrOutput {
-	return i.ToInstanceInformationPtrOutputWithContext(context.Background())
+func (i *payCertificateInformationPtrType) ToPayCertificateInformationPtrOutput() PayCertificateInformationPtrOutput {
+	return i.ToPayCertificateInformationPtrOutputWithContext(context.Background())
 }
 
-func (i *instanceInformationPtrType) ToInstanceInformationPtrOutputWithContext(ctx context.Context) InstanceInformationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstanceInformationPtrOutput)
+func (i *payCertificateInformationPtrType) ToPayCertificateInformationPtrOutputWithContext(ctx context.Context) PayCertificateInformationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PayCertificateInformationPtrOutput)
 }
 
-type InstanceInformationOutput struct{ *pulumi.OutputState }
+type PayCertificateInformationOutput struct{ *pulumi.OutputState }
 
-func (InstanceInformationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstanceInformation)(nil)).Elem()
+func (PayCertificateInformationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*PayCertificateInformation)(nil)).Elem()
 }
 
-func (o InstanceInformationOutput) ToInstanceInformationOutput() InstanceInformationOutput {
+func (o PayCertificateInformationOutput) ToPayCertificateInformationOutput() PayCertificateInformationOutput {
 	return o
 }
 
-func (o InstanceInformationOutput) ToInstanceInformationOutputWithContext(ctx context.Context) InstanceInformationOutput {
+func (o PayCertificateInformationOutput) ToPayCertificateInformationOutputWithContext(ctx context.Context) PayCertificateInformationOutput {
 	return o
 }
 
-func (o InstanceInformationOutput) ToInstanceInformationPtrOutput() InstanceInformationPtrOutput {
-	return o.ToInstanceInformationPtrOutputWithContext(context.Background())
+func (o PayCertificateInformationOutput) ToPayCertificateInformationPtrOutput() PayCertificateInformationPtrOutput {
+	return o.ToPayCertificateInformationPtrOutputWithContext(context.Background())
 }
 
-func (o InstanceInformationOutput) ToInstanceInformationPtrOutputWithContext(ctx context.Context) InstanceInformationPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v InstanceInformation) *InstanceInformation {
+func (o PayCertificateInformationOutput) ToPayCertificateInformationPtrOutputWithContext(ctx context.Context) PayCertificateInformationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v PayCertificateInformation) *PayCertificateInformation {
 		return &v
-	}).(InstanceInformationPtrOutput)
+	}).(PayCertificateInformationPtrOutput)
 }
 
-func (o InstanceInformationOutput) AdminEmail() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.AdminEmail }).(pulumi.StringOutput)
+// The administrator's email address.
+func (o PayCertificateInformationOutput) AdminEmail() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.AdminEmail }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) AdminFirstName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.AdminFirstName }).(pulumi.StringOutput)
+// The first name of the administrator.
+func (o PayCertificateInformationOutput) AdminFirstName() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.AdminFirstName }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) AdminLastName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.AdminLastName }).(pulumi.StringOutput)
+// The last name of the administrator.
+func (o PayCertificateInformationOutput) AdminLastName() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.AdminLastName }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) AdminPhoneNum() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.AdminPhoneNum }).(pulumi.StringOutput)
+// Manager mobile phone number.
+func (o PayCertificateInformationOutput) AdminPhoneNum() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.AdminPhoneNum }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) AdminPosition() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.AdminPosition }).(pulumi.StringOutput)
+// Manager position.
+func (o PayCertificateInformationOutput) AdminPosition() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.AdminPosition }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) CertificateDomain() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.CertificateDomain }).(pulumi.StringOutput)
+// Domain name for binding certificate.
+func (o PayCertificateInformationOutput) CertificateDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.CertificateDomain }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) ContactEmail() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.ContactEmail }).(pulumi.StringOutput)
+// Contact email address.
+func (o PayCertificateInformationOutput) ContactEmail() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.ContactEmail }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) ContactFirstName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.ContactFirstName }).(pulumi.StringOutput)
+// Contact first name.
+func (o PayCertificateInformationOutput) ContactFirstName() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.ContactFirstName }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) ContactLastName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.ContactLastName }).(pulumi.StringOutput)
+// Contact last name.
+func (o PayCertificateInformationOutput) ContactLastName() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.ContactLastName }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) ContactNumber() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.ContactNumber }).(pulumi.StringOutput)
+// Contact phone number.
+func (o PayCertificateInformationOutput) ContactNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.ContactNumber }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) ContactPosition() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.ContactPosition }).(pulumi.StringOutput)
+// Contact position.
+func (o PayCertificateInformationOutput) ContactPosition() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.ContactPosition }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) CsrContent() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v InstanceInformation) *string { return v.CsrContent }).(pulumi.StringPtrOutput)
+// CSR content uploaded.
+func (o PayCertificateInformationOutput) CsrContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PayCertificateInformation) *string { return v.CsrContent }).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationOutput) CsrType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v InstanceInformation) *string { return v.CsrType }).(pulumi.StringPtrOutput)
+// CSR generation method. Valid values: `online`, `parse`. `online` means online generation, `parse` means manual upload.
+func (o PayCertificateInformationOutput) CsrType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PayCertificateInformation) *string { return v.CsrType }).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationOutput) DomainLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v InstanceInformation) []string { return v.DomainLists }).(pulumi.StringArrayOutput)
+// Array of uploaded domain names, multi-domain certificates can be uploaded.
+func (o PayCertificateInformationOutput) DomainLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v PayCertificateInformation) []string { return v.DomainLists }).(pulumi.StringArrayOutput)
 }
 
-func (o InstanceInformationOutput) KeyPassword() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v InstanceInformation) *string { return v.KeyPassword }).(pulumi.StringPtrOutput)
+// Private key password.
+func (o PayCertificateInformationOutput) KeyPassword() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PayCertificateInformation) *string { return v.KeyPassword }).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationOutput) OrganizationAddress() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.OrganizationAddress }).(pulumi.StringOutput)
+// Company address.
+func (o PayCertificateInformationOutput) OrganizationAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.OrganizationAddress }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) OrganizationCity() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.OrganizationCity }).(pulumi.StringOutput)
+// Company city.
+func (o PayCertificateInformationOutput) OrganizationCity() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.OrganizationCity }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) OrganizationCountry() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.OrganizationCountry }).(pulumi.StringOutput)
+// Country name, such as China: CN.
+func (o PayCertificateInformationOutput) OrganizationCountry() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.OrganizationCountry }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) OrganizationDivision() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.OrganizationDivision }).(pulumi.StringOutput)
+// Department name.
+func (o PayCertificateInformationOutput) OrganizationDivision() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.OrganizationDivision }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) OrganizationName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.OrganizationName }).(pulumi.StringOutput)
+// Company name.
+func (o PayCertificateInformationOutput) OrganizationName() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.OrganizationName }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) OrganizationRegion() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.OrganizationRegion }).(pulumi.StringOutput)
+// The province where the company is located.
+func (o PayCertificateInformationOutput) OrganizationRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.OrganizationRegion }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) PhoneAreaCode() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.PhoneAreaCode }).(pulumi.StringOutput)
+// Company landline area code.
+func (o PayCertificateInformationOutput) PhoneAreaCode() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.PhoneAreaCode }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) PhoneNumber() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.PhoneNumber }).(pulumi.StringOutput)
+// Company landline number.
+func (o PayCertificateInformationOutput) PhoneNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.PhoneNumber }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) PostalCode() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.PostalCode }).(pulumi.StringOutput)
+// Company postal code.
+func (o PayCertificateInformationOutput) PostalCode() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.PostalCode }).(pulumi.StringOutput)
 }
 
-func (o InstanceInformationOutput) VerifyType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstanceInformation) string { return v.VerifyType }).(pulumi.StringOutput)
+// Certificate verification method. Valid values: `DNS_AUTO`, `DNS`, `FILE`. `DNS_AUTO` means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, `DNS` means manual DNS verification, `FILE` means file verification.
+func (o PayCertificateInformationOutput) VerifyType() pulumi.StringOutput {
+	return o.ApplyT(func(v PayCertificateInformation) string { return v.VerifyType }).(pulumi.StringOutput)
 }
 
-type InstanceInformationPtrOutput struct{ *pulumi.OutputState }
+type PayCertificateInformationPtrOutput struct{ *pulumi.OutputState }
 
-func (InstanceInformationPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**InstanceInformation)(nil)).Elem()
+func (PayCertificateInformationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**PayCertificateInformation)(nil)).Elem()
 }
 
-func (o InstanceInformationPtrOutput) ToInstanceInformationPtrOutput() InstanceInformationPtrOutput {
+func (o PayCertificateInformationPtrOutput) ToPayCertificateInformationPtrOutput() PayCertificateInformationPtrOutput {
 	return o
 }
 
-func (o InstanceInformationPtrOutput) ToInstanceInformationPtrOutputWithContext(ctx context.Context) InstanceInformationPtrOutput {
+func (o PayCertificateInformationPtrOutput) ToPayCertificateInformationPtrOutputWithContext(ctx context.Context) PayCertificateInformationPtrOutput {
 	return o
 }
 
-func (o InstanceInformationPtrOutput) Elem() InstanceInformationOutput {
-	return o.ApplyT(func(v *InstanceInformation) InstanceInformation {
+func (o PayCertificateInformationPtrOutput) Elem() PayCertificateInformationOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) PayCertificateInformation {
 		if v != nil {
 			return *v
 		}
-		var ret InstanceInformation
+		var ret PayCertificateInformation
 		return ret
-	}).(InstanceInformationOutput)
+	}).(PayCertificateInformationOutput)
 }
 
-func (o InstanceInformationPtrOutput) AdminEmail() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// The administrator's email address.
+func (o PayCertificateInformationPtrOutput) AdminEmail() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -447,8 +363,9 @@ func (o InstanceInformationPtrOutput) AdminEmail() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) AdminFirstName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// The first name of the administrator.
+func (o PayCertificateInformationPtrOutput) AdminFirstName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -456,8 +373,9 @@ func (o InstanceInformationPtrOutput) AdminFirstName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) AdminLastName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// The last name of the administrator.
+func (o PayCertificateInformationPtrOutput) AdminLastName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -465,8 +383,9 @@ func (o InstanceInformationPtrOutput) AdminLastName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) AdminPhoneNum() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Manager mobile phone number.
+func (o PayCertificateInformationPtrOutput) AdminPhoneNum() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -474,8 +393,9 @@ func (o InstanceInformationPtrOutput) AdminPhoneNum() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) AdminPosition() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Manager position.
+func (o PayCertificateInformationPtrOutput) AdminPosition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -483,8 +403,9 @@ func (o InstanceInformationPtrOutput) AdminPosition() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) CertificateDomain() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Domain name for binding certificate.
+func (o PayCertificateInformationPtrOutput) CertificateDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -492,8 +413,9 @@ func (o InstanceInformationPtrOutput) CertificateDomain() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) ContactEmail() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Contact email address.
+func (o PayCertificateInformationPtrOutput) ContactEmail() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -501,8 +423,9 @@ func (o InstanceInformationPtrOutput) ContactEmail() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) ContactFirstName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Contact first name.
+func (o PayCertificateInformationPtrOutput) ContactFirstName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -510,8 +433,9 @@ func (o InstanceInformationPtrOutput) ContactFirstName() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) ContactLastName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Contact last name.
+func (o PayCertificateInformationPtrOutput) ContactLastName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -519,8 +443,9 @@ func (o InstanceInformationPtrOutput) ContactLastName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) ContactNumber() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Contact phone number.
+func (o PayCertificateInformationPtrOutput) ContactNumber() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -528,8 +453,9 @@ func (o InstanceInformationPtrOutput) ContactNumber() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) ContactPosition() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Contact position.
+func (o PayCertificateInformationPtrOutput) ContactPosition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -537,8 +463,9 @@ func (o InstanceInformationPtrOutput) ContactPosition() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) CsrContent() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// CSR content uploaded.
+func (o PayCertificateInformationPtrOutput) CsrContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -546,8 +473,9 @@ func (o InstanceInformationPtrOutput) CsrContent() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) CsrType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// CSR generation method. Valid values: `online`, `parse`. `online` means online generation, `parse` means manual upload.
+func (o PayCertificateInformationPtrOutput) CsrType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -555,8 +483,9 @@ func (o InstanceInformationPtrOutput) CsrType() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) DomainLists() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *InstanceInformation) []string {
+// Array of uploaded domain names, multi-domain certificates can be uploaded.
+func (o PayCertificateInformationPtrOutput) DomainLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) []string {
 		if v == nil {
 			return nil
 		}
@@ -564,8 +493,9 @@ func (o InstanceInformationPtrOutput) DomainLists() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
-func (o InstanceInformationPtrOutput) KeyPassword() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Private key password.
+func (o PayCertificateInformationPtrOutput) KeyPassword() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -573,8 +503,9 @@ func (o InstanceInformationPtrOutput) KeyPassword() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) OrganizationAddress() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Company address.
+func (o PayCertificateInformationPtrOutput) OrganizationAddress() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -582,8 +513,9 @@ func (o InstanceInformationPtrOutput) OrganizationAddress() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) OrganizationCity() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Company city.
+func (o PayCertificateInformationPtrOutput) OrganizationCity() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -591,8 +523,9 @@ func (o InstanceInformationPtrOutput) OrganizationCity() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) OrganizationCountry() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Country name, such as China: CN.
+func (o PayCertificateInformationPtrOutput) OrganizationCountry() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -600,8 +533,9 @@ func (o InstanceInformationPtrOutput) OrganizationCountry() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) OrganizationDivision() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Department name.
+func (o PayCertificateInformationPtrOutput) OrganizationDivision() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -609,8 +543,9 @@ func (o InstanceInformationPtrOutput) OrganizationDivision() pulumi.StringPtrOut
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) OrganizationName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Company name.
+func (o PayCertificateInformationPtrOutput) OrganizationName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -618,8 +553,9 @@ func (o InstanceInformationPtrOutput) OrganizationName() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) OrganizationRegion() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// The province where the company is located.
+func (o PayCertificateInformationPtrOutput) OrganizationRegion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -627,8 +563,9 @@ func (o InstanceInformationPtrOutput) OrganizationRegion() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) PhoneAreaCode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Company landline area code.
+func (o PayCertificateInformationPtrOutput) PhoneAreaCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -636,8 +573,9 @@ func (o InstanceInformationPtrOutput) PhoneAreaCode() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) PhoneNumber() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Company landline number.
+func (o PayCertificateInformationPtrOutput) PhoneNumber() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -645,8 +583,9 @@ func (o InstanceInformationPtrOutput) PhoneNumber() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) PostalCode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Company postal code.
+func (o PayCertificateInformationPtrOutput) PostalCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -654,8 +593,9 @@ func (o InstanceInformationPtrOutput) PostalCode() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o InstanceInformationPtrOutput) VerifyType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *InstanceInformation) *string {
+// Certificate verification method. Valid values: `DNS_AUTO`, `DNS`, `FILE`. `DNS_AUTO` means automatic DNS verification, this verification type is only supported for domain names resolved by Tencent Cloud and the resolution status is normal, `DNS` means manual DNS verification, `FILE` means file verification.
+func (o PayCertificateInformationPtrOutput) VerifyType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PayCertificateInformation) *string {
 		if v == nil {
 			return nil
 		}
@@ -663,13 +603,209 @@ func (o InstanceInformationPtrOutput) VerifyType() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type GetCertificatesCertificate struct {
+	// Beginning time of the SSL certificate.
+	BeginTime string `pulumi:"beginTime"`
+	// Content of the SSL certificate.
+	Cert string `pulumi:"cert"`
+	// Creation time of the SSL certificate.
+	CreateTime string `pulumi:"createTime"`
+	// Primary domain of the SSL certificate.
+	Domain string `pulumi:"domain"`
+	// Ending time of the SSL certificate.
+	EndTime string `pulumi:"endTime"`
+	// ID of the SSL certificate to be queried.
+	Id string `pulumi:"id"`
+	// Name of the SSL certificate to be queried.
+	Name string `pulumi:"name"`
+	// Certificate authority.
+	ProductZhName string `pulumi:"productZhName"`
+	// Project ID of the SSL certificate.
+	ProjectId int `pulumi:"projectId"`
+	// Status of the SSL certificate.
+	Status int `pulumi:"status"`
+	// ALL domains included in the SSL certificate. Including the primary domain name.
+	SubjectNames []string `pulumi:"subjectNames"`
+	// Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
+	Type string `pulumi:"type"`
+}
+
+// GetCertificatesCertificateInput is an input type that accepts GetCertificatesCertificateArgs and GetCertificatesCertificateOutput values.
+// You can construct a concrete instance of `GetCertificatesCertificateInput` via:
+//
+//          GetCertificatesCertificateArgs{...}
+type GetCertificatesCertificateInput interface {
+	pulumi.Input
+
+	ToGetCertificatesCertificateOutput() GetCertificatesCertificateOutput
+	ToGetCertificatesCertificateOutputWithContext(context.Context) GetCertificatesCertificateOutput
+}
+
+type GetCertificatesCertificateArgs struct {
+	// Beginning time of the SSL certificate.
+	BeginTime pulumi.StringInput `pulumi:"beginTime"`
+	// Content of the SSL certificate.
+	Cert pulumi.StringInput `pulumi:"cert"`
+	// Creation time of the SSL certificate.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Primary domain of the SSL certificate.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Ending time of the SSL certificate.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// ID of the SSL certificate to be queried.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Name of the SSL certificate to be queried.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Certificate authority.
+	ProductZhName pulumi.StringInput `pulumi:"productZhName"`
+	// Project ID of the SSL certificate.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Status of the SSL certificate.
+	Status pulumi.IntInput `pulumi:"status"`
+	// ALL domains included in the SSL certificate. Including the primary domain name.
+	SubjectNames pulumi.StringArrayInput `pulumi:"subjectNames"`
+	// Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetCertificatesCertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificatesCertificate)(nil)).Elem()
+}
+
+func (i GetCertificatesCertificateArgs) ToGetCertificatesCertificateOutput() GetCertificatesCertificateOutput {
+	return i.ToGetCertificatesCertificateOutputWithContext(context.Background())
+}
+
+func (i GetCertificatesCertificateArgs) ToGetCertificatesCertificateOutputWithContext(ctx context.Context) GetCertificatesCertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificatesCertificateOutput)
+}
+
+// GetCertificatesCertificateArrayInput is an input type that accepts GetCertificatesCertificateArray and GetCertificatesCertificateArrayOutput values.
+// You can construct a concrete instance of `GetCertificatesCertificateArrayInput` via:
+//
+//          GetCertificatesCertificateArray{ GetCertificatesCertificateArgs{...} }
+type GetCertificatesCertificateArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificatesCertificateArrayOutput() GetCertificatesCertificateArrayOutput
+	ToGetCertificatesCertificateArrayOutputWithContext(context.Context) GetCertificatesCertificateArrayOutput
+}
+
+type GetCertificatesCertificateArray []GetCertificatesCertificateInput
+
+func (GetCertificatesCertificateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificatesCertificate)(nil)).Elem()
+}
+
+func (i GetCertificatesCertificateArray) ToGetCertificatesCertificateArrayOutput() GetCertificatesCertificateArrayOutput {
+	return i.ToGetCertificatesCertificateArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificatesCertificateArray) ToGetCertificatesCertificateArrayOutputWithContext(ctx context.Context) GetCertificatesCertificateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificatesCertificateArrayOutput)
+}
+
+type GetCertificatesCertificateOutput struct{ *pulumi.OutputState }
+
+func (GetCertificatesCertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificatesCertificate)(nil)).Elem()
+}
+
+func (o GetCertificatesCertificateOutput) ToGetCertificatesCertificateOutput() GetCertificatesCertificateOutput {
+	return o
+}
+
+func (o GetCertificatesCertificateOutput) ToGetCertificatesCertificateOutputWithContext(ctx context.Context) GetCertificatesCertificateOutput {
+	return o
+}
+
+// Beginning time of the SSL certificate.
+func (o GetCertificatesCertificateOutput) BeginTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.BeginTime }).(pulumi.StringOutput)
+}
+
+// Content of the SSL certificate.
+func (o GetCertificatesCertificateOutput) Cert() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.Cert }).(pulumi.StringOutput)
+}
+
+// Creation time of the SSL certificate.
+func (o GetCertificatesCertificateOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Primary domain of the SSL certificate.
+func (o GetCertificatesCertificateOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Ending time of the SSL certificate.
+func (o GetCertificatesCertificateOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// ID of the SSL certificate to be queried.
+func (o GetCertificatesCertificateOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Name of the SSL certificate to be queried.
+func (o GetCertificatesCertificateOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Certificate authority.
+func (o GetCertificatesCertificateOutput) ProductZhName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.ProductZhName }).(pulumi.StringOutput)
+}
+
+// Project ID of the SSL certificate.
+func (o GetCertificatesCertificateOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Status of the SSL certificate.
+func (o GetCertificatesCertificateOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// ALL domains included in the SSL certificate. Including the primary domain name.
+func (o GetCertificatesCertificateOutput) SubjectNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) []string { return v.SubjectNames }).(pulumi.StringArrayOutput)
+}
+
+// Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
+func (o GetCertificatesCertificateOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetCertificatesCertificateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificatesCertificateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificatesCertificate)(nil)).Elem()
+}
+
+func (o GetCertificatesCertificateArrayOutput) ToGetCertificatesCertificateArrayOutput() GetCertificatesCertificateArrayOutput {
+	return o
+}
+
+func (o GetCertificatesCertificateArrayOutput) ToGetCertificatesCertificateArrayOutputWithContext(ctx context.Context) GetCertificatesCertificateArrayOutput {
+	return o
+}
+
+func (o GetCertificatesCertificateArrayOutput) Index(i pulumi.IntInput) GetCertificatesCertificateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificatesCertificate {
+		return vs[0].([]GetCertificatesCertificate)[vs[1].(int)]
+	}).(GetCertificatesCertificateOutput)
+}
+
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*CertificatesCertificateInput)(nil)).Elem(), CertificatesCertificateArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CertificatesCertificateArrayInput)(nil)).Elem(), CertificatesCertificateArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstanceInformationInput)(nil)).Elem(), InstanceInformationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstanceInformationPtrInput)(nil)).Elem(), InstanceInformationArgs{})
-	pulumi.RegisterOutputType(CertificatesCertificateOutput{})
-	pulumi.RegisterOutputType(CertificatesCertificateArrayOutput{})
-	pulumi.RegisterOutputType(InstanceInformationOutput{})
-	pulumi.RegisterOutputType(InstanceInformationPtrOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PayCertificateInformationInput)(nil)).Elem(), PayCertificateInformationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PayCertificateInformationPtrInput)(nil)).Elem(), PayCertificateInformationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateInput)(nil)).Elem(), GetCertificatesCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateArrayInput)(nil)).Elem(), GetCertificatesCertificateArray{})
+	pulumi.RegisterOutputType(PayCertificateInformationOutput{})
+	pulumi.RegisterOutputType(PayCertificateInformationPtrOutput{})
+	pulumi.RegisterOutputType(GetCertificatesCertificateOutput{})
+	pulumi.RegisterOutputType(GetCertificatesCertificateArrayOutput{})
 }

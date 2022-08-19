@@ -10,395 +10,452 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type AccessGroupsAccessGroupList struct {
+type GetAccessGroupsAccessGroupList struct {
+	// A specified access group ID used to query.
 	AccessGroupId string `pulumi:"accessGroupId"`
-	CreateTime    string `pulumi:"createTime"`
-	Description   string `pulumi:"description"`
-	Name          string `pulumi:"name"`
+	// Creation time of the access group.
+	CreateTime string `pulumi:"createTime"`
+	// Description of the access group.
+	Description string `pulumi:"description"`
+	// A access group Name used to query.
+	Name string `pulumi:"name"`
 }
 
-// AccessGroupsAccessGroupListInput is an input type that accepts AccessGroupsAccessGroupListArgs and AccessGroupsAccessGroupListOutput values.
-// You can construct a concrete instance of `AccessGroupsAccessGroupListInput` via:
+// GetAccessGroupsAccessGroupListInput is an input type that accepts GetAccessGroupsAccessGroupListArgs and GetAccessGroupsAccessGroupListOutput values.
+// You can construct a concrete instance of `GetAccessGroupsAccessGroupListInput` via:
 //
-//          AccessGroupsAccessGroupListArgs{...}
-type AccessGroupsAccessGroupListInput interface {
+//          GetAccessGroupsAccessGroupListArgs{...}
+type GetAccessGroupsAccessGroupListInput interface {
 	pulumi.Input
 
-	ToAccessGroupsAccessGroupListOutput() AccessGroupsAccessGroupListOutput
-	ToAccessGroupsAccessGroupListOutputWithContext(context.Context) AccessGroupsAccessGroupListOutput
+	ToGetAccessGroupsAccessGroupListOutput() GetAccessGroupsAccessGroupListOutput
+	ToGetAccessGroupsAccessGroupListOutputWithContext(context.Context) GetAccessGroupsAccessGroupListOutput
 }
 
-type AccessGroupsAccessGroupListArgs struct {
+type GetAccessGroupsAccessGroupListArgs struct {
+	// A specified access group ID used to query.
 	AccessGroupId pulumi.StringInput `pulumi:"accessGroupId"`
-	CreateTime    pulumi.StringInput `pulumi:"createTime"`
-	Description   pulumi.StringInput `pulumi:"description"`
-	Name          pulumi.StringInput `pulumi:"name"`
+	// Creation time of the access group.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Description of the access group.
+	Description pulumi.StringInput `pulumi:"description"`
+	// A access group Name used to query.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
-func (AccessGroupsAccessGroupListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*AccessGroupsAccessGroupList)(nil)).Elem()
+func (GetAccessGroupsAccessGroupListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessGroupsAccessGroupList)(nil)).Elem()
 }
 
-func (i AccessGroupsAccessGroupListArgs) ToAccessGroupsAccessGroupListOutput() AccessGroupsAccessGroupListOutput {
-	return i.ToAccessGroupsAccessGroupListOutputWithContext(context.Background())
+func (i GetAccessGroupsAccessGroupListArgs) ToGetAccessGroupsAccessGroupListOutput() GetAccessGroupsAccessGroupListOutput {
+	return i.ToGetAccessGroupsAccessGroupListOutputWithContext(context.Background())
 }
 
-func (i AccessGroupsAccessGroupListArgs) ToAccessGroupsAccessGroupListOutputWithContext(ctx context.Context) AccessGroupsAccessGroupListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AccessGroupsAccessGroupListOutput)
+func (i GetAccessGroupsAccessGroupListArgs) ToGetAccessGroupsAccessGroupListOutputWithContext(ctx context.Context) GetAccessGroupsAccessGroupListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessGroupsAccessGroupListOutput)
 }
 
-// AccessGroupsAccessGroupListArrayInput is an input type that accepts AccessGroupsAccessGroupListArray and AccessGroupsAccessGroupListArrayOutput values.
-// You can construct a concrete instance of `AccessGroupsAccessGroupListArrayInput` via:
+// GetAccessGroupsAccessGroupListArrayInput is an input type that accepts GetAccessGroupsAccessGroupListArray and GetAccessGroupsAccessGroupListArrayOutput values.
+// You can construct a concrete instance of `GetAccessGroupsAccessGroupListArrayInput` via:
 //
-//          AccessGroupsAccessGroupListArray{ AccessGroupsAccessGroupListArgs{...} }
-type AccessGroupsAccessGroupListArrayInput interface {
+//          GetAccessGroupsAccessGroupListArray{ GetAccessGroupsAccessGroupListArgs{...} }
+type GetAccessGroupsAccessGroupListArrayInput interface {
 	pulumi.Input
 
-	ToAccessGroupsAccessGroupListArrayOutput() AccessGroupsAccessGroupListArrayOutput
-	ToAccessGroupsAccessGroupListArrayOutputWithContext(context.Context) AccessGroupsAccessGroupListArrayOutput
+	ToGetAccessGroupsAccessGroupListArrayOutput() GetAccessGroupsAccessGroupListArrayOutput
+	ToGetAccessGroupsAccessGroupListArrayOutputWithContext(context.Context) GetAccessGroupsAccessGroupListArrayOutput
 }
 
-type AccessGroupsAccessGroupListArray []AccessGroupsAccessGroupListInput
+type GetAccessGroupsAccessGroupListArray []GetAccessGroupsAccessGroupListInput
 
-func (AccessGroupsAccessGroupListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AccessGroupsAccessGroupList)(nil)).Elem()
+func (GetAccessGroupsAccessGroupListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessGroupsAccessGroupList)(nil)).Elem()
 }
 
-func (i AccessGroupsAccessGroupListArray) ToAccessGroupsAccessGroupListArrayOutput() AccessGroupsAccessGroupListArrayOutput {
-	return i.ToAccessGroupsAccessGroupListArrayOutputWithContext(context.Background())
+func (i GetAccessGroupsAccessGroupListArray) ToGetAccessGroupsAccessGroupListArrayOutput() GetAccessGroupsAccessGroupListArrayOutput {
+	return i.ToGetAccessGroupsAccessGroupListArrayOutputWithContext(context.Background())
 }
 
-func (i AccessGroupsAccessGroupListArray) ToAccessGroupsAccessGroupListArrayOutputWithContext(ctx context.Context) AccessGroupsAccessGroupListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AccessGroupsAccessGroupListArrayOutput)
+func (i GetAccessGroupsAccessGroupListArray) ToGetAccessGroupsAccessGroupListArrayOutputWithContext(ctx context.Context) GetAccessGroupsAccessGroupListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessGroupsAccessGroupListArrayOutput)
 }
 
-type AccessGroupsAccessGroupListOutput struct{ *pulumi.OutputState }
+type GetAccessGroupsAccessGroupListOutput struct{ *pulumi.OutputState }
 
-func (AccessGroupsAccessGroupListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*AccessGroupsAccessGroupList)(nil)).Elem()
+func (GetAccessGroupsAccessGroupListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessGroupsAccessGroupList)(nil)).Elem()
 }
 
-func (o AccessGroupsAccessGroupListOutput) ToAccessGroupsAccessGroupListOutput() AccessGroupsAccessGroupListOutput {
+func (o GetAccessGroupsAccessGroupListOutput) ToGetAccessGroupsAccessGroupListOutput() GetAccessGroupsAccessGroupListOutput {
 	return o
 }
 
-func (o AccessGroupsAccessGroupListOutput) ToAccessGroupsAccessGroupListOutputWithContext(ctx context.Context) AccessGroupsAccessGroupListOutput {
+func (o GetAccessGroupsAccessGroupListOutput) ToGetAccessGroupsAccessGroupListOutputWithContext(ctx context.Context) GetAccessGroupsAccessGroupListOutput {
 	return o
 }
 
-func (o AccessGroupsAccessGroupListOutput) AccessGroupId() pulumi.StringOutput {
-	return o.ApplyT(func(v AccessGroupsAccessGroupList) string { return v.AccessGroupId }).(pulumi.StringOutput)
+// A specified access group ID used to query.
+func (o GetAccessGroupsAccessGroupListOutput) AccessGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessGroupsAccessGroupList) string { return v.AccessGroupId }).(pulumi.StringOutput)
 }
 
-func (o AccessGroupsAccessGroupListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v AccessGroupsAccessGroupList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the access group.
+func (o GetAccessGroupsAccessGroupListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessGroupsAccessGroupList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o AccessGroupsAccessGroupListOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v AccessGroupsAccessGroupList) string { return v.Description }).(pulumi.StringOutput)
+// Description of the access group.
+func (o GetAccessGroupsAccessGroupListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessGroupsAccessGroupList) string { return v.Description }).(pulumi.StringOutput)
 }
 
-func (o AccessGroupsAccessGroupListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v AccessGroupsAccessGroupList) string { return v.Name }).(pulumi.StringOutput)
+// A access group Name used to query.
+func (o GetAccessGroupsAccessGroupListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessGroupsAccessGroupList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-type AccessGroupsAccessGroupListArrayOutput struct{ *pulumi.OutputState }
+type GetAccessGroupsAccessGroupListArrayOutput struct{ *pulumi.OutputState }
 
-func (AccessGroupsAccessGroupListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AccessGroupsAccessGroupList)(nil)).Elem()
+func (GetAccessGroupsAccessGroupListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessGroupsAccessGroupList)(nil)).Elem()
 }
 
-func (o AccessGroupsAccessGroupListArrayOutput) ToAccessGroupsAccessGroupListArrayOutput() AccessGroupsAccessGroupListArrayOutput {
+func (o GetAccessGroupsAccessGroupListArrayOutput) ToGetAccessGroupsAccessGroupListArrayOutput() GetAccessGroupsAccessGroupListArrayOutput {
 	return o
 }
 
-func (o AccessGroupsAccessGroupListArrayOutput) ToAccessGroupsAccessGroupListArrayOutputWithContext(ctx context.Context) AccessGroupsAccessGroupListArrayOutput {
+func (o GetAccessGroupsAccessGroupListArrayOutput) ToGetAccessGroupsAccessGroupListArrayOutputWithContext(ctx context.Context) GetAccessGroupsAccessGroupListArrayOutput {
 	return o
 }
 
-func (o AccessGroupsAccessGroupListArrayOutput) Index(i pulumi.IntInput) AccessGroupsAccessGroupListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccessGroupsAccessGroupList {
-		return vs[0].([]AccessGroupsAccessGroupList)[vs[1].(int)]
-	}).(AccessGroupsAccessGroupListOutput)
+func (o GetAccessGroupsAccessGroupListArrayOutput) Index(i pulumi.IntInput) GetAccessGroupsAccessGroupListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccessGroupsAccessGroupList {
+		return vs[0].([]GetAccessGroupsAccessGroupList)[vs[1].(int)]
+	}).(GetAccessGroupsAccessGroupListOutput)
 }
 
-type AccessRulesAccessRuleList struct {
-	AccessRuleId   string `pulumi:"accessRuleId"`
-	AuthClientIp   string `pulumi:"authClientIp"`
-	Priority       int    `pulumi:"priority"`
-	RwPermission   string `pulumi:"rwPermission"`
+type GetAccessRulesAccessRuleList struct {
+	// A specified access rule ID used to query.
+	AccessRuleId string `pulumi:"accessRuleId"`
+	// Allowed IP of the access rule.
+	AuthClientIp string `pulumi:"authClientIp"`
+	// The priority level of access rule.
+	Priority int `pulumi:"priority"`
+	// Read and write permissions.
+	RwPermission string `pulumi:"rwPermission"`
+	// The permissions of accessing users.
 	UserPermission string `pulumi:"userPermission"`
 }
 
-// AccessRulesAccessRuleListInput is an input type that accepts AccessRulesAccessRuleListArgs and AccessRulesAccessRuleListOutput values.
-// You can construct a concrete instance of `AccessRulesAccessRuleListInput` via:
+// GetAccessRulesAccessRuleListInput is an input type that accepts GetAccessRulesAccessRuleListArgs and GetAccessRulesAccessRuleListOutput values.
+// You can construct a concrete instance of `GetAccessRulesAccessRuleListInput` via:
 //
-//          AccessRulesAccessRuleListArgs{...}
-type AccessRulesAccessRuleListInput interface {
+//          GetAccessRulesAccessRuleListArgs{...}
+type GetAccessRulesAccessRuleListInput interface {
 	pulumi.Input
 
-	ToAccessRulesAccessRuleListOutput() AccessRulesAccessRuleListOutput
-	ToAccessRulesAccessRuleListOutputWithContext(context.Context) AccessRulesAccessRuleListOutput
+	ToGetAccessRulesAccessRuleListOutput() GetAccessRulesAccessRuleListOutput
+	ToGetAccessRulesAccessRuleListOutputWithContext(context.Context) GetAccessRulesAccessRuleListOutput
 }
 
-type AccessRulesAccessRuleListArgs struct {
-	AccessRuleId   pulumi.StringInput `pulumi:"accessRuleId"`
-	AuthClientIp   pulumi.StringInput `pulumi:"authClientIp"`
-	Priority       pulumi.IntInput    `pulumi:"priority"`
-	RwPermission   pulumi.StringInput `pulumi:"rwPermission"`
+type GetAccessRulesAccessRuleListArgs struct {
+	// A specified access rule ID used to query.
+	AccessRuleId pulumi.StringInput `pulumi:"accessRuleId"`
+	// Allowed IP of the access rule.
+	AuthClientIp pulumi.StringInput `pulumi:"authClientIp"`
+	// The priority level of access rule.
+	Priority pulumi.IntInput `pulumi:"priority"`
+	// Read and write permissions.
+	RwPermission pulumi.StringInput `pulumi:"rwPermission"`
+	// The permissions of accessing users.
 	UserPermission pulumi.StringInput `pulumi:"userPermission"`
 }
 
-func (AccessRulesAccessRuleListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*AccessRulesAccessRuleList)(nil)).Elem()
+func (GetAccessRulesAccessRuleListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessRulesAccessRuleList)(nil)).Elem()
 }
 
-func (i AccessRulesAccessRuleListArgs) ToAccessRulesAccessRuleListOutput() AccessRulesAccessRuleListOutput {
-	return i.ToAccessRulesAccessRuleListOutputWithContext(context.Background())
+func (i GetAccessRulesAccessRuleListArgs) ToGetAccessRulesAccessRuleListOutput() GetAccessRulesAccessRuleListOutput {
+	return i.ToGetAccessRulesAccessRuleListOutputWithContext(context.Background())
 }
 
-func (i AccessRulesAccessRuleListArgs) ToAccessRulesAccessRuleListOutputWithContext(ctx context.Context) AccessRulesAccessRuleListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AccessRulesAccessRuleListOutput)
+func (i GetAccessRulesAccessRuleListArgs) ToGetAccessRulesAccessRuleListOutputWithContext(ctx context.Context) GetAccessRulesAccessRuleListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessRulesAccessRuleListOutput)
 }
 
-// AccessRulesAccessRuleListArrayInput is an input type that accepts AccessRulesAccessRuleListArray and AccessRulesAccessRuleListArrayOutput values.
-// You can construct a concrete instance of `AccessRulesAccessRuleListArrayInput` via:
+// GetAccessRulesAccessRuleListArrayInput is an input type that accepts GetAccessRulesAccessRuleListArray and GetAccessRulesAccessRuleListArrayOutput values.
+// You can construct a concrete instance of `GetAccessRulesAccessRuleListArrayInput` via:
 //
-//          AccessRulesAccessRuleListArray{ AccessRulesAccessRuleListArgs{...} }
-type AccessRulesAccessRuleListArrayInput interface {
+//          GetAccessRulesAccessRuleListArray{ GetAccessRulesAccessRuleListArgs{...} }
+type GetAccessRulesAccessRuleListArrayInput interface {
 	pulumi.Input
 
-	ToAccessRulesAccessRuleListArrayOutput() AccessRulesAccessRuleListArrayOutput
-	ToAccessRulesAccessRuleListArrayOutputWithContext(context.Context) AccessRulesAccessRuleListArrayOutput
+	ToGetAccessRulesAccessRuleListArrayOutput() GetAccessRulesAccessRuleListArrayOutput
+	ToGetAccessRulesAccessRuleListArrayOutputWithContext(context.Context) GetAccessRulesAccessRuleListArrayOutput
 }
 
-type AccessRulesAccessRuleListArray []AccessRulesAccessRuleListInput
+type GetAccessRulesAccessRuleListArray []GetAccessRulesAccessRuleListInput
 
-func (AccessRulesAccessRuleListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AccessRulesAccessRuleList)(nil)).Elem()
+func (GetAccessRulesAccessRuleListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessRulesAccessRuleList)(nil)).Elem()
 }
 
-func (i AccessRulesAccessRuleListArray) ToAccessRulesAccessRuleListArrayOutput() AccessRulesAccessRuleListArrayOutput {
-	return i.ToAccessRulesAccessRuleListArrayOutputWithContext(context.Background())
+func (i GetAccessRulesAccessRuleListArray) ToGetAccessRulesAccessRuleListArrayOutput() GetAccessRulesAccessRuleListArrayOutput {
+	return i.ToGetAccessRulesAccessRuleListArrayOutputWithContext(context.Background())
 }
 
-func (i AccessRulesAccessRuleListArray) ToAccessRulesAccessRuleListArrayOutputWithContext(ctx context.Context) AccessRulesAccessRuleListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(AccessRulesAccessRuleListArrayOutput)
+func (i GetAccessRulesAccessRuleListArray) ToGetAccessRulesAccessRuleListArrayOutputWithContext(ctx context.Context) GetAccessRulesAccessRuleListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccessRulesAccessRuleListArrayOutput)
 }
 
-type AccessRulesAccessRuleListOutput struct{ *pulumi.OutputState }
+type GetAccessRulesAccessRuleListOutput struct{ *pulumi.OutputState }
 
-func (AccessRulesAccessRuleListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*AccessRulesAccessRuleList)(nil)).Elem()
+func (GetAccessRulesAccessRuleListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccessRulesAccessRuleList)(nil)).Elem()
 }
 
-func (o AccessRulesAccessRuleListOutput) ToAccessRulesAccessRuleListOutput() AccessRulesAccessRuleListOutput {
+func (o GetAccessRulesAccessRuleListOutput) ToGetAccessRulesAccessRuleListOutput() GetAccessRulesAccessRuleListOutput {
 	return o
 }
 
-func (o AccessRulesAccessRuleListOutput) ToAccessRulesAccessRuleListOutputWithContext(ctx context.Context) AccessRulesAccessRuleListOutput {
+func (o GetAccessRulesAccessRuleListOutput) ToGetAccessRulesAccessRuleListOutputWithContext(ctx context.Context) GetAccessRulesAccessRuleListOutput {
 	return o
 }
 
-func (o AccessRulesAccessRuleListOutput) AccessRuleId() pulumi.StringOutput {
-	return o.ApplyT(func(v AccessRulesAccessRuleList) string { return v.AccessRuleId }).(pulumi.StringOutput)
+// A specified access rule ID used to query.
+func (o GetAccessRulesAccessRuleListOutput) AccessRuleId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRulesAccessRuleList) string { return v.AccessRuleId }).(pulumi.StringOutput)
 }
 
-func (o AccessRulesAccessRuleListOutput) AuthClientIp() pulumi.StringOutput {
-	return o.ApplyT(func(v AccessRulesAccessRuleList) string { return v.AuthClientIp }).(pulumi.StringOutput)
+// Allowed IP of the access rule.
+func (o GetAccessRulesAccessRuleListOutput) AuthClientIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRulesAccessRuleList) string { return v.AuthClientIp }).(pulumi.StringOutput)
 }
 
-func (o AccessRulesAccessRuleListOutput) Priority() pulumi.IntOutput {
-	return o.ApplyT(func(v AccessRulesAccessRuleList) int { return v.Priority }).(pulumi.IntOutput)
+// The priority level of access rule.
+func (o GetAccessRulesAccessRuleListOutput) Priority() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccessRulesAccessRuleList) int { return v.Priority }).(pulumi.IntOutput)
 }
 
-func (o AccessRulesAccessRuleListOutput) RwPermission() pulumi.StringOutput {
-	return o.ApplyT(func(v AccessRulesAccessRuleList) string { return v.RwPermission }).(pulumi.StringOutput)
+// Read and write permissions.
+func (o GetAccessRulesAccessRuleListOutput) RwPermission() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRulesAccessRuleList) string { return v.RwPermission }).(pulumi.StringOutput)
 }
 
-func (o AccessRulesAccessRuleListOutput) UserPermission() pulumi.StringOutput {
-	return o.ApplyT(func(v AccessRulesAccessRuleList) string { return v.UserPermission }).(pulumi.StringOutput)
+// The permissions of accessing users.
+func (o GetAccessRulesAccessRuleListOutput) UserPermission() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccessRulesAccessRuleList) string { return v.UserPermission }).(pulumi.StringOutput)
 }
 
-type AccessRulesAccessRuleListArrayOutput struct{ *pulumi.OutputState }
+type GetAccessRulesAccessRuleListArrayOutput struct{ *pulumi.OutputState }
 
-func (AccessRulesAccessRuleListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]AccessRulesAccessRuleList)(nil)).Elem()
+func (GetAccessRulesAccessRuleListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccessRulesAccessRuleList)(nil)).Elem()
 }
 
-func (o AccessRulesAccessRuleListArrayOutput) ToAccessRulesAccessRuleListArrayOutput() AccessRulesAccessRuleListArrayOutput {
+func (o GetAccessRulesAccessRuleListArrayOutput) ToGetAccessRulesAccessRuleListArrayOutput() GetAccessRulesAccessRuleListArrayOutput {
 	return o
 }
 
-func (o AccessRulesAccessRuleListArrayOutput) ToAccessRulesAccessRuleListArrayOutputWithContext(ctx context.Context) AccessRulesAccessRuleListArrayOutput {
+func (o GetAccessRulesAccessRuleListArrayOutput) ToGetAccessRulesAccessRuleListArrayOutputWithContext(ctx context.Context) GetAccessRulesAccessRuleListArrayOutput {
 	return o
 }
 
-func (o AccessRulesAccessRuleListArrayOutput) Index(i pulumi.IntInput) AccessRulesAccessRuleListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccessRulesAccessRuleList {
-		return vs[0].([]AccessRulesAccessRuleList)[vs[1].(int)]
-	}).(AccessRulesAccessRuleListOutput)
+func (o GetAccessRulesAccessRuleListArrayOutput) Index(i pulumi.IntInput) GetAccessRulesAccessRuleListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccessRulesAccessRuleList {
+		return vs[0].([]GetAccessRulesAccessRuleList)[vs[1].(int)]
+	}).(GetAccessRulesAccessRuleListOutput)
 }
 
-type FileSystemsFileSystemList struct {
-	AccessGroupId    string `pulumi:"accessGroupId"`
+type GetFileSystemsFileSystemList struct {
+	// ID of the access group.
+	AccessGroupId string `pulumi:"accessGroupId"`
+	// The available zone that the file system locates at.
 	AvailabilityZone string `pulumi:"availabilityZone"`
-	CreateTime       string `pulumi:"createTime"`
-	FileSystemId     string `pulumi:"fileSystemId"`
-	Name             string `pulumi:"name"`
-	Protocol         string `pulumi:"protocol"`
-	SizeLimit        int    `pulumi:"sizeLimit"`
-	SizeUsed         int    `pulumi:"sizeUsed"`
-	Status           string `pulumi:"status"`
-	StorageType      string `pulumi:"storageType"`
+	// Creation time of the file system.
+	CreateTime string `pulumi:"createTime"`
+	// A specified file system ID used to query.
+	FileSystemId string `pulumi:"fileSystemId"`
+	// A file system name used to query.
+	Name string `pulumi:"name"`
+	// Protocol of the file system.
+	Protocol string `pulumi:"protocol"`
+	// Size limit of the file system.
+	SizeLimit int `pulumi:"sizeLimit"`
+	// Size used of the file system.
+	SizeUsed int `pulumi:"sizeUsed"`
+	// Status of the file system.
+	Status string `pulumi:"status"`
+	// Storage type of the file system.
+	StorageType string `pulumi:"storageType"`
 }
 
-// FileSystemsFileSystemListInput is an input type that accepts FileSystemsFileSystemListArgs and FileSystemsFileSystemListOutput values.
-// You can construct a concrete instance of `FileSystemsFileSystemListInput` via:
+// GetFileSystemsFileSystemListInput is an input type that accepts GetFileSystemsFileSystemListArgs and GetFileSystemsFileSystemListOutput values.
+// You can construct a concrete instance of `GetFileSystemsFileSystemListInput` via:
 //
-//          FileSystemsFileSystemListArgs{...}
-type FileSystemsFileSystemListInput interface {
+//          GetFileSystemsFileSystemListArgs{...}
+type GetFileSystemsFileSystemListInput interface {
 	pulumi.Input
 
-	ToFileSystemsFileSystemListOutput() FileSystemsFileSystemListOutput
-	ToFileSystemsFileSystemListOutputWithContext(context.Context) FileSystemsFileSystemListOutput
+	ToGetFileSystemsFileSystemListOutput() GetFileSystemsFileSystemListOutput
+	ToGetFileSystemsFileSystemListOutputWithContext(context.Context) GetFileSystemsFileSystemListOutput
 }
 
-type FileSystemsFileSystemListArgs struct {
-	AccessGroupId    pulumi.StringInput `pulumi:"accessGroupId"`
+type GetFileSystemsFileSystemListArgs struct {
+	// ID of the access group.
+	AccessGroupId pulumi.StringInput `pulumi:"accessGroupId"`
+	// The available zone that the file system locates at.
 	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
-	CreateTime       pulumi.StringInput `pulumi:"createTime"`
-	FileSystemId     pulumi.StringInput `pulumi:"fileSystemId"`
-	Name             pulumi.StringInput `pulumi:"name"`
-	Protocol         pulumi.StringInput `pulumi:"protocol"`
-	SizeLimit        pulumi.IntInput    `pulumi:"sizeLimit"`
-	SizeUsed         pulumi.IntInput    `pulumi:"sizeUsed"`
-	Status           pulumi.StringInput `pulumi:"status"`
-	StorageType      pulumi.StringInput `pulumi:"storageType"`
+	// Creation time of the file system.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// A specified file system ID used to query.
+	FileSystemId pulumi.StringInput `pulumi:"fileSystemId"`
+	// A file system name used to query.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Protocol of the file system.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Size limit of the file system.
+	SizeLimit pulumi.IntInput `pulumi:"sizeLimit"`
+	// Size used of the file system.
+	SizeUsed pulumi.IntInput `pulumi:"sizeUsed"`
+	// Status of the file system.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Storage type of the file system.
+	StorageType pulumi.StringInput `pulumi:"storageType"`
 }
 
-func (FileSystemsFileSystemListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*FileSystemsFileSystemList)(nil)).Elem()
+func (GetFileSystemsFileSystemListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFileSystemsFileSystemList)(nil)).Elem()
 }
 
-func (i FileSystemsFileSystemListArgs) ToFileSystemsFileSystemListOutput() FileSystemsFileSystemListOutput {
-	return i.ToFileSystemsFileSystemListOutputWithContext(context.Background())
+func (i GetFileSystemsFileSystemListArgs) ToGetFileSystemsFileSystemListOutput() GetFileSystemsFileSystemListOutput {
+	return i.ToGetFileSystemsFileSystemListOutputWithContext(context.Background())
 }
 
-func (i FileSystemsFileSystemListArgs) ToFileSystemsFileSystemListOutputWithContext(ctx context.Context) FileSystemsFileSystemListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(FileSystemsFileSystemListOutput)
+func (i GetFileSystemsFileSystemListArgs) ToGetFileSystemsFileSystemListOutputWithContext(ctx context.Context) GetFileSystemsFileSystemListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFileSystemsFileSystemListOutput)
 }
 
-// FileSystemsFileSystemListArrayInput is an input type that accepts FileSystemsFileSystemListArray and FileSystemsFileSystemListArrayOutput values.
-// You can construct a concrete instance of `FileSystemsFileSystemListArrayInput` via:
+// GetFileSystemsFileSystemListArrayInput is an input type that accepts GetFileSystemsFileSystemListArray and GetFileSystemsFileSystemListArrayOutput values.
+// You can construct a concrete instance of `GetFileSystemsFileSystemListArrayInput` via:
 //
-//          FileSystemsFileSystemListArray{ FileSystemsFileSystemListArgs{...} }
-type FileSystemsFileSystemListArrayInput interface {
+//          GetFileSystemsFileSystemListArray{ GetFileSystemsFileSystemListArgs{...} }
+type GetFileSystemsFileSystemListArrayInput interface {
 	pulumi.Input
 
-	ToFileSystemsFileSystemListArrayOutput() FileSystemsFileSystemListArrayOutput
-	ToFileSystemsFileSystemListArrayOutputWithContext(context.Context) FileSystemsFileSystemListArrayOutput
+	ToGetFileSystemsFileSystemListArrayOutput() GetFileSystemsFileSystemListArrayOutput
+	ToGetFileSystemsFileSystemListArrayOutputWithContext(context.Context) GetFileSystemsFileSystemListArrayOutput
 }
 
-type FileSystemsFileSystemListArray []FileSystemsFileSystemListInput
+type GetFileSystemsFileSystemListArray []GetFileSystemsFileSystemListInput
 
-func (FileSystemsFileSystemListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]FileSystemsFileSystemList)(nil)).Elem()
+func (GetFileSystemsFileSystemListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFileSystemsFileSystemList)(nil)).Elem()
 }
 
-func (i FileSystemsFileSystemListArray) ToFileSystemsFileSystemListArrayOutput() FileSystemsFileSystemListArrayOutput {
-	return i.ToFileSystemsFileSystemListArrayOutputWithContext(context.Background())
+func (i GetFileSystemsFileSystemListArray) ToGetFileSystemsFileSystemListArrayOutput() GetFileSystemsFileSystemListArrayOutput {
+	return i.ToGetFileSystemsFileSystemListArrayOutputWithContext(context.Background())
 }
 
-func (i FileSystemsFileSystemListArray) ToFileSystemsFileSystemListArrayOutputWithContext(ctx context.Context) FileSystemsFileSystemListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(FileSystemsFileSystemListArrayOutput)
+func (i GetFileSystemsFileSystemListArray) ToGetFileSystemsFileSystemListArrayOutputWithContext(ctx context.Context) GetFileSystemsFileSystemListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFileSystemsFileSystemListArrayOutput)
 }
 
-type FileSystemsFileSystemListOutput struct{ *pulumi.OutputState }
+type GetFileSystemsFileSystemListOutput struct{ *pulumi.OutputState }
 
-func (FileSystemsFileSystemListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*FileSystemsFileSystemList)(nil)).Elem()
+func (GetFileSystemsFileSystemListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFileSystemsFileSystemList)(nil)).Elem()
 }
 
-func (o FileSystemsFileSystemListOutput) ToFileSystemsFileSystemListOutput() FileSystemsFileSystemListOutput {
+func (o GetFileSystemsFileSystemListOutput) ToGetFileSystemsFileSystemListOutput() GetFileSystemsFileSystemListOutput {
 	return o
 }
 
-func (o FileSystemsFileSystemListOutput) ToFileSystemsFileSystemListOutputWithContext(ctx context.Context) FileSystemsFileSystemListOutput {
+func (o GetFileSystemsFileSystemListOutput) ToGetFileSystemsFileSystemListOutputWithContext(ctx context.Context) GetFileSystemsFileSystemListOutput {
 	return o
 }
 
-func (o FileSystemsFileSystemListOutput) AccessGroupId() pulumi.StringOutput {
-	return o.ApplyT(func(v FileSystemsFileSystemList) string { return v.AccessGroupId }).(pulumi.StringOutput)
+// ID of the access group.
+func (o GetFileSystemsFileSystemListOutput) AccessGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystemList) string { return v.AccessGroupId }).(pulumi.StringOutput)
 }
 
-func (o FileSystemsFileSystemListOutput) AvailabilityZone() pulumi.StringOutput {
-	return o.ApplyT(func(v FileSystemsFileSystemList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
+// The available zone that the file system locates at.
+func (o GetFileSystemsFileSystemListOutput) AvailabilityZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystemList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
 
-func (o FileSystemsFileSystemListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v FileSystemsFileSystemList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the file system.
+func (o GetFileSystemsFileSystemListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystemList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o FileSystemsFileSystemListOutput) FileSystemId() pulumi.StringOutput {
-	return o.ApplyT(func(v FileSystemsFileSystemList) string { return v.FileSystemId }).(pulumi.StringOutput)
+// A specified file system ID used to query.
+func (o GetFileSystemsFileSystemListOutput) FileSystemId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystemList) string { return v.FileSystemId }).(pulumi.StringOutput)
 }
 
-func (o FileSystemsFileSystemListOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v FileSystemsFileSystemList) string { return v.Name }).(pulumi.StringOutput)
+// A file system name used to query.
+func (o GetFileSystemsFileSystemListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystemList) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o FileSystemsFileSystemListOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func(v FileSystemsFileSystemList) string { return v.Protocol }).(pulumi.StringOutput)
+// Protocol of the file system.
+func (o GetFileSystemsFileSystemListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystemList) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
-func (o FileSystemsFileSystemListOutput) SizeLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v FileSystemsFileSystemList) int { return v.SizeLimit }).(pulumi.IntOutput)
+// Size limit of the file system.
+func (o GetFileSystemsFileSystemListOutput) SizeLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystemList) int { return v.SizeLimit }).(pulumi.IntOutput)
 }
 
-func (o FileSystemsFileSystemListOutput) SizeUsed() pulumi.IntOutput {
-	return o.ApplyT(func(v FileSystemsFileSystemList) int { return v.SizeUsed }).(pulumi.IntOutput)
+// Size used of the file system.
+func (o GetFileSystemsFileSystemListOutput) SizeUsed() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystemList) int { return v.SizeUsed }).(pulumi.IntOutput)
 }
 
-func (o FileSystemsFileSystemListOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v FileSystemsFileSystemList) string { return v.Status }).(pulumi.StringOutput)
+// Status of the file system.
+func (o GetFileSystemsFileSystemListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystemList) string { return v.Status }).(pulumi.StringOutput)
 }
 
-func (o FileSystemsFileSystemListOutput) StorageType() pulumi.StringOutput {
-	return o.ApplyT(func(v FileSystemsFileSystemList) string { return v.StorageType }).(pulumi.StringOutput)
+// Storage type of the file system.
+func (o GetFileSystemsFileSystemListOutput) StorageType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFileSystemsFileSystemList) string { return v.StorageType }).(pulumi.StringOutput)
 }
 
-type FileSystemsFileSystemListArrayOutput struct{ *pulumi.OutputState }
+type GetFileSystemsFileSystemListArrayOutput struct{ *pulumi.OutputState }
 
-func (FileSystemsFileSystemListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]FileSystemsFileSystemList)(nil)).Elem()
+func (GetFileSystemsFileSystemListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFileSystemsFileSystemList)(nil)).Elem()
 }
 
-func (o FileSystemsFileSystemListArrayOutput) ToFileSystemsFileSystemListArrayOutput() FileSystemsFileSystemListArrayOutput {
+func (o GetFileSystemsFileSystemListArrayOutput) ToGetFileSystemsFileSystemListArrayOutput() GetFileSystemsFileSystemListArrayOutput {
 	return o
 }
 
-func (o FileSystemsFileSystemListArrayOutput) ToFileSystemsFileSystemListArrayOutputWithContext(ctx context.Context) FileSystemsFileSystemListArrayOutput {
+func (o GetFileSystemsFileSystemListArrayOutput) ToGetFileSystemsFileSystemListArrayOutputWithContext(ctx context.Context) GetFileSystemsFileSystemListArrayOutput {
 	return o
 }
 
-func (o FileSystemsFileSystemListArrayOutput) Index(i pulumi.IntInput) FileSystemsFileSystemListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FileSystemsFileSystemList {
-		return vs[0].([]FileSystemsFileSystemList)[vs[1].(int)]
-	}).(FileSystemsFileSystemListOutput)
+func (o GetFileSystemsFileSystemListArrayOutput) Index(i pulumi.IntInput) GetFileSystemsFileSystemListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFileSystemsFileSystemList {
+		return vs[0].([]GetFileSystemsFileSystemList)[vs[1].(int)]
+	}).(GetFileSystemsFileSystemListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*AccessGroupsAccessGroupListInput)(nil)).Elem(), AccessGroupsAccessGroupListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AccessGroupsAccessGroupListArrayInput)(nil)).Elem(), AccessGroupsAccessGroupListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AccessRulesAccessRuleListInput)(nil)).Elem(), AccessRulesAccessRuleListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*AccessRulesAccessRuleListArrayInput)(nil)).Elem(), AccessRulesAccessRuleListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*FileSystemsFileSystemListInput)(nil)).Elem(), FileSystemsFileSystemListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*FileSystemsFileSystemListArrayInput)(nil)).Elem(), FileSystemsFileSystemListArray{})
-	pulumi.RegisterOutputType(AccessGroupsAccessGroupListOutput{})
-	pulumi.RegisterOutputType(AccessGroupsAccessGroupListArrayOutput{})
-	pulumi.RegisterOutputType(AccessRulesAccessRuleListOutput{})
-	pulumi.RegisterOutputType(AccessRulesAccessRuleListArrayOutput{})
-	pulumi.RegisterOutputType(FileSystemsFileSystemListOutput{})
-	pulumi.RegisterOutputType(FileSystemsFileSystemListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessGroupsAccessGroupListInput)(nil)).Elem(), GetAccessGroupsAccessGroupListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessGroupsAccessGroupListArrayInput)(nil)).Elem(), GetAccessGroupsAccessGroupListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessRulesAccessRuleListInput)(nil)).Elem(), GetAccessRulesAccessRuleListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccessRulesAccessRuleListArrayInput)(nil)).Elem(), GetAccessRulesAccessRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFileSystemsFileSystemListInput)(nil)).Elem(), GetFileSystemsFileSystemListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFileSystemsFileSystemListArrayInput)(nil)).Elem(), GetFileSystemsFileSystemListArray{})
+	pulumi.RegisterOutputType(GetAccessGroupsAccessGroupListOutput{})
+	pulumi.RegisterOutputType(GetAccessGroupsAccessGroupListArrayOutput{})
+	pulumi.RegisterOutputType(GetAccessRulesAccessRuleListOutput{})
+	pulumi.RegisterOutputType(GetAccessRulesAccessRuleListArrayOutput{})
+	pulumi.RegisterOutputType(GetFileSystemsFileSystemListOutput{})
+	pulumi.RegisterOutputType(GetFileSystemsFileSystemListArrayOutput{})
 }

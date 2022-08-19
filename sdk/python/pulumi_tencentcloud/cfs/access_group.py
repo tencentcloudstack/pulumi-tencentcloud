@@ -115,7 +115,25 @@ class AccessGroup(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AccessGroup resource with the given unique name, props, and options.
+        Provides a resource to create a CFS access group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cfs.AccessGroup("foo", description="test")
+        ```
+
+        ## Import
+
+        CFS access group can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup foo pgroup-7nx89k7l
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Description of the access group, and max length is 255.
@@ -128,7 +146,25 @@ class AccessGroup(pulumi.CustomResource):
                  args: Optional[AccessGroupArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AccessGroup resource with the given unique name, props, and options.
+        Provides a resource to create a CFS access group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cfs.AccessGroup("foo", description="test")
+        ```
+
+        ## Import
+
+        CFS access group can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cfs/accessGroup:AccessGroup foo pgroup-7nx89k7l
+        ```
+
         :param str resource_name: The name of the resource.
         :param AccessGroupArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

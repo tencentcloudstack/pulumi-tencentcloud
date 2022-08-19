@@ -9,6 +9,62 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Tdmq
 {
+    /// <summary>
+    /// Provide a resource to create a TDMQ role.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Tdmq.Instance("foo", new Tencentcloud.Tdmq.InstanceArgs
+    ///         {
+    ///             ClusterName = "example",
+    ///             Remark = "this is description.",
+    ///         });
+    ///         var barNamespace = new Tencentcloud.Tdmq.Namespace("barNamespace", new Tencentcloud.Tdmq.NamespaceArgs
+    ///         {
+    ///             ClusterId = foo.Id,
+    ///             EnvironName = "example",
+    ///             MsgTtl = 300,
+    ///             Remark = "this is description.",
+    ///         });
+    ///         var barTopic = new Tencentcloud.Tdmq.Topic("barTopic", new Tencentcloud.Tdmq.TopicArgs
+    ///         {
+    ///             ClusterId = foo.Id,
+    ///             EnvironId = barNamespace.Id,
+    ///             Partitions = 6,
+    ///             Remark = "this is description.",
+    ///             TopicName = "example",
+    ///             TopicType = 0,
+    ///         });
+    ///         var barRole = new Tencentcloud.Tdmq.Role("barRole", new Tencentcloud.Tdmq.RoleArgs
+    ///         {
+    ///             ClusterId = foo.Id,
+    ///             Remark = "this is description world",
+    ///             RoleName = "example",
+    ///         });
+    ///         var barNamespaceRoleAttachment = new Tencentcloud.Tdmq.NamespaceRoleAttachment("barNamespaceRoleAttachment", new Tencentcloud.Tdmq.NamespaceRoleAttachmentArgs
+    ///         {
+    ///             ClusterId = foo.Id,
+    ///             EnvironId = barNamespace.Id,
+    ///             Permissions = 
+    ///             {
+    ///                 "produce",
+    ///                 "consume",
+    ///             },
+    ///             RoleName = barRole.RoleName,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/namespaceRoleAttachment:NamespaceRoleAttachment")]
     public partial class NamespaceRoleAttachment : Pulumi.CustomResource
     {

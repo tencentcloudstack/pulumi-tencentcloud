@@ -9,6 +9,49 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cls
 {
+    /// <summary>
+    /// Provides a resource to create a cls config extra
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var extra = new Tencentcloud.Cls.ConfigExtra("extra", new Tencentcloud.Cls.ConfigExtraArgs
+    ///         {
+    ///             TopicId = tencentcloud_cls_topic.Topic.Id,
+    ///             Type = "container_file",
+    ///             LogType = "json_log",
+    ///             ConfigFlag = "label_k8s",
+    ///             LogsetId = tencentcloud_cls_logset.Logset.Id,
+    ///             LogsetName = tencentcloud_cls_logset.Logset.Logset_name,
+    ///             TopicName = tencentcloud_cls_topic.Topic.Topic_name,
+    ///             ContainerFile = new Tencentcloud.Cls.Inputs.ConfigExtraContainerFileArgs
+    ///             {
+    ///                 Container = "nginx",
+    ///                 FilePattern = "log",
+    ///                 LogPath = "/nginx",
+    ///                 Namespace = "default",
+    ///                 Workload = new Tencentcloud.Cls.Inputs.ConfigExtraContainerFileWorkloadArgs
+    ///                 {
+    ///                     Container = "nginx",
+    ///                     Kind = "deployment",
+    ///                     Name = "nginx",
+    ///                     Namespace = "default",
+    ///                 },
+    ///             },
+    ///             GroupId = "27752a9b-9918-440a-8ee7-9c84a14a47ed",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/configExtra:ConfigExtra")]
     public partial class ConfigExtra : Pulumi.CustomResource
     {
@@ -61,9 +104,7 @@ namespace Pulumi.Tencentcloud.Cls
         public Output<Outputs.ConfigExtraHostFile?> HostFile { get; private set; } = null!;
 
         /// <summary>
-        /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-        /// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-        /// Default value: minimalist_log.
+        /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         /// </summary>
         [Output("logType")]
         public Output<string> LogType { get; private set; } = null!;
@@ -217,9 +258,7 @@ namespace Pulumi.Tencentcloud.Cls
         public Input<Inputs.ConfigExtraHostFileArgs>? HostFile { get; set; }
 
         /// <summary>
-        /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-        /// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-        /// Default value: minimalist_log.
+        /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         /// </summary>
         [Input("logType", required: true)]
         public Input<string> LogType { get; set; } = null!;
@@ -334,9 +373,7 @@ namespace Pulumi.Tencentcloud.Cls
         public Input<Inputs.ConfigExtraHostFileGetArgs>? HostFile { get; set; }
 
         /// <summary>
-        /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-        /// minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-        /// Default value: minimalist_log.
+        /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         /// </summary>
         [Input("logType")]
         public Input<string>? LogType { get; set; }

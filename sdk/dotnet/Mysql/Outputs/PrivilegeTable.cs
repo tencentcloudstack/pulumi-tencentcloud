@@ -13,8 +13,17 @@ namespace Pulumi.Tencentcloud.Mysql.Outputs
     [OutputType]
     public sealed class PrivilegeTable
     {
+        /// <summary>
+        /// Database name.
+        /// </summary>
         public readonly string DatabaseName;
+        /// <summary>
+        /// Table privilege.available values for Privileges:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE VIEW,SHOW VIEW,TRIGGER.
+        /// </summary>
         public readonly ImmutableArray<string> Privileges;
+        /// <summary>
+        /// Table name.
+        /// </summary>
         public readonly string TableName;
 
         [OutputConstructor]

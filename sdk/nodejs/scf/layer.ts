@@ -5,6 +5,36 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a SCF layer.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Scf.Layer("foo", {
+ *     compatibleRuntimes: ["Python3.6"],
+ *     content: {
+ *         cosBucketName: "test-bucket",
+ *         cosBucketRegion: "ap-guangzhou",
+ *         cosObjectName: "/foo.zip",
+ *     },
+ *     description: "foo",
+ *     layerName: "foo",
+ *     licenseInfo: "foo",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Scf layer can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Scf/layer:Layer layer layerId#layerVersion
+ * ```
+ */
 export class Layer extends pulumi.CustomResource {
     /**
      * Get an existing Layer resource's state with the given name, ID, and optional extra

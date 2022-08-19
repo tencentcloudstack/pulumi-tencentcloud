@@ -4,9 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-export class AccountDBAttachment extends pulumi.CustomResource {
+/**
+ * Use this resource to create SQL Server account DB attachment
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.sqlserver.AccountDbAttachment("foo", {
+ *     instanceId: "mssql-3cdq7kx5",
+ *     accountName: tencentcloud_sqlserver_account.example.name,
+ *     dbName: tencentcloud_sqlserver_db.example.name,
+ *     privilege: "ReadWrite",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * SQL Server account DB attachment can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment foo mssql-3cdq7kx5#tf_sqlserver_account#test111
+ * ```
+ */
+export class AccountDbAttachment extends pulumi.CustomResource {
     /**
-     * Get an existing AccountDBAttachment resource's state with the given name, ID, and optional extra
+     * Get an existing AccountDbAttachment resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -14,22 +39,22 @@ export class AccountDBAttachment extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: AccountDBAttachmentState, opts?: pulumi.CustomResourceOptions): AccountDBAttachment {
-        return new AccountDBAttachment(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: AccountDbAttachmentState, opts?: pulumi.CustomResourceOptions): AccountDbAttachment {
+        return new AccountDbAttachment(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:Sqlserver/accountDBAttachment:AccountDBAttachment';
+    public static readonly __pulumiType = 'tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment';
 
     /**
-     * Returns true if the given object is an instance of AccountDBAttachment.  This is designed to work even
+     * Returns true if the given object is an instance of AccountDbAttachment.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is AccountDBAttachment {
+    public static isInstance(obj: any): obj is AccountDbAttachment {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === AccountDBAttachment.__pulumiType;
+        return obj['__pulumiType'] === AccountDbAttachment.__pulumiType;
     }
 
     /**
@@ -50,24 +75,24 @@ export class AccountDBAttachment extends pulumi.CustomResource {
     public readonly privilege!: pulumi.Output<string>;
 
     /**
-     * Create a AccountDBAttachment resource with the given unique name, arguments, and options.
+     * Create a AccountDbAttachment resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: AccountDBAttachmentArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: AccountDBAttachmentArgs | AccountDBAttachmentState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: AccountDbAttachmentArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: AccountDbAttachmentArgs | AccountDbAttachmentState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as AccountDBAttachmentState | undefined;
+            const state = argsOrState as AccountDbAttachmentState | undefined;
             resourceInputs["accountName"] = state ? state.accountName : undefined;
             resourceInputs["dbName"] = state ? state.dbName : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["privilege"] = state ? state.privilege : undefined;
         } else {
-            const args = argsOrState as AccountDBAttachmentArgs | undefined;
+            const args = argsOrState as AccountDbAttachmentArgs | undefined;
             if ((!args || args.accountName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'accountName'");
             }
@@ -86,14 +111,14 @@ export class AccountDBAttachment extends pulumi.CustomResource {
             resourceInputs["privilege"] = args ? args.privilege : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(AccountDBAttachment.__pulumiType, name, resourceInputs, opts);
+        super(AccountDbAttachment.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering AccountDBAttachment resources.
+ * Input properties used for looking up and filtering AccountDbAttachment resources.
  */
-export interface AccountDBAttachmentState {
+export interface AccountDbAttachmentState {
     /**
      * SQL Server account name.
      */
@@ -113,9 +138,9 @@ export interface AccountDBAttachmentState {
 }
 
 /**
- * The set of arguments for constructing a AccountDBAttachment resource.
+ * The set of arguments for constructing a AccountDbAttachment resource.
  */
-export interface AccountDBAttachmentArgs {
+export interface AccountDbAttachmentArgs {
     /**
      * SQL Server account name.
      */

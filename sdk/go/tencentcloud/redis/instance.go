@@ -11,6 +11,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a Redis instance and set its attributes.
+//
+// ## Import
+//
+// Redis instance can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 
@@ -18,33 +27,25 @@ type Instance struct {
 	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
 	// The available zone ID of an instance to be created, please refer to `tencentcloud_redis_zone_config.list`.
 	AvailabilityZone pulumi.StringOutput `pulumi:"availabilityZone"`
-	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-	// International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-	// new with new charge type.
+	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
 	// The time when the instance was created.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
-	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance.
+	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
 	// IP address of an instance.
 	Ip pulumi.StringOutput `pulumi:"ip"`
-	// The memory volume of an available instance(in MB), please refer to
-	// `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-	// of the instance; when Redis is cluster type, it represents memory size of per sharding.
+	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
 	MemSize pulumi.IntOutput `pulumi:"memSize"`
 	// Instance name.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
 	NoAuth pulumi.BoolPtrOutput `pulumi:"noAuth"`
-	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-	// empty.
+	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password pulumi.StringPtrOutput `pulumi:"password"`
-	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-	// the Redis instance will be recreated.
+	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
 	Port pulumi.IntPtrOutput `pulumi:"port"`
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// Specifies which project the instance should belong to.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
@@ -54,12 +55,9 @@ type Instance struct {
 	RedisShardNum pulumi.IntOutput `pulumi:"redisShardNum"`
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions.
 	ReplicaZoneIds pulumi.IntArrayOutput `pulumi:"replicaZoneIds"`
-	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-	// read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-	// to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-	// recommended number of replicas >=2.
+	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
 	ReplicasReadOnly pulumi.BoolOutput `pulumi:"replicasReadOnly"`
-	// ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+	// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// Current status of an instance, maybe: init, processing, online, isolate and todelete.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -67,14 +65,11 @@ type Instance struct {
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
 	// Instance tags.
 	Tags pulumi.MapOutput `pulumi:"tags"`
-	// Instance type. Available values:
-	// `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-	// specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
+	// It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `clusterCkv`,`cluster_redis5.0`,`clusterRedis`,`masterSlaveCkv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`masterSlaveRedis`,`standaloneRedis`, specific region support specific types, need to refer data `Redis.getZoneConfig`.
 	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
 	Type pulumi.StringPtrOutput `pulumi:"type"`
-	// Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-	// [document](https://intl.cloud.tencent.com/document/product/239/32069).
+	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
 	TypeId pulumi.IntPtrOutput `pulumi:"typeId"`
 	// ID of the vpc with which the instance is to be associated.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
@@ -119,33 +114,25 @@ type instanceState struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// The available zone ID of an instance to be created, please refer to `tencentcloud_redis_zone_config.list`.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
-	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-	// International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-	// new with new charge type.
+	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
 	ChargeType *string `pulumi:"chargeType"`
 	// The time when the instance was created.
 	CreateTime *string `pulumi:"createTime"`
-	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance.
+	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// IP address of an instance.
 	Ip *string `pulumi:"ip"`
-	// The memory volume of an available instance(in MB), please refer to
-	// `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-	// of the instance; when Redis is cluster type, it represents memory size of per sharding.
+	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
 	MemSize *int `pulumi:"memSize"`
 	// Instance name.
 	Name *string `pulumi:"name"`
 	// Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
 	NoAuth *bool `pulumi:"noAuth"`
-	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-	// empty.
+	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password *string `pulumi:"password"`
-	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-	// the Redis instance will be recreated.
+	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
 	Port *int `pulumi:"port"`
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// Specifies which project the instance should belong to.
 	ProjectId *int `pulumi:"projectId"`
@@ -155,12 +142,9 @@ type instanceState struct {
 	RedisShardNum *int `pulumi:"redisShardNum"`
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions.
 	ReplicaZoneIds []int `pulumi:"replicaZoneIds"`
-	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-	// read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-	// to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-	// recommended number of replicas >=2.
+	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
 	ReplicasReadOnly *bool `pulumi:"replicasReadOnly"`
-	// ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+	// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Current status of an instance, maybe: init, processing, online, isolate and todelete.
 	Status *string `pulumi:"status"`
@@ -168,14 +152,11 @@ type instanceState struct {
 	SubnetId *string `pulumi:"subnetId"`
 	// Instance tags.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// Instance type. Available values:
-	// `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-	// specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
+	// It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `clusterCkv`,`cluster_redis5.0`,`clusterRedis`,`masterSlaveCkv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`masterSlaveRedis`,`standaloneRedis`, specific region support specific types, need to refer data `Redis.getZoneConfig`.
 	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
 	Type *string `pulumi:"type"`
-	// Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-	// [document](https://intl.cloud.tencent.com/document/product/239/32069).
+	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
 	TypeId *int `pulumi:"typeId"`
 	// ID of the vpc with which the instance is to be associated.
 	VpcId *string `pulumi:"vpcId"`
@@ -186,33 +167,25 @@ type InstanceState struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// The available zone ID of an instance to be created, please refer to `tencentcloud_redis_zone_config.list`.
 	AvailabilityZone pulumi.StringPtrInput
-	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-	// International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-	// new with new charge type.
+	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
 	ChargeType pulumi.StringPtrInput
 	// The time when the instance was created.
 	CreateTime pulumi.StringPtrInput
-	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance.
+	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
 	ForceDelete pulumi.BoolPtrInput
 	// IP address of an instance.
 	Ip pulumi.StringPtrInput
-	// The memory volume of an available instance(in MB), please refer to
-	// `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-	// of the instance; when Redis is cluster type, it represents memory size of per sharding.
+	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
 	MemSize pulumi.IntPtrInput
 	// Instance name.
 	Name pulumi.StringPtrInput
 	// Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
 	NoAuth pulumi.BoolPtrInput
-	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-	// empty.
+	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password pulumi.StringPtrInput
-	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-	// the Redis instance will be recreated.
+	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
 	Port pulumi.IntPtrInput
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod pulumi.IntPtrInput
 	// Specifies which project the instance should belong to.
 	ProjectId pulumi.IntPtrInput
@@ -222,12 +195,9 @@ type InstanceState struct {
 	RedisShardNum pulumi.IntPtrInput
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions.
 	ReplicaZoneIds pulumi.IntArrayInput
-	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-	// read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-	// to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-	// recommended number of replicas >=2.
+	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
 	ReplicasReadOnly pulumi.BoolPtrInput
-	// ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+	// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 	SecurityGroups pulumi.StringArrayInput
 	// Current status of an instance, maybe: init, processing, online, isolate and todelete.
 	Status pulumi.StringPtrInput
@@ -235,14 +205,11 @@ type InstanceState struct {
 	SubnetId pulumi.StringPtrInput
 	// Instance tags.
 	Tags pulumi.MapInput
-	// Instance type. Available values:
-	// `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-	// specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
+	// It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `clusterCkv`,`cluster_redis5.0`,`clusterRedis`,`masterSlaveCkv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`masterSlaveRedis`,`standaloneRedis`, specific region support specific types, need to refer data `Redis.getZoneConfig`.
 	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
 	Type pulumi.StringPtrInput
-	// Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-	// [document](https://intl.cloud.tencent.com/document/product/239/32069).
+	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
 	TypeId pulumi.IntPtrInput
 	// ID of the vpc with which the instance is to be associated.
 	VpcId pulumi.StringPtrInput
@@ -257,29 +224,21 @@ type instanceArgs struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// The available zone ID of an instance to be created, please refer to `tencentcloud_redis_zone_config.list`.
 	AvailabilityZone string `pulumi:"availabilityZone"`
-	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-	// International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-	// new with new charge type.
+	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
 	ChargeType *string `pulumi:"chargeType"`
-	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance.
+	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
 	ForceDelete *bool `pulumi:"forceDelete"`
-	// The memory volume of an available instance(in MB), please refer to
-	// `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-	// of the instance; when Redis is cluster type, it represents memory size of per sharding.
+	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
 	MemSize int `pulumi:"memSize"`
 	// Instance name.
 	Name *string `pulumi:"name"`
 	// Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
 	NoAuth *bool `pulumi:"noAuth"`
-	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-	// empty.
+	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password *string `pulumi:"password"`
-	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-	// the Redis instance will be recreated.
+	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
 	Port *int `pulumi:"port"`
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// Specifies which project the instance should belong to.
 	ProjectId *int `pulumi:"projectId"`
@@ -289,25 +248,19 @@ type instanceArgs struct {
 	RedisShardNum *int `pulumi:"redisShardNum"`
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions.
 	ReplicaZoneIds []int `pulumi:"replicaZoneIds"`
-	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-	// read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-	// to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-	// recommended number of replicas >=2.
+	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
 	ReplicasReadOnly *bool `pulumi:"replicasReadOnly"`
-	// ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+	// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Specifies which subnet the instance should belong to.
 	SubnetId *string `pulumi:"subnetId"`
 	// Instance tags.
 	Tags map[string]interface{} `pulumi:"tags"`
-	// Instance type. Available values:
-	// `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-	// specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
+	// It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `clusterCkv`,`cluster_redis5.0`,`clusterRedis`,`masterSlaveCkv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`masterSlaveRedis`,`standaloneRedis`, specific region support specific types, need to refer data `Redis.getZoneConfig`.
 	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
 	Type *string `pulumi:"type"`
-	// Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-	// [document](https://intl.cloud.tencent.com/document/product/239/32069).
+	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
 	TypeId *int `pulumi:"typeId"`
 	// ID of the vpc with which the instance is to be associated.
 	VpcId *string `pulumi:"vpcId"`
@@ -319,29 +272,21 @@ type InstanceArgs struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// The available zone ID of an instance to be created, please refer to `tencentcloud_redis_zone_config.list`.
 	AvailabilityZone pulumi.StringInput
-	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-	// International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-	// new with new charge type.
+	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
 	ChargeType pulumi.StringPtrInput
-	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-	// instead of staying recycle bin. Note: only works for `PREPAID` instance.
+	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
 	ForceDelete pulumi.BoolPtrInput
-	// The memory volume of an available instance(in MB), please refer to
-	// `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-	// of the instance; when Redis is cluster type, it represents memory size of per sharding.
+	// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
 	MemSize pulumi.IntInput
 	// Instance name.
 	Name pulumi.StringPtrInput
 	// Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
 	NoAuth pulumi.BoolPtrInput
-	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-	// empty.
+	// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 	Password pulumi.StringPtrInput
-	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-	// the Redis instance will be recreated.
+	// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
 	Port pulumi.IntPtrInput
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-	// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	PrepaidPeriod pulumi.IntPtrInput
 	// Specifies which project the instance should belong to.
 	ProjectId pulumi.IntPtrInput
@@ -351,25 +296,19 @@ type InstanceArgs struct {
 	RedisShardNum pulumi.IntPtrInput
 	// ID of replica nodes available zone. This is not required for standalone and master slave versions.
 	ReplicaZoneIds pulumi.IntArrayInput
-	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-	// read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-	// to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-	// recommended number of replicas >=2.
+	// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
 	ReplicasReadOnly pulumi.BoolPtrInput
-	// ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+	// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 	SecurityGroups pulumi.StringArrayInput
 	// Specifies which subnet the instance should belong to.
 	SubnetId pulumi.StringPtrInput
 	// Instance tags.
 	Tags pulumi.MapInput
-	// Instance type. Available values:
-	// `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-	// specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
+	// It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `clusterCkv`,`cluster_redis5.0`,`clusterRedis`,`masterSlaveCkv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`masterSlaveRedis`,`standaloneRedis`, specific region support specific types, need to refer data `Redis.getZoneConfig`.
 	//
 	// Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
 	Type pulumi.StringPtrInput
-	// Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-	// [document](https://intl.cloud.tencent.com/document/product/239/32069).
+	// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
 	TypeId pulumi.IntPtrInput
 	// ID of the vpc with which the instance is to be associated.
 	VpcId pulumi.StringPtrInput
@@ -472,9 +411,7 @@ func (o InstanceOutput) AvailabilityZone() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
 
-// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud
-// International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create
-// new with new charge type.
+// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
 func (o InstanceOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
 }
@@ -484,8 +421,7 @@ func (o InstanceOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted
-// instead of staying recycle bin. Note: only works for `PREPAID` instance.
+// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
 func (o InstanceOutput) ForceDelete() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.ForceDelete }).(pulumi.BoolPtrOutput)
 }
@@ -495,9 +431,7 @@ func (o InstanceOutput) Ip() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Ip }).(pulumi.StringOutput)
 }
 
-// The memory volume of an available instance(in MB), please refer to
-// `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size
-// of the instance; when Redis is cluster type, it represents memory size of per sharding.
+// The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
 func (o InstanceOutput) MemSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.MemSize }).(pulumi.IntOutput)
 }
@@ -512,20 +446,17 @@ func (o InstanceOutput) NoAuth() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.NoAuth }).(pulumi.BoolPtrOutput)
 }
 
-// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password
-// empty.
+// Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
 func (o InstanceOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Password }).(pulumi.StringPtrOutput)
 }
 
-// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or
-// the Redis instance will be recreated.
+// The port used to access a redis instance. The default value is 6379. And this value can't be changed after creation, or the Redis instance will be recreated.
 func (o InstanceOutput) Port() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Port }).(pulumi.IntPtrOutput)
 }
 
-// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to `PREPAID`.
-// Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 func (o InstanceOutput) PrepaidPeriod() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.PrepaidPeriod }).(pulumi.IntPtrOutput)
 }
@@ -550,15 +481,12 @@ func (o InstanceOutput) ReplicaZoneIds() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntArrayOutput { return v.ReplicaZoneIds }).(pulumi.IntArrayOutput)
 }
 
-// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica
-// read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed
-// to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the
-// recommended number of replicas >=2.
+// Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
 func (o InstanceOutput) ReplicasReadOnly() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.ReplicasReadOnly }).(pulumi.BoolOutput)
 }
 
-// ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.
+// ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
 func (o InstanceOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.SecurityGroups }).(pulumi.StringArrayOutput)
 }
@@ -578,17 +506,14 @@ func (o InstanceOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *Instance) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
-// Instance type. Available values:
-// `cluster_ckv`,`cluster_redis5.0`,`cluster_redis`,`master_slave_ckv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`master_slave_redis`,`standalone_redis`,
-// specific region support specific types, need to refer data `tencentcloud_redis_zone_config`.
+// It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `clusterCkv`,`cluster_redis5.0`,`clusterRedis`,`masterSlaveCkv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`masterSlaveRedis`,`standaloneRedis`, specific region support specific types, need to refer data `Redis.getZoneConfig`.
 //
 // Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.
 func (o InstanceOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Type }).(pulumi.StringPtrOutput)
 }
 
-// Instance type. Available values reference data source `tencentcloud_redis_zone_config` or
-// [document](https://intl.cloud.tencent.com/document/product/239/32069).
+// Instance type. Available values reference data source `Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069).
 func (o InstanceOutput) TypeId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.TypeId }).(pulumi.IntPtrOutput)
 }

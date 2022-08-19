@@ -13,9 +13,21 @@ namespace Pulumi.Tencentcloud.Gaap.Outputs
     [OutputType]
     public sealed class HttpRuleRealserver
     {
+        /// <summary>
+        /// ID of the GAAP realserver.
+        /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// IP of the GAAP realserver.
+        /// </summary>
         public readonly string Ip;
+        /// <summary>
+        /// Port of the GAAP realserver.
+        /// </summary>
         public readonly int Port;
+        /// <summary>
+        /// Scheduling weight, default value is `1`. Valid value ranges: (1~100).
+        /// </summary>
         public readonly int? Weight;
 
         [OutputConstructor]

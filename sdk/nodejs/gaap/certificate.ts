@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a certificate of GAAP.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Gaap.Certificate("foo", {
+ *     content: "test:tx2KGdo3zJg/.",
+ *     type: "BASIC",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * GAAP certificate can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Gaap/certificate:Certificate tencentcloud_gaap_certificate.foo cert-d5y6ei3b
+ * ```
+ */
 export class Certificate extends pulumi.CustomResource {
     /**
      * Get an existing Certificate resource's state with the given name, ID, and optional extra
@@ -37,9 +60,7 @@ export class Certificate extends pulumi.CustomResource {
      */
     public /*out*/ readonly beginTime!: pulumi.Output<string>;
     /**
-     * Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-     * password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-     * `SSL`, the format is `pem`.
+     * Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
      */
     public readonly content!: pulumi.Output<string>;
     /**
@@ -67,9 +88,7 @@ export class Certificate extends pulumi.CustomResource {
      */
     public /*out*/ readonly subjectCn!: pulumi.Output<string>;
     /**
-     * Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-     * certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-     * CA certificate; `PROXY` means proxy SSL certificate.
+     * Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
      */
     public readonly type!: pulumi.Output<string>;
 
@@ -127,9 +146,7 @@ export interface CertificateState {
      */
     beginTime?: pulumi.Input<string>;
     /**
-     * Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-     * password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-     * `SSL`, the format is `pem`.
+     * Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
      */
     content?: pulumi.Input<string>;
     /**
@@ -157,9 +174,7 @@ export interface CertificateState {
      */
     subjectCn?: pulumi.Input<string>;
     /**
-     * Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-     * certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-     * CA certificate; `PROXY` means proxy SSL certificate.
+     * Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
      */
     type?: pulumi.Input<string>;
 }
@@ -169,9 +184,7 @@ export interface CertificateState {
  */
 export interface CertificateArgs {
     /**
-     * Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx
-     * password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or
-     * `SSL`, the format is `pem`.
+     * Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
      */
     content: pulumi.Input<string>;
     /**
@@ -183,9 +196,7 @@ export interface CertificateArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic
-     * certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver
-     * CA certificate; `PROXY` means proxy SSL certificate.
+     * Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
      */
     type: pulumi.Input<string>;
 }

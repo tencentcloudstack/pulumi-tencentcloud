@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Eks.Outputs
     [OutputType]
     public sealed class ClusterInternalLb
     {
+        /// <summary>
+        /// Indicates weather the internal access LB enabled.
+        /// </summary>
         public readonly bool Enabled;
+        /// <summary>
+        /// ID of subnet which related to Internal LB.
+        /// </summary>
         public readonly string? SubnetId;
 
         [OutputConstructor]

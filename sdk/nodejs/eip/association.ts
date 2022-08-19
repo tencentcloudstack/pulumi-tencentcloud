@@ -4,6 +4,44 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides an eip resource associated with other resource like CVM, ENI and CLB.
+ *
+ * > **NOTE:** Please DO NOT define `allocatePublicIp` in `tencentcloud.Instance.Instance` resource when using `tencentcloud.Eip.Association`.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Eip.Association("foo", {
+ *     eipId: "eip-xxxxxx",
+ *     instanceId: "ins-xxxxxx",
+ * });
+ * ```
+ *
+ * or
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const bar = new tencentcloud.Eip.Association("bar", {
+ *     eipId: "eip-xxxxxx",
+ *     networkInterfaceId: "eni-xxxxxx",
+ *     privateIp: "10.0.1.22",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Eip association can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-34jwj3
+ * ```
+ */
 export class Association extends pulumi.CustomResource {
     /**
      * Get an existing Association resource's state with the given name, ID, and optional extra
@@ -37,16 +75,15 @@ export class Association extends pulumi.CustomResource {
      */
     public readonly eipId!: pulumi.Output<string>;
     /**
-     * The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-     * `private_ip fields`.
+     * The CVM or CLB instance id going to bind with the EIP. This field is conflict with `networkInterfaceId` and `privateIp fields`.
      */
     public readonly instanceId!: pulumi.Output<string>;
     /**
-     * Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
+     * Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instanceId`.
      */
     public readonly networkInterfaceId!: pulumi.Output<string>;
     /**
-     * Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
+     * Indicates an IP belongs to the `networkInterfaceId`. This field is conflict with `instanceId`.
      */
     public readonly privateIp!: pulumi.Output<string>;
 
@@ -91,16 +128,15 @@ export interface AssociationState {
      */
     eipId?: pulumi.Input<string>;
     /**
-     * The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-     * `private_ip fields`.
+     * The CVM or CLB instance id going to bind with the EIP. This field is conflict with `networkInterfaceId` and `privateIp fields`.
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
+     * Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instanceId`.
      */
     networkInterfaceId?: pulumi.Input<string>;
     /**
-     * Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
+     * Indicates an IP belongs to the `networkInterfaceId`. This field is conflict with `instanceId`.
      */
     privateIp?: pulumi.Input<string>;
 }
@@ -114,16 +150,15 @@ export interface AssociationArgs {
      */
     eipId: pulumi.Input<string>;
     /**
-     * The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-     * `private_ip fields`.
+     * The CVM or CLB instance id going to bind with the EIP. This field is conflict with `networkInterfaceId` and `privateIp fields`.
      */
     instanceId?: pulumi.Input<string>;
     /**
-     * Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
+     * Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instanceId`.
      */
     networkInterfaceId?: pulumi.Input<string>;
     /**
-     * Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
+     * Indicates an IP belongs to the `networkInterfaceId`. This field is conflict with `instanceId`.
      */
     privateIp?: pulumi.Input<string>;
 }

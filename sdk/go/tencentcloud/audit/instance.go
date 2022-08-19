@@ -11,6 +11,42 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create an audit.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Audit"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Audit.NewInstance(ctx, "foo", &Audit.InstanceArgs{
+// 			AuditSwitch:        pulumi.Bool(true),
+// 			CosBucket:          pulumi.String("test"),
+// 			CosRegion:          pulumi.String("ap-hongkong"),
+// 			LogFilePrefix:      pulumi.String("test"),
+// 			ReadWriteAttribute: pulumi.Int(3),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Audit can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Audit/instance:Instance foo audit-test
+// ```
 type Instance struct {
 	pulumi.CustomResourceState
 
@@ -23,8 +59,7 @@ type Instance struct {
 	CosRegion pulumi.StringOutput `pulumi:"cosRegion"`
 	// Indicate whether the log is encrypt with KMS algorithm or not.
 	EnableKmsEncry pulumi.BoolPtrOutput `pulumi:"enableKmsEncry"`
-	// Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-	// KMS must be as same as the `cos_region`.
+	// Existing CMK unique key. This field can be get by data source `Audit.getKeyAlias`. Caution: the region of the KMS must be as same as the `cosRegion`.
 	KeyId pulumi.StringPtrOutput `pulumi:"keyId"`
 	// The log file name prefix. The length ranges from 3 to 40. If not set, the account ID will be the log file prefix.
 	LogFilePrefix pulumi.StringOutput `pulumi:"logFilePrefix"`
@@ -84,8 +119,7 @@ type instanceState struct {
 	CosRegion *string `pulumi:"cosRegion"`
 	// Indicate whether the log is encrypt with KMS algorithm or not.
 	EnableKmsEncry *bool `pulumi:"enableKmsEncry"`
-	// Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-	// KMS must be as same as the `cos_region`.
+	// Existing CMK unique key. This field can be get by data source `Audit.getKeyAlias`. Caution: the region of the KMS must be as same as the `cosRegion`.
 	KeyId *string `pulumi:"keyId"`
 	// The log file name prefix. The length ranges from 3 to 40. If not set, the account ID will be the log file prefix.
 	LogFilePrefix *string `pulumi:"logFilePrefix"`
@@ -105,8 +139,7 @@ type InstanceState struct {
 	CosRegion pulumi.StringPtrInput
 	// Indicate whether the log is encrypt with KMS algorithm or not.
 	EnableKmsEncry pulumi.BoolPtrInput
-	// Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-	// KMS must be as same as the `cos_region`.
+	// Existing CMK unique key. This field can be get by data source `Audit.getKeyAlias`. Caution: the region of the KMS must be as same as the `cosRegion`.
 	KeyId pulumi.StringPtrInput
 	// The log file name prefix. The length ranges from 3 to 40. If not set, the account ID will be the log file prefix.
 	LogFilePrefix pulumi.StringPtrInput
@@ -130,8 +163,7 @@ type instanceArgs struct {
 	CosRegion string `pulumi:"cosRegion"`
 	// Indicate whether the log is encrypt with KMS algorithm or not.
 	EnableKmsEncry *bool `pulumi:"enableKmsEncry"`
-	// Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-	// KMS must be as same as the `cos_region`.
+	// Existing CMK unique key. This field can be get by data source `Audit.getKeyAlias`. Caution: the region of the KMS must be as same as the `cosRegion`.
 	KeyId *string `pulumi:"keyId"`
 	// The log file name prefix. The length ranges from 3 to 40. If not set, the account ID will be the log file prefix.
 	LogFilePrefix *string `pulumi:"logFilePrefix"`
@@ -152,8 +184,7 @@ type InstanceArgs struct {
 	CosRegion pulumi.StringInput
 	// Indicate whether the log is encrypt with KMS algorithm or not.
 	EnableKmsEncry pulumi.BoolPtrInput
-	// Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-	// KMS must be as same as the `cos_region`.
+	// Existing CMK unique key. This field can be get by data source `Audit.getKeyAlias`. Caution: the region of the KMS must be as same as the `cosRegion`.
 	KeyId pulumi.StringPtrInput
 	// The log file name prefix. The length ranges from 3 to 40. If not set, the account ID will be the log file prefix.
 	LogFilePrefix pulumi.StringPtrInput
@@ -271,8 +302,7 @@ func (o InstanceOutput) EnableKmsEncry() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.EnableKmsEncry }).(pulumi.BoolPtrOutput)
 }
 
-// Existing CMK unique key. This field can be get by data source `tencentcloud_audit_key_alias`. Caution: the region of the
-// KMS must be as same as the `cos_region`.
+// Existing CMK unique key. This field can be get by data source `Audit.getKeyAlias`. Caution: the region of the KMS must be as same as the `cosRegion`.
 func (o InstanceOutput) KeyId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.KeyId }).(pulumi.StringPtrOutput)
 }

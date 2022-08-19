@@ -6,16 +6,16 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./function";
-export * from "./functions";
+export * from "./getFunctions";
+export * from "./getLogs";
+export * from "./getNamespaces";
 export * from "./layer";
-export * from "./logs";
-export * from "./namespaces";
-export * from "./scfNamespace";
+export * from "./namespace";
 
 // Import resources to register:
 import { Function } from "./function";
 import { Layer } from "./layer";
-import { ScfNamespace } from "./scfNamespace";
+import { Namespace } from "./namespace";
 
 const _module = {
     version: utilities.getVersion(),
@@ -25,8 +25,8 @@ const _module = {
                 return new Function(name, <any>undefined, { urn })
             case "tencentcloud:Scf/layer:Layer":
                 return new Layer(name, <any>undefined, { urn })
-            case "tencentcloud:Scf/scfNamespace:ScfNamespace":
-                return new ScfNamespace(name, <any>undefined, { urn })
+            case "tencentcloud:Scf/namespace:Namespace":
+                return new Namespace(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -34,4 +34,4 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/function", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/layer", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Scf/scfNamespace", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Scf/namespace", _module)

@@ -13,8 +13,17 @@ namespace Pulumi.Tencentcloud.Eni.Outputs
     [OutputType]
     public sealed class InstanceIpv4Info
     {
+        /// <summary>
+        /// Description of the IP, maximum length 25.
+        /// </summary>
         public readonly string? Description;
+        /// <summary>
+        /// Intranet IP.
+        /// </summary>
         public readonly string? Ip;
+        /// <summary>
+        /// Indicates whether the IP is primary.
+        /// </summary>
         public readonly bool? Primary;
 
         [OutputConstructor]

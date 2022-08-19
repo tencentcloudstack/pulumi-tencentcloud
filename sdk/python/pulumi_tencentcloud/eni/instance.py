@@ -27,11 +27,9 @@ class InstanceArgs:
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this vpc.
         :param pulumi.Input[str] vpc_id: ID of the vpc.
-        :param pulumi.Input[str] description: Description of the ENI, maximum length 60.
-        :param pulumi.Input[int] ipv4_count: The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-               intranet IPs, which conflict with `ipv4s`.
-        :param pulumi.Input[Sequence[pulumi.Input['InstanceIpv4Args']]] ipv4s: Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-               primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+        :param pulumi.Input[str] description: Description of the IP, maximum length 25.
+        :param pulumi.Input[int] ipv4_count: The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
+        :param pulumi.Input[Sequence[pulumi.Input['InstanceIpv4Args']]] ipv4s: Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
         :param pulumi.Input[str] name: Name of the ENI, maximum length 60.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: A set of security group IDs.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of the ENI.
@@ -79,7 +77,7 @@ class InstanceArgs:
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
         """
-        Description of the ENI, maximum length 60.
+        Description of the IP, maximum length 25.
         """
         return pulumi.get(self, "description")
 
@@ -91,8 +89,7 @@ class InstanceArgs:
     @pulumi.getter(name="ipv4Count")
     def ipv4_count(self) -> Optional[pulumi.Input[int]]:
         """
-        The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-        intranet IPs, which conflict with `ipv4s`.
+        The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
         """
         return pulumi.get(self, "ipv4_count")
 
@@ -104,8 +101,7 @@ class InstanceArgs:
     @pulumi.getter
     def ipv4s(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InstanceIpv4Args']]]]:
         """
-        Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-        primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+        Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
         """
         return pulumi.get(self, "ipv4s")
 
@@ -169,12 +165,10 @@ class _InstanceState:
         """
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[str] create_time: Creation time of the ENI.
-        :param pulumi.Input[str] description: Description of the ENI, maximum length 60.
-        :param pulumi.Input[int] ipv4_count: The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-               intranet IPs, which conflict with `ipv4s`.
+        :param pulumi.Input[str] description: Description of the IP, maximum length 25.
+        :param pulumi.Input[int] ipv4_count: The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceIpv4InfoArgs']]] ipv4_infos: An information list of IPv4s. Each element contains the following attributes:
-        :param pulumi.Input[Sequence[pulumi.Input['InstanceIpv4Args']]] ipv4s: Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-               primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+        :param pulumi.Input[Sequence[pulumi.Input['InstanceIpv4Args']]] ipv4s: Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
         :param pulumi.Input[str] mac: MAC address.
         :param pulumi.Input[str] name: Name of the ENI, maximum length 60.
         :param pulumi.Input[bool] primary: Indicates whether the IP is primary.
@@ -227,7 +221,7 @@ class _InstanceState:
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
         """
-        Description of the ENI, maximum length 60.
+        Description of the IP, maximum length 25.
         """
         return pulumi.get(self, "description")
 
@@ -239,8 +233,7 @@ class _InstanceState:
     @pulumi.getter(name="ipv4Count")
     def ipv4_count(self) -> Optional[pulumi.Input[int]]:
         """
-        The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-        intranet IPs, which conflict with `ipv4s`.
+        The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
         """
         return pulumi.get(self, "ipv4_count")
 
@@ -264,8 +257,7 @@ class _InstanceState:
     @pulumi.getter
     def ipv4s(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InstanceIpv4Args']]]]:
         """
-        Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-        primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+        Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
         """
         return pulumi.get(self, "ipv4s")
 
@@ -385,14 +377,40 @@ class Instance(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a resource to create an ENI.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_instance = tencentcloud.vpc.Instance("fooInstance", cidr_block="10.0.0.0/16")
+        foo_subnet_instance_instance = tencentcloud.subnet.Instance("fooSubnet/instanceInstance",
+            availability_zone="ap-guangzhou-3",
+            vpc_id=foo_instance.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        foo_eni_instance_instance = tencentcloud.eni.Instance("fooEni/instanceInstance",
+            vpc_id=foo_instance.id,
+            subnet_id=foo_subnet / instance_instance["id"],
+            description="eni desc",
+            ipv4_count=1)
+        ```
+
+        ## Import
+
+        ENI can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Eni/instance:Instance tencentcloud_eni.foo eni-qka182br
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] description: Description of the ENI, maximum length 60.
-        :param pulumi.Input[int] ipv4_count: The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-               intranet IPs, which conflict with `ipv4s`.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceIpv4Args']]]] ipv4s: Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-               primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+        :param pulumi.Input[str] description: Description of the IP, maximum length 25.
+        :param pulumi.Input[int] ipv4_count: The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceIpv4Args']]]] ipv4s: Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
         :param pulumi.Input[str] name: Name of the ENI, maximum length 60.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: A set of security group IDs.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this vpc.
@@ -406,7 +424,35 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a resource to create an ENI.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_instance = tencentcloud.vpc.Instance("fooInstance", cidr_block="10.0.0.0/16")
+        foo_subnet_instance_instance = tencentcloud.subnet.Instance("fooSubnet/instanceInstance",
+            availability_zone="ap-guangzhou-3",
+            vpc_id=foo_instance.id,
+            cidr_block="10.0.0.0/16",
+            is_multicast=False)
+        foo_eni_instance_instance = tencentcloud.eni.Instance("fooEni/instanceInstance",
+            vpc_id=foo_instance.id,
+            subnet_id=foo_subnet / instance_instance["id"],
+            description="eni desc",
+            ipv4_count=1)
+        ```
+
+        ## Import
+
+        ENI can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Eni/instance:Instance tencentcloud_eni.foo eni-qka182br
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -490,12 +536,10 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] create_time: Creation time of the ENI.
-        :param pulumi.Input[str] description: Description of the ENI, maximum length 60.
-        :param pulumi.Input[int] ipv4_count: The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-               intranet IPs, which conflict with `ipv4s`.
+        :param pulumi.Input[str] description: Description of the IP, maximum length 25.
+        :param pulumi.Input[int] ipv4_count: The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceIpv4InfoArgs']]]] ipv4_infos: An information list of IPv4s. Each element contains the following attributes:
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceIpv4Args']]]] ipv4s: Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-               primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceIpv4Args']]]] ipv4s: Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
         :param pulumi.Input[str] mac: MAC address.
         :param pulumi.Input[str] name: Name of the ENI, maximum length 60.
         :param pulumi.Input[bool] primary: Indicates whether the IP is primary.
@@ -536,7 +580,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def description(self) -> pulumi.Output[Optional[str]]:
         """
-        Description of the ENI, maximum length 60.
+        Description of the IP, maximum length 25.
         """
         return pulumi.get(self, "description")
 
@@ -544,8 +588,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="ipv4Count")
     def ipv4_count(self) -> pulumi.Output[Optional[int]]:
         """
-        The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-        intranet IPs, which conflict with `ipv4s`.
+        The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
         """
         return pulumi.get(self, "ipv4_count")
 
@@ -561,8 +604,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def ipv4s(self) -> pulumi.Output[Optional[Sequence['outputs.InstanceIpv4']]]:
         """
-        Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-        primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+        Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
         """
         return pulumi.get(self, "ipv4s")
 

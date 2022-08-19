@@ -9,6 +9,54 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dayu
 {
+    /// <summary>
+    /// Use this resource to create dayu new layer 7 rule
+    /// 
+    /// &gt; **NOTE:** This resource only support resource Anti-DDoS of type `bgpip`
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var tencentcloudDayuL7RuleV2 = new Tencentcloud.Dayu.L7RuleV2("tencentcloudDayuL7RuleV2", new Tencentcloud.Dayu.L7RuleV2Args
+    ///         {
+    ///             ResourceId = "bgpip-000004xe",
+    ///             ResourceIp = "119.28.217.162",
+    ///             ResourceType = "bgpip",
+    ///             Rule = new Tencentcloud.Dayu.Inputs.L7RuleV2RuleArgs
+    ///             {
+    ///                 Domain = "github.com",
+    ///                 KeepEnable = false,
+    ///                 Keeptime = 0,
+    ///                 LbType = 1,
+    ///                 Protocol = "http",
+    ///                 SourceLists = 
+    ///                 {
+    ///                     new Tencentcloud.Dayu.Inputs.L7RuleV2RuleSourceListArgs
+    ///                     {
+    ///                         Source = "1.2.3.5",
+    ///                         Weight = 100,
+    ///                     },
+    ///                     new Tencentcloud.Dayu.Inputs.L7RuleV2RuleSourceListArgs
+    ///                     {
+    ///                         Source = "1.2.3.6",
+    ///                         Weight = 100,
+    ///                     },
+    ///                 },
+    ///                 SourceType = 2,
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/l7RuleV2:L7RuleV2")]
     public partial class L7RuleV2 : Pulumi.CustomResource
     {

@@ -5,6 +5,85 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a mysql account privilege resource to grant different access privilege to different database. A database can be granted by multiple account.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const _default = new tencentcloud.mysql.Instance("default", {
+ *     memSize: 1000,
+ *     volumeSize: 25,
+ *     instanceName: "guagua",
+ *     engineVersion: "5.7",
+ *     rootPassword: "0153Y474",
+ *     availabilityZone: "ap-guangzhou-3",
+ *     internetService: 1,
+ * });
+ * const mysqlAccount2 = new tencentcloud.mysql.Account("mysqlAccount2", {
+ *     mysqlId: _default.id,
+ *     password: "test1234",
+ *     description: "test from terraform",
+ * });
+ * const tttt = new tencentcloud.mysql.Privilege("tttt", {
+ *     mysqlId: _default.id,
+ *     accountName: mysqlAccount2.name,
+ *     globals: ["TRIGGER"],
+ *     databases: [
+ *         {
+ *             privileges: [
+ *                 "SELECT",
+ *                 "INSERT",
+ *                 "UPDATE",
+ *                 "DELETE",
+ *                 "CREATE",
+ *             ],
+ *             databaseName: "sys",
+ *         },
+ *         {
+ *             privileges: ["SELECT"],
+ *             databaseName: "performance_schema",
+ *         },
+ *     ],
+ *     tables: [
+ *         {
+ *             privileges: [
+ *                 "SELECT",
+ *                 "INSERT",
+ *                 "UPDATE",
+ *                 "DELETE",
+ *                 "CREATE",
+ *             ],
+ *             databaseName: "mysql",
+ *             tableName: "slow_log",
+ *         },
+ *         {
+ *             privileges: [
+ *                 "SELECT",
+ *                 "INSERT",
+ *                 "UPDATE",
+ *             ],
+ *             databaseName: "mysql",
+ *             tableName: "user",
+ *         },
+ *     ],
+ *     columns: [{
+ *         privileges: [
+ *             "SELECT",
+ *             "INSERT",
+ *             "UPDATE",
+ *             "REFERENCES",
+ *         ],
+ *         databaseName: "mysql",
+ *         tableName: "user",
+ *         columnName: "host",
+ *     }],
+ * });
+ * ```
+ */
 export class Privilege extends pulumi.CustomResource {
     /**
      * Get an existing Privilege resource's state with the given name, ID, and optional extra
@@ -50,9 +129,7 @@ export class Privilege extends pulumi.CustomResource {
      */
     public readonly databases!: pulumi.Output<outputs.Mysql.PrivilegeDatabase[] | undefined>;
     /**
-     * Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-     * TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-     * CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+     * Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
      */
     public readonly globals!: pulumi.Output<string[]>;
     /**
@@ -129,9 +206,7 @@ export interface PrivilegeState {
      */
     databases?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeDatabase>[]>;
     /**
-     * Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-     * TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-     * CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+     * Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
      */
     globals?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -165,9 +240,7 @@ export interface PrivilegeArgs {
      */
     databases?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeDatabase>[]>;
     /**
-     * Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-     * TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-     * CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+     * Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
      */
     globals: pulumi.Input<pulumi.Input<string>[]>;
     /**

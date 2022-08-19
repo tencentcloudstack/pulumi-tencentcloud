@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Clb.Inputs
 
     public sealed class InstanceSnatIpArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Snat IP address, If set to empty will auto allocated.
+        /// </summary>
         [Input("ip")]
         public Input<string>? Ip { get; set; }
 
+        /// <summary>
+        /// Snat subnet ID.
+        /// </summary>
         [Input("subnetId", required: true)]
         public Input<string> SubnetId { get; set; } = null!;
 

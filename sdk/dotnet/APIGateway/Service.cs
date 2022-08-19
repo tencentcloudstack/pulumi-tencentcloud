@@ -7,9 +7,50 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway
+namespace Pulumi.Tencentcloud.ApiGateway
 {
-    [TencentcloudResourceType("tencentcloud:APIGateway/service:Service")]
+    /// <summary>
+    /// Use this resource to create API gateway service.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         {
+    ///             IpVersion = "IPv4",
+    ///             NetTypes = 
+    ///             {
+    ///                 "INNER",
+    ///                 "OUTER",
+    ///             },
+    ///             PreLimit = 500,
+    ///             Protocol = "http&amp;https",
+    ///             ReleaseLimit = 500,
+    ///             ServiceDesc = "your nice service",
+    ///             ServiceName = "niceservice",
+    ///             TestLimit = 500,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// API gateway service can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:ApiGateway/service:Service")]
     public partial class Service : Pulumi.CustomResource
     {
         /// <summary>
@@ -61,8 +102,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         public Output<string> ModifyTime { get; private set; } = null!;
 
         /// <summary>
-        /// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-        /// indicates access over private network, and `OUTER` indicates access over public network.
+        /// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
         /// </summary>
         [Output("netTypes")]
         public Output<ImmutableArray<string>> NetTypes { get; private set; } = null!;
@@ -124,12 +164,12 @@ namespace Pulumi.Tencentcloud.APIGateway
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Service(string name, ServiceArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/service:Service", name, args ?? new ServiceArgs(), MakeResourceOptions(options, ""))
+            : base("tencentcloud:ApiGateway/service:Service", name, args ?? new ServiceArgs(), MakeResourceOptions(options, ""))
         {
         }
 
         private Service(string name, Input<string> id, ServiceState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/service:Service", name, state, MakeResourceOptions(options, id))
+            : base("tencentcloud:ApiGateway/service:Service", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -177,8 +217,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         private InputList<string>? _netTypes;
 
         /// <summary>
-        /// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-        /// indicates access over private network, and `OUTER` indicates access over public network.
+        /// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
         /// </summary>
         public InputList<string> NetTypes
         {
@@ -287,8 +326,7 @@ namespace Pulumi.Tencentcloud.APIGateway
         private InputList<string>? _netTypes;
 
         /// <summary>
-        /// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-        /// indicates access over private network, and `OUTER` indicates access over public network.
+        /// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
         /// </summary>
         public InputList<string> NetTypes
         {

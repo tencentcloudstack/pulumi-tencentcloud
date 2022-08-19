@@ -12,15 +12,27 @@ namespace Pulumi.Tencentcloud.Eks.Inputs
 
     public sealed class ContainerInstanceImageRegistryCredentialArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Name of credential.
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// Password.
+        /// </summary>
         [Input("password")]
         public Input<string>? Password { get; set; }
 
+        /// <summary>
+        /// Address of image registry.
+        /// </summary>
         [Input("server")]
         public Input<string>? Server { get; set; }
 
+        /// <summary>
+        /// Username.
+        /// </summary>
         [Input("username")]
         public Input<string>? Username { get; set; }
 

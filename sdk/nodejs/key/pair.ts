@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a key pair resource.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Key.Pair("foo", {
+ *     keyName: "terraform_test",
+ *     publicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Key pair can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
+ * ```
+ */
 export class Pair extends pulumi.CustomResource {
     /**
      * Get an existing Pair resource's state with the given name, ID, and optional extra

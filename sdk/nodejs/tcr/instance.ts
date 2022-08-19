@@ -5,6 +5,51 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create tcr instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Tcr.Instance("foo", {
+ *     instanceType: "basic",
+ *     tags: {
+ *         test: "tf",
+ *     },
+ * });
+ * ```
+ *
+ * Using public network access whitelist
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Tcr.Instance("foo", {
+ *     instanceType: "basic",
+ *     openPublicOperation: true,
+ *     securityPolicies: [
+ *         {
+ *             cidrBlock: "10.0.0.1/24",
+ *         },
+ *         {
+ *             cidrBlock: "192.168.1.1",
+ *         },
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * tcr instance can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Tcr/instance:Instance foo cls-cda1iex1
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -62,7 +107,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly publicStatus!: pulumi.Output<string>;
     /**
-     * Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
+     * Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
      */
     public readonly securityPolicies!: pulumi.Output<outputs.Tcr.InstanceSecurityPolicy[] | undefined>;
     /**
@@ -151,7 +196,7 @@ export interface InstanceState {
      */
     publicStatus?: pulumi.Input<string>;
     /**
-     * Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
+     * Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
      */
     securityPolicies?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceSecurityPolicy>[]>;
     /**
@@ -185,7 +230,7 @@ export interface InstanceArgs {
      */
     openPublicOperation?: pulumi.Input<boolean>;
     /**
-     * Public network access allowlist policies of the TCR instance. Only available when `open_public_operation` is `true`.
+     * Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
      */
     securityPolicies?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceSecurityPolicy>[]>;
     /**

@@ -5,4 +5,4 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
-from .info import *
+from .get_info import *

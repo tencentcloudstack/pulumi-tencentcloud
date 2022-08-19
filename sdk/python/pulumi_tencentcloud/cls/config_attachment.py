@@ -97,7 +97,19 @@ class ConfigAttachment(pulumi.CustomResource):
                  group_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a ConfigAttachment resource with the given unique name, props, and options.
+        Provides a resource to create a cls config attachment
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        attach = tencentcloud.cls.ConfigAttachment("attach",
+            config_id=tencentcloud_cls_config["config"]["id"],
+            group_id="27752a9b-9918-440a-8ee7-9c84a14a47ed")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] config_id: Collection configuration id.
@@ -110,7 +122,19 @@ class ConfigAttachment(pulumi.CustomResource):
                  args: ConfigAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ConfigAttachment resource with the given unique name, props, and options.
+        Provides a resource to create a cls config attachment
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        attach = tencentcloud.cls.ConfigAttachment("attach",
+            config_id=tencentcloud_cls_config["config"]["id"],
+            group_id="27752a9b-9918-440a-8ee7-9c84a14a47ed")
+        ```
+
         :param str resource_name: The name of the resource.
         :param ConfigAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

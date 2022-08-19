@@ -9,6 +9,41 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Vpn
 {
+    /// <summary>
+    /// Provides a resource to create a VPN gateway route.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var route = new Tencentcloud.Vpn.GatewayRoute("route", new Tencentcloud.Vpn.GatewayRouteArgs
+    ///         {
+    ///             DestinationCidrBlock = "10.0.0.0/16",
+    ///             InstanceId = "vpnx-5b5dmao3",
+    ///             InstanceType = "VPNCONN",
+    ///             Priority = 100,
+    ///             Status = "DISABLE",
+    ///             VpnGatewayId = "vpngw-ak9sjem2",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// VPN gateway route can be imported using the id, the id format must be '{vpn_gateway_id}#{route_id}', e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Vpn/gatewayRoute:GatewayRoute route1 vpngw-ak9sjem2#vpngw-8ccsnclt
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/gatewayRoute:GatewayRoute")]
     public partial class GatewayRoute : Pulumi.CustomResource
     {

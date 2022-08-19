@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.PrivateDns.Inputs
 
     public sealed class ZoneVpcSetGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// VPC REGION.
+        /// </summary>
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 
+        /// <summary>
+        /// VPC ID.
+        /// </summary>
         [Input("uniqVpcId", required: true)]
         public Input<string> UniqVpcId { get; set; } = null!;
 

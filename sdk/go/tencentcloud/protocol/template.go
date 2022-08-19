@@ -11,13 +11,48 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to manage protocol template.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Protocol"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Protocol.NewTemplate(ctx, "foo", &Protocol.TemplateArgs{
+// 			Protocols: pulumi.StringArray{
+// 				pulumi.String("tcp:80"),
+// 				pulumi.String("udp:all"),
+// 				pulumi.String("icmp:10-30"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Protocol template can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Protocol/template:Template foo ppm-nwrggd14
+// ```
 type Template struct {
 	pulumi.CustomResourceState
 
 	// Name of the protocol template.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-	// range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+	// Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
 	Protocols pulumi.StringArrayOutput `pulumi:"protocols"`
 }
 
@@ -55,16 +90,14 @@ func GetTemplate(ctx *pulumi.Context,
 type templateState struct {
 	// Name of the protocol template.
 	Name *string `pulumi:"name"`
-	// Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-	// range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+	// Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
 	Protocols []string `pulumi:"protocols"`
 }
 
 type TemplateState struct {
 	// Name of the protocol template.
 	Name pulumi.StringPtrInput
-	// Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-	// range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+	// Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
 	Protocols pulumi.StringArrayInput
 }
 
@@ -75,8 +108,7 @@ func (TemplateState) ElementType() reflect.Type {
 type templateArgs struct {
 	// Name of the protocol template.
 	Name *string `pulumi:"name"`
-	// Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-	// range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+	// Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
 	Protocols []string `pulumi:"protocols"`
 }
 
@@ -84,8 +116,7 @@ type templateArgs struct {
 type TemplateArgs struct {
 	// Name of the protocol template.
 	Name pulumi.StringPtrInput
-	// Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-	// range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+	// Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
 	Protocols pulumi.StringArrayInput
 }
 
@@ -181,8 +212,7 @@ func (o TemplateOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Template) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Protocol list. Valid protocols are `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port
-// range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
+// Protocol list. Valid protocols are  `tcp`, `udp`, `icmp`, `gre`. Single port(tcp:80), multi-port(tcp:80,443), port range(tcp:3306-20000), all(tcp:all) format are support. Protocol `icmp` and `gre` cannot specify port.
 func (o TemplateOutput) Protocols() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Template) pulumi.StringArrayOutput { return v.Protocols }).(pulumi.StringArrayOutput)
 }

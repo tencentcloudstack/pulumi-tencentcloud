@@ -195,7 +195,76 @@ class UsagePlanAttachment(pulumi.CustomResource):
                  usage_plan_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a UsagePlanAttachment resource with the given unique name, props, and options.
+        Use this resource to attach API gateway usage plan to service.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        plan = tencentcloud.api_gateway.UsagePlan("plan",
+            usage_plan_name="my_plan",
+            usage_plan_desc="nice plan",
+            max_request_num=100,
+            max_request_num_pre_sec=10)
+        service = tencentcloud.api_gateway.Service("service",
+            service_name="niceservice",
+            protocol="http&https",
+            service_desc="your nice service",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            ip_version="IPv4")
+        api = tencentcloud.api_gateway.Api("api",
+            service_id=service.id,
+            api_name="hello_update",
+            api_desc="my hello api update",
+            auth_type="SECRET",
+            protocol="HTTP",
+            enable_cors=True,
+            request_config_path="/user/info",
+            request_config_method="POST",
+            request_parameters=[tencentcloud.api.gateway.ApiRequestParameterArgs(
+                name="email",
+                position="QUERY",
+                type="string",
+                desc="your email please?",
+                default_value="tom@qq.com",
+                required=True,
+            )],
+            service_config_type="HTTP",
+            service_config_timeout=10,
+            service_config_url="http://www.tencent.com",
+            service_config_path="/user",
+            service_config_method="POST",
+            response_type="XML",
+            response_success_example="<note>success</note>",
+            response_fail_example="<note>fail</note>",
+            response_error_codes=[tencentcloud.api.gateway.ApiResponseErrorCodeArgs(
+                code=10,
+                msg="system error",
+                desc="system error code",
+                converted_code=-10,
+                need_convert=True,
+            )])
+        attach_service = tencentcloud.api_gateway.UsagePlanAttachment("attachService",
+            usage_plan_id=plan.id,
+            service_id=service.id,
+            environment="release",
+            bind_type="API",
+            api_id=api.id)
+        ```
+
+        ## Import
+
+        API gateway usage plan attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment attach_service usagePlan-pe7fbdgn#service-kuqd6xqk#release#API#api-p8gtanvy
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] api_id: ID of the API. This parameter will be required when `bind_type` is `API`.
@@ -211,7 +280,76 @@ class UsagePlanAttachment(pulumi.CustomResource):
                  args: UsagePlanAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a UsagePlanAttachment resource with the given unique name, props, and options.
+        Use this resource to attach API gateway usage plan to service.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        plan = tencentcloud.api_gateway.UsagePlan("plan",
+            usage_plan_name="my_plan",
+            usage_plan_desc="nice plan",
+            max_request_num=100,
+            max_request_num_pre_sec=10)
+        service = tencentcloud.api_gateway.Service("service",
+            service_name="niceservice",
+            protocol="http&https",
+            service_desc="your nice service",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            ip_version="IPv4")
+        api = tencentcloud.api_gateway.Api("api",
+            service_id=service.id,
+            api_name="hello_update",
+            api_desc="my hello api update",
+            auth_type="SECRET",
+            protocol="HTTP",
+            enable_cors=True,
+            request_config_path="/user/info",
+            request_config_method="POST",
+            request_parameters=[tencentcloud.api.gateway.ApiRequestParameterArgs(
+                name="email",
+                position="QUERY",
+                type="string",
+                desc="your email please?",
+                default_value="tom@qq.com",
+                required=True,
+            )],
+            service_config_type="HTTP",
+            service_config_timeout=10,
+            service_config_url="http://www.tencent.com",
+            service_config_path="/user",
+            service_config_method="POST",
+            response_type="XML",
+            response_success_example="<note>success</note>",
+            response_fail_example="<note>fail</note>",
+            response_error_codes=[tencentcloud.api.gateway.ApiResponseErrorCodeArgs(
+                code=10,
+                msg="system error",
+                desc="system error code",
+                converted_code=-10,
+                need_convert=True,
+            )])
+        attach_service = tencentcloud.api_gateway.UsagePlanAttachment("attachService",
+            usage_plan_id=plan.id,
+            service_id=service.id,
+            environment="release",
+            bind_type="API",
+            api_id=api.id)
+        ```
+
+        ## Import
+
+        API gateway usage plan attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment attach_service usagePlan-pe7fbdgn#service-kuqd6xqk#release#API#api-p8gtanvy
+        ```
+
         :param str resource_name: The name of the resource.
         :param UsagePlanAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -256,7 +394,7 @@ class UsagePlanAttachment(pulumi.CustomResource):
                 raise TypeError("Missing required property 'usage_plan_id'")
             __props__.__dict__["usage_plan_id"] = usage_plan_id
         super(UsagePlanAttachment, __self__).__init__(
-            'tencentcloud:APIGateway/usagePlanAttachment:UsagePlanAttachment',
+            'tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment',
             resource_name,
             __props__,
             opts)

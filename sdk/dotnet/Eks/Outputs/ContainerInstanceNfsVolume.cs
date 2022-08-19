@@ -13,9 +13,21 @@ namespace Pulumi.Tencentcloud.Eks.Outputs
     [OutputType]
     public sealed class ContainerInstanceNfsVolume
     {
+        /// <summary>
+        /// Name of NFS volume.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// NFS volume path.
+        /// </summary>
         public readonly string Path;
+        /// <summary>
+        /// Indicates whether the volume is read only. Default is `false`.
+        /// </summary>
         public readonly bool? ReadOnly;
+        /// <summary>
+        /// NFS server address.
+        /// </summary>
         public readonly string Server;
 
         [OutputConstructor]

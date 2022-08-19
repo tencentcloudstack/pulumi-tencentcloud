@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a SSM secret.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Ssm.Secret("foo", {
+ *     description: "test secret",
+ *     isEnabled: true,
+ *     recoveryWindowInDays: 0,
+ *     secretName: "test",
+ *     tags: {
+ *         "test-tag": "test",
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * SSM secret can be imported using the secretName, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Ssm/secret:Secret foo test
+ * ```
+ */
 export class Secret extends pulumi.CustomResource {
     /**
      * Get an existing Secret resource's state with the given name, ID, and optional extra
@@ -41,18 +69,15 @@ export class Secret extends pulumi.CustomResource {
      */
     public readonly isEnabled!: pulumi.Output<boolean | undefined>;
     /**
-     * KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-     * encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+     * KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
      */
     public readonly kmsKeyId!: pulumi.Output<string>;
     /**
-     * Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-     * days reserved, completely deleted after this date.
+     * Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
      */
     public readonly recoveryWindowInDays!: pulumi.Output<number | undefined>;
     /**
-     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-     * English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     public readonly secretName!: pulumi.Output<string>;
     /**
@@ -115,18 +140,15 @@ export interface SecretState {
      */
     isEnabled?: pulumi.Input<boolean>;
     /**
-     * KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-     * encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+     * KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
      */
     kmsKeyId?: pulumi.Input<string>;
     /**
-     * Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-     * days reserved, completely deleted after this date.
+     * Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
      */
     recoveryWindowInDays?: pulumi.Input<number>;
     /**
-     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-     * English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     secretName?: pulumi.Input<string>;
     /**
@@ -152,18 +174,15 @@ export interface SecretArgs {
      */
     isEnabled?: pulumi.Input<boolean>;
     /**
-     * KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-     * encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+     * KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
      */
     kmsKeyId?: pulumi.Input<string>;
     /**
-     * Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-     * days reserved, completely deleted after this date.
+     * Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
      */
     recoveryWindowInDays?: pulumi.Input<number>;
     /**
-     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-     * English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
     secretName: pulumi.Input<string>;
     /**

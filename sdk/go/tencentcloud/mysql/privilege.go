@@ -11,6 +11,108 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a mysql account privilege resource to grant different access privilege to different database. A database can be granted by multiple account.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Mysql.NewInstance(ctx, "default", &Mysql.InstanceArgs{
+// 			MemSize:          pulumi.Int(1000),
+// 			VolumeSize:       pulumi.Int(25),
+// 			InstanceName:     pulumi.String("guagua"),
+// 			EngineVersion:    pulumi.String("5.7"),
+// 			RootPassword:     pulumi.String("0153Y474"),
+// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+// 			InternetService:  pulumi.Int(1),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		mysqlAccount2, err := Mysql.NewAccount(ctx, "mysqlAccount2", &Mysql.AccountArgs{
+// 			MysqlId:     _default.ID(),
+// 			Password:    pulumi.String("test1234"),
+// 			Description: pulumi.String("test from terraform"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Mysql.NewPrivilege(ctx, "tttt", &Mysql.PrivilegeArgs{
+// 			MysqlId:     _default.ID(),
+// 			AccountName: mysqlAccount2.Name,
+// 			Globals: pulumi.StringArray{
+// 				pulumi.String("TRIGGER"),
+// 			},
+// 			Databases: mysql.PrivilegeDatabaseArray{
+// 				&mysql.PrivilegeDatabaseArgs{
+// 					Privileges: pulumi.StringArray{
+// 						pulumi.String("SELECT"),
+// 						pulumi.String("INSERT"),
+// 						pulumi.String("UPDATE"),
+// 						pulumi.String("DELETE"),
+// 						pulumi.String("CREATE"),
+// 					},
+// 					DatabaseName: pulumi.String("sys"),
+// 				},
+// 				&mysql.PrivilegeDatabaseArgs{
+// 					Privileges: pulumi.StringArray{
+// 						pulumi.String("SELECT"),
+// 					},
+// 					DatabaseName: pulumi.String("performance_schema"),
+// 				},
+// 			},
+// 			Tables: mysql.PrivilegeTableArray{
+// 				&mysql.PrivilegeTableArgs{
+// 					Privileges: pulumi.StringArray{
+// 						pulumi.String("SELECT"),
+// 						pulumi.String("INSERT"),
+// 						pulumi.String("UPDATE"),
+// 						pulumi.String("DELETE"),
+// 						pulumi.String("CREATE"),
+// 					},
+// 					DatabaseName: pulumi.String("mysql"),
+// 					TableName:    pulumi.String("slow_log"),
+// 				},
+// 				&mysql.PrivilegeTableArgs{
+// 					Privileges: pulumi.StringArray{
+// 						pulumi.String("SELECT"),
+// 						pulumi.String("INSERT"),
+// 						pulumi.String("UPDATE"),
+// 					},
+// 					DatabaseName: pulumi.String("mysql"),
+// 					TableName:    pulumi.String("user"),
+// 				},
+// 			},
+// 			Columns: mysql.PrivilegeColumnArray{
+// 				&mysql.PrivilegeColumnArgs{
+// 					Privileges: pulumi.StringArray{
+// 						pulumi.String("SELECT"),
+// 						pulumi.String("INSERT"),
+// 						pulumi.String("UPDATE"),
+// 						pulumi.String("REFERENCES"),
+// 					},
+// 					DatabaseName: pulumi.String("mysql"),
+// 					TableName:    pulumi.String("user"),
+// 					ColumnName:   pulumi.String("host"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type Privilege struct {
 	pulumi.CustomResourceState
 
@@ -22,9 +124,7 @@ type Privilege struct {
 	Columns PrivilegeColumnArrayOutput `pulumi:"columns"`
 	// Database privileges list.
 	Databases PrivilegeDatabaseArrayOutput `pulumi:"databases"`
-	// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-	// TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-	// CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+	// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
 	Globals pulumi.StringArrayOutput `pulumi:"globals"`
 	// Instance ID.
 	MysqlId pulumi.StringOutput `pulumi:"mysqlId"`
@@ -78,9 +178,7 @@ type privilegeState struct {
 	Columns []PrivilegeColumn `pulumi:"columns"`
 	// Database privileges list.
 	Databases []PrivilegeDatabase `pulumi:"databases"`
-	// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-	// TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-	// CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+	// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
 	Globals []string `pulumi:"globals"`
 	// Instance ID.
 	MysqlId *string `pulumi:"mysqlId"`
@@ -97,9 +195,7 @@ type PrivilegeState struct {
 	Columns PrivilegeColumnArrayInput
 	// Database privileges list.
 	Databases PrivilegeDatabaseArrayInput
-	// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-	// TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-	// CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+	// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
 	Globals pulumi.StringArrayInput
 	// Instance ID.
 	MysqlId pulumi.StringPtrInput
@@ -120,9 +216,7 @@ type privilegeArgs struct {
 	Columns []PrivilegeColumn `pulumi:"columns"`
 	// Database privileges list.
 	Databases []PrivilegeDatabase `pulumi:"databases"`
-	// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-	// TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-	// CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+	// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
 	Globals []string `pulumi:"globals"`
 	// Instance ID.
 	MysqlId string `pulumi:"mysqlId"`
@@ -140,9 +234,7 @@ type PrivilegeArgs struct {
 	Columns PrivilegeColumnArrayInput
 	// Database privileges list.
 	Databases PrivilegeDatabaseArrayInput
-	// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-	// TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-	// CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+	// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
 	Globals pulumi.StringArrayInput
 	// Instance ID.
 	MysqlId pulumi.StringInput
@@ -257,9 +349,7 @@ func (o PrivilegeOutput) Databases() PrivilegeDatabaseArrayOutput {
 	return o.ApplyT(func(v *Privilege) PrivilegeDatabaseArrayOutput { return v.Databases }).(PrivilegeDatabaseArrayOutput)
 }
 
-// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY
-// TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION
-// CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
+// Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
 func (o PrivilegeOutput) Globals() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Privilege) pulumi.StringArrayOutput { return v.Globals }).(pulumi.StringArrayOutput)
 }

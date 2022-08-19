@@ -11,11 +11,70 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a COS object resource to put an object(content or file) to the bucket.
+//
+// ## Example Usage
+//
+// Uploading a file to a bucket
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cos.NewBucketObject(ctx, "myobject", &Cos.BucketObjectArgs{
+// 			Bucket: pulumi.String("mycos-1258798060"),
+// 			Key:    pulumi.String("new_object_key"),
+// 			Source: pulumi.String("path/to/file"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// Uploading a content to a bucket
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		mycos, err := Cos.NewBucket(ctx, "mycos", &Cos.BucketArgs{
+// 			Bucket: pulumi.String("mycos-1258798060"),
+// 			Acl:    pulumi.String("public-read"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Cos.NewBucketObject(ctx, "myobject", &Cos.BucketObjectArgs{
+// 			Bucket:  mycos.Bucket,
+// 			Key:     pulumi.String("new_object_key"),
+// 			Content: pulumi.String("the content that you want to upload."),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type BucketObject struct {
 	pulumi.CustomResourceState
 
-	// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-	// `private`.
+	// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
 	Acl pulumi.StringPtrOutput `pulumi:"acl"`
 	// The name of a bucket to use. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket pulumi.StringOutput `pulumi:"bucket"`
@@ -25,8 +84,7 @@ type BucketObject struct {
 	Content pulumi.StringPtrOutput `pulumi:"content"`
 	// Specifies presentational information for the object.
 	ContentDisposition pulumi.StringPtrOutput `pulumi:"contentDisposition"`
-	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-	// obtain the media-type referenced by the Content-Type header field.
+	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
 	ContentEncoding pulumi.StringPtrOutput `pulumi:"contentEncoding"`
 	// A standard MIME type describing the format of the object data.
 	ContentType pulumi.StringOutput `pulumi:"contentType"`
@@ -77,8 +135,7 @@ func GetBucketObject(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering BucketObject resources.
 type bucketObjectState struct {
-	// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-	// `private`.
+	// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
 	Acl *string `pulumi:"acl"`
 	// The name of a bucket to use. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket *string `pulumi:"bucket"`
@@ -88,8 +145,7 @@ type bucketObjectState struct {
 	Content *string `pulumi:"content"`
 	// Specifies presentational information for the object.
 	ContentDisposition *string `pulumi:"contentDisposition"`
-	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-	// obtain the media-type referenced by the Content-Type header field.
+	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
 	ContentEncoding *string `pulumi:"contentEncoding"`
 	// A standard MIME type describing the format of the object data.
 	ContentType *string `pulumi:"contentType"`
@@ -106,8 +162,7 @@ type bucketObjectState struct {
 }
 
 type BucketObjectState struct {
-	// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-	// `private`.
+	// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
 	Acl pulumi.StringPtrInput
 	// The name of a bucket to use. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket pulumi.StringPtrInput
@@ -117,8 +172,7 @@ type BucketObjectState struct {
 	Content pulumi.StringPtrInput
 	// Specifies presentational information for the object.
 	ContentDisposition pulumi.StringPtrInput
-	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-	// obtain the media-type referenced by the Content-Type header field.
+	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
 	ContentEncoding pulumi.StringPtrInput
 	// A standard MIME type describing the format of the object data.
 	ContentType pulumi.StringPtrInput
@@ -139,8 +193,7 @@ func (BucketObjectState) ElementType() reflect.Type {
 }
 
 type bucketObjectArgs struct {
-	// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-	// `private`.
+	// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
 	Acl *string `pulumi:"acl"`
 	// The name of a bucket to use. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket string `pulumi:"bucket"`
@@ -150,8 +203,7 @@ type bucketObjectArgs struct {
 	Content *string `pulumi:"content"`
 	// Specifies presentational information for the object.
 	ContentDisposition *string `pulumi:"contentDisposition"`
-	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-	// obtain the media-type referenced by the Content-Type header field.
+	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
 	ContentEncoding *string `pulumi:"contentEncoding"`
 	// A standard MIME type describing the format of the object data.
 	ContentType *string `pulumi:"contentType"`
@@ -169,8 +221,7 @@ type bucketObjectArgs struct {
 
 // The set of arguments for constructing a BucketObject resource.
 type BucketObjectArgs struct {
-	// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-	// `private`.
+	// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
 	Acl pulumi.StringPtrInput
 	// The name of a bucket to use. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket pulumi.StringInput
@@ -180,8 +231,7 @@ type BucketObjectArgs struct {
 	Content pulumi.StringPtrInput
 	// Specifies presentational information for the object.
 	ContentDisposition pulumi.StringPtrInput
-	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-	// obtain the media-type referenced by the Content-Type header field.
+	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
 	ContentEncoding pulumi.StringPtrInput
 	// A standard MIME type describing the format of the object data.
 	ContentType pulumi.StringPtrInput
@@ -284,8 +334,7 @@ func (o BucketObjectOutput) ToBucketObjectOutputWithContext(ctx context.Context)
 	return o
 }
 
-// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to
-// `private`.
+// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
 func (o BucketObjectOutput) Acl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BucketObject) pulumi.StringPtrOutput { return v.Acl }).(pulumi.StringPtrOutput)
 }
@@ -310,8 +359,7 @@ func (o BucketObjectOutput) ContentDisposition() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BucketObject) pulumi.StringPtrOutput { return v.ContentDisposition }).(pulumi.StringPtrOutput)
 }
 
-// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to
-// obtain the media-type referenced by the Content-Type header field.
+// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
 func (o BucketObjectOutput) ContentEncoding() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BucketObject) pulumi.StringPtrOutput { return v.ContentEncoding }).(pulumi.StringPtrOutput)
 }

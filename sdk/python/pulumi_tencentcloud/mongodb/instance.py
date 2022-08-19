@@ -33,26 +33,17 @@ class InstanceArgs:
         """
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] available_zone: The available zone of the Mongodb.
-        :param pulumi.Input[str] engine_version: Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-               (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-               WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        :param pulumi.Input[str] engine_version: Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
-        :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-               `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[int] volume: Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
-        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-               `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-               `1` for creation.
-        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-               Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-               delete old instances and create new one with new charge type.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[str] password: Password of this Mongodb account.
-        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-               36. NOTE: it only works when charge_type is set to `PREPAID`.
+        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-               supported.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC. The value is required if `vpc_id` is set.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the Mongodb. Key name `project` is system reserved and can't be used.
         :param pulumi.Input[str] vpc_id: ID of the VPC.
@@ -98,9 +89,7 @@ class InstanceArgs:
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> pulumi.Input[str]:
         """
-        Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-        (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-        WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
         """
         return pulumi.get(self, "engine_version")
 
@@ -124,8 +113,7 @@ class InstanceArgs:
     @pulumi.getter(name="machineType")
     def machine_type(self) -> pulumi.Input[str]:
         """
-        Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-        `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         """
         return pulumi.get(self, "machine_type")
 
@@ -161,9 +149,7 @@ class InstanceArgs:
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> Optional[pulumi.Input[int]]:
         """
-        Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-        `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-        `1` for creation.
+        Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         """
         return pulumi.get(self, "auto_renew_flag")
 
@@ -175,9 +161,7 @@ class InstanceArgs:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-        Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-        delete old instances and create new one with new charge type.
+        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         """
         return pulumi.get(self, "charge_type")
 
@@ -201,8 +185,7 @@ class InstanceArgs:
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> Optional[pulumi.Input[int]]:
         """
-        The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-        36. NOTE: it only works when charge_type is set to `PREPAID`.
+        The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -226,8 +209,7 @@ class InstanceArgs:
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-        supported.
+        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         """
         return pulumi.get(self, "security_groups")
 
@@ -297,30 +279,20 @@ class _InstanceState:
                  vport: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering Instance resources.
-        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-               `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-               `1` for creation.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         :param pulumi.Input[str] available_zone: The available zone of the Mongodb.
-        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-               Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-               delete old instances and create new one with new charge type.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[str] create_time: Creation time of the Mongodb instance.
-        :param pulumi.Input[str] engine_version: Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-               (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-               WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        :param pulumi.Input[str] engine_version: Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
-        :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-               `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[str] password: Password of this Mongodb account.
-        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-               36. NOTE: it only works when charge_type is set to `PREPAID`.
+        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-               supported.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceStandbyInstanceListArgs']]] standby_instance_lists: List of standby instances' info.
-        :param pulumi.Input[int] status: Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-               processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        :param pulumi.Input[int] status: Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC. The value is required if `vpc_id` is set.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the Mongodb. Key name `project` is system reserved and can't be used.
         :param pulumi.Input[str] vip: IP of the Mongodb instance.
@@ -373,9 +345,7 @@ class _InstanceState:
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> Optional[pulumi.Input[int]]:
         """
-        Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-        `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-        `1` for creation.
+        Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         """
         return pulumi.get(self, "auto_renew_flag")
 
@@ -399,9 +369,7 @@ class _InstanceState:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-        Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-        delete old instances and create new one with new charge type.
+        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         """
         return pulumi.get(self, "charge_type")
 
@@ -425,9 +393,7 @@ class _InstanceState:
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-        (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-        WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
         """
         return pulumi.get(self, "engine_version")
 
@@ -451,8 +417,7 @@ class _InstanceState:
     @pulumi.getter(name="machineType")
     def machine_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-        `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         """
         return pulumi.get(self, "machine_type")
 
@@ -488,8 +453,7 @@ class _InstanceState:
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> Optional[pulumi.Input[int]]:
         """
-        The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-        36. NOTE: it only works when charge_type is set to `PREPAID`.
+        The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -513,8 +477,7 @@ class _InstanceState:
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-        supported.
+        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         """
         return pulumi.get(self, "security_groups")
 
@@ -538,8 +501,7 @@ class _InstanceState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[int]]:
         """
-        Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-        processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         """
         return pulumi.get(self, "status")
 
@@ -642,29 +604,48 @@ class Instance(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provide a resource to create a Mongodb instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        mongodb = tencentcloud.mongodb.Instance("mongodb",
+            available_zone="ap-guangzhou-2",
+            engine_version="MONGO_3_WT",
+            instance_name="mongodb",
+            machine_type="GIO",
+            memory=4,
+            password="password1234",
+            project_id=0,
+            subnet_id="subnet-lk0svi3p",
+            volume=100,
+            vpc_id="vpc-mz3efvbw")
+        ```
+
+        ## Import
+
+        Mongodb instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-               `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-               `1` for creation.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         :param pulumi.Input[str] available_zone: The available zone of the Mongodb.
-        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-               Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-               delete old instances and create new one with new charge type.
-        :param pulumi.Input[str] engine_version: Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-               (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-               WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
+        :param pulumi.Input[str] engine_version: Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
-        :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-               `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[str] password: Password of this Mongodb account.
-        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-               36. NOTE: it only works when charge_type is set to `PREPAID`.
+        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-               supported.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC. The value is required if `vpc_id` is set.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the Mongodb. Key name `project` is system reserved and can't be used.
         :param pulumi.Input[int] volume: Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
@@ -677,7 +658,35 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provide a resource to create a Mongodb instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        mongodb = tencentcloud.mongodb.Instance("mongodb",
+            available_zone="ap-guangzhou-2",
+            engine_version="MONGO_3_WT",
+            instance_name="mongodb",
+            machine_type="GIO",
+            memory=4,
+            password="password1234",
+            project_id=0,
+            subnet_id="subnet-lk0svi3p",
+            volume=100,
+            vpc_id="vpc-mz3efvbw")
+        ```
+
+        ## Import
+
+        Mongodb instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -789,30 +798,20 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-               `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-               `1` for creation.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         :param pulumi.Input[str] available_zone: The available zone of the Mongodb.
-        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-               Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-               delete old instances and create new one with new charge type.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[str] create_time: Creation time of the Mongodb instance.
-        :param pulumi.Input[str] engine_version: Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-               (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-               WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        :param pulumi.Input[str] engine_version: Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
-        :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-               `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[str] password: Password of this Mongodb account.
-        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-               36. NOTE: it only works when charge_type is set to `PREPAID`.
+        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-               supported.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceStandbyInstanceListArgs']]]] standby_instance_lists: List of standby instances' info.
-        :param pulumi.Input[int] status: Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-               processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        :param pulumi.Input[int] status: Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC. The value is required if `vpc_id` is set.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the Mongodb. Key name `project` is system reserved and can't be used.
         :param pulumi.Input[str] vip: IP of the Mongodb instance.
@@ -850,9 +849,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> pulumi.Output[Optional[int]]:
         """
-        Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-        `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-        `1` for creation.
+        Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         """
         return pulumi.get(self, "auto_renew_flag")
 
@@ -868,9 +865,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> pulumi.Output[Optional[str]]:
         """
-        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-        Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-        delete old instances and create new one with new charge type.
+        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         """
         return pulumi.get(self, "charge_type")
 
@@ -886,9 +881,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> pulumi.Output[str]:
         """
-        Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT`
-        (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT` (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2
-        WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
+        Version of the Mongodb, and available values include `MONGO_36_WT` (MongoDB 3.6 WiredTiger Edition), `MONGO_40_WT` (MongoDB 4.0 WiredTiger Edition) and `MONGO_42_WT`  (MongoDB 4.2 WiredTiger Edition). NOTE: `MONGO_3_WT` (MongoDB 3.2 WiredTiger Edition) and `MONGO_3_ROCKS` (MongoDB 3.2 RocksDB Edition) will deprecated.
         """
         return pulumi.get(self, "engine_version")
 
@@ -904,8 +897,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="machineType")
     def machine_type(self) -> pulumi.Output[str]:
         """
-        Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and
-        `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         """
         return pulumi.get(self, "machine_type")
 
@@ -929,8 +921,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> pulumi.Output[Optional[int]]:
         """
-        The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-        36. NOTE: it only works when charge_type is set to `PREPAID`.
+        The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -946,8 +937,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-        supported.
+        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         """
         return pulumi.get(self, "security_groups")
 
@@ -963,8 +953,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[int]:
         """
-        Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-        processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         """
         return pulumi.get(self, "status")
 

@@ -5,6 +5,89 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create dayu DDoS policy v2
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const ddosV2 = new tencentcloud.Dayu.DdosPolicyV2("ddos_v2", {
+ *     acls: [{
+ *         action: "transmit",
+ *         dPortEnd: 10,
+ *         dPortStart: 1,
+ *         forwardProtocol: "all",
+ *         priority: 9,
+ *         sPortEnd: 20,
+ *         sPortStart: 10,
+ *     }],
+ *     blackWhiteIps: [{
+ *         ip: "1.2.3.4",
+ *         ipType: "black",
+ *     }],
+ *     business: "bgpip",
+ *     ddosAi: "on",
+ *     ddosConnectLimit: {
+ *         badConnThreshold: 30,
+ *         connTimeout: 30,
+ *         dstConnLimit: 21,
+ *         dstNewLimit: 20,
+ *         nullConnEnable: 1,
+ *         sdConnLimit: 11,
+ *         sdNewLimit: 10,
+ *         synLimit: 20,
+ *         synRate: 10,
+ *     },
+ *     ddosGeoIpBlockConfigs: [{
+ *         action: "drop",
+ *         areaLists: [100001],
+ *         regionType: "customized",
+ *     }],
+ *     ddosLevel: "low",
+ *     ddosSpeedLimitConfigs: [{
+ *         bandwidth: 20,
+ *         dstPortList: "10",
+ *         mode: 1,
+ *         packetRate: 10,
+ *         protocolList: "TCP",
+ *     }],
+ *     ddosThreshold: 100,
+ *     packetFilters: [{
+ *         action: "drop",
+ *         dPortEnd: 20,
+ *         dPortStart: 20,
+ *         depth: 2,
+ *         depth2: 3,
+ *         isNot: 0,
+ *         isNot2: 0,
+ *         matchBegin: "begin_l3",
+ *         matchBegin2: "begin_l3",
+ *         matchLogic: "and",
+ *         matchType: "pcre",
+ *         matchType2: "pcre",
+ *         offset: 1,
+ *         offset2: 2,
+ *         pktlenMax: 30,
+ *         pktlenMin: 30,
+ *         protocol: "all",
+ *         sPortEnd: 10,
+ *         sPortStart: 10,
+ *         str: "12",
+ *         str2: "30",
+ *     }],
+ *     protocolBlockConfigs: [{
+ *         dropIcmp: 1,
+ *         dropOther: 0,
+ *         dropTcp: 0,
+ *         dropUdp: 0,
+ *     }],
+ *     resourceId: "bgpip-000004xf",
+ * });
+ * ```
+ */
 export class DdosPolicyV2 extends pulumi.CustomResource {
     /**
      * Get an existing DdosPolicyV2 resource's state with the given name, ID, and optional extra
@@ -42,8 +125,7 @@ export class DdosPolicyV2 extends pulumi.CustomResource {
      */
     public readonly blackWhiteIps!: pulumi.Output<outputs.Dayu.DdosPolicyV2BlackWhiteIp[] | undefined>;
     /**
-     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-     * packet; net indicates anti-anti-ip pro version.
+     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
     public readonly business!: pulumi.Output<string | undefined>;
     /**
@@ -67,8 +149,7 @@ export class DdosPolicyV2 extends pulumi.CustomResource {
      */
     public readonly ddosSpeedLimitConfigs!: pulumi.Output<outputs.Dayu.DdosPolicyV2DdosSpeedLimitConfig[] | undefined>;
     /**
-     * DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-     * means that the default value is adopted.
+     * DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
      */
     public readonly ddosThreshold!: pulumi.Output<number | undefined>;
     /**
@@ -145,8 +226,7 @@ export interface DdosPolicyV2State {
      */
     blackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2BlackWhiteIp>[]>;
     /**
-     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-     * packet; net indicates anti-anti-ip pro version.
+     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
     business?: pulumi.Input<string>;
     /**
@@ -170,8 +250,7 @@ export interface DdosPolicyV2State {
      */
     ddosSpeedLimitConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2DdosSpeedLimitConfig>[]>;
     /**
-     * DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-     * means that the default value is adopted.
+     * DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
      */
     ddosThreshold?: pulumi.Input<number>;
     /**
@@ -201,8 +280,7 @@ export interface DdosPolicyV2Args {
      */
     blackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2BlackWhiteIp>[]>;
     /**
-     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared
-     * packet; net indicates anti-anti-ip pro version.
+     * Bussiness of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
     business?: pulumi.Input<string>;
     /**
@@ -226,8 +304,7 @@ export interface DdosPolicyV2Args {
      */
     ddosSpeedLimitConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2DdosSpeedLimitConfig>[]>;
     /**
-     * DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it
-     * means that the default value is adopted.
+     * DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
      */
     ddosThreshold?: pulumi.Input<number>;
     /**

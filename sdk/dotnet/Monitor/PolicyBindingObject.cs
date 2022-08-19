@@ -9,6 +9,93 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Monitor
 {
+    /// <summary>
+    /// Provides a resource for bind objects to a alarm policy resource.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var instances = Output.Create(Tencentcloud.Instances.GetInstance.InvokeAsync());
+    ///         var policy = new Tencentcloud.Monitor.AlarmPolicy("policy", new Tencentcloud.Monitor.AlarmPolicyArgs
+    ///         {
+    ///             PolicyName = "hello",
+    ///             MonitorType = "MT_QCE",
+    ///             Enable = 1,
+    ///             ProjectId = 1244035,
+    ///             Namespace = "cvm_device",
+    ///             Conditions = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsArgs
+    ///             {
+    ///                 IsUnionRule = 1,
+    ///                 Rules = 
+    ///                 {
+    ///                     new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+    ///                     {
+    ///                         MetricName = "CpuUsage",
+    ///                         Period = 60,
+    ///                         Operator = "ge",
+    ///                         Value = "89.9",
+    ///                         ContinuePeriod = 1,
+    ///                         NoticeFrequency = 3600,
+    ///                         IsPowerNotice = 0,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             EventConditions = 
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
+    ///                 {
+    ///                     MetricName = "ping_unreachable",
+    ///                 },
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
+    ///                 {
+    ///                     MetricName = "guest_reboot",
+    ///                 },
+    ///             },
+    ///             NoticeIds = 
+    ///             {
+    ///                 "notice-l9ziyxw6",
+    ///             },
+    ///             TriggerTasks = 
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyTriggerTaskArgs
+    ///                 {
+    ///                     Type = "AS",
+    ///                     TaskConfig = "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
+    ///                 },
+    ///             },
+    ///         });
+    ///         //for cvm
+    ///         var binding = new Tencentcloud.Monitor.PolicyBindingObject("binding", new Tencentcloud.Monitor.PolicyBindingObjectArgs
+    ///         {
+    ///             PolicyId = policy.Id,
+    ///             Dimensions = 
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.PolicyBindingObjectDimensionArgs
+    ///                 {
+    ///                     DimensionsJson = instances.Apply(instances =&gt; $"{{\"unInstanceId\":\"{instances.InstanceLists?[0]?.InstanceId}\"}}"),
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Monitor Policy Binding Object can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Monitor/policyBindingObject:PolicyBindingObject binding policyId
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/policyBindingObject:PolicyBindingObject")]
     public partial class PolicyBindingObject : Pulumi.CustomResource
     {

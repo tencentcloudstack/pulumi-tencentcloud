@@ -11,7 +11,9 @@ import (
 )
 
 type InstanceStandbyInstanceList struct {
-	StandbyInstanceId     *string `pulumi:"standbyInstanceId"`
+	// Indicates the ID of standby instance.
+	StandbyInstanceId *string `pulumi:"standbyInstanceId"`
+	// Indicates the region of standby instance.
 	StandbyInstanceRegion *string `pulumi:"standbyInstanceRegion"`
 }
 
@@ -27,7 +29,9 @@ type InstanceStandbyInstanceListInput interface {
 }
 
 type InstanceStandbyInstanceListArgs struct {
-	StandbyInstanceId     pulumi.StringPtrInput `pulumi:"standbyInstanceId"`
+	// Indicates the ID of standby instance.
+	StandbyInstanceId pulumi.StringPtrInput `pulumi:"standbyInstanceId"`
+	// Indicates the region of standby instance.
 	StandbyInstanceRegion pulumi.StringPtrInput `pulumi:"standbyInstanceRegion"`
 }
 
@@ -82,10 +86,12 @@ func (o InstanceStandbyInstanceListOutput) ToInstanceStandbyInstanceListOutputWi
 	return o
 }
 
+// Indicates the ID of standby instance.
 func (o InstanceStandbyInstanceListOutput) StandbyInstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceStandbyInstanceList) *string { return v.StandbyInstanceId }).(pulumi.StringPtrOutput)
 }
 
+// Indicates the region of standby instance.
 func (o InstanceStandbyInstanceListOutput) StandbyInstanceRegion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceStandbyInstanceList) *string { return v.StandbyInstanceRegion }).(pulumi.StringPtrOutput)
 }
@@ -110,379 +116,472 @@ func (o InstanceStandbyInstanceListArrayOutput) Index(i pulumi.IntInput) Instanc
 	}).(InstanceStandbyInstanceListOutput)
 }
 
-type InstancesInstanceList struct {
-	AutoRenewFlag int                    `pulumi:"autoRenewFlag"`
-	AvailableZone string                 `pulumi:"availableZone"`
-	ChargeType    string                 `pulumi:"chargeType"`
-	ClusterType   string                 `pulumi:"clusterType"`
-	Cpu           int                    `pulumi:"cpu"`
-	CreateTime    string                 `pulumi:"createTime"`
-	EngineVersion string                 `pulumi:"engineVersion"`
-	InstanceId    string                 `pulumi:"instanceId"`
-	InstanceName  string                 `pulumi:"instanceName"`
-	MachineType   string                 `pulumi:"machineType"`
-	Memory        int                    `pulumi:"memory"`
-	ProjectId     int                    `pulumi:"projectId"`
-	ShardQuantity int                    `pulumi:"shardQuantity"`
-	Status        int                    `pulumi:"status"`
-	SubnetId      string                 `pulumi:"subnetId"`
-	Tags          map[string]interface{} `pulumi:"tags"`
-	Vip           string                 `pulumi:"vip"`
-	Volume        int                    `pulumi:"volume"`
-	VpcId         string                 `pulumi:"vpcId"`
-	Vport         int                    `pulumi:"vport"`
+type GetInstancesInstanceList struct {
+	// Auto renew flag.
+	AutoRenewFlag int `pulumi:"autoRenewFlag"`
+	// The available zone of the Mongodb.
+	AvailableZone string `pulumi:"availableZone"`
+	// The charge type of instance.
+	ChargeType string `pulumi:"chargeType"`
+	// Type of Mongodb cluster, and available values include replica set cluster(expressed with `REPLSET`), sharding cluster(expressed with `SHARD`).
+	ClusterType string `pulumi:"clusterType"`
+	// Number of cpu's core.
+	Cpu int `pulumi:"cpu"`
+	// Creation time of the Mongodb instance.
+	CreateTime string `pulumi:"createTime"`
+	// Version of the Mongodb engine.
+	EngineVersion string `pulumi:"engineVersion"`
+	// ID of the Mongodb instance to be queried.
+	InstanceId string `pulumi:"instanceId"`
+	// Name of the Mongodb instance.
+	InstanceName string `pulumi:"instanceName"`
+	// Type of Mongodb instance.
+	MachineType string `pulumi:"machineType"`
+	// Memory size.
+	Memory int `pulumi:"memory"`
+	// ID of the project which the instance belongs.
+	ProjectId int `pulumi:"projectId"`
+	// Number of sharding.
+	ShardQuantity int `pulumi:"shardQuantity"`
+	// Status of the Mongodb, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+	Status int `pulumi:"status"`
+	// ID of the subnet.
+	SubnetId string `pulumi:"subnetId"`
+	// Tags of the Mongodb instance to be queried.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// IP of the Mongodb instance.
+	Vip string `pulumi:"vip"`
+	// Disk size.
+	Volume int `pulumi:"volume"`
+	// ID of the VPC.
+	VpcId string `pulumi:"vpcId"`
+	// IP port of the Mongodb instance.
+	Vport int `pulumi:"vport"`
 }
 
-// InstancesInstanceListInput is an input type that accepts InstancesInstanceListArgs and InstancesInstanceListOutput values.
-// You can construct a concrete instance of `InstancesInstanceListInput` via:
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          InstancesInstanceListArgs{...}
-type InstancesInstanceListInput interface {
+//          GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListOutput() InstancesInstanceListOutput
-	ToInstancesInstanceListOutputWithContext(context.Context) InstancesInstanceListOutput
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
 }
 
-type InstancesInstanceListArgs struct {
-	AutoRenewFlag pulumi.IntInput    `pulumi:"autoRenewFlag"`
+type GetInstancesInstanceListArgs struct {
+	// Auto renew flag.
+	AutoRenewFlag pulumi.IntInput `pulumi:"autoRenewFlag"`
+	// The available zone of the Mongodb.
 	AvailableZone pulumi.StringInput `pulumi:"availableZone"`
-	ChargeType    pulumi.StringInput `pulumi:"chargeType"`
-	ClusterType   pulumi.StringInput `pulumi:"clusterType"`
-	Cpu           pulumi.IntInput    `pulumi:"cpu"`
-	CreateTime    pulumi.StringInput `pulumi:"createTime"`
+	// The charge type of instance.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// Type of Mongodb cluster, and available values include replica set cluster(expressed with `REPLSET`), sharding cluster(expressed with `SHARD`).
+	ClusterType pulumi.StringInput `pulumi:"clusterType"`
+	// Number of cpu's core.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Creation time of the Mongodb instance.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Version of the Mongodb engine.
 	EngineVersion pulumi.StringInput `pulumi:"engineVersion"`
-	InstanceId    pulumi.StringInput `pulumi:"instanceId"`
-	InstanceName  pulumi.StringInput `pulumi:"instanceName"`
-	MachineType   pulumi.StringInput `pulumi:"machineType"`
-	Memory        pulumi.IntInput    `pulumi:"memory"`
-	ProjectId     pulumi.IntInput    `pulumi:"projectId"`
-	ShardQuantity pulumi.IntInput    `pulumi:"shardQuantity"`
-	Status        pulumi.IntInput    `pulumi:"status"`
-	SubnetId      pulumi.StringInput `pulumi:"subnetId"`
-	Tags          pulumi.MapInput    `pulumi:"tags"`
-	Vip           pulumi.StringInput `pulumi:"vip"`
-	Volume        pulumi.IntInput    `pulumi:"volume"`
-	VpcId         pulumi.StringInput `pulumi:"vpcId"`
-	Vport         pulumi.IntInput    `pulumi:"vport"`
+	// ID of the Mongodb instance to be queried.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Name of the Mongodb instance.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Type of Mongodb instance.
+	MachineType pulumi.StringInput `pulumi:"machineType"`
+	// Memory size.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// ID of the project which the instance belongs.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Number of sharding.
+	ShardQuantity pulumi.IntInput `pulumi:"shardQuantity"`
+	// Status of the Mongodb, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+	Status pulumi.IntInput `pulumi:"status"`
+	// ID of the subnet.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Tags of the Mongodb instance to be queried.
+	Tags pulumi.MapInput `pulumi:"tags"`
+	// IP of the Mongodb instance.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// Disk size.
+	Volume pulumi.IntInput `pulumi:"volume"`
+	// ID of the VPC.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// IP port of the Mongodb instance.
+	Vport pulumi.IntInput `pulumi:"vport"`
 }
 
-func (InstancesInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
-	return i.ToInstancesInstanceListOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListOutput)
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
 }
 
-// InstancesInstanceListArrayInput is an input type that accepts InstancesInstanceListArray and InstancesInstanceListArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListArrayInput` via:
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          InstancesInstanceListArray{ InstancesInstanceListArgs{...} }
-type InstancesInstanceListArrayInput interface {
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput
-	ToInstancesInstanceListArrayOutputWithContext(context.Context) InstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
 }
 
-type InstancesInstanceListArray []InstancesInstanceListInput
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
 
-func (InstancesInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
-	return i.ToInstancesInstanceListArrayOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListArrayOutput)
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
 }
 
-type InstancesInstanceListOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListOutput) AutoRenewFlag() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.AutoRenewFlag }).(pulumi.IntOutput)
+// Auto renew flag.
+func (o GetInstancesInstanceListOutput) AutoRenewFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.AutoRenewFlag }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) AvailableZone() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.AvailableZone }).(pulumi.StringOutput)
+// The available zone of the Mongodb.
+func (o GetInstancesInstanceListOutput) AvailableZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.AvailableZone }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
+// The charge type of instance.
+func (o GetInstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) ClusterType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.ClusterType }).(pulumi.StringOutput)
+// Type of Mongodb cluster, and available values include replica set cluster(expressed with `REPLSET`), sharding cluster(expressed with `SHARD`).
+func (o GetInstancesInstanceListOutput) ClusterType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ClusterType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Cpu() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Cpu }).(pulumi.IntOutput)
+// Number of cpu's core.
+func (o GetInstancesInstanceListOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Cpu }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+// Creation time of the Mongodb instance.
+func (o GetInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) EngineVersion() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.EngineVersion }).(pulumi.StringOutput)
+// Version of the Mongodb engine.
+func (o GetInstancesInstanceListOutput) EngineVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.EngineVersion }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+// ID of the Mongodb instance to be queried.
+func (o GetInstancesInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) InstanceName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
+// Name of the Mongodb instance.
+func (o GetInstancesInstanceListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) MachineType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.MachineType }).(pulumi.StringOutput)
+// Type of Mongodb instance.
+func (o GetInstancesInstanceListOutput) MachineType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.MachineType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Memory() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Memory }).(pulumi.IntOutput)
+// Memory size.
+func (o GetInstancesInstanceListOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Memory }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
+// ID of the project which the instance belongs.
+func (o GetInstancesInstanceListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.ProjectId }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) ShardQuantity() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.ShardQuantity }).(pulumi.IntOutput)
+// Number of sharding.
+func (o GetInstancesInstanceListOutput) ShardQuantity() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.ShardQuantity }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Status }).(pulumi.IntOutput)
+// Status of the Mongodb, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+func (o GetInstancesInstanceListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Status }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
+// ID of the subnet.
+func (o GetInstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v InstancesInstanceList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+// Tags of the Mongodb instance to be queried.
+func (o GetInstancesInstanceListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
 }
 
-func (o InstancesInstanceListOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Vip }).(pulumi.StringOutput)
+// IP of the Mongodb instance.
+func (o GetInstancesInstanceListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Vip }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Volume() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Volume }).(pulumi.IntOutput)
+// Disk size.
+func (o GetInstancesInstanceListOutput) Volume() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Volume }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
+// ID of the VPC.
+func (o GetInstancesInstanceListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListOutput) Vport() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.Vport }).(pulumi.IntOutput)
+// IP port of the Mongodb instance.
+func (o GetInstancesInstanceListOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Vport }).(pulumi.IntOutput)
 }
 
-type InstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceList {
-		return vs[0].([]InstancesInstanceList)[vs[1].(int)]
-	}).(InstancesInstanceListOutput)
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
 }
 
-type ZoneConfigList struct {
-	AvailableZone      string `pulumi:"availableZone"`
-	ClusterType        string `pulumi:"clusterType"`
-	Cpu                int    `pulumi:"cpu"`
-	DefaultStorage     int    `pulumi:"defaultStorage"`
-	EngineVersion      string `pulumi:"engineVersion"`
-	MachineType        string `pulumi:"machineType"`
-	MaxReplicateSetNum int    `pulumi:"maxReplicateSetNum"`
-	MaxStorage         int    `pulumi:"maxStorage"`
-	Memory             int    `pulumi:"memory"`
-	MinReplicateSetNum int    `pulumi:"minReplicateSetNum"`
-	MinStorage         int    `pulumi:"minStorage"`
+type GetZoneConfigList struct {
+	// The available zone of the Mongodb.
+	AvailableZone string `pulumi:"availableZone"`
+	// Type of Mongodb cluster.
+	ClusterType string `pulumi:"clusterType"`
+	// Number of cpu's core.
+	Cpu int `pulumi:"cpu"`
+	// Default disk size.
+	DefaultStorage int `pulumi:"defaultStorage"`
+	// Version of the Mongodb version.
+	EngineVersion string `pulumi:"engineVersion"`
+	// Type of Mongodb instance.
+	MachineType string `pulumi:"machineType"`
+	// Maximum replicate set num for sharding cluster.
+	MaxReplicateSetNum int `pulumi:"maxReplicateSetNum"`
+	// Maximum size of the disk.
+	MaxStorage int `pulumi:"maxStorage"`
+	// Memory size.
+	Memory int `pulumi:"memory"`
+	// Minimum replicate set num for sharding cluster.
+	MinReplicateSetNum int `pulumi:"minReplicateSetNum"`
+	// Minimum sie of the disk.
+	MinStorage int `pulumi:"minStorage"`
 }
 
-// ZoneConfigListInput is an input type that accepts ZoneConfigListArgs and ZoneConfigListOutput values.
-// You can construct a concrete instance of `ZoneConfigListInput` via:
+// GetZoneConfigListInput is an input type that accepts GetZoneConfigListArgs and GetZoneConfigListOutput values.
+// You can construct a concrete instance of `GetZoneConfigListInput` via:
 //
-//          ZoneConfigListArgs{...}
-type ZoneConfigListInput interface {
+//          GetZoneConfigListArgs{...}
+type GetZoneConfigListInput interface {
 	pulumi.Input
 
-	ToZoneConfigListOutput() ZoneConfigListOutput
-	ToZoneConfigListOutputWithContext(context.Context) ZoneConfigListOutput
+	ToGetZoneConfigListOutput() GetZoneConfigListOutput
+	ToGetZoneConfigListOutputWithContext(context.Context) GetZoneConfigListOutput
 }
 
-type ZoneConfigListArgs struct {
-	AvailableZone      pulumi.StringInput `pulumi:"availableZone"`
-	ClusterType        pulumi.StringInput `pulumi:"clusterType"`
-	Cpu                pulumi.IntInput    `pulumi:"cpu"`
-	DefaultStorage     pulumi.IntInput    `pulumi:"defaultStorage"`
-	EngineVersion      pulumi.StringInput `pulumi:"engineVersion"`
-	MachineType        pulumi.StringInput `pulumi:"machineType"`
-	MaxReplicateSetNum pulumi.IntInput    `pulumi:"maxReplicateSetNum"`
-	MaxStorage         pulumi.IntInput    `pulumi:"maxStorage"`
-	Memory             pulumi.IntInput    `pulumi:"memory"`
-	MinReplicateSetNum pulumi.IntInput    `pulumi:"minReplicateSetNum"`
-	MinStorage         pulumi.IntInput    `pulumi:"minStorage"`
+type GetZoneConfigListArgs struct {
+	// The available zone of the Mongodb.
+	AvailableZone pulumi.StringInput `pulumi:"availableZone"`
+	// Type of Mongodb cluster.
+	ClusterType pulumi.StringInput `pulumi:"clusterType"`
+	// Number of cpu's core.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Default disk size.
+	DefaultStorage pulumi.IntInput `pulumi:"defaultStorage"`
+	// Version of the Mongodb version.
+	EngineVersion pulumi.StringInput `pulumi:"engineVersion"`
+	// Type of Mongodb instance.
+	MachineType pulumi.StringInput `pulumi:"machineType"`
+	// Maximum replicate set num for sharding cluster.
+	MaxReplicateSetNum pulumi.IntInput `pulumi:"maxReplicateSetNum"`
+	// Maximum size of the disk.
+	MaxStorage pulumi.IntInput `pulumi:"maxStorage"`
+	// Memory size.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Minimum replicate set num for sharding cluster.
+	MinReplicateSetNum pulumi.IntInput `pulumi:"minReplicateSetNum"`
+	// Minimum sie of the disk.
+	MinStorage pulumi.IntInput `pulumi:"minStorage"`
 }
 
-func (ZoneConfigListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneConfigList)(nil)).Elem()
+func (GetZoneConfigListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigList)(nil)).Elem()
 }
 
-func (i ZoneConfigListArgs) ToZoneConfigListOutput() ZoneConfigListOutput {
-	return i.ToZoneConfigListOutputWithContext(context.Background())
+func (i GetZoneConfigListArgs) ToGetZoneConfigListOutput() GetZoneConfigListOutput {
+	return i.ToGetZoneConfigListOutputWithContext(context.Background())
 }
 
-func (i ZoneConfigListArgs) ToZoneConfigListOutputWithContext(ctx context.Context) ZoneConfigListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneConfigListOutput)
+func (i GetZoneConfigListArgs) ToGetZoneConfigListOutputWithContext(ctx context.Context) GetZoneConfigListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigListOutput)
 }
 
-// ZoneConfigListArrayInput is an input type that accepts ZoneConfigListArray and ZoneConfigListArrayOutput values.
-// You can construct a concrete instance of `ZoneConfigListArrayInput` via:
+// GetZoneConfigListArrayInput is an input type that accepts GetZoneConfigListArray and GetZoneConfigListArrayOutput values.
+// You can construct a concrete instance of `GetZoneConfigListArrayInput` via:
 //
-//          ZoneConfigListArray{ ZoneConfigListArgs{...} }
-type ZoneConfigListArrayInput interface {
+//          GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
+type GetZoneConfigListArrayInput interface {
 	pulumi.Input
 
-	ToZoneConfigListArrayOutput() ZoneConfigListArrayOutput
-	ToZoneConfigListArrayOutputWithContext(context.Context) ZoneConfigListArrayOutput
+	ToGetZoneConfigListArrayOutput() GetZoneConfigListArrayOutput
+	ToGetZoneConfigListArrayOutputWithContext(context.Context) GetZoneConfigListArrayOutput
 }
 
-type ZoneConfigListArray []ZoneConfigListInput
+type GetZoneConfigListArray []GetZoneConfigListInput
 
-func (ZoneConfigListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneConfigList)(nil)).Elem()
+func (GetZoneConfigListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigList)(nil)).Elem()
 }
 
-func (i ZoneConfigListArray) ToZoneConfigListArrayOutput() ZoneConfigListArrayOutput {
-	return i.ToZoneConfigListArrayOutputWithContext(context.Background())
+func (i GetZoneConfigListArray) ToGetZoneConfigListArrayOutput() GetZoneConfigListArrayOutput {
+	return i.ToGetZoneConfigListArrayOutputWithContext(context.Background())
 }
 
-func (i ZoneConfigListArray) ToZoneConfigListArrayOutputWithContext(ctx context.Context) ZoneConfigListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZoneConfigListArrayOutput)
+func (i GetZoneConfigListArray) ToGetZoneConfigListArrayOutputWithContext(ctx context.Context) GetZoneConfigListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZoneConfigListArrayOutput)
 }
 
-type ZoneConfigListOutput struct{ *pulumi.OutputState }
+type GetZoneConfigListOutput struct{ *pulumi.OutputState }
 
-func (ZoneConfigListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZoneConfigList)(nil)).Elem()
+func (GetZoneConfigListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZoneConfigList)(nil)).Elem()
 }
 
-func (o ZoneConfigListOutput) ToZoneConfigListOutput() ZoneConfigListOutput {
+func (o GetZoneConfigListOutput) ToGetZoneConfigListOutput() GetZoneConfigListOutput {
 	return o
 }
 
-func (o ZoneConfigListOutput) ToZoneConfigListOutputWithContext(ctx context.Context) ZoneConfigListOutput {
+func (o GetZoneConfigListOutput) ToGetZoneConfigListOutputWithContext(ctx context.Context) GetZoneConfigListOutput {
 	return o
 }
 
-func (o ZoneConfigListOutput) AvailableZone() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigList) string { return v.AvailableZone }).(pulumi.StringOutput)
+// The available zone of the Mongodb.
+func (o GetZoneConfigListOutput) AvailableZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigList) string { return v.AvailableZone }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListOutput) ClusterType() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigList) string { return v.ClusterType }).(pulumi.StringOutput)
+// Type of Mongodb cluster.
+func (o GetZoneConfigListOutput) ClusterType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigList) string { return v.ClusterType }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListOutput) Cpu() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigList) int { return v.Cpu }).(pulumi.IntOutput)
+// Number of cpu's core.
+func (o GetZoneConfigListOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.Cpu }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigListOutput) DefaultStorage() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigList) int { return v.DefaultStorage }).(pulumi.IntOutput)
+// Default disk size.
+func (o GetZoneConfigListOutput) DefaultStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.DefaultStorage }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigListOutput) EngineVersion() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigList) string { return v.EngineVersion }).(pulumi.StringOutput)
+// Version of the Mongodb version.
+func (o GetZoneConfigListOutput) EngineVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigList) string { return v.EngineVersion }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListOutput) MachineType() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneConfigList) string { return v.MachineType }).(pulumi.StringOutput)
+// Type of Mongodb instance.
+func (o GetZoneConfigListOutput) MachineType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZoneConfigList) string { return v.MachineType }).(pulumi.StringOutput)
 }
 
-func (o ZoneConfigListOutput) MaxReplicateSetNum() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigList) int { return v.MaxReplicateSetNum }).(pulumi.IntOutput)
+// Maximum replicate set num for sharding cluster.
+func (o GetZoneConfigListOutput) MaxReplicateSetNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.MaxReplicateSetNum }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigListOutput) MaxStorage() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigList) int { return v.MaxStorage }).(pulumi.IntOutput)
+// Maximum size of the disk.
+func (o GetZoneConfigListOutput) MaxStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.MaxStorage }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigListOutput) Memory() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigList) int { return v.Memory }).(pulumi.IntOutput)
+// Memory size.
+func (o GetZoneConfigListOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.Memory }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigListOutput) MinReplicateSetNum() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigList) int { return v.MinReplicateSetNum }).(pulumi.IntOutput)
+// Minimum replicate set num for sharding cluster.
+func (o GetZoneConfigListOutput) MinReplicateSetNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.MinReplicateSetNum }).(pulumi.IntOutput)
 }
 
-func (o ZoneConfigListOutput) MinStorage() pulumi.IntOutput {
-	return o.ApplyT(func(v ZoneConfigList) int { return v.MinStorage }).(pulumi.IntOutput)
+// Minimum sie of the disk.
+func (o GetZoneConfigListOutput) MinStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetZoneConfigList) int { return v.MinStorage }).(pulumi.IntOutput)
 }
 
-type ZoneConfigListArrayOutput struct{ *pulumi.OutputState }
+type GetZoneConfigListArrayOutput struct{ *pulumi.OutputState }
 
-func (ZoneConfigListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZoneConfigList)(nil)).Elem()
+func (GetZoneConfigListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZoneConfigList)(nil)).Elem()
 }
 
-func (o ZoneConfigListArrayOutput) ToZoneConfigListArrayOutput() ZoneConfigListArrayOutput {
+func (o GetZoneConfigListArrayOutput) ToGetZoneConfigListArrayOutput() GetZoneConfigListArrayOutput {
 	return o
 }
 
-func (o ZoneConfigListArrayOutput) ToZoneConfigListArrayOutputWithContext(ctx context.Context) ZoneConfigListArrayOutput {
+func (o GetZoneConfigListArrayOutput) ToGetZoneConfigListArrayOutputWithContext(ctx context.Context) GetZoneConfigListArrayOutput {
 	return o
 }
 
-func (o ZoneConfigListArrayOutput) Index(i pulumi.IntInput) ZoneConfigListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZoneConfigList {
-		return vs[0].([]ZoneConfigList)[vs[1].(int)]
-	}).(ZoneConfigListOutput)
+func (o GetZoneConfigListArrayOutput) Index(i pulumi.IntInput) GetZoneConfigListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZoneConfigList {
+		return vs[0].([]GetZoneConfigList)[vs[1].(int)]
+	}).(GetZoneConfigListOutput)
 }
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceStandbyInstanceListInput)(nil)).Elem(), InstanceStandbyInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceStandbyInstanceListArrayInput)(nil)).Elem(), InstanceStandbyInstanceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListInput)(nil)).Elem(), InstancesInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListArrayInput)(nil)).Elem(), InstancesInstanceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneConfigListInput)(nil)).Elem(), ZoneConfigListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZoneConfigListArrayInput)(nil)).Elem(), ZoneConfigListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListInput)(nil)).Elem(), GetZoneConfigListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListArrayInput)(nil)).Elem(), GetZoneConfigListArray{})
 	pulumi.RegisterOutputType(InstanceStandbyInstanceListOutput{})
 	pulumi.RegisterOutputType(InstanceStandbyInstanceListArrayOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListArrayOutput{})
-	pulumi.RegisterOutputType(ZoneConfigListOutput{})
-	pulumi.RegisterOutputType(ZoneConfigListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigListOutput{})
+	pulumi.RegisterOutputType(GetZoneConfigListArrayOutput{})
 }

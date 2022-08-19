@@ -9,6 +9,37 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dnspod
 {
+    /// <summary>
+    /// Provide a resource to create a DnsPod Domain instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Dnspod.DomainInstance("foo", new Tencentcloud.Dnspod.DomainInstanceArgs
+    ///         {
+    ///             Domain = "hello.com",
+    ///             Remark = "this is demo",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// DnsPod Domain instance can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/domainInstance:DomainInstance")]
     public partial class DomainInstance : Pulumi.CustomResource
     {

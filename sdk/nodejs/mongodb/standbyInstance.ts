@@ -4,6 +4,53 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a Mongodb standby instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const shanghai = new tencentcloud.Provider("shanghai", {region: "ap-shanghai"});
+ * const mongodbInstance = new tencentcloud.mongodb.Instance("mongodbInstance", {
+ *     instanceName: "tf-mongodb-test",
+ *     memory: 4,
+ *     volume: 100,
+ *     engineVersion: "MONGO_40_WT",
+ *     machineType: "HIO10G",
+ *     availableZone: _var.availability_zone,
+ *     projectId: 0,
+ *     password: "test1234",
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const mongodbStandbyInstance = new tencentcloud.mongodb.StandbyInstance("mongodbStandbyInstance", {
+ *     instanceName: "tf-mongodb-standby-test",
+ *     memory: 4,
+ *     volume: 100,
+ *     availableZone: "ap-shanghai-2",
+ *     projectId: 0,
+ *     fatherInstanceId: mongodbInstance.id,
+ *     fatherInstanceRegion: "ap-guangzhou",
+ *     tags: {
+ *         test: "test",
+ *     },
+ * }, {
+ *     provider: tencentcloud.shanghai,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Mongodb instance can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
+ * ```
+ */
 export class StandbyInstance extends pulumi.CustomResource {
     /**
      * Get an existing StandbyInstance resource's state with the given name, ID, and optional extra
@@ -33,9 +80,7 @@ export class StandbyInstance extends pulumi.CustomResource {
     }
 
     /**
-     * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-     * `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-     * `1` for creation.
+     * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
     public readonly autoRenewFlag!: pulumi.Output<number | undefined>;
     /**
@@ -43,9 +88,7 @@ export class StandbyInstance extends pulumi.CustomResource {
      */
     public readonly availableZone!: pulumi.Output<string>;
     /**
-     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-     * Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-     * delete old instances and create new one with new charge type.
+     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
      */
     public readonly chargeType!: pulumi.Output<string | undefined>;
     /**
@@ -77,8 +120,7 @@ export class StandbyInstance extends pulumi.CustomResource {
      */
     public readonly memory!: pulumi.Output<number>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-     * 36. NOTE: it only works when charge_type is set to `PREPAID`.
+     * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     public readonly prepaidPeriod!: pulumi.Output<number | undefined>;
     /**
@@ -86,17 +128,15 @@ export class StandbyInstance extends pulumi.CustomResource {
      */
     public readonly projectId!: pulumi.Output<number | undefined>;
     /**
-     * ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-     * supported.
+     * ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
      */
     public readonly securityGroups!: pulumi.Output<string[] | undefined>;
     /**
-     * Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-     * processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+     * Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
      */
     public /*out*/ readonly status!: pulumi.Output<number>;
     /**
-     * ID of the subnet within this VPC. The value is required if `vpc_id` is set.
+     * ID of the subnet within this VPC. The value is required if `vpcId` is set.
      */
     public readonly subnetId!: pulumi.Output<string | undefined>;
     /**
@@ -204,9 +244,7 @@ export class StandbyInstance extends pulumi.CustomResource {
  */
 export interface StandbyInstanceState {
     /**
-     * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-     * `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-     * `1` for creation.
+     * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
     autoRenewFlag?: pulumi.Input<number>;
     /**
@@ -214,9 +252,7 @@ export interface StandbyInstanceState {
      */
     availableZone?: pulumi.Input<string>;
     /**
-     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-     * Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-     * delete old instances and create new one with new charge type.
+     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
      */
     chargeType?: pulumi.Input<string>;
     /**
@@ -248,8 +284,7 @@ export interface StandbyInstanceState {
      */
     memory?: pulumi.Input<number>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-     * 36. NOTE: it only works when charge_type is set to `PREPAID`.
+     * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
@@ -257,17 +292,15 @@ export interface StandbyInstanceState {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-     * supported.
+     * ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-     * processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+     * Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
      */
     status?: pulumi.Input<number>;
     /**
-     * ID of the subnet within this VPC. The value is required if `vpc_id` is set.
+     * ID of the subnet within this VPC. The value is required if `vpcId` is set.
      */
     subnetId?: pulumi.Input<string>;
     /**
@@ -297,9 +330,7 @@ export interface StandbyInstanceState {
  */
 export interface StandbyInstanceArgs {
     /**
-     * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-     * `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-     * `1` for creation.
+     * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
     autoRenewFlag?: pulumi.Input<number>;
     /**
@@ -307,9 +338,7 @@ export interface StandbyInstanceArgs {
      */
     availableZone: pulumi.Input<string>;
     /**
-     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-     * Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-     * delete old instances and create new one with new charge type.
+     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
      */
     chargeType?: pulumi.Input<string>;
     /**
@@ -329,8 +358,7 @@ export interface StandbyInstanceArgs {
      */
     memory: pulumi.Input<number>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-     * 36. NOTE: it only works when charge_type is set to `PREPAID`.
+     * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
@@ -338,12 +366,11 @@ export interface StandbyInstanceArgs {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-     * supported.
+     * ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * ID of the subnet within this VPC. The value is required if `vpc_id` is set.
+     * ID of the subnet within this VPC. The value is required if `vpcId` is set.
      */
     subnetId?: pulumi.Input<string>;
     /**

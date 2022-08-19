@@ -9,6 +9,90 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.As
 {
+    /// <summary>
+    /// Provides a resource to create a configuration for an AS (Auto scaling) instance.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var launchConfiguration = new Tencentcloud.As.ScalingConfig("launchConfiguration", new Tencentcloud.As.ScalingConfigArgs
+    ///         {
+    ///             ConfigurationName = "launch-configuration",
+    ///             DataDisks = 
+    ///             {
+    ///                 new Tencentcloud.As.Inputs.ScalingConfigDataDiskArgs
+    ///                 {
+    ///                     DiskSize = 50,
+    ///                     DiskType = "CLOUD_PREMIUM",
+    ///                 },
+    ///             },
+    ///             EnhancedMonitorService = false,
+    ///             EnhancedSecurityService = false,
+    ///             ImageId = "img-9qabwvbn",
+    ///             InstanceTags = 
+    ///             {
+    ///                 { "tag", "as" },
+    ///             },
+    ///             InstanceTypes = 
+    ///             {
+    ///                 "SA1.SMALL1",
+    ///             },
+    ///             InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///             InternetMaxBandwidthOut = 10,
+    ///             Password = "test123#",
+    ///             ProjectId = 0,
+    ///             PublicIpAssigned = true,
+    ///             SystemDiskSize = 50,
+    ///             SystemDiskType = "CLOUD_PREMIUM",
+    ///             UserData = "dGVzdA==",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Using SPOT charge type
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var launchConfiguration = new Tencentcloud.As.ScalingConfig("launchConfiguration", new Tencentcloud.As.ScalingConfigArgs
+    ///         {
+    ///             ConfigurationName = "launch-configuration",
+    ///             ImageId = "img-9qabwvbn",
+    ///             InstanceChargeType = "SPOTPAID",
+    ///             InstanceTypes = 
+    ///             {
+    ///                 "SA1.SMALL1",
+    ///             },
+    ///             SpotInstanceType = "one-time",
+    ///             SpotMaxPrice = "1000",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// AutoScaling Configuration can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig scaling_config asc-n32ymck2
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:As/scalingConfig:ScalingConfig")]
     public partial class ScalingConfig : Pulumi.CustomResource
     {
@@ -61,25 +145,19 @@ namespace Pulumi.Tencentcloud.As
         public Output<string> ImageId { get; private set; } = null!;
 
         /// <summary>
-        /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-        /// NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         /// </summary>
         [Output("instanceChargeType")]
         public Output<string?> InstanceChargeType { get; private set; } = null!;
 
         /// <summary>
-        /// The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-        /// values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         /// </summary>
         [Output("instanceChargeTypePrepaidPeriod")]
         public Output<int?> InstanceChargeTypePrepaidPeriod { get; private set; } = null!;
 
         /// <summary>
-        /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-        /// `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-        /// neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-        /// specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-        /// balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+        /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         /// </summary>
         [Output("instanceChargeTypePrepaidRenewFlag")]
         public Output<string> InstanceChargeTypePrepaidRenewFlag { get; private set; } = null!;
@@ -103,8 +181,7 @@ namespace Pulumi.Tencentcloud.As
         public Output<ImmutableArray<string>> InstanceTypes { get; private set; } = null!;
 
         /// <summary>
-        /// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-        /// `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        /// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Output("internetChargeType")]
         public Output<string?> InternetChargeType { get; private set; } = null!;
@@ -158,8 +235,7 @@ namespace Pulumi.Tencentcloud.As
         public Output<string?> SpotInstanceType { get; private set; } = null!;
 
         /// <summary>
-        /// Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-        /// instance_charge_type is set to `SPOTPAID`.
+        /// Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         /// </summary>
         [Output("spotMaxPrice")]
         public Output<string?> SpotMaxPrice { get; private set; } = null!;
@@ -177,8 +253,7 @@ namespace Pulumi.Tencentcloud.As
         public Output<int?> SystemDiskSize { get; private set; } = null!;
 
         /// <summary>
-        /// Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-        /// disk_type_policy is ORIGINAL.
+        /// Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when disk_type_policy is ORIGINAL.
         /// </summary>
         [Output("systemDiskType")]
         public Output<string?> SystemDiskType { get; private set; } = null!;
@@ -284,25 +359,19 @@ namespace Pulumi.Tencentcloud.As
         public Input<string> ImageId { get; set; } = null!;
 
         /// <summary>
-        /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-        /// NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         /// </summary>
         [Input("instanceChargeType")]
         public Input<string>? InstanceChargeType { get; set; }
 
         /// <summary>
-        /// The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-        /// values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         /// </summary>
         [Input("instanceChargeTypePrepaidPeriod")]
         public Input<int>? InstanceChargeTypePrepaidPeriod { get; set; }
 
         /// <summary>
-        /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-        /// `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-        /// neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-        /// specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-        /// balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+        /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         /// </summary>
         [Input("instanceChargeTypePrepaidRenewFlag")]
         public Input<string>? InstanceChargeTypePrepaidRenewFlag { get; set; }
@@ -338,8 +407,7 @@ namespace Pulumi.Tencentcloud.As
         }
 
         /// <summary>
-        /// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-        /// `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        /// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Input("internetChargeType")]
         public Input<string>? InternetChargeType { get; set; }
@@ -405,8 +473,7 @@ namespace Pulumi.Tencentcloud.As
         public Input<string>? SpotInstanceType { get; set; }
 
         /// <summary>
-        /// Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-        /// instance_charge_type is set to `SPOTPAID`.
+        /// Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         /// </summary>
         [Input("spotMaxPrice")]
         public Input<string>? SpotMaxPrice { get; set; }
@@ -418,8 +485,7 @@ namespace Pulumi.Tencentcloud.As
         public Input<int>? SystemDiskSize { get; set; }
 
         /// <summary>
-        /// Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-        /// disk_type_policy is ORIGINAL.
+        /// Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when disk_type_policy is ORIGINAL.
         /// </summary>
         [Input("systemDiskType")]
         public Input<string>? SystemDiskType { get; set; }
@@ -492,25 +558,19 @@ namespace Pulumi.Tencentcloud.As
         public Input<string>? ImageId { get; set; }
 
         /// <summary>
-        /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-        /// NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         /// </summary>
         [Input("instanceChargeType")]
         public Input<string>? InstanceChargeType { get; set; }
 
         /// <summary>
-        /// The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-        /// values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         /// </summary>
         [Input("instanceChargeTypePrepaidPeriod")]
         public Input<int>? InstanceChargeTypePrepaidPeriod { get; set; }
 
         /// <summary>
-        /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-        /// `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-        /// neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-        /// specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-        /// balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+        /// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         /// </summary>
         [Input("instanceChargeTypePrepaidRenewFlag")]
         public Input<string>? InstanceChargeTypePrepaidRenewFlag { get; set; }
@@ -546,8 +606,7 @@ namespace Pulumi.Tencentcloud.As
         }
 
         /// <summary>
-        /// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-        /// `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        /// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Input("internetChargeType")]
         public Input<string>? InternetChargeType { get; set; }
@@ -613,8 +672,7 @@ namespace Pulumi.Tencentcloud.As
         public Input<string>? SpotInstanceType { get; set; }
 
         /// <summary>
-        /// Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-        /// instance_charge_type is set to `SPOTPAID`.
+        /// Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         /// </summary>
         [Input("spotMaxPrice")]
         public Input<string>? SpotMaxPrice { get; set; }
@@ -632,8 +690,7 @@ namespace Pulumi.Tencentcloud.As
         public Input<int>? SystemDiskSize { get; set; }
 
         /// <summary>
-        /// Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-        /// disk_type_policy is ORIGINAL.
+        /// Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when disk_type_policy is ORIGINAL.
         /// </summary>
         [Input("systemDiskType")]
         public Input<string>? SystemDiskType { get; set; }

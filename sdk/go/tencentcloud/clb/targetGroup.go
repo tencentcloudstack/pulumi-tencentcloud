@@ -10,6 +10,70 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CLB target group.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
+// 			Port:            pulumi.Int(33),
+// 			TargetGroupName: pulumi.String("test"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// Create target group
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
+// 			Port: pulumi.Int(18082),
+// 			TargetGroupInstances: clb.TargetGroupTargetGroupInstanceArray{
+// 				&clb.TargetGroupTargetGroupInstanceArgs{
+// 					BindIp: pulumi.String("10.0.0.4"),
+// 					Port:   pulumi.Int(18080),
+// 				},
+// 			},
+// 			TargetGroupName: pulumi.String("hello1"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CLB target group can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
+// ```
 type TargetGroup struct {
 	pulumi.CustomResourceState
 

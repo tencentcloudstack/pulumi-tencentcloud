@@ -29,8 +29,7 @@ class TopicArgs:
         :param pulumi.Input[int] max_split_partitions: Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
         :param pulumi.Input[int] partition_count: Number of log topic partitions. Default value: 1. Maximum value: 10.
         :param pulumi.Input[int] period: Lifecycle in days. Value range: 1~366. Default value: 30.
-        :param pulumi.Input[str] storage_type: Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-               passed in, please contact the customer service to add the log topic to the allowlist first..
+        :param pulumi.Input[str] storage_type: Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
         """
         pulumi.set(__self__, "logset_id", logset_id)
@@ -124,8 +123,7 @@ class TopicArgs:
     @pulumi.getter(name="storageType")
     def storage_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-        passed in, please contact the customer service to add the log topic to the allowlist first..
+        Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
         """
         return pulumi.get(self, "storage_type")
 
@@ -164,8 +162,7 @@ class _TopicState:
         :param pulumi.Input[int] max_split_partitions: Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
         :param pulumi.Input[int] partition_count: Number of log topic partitions. Default value: 1. Maximum value: 10.
         :param pulumi.Input[int] period: Lifecycle in days. Value range: 1~366. Default value: 30.
-        :param pulumi.Input[str] storage_type: Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-               passed in, please contact the customer service to add the log topic to the allowlist first..
+        :param pulumi.Input[str] storage_type: Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
         :param pulumi.Input[str] topic_name: Log topic name.
         """
@@ -250,8 +247,7 @@ class _TopicState:
     @pulumi.getter(name="storageType")
     def storage_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-        passed in, please contact the customer service to add the log topic to the allowlist first..
+        Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
         """
         return pulumi.get(self, "storage_type")
 
@@ -299,7 +295,35 @@ class Topic(pulumi.CustomResource):
                  topic_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Topic resource with the given unique name, props, and options.
+        Provides a resource to create a cls topic.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        topic = tencentcloud.cls.Topic("topic",
+            auto_split=False,
+            logset_id="5cd3a17e-fb0b-418c-afd7-77b365397426",
+            max_split_partitions=20,
+            partition_count=1,
+            period=10,
+            storage_type="hot",
+            tags={
+                "test": "test",
+            },
+            topic_name="topic")
+        ```
+
+        ## Import
+
+        cls topic can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cls/topic:Topic topic 2f5764c1-c833-44c5-84c7-950979b2a278
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] auto_split: Whether to enable automatic split. Default value: true.
@@ -307,8 +331,7 @@ class Topic(pulumi.CustomResource):
         :param pulumi.Input[int] max_split_partitions: Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
         :param pulumi.Input[int] partition_count: Number of log topic partitions. Default value: 1. Maximum value: 10.
         :param pulumi.Input[int] period: Lifecycle in days. Value range: 1~366. Default value: 30.
-        :param pulumi.Input[str] storage_type: Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-               passed in, please contact the customer service to add the log topic to the allowlist first..
+        :param pulumi.Input[str] storage_type: Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
         :param pulumi.Input[str] topic_name: Log topic name.
         """
@@ -319,7 +342,35 @@ class Topic(pulumi.CustomResource):
                  args: TopicArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Topic resource with the given unique name, props, and options.
+        Provides a resource to create a cls topic.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        topic = tencentcloud.cls.Topic("topic",
+            auto_split=False,
+            logset_id="5cd3a17e-fb0b-418c-afd7-77b365397426",
+            max_split_partitions=20,
+            partition_count=1,
+            period=10,
+            storage_type="hot",
+            tags={
+                "test": "test",
+            },
+            topic_name="topic")
+        ```
+
+        ## Import
+
+        cls topic can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cls/topic:Topic topic 2f5764c1-c833-44c5-84c7-950979b2a278
+        ```
+
         :param str resource_name: The name of the resource.
         :param TopicArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -397,8 +448,7 @@ class Topic(pulumi.CustomResource):
         :param pulumi.Input[int] max_split_partitions: Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
         :param pulumi.Input[int] partition_count: Number of log topic partitions. Default value: 1. Maximum value: 10.
         :param pulumi.Input[int] period: Lifecycle in days. Value range: 1~366. Default value: 30.
-        :param pulumi.Input[str] storage_type: Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-               passed in, please contact the customer service to add the log topic to the allowlist first..
+        :param pulumi.Input[str] storage_type: Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
         :param pulumi.Input[str] topic_name: Log topic name.
         """
@@ -460,8 +510,7 @@ class Topic(pulumi.CustomResource):
     @pulumi.getter(name="storageType")
     def storage_type(self) -> pulumi.Output[str]:
         """
-        Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-        passed in, please contact the customer service to add the log topic to the allowlist first..
+        Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
         """
         return pulumi.get(self, "storage_type")
 

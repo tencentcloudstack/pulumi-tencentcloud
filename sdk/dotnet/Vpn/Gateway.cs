@@ -9,13 +9,74 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Vpn
 {
+    /// <summary>
+    /// ## Example Usage
+    /// 
+    /// POSTPAID_BY_HOUR VPN gateway
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new Tencentcloud.Vpn.GatewayArgs
+    ///         {
+    ///             Bandwidth = 5,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///             VpcId = "vpc-dk8zmwuf",
+    ///             Zone = "ap-guangzhou-3",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// PREPAID VPN gateway
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var myCgw = new Tencentcloud.Vpn.Gateway("myCgw", new Tencentcloud.Vpn.GatewayArgs
+    ///         {
+    ///             Bandwidth = 5,
+    ///             ChargeType = "PREPAID",
+    ///             PrepaidPeriod = 1,
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "test" },
+    ///             },
+    ///             VpcId = "vpc-dk8zmwuf",
+    ///             Zone = "ap-guangzhou-3",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// VPN gateway can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Vpn/gateway:Gateway foo vpngw-8ccsnclt
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/gateway:Gateway")]
     public partial class Gateway : Pulumi.CustomResource
     {
         /// <summary>
-        /// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-        /// 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-        /// unsupported.
+        /// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
         /// </summary>
         [Output("bandwidth")]
         public Output<int?> Bandwidth { get; private set; } = null!;
@@ -51,8 +112,7 @@ namespace Pulumi.Tencentcloud.Vpn
         public Output<bool> IsAddressBlocked { get; private set; } = null!;
 
         /// <summary>
-        /// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-        /// is only required for SSL VPN gateways.
+        /// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         /// </summary>
         [Output("maxConnection")]
         public Output<int> MaxConnection { get; private set; } = null!;
@@ -70,16 +130,13 @@ namespace Pulumi.Tencentcloud.Vpn
         public Output<string> NewPurchasePlan { get; private set; } = null!;
 
         /// <summary>
-        /// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-        /// month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-        /// period. This para can only be set to take effect in create operation.
+        /// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
         /// </summary>
         [Output("prepaidPeriod")]
         public Output<int?> PrepaidPeriod { get; private set; } = null!;
 
         /// <summary>
-        /// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-        /// `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        /// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
         /// </summary>
         [Output("prepaidRenewFlag")]
         public Output<string?> PrepaidRenewFlag { get; private set; } = null!;
@@ -173,9 +230,7 @@ namespace Pulumi.Tencentcloud.Vpn
     public sealed class GatewayArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-        /// 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-        /// unsupported.
+        /// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
         /// </summary>
         [Input("bandwidth")]
         public Input<int>? Bandwidth { get; set; }
@@ -193,8 +248,7 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
-        /// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-        /// is only required for SSL VPN gateways.
+        /// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         /// </summary>
         [Input("maxConnection")]
         public Input<int>? MaxConnection { get; set; }
@@ -206,16 +260,13 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-        /// month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-        /// period. This para can only be set to take effect in create operation.
+        /// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
 
         /// <summary>
-        /// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-        /// `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        /// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
         /// </summary>
         [Input("prepaidRenewFlag")]
         public Input<string>? PrepaidRenewFlag { get; set; }
@@ -258,9 +309,7 @@ namespace Pulumi.Tencentcloud.Vpn
     public sealed class GatewayState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include:
-        /// 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is
-        /// unsupported.
+        /// The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
         /// </summary>
         [Input("bandwidth")]
         public Input<int>? Bandwidth { get; set; }
@@ -296,8 +345,7 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<bool>? IsAddressBlocked { get; set; }
 
         /// <summary>
-        /// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter
-        /// is only required for SSL VPN gateways.
+        /// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
         /// </summary>
         [Input("maxConnection")]
         public Input<int>? MaxConnection { get; set; }
@@ -315,16 +363,13 @@ namespace Pulumi.Tencentcloud.Vpn
         public Input<string>? NewPurchasePlan { get; set; }
 
         /// <summary>
-        /// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is
-        /// month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid
-        /// period. This para can only be set to take effect in create operation.
+        /// Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renew_flag para are valid, the request means to renew several months more pre-paid period. This para can only be set to take effect in create operation.
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
 
         /// <summary>
-        /// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`,
-        /// `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
+        /// Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_RENEW`, `NOTIFY_AND_AUTO_RENEW`, `NOT_NOTIFY_AND_NOT_RENEW`. This para can only be set to take effect in create operation.
         /// </summary>
         [Input("prepaidRenewFlag")]
         public Input<string>? PrepaidRenewFlag { get; set; }

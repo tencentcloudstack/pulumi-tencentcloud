@@ -27,16 +27,11 @@ class ScalingPolicyArgs:
                  statistic: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ScalingPolicy resource.
-        :param pulumi.Input[str] adjustment_type: Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-               `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
-        :param pulumi.Input[int] adjustment_value: Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-               increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-               type, it defines an absolute number of the existing Auto Scaling group size.
-        :param pulumi.Input[str] comparison_operator: Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-               `EQUAL_TO` and `NOT_EQUAL_TO`.
+        :param pulumi.Input[str] adjustment_type: Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+        :param pulumi.Input[int] adjustment_value: Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
+        :param pulumi.Input[str] comparison_operator: Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
         :param pulumi.Input[int] continuous_time: Retry times. Valid value ranges: (1~10).
-        :param pulumi.Input[str] metric_name: Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-               `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+        :param pulumi.Input[str] metric_name: Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
         :param pulumi.Input[int] period: Time period in second. Valid values: `60` and `300`.
         :param pulumi.Input[str] policy_name: Name of a policy used to define a reaction when an alarm is triggered.
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
@@ -65,8 +60,7 @@ class ScalingPolicyArgs:
     @pulumi.getter(name="adjustmentType")
     def adjustment_type(self) -> pulumi.Input[str]:
         """
-        Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-        `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+        Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
         """
         return pulumi.get(self, "adjustment_type")
 
@@ -78,9 +72,7 @@ class ScalingPolicyArgs:
     @pulumi.getter(name="adjustmentValue")
     def adjustment_value(self) -> pulumi.Input[int]:
         """
-        Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-        increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-        type, it defines an absolute number of the existing Auto Scaling group size.
+        Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
         """
         return pulumi.get(self, "adjustment_value")
 
@@ -92,8 +84,7 @@ class ScalingPolicyArgs:
     @pulumi.getter(name="comparisonOperator")
     def comparison_operator(self) -> pulumi.Input[str]:
         """
-        Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-        `EQUAL_TO` and `NOT_EQUAL_TO`.
+        Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
         """
         return pulumi.get(self, "comparison_operator")
 
@@ -117,8 +108,7 @@ class ScalingPolicyArgs:
     @pulumi.getter(name="metricName")
     def metric_name(self) -> pulumi.Input[str]:
         """
-        Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-        `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+        Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
         """
         return pulumi.get(self, "metric_name")
 
@@ -228,17 +218,12 @@ class _ScalingPolicyState:
                  threshold: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering ScalingPolicy resources.
-        :param pulumi.Input[str] adjustment_type: Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-               `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
-        :param pulumi.Input[int] adjustment_value: Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-               increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-               type, it defines an absolute number of the existing Auto Scaling group size.
-        :param pulumi.Input[str] comparison_operator: Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-               `EQUAL_TO` and `NOT_EQUAL_TO`.
+        :param pulumi.Input[str] adjustment_type: Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+        :param pulumi.Input[int] adjustment_value: Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
+        :param pulumi.Input[str] comparison_operator: Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
         :param pulumi.Input[int] continuous_time: Retry times. Valid value ranges: (1~10).
         :param pulumi.Input[int] cooldown: Cooldwon time in second. Default is `30`0.
-        :param pulumi.Input[str] metric_name: Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-               `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+        :param pulumi.Input[str] metric_name: Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_user_group_ids: An ID group of users to be notified when an alarm is triggered.
         :param pulumi.Input[int] period: Time period in second. Valid values: `60` and `300`.
         :param pulumi.Input[str] policy_name: Name of a policy used to define a reaction when an alarm is triggered.
@@ -275,8 +260,7 @@ class _ScalingPolicyState:
     @pulumi.getter(name="adjustmentType")
     def adjustment_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-        `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+        Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
         """
         return pulumi.get(self, "adjustment_type")
 
@@ -288,9 +272,7 @@ class _ScalingPolicyState:
     @pulumi.getter(name="adjustmentValue")
     def adjustment_value(self) -> Optional[pulumi.Input[int]]:
         """
-        Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-        increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-        type, it defines an absolute number of the existing Auto Scaling group size.
+        Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
         """
         return pulumi.get(self, "adjustment_value")
 
@@ -302,8 +284,7 @@ class _ScalingPolicyState:
     @pulumi.getter(name="comparisonOperator")
     def comparison_operator(self) -> Optional[pulumi.Input[str]]:
         """
-        Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-        `EQUAL_TO` and `NOT_EQUAL_TO`.
+        Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
         """
         return pulumi.get(self, "comparison_operator")
 
@@ -339,8 +320,7 @@ class _ScalingPolicyState:
     @pulumi.getter(name="metricName")
     def metric_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-        `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+        Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
         """
         return pulumi.get(self, "metric_name")
 
@@ -440,20 +420,36 @@ class ScalingPolicy(pulumi.CustomResource):
                  threshold: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a ScalingPolicy resource with the given unique name, props, and options.
+        Provides a resource for an AS (Auto scaling) policy.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        scaling_policy = tencentcloud.as_.ScalingPolicy("scalingPolicy",
+            adjustment_type="EXACT_CAPACITY",
+            adjustment_value=0,
+            comparison_operator="GREATER_THAN",
+            continuous_time=10,
+            cooldown=360,
+            metric_name="CPU_UTILIZATION",
+            period=300,
+            policy_name="tf-as-scaling-policy",
+            scaling_group_id="asg-n32ymck2",
+            statistic="AVERAGE",
+            threshold=80)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] adjustment_type: Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-               `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
-        :param pulumi.Input[int] adjustment_value: Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-               increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-               type, it defines an absolute number of the existing Auto Scaling group size.
-        :param pulumi.Input[str] comparison_operator: Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-               `EQUAL_TO` and `NOT_EQUAL_TO`.
+        :param pulumi.Input[str] adjustment_type: Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+        :param pulumi.Input[int] adjustment_value: Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
+        :param pulumi.Input[str] comparison_operator: Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
         :param pulumi.Input[int] continuous_time: Retry times. Valid value ranges: (1~10).
         :param pulumi.Input[int] cooldown: Cooldwon time in second. Default is `30`0.
-        :param pulumi.Input[str] metric_name: Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-               `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+        :param pulumi.Input[str] metric_name: Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_user_group_ids: An ID group of users to be notified when an alarm is triggered.
         :param pulumi.Input[int] period: Time period in second. Valid values: `60` and `300`.
         :param pulumi.Input[str] policy_name: Name of a policy used to define a reaction when an alarm is triggered.
@@ -468,7 +464,28 @@ class ScalingPolicy(pulumi.CustomResource):
                  args: ScalingPolicyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ScalingPolicy resource with the given unique name, props, and options.
+        Provides a resource for an AS (Auto scaling) policy.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        scaling_policy = tencentcloud.as_.ScalingPolicy("scalingPolicy",
+            adjustment_type="EXACT_CAPACITY",
+            adjustment_value=0,
+            comparison_operator="GREATER_THAN",
+            continuous_time=10,
+            cooldown=360,
+            metric_name="CPU_UTILIZATION",
+            period=300,
+            policy_name="tf-as-scaling-policy",
+            scaling_group_id="asg-n32ymck2",
+            statistic="AVERAGE",
+            threshold=80)
+        ```
+
         :param str resource_name: The name of the resource.
         :param ScalingPolicyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -567,17 +584,12 @@ class ScalingPolicy(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] adjustment_type: Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-               `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
-        :param pulumi.Input[int] adjustment_value: Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-               increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-               type, it defines an absolute number of the existing Auto Scaling group size.
-        :param pulumi.Input[str] comparison_operator: Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-               `EQUAL_TO` and `NOT_EQUAL_TO`.
+        :param pulumi.Input[str] adjustment_type: Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+        :param pulumi.Input[int] adjustment_value: Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
+        :param pulumi.Input[str] comparison_operator: Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
         :param pulumi.Input[int] continuous_time: Retry times. Valid value ranges: (1~10).
         :param pulumi.Input[int] cooldown: Cooldwon time in second. Default is `30`0.
-        :param pulumi.Input[str] metric_name: Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-               `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+        :param pulumi.Input[str] metric_name: Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] notification_user_group_ids: An ID group of users to be notified when an alarm is triggered.
         :param pulumi.Input[int] period: Time period in second. Valid values: `60` and `300`.
         :param pulumi.Input[str] policy_name: Name of a policy used to define a reaction when an alarm is triggered.
@@ -607,8 +619,7 @@ class ScalingPolicy(pulumi.CustomResource):
     @pulumi.getter(name="adjustmentType")
     def adjustment_type(self) -> pulumi.Output[str]:
         """
-        Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values:
-        `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
+        Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
         """
         return pulumi.get(self, "adjustment_type")
 
@@ -616,9 +627,7 @@ class ScalingPolicy(pulumi.CustomResource):
     @pulumi.getter(name="adjustmentValue")
     def adjustment_value(self) -> pulumi.Output[int]:
         """
-        Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive
-        increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY`
-        type, it defines an absolute number of the existing Auto Scaling group size.
+        Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
         """
         return pulumi.get(self, "adjustment_value")
 
@@ -626,8 +635,7 @@ class ScalingPolicy(pulumi.CustomResource):
     @pulumi.getter(name="comparisonOperator")
     def comparison_operator(self) -> pulumi.Output[str]:
         """
-        Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`,
-        `EQUAL_TO` and `NOT_EQUAL_TO`.
+        Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
         """
         return pulumi.get(self, "comparison_operator")
 
@@ -651,8 +659,7 @@ class ScalingPolicy(pulumi.CustomResource):
     @pulumi.getter(name="metricName")
     def metric_name(self) -> pulumi.Output[str]:
         """
-        Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`,
-        `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
+        Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
         """
         return pulumi.get(self, "metric_name")
 

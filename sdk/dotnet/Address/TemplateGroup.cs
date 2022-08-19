@@ -9,6 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Address
 {
+    /// <summary>
+    /// Provides a resource to manage address template group.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Address.TemplateGroup("foo", new Tencentcloud.Address.TemplateGroupArgs
+    ///         {
+    ///             TemplateIds = 
+    ///             {
+    ///                 "ipl-axaf24151",
+    ///                 "ipl-axaf24152",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Address template group can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Address/templateGroup:TemplateGroup foo ipmg-0np3u974
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Address/templateGroup:TemplateGroup")]
     public partial class TemplateGroup : Pulumi.CustomResource
     {

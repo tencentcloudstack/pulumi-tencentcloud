@@ -10,14 +10,9 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
-    'ClusterCredentialAddressResult',
-    'ClusterCredentialInternalLbResult',
-    'ClusterCredentialPublicLbResult',
     'ClusterDnsServer',
     'ClusterInternalLb',
     'ClusterPublicLb',
-    'ClustersListResult',
-    'ClustersListDnsServerResult',
     'ContainerInstanceCbsVolume',
     'ContainerInstanceContainer',
     'ContainerInstanceContainerLivenessProbe',
@@ -27,98 +22,22 @@ __all__ = [
     'ContainerInstanceInitContainer',
     'ContainerInstanceInitContainerVolumeMount',
     'ContainerInstanceNfsVolume',
+    'GetClusterCredentialAddressResult',
+    'GetClusterCredentialInternalLbResult',
+    'GetClusterCredentialPublicLbResult',
+    'GetClustersListResult',
+    'GetClustersListDnsServerResult',
 ]
-
-@pulumi.output_type
-class ClusterCredentialAddressResult(dict):
-    def __init__(__self__, *,
-                 ip: str,
-                 port: str,
-                 type: str):
-        pulumi.set(__self__, "ip", ip)
-        pulumi.set(__self__, "port", port)
-        pulumi.set(__self__, "type", type)
-
-    @property
-    @pulumi.getter
-    def ip(self) -> str:
-        return pulumi.get(self, "ip")
-
-    @property
-    @pulumi.getter
-    def port(self) -> str:
-        return pulumi.get(self, "port")
-
-    @property
-    @pulumi.getter
-    def type(self) -> str:
-        return pulumi.get(self, "type")
-
-
-@pulumi.output_type
-class ClusterCredentialInternalLbResult(dict):
-    def __init__(__self__, *,
-                 enabled: bool,
-                 subnet_id: str):
-        pulumi.set(__self__, "enabled", enabled)
-        pulumi.set(__self__, "subnet_id", subnet_id)
-
-    @property
-    @pulumi.getter
-    def enabled(self) -> bool:
-        return pulumi.get(self, "enabled")
-
-    @property
-    @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> str:
-        return pulumi.get(self, "subnet_id")
-
-
-@pulumi.output_type
-class ClusterCredentialPublicLbResult(dict):
-    def __init__(__self__, *,
-                 allow_from_cidrs: Sequence[str],
-                 enabled: bool,
-                 extra_param: str,
-                 security_group: str,
-                 security_policies: Sequence[str]):
-        pulumi.set(__self__, "allow_from_cidrs", allow_from_cidrs)
-        pulumi.set(__self__, "enabled", enabled)
-        pulumi.set(__self__, "extra_param", extra_param)
-        pulumi.set(__self__, "security_group", security_group)
-        pulumi.set(__self__, "security_policies", security_policies)
-
-    @property
-    @pulumi.getter(name="allowFromCidrs")
-    def allow_from_cidrs(self) -> Sequence[str]:
-        return pulumi.get(self, "allow_from_cidrs")
-
-    @property
-    @pulumi.getter
-    def enabled(self) -> bool:
-        return pulumi.get(self, "enabled")
-
-    @property
-    @pulumi.getter(name="extraParam")
-    def extra_param(self) -> str:
-        return pulumi.get(self, "extra_param")
-
-    @property
-    @pulumi.getter(name="securityGroup")
-    def security_group(self) -> str:
-        return pulumi.get(self, "security_group")
-
-    @property
-    @pulumi.getter(name="securityPolicies")
-    def security_policies(self) -> Sequence[str]:
-        return pulumi.get(self, "security_policies")
-
 
 @pulumi.output_type
 class ClusterDnsServer(dict):
     def __init__(__self__, *,
                  domain: Optional[str] = None,
                  servers: Optional[Sequence[str]] = None):
+        """
+        :param str domain: DNS Server domain. Empty indicates all domain.
+        :param Sequence[str] servers: List of DNS Server IP address, pattern: "ip[:port]".
+        """
         if domain is not None:
             pulumi.set(__self__, "domain", domain)
         if servers is not None:
@@ -127,11 +46,17 @@ class ClusterDnsServer(dict):
     @property
     @pulumi.getter
     def domain(self) -> Optional[str]:
+        """
+        DNS Server domain. Empty indicates all domain.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter
     def servers(self) -> Optional[Sequence[str]]:
+        """
+        List of DNS Server IP address, pattern: "ip[:port]".
+        """
         return pulumi.get(self, "servers")
 
 
@@ -157,6 +82,10 @@ class ClusterInternalLb(dict):
     def __init__(__self__, *,
                  enabled: bool,
                  subnet_id: Optional[str] = None):
+        """
+        :param bool enabled: Indicates weather the internal access LB enabled.
+        :param str subnet_id: ID of subnet which related to Internal LB.
+        """
         pulumi.set(__self__, "enabled", enabled)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
@@ -164,11 +93,17 @@ class ClusterInternalLb(dict):
     @property
     @pulumi.getter
     def enabled(self) -> bool:
+        """
+        Indicates weather the internal access LB enabled.
+        """
         return pulumi.get(self, "enabled")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[str]:
+        """
+        ID of subnet which related to Internal LB.
+        """
         return pulumi.get(self, "subnet_id")
 
 
@@ -203,6 +138,12 @@ class ClusterPublicLb(dict):
                  extra_param: Optional[str] = None,
                  security_group: Optional[str] = None,
                  security_policies: Optional[Sequence[str]] = None):
+        """
+        :param bool enabled: Indicates weather the public access LB enabled.
+        :param Sequence[str] allow_from_cidrs: List of CIDRs which allowed to access.
+        :param str extra_param: Extra param text json.
+        :param Sequence[str] security_policies: List of security allow IP or CIDRs, default deny all.
+        """
         pulumi.set(__self__, "enabled", enabled)
         if allow_from_cidrs is not None:
             pulumi.set(__self__, "allow_from_cidrs", allow_from_cidrs)
@@ -216,16 +157,25 @@ class ClusterPublicLb(dict):
     @property
     @pulumi.getter
     def enabled(self) -> bool:
+        """
+        Indicates weather the public access LB enabled.
+        """
         return pulumi.get(self, "enabled")
 
     @property
     @pulumi.getter(name="allowFromCidrs")
     def allow_from_cidrs(self) -> Optional[Sequence[str]]:
+        """
+        List of CIDRs which allowed to access.
+        """
         return pulumi.get(self, "allow_from_cidrs")
 
     @property
     @pulumi.getter(name="extraParam")
     def extra_param(self) -> Optional[str]:
+        """
+        Extra param text json.
+        """
         return pulumi.get(self, "extra_param")
 
     @property
@@ -236,122 +186,10 @@ class ClusterPublicLb(dict):
     @property
     @pulumi.getter(name="securityPolicies")
     def security_policies(self) -> Optional[Sequence[str]]:
+        """
+        List of security allow IP or CIDRs, default deny all.
+        """
         return pulumi.get(self, "security_policies")
-
-
-@pulumi.output_type
-class ClustersListResult(dict):
-    def __init__(__self__, *,
-                 cluster_desc: str,
-                 cluster_id: str,
-                 cluster_name: str,
-                 created_time: str,
-                 dns_servers: Sequence['outputs.ClustersListDnsServerResult'],
-                 enable_vpc_core_dns: bool,
-                 k8s_version: str,
-                 need_delete_cbs: bool,
-                 service_subnet_id: str,
-                 status: str,
-                 subnet_ids: Sequence[str],
-                 tags: Mapping[str, Any],
-                 vpc_id: str):
-        pulumi.set(__self__, "cluster_desc", cluster_desc)
-        pulumi.set(__self__, "cluster_id", cluster_id)
-        pulumi.set(__self__, "cluster_name", cluster_name)
-        pulumi.set(__self__, "created_time", created_time)
-        pulumi.set(__self__, "dns_servers", dns_servers)
-        pulumi.set(__self__, "enable_vpc_core_dns", enable_vpc_core_dns)
-        pulumi.set(__self__, "k8s_version", k8s_version)
-        pulumi.set(__self__, "need_delete_cbs", need_delete_cbs)
-        pulumi.set(__self__, "service_subnet_id", service_subnet_id)
-        pulumi.set(__self__, "status", status)
-        pulumi.set(__self__, "subnet_ids", subnet_ids)
-        pulumi.set(__self__, "tags", tags)
-        pulumi.set(__self__, "vpc_id", vpc_id)
-
-    @property
-    @pulumi.getter(name="clusterDesc")
-    def cluster_desc(self) -> str:
-        return pulumi.get(self, "cluster_desc")
-
-    @property
-    @pulumi.getter(name="clusterId")
-    def cluster_id(self) -> str:
-        return pulumi.get(self, "cluster_id")
-
-    @property
-    @pulumi.getter(name="clusterName")
-    def cluster_name(self) -> str:
-        return pulumi.get(self, "cluster_name")
-
-    @property
-    @pulumi.getter(name="createdTime")
-    def created_time(self) -> str:
-        return pulumi.get(self, "created_time")
-
-    @property
-    @pulumi.getter(name="dnsServers")
-    def dns_servers(self) -> Sequence['outputs.ClustersListDnsServerResult']:
-        return pulumi.get(self, "dns_servers")
-
-    @property
-    @pulumi.getter(name="enableVpcCoreDns")
-    def enable_vpc_core_dns(self) -> bool:
-        return pulumi.get(self, "enable_vpc_core_dns")
-
-    @property
-    @pulumi.getter(name="k8sVersion")
-    def k8s_version(self) -> str:
-        return pulumi.get(self, "k8s_version")
-
-    @property
-    @pulumi.getter(name="needDeleteCbs")
-    def need_delete_cbs(self) -> bool:
-        return pulumi.get(self, "need_delete_cbs")
-
-    @property
-    @pulumi.getter(name="serviceSubnetId")
-    def service_subnet_id(self) -> str:
-        return pulumi.get(self, "service_subnet_id")
-
-    @property
-    @pulumi.getter
-    def status(self) -> str:
-        return pulumi.get(self, "status")
-
-    @property
-    @pulumi.getter(name="subnetIds")
-    def subnet_ids(self) -> Sequence[str]:
-        return pulumi.get(self, "subnet_ids")
-
-    @property
-    @pulumi.getter
-    def tags(self) -> Mapping[str, Any]:
-        return pulumi.get(self, "tags")
-
-    @property
-    @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> str:
-        return pulumi.get(self, "vpc_id")
-
-
-@pulumi.output_type
-class ClustersListDnsServerResult(dict):
-    def __init__(__self__, *,
-                 domain: str,
-                 servers: Sequence[str]):
-        pulumi.set(__self__, "domain", domain)
-        pulumi.set(__self__, "servers", servers)
-
-    @property
-    @pulumi.getter
-    def domain(self) -> str:
-        return pulumi.get(self, "domain")
-
-    @property
-    @pulumi.getter
-    def servers(self) -> Sequence[str]:
-        return pulumi.get(self, "servers")
 
 
 @pulumi.output_type
@@ -376,17 +214,27 @@ class ContainerInstanceCbsVolume(dict):
     def __init__(__self__, *,
                  disk_id: str,
                  name: str):
+        """
+        :param str disk_id: ID of CBS.
+        :param str name: Name of CBS volume.
+        """
         pulumi.set(__self__, "disk_id", disk_id)
         pulumi.set(__self__, "name", name)
 
     @property
     @pulumi.getter(name="diskId")
     def disk_id(self) -> str:
+        """
+        ID of CBS.
+        """
         return pulumi.get(self, "disk_id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of CBS volume.
+        """
         return pulumi.get(self, "name")
 
 
@@ -429,6 +277,19 @@ class ContainerInstanceContainer(dict):
                  readiness_probe: Optional['outputs.ContainerInstanceContainerReadinessProbe'] = None,
                  volume_mounts: Optional[Sequence['outputs.ContainerInstanceContainerVolumeMount']] = None,
                  working_dir: Optional[str] = None):
+        """
+        :param str image: Image of Container.
+        :param str name: Name of Container.
+        :param Sequence[str] args: Container launch argument list.
+        :param Sequence[str] commands: Container launch command list.
+        :param float cpu: Number of cpu core of container.
+        :param Mapping[str, Any] env_vars: Map of environment variables of container OS.
+        :param 'ContainerInstanceContainerLivenessProbeArgs' liveness_probe: Configuration block of LivenessProbe.
+        :param float memory: Memory size of container.
+        :param 'ContainerInstanceContainerReadinessProbeArgs' readiness_probe: Configuration block of ReadinessProbe.
+        :param Sequence['ContainerInstanceContainerVolumeMountArgs'] volume_mounts: List of volume mount informations.
+        :param str working_dir: Container working directory.
+        """
         pulumi.set(__self__, "image", image)
         pulumi.set(__self__, "name", name)
         if args is not None:
@@ -453,56 +314,89 @@ class ContainerInstanceContainer(dict):
     @property
     @pulumi.getter
     def image(self) -> str:
+        """
+        Image of Container.
+        """
         return pulumi.get(self, "image")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of Container.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def args(self) -> Optional[Sequence[str]]:
+        """
+        Container launch argument list.
+        """
         return pulumi.get(self, "args")
 
     @property
     @pulumi.getter
     def commands(self) -> Optional[Sequence[str]]:
+        """
+        Container launch command list.
+        """
         return pulumi.get(self, "commands")
 
     @property
     @pulumi.getter
     def cpu(self) -> Optional[float]:
+        """
+        Number of cpu core of container.
+        """
         return pulumi.get(self, "cpu")
 
     @property
     @pulumi.getter(name="envVars")
     def env_vars(self) -> Optional[Mapping[str, Any]]:
+        """
+        Map of environment variables of container OS.
+        """
         return pulumi.get(self, "env_vars")
 
     @property
     @pulumi.getter(name="livenessProbe")
     def liveness_probe(self) -> Optional['outputs.ContainerInstanceContainerLivenessProbe']:
+        """
+        Configuration block of LivenessProbe.
+        """
         return pulumi.get(self, "liveness_probe")
 
     @property
     @pulumi.getter
     def memory(self) -> Optional[float]:
+        """
+        Memory size of container.
+        """
         return pulumi.get(self, "memory")
 
     @property
     @pulumi.getter(name="readinessProbe")
     def readiness_probe(self) -> Optional['outputs.ContainerInstanceContainerReadinessProbe']:
+        """
+        Configuration block of ReadinessProbe.
+        """
         return pulumi.get(self, "readiness_probe")
 
     @property
     @pulumi.getter(name="volumeMounts")
     def volume_mounts(self) -> Optional[Sequence['outputs.ContainerInstanceContainerVolumeMount']]:
+        """
+        List of volume mount informations.
+        """
         return pulumi.get(self, "volume_mounts")
 
     @property
     @pulumi.getter(name="workingDir")
     def working_dir(self) -> Optional[str]:
+        """
+        Container working directory.
+        """
         return pulumi.get(self, "working_dir")
 
 
@@ -554,6 +448,19 @@ class ContainerInstanceContainerLivenessProbe(dict):
                  success_threshold: Optional[int] = None,
                  tcp_socket_port: Optional[int] = None,
                  timeout_seconds: Optional[int] = None):
+        """
+        :param Sequence[str] exec_commands: List of execution commands.
+        :param int failure_threshold: Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
+        :param str http_get_path: HttpGet detection path.
+        :param int http_get_port: HttpGet detection port.
+        :param str http_get_scheme: HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
+        :param int init_delay_seconds: Number of seconds after the container has started before probes are initiated.
+        :param int period_seconds: How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
+        :param int success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
+        :param int tcp_socket_port: TCP Socket detection port.
+        :param int timeout_seconds: Number of seconds after which the probe times out.
+               Defaults to 1 second. Minimum value is `1`.
+        """
         if exec_commands is not None:
             pulumi.set(__self__, "exec_commands", exec_commands)
         if failure_threshold is not None:
@@ -578,51 +485,82 @@ class ContainerInstanceContainerLivenessProbe(dict):
     @property
     @pulumi.getter(name="execCommands")
     def exec_commands(self) -> Optional[Sequence[str]]:
+        """
+        List of execution commands.
+        """
         return pulumi.get(self, "exec_commands")
 
     @property
     @pulumi.getter(name="failureThreshold")
     def failure_threshold(self) -> Optional[int]:
+        """
+        Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
+        """
         return pulumi.get(self, "failure_threshold")
 
     @property
     @pulumi.getter(name="httpGetPath")
     def http_get_path(self) -> Optional[str]:
+        """
+        HttpGet detection path.
+        """
         return pulumi.get(self, "http_get_path")
 
     @property
     @pulumi.getter(name="httpGetPort")
     def http_get_port(self) -> Optional[int]:
+        """
+        HttpGet detection port.
+        """
         return pulumi.get(self, "http_get_port")
 
     @property
     @pulumi.getter(name="httpGetScheme")
     def http_get_scheme(self) -> Optional[str]:
+        """
+        HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
+        """
         return pulumi.get(self, "http_get_scheme")
 
     @property
     @pulumi.getter(name="initDelaySeconds")
     def init_delay_seconds(self) -> Optional[int]:
+        """
+        Number of seconds after the container has started before probes are initiated.
+        """
         return pulumi.get(self, "init_delay_seconds")
 
     @property
     @pulumi.getter(name="periodSeconds")
     def period_seconds(self) -> Optional[int]:
+        """
+        How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
+        """
         return pulumi.get(self, "period_seconds")
 
     @property
     @pulumi.getter(name="successThreshold")
     def success_threshold(self) -> Optional[int]:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
+        """
         return pulumi.get(self, "success_threshold")
 
     @property
     @pulumi.getter(name="tcpSocketPort")
     def tcp_socket_port(self) -> Optional[int]:
+        """
+        TCP Socket detection port.
+        """
         return pulumi.get(self, "tcp_socket_port")
 
     @property
     @pulumi.getter(name="timeoutSeconds")
     def timeout_seconds(self) -> Optional[int]:
+        """
+        Number of seconds after which the probe times out.
+        Defaults to 1 second. Minimum value is `1`.
+        """
         return pulumi.get(self, "timeout_seconds")
 
 
@@ -674,6 +612,19 @@ class ContainerInstanceContainerReadinessProbe(dict):
                  success_threshold: Optional[int] = None,
                  tcp_socket_port: Optional[int] = None,
                  timeout_seconds: Optional[int] = None):
+        """
+        :param Sequence[str] exec_commands: List of execution commands.
+        :param int failure_threshold: Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
+        :param str http_get_path: HttpGet detection path.
+        :param int http_get_port: HttpGet detection port.
+        :param str http_get_scheme: HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
+        :param int init_delay_seconds: Number of seconds after the container has started before probes are initiated.
+        :param int period_seconds: How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
+        :param int success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
+        :param int tcp_socket_port: TCP Socket detection port.
+        :param int timeout_seconds: Number of seconds after which the probe times out.
+               Defaults to 1 second. Minimum value is `1`.
+        """
         if exec_commands is not None:
             pulumi.set(__self__, "exec_commands", exec_commands)
         if failure_threshold is not None:
@@ -698,51 +649,82 @@ class ContainerInstanceContainerReadinessProbe(dict):
     @property
     @pulumi.getter(name="execCommands")
     def exec_commands(self) -> Optional[Sequence[str]]:
+        """
+        List of execution commands.
+        """
         return pulumi.get(self, "exec_commands")
 
     @property
     @pulumi.getter(name="failureThreshold")
     def failure_threshold(self) -> Optional[int]:
+        """
+        Minimum consecutive failures for the probe to be considered failed after having succeeded.Default: `3`. Minimum value is `1`.
+        """
         return pulumi.get(self, "failure_threshold")
 
     @property
     @pulumi.getter(name="httpGetPath")
     def http_get_path(self) -> Optional[str]:
+        """
+        HttpGet detection path.
+        """
         return pulumi.get(self, "http_get_path")
 
     @property
     @pulumi.getter(name="httpGetPort")
     def http_get_port(self) -> Optional[int]:
+        """
+        HttpGet detection port.
+        """
         return pulumi.get(self, "http_get_port")
 
     @property
     @pulumi.getter(name="httpGetScheme")
     def http_get_scheme(self) -> Optional[str]:
+        """
+        HttpGet detection scheme. Available values: `HTTP`, `HTTPS`.
+        """
         return pulumi.get(self, "http_get_scheme")
 
     @property
     @pulumi.getter(name="initDelaySeconds")
     def init_delay_seconds(self) -> Optional[int]:
+        """
+        Number of seconds after the container has started before probes are initiated.
+        """
         return pulumi.get(self, "init_delay_seconds")
 
     @property
     @pulumi.getter(name="periodSeconds")
     def period_seconds(self) -> Optional[int]:
+        """
+        How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is `1`.
+        """
         return pulumi.get(self, "period_seconds")
 
     @property
     @pulumi.getter(name="successThreshold")
     def success_threshold(self) -> Optional[int]:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed. Default: `1`. Must be 1 for liveness. Minimum value is `1`.
+        """
         return pulumi.get(self, "success_threshold")
 
     @property
     @pulumi.getter(name="tcpSocketPort")
     def tcp_socket_port(self) -> Optional[int]:
+        """
+        TCP Socket detection port.
+        """
         return pulumi.get(self, "tcp_socket_port")
 
     @property
     @pulumi.getter(name="timeoutSeconds")
     def timeout_seconds(self) -> Optional[int]:
+        """
+        Number of seconds after which the probe times out.
+        Defaults to 1 second. Minimum value is `1`.
+        """
         return pulumi.get(self, "timeout_seconds")
 
 
@@ -778,6 +760,14 @@ class ContainerInstanceContainerVolumeMount(dict):
                  read_only: Optional[bool] = None,
                  sub_path: Optional[str] = None,
                  sub_path_expr: Optional[str] = None):
+        """
+        :param str name: Volume name.
+        :param str path: Volume mount path.
+        :param str mount_propagation: Volume mount propagation.
+        :param bool read_only: Whether the volume is read-only.
+        :param str sub_path: Volume mount sub-path.
+        :param str sub_path_expr: Volume mount sub-path expression.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "path", path)
         if mount_propagation is not None:
@@ -792,31 +782,49 @@ class ContainerInstanceContainerVolumeMount(dict):
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Volume name.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def path(self) -> str:
+        """
+        Volume mount path.
+        """
         return pulumi.get(self, "path")
 
     @property
     @pulumi.getter(name="mountPropagation")
     def mount_propagation(self) -> Optional[str]:
+        """
+        Volume mount propagation.
+        """
         return pulumi.get(self, "mount_propagation")
 
     @property
     @pulumi.getter(name="readOnly")
     def read_only(self) -> Optional[bool]:
+        """
+        Whether the volume is read-only.
+        """
         return pulumi.get(self, "read_only")
 
     @property
     @pulumi.getter(name="subPath")
     def sub_path(self) -> Optional[str]:
+        """
+        Volume mount sub-path.
+        """
         return pulumi.get(self, "sub_path")
 
     @property
     @pulumi.getter(name="subPathExpr")
     def sub_path_expr(self) -> Optional[str]:
+        """
+        Volume mount sub-path expression.
+        """
         return pulumi.get(self, "sub_path_expr")
 
 
@@ -827,6 +835,12 @@ class ContainerInstanceImageRegistryCredential(dict):
                  password: Optional[str] = None,
                  server: Optional[str] = None,
                  username: Optional[str] = None):
+        """
+        :param str name: Name of credential.
+        :param str password: Password.
+        :param str server: Address of image registry.
+        :param str username: Username.
+        """
         if name is not None:
             pulumi.set(__self__, "name", name)
         if password is not None:
@@ -839,21 +853,33 @@ class ContainerInstanceImageRegistryCredential(dict):
     @property
     @pulumi.getter
     def name(self) -> Optional[str]:
+        """
+        Name of credential.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def password(self) -> Optional[str]:
+        """
+        Password.
+        """
         return pulumi.get(self, "password")
 
     @property
     @pulumi.getter
     def server(self) -> Optional[str]:
+        """
+        Address of image registry.
+        """
         return pulumi.get(self, "server")
 
     @property
     @pulumi.getter
     def username(self) -> Optional[str]:
+        """
+        Username.
+        """
         return pulumi.get(self, "username")
 
 
@@ -890,6 +916,17 @@ class ContainerInstanceInitContainer(dict):
                  memory: Optional[float] = None,
                  volume_mounts: Optional[Sequence['outputs.ContainerInstanceInitContainerVolumeMount']] = None,
                  working_dir: Optional[str] = None):
+        """
+        :param str image: Image of Container.
+        :param str name: Name of Container.
+        :param Sequence[str] args: Container launch argument list.
+        :param Sequence[str] commands: Container launch command list.
+        :param float cpu: Number of cpu core of container.
+        :param Mapping[str, Any] env_vars: Map of environment variables of container OS.
+        :param float memory: Memory size of container.
+        :param Sequence['ContainerInstanceInitContainerVolumeMountArgs'] volume_mounts: List of volume mount informations.
+        :param str working_dir: Container working directory.
+        """
         pulumi.set(__self__, "image", image)
         pulumi.set(__self__, "name", name)
         if args is not None:
@@ -910,46 +947,73 @@ class ContainerInstanceInitContainer(dict):
     @property
     @pulumi.getter
     def image(self) -> str:
+        """
+        Image of Container.
+        """
         return pulumi.get(self, "image")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of Container.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def args(self) -> Optional[Sequence[str]]:
+        """
+        Container launch argument list.
+        """
         return pulumi.get(self, "args")
 
     @property
     @pulumi.getter
     def commands(self) -> Optional[Sequence[str]]:
+        """
+        Container launch command list.
+        """
         return pulumi.get(self, "commands")
 
     @property
     @pulumi.getter
     def cpu(self) -> Optional[float]:
+        """
+        Number of cpu core of container.
+        """
         return pulumi.get(self, "cpu")
 
     @property
     @pulumi.getter(name="envVars")
     def env_vars(self) -> Optional[Mapping[str, Any]]:
+        """
+        Map of environment variables of container OS.
+        """
         return pulumi.get(self, "env_vars")
 
     @property
     @pulumi.getter
     def memory(self) -> Optional[float]:
+        """
+        Memory size of container.
+        """
         return pulumi.get(self, "memory")
 
     @property
     @pulumi.getter(name="volumeMounts")
     def volume_mounts(self) -> Optional[Sequence['outputs.ContainerInstanceInitContainerVolumeMount']]:
+        """
+        List of volume mount informations.
+        """
         return pulumi.get(self, "volume_mounts")
 
     @property
     @pulumi.getter(name="workingDir")
     def working_dir(self) -> Optional[str]:
+        """
+        Container working directory.
+        """
         return pulumi.get(self, "working_dir")
 
 
@@ -985,6 +1049,14 @@ class ContainerInstanceInitContainerVolumeMount(dict):
                  read_only: Optional[bool] = None,
                  sub_path: Optional[str] = None,
                  sub_path_expr: Optional[str] = None):
+        """
+        :param str name: Volume name.
+        :param str path: Volume mount path.
+        :param str mount_propagation: Volume mount propagation.
+        :param bool read_only: Whether the volume is read-only.
+        :param str sub_path: Volume mount sub-path.
+        :param str sub_path_expr: Volume mount sub-path expression.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "path", path)
         if mount_propagation is not None:
@@ -999,31 +1071,49 @@ class ContainerInstanceInitContainerVolumeMount(dict):
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Volume name.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def path(self) -> str:
+        """
+        Volume mount path.
+        """
         return pulumi.get(self, "path")
 
     @property
     @pulumi.getter(name="mountPropagation")
     def mount_propagation(self) -> Optional[str]:
+        """
+        Volume mount propagation.
+        """
         return pulumi.get(self, "mount_propagation")
 
     @property
     @pulumi.getter(name="readOnly")
     def read_only(self) -> Optional[bool]:
+        """
+        Whether the volume is read-only.
+        """
         return pulumi.get(self, "read_only")
 
     @property
     @pulumi.getter(name="subPath")
     def sub_path(self) -> Optional[str]:
+        """
+        Volume mount sub-path.
+        """
         return pulumi.get(self, "sub_path")
 
     @property
     @pulumi.getter(name="subPathExpr")
     def sub_path_expr(self) -> Optional[str]:
+        """
+        Volume mount sub-path expression.
+        """
         return pulumi.get(self, "sub_path_expr")
 
 
@@ -1051,6 +1141,12 @@ class ContainerInstanceNfsVolume(dict):
                  path: str,
                  server: str,
                  read_only: Optional[bool] = None):
+        """
+        :param str name: Name of NFS volume.
+        :param str path: NFS volume path.
+        :param str server: NFS server address.
+        :param bool read_only: Indicates whether the volume is read only. Default is `false`.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "path", path)
         pulumi.set(__self__, "server", server)
@@ -1060,21 +1156,343 @@ class ContainerInstanceNfsVolume(dict):
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of NFS volume.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def path(self) -> str:
+        """
+        NFS volume path.
+        """
         return pulumi.get(self, "path")
 
     @property
     @pulumi.getter
     def server(self) -> str:
+        """
+        NFS server address.
+        """
         return pulumi.get(self, "server")
 
     @property
     @pulumi.getter(name="readOnly")
     def read_only(self) -> Optional[bool]:
+        """
+        Indicates whether the volume is read only. Default is `false`.
+        """
         return pulumi.get(self, "read_only")
+
+
+@pulumi.output_type
+class GetClusterCredentialAddressResult(dict):
+    def __init__(__self__, *,
+                 ip: str,
+                 port: str,
+                 type: str):
+        """
+        :param str ip: IP Address.
+        :param str port: Port.
+        :param str type: Type of IP, can be `advertise`, `public`, etc.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP Address.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter
+    def port(self) -> str:
+        """
+        Port.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Type of IP, can be `advertise`, `public`, etc.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetClusterCredentialInternalLbResult(dict):
+    def __init__(__self__, *,
+                 enabled: bool,
+                 subnet_id: str):
+        """
+        :param bool enabled: Indicates weather the public access LB enabled.
+        :param str subnet_id: ID of subnet which related to Internal LB.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        Indicates weather the public access LB enabled.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        ID of subnet which related to Internal LB.
+        """
+        return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class GetClusterCredentialPublicLbResult(dict):
+    def __init__(__self__, *,
+                 allow_from_cidrs: Sequence[str],
+                 enabled: bool,
+                 extra_param: str,
+                 security_group: str,
+                 security_policies: Sequence[str]):
+        """
+        :param Sequence[str] allow_from_cidrs: List of CIDRs which allowed to access.
+        :param bool enabled: Indicates weather the public access LB enabled.
+        :param str extra_param: Extra param text json.
+        :param str security_group: Security group.
+        :param Sequence[str] security_policies: List of security allow IP or CIDRs, default deny all.
+        """
+        pulumi.set(__self__, "allow_from_cidrs", allow_from_cidrs)
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "extra_param", extra_param)
+        pulumi.set(__self__, "security_group", security_group)
+        pulumi.set(__self__, "security_policies", security_policies)
+
+    @property
+    @pulumi.getter(name="allowFromCidrs")
+    def allow_from_cidrs(self) -> Sequence[str]:
+        """
+        List of CIDRs which allowed to access.
+        """
+        return pulumi.get(self, "allow_from_cidrs")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        Indicates weather the public access LB enabled.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="extraParam")
+    def extra_param(self) -> str:
+        """
+        Extra param text json.
+        """
+        return pulumi.get(self, "extra_param")
+
+    @property
+    @pulumi.getter(name="securityGroup")
+    def security_group(self) -> str:
+        """
+        Security group.
+        """
+        return pulumi.get(self, "security_group")
+
+    @property
+    @pulumi.getter(name="securityPolicies")
+    def security_policies(self) -> Sequence[str]:
+        """
+        List of security allow IP or CIDRs, default deny all.
+        """
+        return pulumi.get(self, "security_policies")
+
+
+@pulumi.output_type
+class GetClustersListResult(dict):
+    def __init__(__self__, *,
+                 cluster_desc: str,
+                 cluster_id: str,
+                 cluster_name: str,
+                 created_time: str,
+                 dns_servers: Sequence['outputs.GetClustersListDnsServerResult'],
+                 enable_vpc_core_dns: bool,
+                 k8s_version: str,
+                 need_delete_cbs: bool,
+                 service_subnet_id: str,
+                 status: str,
+                 subnet_ids: Sequence[str],
+                 tags: Mapping[str, Any],
+                 vpc_id: str):
+        """
+        :param str cluster_desc: Description of the cluster.
+        :param str cluster_id: ID of the cluster. Conflict with cluster_name, can not be set at the same time.
+        :param str cluster_name: Name of the cluster. Conflict with cluster_id, can not be set at the same time.
+        :param str created_time: Create time of the clusters.
+        :param Sequence['GetClustersListDnsServerArgs'] dns_servers: List of cluster custom DNS Server info.
+        :param bool enable_vpc_core_dns: Indicates whether to enable dns in user cluster, default value is `true`.
+        :param str k8s_version: EKS cluster kubernetes version.
+        :param bool need_delete_cbs: Indicates whether to delete CBS after EKS cluster remove.
+        :param str service_subnet_id: Subnet id of service.
+        :param str status: EKS status.
+        :param Sequence[str] subnet_ids: Subnet id list.
+        :param Mapping[str, Any] tags: Tags of EKS cluster.
+        :param str vpc_id: Vpc id.
+        """
+        pulumi.set(__self__, "cluster_desc", cluster_desc)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "dns_servers", dns_servers)
+        pulumi.set(__self__, "enable_vpc_core_dns", enable_vpc_core_dns)
+        pulumi.set(__self__, "k8s_version", k8s_version)
+        pulumi.set(__self__, "need_delete_cbs", need_delete_cbs)
+        pulumi.set(__self__, "service_subnet_id", service_subnet_id)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "subnet_ids", subnet_ids)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="clusterDesc")
+    def cluster_desc(self) -> str:
+        """
+        Description of the cluster.
+        """
+        return pulumi.get(self, "cluster_desc")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        ID of the cluster. Conflict with cluster_name, can not be set at the same time.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Name of the cluster. Conflict with cluster_id, can not be set at the same time.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        Create time of the clusters.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter(name="dnsServers")
+    def dns_servers(self) -> Sequence['outputs.GetClustersListDnsServerResult']:
+        """
+        List of cluster custom DNS Server info.
+        """
+        return pulumi.get(self, "dns_servers")
+
+    @property
+    @pulumi.getter(name="enableVpcCoreDns")
+    def enable_vpc_core_dns(self) -> bool:
+        """
+        Indicates whether to enable dns in user cluster, default value is `true`.
+        """
+        return pulumi.get(self, "enable_vpc_core_dns")
+
+    @property
+    @pulumi.getter(name="k8sVersion")
+    def k8s_version(self) -> str:
+        """
+        EKS cluster kubernetes version.
+        """
+        return pulumi.get(self, "k8s_version")
+
+    @property
+    @pulumi.getter(name="needDeleteCbs")
+    def need_delete_cbs(self) -> bool:
+        """
+        Indicates whether to delete CBS after EKS cluster remove.
+        """
+        return pulumi.get(self, "need_delete_cbs")
+
+    @property
+    @pulumi.getter(name="serviceSubnetId")
+    def service_subnet_id(self) -> str:
+        """
+        Subnet id of service.
+        """
+        return pulumi.get(self, "service_subnet_id")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        EKS status.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="subnetIds")
+    def subnet_ids(self) -> Sequence[str]:
+        """
+        Subnet id list.
+        """
+        return pulumi.get(self, "subnet_ids")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Mapping[str, Any]:
+        """
+        Tags of EKS cluster.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        Vpc id.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetClustersListDnsServerResult(dict):
+    def __init__(__self__, *,
+                 domain: str,
+                 servers: Sequence[str]):
+        """
+        :param str domain: DNS Server domain. Empty indicates all domain.
+        :param Sequence[str] servers: List of DNS Server IP address.
+        """
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "servers", servers)
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        DNS Server domain. Empty indicates all domain.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter
+    def servers(self) -> Sequence[str]:
+        """
+        List of DNS Server IP address.
+        """
+        return pulumi.get(self, "servers")
 
 

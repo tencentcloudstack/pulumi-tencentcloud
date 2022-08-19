@@ -13,9 +13,21 @@ namespace Pulumi.Tencentcloud.Ckafka.Outputs
     [OutputType]
     public sealed class InstanceDynamicRetentionConfig
     {
+        /// <summary>
+        /// Minimum retention time, in minutes.
+        /// </summary>
         public readonly int? BottomRetention;
+        /// <summary>
+        /// Disk quota threshold (in percentage) for triggering the message retention time change event.
+        /// </summary>
         public readonly int? DiskQuotaPercentage;
+        /// <summary>
+        /// Whether the dynamic message retention time configuration is enabled. 0: disabled; 1: enabled.
+        /// </summary>
         public readonly int? Enable;
+        /// <summary>
+        /// Percentage by which the message retention time is shortened each time.
+        /// </summary>
         public readonly int? StepForwardPercentage;
 
         [OutputConstructor]

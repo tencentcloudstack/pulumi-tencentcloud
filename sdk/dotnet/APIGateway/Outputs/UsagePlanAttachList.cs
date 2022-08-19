@@ -7,20 +7,47 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway.Outputs
+namespace Pulumi.Tencentcloud.ApiGateway.Outputs
 {
 
     [OutputType]
     public sealed class UsagePlanAttachList
     {
+        /// <summary>
+        /// The API ID, this value is empty if attach service.
+        /// </summary>
         public readonly string? ApiId;
+        /// <summary>
+        /// The API name, this value is empty if attach service.
+        /// </summary>
         public readonly string? ApiName;
+        /// <summary>
+        /// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        /// </summary>
         public readonly string? CreateTime;
+        /// <summary>
+        /// The environment name.
+        /// </summary>
         public readonly string? Environment;
+        /// <summary>
+        /// The API method, this value is empty if attach service.
+        /// </summary>
         public readonly string? Method;
+        /// <summary>
+        /// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+        /// </summary>
         public readonly string? ModifyTime;
+        /// <summary>
+        /// The API path, this value is empty if attach service.
+        /// </summary>
         public readonly string? Path;
+        /// <summary>
+        /// The service ID.
+        /// </summary>
         public readonly string? ServiceId;
+        /// <summary>
+        /// The service name.
+        /// </summary>
         public readonly string? ServiceName;
 
         [OutputConstructor]

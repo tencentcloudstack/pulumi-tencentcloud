@@ -5,6 +5,99 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a VOD procedure template.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fooAdaptiveDynamicStreamingTemplate = new tencentcloud.vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate", {
+ *     format: "HLS",
+ *     drmType: "SimpleAES",
+ *     disableHigherVideoBitrate: false,
+ *     disableHigherVideoResolution: false,
+ *     comment: "test",
+ *     streamInfos: [
+ *         {
+ *             video: {
+ *                 codec: "libx265",
+ *                 fps: 4,
+ *                 bitrate: 129,
+ *                 resolutionAdaptive: false,
+ *                 width: 128,
+ *                 height: 128,
+ *                 fillType: "stretch",
+ *             },
+ *             audio: {
+ *                 codec: "libmp3lame",
+ *                 bitrate: 129,
+ *                 sampleRate: 44100,
+ *                 audioChannel: "dual",
+ *             },
+ *             removeAudio: false,
+ *         },
+ *         {
+ *             video: {
+ *                 codec: "libx264",
+ *                 fps: 4,
+ *                 bitrate: 256,
+ *             },
+ *             audio: {
+ *                 codec: "libfdk_aac",
+ *                 bitrate: 256,
+ *                 sampleRate: 44100,
+ *             },
+ *             removeAudio: true,
+ *         },
+ *     ],
+ * });
+ * const fooSnapshotByTimeOffsetTemplate = new tencentcloud.vod.SnapshotByTimeOffsetTemplate("fooSnapshotByTimeOffsetTemplate", {
+ *     width: 130,
+ *     height: 128,
+ *     resolutionAdaptive: false,
+ *     format: "png",
+ *     comment: "test",
+ *     fillType: "white",
+ * });
+ * const fooImageSpriteTemplate = new tencentcloud.vod.ImageSpriteTemplate("fooImageSpriteTemplate", {
+ *     sampleType: "Percent",
+ *     sampleInterval: 10,
+ *     rowCount: 3,
+ *     columnCount: 3,
+ *     comment: "test",
+ *     fillType: "stretch",
+ *     width: 128,
+ *     height: 128,
+ *     resolutionAdaptive: false,
+ * });
+ * const fooProcedureTemplate = new tencentcloud.vod.ProcedureTemplate("fooProcedureTemplate", {
+ *     comment: "test",
+ *     mediaProcessTask: {
+ *         adaptiveDynamicStreamingTaskLists: [{
+ *             definition: fooAdaptiveDynamicStreamingTemplate.id,
+ *         }],
+ *         snapshotByTimeOffsetTaskLists: [{
+ *             definition: fooSnapshotByTimeOffsetTemplate.id,
+ *             extTimeOffsetLists: ["3.5s"],
+ *         }],
+ *         imageSpriteTaskLists: [{
+ *             definition: fooImageSpriteTemplate.id,
+ *         }],
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * VOD procedure template can be imported using the name, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Vod/procedureTemplate:ProcedureTemplate foo tf-procedure
+ * ```
+ */
 export class ProcedureTemplate extends pulumi.CustomResource {
     /**
      * Get an existing ProcedureTemplate resource's state with the given name, ID, and optional extra
@@ -50,8 +143,7 @@ export class ProcedureTemplate extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-     * field; otherwise, leave it empty.
+     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
      */
     public readonly subAppId!: pulumi.Output<number | undefined>;
     /**
@@ -113,8 +205,7 @@ export interface ProcedureTemplateState {
      */
     name?: pulumi.Input<string>;
     /**
-     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-     * field; otherwise, leave it empty.
+     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
      */
     subAppId?: pulumi.Input<number>;
     /**
@@ -140,8 +231,7 @@ export interface ProcedureTemplateArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-     * field; otherwise, leave it empty.
+     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
      */
     subAppId?: pulumi.Input<number>;
 }

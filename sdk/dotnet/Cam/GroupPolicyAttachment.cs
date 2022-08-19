@@ -9,12 +9,42 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cam
 {
+    /// <summary>
+    /// Provides a resource to create a CAM group policy attachment.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cam.GroupPolicyAttachment("foo", new Tencentcloud.Cam.GroupPolicyAttachmentArgs
+    ///         {
+    ///             GroupId = tencentcloud_cam_group.Foo.Id,
+    ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CAM group policy attachment can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment foo 12515263#26800353
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment")]
     public partial class GroupPolicyAttachment : Pulumi.CustomResource
     {
         /// <summary>
-        /// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and
-        /// the others indicate syntax strategy ways.
+        /// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
         /// </summary>
         [Output("createMode")]
         public Output<int> CreateMode { get; private set; } = null!;
@@ -115,8 +145,7 @@ namespace Pulumi.Tencentcloud.Cam
     public sealed class GroupPolicyAttachmentState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and
-        /// the others indicate syntax strategy ways.
+        /// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
         /// </summary>
         [Input("createMode")]
         public Input<int>? CreateMode { get; set; }

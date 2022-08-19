@@ -10,237 +10,252 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type ZonesByProductZone struct {
+type GetRegionsRegion struct {
+	// The description of the region, like `Guangzhou Region`.
 	Description string `pulumi:"description"`
-	Id          string `pulumi:"id"`
-	Name        string `pulumi:"name"`
-	State       string `pulumi:"state"`
+	// When specified, only the region with the exactly name match will be returned. `default` value means it consistent with the provider region.
+	Name string `pulumi:"name"`
+	// The state of the region, indicate availability using `AVAILABLE` and `UNAVAILABLE` values.
+	State string `pulumi:"state"`
 }
 
-// ZonesByProductZoneInput is an input type that accepts ZonesByProductZoneArgs and ZonesByProductZoneOutput values.
-// You can construct a concrete instance of `ZonesByProductZoneInput` via:
+// GetRegionsRegionInput is an input type that accepts GetRegionsRegionArgs and GetRegionsRegionOutput values.
+// You can construct a concrete instance of `GetRegionsRegionInput` via:
 //
-//          ZonesByProductZoneArgs{...}
-type ZonesByProductZoneInput interface {
+//          GetRegionsRegionArgs{...}
+type GetRegionsRegionInput interface {
 	pulumi.Input
 
-	ToZonesByProductZoneOutput() ZonesByProductZoneOutput
-	ToZonesByProductZoneOutputWithContext(context.Context) ZonesByProductZoneOutput
+	ToGetRegionsRegionOutput() GetRegionsRegionOutput
+	ToGetRegionsRegionOutputWithContext(context.Context) GetRegionsRegionOutput
 }
 
-type ZonesByProductZoneArgs struct {
+type GetRegionsRegionArgs struct {
+	// The description of the region, like `Guangzhou Region`.
 	Description pulumi.StringInput `pulumi:"description"`
-	Id          pulumi.StringInput `pulumi:"id"`
-	Name        pulumi.StringInput `pulumi:"name"`
-	State       pulumi.StringInput `pulumi:"state"`
+	// When specified, only the region with the exactly name match will be returned. `default` value means it consistent with the provider region.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The state of the region, indicate availability using `AVAILABLE` and `UNAVAILABLE` values.
+	State pulumi.StringInput `pulumi:"state"`
 }
 
-func (ZonesByProductZoneArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZonesByProductZone)(nil)).Elem()
+func (GetRegionsRegionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRegionsRegion)(nil)).Elem()
 }
 
-func (i ZonesByProductZoneArgs) ToZonesByProductZoneOutput() ZonesByProductZoneOutput {
-	return i.ToZonesByProductZoneOutputWithContext(context.Background())
+func (i GetRegionsRegionArgs) ToGetRegionsRegionOutput() GetRegionsRegionOutput {
+	return i.ToGetRegionsRegionOutputWithContext(context.Background())
 }
 
-func (i ZonesByProductZoneArgs) ToZonesByProductZoneOutputWithContext(ctx context.Context) ZonesByProductZoneOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZonesByProductZoneOutput)
+func (i GetRegionsRegionArgs) ToGetRegionsRegionOutputWithContext(ctx context.Context) GetRegionsRegionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRegionsRegionOutput)
 }
 
-// ZonesByProductZoneArrayInput is an input type that accepts ZonesByProductZoneArray and ZonesByProductZoneArrayOutput values.
-// You can construct a concrete instance of `ZonesByProductZoneArrayInput` via:
+// GetRegionsRegionArrayInput is an input type that accepts GetRegionsRegionArray and GetRegionsRegionArrayOutput values.
+// You can construct a concrete instance of `GetRegionsRegionArrayInput` via:
 //
-//          ZonesByProductZoneArray{ ZonesByProductZoneArgs{...} }
-type ZonesByProductZoneArrayInput interface {
+//          GetRegionsRegionArray{ GetRegionsRegionArgs{...} }
+type GetRegionsRegionArrayInput interface {
 	pulumi.Input
 
-	ToZonesByProductZoneArrayOutput() ZonesByProductZoneArrayOutput
-	ToZonesByProductZoneArrayOutputWithContext(context.Context) ZonesByProductZoneArrayOutput
+	ToGetRegionsRegionArrayOutput() GetRegionsRegionArrayOutput
+	ToGetRegionsRegionArrayOutputWithContext(context.Context) GetRegionsRegionArrayOutput
 }
 
-type ZonesByProductZoneArray []ZonesByProductZoneInput
+type GetRegionsRegionArray []GetRegionsRegionInput
 
-func (ZonesByProductZoneArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZonesByProductZone)(nil)).Elem()
+func (GetRegionsRegionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRegionsRegion)(nil)).Elem()
 }
 
-func (i ZonesByProductZoneArray) ToZonesByProductZoneArrayOutput() ZonesByProductZoneArrayOutput {
-	return i.ToZonesByProductZoneArrayOutputWithContext(context.Background())
+func (i GetRegionsRegionArray) ToGetRegionsRegionArrayOutput() GetRegionsRegionArrayOutput {
+	return i.ToGetRegionsRegionArrayOutputWithContext(context.Background())
 }
 
-func (i ZonesByProductZoneArray) ToZonesByProductZoneArrayOutputWithContext(ctx context.Context) ZonesByProductZoneArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZonesByProductZoneArrayOutput)
+func (i GetRegionsRegionArray) ToGetRegionsRegionArrayOutputWithContext(ctx context.Context) GetRegionsRegionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRegionsRegionArrayOutput)
 }
 
-type ZonesByProductZoneOutput struct{ *pulumi.OutputState }
+type GetRegionsRegionOutput struct{ *pulumi.OutputState }
 
-func (ZonesByProductZoneOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZonesByProductZone)(nil)).Elem()
+func (GetRegionsRegionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRegionsRegion)(nil)).Elem()
 }
 
-func (o ZonesByProductZoneOutput) ToZonesByProductZoneOutput() ZonesByProductZoneOutput {
+func (o GetRegionsRegionOutput) ToGetRegionsRegionOutput() GetRegionsRegionOutput {
 	return o
 }
 
-func (o ZonesByProductZoneOutput) ToZonesByProductZoneOutputWithContext(ctx context.Context) ZonesByProductZoneOutput {
+func (o GetRegionsRegionOutput) ToGetRegionsRegionOutputWithContext(ctx context.Context) GetRegionsRegionOutput {
 	return o
 }
 
-func (o ZonesByProductZoneOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v ZonesByProductZone) string { return v.Description }).(pulumi.StringOutput)
+// The description of the region, like `Guangzhou Region`.
+func (o GetRegionsRegionOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionsRegion) string { return v.Description }).(pulumi.StringOutput)
 }
 
-func (o ZonesByProductZoneOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v ZonesByProductZone) string { return v.Id }).(pulumi.StringOutput)
+// When specified, only the region with the exactly name match will be returned. `default` value means it consistent with the provider region.
+func (o GetRegionsRegionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionsRegion) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o ZonesByProductZoneOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ZonesByProductZone) string { return v.Name }).(pulumi.StringOutput)
+// The state of the region, indicate availability using `AVAILABLE` and `UNAVAILABLE` values.
+func (o GetRegionsRegionOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRegionsRegion) string { return v.State }).(pulumi.StringOutput)
 }
 
-func (o ZonesByProductZoneOutput) State() pulumi.StringOutput {
-	return o.ApplyT(func(v ZonesByProductZone) string { return v.State }).(pulumi.StringOutput)
+type GetRegionsRegionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRegionsRegionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRegionsRegion)(nil)).Elem()
 }
 
-type ZonesByProductZoneArrayOutput struct{ *pulumi.OutputState }
-
-func (ZonesByProductZoneArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZonesByProductZone)(nil)).Elem()
-}
-
-func (o ZonesByProductZoneArrayOutput) ToZonesByProductZoneArrayOutput() ZonesByProductZoneArrayOutput {
+func (o GetRegionsRegionArrayOutput) ToGetRegionsRegionArrayOutput() GetRegionsRegionArrayOutput {
 	return o
 }
 
-func (o ZonesByProductZoneArrayOutput) ToZonesByProductZoneArrayOutputWithContext(ctx context.Context) ZonesByProductZoneArrayOutput {
+func (o GetRegionsRegionArrayOutput) ToGetRegionsRegionArrayOutputWithContext(ctx context.Context) GetRegionsRegionArrayOutput {
 	return o
 }
 
-func (o ZonesByProductZoneArrayOutput) Index(i pulumi.IntInput) ZonesByProductZoneOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZonesByProductZone {
-		return vs[0].([]ZonesByProductZone)[vs[1].(int)]
-	}).(ZonesByProductZoneOutput)
+func (o GetRegionsRegionArrayOutput) Index(i pulumi.IntInput) GetRegionsRegionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRegionsRegion {
+		return vs[0].([]GetRegionsRegion)[vs[1].(int)]
+	}).(GetRegionsRegionOutput)
 }
 
-type ZonesZone struct {
+type GetZonesByProductZone struct {
+	// The description of the zone, like `Guangzhou Zone 3`.
 	Description string `pulumi:"description"`
-	Id          string `pulumi:"id"`
-	Name        string `pulumi:"name"`
-	State       string `pulumi:"state"`
+	// An internal id for the zone, like `200003`, usually not so useful.
+	Id string `pulumi:"id"`
+	// When specified, only the zone with the exactly name match will be returned.
+	Name string `pulumi:"name"`
+	// The state of the zone, indicate availability using `AVAILABLE` and `UNAVAILABLE` values.
+	State string `pulumi:"state"`
 }
 
-// ZonesZoneInput is an input type that accepts ZonesZoneArgs and ZonesZoneOutput values.
-// You can construct a concrete instance of `ZonesZoneInput` via:
+// GetZonesByProductZoneInput is an input type that accepts GetZonesByProductZoneArgs and GetZonesByProductZoneOutput values.
+// You can construct a concrete instance of `GetZonesByProductZoneInput` via:
 //
-//          ZonesZoneArgs{...}
-type ZonesZoneInput interface {
+//          GetZonesByProductZoneArgs{...}
+type GetZonesByProductZoneInput interface {
 	pulumi.Input
 
-	ToZonesZoneOutput() ZonesZoneOutput
-	ToZonesZoneOutputWithContext(context.Context) ZonesZoneOutput
+	ToGetZonesByProductZoneOutput() GetZonesByProductZoneOutput
+	ToGetZonesByProductZoneOutputWithContext(context.Context) GetZonesByProductZoneOutput
 }
 
-type ZonesZoneArgs struct {
+type GetZonesByProductZoneArgs struct {
+	// The description of the zone, like `Guangzhou Zone 3`.
 	Description pulumi.StringInput `pulumi:"description"`
-	Id          pulumi.StringInput `pulumi:"id"`
-	Name        pulumi.StringInput `pulumi:"name"`
-	State       pulumi.StringInput `pulumi:"state"`
+	// An internal id for the zone, like `200003`, usually not so useful.
+	Id pulumi.StringInput `pulumi:"id"`
+	// When specified, only the zone with the exactly name match will be returned.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The state of the zone, indicate availability using `AVAILABLE` and `UNAVAILABLE` values.
+	State pulumi.StringInput `pulumi:"state"`
 }
 
-func (ZonesZoneArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZonesZone)(nil)).Elem()
+func (GetZonesByProductZoneArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZonesByProductZone)(nil)).Elem()
 }
 
-func (i ZonesZoneArgs) ToZonesZoneOutput() ZonesZoneOutput {
-	return i.ToZonesZoneOutputWithContext(context.Background())
+func (i GetZonesByProductZoneArgs) ToGetZonesByProductZoneOutput() GetZonesByProductZoneOutput {
+	return i.ToGetZonesByProductZoneOutputWithContext(context.Background())
 }
 
-func (i ZonesZoneArgs) ToZonesZoneOutputWithContext(ctx context.Context) ZonesZoneOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZonesZoneOutput)
+func (i GetZonesByProductZoneArgs) ToGetZonesByProductZoneOutputWithContext(ctx context.Context) GetZonesByProductZoneOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZonesByProductZoneOutput)
 }
 
-// ZonesZoneArrayInput is an input type that accepts ZonesZoneArray and ZonesZoneArrayOutput values.
-// You can construct a concrete instance of `ZonesZoneArrayInput` via:
+// GetZonesByProductZoneArrayInput is an input type that accepts GetZonesByProductZoneArray and GetZonesByProductZoneArrayOutput values.
+// You can construct a concrete instance of `GetZonesByProductZoneArrayInput` via:
 //
-//          ZonesZoneArray{ ZonesZoneArgs{...} }
-type ZonesZoneArrayInput interface {
+//          GetZonesByProductZoneArray{ GetZonesByProductZoneArgs{...} }
+type GetZonesByProductZoneArrayInput interface {
 	pulumi.Input
 
-	ToZonesZoneArrayOutput() ZonesZoneArrayOutput
-	ToZonesZoneArrayOutputWithContext(context.Context) ZonesZoneArrayOutput
+	ToGetZonesByProductZoneArrayOutput() GetZonesByProductZoneArrayOutput
+	ToGetZonesByProductZoneArrayOutputWithContext(context.Context) GetZonesByProductZoneArrayOutput
 }
 
-type ZonesZoneArray []ZonesZoneInput
+type GetZonesByProductZoneArray []GetZonesByProductZoneInput
 
-func (ZonesZoneArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZonesZone)(nil)).Elem()
+func (GetZonesByProductZoneArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZonesByProductZone)(nil)).Elem()
 }
 
-func (i ZonesZoneArray) ToZonesZoneArrayOutput() ZonesZoneArrayOutput {
-	return i.ToZonesZoneArrayOutputWithContext(context.Background())
+func (i GetZonesByProductZoneArray) ToGetZonesByProductZoneArrayOutput() GetZonesByProductZoneArrayOutput {
+	return i.ToGetZonesByProductZoneArrayOutputWithContext(context.Background())
 }
 
-func (i ZonesZoneArray) ToZonesZoneArrayOutputWithContext(ctx context.Context) ZonesZoneArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ZonesZoneArrayOutput)
+func (i GetZonesByProductZoneArray) ToGetZonesByProductZoneArrayOutputWithContext(ctx context.Context) GetZonesByProductZoneArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetZonesByProductZoneArrayOutput)
 }
 
-type ZonesZoneOutput struct{ *pulumi.OutputState }
+type GetZonesByProductZoneOutput struct{ *pulumi.OutputState }
 
-func (ZonesZoneOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ZonesZone)(nil)).Elem()
+func (GetZonesByProductZoneOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetZonesByProductZone)(nil)).Elem()
 }
 
-func (o ZonesZoneOutput) ToZonesZoneOutput() ZonesZoneOutput {
+func (o GetZonesByProductZoneOutput) ToGetZonesByProductZoneOutput() GetZonesByProductZoneOutput {
 	return o
 }
 
-func (o ZonesZoneOutput) ToZonesZoneOutputWithContext(ctx context.Context) ZonesZoneOutput {
+func (o GetZonesByProductZoneOutput) ToGetZonesByProductZoneOutputWithContext(ctx context.Context) GetZonesByProductZoneOutput {
 	return o
 }
 
-func (o ZonesZoneOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v ZonesZone) string { return v.Description }).(pulumi.StringOutput)
+// The description of the zone, like `Guangzhou Zone 3`.
+func (o GetZonesByProductZoneOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZonesByProductZone) string { return v.Description }).(pulumi.StringOutput)
 }
 
-func (o ZonesZoneOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v ZonesZone) string { return v.Id }).(pulumi.StringOutput)
+// An internal id for the zone, like `200003`, usually not so useful.
+func (o GetZonesByProductZoneOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZonesByProductZone) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o ZonesZoneOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ZonesZone) string { return v.Name }).(pulumi.StringOutput)
+// When specified, only the zone with the exactly name match will be returned.
+func (o GetZonesByProductZoneOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZonesByProductZone) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o ZonesZoneOutput) State() pulumi.StringOutput {
-	return o.ApplyT(func(v ZonesZone) string { return v.State }).(pulumi.StringOutput)
+// The state of the zone, indicate availability using `AVAILABLE` and `UNAVAILABLE` values.
+func (o GetZonesByProductZoneOutput) State() pulumi.StringOutput {
+	return o.ApplyT(func(v GetZonesByProductZone) string { return v.State }).(pulumi.StringOutput)
 }
 
-type ZonesZoneArrayOutput struct{ *pulumi.OutputState }
+type GetZonesByProductZoneArrayOutput struct{ *pulumi.OutputState }
 
-func (ZonesZoneArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ZonesZone)(nil)).Elem()
+func (GetZonesByProductZoneArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetZonesByProductZone)(nil)).Elem()
 }
 
-func (o ZonesZoneArrayOutput) ToZonesZoneArrayOutput() ZonesZoneArrayOutput {
+func (o GetZonesByProductZoneArrayOutput) ToGetZonesByProductZoneArrayOutput() GetZonesByProductZoneArrayOutput {
 	return o
 }
 
-func (o ZonesZoneArrayOutput) ToZonesZoneArrayOutputWithContext(ctx context.Context) ZonesZoneArrayOutput {
+func (o GetZonesByProductZoneArrayOutput) ToGetZonesByProductZoneArrayOutputWithContext(ctx context.Context) GetZonesByProductZoneArrayOutput {
 	return o
 }
 
-func (o ZonesZoneArrayOutput) Index(i pulumi.IntInput) ZonesZoneOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ZonesZone {
-		return vs[0].([]ZonesZone)[vs[1].(int)]
-	}).(ZonesZoneOutput)
+func (o GetZonesByProductZoneArrayOutput) Index(i pulumi.IntInput) GetZonesByProductZoneOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetZonesByProductZone {
+		return vs[0].([]GetZonesByProductZone)[vs[1].(int)]
+	}).(GetZonesByProductZoneOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*ZonesByProductZoneInput)(nil)).Elem(), ZonesByProductZoneArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZonesByProductZoneArrayInput)(nil)).Elem(), ZonesByProductZoneArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZonesZoneInput)(nil)).Elem(), ZonesZoneArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ZonesZoneArrayInput)(nil)).Elem(), ZonesZoneArray{})
-	pulumi.RegisterOutputType(ZonesByProductZoneOutput{})
-	pulumi.RegisterOutputType(ZonesByProductZoneArrayOutput{})
-	pulumi.RegisterOutputType(ZonesZoneOutput{})
-	pulumi.RegisterOutputType(ZonesZoneArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionsRegionInput)(nil)).Elem(), GetRegionsRegionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRegionsRegionArrayInput)(nil)).Elem(), GetRegionsRegionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZonesByProductZoneInput)(nil)).Elem(), GetZonesByProductZoneArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetZonesByProductZoneArrayInput)(nil)).Elem(), GetZonesByProductZoneArray{})
+	pulumi.RegisterOutputType(GetRegionsRegionOutput{})
+	pulumi.RegisterOutputType(GetRegionsRegionArrayOutput{})
+	pulumi.RegisterOutputType(GetZonesByProductZoneOutput{})
+	pulumi.RegisterOutputType(GetZonesByProductZoneArrayOutput{})
 }

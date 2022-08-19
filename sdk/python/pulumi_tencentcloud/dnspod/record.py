@@ -29,12 +29,10 @@ class RecordArgs:
         :param pulumi.Input[str] record_type: The record type.
         :param pulumi.Input[str] value: The record value.
         :param pulumi.Input[int] mx: MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
-        :param pulumi.Input[str] status: Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-               in, resolution will not take effect and the limits of load balancing will not be verified.
+        :param pulumi.Input[str] status: Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         :param pulumi.Input[str] sub_domain: The host records, default value is `@`.
         :param pulumi.Input[int] ttl: TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
-        :param pulumi.Input[int] weight: Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-               this parameter, means that the weight information is not set. Default is 0.
+        :param pulumi.Input[int] weight: Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
         """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "record_line", record_line)
@@ -115,8 +113,7 @@ class RecordArgs:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-        in, resolution will not take effect and the limits of load balancing will not be verified.
+        Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         """
         return pulumi.get(self, "status")
 
@@ -152,8 +149,7 @@ class RecordArgs:
     @pulumi.getter
     def weight(self) -> Optional[pulumi.Input[int]]:
         """
-        Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-        this parameter, means that the weight information is not set. Default is 0.
+        Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
         """
         return pulumi.get(self, "weight")
 
@@ -182,13 +178,11 @@ class _RecordState:
         :param pulumi.Input[int] mx: MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
         :param pulumi.Input[str] record_line: The record line.
         :param pulumi.Input[str] record_type: The record type.
-        :param pulumi.Input[str] status: Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-               in, resolution will not take effect and the limits of load balancing will not be verified.
+        :param pulumi.Input[str] status: Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         :param pulumi.Input[str] sub_domain: The host records, default value is `@`.
         :param pulumi.Input[int] ttl: TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
         :param pulumi.Input[str] value: The record value.
-        :param pulumi.Input[int] weight: Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-               this parameter, means that the weight information is not set. Default is 0.
+        :param pulumi.Input[int] weight: Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
         """
         if domain is not None:
             pulumi.set(__self__, "domain", domain)
@@ -275,8 +269,7 @@ class _RecordState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-        in, resolution will not take effect and the limits of load balancing will not be verified.
+        Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         """
         return pulumi.get(self, "status")
 
@@ -324,8 +317,7 @@ class _RecordState:
     @pulumi.getter
     def weight(self) -> Optional[pulumi.Input[int]]:
         """
-        Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-        this parameter, means that the weight information is not set. Default is 0.
+        Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
         """
         return pulumi.get(self, "weight")
 
@@ -350,20 +342,33 @@ class Record(pulumi.CustomResource):
                  weight: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a Record resource with the given unique name, props, and options.
+        Provide a resource to create a DnsPod record.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        demo = tencentcloud.dnspod.Record("demo",
+            domain="mikatong.com",
+            record_line="默认",
+            record_type="A",
+            sub_domain="demo",
+            value="1.2.3.9")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] domain: The Domain.
         :param pulumi.Input[int] mx: MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
         :param pulumi.Input[str] record_line: The record line.
         :param pulumi.Input[str] record_type: The record type.
-        :param pulumi.Input[str] status: Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-               in, resolution will not take effect and the limits of load balancing will not be verified.
+        :param pulumi.Input[str] status: Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         :param pulumi.Input[str] sub_domain: The host records, default value is `@`.
         :param pulumi.Input[int] ttl: TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
         :param pulumi.Input[str] value: The record value.
-        :param pulumi.Input[int] weight: Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-               this parameter, means that the weight information is not set. Default is 0.
+        :param pulumi.Input[int] weight: Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
         """
         ...
     @overload
@@ -372,7 +377,22 @@ class Record(pulumi.CustomResource):
                  args: RecordArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Record resource with the given unique name, props, and options.
+        Provide a resource to create a DnsPod record.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        demo = tencentcloud.dnspod.Record("demo",
+            domain="mikatong.com",
+            record_line="默认",
+            record_type="A",
+            sub_domain="demo",
+            value="1.2.3.9")
+        ```
+
         :param str resource_name: The name of the resource.
         :param RecordArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -459,13 +479,11 @@ class Record(pulumi.CustomResource):
         :param pulumi.Input[int] mx: MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
         :param pulumi.Input[str] record_line: The record line.
         :param pulumi.Input[str] record_type: The record type.
-        :param pulumi.Input[str] status: Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-               in, resolution will not take effect and the limits of load balancing will not be verified.
+        :param pulumi.Input[str] status: Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         :param pulumi.Input[str] sub_domain: The host records, default value is `@`.
         :param pulumi.Input[int] ttl: TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
         :param pulumi.Input[str] value: The record value.
-        :param pulumi.Input[int] weight: Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-               this parameter, means that the weight information is not set. Default is 0.
+        :param pulumi.Input[int] weight: Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -527,8 +545,7 @@ class Record(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[Optional[str]]:
         """
-        Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed
-        in, resolution will not take effect and the limits of load balancing will not be verified.
+        Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
         """
         return pulumi.get(self, "status")
 
@@ -560,8 +577,7 @@ class Record(pulumi.CustomResource):
     @pulumi.getter
     def weight(self) -> pulumi.Output[Optional[int]]:
         """
-        Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass
-        this parameter, means that the weight information is not set. Default is 0.
+        Weight information. An integer from 0 to 100. Only enterprise VIP domain names are available, 0 means off, does not pass this parameter, means that the weight information is not set. Default is 0.
         """
         return pulumi.get(self, "weight")
 

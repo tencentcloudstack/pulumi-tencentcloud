@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Monitor.Outputs
     [OutputType]
     public sealed class AlarmPolicyTriggerTask
     {
+        /// <summary>
+        /// Configuration information in JSON format.
+        /// </summary>
         public readonly string TaskConfig;
+        /// <summary>
+        /// Triggered task type.
+        /// </summary>
         public readonly string Type;
 
         [OutputConstructor]

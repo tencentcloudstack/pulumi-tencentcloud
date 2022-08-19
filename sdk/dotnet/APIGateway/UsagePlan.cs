@@ -7,9 +7,42 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway
+namespace Pulumi.Tencentcloud.ApiGateway
 {
-    [TencentcloudResourceType("tencentcloud:APIGateway/usagePlan:UsagePlan")]
+    /// <summary>
+    /// Use this resource to create API gateway usage plan.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new Tencentcloud.ApiGateway.UsagePlanArgs
+    ///         {
+    ///             MaxRequestNum = 100,
+    ///             MaxRequestNumPreSec = 10,
+    ///             UsagePlanDesc = "nice plan",
+    ///             UsagePlanName = "my_plan",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// API gateway usage plan can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:ApiGateway/usagePlan:UsagePlan plan usagePlan-gyeafpab
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:ApiGateway/usagePlan:UsagePlan")]
     public partial class UsagePlan : Pulumi.CustomResource
     {
         /// <summary>
@@ -69,12 +102,12 @@ namespace Pulumi.Tencentcloud.APIGateway
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public UsagePlan(string name, UsagePlanArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/usagePlan:UsagePlan", name, args ?? new UsagePlanArgs(), MakeResourceOptions(options, ""))
+            : base("tencentcloud:ApiGateway/usagePlan:UsagePlan", name, args ?? new UsagePlanArgs(), MakeResourceOptions(options, ""))
         {
         }
 
         private UsagePlan(string name, Input<string> id, UsagePlanState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:APIGateway/usagePlan:UsagePlan", name, state, MakeResourceOptions(options, id))
+            : base("tencentcloud:ApiGateway/usagePlan:UsagePlan", name, state, MakeResourceOptions(options, id))
         {
         }
 

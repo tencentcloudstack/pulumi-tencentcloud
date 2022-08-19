@@ -13,9 +13,21 @@ namespace Pulumi.Tencentcloud.Eks.Outputs
     [OutputType]
     public sealed class ContainerInstanceImageRegistryCredential
     {
+        /// <summary>
+        /// Name of credential.
+        /// </summary>
         public readonly string? Name;
+        /// <summary>
+        /// Password.
+        /// </summary>
         public readonly string? Password;
+        /// <summary>
+        /// Address of image registry.
+        /// </summary>
         public readonly string? Server;
+        /// <summary>
+        /// Username.
+        /// </summary>
         public readonly string? Username;
 
         [OutputConstructor]

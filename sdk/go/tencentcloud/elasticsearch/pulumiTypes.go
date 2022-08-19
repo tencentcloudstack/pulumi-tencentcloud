@@ -11,8 +11,10 @@ import (
 )
 
 type InstanceMultiZoneInfo struct {
+	// Availability zone.
 	AvailabilityZone string `pulumi:"availabilityZone"`
-	SubnetId         string `pulumi:"subnetId"`
+	// The ID of a VPC subnetwork.
+	SubnetId string `pulumi:"subnetId"`
 }
 
 // InstanceMultiZoneInfoInput is an input type that accepts InstanceMultiZoneInfoArgs and InstanceMultiZoneInfoOutput values.
@@ -27,8 +29,10 @@ type InstanceMultiZoneInfoInput interface {
 }
 
 type InstanceMultiZoneInfoArgs struct {
+	// Availability zone.
 	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
-	SubnetId         pulumi.StringInput `pulumi:"subnetId"`
+	// The ID of a VPC subnetwork.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
 }
 
 func (InstanceMultiZoneInfoArgs) ElementType() reflect.Type {
@@ -82,10 +86,12 @@ func (o InstanceMultiZoneInfoOutput) ToInstanceMultiZoneInfoOutputWithContext(ct
 	return o
 }
 
+// Availability zone.
 func (o InstanceMultiZoneInfoOutput) AvailabilityZone() pulumi.StringOutput {
 	return o.ApplyT(func(v InstanceMultiZoneInfo) string { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
 
+// The ID of a VPC subnetwork.
 func (o InstanceMultiZoneInfoOutput) SubnetId() pulumi.StringOutput {
 	return o.ApplyT(func(v InstanceMultiZoneInfo) string { return v.SubnetId }).(pulumi.StringOutput)
 }
@@ -111,12 +117,18 @@ func (o InstanceMultiZoneInfoArrayOutput) Index(i pulumi.IntInput) InstanceMulti
 }
 
 type InstanceNodeInfoList struct {
-	DiskSize *int    `pulumi:"diskSize"`
+	// Node disk size. Unit is GB, and default value is `100`.
+	DiskSize *int `pulumi:"diskSize"`
+	// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`. The default value is `CLOUD_SSD`.
 	DiskType *string `pulumi:"diskType"`
-	Encrypt  *bool   `pulumi:"encrypt"`
-	NodeNum  int     `pulumi:"nodeNum"`
-	NodeType string  `pulumi:"nodeType"`
-	Type     *string `pulumi:"type"`
+	// Decides to encrypt this disk or not.
+	Encrypt *bool `pulumi:"encrypt"`
+	// Number of nodes.
+	NodeNum int `pulumi:"nodeNum"`
+	// Node specification, and valid values refer to [document of tencentcloud](https://intl.cloud.tencent.com/document/product/845/18376).
+	NodeType string `pulumi:"nodeType"`
+	// Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+	Type *string `pulumi:"type"`
 }
 
 // InstanceNodeInfoListInput is an input type that accepts InstanceNodeInfoListArgs and InstanceNodeInfoListOutput values.
@@ -131,12 +143,18 @@ type InstanceNodeInfoListInput interface {
 }
 
 type InstanceNodeInfoListArgs struct {
-	DiskSize pulumi.IntPtrInput    `pulumi:"diskSize"`
+	// Node disk size. Unit is GB, and default value is `100`.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`. The default value is `CLOUD_SSD`.
 	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
-	Encrypt  pulumi.BoolPtrInput   `pulumi:"encrypt"`
-	NodeNum  pulumi.IntInput       `pulumi:"nodeNum"`
-	NodeType pulumi.StringInput    `pulumi:"nodeType"`
-	Type     pulumi.StringPtrInput `pulumi:"type"`
+	// Decides to encrypt this disk or not.
+	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
+	// Number of nodes.
+	NodeNum pulumi.IntInput `pulumi:"nodeNum"`
+	// Node specification, and valid values refer to [document of tencentcloud](https://intl.cloud.tencent.com/document/product/845/18376).
+	NodeType pulumi.StringInput `pulumi:"nodeType"`
+	// Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+	Type pulumi.StringPtrInput `pulumi:"type"`
 }
 
 func (InstanceNodeInfoListArgs) ElementType() reflect.Type {
@@ -190,26 +208,32 @@ func (o InstanceNodeInfoListOutput) ToInstanceNodeInfoListOutputWithContext(ctx 
 	return o
 }
 
+// Node disk size. Unit is GB, and default value is `100`.
 func (o InstanceNodeInfoListOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceNodeInfoList) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
 }
 
+// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`. The default value is `CLOUD_SSD`.
 func (o InstanceNodeInfoListOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceNodeInfoList) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }
 
+// Decides to encrypt this disk or not.
 func (o InstanceNodeInfoListOutput) Encrypt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v InstanceNodeInfoList) *bool { return v.Encrypt }).(pulumi.BoolPtrOutput)
 }
 
+// Number of nodes.
 func (o InstanceNodeInfoListOutput) NodeNum() pulumi.IntOutput {
 	return o.ApplyT(func(v InstanceNodeInfoList) int { return v.NodeNum }).(pulumi.IntOutput)
 }
 
+// Node specification, and valid values refer to [document of tencentcloud](https://intl.cloud.tencent.com/document/product/845/18376).
 func (o InstanceNodeInfoListOutput) NodeType() pulumi.StringOutput {
 	return o.ApplyT(func(v InstanceNodeInfoList) string { return v.NodeType }).(pulumi.StringOutput)
 }
 
+// Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
 func (o InstanceNodeInfoListOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceNodeInfoList) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -235,7 +259,9 @@ func (o InstanceNodeInfoListArrayOutput) Index(i pulumi.IntInput) InstanceNodeIn
 }
 
 type InstanceWebNodeTypeInfo struct {
-	NodeNum  int    `pulumi:"nodeNum"`
+	// Visual node number.
+	NodeNum int `pulumi:"nodeNum"`
+	// Visual node specifications.
 	NodeType string `pulumi:"nodeType"`
 }
 
@@ -251,7 +277,9 @@ type InstanceWebNodeTypeInfoInput interface {
 }
 
 type InstanceWebNodeTypeInfoArgs struct {
-	NodeNum  pulumi.IntInput    `pulumi:"nodeNum"`
+	// Visual node number.
+	NodeNum pulumi.IntInput `pulumi:"nodeNum"`
+	// Visual node specifications.
 	NodeType pulumi.StringInput `pulumi:"nodeType"`
 }
 
@@ -306,10 +334,12 @@ func (o InstanceWebNodeTypeInfoOutput) ToInstanceWebNodeTypeInfoOutputWithContex
 	return o
 }
 
+// Visual node number.
 func (o InstanceWebNodeTypeInfoOutput) NodeNum() pulumi.IntOutput {
 	return o.ApplyT(func(v InstanceWebNodeTypeInfo) int { return v.NodeNum }).(pulumi.IntOutput)
 }
 
+// Visual node specifications.
 func (o InstanceWebNodeTypeInfoOutput) NodeType() pulumi.StringOutput {
 	return o.ApplyT(func(v InstanceWebNodeTypeInfo) string { return v.NodeType }).(pulumi.StringOutput)
 }
@@ -334,424 +364,502 @@ func (o InstanceWebNodeTypeInfoArrayOutput) Index(i pulumi.IntInput) InstanceWeb
 	}).(InstanceWebNodeTypeInfoOutput)
 }
 
-type InstancesInstanceList struct {
-	AvailabilityZone    string                               `pulumi:"availabilityZone"`
-	BasicSecurityType   int                                  `pulumi:"basicSecurityType"`
-	ChargeType          string                               `pulumi:"chargeType"`
-	CreateTime          string                               `pulumi:"createTime"`
-	DeployMode          int                                  `pulumi:"deployMode"`
-	ElasticsearchDomain string                               `pulumi:"elasticsearchDomain"`
-	ElasticsearchPort   int                                  `pulumi:"elasticsearchPort"`
-	ElasticsearchVip    string                               `pulumi:"elasticsearchVip"`
-	InstanceId          string                               `pulumi:"instanceId"`
-	InstanceName        string                               `pulumi:"instanceName"`
-	KibanaUrl           string                               `pulumi:"kibanaUrl"`
-	LicenseType         string                               `pulumi:"licenseType"`
-	MultiZoneInfos      []InstancesInstanceListMultiZoneInfo `pulumi:"multiZoneInfos"`
-	NodeInfoLists       []InstancesInstanceListNodeInfoList  `pulumi:"nodeInfoLists"`
-	SubnetId            string                               `pulumi:"subnetId"`
-	Tags                map[string]interface{}               `pulumi:"tags"`
-	Version             string                               `pulumi:"version"`
-	VpcId               string                               `pulumi:"vpcId"`
-}
-
-// InstancesInstanceListInput is an input type that accepts InstancesInstanceListArgs and InstancesInstanceListOutput values.
-// You can construct a concrete instance of `InstancesInstanceListInput` via:
-//
-//          InstancesInstanceListArgs{...}
-type InstancesInstanceListInput interface {
-	pulumi.Input
-
-	ToInstancesInstanceListOutput() InstancesInstanceListOutput
-	ToInstancesInstanceListOutputWithContext(context.Context) InstancesInstanceListOutput
-}
-
-type InstancesInstanceListArgs struct {
-	AvailabilityZone    pulumi.StringInput                           `pulumi:"availabilityZone"`
-	BasicSecurityType   pulumi.IntInput                              `pulumi:"basicSecurityType"`
-	ChargeType          pulumi.StringInput                           `pulumi:"chargeType"`
-	CreateTime          pulumi.StringInput                           `pulumi:"createTime"`
-	DeployMode          pulumi.IntInput                              `pulumi:"deployMode"`
-	ElasticsearchDomain pulumi.StringInput                           `pulumi:"elasticsearchDomain"`
-	ElasticsearchPort   pulumi.IntInput                              `pulumi:"elasticsearchPort"`
-	ElasticsearchVip    pulumi.StringInput                           `pulumi:"elasticsearchVip"`
-	InstanceId          pulumi.StringInput                           `pulumi:"instanceId"`
-	InstanceName        pulumi.StringInput                           `pulumi:"instanceName"`
-	KibanaUrl           pulumi.StringInput                           `pulumi:"kibanaUrl"`
-	LicenseType         pulumi.StringInput                           `pulumi:"licenseType"`
-	MultiZoneInfos      InstancesInstanceListMultiZoneInfoArrayInput `pulumi:"multiZoneInfos"`
-	NodeInfoLists       InstancesInstanceListNodeInfoListArrayInput  `pulumi:"nodeInfoLists"`
-	SubnetId            pulumi.StringInput                           `pulumi:"subnetId"`
-	Tags                pulumi.MapInput                              `pulumi:"tags"`
-	Version             pulumi.StringInput                           `pulumi:"version"`
-	VpcId               pulumi.StringInput                           `pulumi:"vpcId"`
-}
-
-func (InstancesInstanceListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
-}
-
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
-	return i.ToInstancesInstanceListOutputWithContext(context.Background())
-}
-
-func (i InstancesInstanceListArgs) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListOutput)
-}
-
-// InstancesInstanceListArrayInput is an input type that accepts InstancesInstanceListArray and InstancesInstanceListArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListArrayInput` via:
-//
-//          InstancesInstanceListArray{ InstancesInstanceListArgs{...} }
-type InstancesInstanceListArrayInput interface {
-	pulumi.Input
-
-	ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput
-	ToInstancesInstanceListArrayOutputWithContext(context.Context) InstancesInstanceListArrayOutput
-}
-
-type InstancesInstanceListArray []InstancesInstanceListInput
-
-func (InstancesInstanceListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
-}
-
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
-	return i.ToInstancesInstanceListArrayOutputWithContext(context.Background())
-}
-
-func (i InstancesInstanceListArray) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListArrayOutput)
-}
-
-type InstancesInstanceListOutput struct{ *pulumi.OutputState }
-
-func (InstancesInstanceListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceList)(nil)).Elem()
-}
-
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutput() InstancesInstanceListOutput {
-	return o
-}
-
-func (o InstancesInstanceListOutput) ToInstancesInstanceListOutputWithContext(ctx context.Context) InstancesInstanceListOutput {
-	return o
-}
-
-func (o InstancesInstanceListOutput) AvailabilityZone() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) BasicSecurityType() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.BasicSecurityType }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) DeployMode() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.DeployMode }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) ElasticsearchDomain() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.ElasticsearchDomain }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) ElasticsearchPort() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceList) int { return v.ElasticsearchPort }).(pulumi.IntOutput)
-}
-
-func (o InstancesInstanceListOutput) ElasticsearchVip() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.ElasticsearchVip }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) InstanceId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) InstanceName() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) KibanaUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.KibanaUrl }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) LicenseType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.LicenseType }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) MultiZoneInfos() InstancesInstanceListMultiZoneInfoArrayOutput {
-	return o.ApplyT(func(v InstancesInstanceList) []InstancesInstanceListMultiZoneInfo { return v.MultiZoneInfos }).(InstancesInstanceListMultiZoneInfoArrayOutput)
-}
-
-func (o InstancesInstanceListOutput) NodeInfoLists() InstancesInstanceListNodeInfoListArrayOutput {
-	return o.ApplyT(func(v InstancesInstanceList) []InstancesInstanceListNodeInfoList { return v.NodeInfoLists }).(InstancesInstanceListNodeInfoListArrayOutput)
-}
-
-func (o InstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v InstancesInstanceList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
-}
-
-func (o InstancesInstanceListOutput) Version() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.Version }).(pulumi.StringOutput)
-}
-
-func (o InstancesInstanceListOutput) VpcId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
-}
-
-type InstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
-
-func (InstancesInstanceListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceList)(nil)).Elem()
-}
-
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutput() InstancesInstanceListArrayOutput {
-	return o
-}
-
-func (o InstancesInstanceListArrayOutput) ToInstancesInstanceListArrayOutputWithContext(ctx context.Context) InstancesInstanceListArrayOutput {
-	return o
-}
-
-func (o InstancesInstanceListArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceList {
-		return vs[0].([]InstancesInstanceList)[vs[1].(int)]
-	}).(InstancesInstanceListOutput)
-}
-
-type InstancesInstanceListMultiZoneInfo struct {
+type GetInstancesInstanceList struct {
+	// Availability zone.
 	AvailabilityZone string `pulumi:"availabilityZone"`
-	SubnetId         string `pulumi:"subnetId"`
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above.
+	BasicSecurityType int `pulumi:"basicSecurityType"`
+	// The charge type of instance.
+	ChargeType string `pulumi:"chargeType"`
+	// Instance creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Cluster deployment mode.
+	DeployMode int `pulumi:"deployMode"`
+	// Elasticsearch domain name.
+	ElasticsearchDomain string `pulumi:"elasticsearchDomain"`
+	// Elasticsearch port.
+	ElasticsearchPort int `pulumi:"elasticsearchPort"`
+	// Elasticsearch VIP.
+	ElasticsearchVip string `pulumi:"elasticsearchVip"`
+	// ID of the instance to be queried.
+	InstanceId string `pulumi:"instanceId"`
+	// Name of the instance to be queried.
+	InstanceName string `pulumi:"instanceName"`
+	// Kibana access URL.
+	KibanaUrl string `pulumi:"kibanaUrl"`
+	// License type.
+	LicenseType string `pulumi:"licenseType"`
+	// Details of AZs in multi-AZ deployment mode.
+	MultiZoneInfos []GetInstancesInstanceListMultiZoneInfo `pulumi:"multiZoneInfos"`
+	// Node information list, which describe the specification information of various types of nodes in the cluster.
+	NodeInfoLists []GetInstancesInstanceListNodeInfoList `pulumi:"nodeInfoLists"`
+	// The ID of a VPC subnet.
+	SubnetId string `pulumi:"subnetId"`
+	// Tag of the instance to be queried.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// Version of the instance.
+	Version string `pulumi:"version"`
+	// The ID of a VPC network.
+	VpcId string `pulumi:"vpcId"`
 }
 
-// InstancesInstanceListMultiZoneInfoInput is an input type that accepts InstancesInstanceListMultiZoneInfoArgs and InstancesInstanceListMultiZoneInfoOutput values.
-// You can construct a concrete instance of `InstancesInstanceListMultiZoneInfoInput` via:
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          InstancesInstanceListMultiZoneInfoArgs{...}
-type InstancesInstanceListMultiZoneInfoInput interface {
+//          GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListMultiZoneInfoOutput() InstancesInstanceListMultiZoneInfoOutput
-	ToInstancesInstanceListMultiZoneInfoOutputWithContext(context.Context) InstancesInstanceListMultiZoneInfoOutput
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
 }
 
-type InstancesInstanceListMultiZoneInfoArgs struct {
+type GetInstancesInstanceListArgs struct {
+	// Availability zone.
 	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
-	SubnetId         pulumi.StringInput `pulumi:"subnetId"`
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above.
+	BasicSecurityType pulumi.IntInput `pulumi:"basicSecurityType"`
+	// The charge type of instance.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// Instance creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Cluster deployment mode.
+	DeployMode pulumi.IntInput `pulumi:"deployMode"`
+	// Elasticsearch domain name.
+	ElasticsearchDomain pulumi.StringInput `pulumi:"elasticsearchDomain"`
+	// Elasticsearch port.
+	ElasticsearchPort pulumi.IntInput `pulumi:"elasticsearchPort"`
+	// Elasticsearch VIP.
+	ElasticsearchVip pulumi.StringInput `pulumi:"elasticsearchVip"`
+	// ID of the instance to be queried.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Name of the instance to be queried.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Kibana access URL.
+	KibanaUrl pulumi.StringInput `pulumi:"kibanaUrl"`
+	// License type.
+	LicenseType pulumi.StringInput `pulumi:"licenseType"`
+	// Details of AZs in multi-AZ deployment mode.
+	MultiZoneInfos GetInstancesInstanceListMultiZoneInfoArrayInput `pulumi:"multiZoneInfos"`
+	// Node information list, which describe the specification information of various types of nodes in the cluster.
+	NodeInfoLists GetInstancesInstanceListNodeInfoListArrayInput `pulumi:"nodeInfoLists"`
+	// The ID of a VPC subnet.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Tag of the instance to be queried.
+	Tags pulumi.MapInput `pulumi:"tags"`
+	// Version of the instance.
+	Version pulumi.StringInput `pulumi:"version"`
+	// The ID of a VPC network.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
 
-func (InstancesInstanceListMultiZoneInfoArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceListMultiZoneInfo)(nil)).Elem()
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListMultiZoneInfoArgs) ToInstancesInstanceListMultiZoneInfoOutput() InstancesInstanceListMultiZoneInfoOutput {
-	return i.ToInstancesInstanceListMultiZoneInfoOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListMultiZoneInfoArgs) ToInstancesInstanceListMultiZoneInfoOutputWithContext(ctx context.Context) InstancesInstanceListMultiZoneInfoOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListMultiZoneInfoOutput)
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
 }
 
-// InstancesInstanceListMultiZoneInfoArrayInput is an input type that accepts InstancesInstanceListMultiZoneInfoArray and InstancesInstanceListMultiZoneInfoArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListMultiZoneInfoArrayInput` via:
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          InstancesInstanceListMultiZoneInfoArray{ InstancesInstanceListMultiZoneInfoArgs{...} }
-type InstancesInstanceListMultiZoneInfoArrayInput interface {
+//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListMultiZoneInfoArrayOutput() InstancesInstanceListMultiZoneInfoArrayOutput
-	ToInstancesInstanceListMultiZoneInfoArrayOutputWithContext(context.Context) InstancesInstanceListMultiZoneInfoArrayOutput
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
 }
 
-type InstancesInstanceListMultiZoneInfoArray []InstancesInstanceListMultiZoneInfoInput
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
 
-func (InstancesInstanceListMultiZoneInfoArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceListMultiZoneInfo)(nil)).Elem()
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListMultiZoneInfoArray) ToInstancesInstanceListMultiZoneInfoArrayOutput() InstancesInstanceListMultiZoneInfoArrayOutput {
-	return i.ToInstancesInstanceListMultiZoneInfoArrayOutputWithContext(context.Background())
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListMultiZoneInfoArray) ToInstancesInstanceListMultiZoneInfoArrayOutputWithContext(ctx context.Context) InstancesInstanceListMultiZoneInfoArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListMultiZoneInfoArrayOutput)
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
 }
 
-type InstancesInstanceListMultiZoneInfoOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListMultiZoneInfoOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceListMultiZoneInfo)(nil)).Elem()
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListMultiZoneInfoOutput) ToInstancesInstanceListMultiZoneInfoOutput() InstancesInstanceListMultiZoneInfoOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListMultiZoneInfoOutput) ToInstancesInstanceListMultiZoneInfoOutputWithContext(ctx context.Context) InstancesInstanceListMultiZoneInfoOutput {
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
 	return o
 }
 
-func (o InstancesInstanceListMultiZoneInfoOutput) AvailabilityZone() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceListMultiZoneInfo) string { return v.AvailabilityZone }).(pulumi.StringOutput)
+// Availability zone.
+func (o GetInstancesInstanceListOutput) AvailabilityZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListMultiZoneInfoOutput) SubnetId() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceListMultiZoneInfo) string { return v.SubnetId }).(pulumi.StringOutput)
+// Whether to enable X-Pack security authentication in Basic Edition 6.8 and above.
+func (o GetInstancesInstanceListOutput) BasicSecurityType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.BasicSecurityType }).(pulumi.IntOutput)
 }
 
-type InstancesInstanceListMultiZoneInfoArrayOutput struct{ *pulumi.OutputState }
-
-func (InstancesInstanceListMultiZoneInfoArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceListMultiZoneInfo)(nil)).Elem()
+// The charge type of instance.
+func (o GetInstancesInstanceListOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ChargeType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListMultiZoneInfoArrayOutput) ToInstancesInstanceListMultiZoneInfoArrayOutput() InstancesInstanceListMultiZoneInfoArrayOutput {
+// Instance creation time.
+func (o GetInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Cluster deployment mode.
+func (o GetInstancesInstanceListOutput) DeployMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.DeployMode }).(pulumi.IntOutput)
+}
+
+// Elasticsearch domain name.
+func (o GetInstancesInstanceListOutput) ElasticsearchDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ElasticsearchDomain }).(pulumi.StringOutput)
+}
+
+// Elasticsearch port.
+func (o GetInstancesInstanceListOutput) ElasticsearchPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.ElasticsearchPort }).(pulumi.IntOutput)
+}
+
+// Elasticsearch VIP.
+func (o GetInstancesInstanceListOutput) ElasticsearchVip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ElasticsearchVip }).(pulumi.StringOutput)
+}
+
+// ID of the instance to be queried.
+func (o GetInstancesInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Name of the instance to be queried.
+func (o GetInstancesInstanceListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Kibana access URL.
+func (o GetInstancesInstanceListOutput) KibanaUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.KibanaUrl }).(pulumi.StringOutput)
+}
+
+// License type.
+func (o GetInstancesInstanceListOutput) LicenseType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.LicenseType }).(pulumi.StringOutput)
+}
+
+// Details of AZs in multi-AZ deployment mode.
+func (o GetInstancesInstanceListOutput) MultiZoneInfos() GetInstancesInstanceListMultiZoneInfoArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []GetInstancesInstanceListMultiZoneInfo { return v.MultiZoneInfos }).(GetInstancesInstanceListMultiZoneInfoArrayOutput)
+}
+
+// Node information list, which describe the specification information of various types of nodes in the cluster.
+func (o GetInstancesInstanceListOutput) NodeInfoLists() GetInstancesInstanceListNodeInfoListArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []GetInstancesInstanceListNodeInfoList { return v.NodeInfoLists }).(GetInstancesInstanceListNodeInfoListArrayOutput)
+}
+
+// The ID of a VPC subnet.
+func (o GetInstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Tag of the instance to be queried.
+func (o GetInstancesInstanceListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+}
+
+// Version of the instance.
+func (o GetInstancesInstanceListOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Version }).(pulumi.StringOutput)
+}
+
+// The ID of a VPC network.
+func (o GetInstancesInstanceListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListMultiZoneInfoArrayOutput) ToInstancesInstanceListMultiZoneInfoArrayOutputWithContext(ctx context.Context) InstancesInstanceListMultiZoneInfoArrayOutput {
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListMultiZoneInfoArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListMultiZoneInfoOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceListMultiZoneInfo {
-		return vs[0].([]InstancesInstanceListMultiZoneInfo)[vs[1].(int)]
-	}).(InstancesInstanceListMultiZoneInfoOutput)
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
 }
 
-type InstancesInstanceListNodeInfoList struct {
-	DiskSize int    `pulumi:"diskSize"`
+type GetInstancesInstanceListMultiZoneInfo struct {
+	// Availability zone.
+	AvailabilityZone string `pulumi:"availabilityZone"`
+	// The ID of a VPC subnet.
+	SubnetId string `pulumi:"subnetId"`
+}
+
+// GetInstancesInstanceListMultiZoneInfoInput is an input type that accepts GetInstancesInstanceListMultiZoneInfoArgs and GetInstancesInstanceListMultiZoneInfoOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListMultiZoneInfoInput` via:
+//
+//          GetInstancesInstanceListMultiZoneInfoArgs{...}
+type GetInstancesInstanceListMultiZoneInfoInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListMultiZoneInfoOutput() GetInstancesInstanceListMultiZoneInfoOutput
+	ToGetInstancesInstanceListMultiZoneInfoOutputWithContext(context.Context) GetInstancesInstanceListMultiZoneInfoOutput
+}
+
+type GetInstancesInstanceListMultiZoneInfoArgs struct {
+	// Availability zone.
+	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
+	// The ID of a VPC subnet.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+}
+
+func (GetInstancesInstanceListMultiZoneInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListMultiZoneInfo)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListMultiZoneInfoArgs) ToGetInstancesInstanceListMultiZoneInfoOutput() GetInstancesInstanceListMultiZoneInfoOutput {
+	return i.ToGetInstancesInstanceListMultiZoneInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListMultiZoneInfoArgs) ToGetInstancesInstanceListMultiZoneInfoOutputWithContext(ctx context.Context) GetInstancesInstanceListMultiZoneInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListMultiZoneInfoOutput)
+}
+
+// GetInstancesInstanceListMultiZoneInfoArrayInput is an input type that accepts GetInstancesInstanceListMultiZoneInfoArray and GetInstancesInstanceListMultiZoneInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListMultiZoneInfoArrayInput` via:
+//
+//          GetInstancesInstanceListMultiZoneInfoArray{ GetInstancesInstanceListMultiZoneInfoArgs{...} }
+type GetInstancesInstanceListMultiZoneInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListMultiZoneInfoArrayOutput() GetInstancesInstanceListMultiZoneInfoArrayOutput
+	ToGetInstancesInstanceListMultiZoneInfoArrayOutputWithContext(context.Context) GetInstancesInstanceListMultiZoneInfoArrayOutput
+}
+
+type GetInstancesInstanceListMultiZoneInfoArray []GetInstancesInstanceListMultiZoneInfoInput
+
+func (GetInstancesInstanceListMultiZoneInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListMultiZoneInfo)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListMultiZoneInfoArray) ToGetInstancesInstanceListMultiZoneInfoArrayOutput() GetInstancesInstanceListMultiZoneInfoArrayOutput {
+	return i.ToGetInstancesInstanceListMultiZoneInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListMultiZoneInfoArray) ToGetInstancesInstanceListMultiZoneInfoArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListMultiZoneInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListMultiZoneInfoArrayOutput)
+}
+
+type GetInstancesInstanceListMultiZoneInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListMultiZoneInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListMultiZoneInfo)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListMultiZoneInfoOutput) ToGetInstancesInstanceListMultiZoneInfoOutput() GetInstancesInstanceListMultiZoneInfoOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListMultiZoneInfoOutput) ToGetInstancesInstanceListMultiZoneInfoOutputWithContext(ctx context.Context) GetInstancesInstanceListMultiZoneInfoOutput {
+	return o
+}
+
+// Availability zone.
+func (o GetInstancesInstanceListMultiZoneInfoOutput) AvailabilityZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMultiZoneInfo) string { return v.AvailabilityZone }).(pulumi.StringOutput)
+}
+
+// The ID of a VPC subnet.
+func (o GetInstancesInstanceListMultiZoneInfoOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMultiZoneInfo) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListMultiZoneInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListMultiZoneInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListMultiZoneInfo)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListMultiZoneInfoArrayOutput) ToGetInstancesInstanceListMultiZoneInfoArrayOutput() GetInstancesInstanceListMultiZoneInfoArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListMultiZoneInfoArrayOutput) ToGetInstancesInstanceListMultiZoneInfoArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListMultiZoneInfoArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListMultiZoneInfoArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListMultiZoneInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListMultiZoneInfo {
+		return vs[0].([]GetInstancesInstanceListMultiZoneInfo)[vs[1].(int)]
+	}).(GetInstancesInstanceListMultiZoneInfoOutput)
+}
+
+type GetInstancesInstanceListNodeInfoList struct {
+	// Node disk size.
+	DiskSize int `pulumi:"diskSize"`
+	// Node disk type.
 	DiskType string `pulumi:"diskType"`
-	Encrypt  bool   `pulumi:"encrypt"`
-	NodeNum  int    `pulumi:"nodeNum"`
+	// Decides this disk encrypted or not.
+	Encrypt bool `pulumi:"encrypt"`
+	// Number of nodes.
+	NodeNum int `pulumi:"nodeNum"`
+	// Node specification.
 	NodeType string `pulumi:"nodeType"`
-	Type     string `pulumi:"type"`
+	// Node type.
+	Type string `pulumi:"type"`
 }
 
-// InstancesInstanceListNodeInfoListInput is an input type that accepts InstancesInstanceListNodeInfoListArgs and InstancesInstanceListNodeInfoListOutput values.
-// You can construct a concrete instance of `InstancesInstanceListNodeInfoListInput` via:
+// GetInstancesInstanceListNodeInfoListInput is an input type that accepts GetInstancesInstanceListNodeInfoListArgs and GetInstancesInstanceListNodeInfoListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListNodeInfoListInput` via:
 //
-//          InstancesInstanceListNodeInfoListArgs{...}
-type InstancesInstanceListNodeInfoListInput interface {
+//          GetInstancesInstanceListNodeInfoListArgs{...}
+type GetInstancesInstanceListNodeInfoListInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListNodeInfoListOutput() InstancesInstanceListNodeInfoListOutput
-	ToInstancesInstanceListNodeInfoListOutputWithContext(context.Context) InstancesInstanceListNodeInfoListOutput
+	ToGetInstancesInstanceListNodeInfoListOutput() GetInstancesInstanceListNodeInfoListOutput
+	ToGetInstancesInstanceListNodeInfoListOutputWithContext(context.Context) GetInstancesInstanceListNodeInfoListOutput
 }
 
-type InstancesInstanceListNodeInfoListArgs struct {
-	DiskSize pulumi.IntInput    `pulumi:"diskSize"`
+type GetInstancesInstanceListNodeInfoListArgs struct {
+	// Node disk size.
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Node disk type.
 	DiskType pulumi.StringInput `pulumi:"diskType"`
-	Encrypt  pulumi.BoolInput   `pulumi:"encrypt"`
-	NodeNum  pulumi.IntInput    `pulumi:"nodeNum"`
+	// Decides this disk encrypted or not.
+	Encrypt pulumi.BoolInput `pulumi:"encrypt"`
+	// Number of nodes.
+	NodeNum pulumi.IntInput `pulumi:"nodeNum"`
+	// Node specification.
 	NodeType pulumi.StringInput `pulumi:"nodeType"`
-	Type     pulumi.StringInput `pulumi:"type"`
+	// Node type.
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
-func (InstancesInstanceListNodeInfoListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceListNodeInfoList)(nil)).Elem()
+func (GetInstancesInstanceListNodeInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListNodeInfoList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListNodeInfoListArgs) ToInstancesInstanceListNodeInfoListOutput() InstancesInstanceListNodeInfoListOutput {
-	return i.ToInstancesInstanceListNodeInfoListOutputWithContext(context.Background())
+func (i GetInstancesInstanceListNodeInfoListArgs) ToGetInstancesInstanceListNodeInfoListOutput() GetInstancesInstanceListNodeInfoListOutput {
+	return i.ToGetInstancesInstanceListNodeInfoListOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListNodeInfoListArgs) ToInstancesInstanceListNodeInfoListOutputWithContext(ctx context.Context) InstancesInstanceListNodeInfoListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListNodeInfoListOutput)
+func (i GetInstancesInstanceListNodeInfoListArgs) ToGetInstancesInstanceListNodeInfoListOutputWithContext(ctx context.Context) GetInstancesInstanceListNodeInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListNodeInfoListOutput)
 }
 
-// InstancesInstanceListNodeInfoListArrayInput is an input type that accepts InstancesInstanceListNodeInfoListArray and InstancesInstanceListNodeInfoListArrayOutput values.
-// You can construct a concrete instance of `InstancesInstanceListNodeInfoListArrayInput` via:
+// GetInstancesInstanceListNodeInfoListArrayInput is an input type that accepts GetInstancesInstanceListNodeInfoListArray and GetInstancesInstanceListNodeInfoListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListNodeInfoListArrayInput` via:
 //
-//          InstancesInstanceListNodeInfoListArray{ InstancesInstanceListNodeInfoListArgs{...} }
-type InstancesInstanceListNodeInfoListArrayInput interface {
+//          GetInstancesInstanceListNodeInfoListArray{ GetInstancesInstanceListNodeInfoListArgs{...} }
+type GetInstancesInstanceListNodeInfoListArrayInput interface {
 	pulumi.Input
 
-	ToInstancesInstanceListNodeInfoListArrayOutput() InstancesInstanceListNodeInfoListArrayOutput
-	ToInstancesInstanceListNodeInfoListArrayOutputWithContext(context.Context) InstancesInstanceListNodeInfoListArrayOutput
+	ToGetInstancesInstanceListNodeInfoListArrayOutput() GetInstancesInstanceListNodeInfoListArrayOutput
+	ToGetInstancesInstanceListNodeInfoListArrayOutputWithContext(context.Context) GetInstancesInstanceListNodeInfoListArrayOutput
 }
 
-type InstancesInstanceListNodeInfoListArray []InstancesInstanceListNodeInfoListInput
+type GetInstancesInstanceListNodeInfoListArray []GetInstancesInstanceListNodeInfoListInput
 
-func (InstancesInstanceListNodeInfoListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceListNodeInfoList)(nil)).Elem()
+func (GetInstancesInstanceListNodeInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListNodeInfoList)(nil)).Elem()
 }
 
-func (i InstancesInstanceListNodeInfoListArray) ToInstancesInstanceListNodeInfoListArrayOutput() InstancesInstanceListNodeInfoListArrayOutput {
-	return i.ToInstancesInstanceListNodeInfoListArrayOutputWithContext(context.Background())
+func (i GetInstancesInstanceListNodeInfoListArray) ToGetInstancesInstanceListNodeInfoListArrayOutput() GetInstancesInstanceListNodeInfoListArrayOutput {
+	return i.ToGetInstancesInstanceListNodeInfoListArrayOutputWithContext(context.Background())
 }
 
-func (i InstancesInstanceListNodeInfoListArray) ToInstancesInstanceListNodeInfoListArrayOutputWithContext(ctx context.Context) InstancesInstanceListNodeInfoListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(InstancesInstanceListNodeInfoListArrayOutput)
+func (i GetInstancesInstanceListNodeInfoListArray) ToGetInstancesInstanceListNodeInfoListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListNodeInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListNodeInfoListArrayOutput)
 }
 
-type InstancesInstanceListNodeInfoListOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListNodeInfoListOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListNodeInfoListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*InstancesInstanceListNodeInfoList)(nil)).Elem()
+func (GetInstancesInstanceListNodeInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListNodeInfoList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListNodeInfoListOutput) ToInstancesInstanceListNodeInfoListOutput() InstancesInstanceListNodeInfoListOutput {
+func (o GetInstancesInstanceListNodeInfoListOutput) ToGetInstancesInstanceListNodeInfoListOutput() GetInstancesInstanceListNodeInfoListOutput {
 	return o
 }
 
-func (o InstancesInstanceListNodeInfoListOutput) ToInstancesInstanceListNodeInfoListOutputWithContext(ctx context.Context) InstancesInstanceListNodeInfoListOutput {
+func (o GetInstancesInstanceListNodeInfoListOutput) ToGetInstancesInstanceListNodeInfoListOutputWithContext(ctx context.Context) GetInstancesInstanceListNodeInfoListOutput {
 	return o
 }
 
-func (o InstancesInstanceListNodeInfoListOutput) DiskSize() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceListNodeInfoList) int { return v.DiskSize }).(pulumi.IntOutput)
+// Node disk size.
+func (o GetInstancesInstanceListNodeInfoListOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListNodeInfoList) int { return v.DiskSize }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListNodeInfoListOutput) DiskType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceListNodeInfoList) string { return v.DiskType }).(pulumi.StringOutput)
+// Node disk type.
+func (o GetInstancesInstanceListNodeInfoListOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListNodeInfoList) string { return v.DiskType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListNodeInfoListOutput) Encrypt() pulumi.BoolOutput {
-	return o.ApplyT(func(v InstancesInstanceListNodeInfoList) bool { return v.Encrypt }).(pulumi.BoolOutput)
+// Decides this disk encrypted or not.
+func (o GetInstancesInstanceListNodeInfoListOutput) Encrypt() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListNodeInfoList) bool { return v.Encrypt }).(pulumi.BoolOutput)
 }
 
-func (o InstancesInstanceListNodeInfoListOutput) NodeNum() pulumi.IntOutput {
-	return o.ApplyT(func(v InstancesInstanceListNodeInfoList) int { return v.NodeNum }).(pulumi.IntOutput)
+// Number of nodes.
+func (o GetInstancesInstanceListNodeInfoListOutput) NodeNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListNodeInfoList) int { return v.NodeNum }).(pulumi.IntOutput)
 }
 
-func (o InstancesInstanceListNodeInfoListOutput) NodeType() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceListNodeInfoList) string { return v.NodeType }).(pulumi.StringOutput)
+// Node specification.
+func (o GetInstancesInstanceListNodeInfoListOutput) NodeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListNodeInfoList) string { return v.NodeType }).(pulumi.StringOutput)
 }
 
-func (o InstancesInstanceListNodeInfoListOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v InstancesInstanceListNodeInfoList) string { return v.Type }).(pulumi.StringOutput)
+// Node type.
+func (o GetInstancesInstanceListNodeInfoListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListNodeInfoList) string { return v.Type }).(pulumi.StringOutput)
 }
 
-type InstancesInstanceListNodeInfoListArrayOutput struct{ *pulumi.OutputState }
+type GetInstancesInstanceListNodeInfoListArrayOutput struct{ *pulumi.OutputState }
 
-func (InstancesInstanceListNodeInfoListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]InstancesInstanceListNodeInfoList)(nil)).Elem()
+func (GetInstancesInstanceListNodeInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListNodeInfoList)(nil)).Elem()
 }
 
-func (o InstancesInstanceListNodeInfoListArrayOutput) ToInstancesInstanceListNodeInfoListArrayOutput() InstancesInstanceListNodeInfoListArrayOutput {
+func (o GetInstancesInstanceListNodeInfoListArrayOutput) ToGetInstancesInstanceListNodeInfoListArrayOutput() GetInstancesInstanceListNodeInfoListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListNodeInfoListArrayOutput) ToInstancesInstanceListNodeInfoListArrayOutputWithContext(ctx context.Context) InstancesInstanceListNodeInfoListArrayOutput {
+func (o GetInstancesInstanceListNodeInfoListArrayOutput) ToGetInstancesInstanceListNodeInfoListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListNodeInfoListArrayOutput {
 	return o
 }
 
-func (o InstancesInstanceListNodeInfoListArrayOutput) Index(i pulumi.IntInput) InstancesInstanceListNodeInfoListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstancesInstanceListNodeInfoList {
-		return vs[0].([]InstancesInstanceListNodeInfoList)[vs[1].(int)]
-	}).(InstancesInstanceListNodeInfoListOutput)
+func (o GetInstancesInstanceListNodeInfoListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListNodeInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListNodeInfoList {
+		return vs[0].([]GetInstancesInstanceListNodeInfoList)[vs[1].(int)]
+	}).(GetInstancesInstanceListNodeInfoListOutput)
 }
 
 func init() {
@@ -761,22 +869,22 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceNodeInfoListArrayInput)(nil)).Elem(), InstanceNodeInfoListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceWebNodeTypeInfoInput)(nil)).Elem(), InstanceWebNodeTypeInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceWebNodeTypeInfoArrayInput)(nil)).Elem(), InstanceWebNodeTypeInfoArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListInput)(nil)).Elem(), InstancesInstanceListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListArrayInput)(nil)).Elem(), InstancesInstanceListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListMultiZoneInfoInput)(nil)).Elem(), InstancesInstanceListMultiZoneInfoArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListMultiZoneInfoArrayInput)(nil)).Elem(), InstancesInstanceListMultiZoneInfoArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListNodeInfoListInput)(nil)).Elem(), InstancesInstanceListNodeInfoListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*InstancesInstanceListNodeInfoListArrayInput)(nil)).Elem(), InstancesInstanceListNodeInfoListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListMultiZoneInfoInput)(nil)).Elem(), GetInstancesInstanceListMultiZoneInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListMultiZoneInfoArrayInput)(nil)).Elem(), GetInstancesInstanceListMultiZoneInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListNodeInfoListInput)(nil)).Elem(), GetInstancesInstanceListNodeInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListNodeInfoListArrayInput)(nil)).Elem(), GetInstancesInstanceListNodeInfoListArray{})
 	pulumi.RegisterOutputType(InstanceMultiZoneInfoOutput{})
 	pulumi.RegisterOutputType(InstanceMultiZoneInfoArrayOutput{})
 	pulumi.RegisterOutputType(InstanceNodeInfoListOutput{})
 	pulumi.RegisterOutputType(InstanceNodeInfoListArrayOutput{})
 	pulumi.RegisterOutputType(InstanceWebNodeTypeInfoOutput{})
 	pulumi.RegisterOutputType(InstanceWebNodeTypeInfoArrayOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListArrayOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListMultiZoneInfoOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListMultiZoneInfoArrayOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListNodeInfoListOutput{})
-	pulumi.RegisterOutputType(InstancesInstanceListNodeInfoListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListMultiZoneInfoOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListMultiZoneInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListNodeInfoListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListNodeInfoListArrayOutput{})
 }

@@ -11,6 +11,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to detailed information of attached backend server to an ENI.
+//
+// ## Import
+//
+// ENI attachment can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Eni/attachment:Attachment tencentcloud_eni_attachment.foo eni-gtlvkjvz+ins-0h3a5new
+// ```
 type Attachment struct {
 	pulumi.CustomResourceState
 

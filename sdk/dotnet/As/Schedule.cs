@@ -9,6 +9,35 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.As
 {
+    /// <summary>
+    /// Provides a resource for an AS (Auto scaling) schedule.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var schedule = new Tencentcloud.As.Schedule("schedule", new Tencentcloud.As.ScheduleArgs
+    ///         {
+    ///             DesiredCapacity = 0,
+    ///             EndTime = "2019-12-01T00:00:00+08:00",
+    ///             MaxSize = 10,
+    ///             MinSize = 0,
+    ///             Recurrence = "0 0 * * *",
+    ///             ScalingGroupId = "sg-12af45",
+    ///             ScheduleActionName = "tf-as-schedule",
+    ///             StartTime = "2019-01-01T00:00:00+08:00",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:As/schedule:Schedule")]
     public partial class Schedule : Pulumi.CustomResource
     {
@@ -37,8 +66,7 @@ namespace Pulumi.Tencentcloud.As
         public Output<int> MinSize { get; private set; } = null!;
 
         /// <summary>
-        /// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-        /// format. And this argument should be set with end_time together.
+        /// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.
         /// </summary>
         [Output("recurrence")]
         public Output<string?> Recurrence { get; private set; } = null!;
@@ -132,8 +160,7 @@ namespace Pulumi.Tencentcloud.As
         public Input<int> MinSize { get; set; } = null!;
 
         /// <summary>
-        /// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-        /// format. And this argument should be set with end_time together.
+        /// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.
         /// </summary>
         [Input("recurrence")]
         public Input<string>? Recurrence { get; set; }
@@ -188,8 +215,7 @@ namespace Pulumi.Tencentcloud.As
         public Input<int>? MinSize { get; set; }
 
         /// <summary>
-        /// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-        /// format. And this argument should be set with end_time together.
+        /// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.
         /// </summary>
         [Input("recurrence")]
         public Input<string>? Recurrence { get; set; }

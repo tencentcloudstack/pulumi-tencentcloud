@@ -9,6 +9,29 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cbs
 {
+    /// <summary>
+    /// Provides a CBS snapshot policy attachment resource.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Cbs.SnapshotPolicyAttachment("foo", new Tencentcloud.Cbs.SnapshotPolicyAttachmentArgs
+    ///         {
+    ///             StorageId = tencentcloud_cbs_storage.Foo.Id,
+    ///             SnapshotPolicyId = tencentcloud_cbs_snapshot_policy.Policy.Id,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment")]
     public partial class SnapshotPolicyAttachment : Pulumi.CustomResource
     {

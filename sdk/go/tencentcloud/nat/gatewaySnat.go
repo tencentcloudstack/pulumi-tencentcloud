@@ -11,6 +11,21 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a NAT Gateway SNat rule.
+//
+// ## Import
+//
+// VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g. SUBNET SNat
+//
+// ```sh
+//  $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
+// ```
+//
+//  NETWORKINTERFACT SNat
+//
+// ```sh
+//  $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
+// ```
 type GatewaySnat struct {
 	pulumi.CustomResourceState
 
@@ -18,9 +33,9 @@ type GatewaySnat struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Description.
 	Description pulumi.StringOutput `pulumi:"description"`
-	// Instance ID, required when `resource_type` is NETWORKINTERFACE.
+	// Instance ID, required when `resourceType` is NETWORKINTERFACE.
 	InstanceId pulumi.StringPtrOutput `pulumi:"instanceId"`
-	// Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
 	InstancePrivateIpAddr pulumi.StringPtrOutput `pulumi:"instancePrivateIpAddr"`
 	// NAT gateway ID.
 	NatGatewayId pulumi.StringOutput `pulumi:"natGatewayId"`
@@ -30,9 +45,9 @@ type GatewaySnat struct {
 	ResourceType pulumi.StringOutput `pulumi:"resourceType"`
 	// SNAT rule ID.
 	SnatId pulumi.StringOutput `pulumi:"snatId"`
-	// The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
+	// The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
 	SubnetCidrBlock pulumi.StringPtrOutput `pulumi:"subnetCidrBlock"`
-	// Subnet instance ID, required when `resource_type` is SUBNET.
+	// Subnet instance ID, required when `resourceType` is SUBNET.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
 }
 
@@ -81,9 +96,9 @@ type gatewaySnatState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Description.
 	Description *string `pulumi:"description"`
-	// Instance ID, required when `resource_type` is NETWORKINTERFACE.
+	// Instance ID, required when `resourceType` is NETWORKINTERFACE.
 	InstanceId *string `pulumi:"instanceId"`
-	// Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
 	InstancePrivateIpAddr *string `pulumi:"instancePrivateIpAddr"`
 	// NAT gateway ID.
 	NatGatewayId *string `pulumi:"natGatewayId"`
@@ -93,9 +108,9 @@ type gatewaySnatState struct {
 	ResourceType *string `pulumi:"resourceType"`
 	// SNAT rule ID.
 	SnatId *string `pulumi:"snatId"`
-	// The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
+	// The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
 	SubnetCidrBlock *string `pulumi:"subnetCidrBlock"`
-	// Subnet instance ID, required when `resource_type` is SUBNET.
+	// Subnet instance ID, required when `resourceType` is SUBNET.
 	SubnetId *string `pulumi:"subnetId"`
 }
 
@@ -104,9 +119,9 @@ type GatewaySnatState struct {
 	CreateTime pulumi.StringPtrInput
 	// Description.
 	Description pulumi.StringPtrInput
-	// Instance ID, required when `resource_type` is NETWORKINTERFACE.
+	// Instance ID, required when `resourceType` is NETWORKINTERFACE.
 	InstanceId pulumi.StringPtrInput
-	// Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
 	InstancePrivateIpAddr pulumi.StringPtrInput
 	// NAT gateway ID.
 	NatGatewayId pulumi.StringPtrInput
@@ -116,9 +131,9 @@ type GatewaySnatState struct {
 	ResourceType pulumi.StringPtrInput
 	// SNAT rule ID.
 	SnatId pulumi.StringPtrInput
-	// The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
+	// The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
 	SubnetCidrBlock pulumi.StringPtrInput
-	// Subnet instance ID, required when `resource_type` is SUBNET.
+	// Subnet instance ID, required when `resourceType` is SUBNET.
 	SubnetId pulumi.StringPtrInput
 }
 
@@ -129,9 +144,9 @@ func (GatewaySnatState) ElementType() reflect.Type {
 type gatewaySnatArgs struct {
 	// Description.
 	Description string `pulumi:"description"`
-	// Instance ID, required when `resource_type` is NETWORKINTERFACE.
+	// Instance ID, required when `resourceType` is NETWORKINTERFACE.
 	InstanceId *string `pulumi:"instanceId"`
-	// Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
 	InstancePrivateIpAddr *string `pulumi:"instancePrivateIpAddr"`
 	// NAT gateway ID.
 	NatGatewayId string `pulumi:"natGatewayId"`
@@ -139,9 +154,9 @@ type gatewaySnatArgs struct {
 	PublicIpAddrs []string `pulumi:"publicIpAddrs"`
 	// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
 	ResourceType string `pulumi:"resourceType"`
-	// The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
+	// The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
 	SubnetCidrBlock *string `pulumi:"subnetCidrBlock"`
-	// Subnet instance ID, required when `resource_type` is SUBNET.
+	// Subnet instance ID, required when `resourceType` is SUBNET.
 	SubnetId *string `pulumi:"subnetId"`
 }
 
@@ -149,9 +164,9 @@ type gatewaySnatArgs struct {
 type GatewaySnatArgs struct {
 	// Description.
 	Description pulumi.StringInput
-	// Instance ID, required when `resource_type` is NETWORKINTERFACE.
+	// Instance ID, required when `resourceType` is NETWORKINTERFACE.
 	InstanceId pulumi.StringPtrInput
-	// Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
 	InstancePrivateIpAddr pulumi.StringPtrInput
 	// NAT gateway ID.
 	NatGatewayId pulumi.StringInput
@@ -159,9 +174,9 @@ type GatewaySnatArgs struct {
 	PublicIpAddrs pulumi.StringArrayInput
 	// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
 	ResourceType pulumi.StringInput
-	// The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
+	// The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
 	SubnetCidrBlock pulumi.StringPtrInput
-	// Subnet instance ID, required when `resource_type` is SUBNET.
+	// Subnet instance ID, required when `resourceType` is SUBNET.
 	SubnetId pulumi.StringPtrInput
 }
 
@@ -262,12 +277,12 @@ func (o GatewaySnatOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v *GatewaySnat) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
 }
 
-// Instance ID, required when `resource_type` is NETWORKINTERFACE.
+// Instance ID, required when `resourceType` is NETWORKINTERFACE.
 func (o GatewaySnatOutput) InstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GatewaySnat) pulumi.StringPtrOutput { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
-// Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
 func (o GatewaySnatOutput) InstancePrivateIpAddr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GatewaySnat) pulumi.StringPtrOutput { return v.InstancePrivateIpAddr }).(pulumi.StringPtrOutput)
 }
@@ -292,12 +307,12 @@ func (o GatewaySnatOutput) SnatId() pulumi.StringOutput {
 	return o.ApplyT(func(v *GatewaySnat) pulumi.StringOutput { return v.SnatId }).(pulumi.StringOutput)
 }
 
-// The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
+// The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
 func (o GatewaySnatOutput) SubnetCidrBlock() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GatewaySnat) pulumi.StringPtrOutput { return v.SubnetCidrBlock }).(pulumi.StringPtrOutput)
 }
 
-// Subnet instance ID, required when `resource_type` is SUBNET.
+// Subnet instance ID, required when `resourceType` is SUBNET.
 func (o GatewaySnatOutput) SubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GatewaySnat) pulumi.StringPtrOutput { return v.SubnetId }).(pulumi.StringPtrOutput)
 }

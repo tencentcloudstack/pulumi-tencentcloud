@@ -23,18 +23,12 @@ class AclArgs:
         """
         The set of arguments for constructing a Acl resource.
         :param pulumi.Input[str] instance_id: ID of the ckafka instance.
-        :param pulumi.Input[str] operation_type: ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`,
-               `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
-        :param pulumi.Input[str] resource_name: ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates
-               the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
+        :param pulumi.Input[str] operation_type: ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
+        :param pulumi.Input[str] resource_name: ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
         :param pulumi.Input[str] host: IP address allowed to access. The default value is `*`, which means that any host can access.
-        :param pulumi.Input[str] permission_type: ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports
-               `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
-        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in
-               the user list.
-        :param pulumi.Input[str] resource_type: ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by
-               default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source
-               Kafka.
+        :param pulumi.Input[str] permission_type: ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        :param pulumi.Input[str] resource_type: ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
         """
         pulumi.set(__self__, "instance_id", instance_id)
         pulumi.set(__self__, "operation_type", operation_type)
@@ -64,8 +58,7 @@ class AclArgs:
     @pulumi.getter(name="operationType")
     def operation_type(self) -> pulumi.Input[str]:
         """
-        ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`,
-        `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
+        ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
         """
         return pulumi.get(self, "operation_type")
 
@@ -77,8 +70,7 @@ class AclArgs:
     @pulumi.getter(name="resourceName")
     def resource_name(self) -> pulumi.Input[str]:
         """
-        ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates
-        the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
+        ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
         """
         return pulumi.get(self, "resource_name")
 
@@ -102,8 +94,7 @@ class AclArgs:
     @pulumi.getter(name="permissionType")
     def permission_type(self) -> Optional[pulumi.Input[str]]:
         """
-        ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports
-        `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+        ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
         """
         return pulumi.get(self, "permission_type")
 
@@ -115,8 +106,7 @@ class AclArgs:
     @pulumi.getter
     def principal(self) -> Optional[pulumi.Input[str]]:
         """
-        User list. The default value is `*`, which means that any user can access. The current user can only be one included in
-        the user list.
+        User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
         """
         return pulumi.get(self, "principal")
 
@@ -128,9 +118,7 @@ class AclArgs:
     @pulumi.getter(name="resourceType")
     def resource_type(self) -> Optional[pulumi.Input[str]]:
         """
-        ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by
-        default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source
-        Kafka.
+        ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
         """
         return pulumi.get(self, "resource_type")
 
@@ -153,17 +141,11 @@ class _AclState:
         Input properties used for looking up and filtering Acl resources.
         :param pulumi.Input[str] host: IP address allowed to access. The default value is `*`, which means that any host can access.
         :param pulumi.Input[str] instance_id: ID of the ckafka instance.
-        :param pulumi.Input[str] operation_type: ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`,
-               `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
-        :param pulumi.Input[str] permission_type: ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports
-               `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
-        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in
-               the user list.
-        :param pulumi.Input[str] resource_name: ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates
-               the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
-        :param pulumi.Input[str] resource_type: ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by
-               default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source
-               Kafka.
+        :param pulumi.Input[str] operation_type: ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
+        :param pulumi.Input[str] permission_type: ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        :param pulumi.Input[str] resource_name: ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
+        :param pulumi.Input[str] resource_type: ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
         """
         if host is not None:
             pulumi.set(__self__, "host", host)
@@ -208,8 +190,7 @@ class _AclState:
     @pulumi.getter(name="operationType")
     def operation_type(self) -> Optional[pulumi.Input[str]]:
         """
-        ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`,
-        `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
+        ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
         """
         return pulumi.get(self, "operation_type")
 
@@ -221,8 +202,7 @@ class _AclState:
     @pulumi.getter(name="permissionType")
     def permission_type(self) -> Optional[pulumi.Input[str]]:
         """
-        ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports
-        `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+        ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
         """
         return pulumi.get(self, "permission_type")
 
@@ -234,8 +214,7 @@ class _AclState:
     @pulumi.getter
     def principal(self) -> Optional[pulumi.Input[str]]:
         """
-        User list. The default value is `*`, which means that any user can access. The current user can only be one included in
-        the user list.
+        User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
         """
         return pulumi.get(self, "principal")
 
@@ -247,8 +226,7 @@ class _AclState:
     @pulumi.getter(name="resourceName")
     def resource_name(self) -> Optional[pulumi.Input[str]]:
         """
-        ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates
-        the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
+        ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
         """
         return pulumi.get(self, "resource_name")
 
@@ -260,9 +238,7 @@ class _AclState:
     @pulumi.getter(name="resourceType")
     def resource_type(self) -> Optional[pulumi.Input[str]]:
         """
-        ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by
-        default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source
-        Kafka.
+        ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
         """
         return pulumi.get(self, "resource_type")
 
@@ -285,22 +261,43 @@ class Acl(pulumi.CustomResource):
                  resource_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Acl resource with the given unique name, props, and options.
+        Provides a resource to create a Ckafka Acl.
+
+        ## Example Usage
+
+        Ckafka Acl
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ckafka.Acl("foo",
+            instance_id="ckafka-f9ife4zz",
+            resource_type="TOPIC",
+            resource_name_="topic-tf-test",
+            operation_type="WRITE",
+            permission_type="ALLOW",
+            host="*",
+            principal=tencentcloud_ckafka_user["foo"]["account_name"])
+        ```
+
+        ## Import
+
+        Ckafka acl can be imported using the instance_id#permission_type#principal#host#operation_type#resource_type#resource_name, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ckafka/acl:Acl foo ckafka-f9ife4zz#ALLOW#test#*#WRITE#TOPIC#topic-tf-test
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] host: IP address allowed to access. The default value is `*`, which means that any host can access.
         :param pulumi.Input[str] instance_id: ID of the ckafka instance.
-        :param pulumi.Input[str] operation_type: ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`,
-               `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
-        :param pulumi.Input[str] permission_type: ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports
-               `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
-        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in
-               the user list.
-        :param pulumi.Input[str] resource_name_: ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates
-               the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
-        :param pulumi.Input[str] resource_type: ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by
-               default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source
-               Kafka.
+        :param pulumi.Input[str] operation_type: ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
+        :param pulumi.Input[str] permission_type: ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        :param pulumi.Input[str] resource_name_: ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
+        :param pulumi.Input[str] resource_type: ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
         """
         ...
     @overload
@@ -309,7 +306,34 @@ class Acl(pulumi.CustomResource):
                  args: AclArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Acl resource with the given unique name, props, and options.
+        Provides a resource to create a Ckafka Acl.
+
+        ## Example Usage
+
+        Ckafka Acl
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ckafka.Acl("foo",
+            instance_id="ckafka-f9ife4zz",
+            resource_type="TOPIC",
+            resource_name_="topic-tf-test",
+            operation_type="WRITE",
+            permission_type="ALLOW",
+            host="*",
+            principal=tencentcloud_ckafka_user["foo"]["account_name"])
+        ```
+
+        ## Import
+
+        Ckafka acl can be imported using the instance_id#permission_type#principal#host#operation_type#resource_type#resource_name, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ckafka/acl:Acl foo ckafka-f9ife4zz#ALLOW#test#*#WRITE#TOPIC#topic-tf-test
+        ```
+
         :param str resource_name: The name of the resource.
         :param AclArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -383,17 +407,11 @@ class Acl(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] host: IP address allowed to access. The default value is `*`, which means that any host can access.
         :param pulumi.Input[str] instance_id: ID of the ckafka instance.
-        :param pulumi.Input[str] operation_type: ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`,
-               `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
-        :param pulumi.Input[str] permission_type: ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports
-               `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
-        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in
-               the user list.
-        :param pulumi.Input[str] resource_name_: ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates
-               the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
-        :param pulumi.Input[str] resource_type: ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by
-               default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source
-               Kafka.
+        :param pulumi.Input[str] operation_type: ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
+        :param pulumi.Input[str] permission_type: ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+        :param pulumi.Input[str] principal: User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
+        :param pulumi.Input[str] resource_name_: ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
+        :param pulumi.Input[str] resource_type: ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -428,8 +446,7 @@ class Acl(pulumi.CustomResource):
     @pulumi.getter(name="operationType")
     def operation_type(self) -> pulumi.Output[str]:
         """
-        ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`,
-        `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
+        ACL operation mode. Valid values: `UNKNOWN`, `ANY`, `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS` and `ALTER_CONFIGS`.
         """
         return pulumi.get(self, "operation_type")
 
@@ -437,8 +454,7 @@ class Acl(pulumi.CustomResource):
     @pulumi.getter(name="permissionType")
     def permission_type(self) -> pulumi.Output[Optional[str]]:
         """
-        ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports
-        `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
+        ACL permission type. Valid values: `UNKNOWN`, `ANY`, `DENY`, `ALLOW`. and `ALLOW` by default. Currently, CKafka supports `ALLOW` (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.
         """
         return pulumi.get(self, "permission_type")
 
@@ -446,8 +462,7 @@ class Acl(pulumi.CustomResource):
     @pulumi.getter
     def principal(self) -> pulumi.Output[Optional[str]]:
         """
-        User list. The default value is `*`, which means that any user can access. The current user can only be one included in
-        the user list.
+        User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list.
         """
         return pulumi.get(self, "principal")
 
@@ -455,8 +470,7 @@ class Acl(pulumi.CustomResource):
     @pulumi.getter(name="resourceName")
     def resource_name(self) -> pulumi.Output[str]:
         """
-        ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates
-        the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
+        ACL resource name, which is related to `resource_type`. For example, if `resource_type` is `TOPIC`, this field indicates the topic name; if `resource_type` is `GROUP`, this field indicates the group name.
         """
         return pulumi.get(self, "resource_name")
 
@@ -464,9 +478,7 @@ class Acl(pulumi.CustomResource):
     @pulumi.getter(name="resourceType")
     def resource_type(self) -> pulumi.Output[Optional[str]]:
         """
-        ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by
-        default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source
-        Kafka.
+        ACL resource type. Valid values are `UNKNOWN`, `ANY`, `TOPIC`, `GROUP`, `CLUSTER`, `TRANSACTIONAL_ID`. and `TOPIC` by default. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka.
         """
         return pulumi.get(self, "resource_type")
 

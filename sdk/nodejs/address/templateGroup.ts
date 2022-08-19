@@ -4,6 +4,31 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to manage address template group.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Address.TemplateGroup("foo", {
+ *     templateIds: [
+ *         "ipl-axaf24151",
+ *         "ipl-axaf24152",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Address template group can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Address/templateGroup:TemplateGroup foo ipmg-0np3u974
+ * ```
+ */
 export class TemplateGroup extends pulumi.CustomResource {
     /**
      * Get an existing TemplateGroup resource's state with the given name, ID, and optional extra

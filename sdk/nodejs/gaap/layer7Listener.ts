@@ -4,6 +4,36 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a layer7 listener of GAAP.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+ *     bandwidth: 10,
+ *     concurrent: 2,
+ *     accessRegion: "SouthChina",
+ *     realserverRegion: "NorthChina",
+ * });
+ * const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
+ *     protocol: "HTTP",
+ *     port: 80,
+ *     proxyId: fooProxy.id,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * GAAP layer7 listener can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
+ * ```
+ */
 export class Layer7Listener extends pulumi.CustomResource {
     /**
      * Get an existing Layer7Listener resource's state with the given name, ID, and optional extra
@@ -33,8 +63,7 @@ export class Layer7Listener extends pulumi.CustomResource {
     }
 
     /**
-     * Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-     * supports listeners of `HTTPS` protocol.
+     * Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      */
     public readonly authType!: pulumi.Output<number | undefined>;
     /**
@@ -42,15 +71,13 @@ export class Layer7Listener extends pulumi.CustomResource {
      */
     public readonly certificateId!: pulumi.Output<string | undefined>;
     /**
-     * ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-     * listeners of `HTTPS` protocol.
+     * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      *
      * @deprecated It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
      */
     public readonly clientCertificateId!: pulumi.Output<string>;
     /**
-     * ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-     * listeners of `HTTPS` protocol.
+     * ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      */
     public readonly clientCertificateIds!: pulumi.Output<string[]>;
     /**
@@ -139,8 +166,7 @@ export class Layer7Listener extends pulumi.CustomResource {
  */
 export interface Layer7ListenerState {
     /**
-     * Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-     * supports listeners of `HTTPS` protocol.
+     * Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      */
     authType?: pulumi.Input<number>;
     /**
@@ -148,15 +174,13 @@ export interface Layer7ListenerState {
      */
     certificateId?: pulumi.Input<string>;
     /**
-     * ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-     * listeners of `HTTPS` protocol.
+     * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      *
      * @deprecated It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
      */
     clientCertificateId?: pulumi.Input<string>;
     /**
-     * ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-     * listeners of `HTTPS` protocol.
+     * ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      */
     clientCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -194,8 +218,7 @@ export interface Layer7ListenerState {
  */
 export interface Layer7ListenerArgs {
     /**
-     * Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only
-     * supports listeners of `HTTPS` protocol.
+     * Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      */
     authType?: pulumi.Input<number>;
     /**
@@ -203,15 +226,13 @@ export interface Layer7ListenerArgs {
      */
     certificateId?: pulumi.Input<string>;
     /**
-     * ID of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-     * listeners of `HTTPS` protocol.
+     * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      *
      * @deprecated It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
      */
     clientCertificateId?: pulumi.Input<string>;
     /**
-     * ID list of the client certificate. Set only when `auth_type` is specified as mutual authentication. NOTES: Only supports
-     * listeners of `HTTPS` protocol.
+     * ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      */
     clientCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**

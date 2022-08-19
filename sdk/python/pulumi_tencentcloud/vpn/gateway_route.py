@@ -289,7 +289,31 @@ class GatewayRoute(pulumi.CustomResource):
                  vpn_gateway_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a GatewayRoute resource with the given unique name, props, and options.
+        Provides a resource to create a VPN gateway route.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        route = tencentcloud.vpn.GatewayRoute("route",
+            destination_cidr_block="10.0.0.0/16",
+            instance_id="vpnx-5b5dmao3",
+            instance_type="VPNCONN",
+            priority=100,
+            status="DISABLE",
+            vpn_gateway_id="vpngw-ak9sjem2")
+        ```
+
+        ## Import
+
+        VPN gateway route can be imported using the id, the id format must be '{vpn_gateway_id}#{route_id}', e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpn/gatewayRoute:GatewayRoute route1 vpngw-ak9sjem2#vpngw-8ccsnclt
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] destination_cidr_block: Destination IDC IP range.
@@ -306,7 +330,31 @@ class GatewayRoute(pulumi.CustomResource):
                  args: GatewayRouteArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a GatewayRoute resource with the given unique name, props, and options.
+        Provides a resource to create a VPN gateway route.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        route = tencentcloud.vpn.GatewayRoute("route",
+            destination_cidr_block="10.0.0.0/16",
+            instance_id="vpnx-5b5dmao3",
+            instance_type="VPNCONN",
+            priority=100,
+            status="DISABLE",
+            vpn_gateway_id="vpngw-ak9sjem2")
+        ```
+
+        ## Import
+
+        VPN gateway route can be imported using the id, the id format must be '{vpn_gateway_id}#{route_id}', e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpn/gatewayRoute:GatewayRoute route1 vpngw-ak9sjem2#vpngw-8ccsnclt
+        ```
+
         :param str resource_name: The name of the resource.
         :param GatewayRouteArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

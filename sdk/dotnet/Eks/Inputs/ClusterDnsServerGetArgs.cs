@@ -12,11 +12,18 @@ namespace Pulumi.Tencentcloud.Eks.Inputs
 
     public sealed class ClusterDnsServerGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// DNS Server domain. Empty indicates all domain.
+        /// </summary>
         [Input("domain")]
         public Input<string>? Domain { get; set; }
 
         [Input("servers")]
         private InputList<string>? _servers;
+
+        /// <summary>
+        /// List of DNS Server IP address, pattern: "ip[:port]".
+        /// </summary>
         public InputList<string> Servers
         {
             get => _servers ?? (_servers = new InputList<string>());

@@ -146,7 +146,25 @@ class Group(pulumi.CustomResource):
                  type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Group resource with the given unique name, props, and options.
+        Provide a resource to create a placement group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.placement.Group("foo", type="HOST")
+        ```
+
+        ## Import
+
+        Placement group can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Placement/group:Group foo ps-ilan8vjf
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of the placement group, 1-60 characters in length.
@@ -159,7 +177,25 @@ class Group(pulumi.CustomResource):
                  args: GroupArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Group resource with the given unique name, props, and options.
+        Provide a resource to create a placement group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.placement.Group("foo", type="HOST")
+        ```
+
+        ## Import
+
+        Placement group can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Placement/group:Group foo ps-ilan8vjf
+        ```
+
         :param str resource_name: The name of the resource.
         :param GroupArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

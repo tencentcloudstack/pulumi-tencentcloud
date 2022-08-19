@@ -35,22 +35,16 @@ class L7RuleArgs:
         :param pulumi.Input[str] protocol: Protocol of the rule. Valid values: `http`, `https`.
         :param pulumi.Input[str] resource_id: ID of the resource that the layer 7 rule works for.
         :param pulumi.Input[str] resource_type: Type of the resource that the layer 7 rule works for, valid value is `bgpip`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-               16.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
         :param pulumi.Input[int] source_type: Source type, `1` for source of host, `2` for source of IP.
         :param pulumi.Input[bool] switch: Indicate the rule will take effect or not.
-        :param pulumi.Input[int] health_check_code: HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-               the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-               health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-               the corresponding values.
-        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-               consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+        :param pulumi.Input[int] health_check_code: HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
         :param pulumi.Input[int] health_check_interval: Interval time of health check. Valid value ranges: [10~60]sec. The default is 15 sec.
         :param pulumi.Input[str] health_check_method: Methods of health check. The default is 'HEAD', the available value are 'HEAD' and 'GET'.
         :param pulumi.Input[str] health_check_path: Path of health check. The default is `/`.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled. The default is `false`.
-        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-               indicates that the forwarding is abnormal. The value range is [2-10].
+        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
         :param pulumi.Input[str] name: Name of the rule.
         :param pulumi.Input[str] ssl_id: SSL ID, when the `protocol` is `https`, the field should be set with valid SSL id.
         """
@@ -132,8 +126,7 @@ class L7RuleArgs:
     @pulumi.getter(name="sourceLists")
     def source_lists(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
         """
-        Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-        16.
+        Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
         """
         return pulumi.get(self, "source_lists")
 
@@ -169,10 +162,7 @@ class L7RuleArgs:
     @pulumi.getter(name="healthCheckCode")
     def health_check_code(self) -> Optional[pulumi.Input[int]]:
         """
-        HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-        the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-        health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-        the corresponding values.
+        HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
         """
         return pulumi.get(self, "health_check_code")
 
@@ -184,8 +174,7 @@ class L7RuleArgs:
     @pulumi.getter(name="healthCheckHealthNum")
     def health_check_health_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-        consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+        Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
         """
         return pulumi.get(self, "health_check_health_num")
 
@@ -245,8 +234,7 @@ class L7RuleArgs:
     @pulumi.getter(name="healthCheckUnhealthNum")
     def health_check_unhealth_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-        indicates that the forwarding is abnormal. The value range is [2-10].
+        Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
         """
         return pulumi.get(self, "health_check_unhealth_num")
 
@@ -303,29 +291,22 @@ class _L7RuleState:
         """
         Input properties used for looking up and filtering L7Rule resources.
         :param pulumi.Input[str] domain: Domain that the layer 7 rule works for. Valid string length ranges from 0 to 80.
-        :param pulumi.Input[int] health_check_code: HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-               the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-               health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-               the corresponding values.
-        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-               consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+        :param pulumi.Input[int] health_check_code: HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
         :param pulumi.Input[int] health_check_interval: Interval time of health check. Valid value ranges: [10~60]sec. The default is 15 sec.
         :param pulumi.Input[str] health_check_method: Methods of health check. The default is 'HEAD', the available value are 'HEAD' and 'GET'.
         :param pulumi.Input[str] health_check_path: Path of health check. The default is `/`.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled. The default is `false`.
-        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-               indicates that the forwarding is abnormal. The value range is [2-10].
+        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
         :param pulumi.Input[str] name: Name of the rule.
         :param pulumi.Input[str] protocol: Protocol of the rule. Valid values: `http`, `https`.
         :param pulumi.Input[str] resource_id: ID of the resource that the layer 7 rule works for.
         :param pulumi.Input[str] resource_type: Type of the resource that the layer 7 rule works for, valid value is `bgpip`.
         :param pulumi.Input[str] rule_id: ID of the layer 7 rule.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-               16.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
         :param pulumi.Input[int] source_type: Source type, `1` for source of host, `2` for source of IP.
         :param pulumi.Input[str] ssl_id: SSL ID, when the `protocol` is `https`, the field should be set with valid SSL id.
-        :param pulumi.Input[int] status: Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete
-               failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
+        :param pulumi.Input[int] status: Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
         :param pulumi.Input[bool] switch: Indicate the rule will take effect or not.
         """
         if domain is not None:
@@ -381,10 +362,7 @@ class _L7RuleState:
     @pulumi.getter(name="healthCheckCode")
     def health_check_code(self) -> Optional[pulumi.Input[int]]:
         """
-        HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-        the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-        health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-        the corresponding values.
+        HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
         """
         return pulumi.get(self, "health_check_code")
 
@@ -396,8 +374,7 @@ class _L7RuleState:
     @pulumi.getter(name="healthCheckHealthNum")
     def health_check_health_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-        consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+        Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
         """
         return pulumi.get(self, "health_check_health_num")
 
@@ -457,8 +434,7 @@ class _L7RuleState:
     @pulumi.getter(name="healthCheckUnhealthNum")
     def health_check_unhealth_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-        indicates that the forwarding is abnormal. The value range is [2-10].
+        Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
         """
         return pulumi.get(self, "health_check_unhealth_num")
 
@@ -530,8 +506,7 @@ class _L7RuleState:
     @pulumi.getter(name="sourceLists")
     def source_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-        16.
+        Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
         """
         return pulumi.get(self, "source_lists")
 
@@ -567,8 +542,7 @@ class _L7RuleState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[int]]:
         """
-        Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete
-        failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
+        Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
         """
         return pulumi.get(self, "status")
 
@@ -612,28 +586,52 @@ class L7Rule(pulumi.CustomResource):
                  switch: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a L7Rule resource with the given unique name, props, and options.
+        Use this resource to create dayu layer 7 rule
+
+        > **NOTE:** This resource only support resource Anti-DDoS of type `bgpip`
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test_rule = tencentcloud.dayu.L7Rule("testRule",
+            domain="zhaoshaona.com",
+            health_check_code=31,
+            health_check_health_num=5,
+            health_check_interval=30,
+            health_check_method="GET",
+            health_check_path="/",
+            health_check_switch=True,
+            health_check_unhealth_num=10,
+            protocol="https",
+            resource_id="bgpip-00000294",
+            resource_type="bgpip",
+            source_lists=[
+                "1.1.1.1:80",
+                "2.2.2.2",
+            ],
+            source_type=2,
+            ssl_id="%s",
+            switch=True)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] domain: Domain that the layer 7 rule works for. Valid string length ranges from 0 to 80.
-        :param pulumi.Input[int] health_check_code: HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-               the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-               health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-               the corresponding values.
-        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-               consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+        :param pulumi.Input[int] health_check_code: HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
         :param pulumi.Input[int] health_check_interval: Interval time of health check. Valid value ranges: [10~60]sec. The default is 15 sec.
         :param pulumi.Input[str] health_check_method: Methods of health check. The default is 'HEAD', the available value are 'HEAD' and 'GET'.
         :param pulumi.Input[str] health_check_path: Path of health check. The default is `/`.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled. The default is `false`.
-        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-               indicates that the forwarding is abnormal. The value range is [2-10].
+        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
         :param pulumi.Input[str] name: Name of the rule.
         :param pulumi.Input[str] protocol: Protocol of the rule. Valid values: `http`, `https`.
         :param pulumi.Input[str] resource_id: ID of the resource that the layer 7 rule works for.
         :param pulumi.Input[str] resource_type: Type of the resource that the layer 7 rule works for, valid value is `bgpip`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-               16.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
         :param pulumi.Input[int] source_type: Source type, `1` for source of host, `2` for source of IP.
         :param pulumi.Input[str] ssl_id: SSL ID, when the `protocol` is `https`, the field should be set with valid SSL id.
         :param pulumi.Input[bool] switch: Indicate the rule will take effect or not.
@@ -645,7 +643,37 @@ class L7Rule(pulumi.CustomResource):
                  args: L7RuleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a L7Rule resource with the given unique name, props, and options.
+        Use this resource to create dayu layer 7 rule
+
+        > **NOTE:** This resource only support resource Anti-DDoS of type `bgpip`
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test_rule = tencentcloud.dayu.L7Rule("testRule",
+            domain="zhaoshaona.com",
+            health_check_code=31,
+            health_check_health_num=5,
+            health_check_interval=30,
+            health_check_method="GET",
+            health_check_path="/",
+            health_check_switch=True,
+            health_check_unhealth_num=10,
+            protocol="https",
+            resource_id="bgpip-00000294",
+            resource_type="bgpip",
+            source_lists=[
+                "1.1.1.1:80",
+                "2.2.2.2",
+            ],
+            source_type=2,
+            ssl_id="%s",
+            switch=True)
+        ```
+
         :param str resource_name: The name of the resource.
         :param L7RuleArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -757,29 +785,22 @@ class L7Rule(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] domain: Domain that the layer 7 rule works for. Valid string length ranges from 0 to 80.
-        :param pulumi.Input[int] health_check_code: HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-               the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-               health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-               the corresponding values.
-        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-               consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+        :param pulumi.Input[int] health_check_code: HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+        :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
         :param pulumi.Input[int] health_check_interval: Interval time of health check. Valid value ranges: [10~60]sec. The default is 15 sec.
         :param pulumi.Input[str] health_check_method: Methods of health check. The default is 'HEAD', the available value are 'HEAD' and 'GET'.
         :param pulumi.Input[str] health_check_path: Path of health check. The default is `/`.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled. The default is `false`.
-        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-               indicates that the forwarding is abnormal. The value range is [2-10].
+        :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
         :param pulumi.Input[str] name: Name of the rule.
         :param pulumi.Input[str] protocol: Protocol of the rule. Valid values: `http`, `https`.
         :param pulumi.Input[str] resource_id: ID of the resource that the layer 7 rule works for.
         :param pulumi.Input[str] resource_type: Type of the resource that the layer 7 rule works for, valid value is `bgpip`.
         :param pulumi.Input[str] rule_id: ID of the layer 7 rule.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-               16.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] source_lists: Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
         :param pulumi.Input[int] source_type: Source type, `1` for source of host, `2` for source of IP.
         :param pulumi.Input[str] ssl_id: SSL ID, when the `protocol` is `https`, the field should be set with valid SSL id.
-        :param pulumi.Input[int] status: Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete
-               failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
+        :param pulumi.Input[int] status: Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
         :param pulumi.Input[bool] switch: Indicate the rule will take effect or not.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -818,10 +839,7 @@ class L7Rule(pulumi.CustomResource):
     @pulumi.getter(name="healthCheckCode")
     def health_check_code(self) -> pulumi.Output[int]:
         """
-        HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means
-        the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is
-        health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add
-        the corresponding values.
+        HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
         """
         return pulumi.get(self, "health_check_code")
 
@@ -829,8 +847,7 @@ class L7Rule(pulumi.CustomResource):
     @pulumi.getter(name="healthCheckHealthNum")
     def health_check_health_num(self) -> pulumi.Output[int]:
         """
-        Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3
-        consecutive times, indicates that the forwarding is normal. The value range is [2-10].
+        Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
         """
         return pulumi.get(self, "health_check_health_num")
 
@@ -870,8 +887,7 @@ class L7Rule(pulumi.CustomResource):
     @pulumi.getter(name="healthCheckUnhealthNum")
     def health_check_unhealth_num(self) -> pulumi.Output[int]:
         """
-        Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times,
-        indicates that the forwarding is abnormal. The value range is [2-10].
+        Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
         """
         return pulumi.get(self, "health_check_unhealth_num")
 
@@ -919,8 +935,7 @@ class L7Rule(pulumi.CustomResource):
     @pulumi.getter(name="sourceLists")
     def source_lists(self) -> pulumi.Output[Sequence[str]]:
         """
-        Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to
-        16.
+        Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
         """
         return pulumi.get(self, "source_lists")
 
@@ -944,8 +959,7 @@ class L7Rule(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[int]:
         """
-        Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete
-        failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
+        Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
         """
         return pulumi.get(self, "status")
 

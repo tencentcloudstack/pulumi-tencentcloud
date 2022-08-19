@@ -9,6 +9,76 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Security
 {
+    /// <summary>
+    /// Provides a resource to create security group rule.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// Source is CIDR ip
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var sglab1Group = new Tencentcloud.Security.Group("sglab1Group", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "favourite sg_1",
+    ///             ProjectId = 0,
+    ///         });
+    ///         var sglab1GroupRule = new Tencentcloud.Security.GroupRule("sglab1GroupRule", new Tencentcloud.Security.GroupRuleArgs
+    ///         {
+    ///             SecurityGroupId = sglab1Group.Id,
+    ///             Type = "ingress",
+    ///             CidrIp = "10.0.0.0/16",
+    ///             IpProtocol = "TCP",
+    ///             PortRange = "80",
+    ///             Policy = "ACCEPT",
+    ///             Description = "favourite sg rule_1",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Source is a security group id
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var sglab2Group = new Tencentcloud.Security.Group("sglab2Group", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "favourite sg_2",
+    ///             ProjectId = 0,
+    ///         });
+    ///         var sglab3 = new Tencentcloud.Security.Group("sglab3", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///             Description = "favourite sg_3",
+    ///             ProjectId = 0,
+    ///         });
+    ///         var sglab2GroupRule = new Tencentcloud.Security.GroupRule("sglab2GroupRule", new Tencentcloud.Security.GroupRuleArgs
+    ///         {
+    ///             SecurityGroupId = sglab2Group.Id,
+    ///             Type = "ingress",
+    ///             IpProtocol = "TCP",
+    ///             PortRange = "80",
+    ///             Policy = "ACCEPT",
+    ///             SourceSgid = sglab3.Id,
+    ///             Description = "favourite sg rule_2",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Security/groupRule:GroupRule")]
     public partial class GroupRule : Pulumi.CustomResource
     {
@@ -31,8 +101,7 @@ namespace Pulumi.Tencentcloud.Security
         public Output<string> Description { get; private set; } = null!;
 
         /// <summary>
-        /// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-        /// `protocol_template`.
+        /// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
         /// </summary>
         [Output("ipProtocol")]
         public Output<string> IpProtocol { get; private set; } = null!;
@@ -44,8 +113,7 @@ namespace Pulumi.Tencentcloud.Security
         public Output<string> Policy { get; private set; } = null!;
 
         /// <summary>
-        /// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-        /// all ports, and confilicts with `protocol_template`.
+        /// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         /// </summary>
         [Output("portRange")]
         public Output<string> PortRange { get; private set; } = null!;
@@ -139,8 +207,7 @@ namespace Pulumi.Tencentcloud.Security
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-        /// `protocol_template`.
+        /// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
         /// </summary>
         [Input("ipProtocol")]
         public Input<string>? IpProtocol { get; set; }
@@ -152,8 +219,7 @@ namespace Pulumi.Tencentcloud.Security
         public Input<string> Policy { get; set; } = null!;
 
         /// <summary>
-        /// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-        /// all ports, and confilicts with `protocol_template`.
+        /// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         /// </summary>
         [Input("portRange")]
         public Input<string>? PortRange { get; set; }
@@ -208,8 +274,7 @@ namespace Pulumi.Tencentcloud.Security
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-        /// `protocol_template`.
+        /// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
         /// </summary>
         [Input("ipProtocol")]
         public Input<string>? IpProtocol { get; set; }
@@ -221,8 +286,7 @@ namespace Pulumi.Tencentcloud.Security
         public Input<string>? Policy { get; set; }
 
         /// <summary>
-        /// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-        /// all ports, and confilicts with `protocol_template`.
+        /// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         /// </summary>
         [Input("portRange")]
         public Input<string>? PortRange { get; set; }

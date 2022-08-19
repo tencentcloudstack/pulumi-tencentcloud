@@ -9,6 +9,30 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Mysql
 {
+    /// <summary>
+    /// Provides a MySQL account resource for database management. A MySQL instance supports multiple database account.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var @default = new Tencentcloud.Mysql.Account("default", new Tencentcloud.Mysql.AccountArgs
+    ///         {
+    ///             Description = "My test account",
+    ///             MysqlId = "my-test-database",
+    ///             Password = "********",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/account:Account")]
     public partial class Account : Pulumi.CustomResource
     {

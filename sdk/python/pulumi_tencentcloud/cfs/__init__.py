@@ -6,9 +6,9 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .access_group import *
-from .access_groups import *
 from .access_rule import *
-from .access_rules import *
 from .file_system import *
-from .file_systems import *
+from .get_access_groups import *
+from .get_access_rules import *
+from .get_file_systems import *
 from . import outputs

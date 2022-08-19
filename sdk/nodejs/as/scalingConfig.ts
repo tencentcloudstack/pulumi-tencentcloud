@@ -5,6 +5,63 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a configuration for an AS (Auto scaling) instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const launchConfiguration = new tencentcloud.As.ScalingConfig("launch_configuration", {
+ *     configurationName: "launch-configuration",
+ *     dataDisks: [{
+ *         diskSize: 50,
+ *         diskType: "CLOUD_PREMIUM",
+ *     }],
+ *     enhancedMonitorService: false,
+ *     enhancedSecurityService: false,
+ *     imageId: "img-9qabwvbn",
+ *     instanceTags: {
+ *         tag: "as",
+ *     },
+ *     instanceTypes: ["SA1.SMALL1"],
+ *     internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *     internetMaxBandwidthOut: 10,
+ *     password: "test123#",
+ *     projectId: 0,
+ *     publicIpAssigned: true,
+ *     systemDiskSize: 50,
+ *     systemDiskType: "CLOUD_PREMIUM",
+ *     userData: "dGVzdA==",
+ * });
+ * ```
+ *
+ * Using SPOT charge type
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const launchConfiguration = new tencentcloud.As.ScalingConfig("launch_configuration", {
+ *     configurationName: "launch-configuration",
+ *     imageId: "img-9qabwvbn",
+ *     instanceChargeType: "SPOTPAID",
+ *     instanceTypes: ["SA1.SMALL1"],
+ *     spotInstanceType: "one-time",
+ *     spotMaxPrice: "1000",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * AutoScaling Configuration can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig scaling_config asc-n32ymck2
+ * ```
+ */
 export class ScalingConfig extends pulumi.CustomResource {
     /**
      * Get an existing ScalingConfig resource's state with the given name, ID, and optional extra
@@ -66,21 +123,15 @@ export class ScalingConfig extends pulumi.CustomResource {
      */
     public readonly imageId!: pulumi.Output<string>;
     /**
-     * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-     * NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+     * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
      */
     public readonly instanceChargeType!: pulumi.Output<string | undefined>;
     /**
-     * The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-     * values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     * The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
      */
     public readonly instanceChargeTypePrepaidPeriod!: pulumi.Output<number | undefined>;
     /**
-     * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-     * `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-     * neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-     * specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-     * balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+     * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
      */
     public readonly instanceChargeTypePrepaidRenewFlag!: pulumi.Output<string>;
     /**
@@ -96,8 +147,7 @@ export class ScalingConfig extends pulumi.CustomResource {
      */
     public readonly instanceTypes!: pulumi.Output<string[]>;
     /**
-     * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-     * `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+     * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
      */
     public readonly internetChargeType!: pulumi.Output<string | undefined>;
     /**
@@ -105,7 +155,7 @@ export class ScalingConfig extends pulumi.CustomResource {
      */
     public readonly internetMaxBandwidthOut!: pulumi.Output<number | undefined>;
     /**
-     * Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.
+     * Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.
      */
     public readonly keepImageLogin!: pulumi.Output<boolean | undefined>;
     /**
@@ -129,12 +179,11 @@ export class ScalingConfig extends pulumi.CustomResource {
      */
     public readonly securityGroupIds!: pulumi.Output<string[] | undefined>;
     /**
-     * Type of spot instance, only support `one-time` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
+     * Type of spot instance, only support `one-time` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
     public readonly spotInstanceType!: pulumi.Output<string | undefined>;
     /**
-     * Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-     * instance_charge_type is set to `SPOTPAID`.
+     * Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
     public readonly spotMaxPrice!: pulumi.Output<string | undefined>;
     /**
@@ -146,8 +195,7 @@ export class ScalingConfig extends pulumi.CustomResource {
      */
     public readonly systemDiskSize!: pulumi.Output<number | undefined>;
     /**
-     * Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-     * disk_type_policy is ORIGINAL.
+     * Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when diskTypePolicy is ORIGINAL.
      */
     public readonly systemDiskType!: pulumi.Output<string | undefined>;
     /**
@@ -278,21 +326,15 @@ export interface ScalingConfigState {
      */
     imageId?: pulumi.Input<string>;
     /**
-     * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-     * NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+     * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
      */
     instanceChargeType?: pulumi.Input<string>;
     /**
-     * The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-     * values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     * The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
      */
     instanceChargeTypePrepaidPeriod?: pulumi.Input<number>;
     /**
-     * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-     * `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-     * neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-     * specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-     * balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+     * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
      */
     instanceChargeTypePrepaidRenewFlag?: pulumi.Input<string>;
     /**
@@ -308,8 +350,7 @@ export interface ScalingConfigState {
      */
     instanceTypes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-     * `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+     * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
      */
     internetChargeType?: pulumi.Input<string>;
     /**
@@ -317,7 +358,7 @@ export interface ScalingConfigState {
      */
     internetMaxBandwidthOut?: pulumi.Input<number>;
     /**
-     * Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.
+     * Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.
      */
     keepImageLogin?: pulumi.Input<boolean>;
     /**
@@ -341,12 +382,11 @@ export interface ScalingConfigState {
      */
     securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Type of spot instance, only support `one-time` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
+     * Type of spot instance, only support `one-time` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
     spotInstanceType?: pulumi.Input<string>;
     /**
-     * Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-     * instance_charge_type is set to `SPOTPAID`.
+     * Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
     spotMaxPrice?: pulumi.Input<string>;
     /**
@@ -358,8 +398,7 @@ export interface ScalingConfigState {
      */
     systemDiskSize?: pulumi.Input<number>;
     /**
-     * Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-     * disk_type_policy is ORIGINAL.
+     * Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when diskTypePolicy is ORIGINAL.
      */
     systemDiskType?: pulumi.Input<string>;
     /**
@@ -401,21 +440,15 @@ export interface ScalingConfigArgs {
      */
     imageId: pulumi.Input<string>;
     /**
-     * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`.
-     * NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+     * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
      */
     instanceChargeType?: pulumi.Input<string>;
     /**
-     * The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid
-     * values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     * The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
      */
     instanceChargeTypePrepaidPeriod?: pulumi.Input<number>;
     /**
-     * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically,
-     * `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`:
-     * neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is
-     * specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account
-     * balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
+     * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
      */
     instanceChargeTypePrepaidRenewFlag?: pulumi.Input<string>;
     /**
@@ -431,8 +464,7 @@ export interface ScalingConfigArgs {
      */
     instanceTypes: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`,
-     * `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+     * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
      */
     internetChargeType?: pulumi.Input<string>;
     /**
@@ -440,7 +472,7 @@ export interface ScalingConfigArgs {
      */
     internetMaxBandwidthOut?: pulumi.Input<number>;
     /**
-     * Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.
+     * Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.
      */
     keepImageLogin?: pulumi.Input<boolean>;
     /**
@@ -464,12 +496,11 @@ export interface ScalingConfigArgs {
      */
     securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Type of spot instance, only support `one-time` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
+     * Type of spot instance, only support `one-time` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
     spotInstanceType?: pulumi.Input<string>;
     /**
-     * Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when
-     * instance_charge_type is set to `SPOTPAID`.
+     * Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
     spotMaxPrice?: pulumi.Input<string>;
     /**
@@ -477,8 +508,7 @@ export interface ScalingConfigArgs {
      */
     systemDiskSize?: pulumi.Input<number>;
     /**
-     * Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when
-     * disk_type_policy is ORIGINAL.
+     * Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when diskTypePolicy is ORIGINAL.
      */
     systemDiskType?: pulumi.Input<string>;
     /**

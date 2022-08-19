@@ -10,10 +10,10 @@ from .. import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['APIArgs', 'API']
+__all__ = ['ApiArgs', 'Api']
 
 @pulumi.input_type
-class APIArgs:
+class ApiArgs:
     def __init__(__self__, *,
                  api_name: pulumi.Input[str],
                  request_config_path: pulumi.Input[str],
@@ -25,8 +25,8 @@ class APIArgs:
                  protocol: Optional[pulumi.Input[str]] = None,
                  release_limit: Optional[pulumi.Input[int]] = None,
                  request_config_method: Optional[pulumi.Input[str]] = None,
-                 request_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['APIRequestParameterArgs']]]] = None,
-                 response_error_codes: Optional[pulumi.Input[Sequence[pulumi.Input['APIResponseErrorCodeArgs']]]] = None,
+                 request_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['ApiRequestParameterArgs']]]] = None,
+                 response_error_codes: Optional[pulumi.Input[Sequence[pulumi.Input['ApiResponseErrorCodeArgs']]]] = None,
                  response_fail_example: Optional[pulumi.Input[str]] = None,
                  response_success_example: Optional[pulumi.Input[str]] = None,
                  response_type: Optional[pulumi.Input[str]] = None,
@@ -43,28 +43,25 @@ class APIArgs:
                  service_config_vpc_id: Optional[pulumi.Input[str]] = None,
                  test_limit: Optional[pulumi.Input[int]] = None):
         """
-        The set of arguments for constructing a API resource.
+        The set of arguments for constructing a Api resource.
         :param pulumi.Input[str] api_name: Custom API name.
         :param pulumi.Input[str] request_config_path: Request frontend path configuration. Like `/user/getinfo`.
-        :param pulumi.Input[str] service_id: Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+        :param pulumi.Input[str] service_id: Which service this API belongs. Refer to resource `ApiGateway.Service`.
         :param pulumi.Input[str] api_desc: Custom API description.
-        :param pulumi.Input[str] auth_type: API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-               `NONE`.
+        :param pulumi.Input[str] auth_type: API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
         :param pulumi.Input[bool] enable_cors: Whether to enable CORS. Default value: `true`.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] protocol: API frontend request type. Valid values: `HTTP`, `WEBSOCKET`. Default value: `HTTP`.
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] request_config_method: Request frontend method configuration. Valid values: `GET`,`POST`,`PUT`,`DELETE`,`HEAD`,`ANY`. Default value: `GET`.
-        :param pulumi.Input[Sequence[pulumi.Input['APIRequestParameterArgs']]] request_parameters: Frontend request parameters.
-        :param pulumi.Input[Sequence[pulumi.Input['APIResponseErrorCodeArgs']]] response_error_codes: Custom error code configuration. Must keep at least one after set.
+        :param pulumi.Input[Sequence[pulumi.Input['ApiRequestParameterArgs']]] request_parameters: Frontend request parameters.
+        :param pulumi.Input[Sequence[pulumi.Input['ApiResponseErrorCodeArgs']]] response_error_codes: Custom error code configuration. Must keep at least one after set.
         :param pulumi.Input[str] response_fail_example: Response failure sample of custom response configuration.
         :param pulumi.Input[str] response_success_example: Successful response sample of custom response configuration.
         :param pulumi.Input[str] response_type: Return type. Valid values: `HTML`, `JSON`, `TEXT`, `BINARY`, `XML`. Default value: `HTML`.
-        :param pulumi.Input[str] service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-               The frontend `request_config_method` and backend method `service_config_method` can be different.
+        :param pulumi.Input[str] service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         :param pulumi.Input[str] service_config_mock_return_message: Returned information of API backend mocking. This parameter is required when `service_config_type` is `MOCK`.
-        :param pulumi.Input[str] service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-               frontend `request_config_path` and backend path `service_config_path` can be different.
+        :param pulumi.Input[str] service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
         :param pulumi.Input[str] service_config_product: Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
         :param pulumi.Input[str] service_config_scf_function_name: SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
         :param pulumi.Input[str] service_config_scf_function_namespace: SCF function namespace. This parameter takes effect when `service_config_type` is `SCF`.
@@ -155,7 +152,7 @@ class APIArgs:
     @pulumi.getter(name="serviceId")
     def service_id(self) -> pulumi.Input[str]:
         """
-        Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+        Which service this API belongs. Refer to resource `ApiGateway.Service`.
         """
         return pulumi.get(self, "service_id")
 
@@ -179,8 +176,7 @@ class APIArgs:
     @pulumi.getter(name="authType")
     def auth_type(self) -> Optional[pulumi.Input[str]]:
         """
-        API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-        `NONE`.
+        API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
         """
         return pulumi.get(self, "auth_type")
 
@@ -250,26 +246,26 @@ class APIArgs:
 
     @property
     @pulumi.getter(name="requestParameters")
-    def request_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['APIRequestParameterArgs']]]]:
+    def request_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApiRequestParameterArgs']]]]:
         """
         Frontend request parameters.
         """
         return pulumi.get(self, "request_parameters")
 
     @request_parameters.setter
-    def request_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['APIRequestParameterArgs']]]]):
+    def request_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApiRequestParameterArgs']]]]):
         pulumi.set(self, "request_parameters", value)
 
     @property
     @pulumi.getter(name="responseErrorCodes")
-    def response_error_codes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['APIResponseErrorCodeArgs']]]]:
+    def response_error_codes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApiResponseErrorCodeArgs']]]]:
         """
         Custom error code configuration. Must keep at least one after set.
         """
         return pulumi.get(self, "response_error_codes")
 
     @response_error_codes.setter
-    def response_error_codes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['APIResponseErrorCodeArgs']]]]):
+    def response_error_codes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApiResponseErrorCodeArgs']]]]):
         pulumi.set(self, "response_error_codes", value)
 
     @property
@@ -312,8 +308,7 @@ class APIArgs:
     @pulumi.getter(name="serviceConfigMethod")
     def service_config_method(self) -> Optional[pulumi.Input[str]]:
         """
-        API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-        The frontend `request_config_method` and backend method `service_config_method` can be different.
+        API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         """
         return pulumi.get(self, "service_config_method")
 
@@ -337,8 +332,7 @@ class APIArgs:
     @pulumi.getter(name="serviceConfigPath")
     def service_config_path(self) -> Optional[pulumi.Input[str]]:
         """
-        API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-        frontend `request_config_path` and backend path `service_config_path` can be different.
+        API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
         """
         return pulumi.get(self, "service_config_path")
 
@@ -456,7 +450,7 @@ class APIArgs:
 
 
 @pulumi.input_type
-class _APIState:
+class _ApiState:
     def __init__(__self__, *,
                  api_desc: Optional[pulumi.Input[str]] = None,
                  api_name: Optional[pulumi.Input[str]] = None,
@@ -468,8 +462,8 @@ class _APIState:
                  release_limit: Optional[pulumi.Input[int]] = None,
                  request_config_method: Optional[pulumi.Input[str]] = None,
                  request_config_path: Optional[pulumi.Input[str]] = None,
-                 request_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['APIRequestParameterArgs']]]] = None,
-                 response_error_codes: Optional[pulumi.Input[Sequence[pulumi.Input['APIResponseErrorCodeArgs']]]] = None,
+                 request_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['ApiRequestParameterArgs']]]] = None,
+                 response_error_codes: Optional[pulumi.Input[Sequence[pulumi.Input['ApiResponseErrorCodeArgs']]]] = None,
                  response_fail_example: Optional[pulumi.Input[str]] = None,
                  response_success_example: Optional[pulumi.Input[str]] = None,
                  response_type: Optional[pulumi.Input[str]] = None,
@@ -488,11 +482,10 @@ class _APIState:
                  test_limit: Optional[pulumi.Input[int]] = None,
                  update_time: Optional[pulumi.Input[str]] = None):
         """
-        Input properties used for looking up and filtering API resources.
+        Input properties used for looking up and filtering Api resources.
         :param pulumi.Input[str] api_desc: Custom API description.
         :param pulumi.Input[str] api_name: Custom API name.
-        :param pulumi.Input[str] auth_type: API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-               `NONE`.
+        :param pulumi.Input[str] auth_type: API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
         :param pulumi.Input[str] create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         :param pulumi.Input[bool] enable_cors: Whether to enable CORS. Default value: `true`.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -500,16 +493,14 @@ class _APIState:
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] request_config_method: Request frontend method configuration. Valid values: `GET`,`POST`,`PUT`,`DELETE`,`HEAD`,`ANY`. Default value: `GET`.
         :param pulumi.Input[str] request_config_path: Request frontend path configuration. Like `/user/getinfo`.
-        :param pulumi.Input[Sequence[pulumi.Input['APIRequestParameterArgs']]] request_parameters: Frontend request parameters.
-        :param pulumi.Input[Sequence[pulumi.Input['APIResponseErrorCodeArgs']]] response_error_codes: Custom error code configuration. Must keep at least one after set.
+        :param pulumi.Input[Sequence[pulumi.Input['ApiRequestParameterArgs']]] request_parameters: Frontend request parameters.
+        :param pulumi.Input[Sequence[pulumi.Input['ApiResponseErrorCodeArgs']]] response_error_codes: Custom error code configuration. Must keep at least one after set.
         :param pulumi.Input[str] response_fail_example: Response failure sample of custom response configuration.
         :param pulumi.Input[str] response_success_example: Successful response sample of custom response configuration.
         :param pulumi.Input[str] response_type: Return type. Valid values: `HTML`, `JSON`, `TEXT`, `BINARY`, `XML`. Default value: `HTML`.
-        :param pulumi.Input[str] service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-               The frontend `request_config_method` and backend method `service_config_method` can be different.
+        :param pulumi.Input[str] service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         :param pulumi.Input[str] service_config_mock_return_message: Returned information of API backend mocking. This parameter is required when `service_config_type` is `MOCK`.
-        :param pulumi.Input[str] service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-               frontend `request_config_path` and backend path `service_config_path` can be different.
+        :param pulumi.Input[str] service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
         :param pulumi.Input[str] service_config_product: Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
         :param pulumi.Input[str] service_config_scf_function_name: SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
         :param pulumi.Input[str] service_config_scf_function_namespace: SCF function namespace. This parameter takes effect when `service_config_type` is `SCF`.
@@ -518,7 +509,7 @@ class _APIState:
         :param pulumi.Input[str] service_config_type: API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
         :param pulumi.Input[str] service_config_url: API backend service url. This parameter is required when `service_config_type` is `HTTP`.
         :param pulumi.Input[str] service_config_vpc_id: Unique VPC ID.
-        :param pulumi.Input[str] service_id: Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+        :param pulumi.Input[str] service_id: Which service this API belongs. Refer to resource `ApiGateway.Service`.
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] update_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         """
@@ -609,8 +600,7 @@ class _APIState:
     @pulumi.getter(name="authType")
     def auth_type(self) -> Optional[pulumi.Input[str]]:
         """
-        API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-        `NONE`.
+        API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
         """
         return pulumi.get(self, "auth_type")
 
@@ -704,26 +694,26 @@ class _APIState:
 
     @property
     @pulumi.getter(name="requestParameters")
-    def request_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['APIRequestParameterArgs']]]]:
+    def request_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApiRequestParameterArgs']]]]:
         """
         Frontend request parameters.
         """
         return pulumi.get(self, "request_parameters")
 
     @request_parameters.setter
-    def request_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['APIRequestParameterArgs']]]]):
+    def request_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApiRequestParameterArgs']]]]):
         pulumi.set(self, "request_parameters", value)
 
     @property
     @pulumi.getter(name="responseErrorCodes")
-    def response_error_codes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['APIResponseErrorCodeArgs']]]]:
+    def response_error_codes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApiResponseErrorCodeArgs']]]]:
         """
         Custom error code configuration. Must keep at least one after set.
         """
         return pulumi.get(self, "response_error_codes")
 
     @response_error_codes.setter
-    def response_error_codes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['APIResponseErrorCodeArgs']]]]):
+    def response_error_codes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApiResponseErrorCodeArgs']]]]):
         pulumi.set(self, "response_error_codes", value)
 
     @property
@@ -766,8 +756,7 @@ class _APIState:
     @pulumi.getter(name="serviceConfigMethod")
     def service_config_method(self) -> Optional[pulumi.Input[str]]:
         """
-        API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-        The frontend `request_config_method` and backend method `service_config_method` can be different.
+        API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         """
         return pulumi.get(self, "service_config_method")
 
@@ -791,8 +780,7 @@ class _APIState:
     @pulumi.getter(name="serviceConfigPath")
     def service_config_path(self) -> Optional[pulumi.Input[str]]:
         """
-        API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-        frontend `request_config_path` and backend path `service_config_path` can be different.
+        API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
         """
         return pulumi.get(self, "service_config_path")
 
@@ -900,7 +888,7 @@ class _APIState:
     @pulumi.getter(name="serviceId")
     def service_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+        Which service this API belongs. Refer to resource `ApiGateway.Service`.
         """
         return pulumi.get(self, "service_id")
 
@@ -933,7 +921,7 @@ class _APIState:
         pulumi.set(self, "update_time", value)
 
 
-class API(pulumi.CustomResource):
+class Api(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -947,8 +935,8 @@ class API(pulumi.CustomResource):
                  release_limit: Optional[pulumi.Input[int]] = None,
                  request_config_method: Optional[pulumi.Input[str]] = None,
                  request_config_path: Optional[pulumi.Input[str]] = None,
-                 request_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['APIRequestParameterArgs']]]]] = None,
-                 response_error_codes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['APIResponseErrorCodeArgs']]]]] = None,
+                 request_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiRequestParameterArgs']]]]] = None,
+                 response_error_codes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiResponseErrorCodeArgs']]]]] = None,
                  response_fail_example: Optional[pulumi.Input[str]] = None,
                  response_success_example: Optional[pulumi.Input[str]] = None,
                  response_type: Optional[pulumi.Input[str]] = None,
@@ -967,29 +955,76 @@ class API(pulumi.CustomResource):
                  test_limit: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a API resource with the given unique name, props, and options.
+        Use this resource to create API of API gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        service = tencentcloud.api_gateway.Service("service",
+            service_name="ck",
+            protocol="http&https",
+            service_desc="your nice service",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            ip_version="IPv4")
+        api = tencentcloud.api_gateway.Api("api",
+            service_id=service.id,
+            api_name="hello",
+            api_desc="my hello api",
+            auth_type="NONE",
+            protocol="HTTP",
+            enable_cors=True,
+            request_config_path="/user/info",
+            request_config_method="GET",
+            request_parameters=[tencentcloud.api.gateway.ApiRequestParameterArgs(
+                name="name",
+                position="QUERY",
+                type="string",
+                desc="who are you?",
+                default_value="tom",
+                required=True,
+            )],
+            service_config_type="HTTP",
+            service_config_timeout=15,
+            service_config_url="http://www.qq.com",
+            service_config_path="/user",
+            service_config_method="GET",
+            response_type="HTML",
+            response_success_example="success",
+            response_fail_example="fail",
+            response_error_codes=[tencentcloud.api.gateway.ApiResponseErrorCodeArgs(
+                code=100,
+                msg="system error",
+                desc="system error code",
+                converted_code=-100,
+                need_convert=True,
+            )])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] api_desc: Custom API description.
         :param pulumi.Input[str] api_name: Custom API name.
-        :param pulumi.Input[str] auth_type: API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-               `NONE`.
+        :param pulumi.Input[str] auth_type: API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
         :param pulumi.Input[bool] enable_cors: Whether to enable CORS. Default value: `true`.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] protocol: API frontend request type. Valid values: `HTTP`, `WEBSOCKET`. Default value: `HTTP`.
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] request_config_method: Request frontend method configuration. Valid values: `GET`,`POST`,`PUT`,`DELETE`,`HEAD`,`ANY`. Default value: `GET`.
         :param pulumi.Input[str] request_config_path: Request frontend path configuration. Like `/user/getinfo`.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['APIRequestParameterArgs']]]] request_parameters: Frontend request parameters.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['APIResponseErrorCodeArgs']]]] response_error_codes: Custom error code configuration. Must keep at least one after set.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiRequestParameterArgs']]]] request_parameters: Frontend request parameters.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiResponseErrorCodeArgs']]]] response_error_codes: Custom error code configuration. Must keep at least one after set.
         :param pulumi.Input[str] response_fail_example: Response failure sample of custom response configuration.
         :param pulumi.Input[str] response_success_example: Successful response sample of custom response configuration.
         :param pulumi.Input[str] response_type: Return type. Valid values: `HTML`, `JSON`, `TEXT`, `BINARY`, `XML`. Default value: `HTML`.
-        :param pulumi.Input[str] service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-               The frontend `request_config_method` and backend method `service_config_method` can be different.
+        :param pulumi.Input[str] service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         :param pulumi.Input[str] service_config_mock_return_message: Returned information of API backend mocking. This parameter is required when `service_config_type` is `MOCK`.
-        :param pulumi.Input[str] service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-               frontend `request_config_path` and backend path `service_config_path` can be different.
+        :param pulumi.Input[str] service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
         :param pulumi.Input[str] service_config_product: Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
         :param pulumi.Input[str] service_config_scf_function_name: SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
         :param pulumi.Input[str] service_config_scf_function_namespace: SCF function namespace. This parameter takes effect when `service_config_type` is `SCF`.
@@ -998,24 +1033,74 @@ class API(pulumi.CustomResource):
         :param pulumi.Input[str] service_config_type: API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
         :param pulumi.Input[str] service_config_url: API backend service url. This parameter is required when `service_config_type` is `HTTP`.
         :param pulumi.Input[str] service_config_vpc_id: Unique VPC ID.
-        :param pulumi.Input[str] service_id: Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+        :param pulumi.Input[str] service_id: Which service this API belongs. Refer to resource `ApiGateway.Service`.
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: APIArgs,
+                 args: ApiArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a API resource with the given unique name, props, and options.
+        Use this resource to create API of API gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        service = tencentcloud.api_gateway.Service("service",
+            service_name="ck",
+            protocol="http&https",
+            service_desc="your nice service",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            ip_version="IPv4")
+        api = tencentcloud.api_gateway.Api("api",
+            service_id=service.id,
+            api_name="hello",
+            api_desc="my hello api",
+            auth_type="NONE",
+            protocol="HTTP",
+            enable_cors=True,
+            request_config_path="/user/info",
+            request_config_method="GET",
+            request_parameters=[tencentcloud.api.gateway.ApiRequestParameterArgs(
+                name="name",
+                position="QUERY",
+                type="string",
+                desc="who are you?",
+                default_value="tom",
+                required=True,
+            )],
+            service_config_type="HTTP",
+            service_config_timeout=15,
+            service_config_url="http://www.qq.com",
+            service_config_path="/user",
+            service_config_method="GET",
+            response_type="HTML",
+            response_success_example="success",
+            response_fail_example="fail",
+            response_error_codes=[tencentcloud.api.gateway.ApiResponseErrorCodeArgs(
+                code=100,
+                msg="system error",
+                desc="system error code",
+                converted_code=-100,
+                need_convert=True,
+            )])
+        ```
+
         :param str resource_name: The name of the resource.
-        :param APIArgs args: The arguments to use to populate this resource's properties.
+        :param ApiArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(APIArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(ApiArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -1033,8 +1118,8 @@ class API(pulumi.CustomResource):
                  release_limit: Optional[pulumi.Input[int]] = None,
                  request_config_method: Optional[pulumi.Input[str]] = None,
                  request_config_path: Optional[pulumi.Input[str]] = None,
-                 request_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['APIRequestParameterArgs']]]]] = None,
-                 response_error_codes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['APIResponseErrorCodeArgs']]]]] = None,
+                 request_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiRequestParameterArgs']]]]] = None,
+                 response_error_codes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiResponseErrorCodeArgs']]]]] = None,
                  response_fail_example: Optional[pulumi.Input[str]] = None,
                  response_success_example: Optional[pulumi.Input[str]] = None,
                  response_type: Optional[pulumi.Input[str]] = None,
@@ -1061,7 +1146,7 @@ class API(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = APIArgs.__new__(APIArgs)
+            __props__ = ApiArgs.__new__(ApiArgs)
 
             __props__.__dict__["api_desc"] = api_desc
             if api_name is None and not opts.urn:
@@ -1098,8 +1183,8 @@ class API(pulumi.CustomResource):
             __props__.__dict__["test_limit"] = test_limit
             __props__.__dict__["create_time"] = None
             __props__.__dict__["update_time"] = None
-        super(API, __self__).__init__(
-            'tencentcloud:APIGateway/aPI:API',
+        super(Api, __self__).__init__(
+            'tencentcloud:ApiGateway/api:Api',
             resource_name,
             __props__,
             opts)
@@ -1118,8 +1203,8 @@ class API(pulumi.CustomResource):
             release_limit: Optional[pulumi.Input[int]] = None,
             request_config_method: Optional[pulumi.Input[str]] = None,
             request_config_path: Optional[pulumi.Input[str]] = None,
-            request_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['APIRequestParameterArgs']]]]] = None,
-            response_error_codes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['APIResponseErrorCodeArgs']]]]] = None,
+            request_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiRequestParameterArgs']]]]] = None,
+            response_error_codes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiResponseErrorCodeArgs']]]]] = None,
             response_fail_example: Optional[pulumi.Input[str]] = None,
             response_success_example: Optional[pulumi.Input[str]] = None,
             response_type: Optional[pulumi.Input[str]] = None,
@@ -1136,9 +1221,9 @@ class API(pulumi.CustomResource):
             service_config_vpc_id: Optional[pulumi.Input[str]] = None,
             service_id: Optional[pulumi.Input[str]] = None,
             test_limit: Optional[pulumi.Input[int]] = None,
-            update_time: Optional[pulumi.Input[str]] = None) -> 'API':
+            update_time: Optional[pulumi.Input[str]] = None) -> 'Api':
         """
-        Get an existing API resource's state with the given name, id, and optional extra
+        Get an existing Api resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
@@ -1146,8 +1231,7 @@ class API(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] api_desc: Custom API description.
         :param pulumi.Input[str] api_name: Custom API name.
-        :param pulumi.Input[str] auth_type: API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-               `NONE`.
+        :param pulumi.Input[str] auth_type: API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
         :param pulumi.Input[str] create_time: Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         :param pulumi.Input[bool] enable_cors: Whether to enable CORS. Default value: `true`.
         :param pulumi.Input[int] pre_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
@@ -1155,16 +1239,14 @@ class API(pulumi.CustomResource):
         :param pulumi.Input[int] release_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] request_config_method: Request frontend method configuration. Valid values: `GET`,`POST`,`PUT`,`DELETE`,`HEAD`,`ANY`. Default value: `GET`.
         :param pulumi.Input[str] request_config_path: Request frontend path configuration. Like `/user/getinfo`.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['APIRequestParameterArgs']]]] request_parameters: Frontend request parameters.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['APIResponseErrorCodeArgs']]]] response_error_codes: Custom error code configuration. Must keep at least one after set.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiRequestParameterArgs']]]] request_parameters: Frontend request parameters.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiResponseErrorCodeArgs']]]] response_error_codes: Custom error code configuration. Must keep at least one after set.
         :param pulumi.Input[str] response_fail_example: Response failure sample of custom response configuration.
         :param pulumi.Input[str] response_success_example: Successful response sample of custom response configuration.
         :param pulumi.Input[str] response_type: Return type. Valid values: `HTML`, `JSON`, `TEXT`, `BINARY`, `XML`. Default value: `HTML`.
-        :param pulumi.Input[str] service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-               The frontend `request_config_method` and backend method `service_config_method` can be different.
+        :param pulumi.Input[str] service_config_method: API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         :param pulumi.Input[str] service_config_mock_return_message: Returned information of API backend mocking. This parameter is required when `service_config_type` is `MOCK`.
-        :param pulumi.Input[str] service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-               frontend `request_config_path` and backend path `service_config_path` can be different.
+        :param pulumi.Input[str] service_config_path: API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
         :param pulumi.Input[str] service_config_product: Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
         :param pulumi.Input[str] service_config_scf_function_name: SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
         :param pulumi.Input[str] service_config_scf_function_namespace: SCF function namespace. This parameter takes effect when `service_config_type` is `SCF`.
@@ -1173,13 +1255,13 @@ class API(pulumi.CustomResource):
         :param pulumi.Input[str] service_config_type: API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
         :param pulumi.Input[str] service_config_url: API backend service url. This parameter is required when `service_config_type` is `HTTP`.
         :param pulumi.Input[str] service_config_vpc_id: Unique VPC ID.
-        :param pulumi.Input[str] service_id: Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+        :param pulumi.Input[str] service_id: Which service this API belongs. Refer to resource `ApiGateway.Service`.
         :param pulumi.Input[int] test_limit: API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
         :param pulumi.Input[str] update_time: Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = _APIState.__new__(_APIState)
+        __props__ = _ApiState.__new__(_ApiState)
 
         __props__.__dict__["api_desc"] = api_desc
         __props__.__dict__["api_name"] = api_name
@@ -1210,7 +1292,7 @@ class API(pulumi.CustomResource):
         __props__.__dict__["service_id"] = service_id
         __props__.__dict__["test_limit"] = test_limit
         __props__.__dict__["update_time"] = update_time
-        return API(resource_name, opts=opts, __props__=__props__)
+        return Api(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter(name="apiDesc")
@@ -1232,8 +1314,7 @@ class API(pulumi.CustomResource):
     @pulumi.getter(name="authType")
     def auth_type(self) -> pulumi.Output[Optional[str]]:
         """
-        API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-        `NONE`.
+        API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
         """
         return pulumi.get(self, "auth_type")
 
@@ -1295,7 +1376,7 @@ class API(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="requestParameters")
-    def request_parameters(self) -> pulumi.Output[Optional[Sequence['outputs.APIRequestParameter']]]:
+    def request_parameters(self) -> pulumi.Output[Optional[Sequence['outputs.ApiRequestParameter']]]:
         """
         Frontend request parameters.
         """
@@ -1303,7 +1384,7 @@ class API(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="responseErrorCodes")
-    def response_error_codes(self) -> pulumi.Output[Optional[Sequence['outputs.APIResponseErrorCode']]]:
+    def response_error_codes(self) -> pulumi.Output[Optional[Sequence['outputs.ApiResponseErrorCode']]]:
         """
         Custom error code configuration. Must keep at least one after set.
         """
@@ -1337,8 +1418,7 @@ class API(pulumi.CustomResource):
     @pulumi.getter(name="serviceConfigMethod")
     def service_config_method(self) -> pulumi.Output[Optional[str]]:
         """
-        API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-        The frontend `request_config_method` and backend method `service_config_method` can be different.
+        API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_method` and backend method `service_config_method` can be different.
         """
         return pulumi.get(self, "service_config_method")
 
@@ -1354,8 +1434,7 @@ class API(pulumi.CustomResource):
     @pulumi.getter(name="serviceConfigPath")
     def service_config_path(self) -> pulumi.Output[Optional[str]]:
         """
-        API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-        frontend `request_config_path` and backend path `service_config_path` can be different.
+        API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The frontend `request_config_path` and backend path `service_config_path` can be different.
         """
         return pulumi.get(self, "service_config_path")
 
@@ -1427,7 +1506,7 @@ class API(pulumi.CustomResource):
     @pulumi.getter(name="serviceId")
     def service_id(self) -> pulumi.Output[str]:
         """
-        Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+        Which service this API belongs. Refer to resource `ApiGateway.Service`.
         """
         return pulumi.get(self, "service_id")
 

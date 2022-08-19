@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Cynosdb.Outputs
     [OutputType]
     public sealed class ClusterRoGroupAddr
     {
+        /// <summary>
+        /// IP address for read-write connection.
+        /// </summary>
         public readonly string? Ip;
+        /// <summary>
+        /// Port of CynosDB cluster.
+        /// </summary>
         public readonly int? Port;
 
         [OutputConstructor]

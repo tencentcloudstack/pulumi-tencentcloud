@@ -11,8 +11,8 @@ from . import outputs
 
 __all__ = [
     'InstanceHostResource',
-    'InstancesCdhInstanceListResult',
-    'InstancesCdhInstanceListHostResourceResult',
+    'GetInstancesCdhInstanceListResult',
+    'GetInstancesCdhInstanceListHostResourceResult',
 ]
 
 @pulumi.output_type
@@ -54,6 +54,15 @@ class InstanceHostResource(dict):
                  disk_type: Optional[str] = None,
                  memory_available_size: Optional[float] = None,
                  memory_total_size: Optional[float] = None):
+        """
+        :param int cpu_available_num: The number of available CPU cores of the instance.
+        :param int cpu_total_num: The number of total CPU cores of the instance.
+        :param int disk_available_size: Instance disk available capacity, unit in GB.
+        :param int disk_total_size: Instance disk total capacity, unit in GB.
+        :param str disk_type: Type of the disk.
+        :param float memory_available_size: Instance memory available capacity, unit in GB.
+        :param float memory_total_size: Instance memory total capacity, unit in GB.
+        """
         if cpu_available_num is not None:
             pulumi.set(__self__, "cpu_available_num", cpu_available_num)
         if cpu_total_num is not None:
@@ -72,41 +81,62 @@ class InstanceHostResource(dict):
     @property
     @pulumi.getter(name="cpuAvailableNum")
     def cpu_available_num(self) -> Optional[int]:
+        """
+        The number of available CPU cores of the instance.
+        """
         return pulumi.get(self, "cpu_available_num")
 
     @property
     @pulumi.getter(name="cpuTotalNum")
     def cpu_total_num(self) -> Optional[int]:
+        """
+        The number of total CPU cores of the instance.
+        """
         return pulumi.get(self, "cpu_total_num")
 
     @property
     @pulumi.getter(name="diskAvailableSize")
     def disk_available_size(self) -> Optional[int]:
+        """
+        Instance disk available capacity, unit in GB.
+        """
         return pulumi.get(self, "disk_available_size")
 
     @property
     @pulumi.getter(name="diskTotalSize")
     def disk_total_size(self) -> Optional[int]:
+        """
+        Instance disk total capacity, unit in GB.
+        """
         return pulumi.get(self, "disk_total_size")
 
     @property
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[str]:
+        """
+        Type of the disk.
+        """
         return pulumi.get(self, "disk_type")
 
     @property
     @pulumi.getter(name="memoryAvailableSize")
     def memory_available_size(self) -> Optional[float]:
+        """
+        Instance memory available capacity, unit in GB.
+        """
         return pulumi.get(self, "memory_available_size")
 
     @property
     @pulumi.getter(name="memoryTotalSize")
     def memory_total_size(self) -> Optional[float]:
+        """
+        Instance memory total capacity, unit in GB.
+        """
         return pulumi.get(self, "memory_total_size")
 
 
 @pulumi.output_type
-class InstancesCdhInstanceListResult(dict):
+class GetInstancesCdhInstanceListResult(dict):
     def __init__(__self__, *,
                  availability_zone: str,
                  cage_id: str,
@@ -116,11 +146,26 @@ class InstancesCdhInstanceListResult(dict):
                  expired_time: str,
                  host_id: str,
                  host_name: str,
-                 host_resources: Sequence['outputs.InstancesCdhInstanceListHostResourceResult'],
+                 host_resources: Sequence['outputs.GetInstancesCdhInstanceListHostResourceResult'],
                  host_state: str,
                  host_type: str,
                  prepaid_renew_flag: str,
                  project_id: int):
+        """
+        :param str availability_zone: The available zone that the CDH instance locates at.
+        :param str cage_id: Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.
+        :param str charge_type: The charge type of the CDH instance.
+        :param str create_time: Creation time of the CDH instance.
+        :param Sequence[str] cvm_instance_ids: Id of CVM instances that have been created on the CDH instance.
+        :param str expired_time: Expired time of the CDH instance.
+        :param str host_id: ID of the CDH instances to be queried.
+        :param str host_name: Name of the CDH instances to be queried.
+        :param Sequence['GetInstancesCdhInstanceListHostResourceArgs'] host_resources: An information list of host resource. Each element contains the following attributes:
+        :param str host_state: State of the CDH instances to be queried. Valid values: `PENDING`, `LAUNCH_FAILURE`, `RUNNING`, `EXPIRED`.
+        :param str host_type: Type of the CDH instance.
+        :param str prepaid_renew_flag: Auto renewal flag.
+        :param int project_id: The project CDH belongs to.
+        """
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "cage_id", cage_id)
         pulumi.set(__self__, "charge_type", charge_type)
@@ -138,71 +183,110 @@ class InstancesCdhInstanceListResult(dict):
     @property
     @pulumi.getter(name="availabilityZone")
     def availability_zone(self) -> str:
+        """
+        The available zone that the CDH instance locates at.
+        """
         return pulumi.get(self, "availability_zone")
 
     @property
     @pulumi.getter(name="cageId")
     def cage_id(self) -> str:
+        """
+        Cage ID of the CDH instance. This parameter is only valid for CDH instances in the cages of finance availability zones.
+        """
         return pulumi.get(self, "cage_id")
 
     @property
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> str:
+        """
+        The charge type of the CDH instance.
+        """
         return pulumi.get(self, "charge_type")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the CDH instance.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="cvmInstanceIds")
     def cvm_instance_ids(self) -> Sequence[str]:
+        """
+        Id of CVM instances that have been created on the CDH instance.
+        """
         return pulumi.get(self, "cvm_instance_ids")
 
     @property
     @pulumi.getter(name="expiredTime")
     def expired_time(self) -> str:
+        """
+        Expired time of the CDH instance.
+        """
         return pulumi.get(self, "expired_time")
 
     @property
     @pulumi.getter(name="hostId")
     def host_id(self) -> str:
+        """
+        ID of the CDH instances to be queried.
+        """
         return pulumi.get(self, "host_id")
 
     @property
     @pulumi.getter(name="hostName")
     def host_name(self) -> str:
+        """
+        Name of the CDH instances to be queried.
+        """
         return pulumi.get(self, "host_name")
 
     @property
     @pulumi.getter(name="hostResources")
-    def host_resources(self) -> Sequence['outputs.InstancesCdhInstanceListHostResourceResult']:
+    def host_resources(self) -> Sequence['outputs.GetInstancesCdhInstanceListHostResourceResult']:
+        """
+        An information list of host resource. Each element contains the following attributes:
+        """
         return pulumi.get(self, "host_resources")
 
     @property
     @pulumi.getter(name="hostState")
     def host_state(self) -> str:
+        """
+        State of the CDH instances to be queried. Valid values: `PENDING`, `LAUNCH_FAILURE`, `RUNNING`, `EXPIRED`.
+        """
         return pulumi.get(self, "host_state")
 
     @property
     @pulumi.getter(name="hostType")
     def host_type(self) -> str:
+        """
+        Type of the CDH instance.
+        """
         return pulumi.get(self, "host_type")
 
     @property
     @pulumi.getter(name="prepaidRenewFlag")
     def prepaid_renew_flag(self) -> str:
+        """
+        Auto renewal flag.
+        """
         return pulumi.get(self, "prepaid_renew_flag")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        The project CDH belongs to.
+        """
         return pulumi.get(self, "project_id")
 
 
 @pulumi.output_type
-class InstancesCdhInstanceListHostResourceResult(dict):
+class GetInstancesCdhInstanceListHostResourceResult(dict):
     def __init__(__self__, *,
                  cpu_available_num: int,
                  cpu_total_num: int,
@@ -211,6 +295,15 @@ class InstancesCdhInstanceListHostResourceResult(dict):
                  disk_type: str,
                  memory_available_size: float,
                  memory_total_size: float):
+        """
+        :param int cpu_available_num: The number of available CPU cores of the instance.
+        :param int cpu_total_num: The number of total CPU cores of the instance.
+        :param int disk_available_size: Instance disk available capacity, unit in GB.
+        :param int disk_total_size: Instance disk total capacity, unit in GB.
+        :param str disk_type: Type of the disk.
+        :param float memory_available_size: Instance memory available capacity, unit in GB.
+        :param float memory_total_size: Instance memory total capacity, unit in GB.
+        """
         pulumi.set(__self__, "cpu_available_num", cpu_available_num)
         pulumi.set(__self__, "cpu_total_num", cpu_total_num)
         pulumi.set(__self__, "disk_available_size", disk_available_size)
@@ -222,36 +315,57 @@ class InstancesCdhInstanceListHostResourceResult(dict):
     @property
     @pulumi.getter(name="cpuAvailableNum")
     def cpu_available_num(self) -> int:
+        """
+        The number of available CPU cores of the instance.
+        """
         return pulumi.get(self, "cpu_available_num")
 
     @property
     @pulumi.getter(name="cpuTotalNum")
     def cpu_total_num(self) -> int:
+        """
+        The number of total CPU cores of the instance.
+        """
         return pulumi.get(self, "cpu_total_num")
 
     @property
     @pulumi.getter(name="diskAvailableSize")
     def disk_available_size(self) -> int:
+        """
+        Instance disk available capacity, unit in GB.
+        """
         return pulumi.get(self, "disk_available_size")
 
     @property
     @pulumi.getter(name="diskTotalSize")
     def disk_total_size(self) -> int:
+        """
+        Instance disk total capacity, unit in GB.
+        """
         return pulumi.get(self, "disk_total_size")
 
     @property
     @pulumi.getter(name="diskType")
     def disk_type(self) -> str:
+        """
+        Type of the disk.
+        """
         return pulumi.get(self, "disk_type")
 
     @property
     @pulumi.getter(name="memoryAvailableSize")
     def memory_available_size(self) -> float:
+        """
+        Instance memory available capacity, unit in GB.
+        """
         return pulumi.get(self, "memory_available_size")
 
     @property
     @pulumi.getter(name="memoryTotalSize")
     def memory_total_size(self) -> float:
+        """
+        Instance memory total capacity, unit in GB.
+        """
         return pulumi.get(self, "memory_total_size")
 
 

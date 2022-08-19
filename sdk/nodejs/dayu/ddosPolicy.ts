@@ -5,6 +5,75 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create dayu DDoS policy
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const testPolicy = new tencentcloud.Dayu.DdosPolicy("test_policy", {
+ *     blackIps: ["1.1.1.1"],
+ *     dropOptions: [{
+ *         badConnThreshold: 100,
+ *         checkSyncConn: true,
+ *         connTimeout: 500,
+ *         dConnLimit: 100,
+ *         dNewLimit: 100,
+ *         dropAbroad: true,
+ *         dropIcmp: true,
+ *         dropOther: true,
+ *         dropTcp: true,
+ *         dropUdp: true,
+ *         icmpMbpsLimit: 100,
+ *         nullConnEnable: true,
+ *         otherMbpsLimit: 100,
+ *         sConnLimit: 100,
+ *         sNewLimit: 100,
+ *         synLimit: 100,
+ *         synRate: 50,
+ *         tcpMbpsLimit: 100,
+ *         udpMbpsLimit: 100,
+ *     }],
+ *     packetFilters: [{
+ *         action: "drop",
+ *         dEndPort: 1500,
+ *         dStartPort: 1000,
+ *         depth: 1000,
+ *         isInclude: true,
+ *         matchBegin: "begin_l5",
+ *         matchType: "pcre",
+ *         offset: 500,
+ *         pktLengthMax: 1400,
+ *         pktLengthMin: 1000,
+ *         protocol: "tcp",
+ *         sEndPort: 2500,
+ *         sStartPort: 2000,
+ *     }],
+ *     portFilters: [{
+ *         action: "drop",
+ *         endPort: 2500,
+ *         kind: 1,
+ *         protocol: "all",
+ *         startPort: 2000,
+ *     }],
+ *     resourceType: "bgpip",
+ *     watermarkFilters: [{
+ *         autoRemove: true,
+ *         offset: 50,
+ *         openSwitch: true,
+ *         tcpPortLists: [
+ *             "2000-3000",
+ *             "3500-4000",
+ *         ],
+ *         udpPortLists: ["5000-6000"],
+ *     }],
+ *     whiteIps: ["2.2.2.2"],
+ * });
+ * ```
+ */
 export class DdosPolicy extends pulumi.CustomResource {
     /**
      * Get an existing DdosPolicy resource's state with the given name, ID, and optional extra

@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -27,18 +27,18 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &GroupMembership{}
 	case "tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment":
 		r = &GroupPolicyAttachment{}
-	case "tencentcloud:Cam/oIDCSSO:OIDCSSO":
-		r = &OIDCSSO{}
+	case "tencentcloud:Cam/oidcSso:OidcSso":
+		r = &OidcSso{}
 	case "tencentcloud:Cam/policy:Policy":
 		r = &Policy{}
 	case "tencentcloud:Cam/role:Role":
 		r = &Role{}
 	case "tencentcloud:Cam/rolePolicyAttachment:RolePolicyAttachment":
 		r = &RolePolicyAttachment{}
-	case "tencentcloud:Cam/roleSSO:RoleSSO":
-		r = &RoleSSO{}
-	case "tencentcloud:Cam/sAMLProvider:SAMLProvider":
-		r = &SAMLProvider{}
+	case "tencentcloud:Cam/roleSso:RoleSso":
+		r = &RoleSso{}
+	case "tencentcloud:Cam/samlProvider:SamlProvider":
+		r = &SamlProvider{}
 	case "tencentcloud:Cam/user:User":
 		r = &User{}
 	case "tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment":
@@ -73,7 +73,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Cam/oIDCSSO",
+		"Cam/oidcSso",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -93,12 +93,12 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Cam/roleSSO",
+		"Cam/roleSso",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Cam/sAMLProvider",
+		"Cam/samlProvider",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

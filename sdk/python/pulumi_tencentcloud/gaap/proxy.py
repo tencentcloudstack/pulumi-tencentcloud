@@ -23,15 +23,10 @@ class ProxyArgs:
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Proxy resource.
-        :param pulumi.Input[str] access_region: Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-               `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-               `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        :param pulumi.Input[str] access_region: Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         :param pulumi.Input[int] bandwidth: Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
-        :param pulumi.Input[int] concurrent: Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`,
-               `80`, `90` and `100`.
-        :param pulumi.Input[str] realserver_region: Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-               `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-               `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        :param pulumi.Input[int] concurrent: Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
+        :param pulumi.Input[str] realserver_region: Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         :param pulumi.Input[bool] enable: Indicates whether GAAP proxy is enabled, default value is `true`.
         :param pulumi.Input[str] name: Name of the GAAP proxy, the maximum length is 30.
         :param pulumi.Input[int] project_id: ID of the project within the GAAP proxy, `0` means is default project.
@@ -54,9 +49,7 @@ class ProxyArgs:
     @pulumi.getter(name="accessRegion")
     def access_region(self) -> pulumi.Input[str]:
         """
-        Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-        `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-        `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         """
         return pulumi.get(self, "access_region")
 
@@ -80,8 +73,7 @@ class ProxyArgs:
     @pulumi.getter
     def concurrent(self) -> pulumi.Input[int]:
         """
-        Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`,
-        `80`, `90` and `100`.
+        Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
         """
         return pulumi.get(self, "concurrent")
 
@@ -93,9 +85,7 @@ class ProxyArgs:
     @pulumi.getter(name="realserverRegion")
     def realserver_region(self) -> pulumi.Input[str]:
         """
-        Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-        `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-        `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         """
         return pulumi.get(self, "realserver_region")
 
@@ -172,12 +162,9 @@ class _ProxyState:
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering Proxy resources.
-        :param pulumi.Input[str] access_region: Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-               `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-               `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        :param pulumi.Input[str] access_region: Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         :param pulumi.Input[int] bandwidth: Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
-        :param pulumi.Input[int] concurrent: Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`,
-               `80`, `90` and `100`.
+        :param pulumi.Input[int] concurrent: Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
         :param pulumi.Input[str] create_time: Creation time of the GAAP proxy.
         :param pulumi.Input[str] domain: Access domain of the GAAP proxy.
         :param pulumi.Input[bool] enable: Indicates whether GAAP proxy is enabled, default value is `true`.
@@ -185,9 +172,7 @@ class _ProxyState:
         :param pulumi.Input[str] ip: Access IP of the GAAP proxy.
         :param pulumi.Input[str] name: Name of the GAAP proxy, the maximum length is 30.
         :param pulumi.Input[int] project_id: ID of the project within the GAAP proxy, `0` means is default project.
-        :param pulumi.Input[str] realserver_region: Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-               `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-               `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        :param pulumi.Input[str] realserver_region: Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         :param pulumi.Input[bool] scalable: Indicates whether GAAP proxy can scalable.
         :param pulumi.Input[str] status: Status of the GAAP proxy.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] support_protocols: Supported protocols of the GAAP proxy.
@@ -228,9 +213,7 @@ class _ProxyState:
     @pulumi.getter(name="accessRegion")
     def access_region(self) -> Optional[pulumi.Input[str]]:
         """
-        Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-        `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-        `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         """
         return pulumi.get(self, "access_region")
 
@@ -254,8 +237,7 @@ class _ProxyState:
     @pulumi.getter
     def concurrent(self) -> Optional[pulumi.Input[int]]:
         """
-        Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`,
-        `80`, `90` and `100`.
+        Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
         """
         return pulumi.get(self, "concurrent")
 
@@ -351,9 +333,7 @@ class _ProxyState:
     @pulumi.getter(name="realserverRegion")
     def realserver_region(self) -> Optional[pulumi.Input[str]]:
         """
-        Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-        `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-        `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         """
         return pulumi.get(self, "realserver_region")
 
@@ -425,21 +405,41 @@ class Proxy(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a Proxy resource with the given unique name, props, and options.
+        Provides a resource to create a GAAP proxy.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.gaap.Proxy("foo",
+            access_region="SouthChina",
+            bandwidth=10,
+            concurrent=2,
+            realserver_region="NorthChina",
+            tags={
+                "test": "test",
+            })
+        ```
+
+        ## Import
+
+        GAAP proxy can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/proxy:Proxy tencentcloud_gaap_proxy.foo link-11112222
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] access_region: Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-               `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-               `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        :param pulumi.Input[str] access_region: Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         :param pulumi.Input[int] bandwidth: Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
-        :param pulumi.Input[int] concurrent: Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`,
-               `80`, `90` and `100`.
+        :param pulumi.Input[int] concurrent: Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
         :param pulumi.Input[bool] enable: Indicates whether GAAP proxy is enabled, default value is `true`.
         :param pulumi.Input[str] name: Name of the GAAP proxy, the maximum length is 30.
         :param pulumi.Input[int] project_id: ID of the project within the GAAP proxy, `0` means is default project.
-        :param pulumi.Input[str] realserver_region: Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-               `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-               `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        :param pulumi.Input[str] realserver_region: Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of the GAAP proxy.
         """
         ...
@@ -449,7 +449,32 @@ class Proxy(pulumi.CustomResource):
                  args: ProxyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Proxy resource with the given unique name, props, and options.
+        Provides a resource to create a GAAP proxy.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.gaap.Proxy("foo",
+            access_region="SouthChina",
+            bandwidth=10,
+            concurrent=2,
+            realserver_region="NorthChina",
+            tags={
+                "test": "test",
+            })
+        ```
+
+        ## Import
+
+        GAAP proxy can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/proxy:Proxy tencentcloud_gaap_proxy.foo link-11112222
+        ```
+
         :param str resource_name: The name of the resource.
         :param ProxyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -540,12 +565,9 @@ class Proxy(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] access_region: Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-               `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-               `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        :param pulumi.Input[str] access_region: Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         :param pulumi.Input[int] bandwidth: Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500` and `1000`.
-        :param pulumi.Input[int] concurrent: Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`,
-               `80`, `90` and `100`.
+        :param pulumi.Input[int] concurrent: Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
         :param pulumi.Input[str] create_time: Creation time of the GAAP proxy.
         :param pulumi.Input[str] domain: Access domain of the GAAP proxy.
         :param pulumi.Input[bool] enable: Indicates whether GAAP proxy is enabled, default value is `true`.
@@ -553,9 +575,7 @@ class Proxy(pulumi.CustomResource):
         :param pulumi.Input[str] ip: Access IP of the GAAP proxy.
         :param pulumi.Input[str] name: Name of the GAAP proxy, the maximum length is 30.
         :param pulumi.Input[int] project_id: ID of the project within the GAAP proxy, `0` means is default project.
-        :param pulumi.Input[str] realserver_region: Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-               `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-               `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        :param pulumi.Input[str] realserver_region: Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         :param pulumi.Input[bool] scalable: Indicates whether GAAP proxy can scalable.
         :param pulumi.Input[str] status: Status of the GAAP proxy.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] support_protocols: Supported protocols of the GAAP proxy.
@@ -586,9 +606,7 @@ class Proxy(pulumi.CustomResource):
     @pulumi.getter(name="accessRegion")
     def access_region(self) -> pulumi.Output[str]:
         """
-        Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-        `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-        `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        Access region of the GAAP proxy. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         """
         return pulumi.get(self, "access_region")
 
@@ -604,8 +622,7 @@ class Proxy(pulumi.CustomResource):
     @pulumi.getter
     def concurrent(self) -> pulumi.Output[int]:
         """
-        Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`,
-        `80`, `90` and `100`.
+        Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90` and `100`.
         """
         return pulumi.get(self, "concurrent")
 
@@ -669,9 +686,7 @@ class Proxy(pulumi.CustomResource):
     @pulumi.getter(name="realserverRegion")
     def realserver_region(self) -> pulumi.Output[str]:
         """
-        Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`,
-        `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`,
-        `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
+        Region of the GAAP realserver. Valid value: `NorthChina`, `EastChina`, `SouthChina`, `SouthwestChina`, `Hongkong`, `SL_TAIWAN`, `SoutheastAsia`, `Korea`, `SL_India`, `SL_Australia`, `Europe`, `SL_UK`, `SL_SouthAmerica`, `NorthAmerica`, `SL_MiddleUSA`, `Canada`, `SL_VIET`, `WestIndia`, `Thailand`, `Virginia`, `Russia`, `Japan` and `SL_Indonesia`.
         """
         return pulumi.get(self, "realserver_region")
 

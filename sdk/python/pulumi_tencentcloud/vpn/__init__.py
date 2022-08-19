@@ -6,13 +6,13 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .connection import *
-from .connections import *
 from .customer_gateway import *
-from .customer_gateways import *
 from .gateway import *
 from .gateway_route import *
-from .gateway_routes import *
-from .gateways import *
+from .get_connections import *
+from .get_customer_gateways import *
+from .get_gateway_routes import *
+from .get_gateways import *
 from .ssl_client import *
 from .ssl_server import *
 from ._inputs import *

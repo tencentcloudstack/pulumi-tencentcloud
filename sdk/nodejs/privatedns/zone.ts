@@ -5,6 +5,44 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a Private Dns Zone.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.PrivateDns.Zone("foo", {
+ *     accountVpcSets: [{
+ *         region: "ap-guangzhou",
+ *         uin: "454xxxxxxx",
+ *         uniqVpcId: "vpc-xxxxx",
+ *         vpcName: "test-redis",
+ *     }],
+ *     dnsForwardStatus: "DISABLED",
+ *     domain: "domain.com",
+ *     remark: "test",
+ *     tags: {
+ *         created_by: [{}],
+ *         terraform: [{}],
+ *     },
+ *     vpcSets: [{
+ *         region: "ap-guangzhou",
+ *         uniqVpcId: "vpc-xxxxx",
+ *     }],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Private Dns Zone can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:PrivateDns/zone:Zone foo zone_id
+ * ```
+ */
 export class Zone extends pulumi.CustomResource {
     /**
      * Get an existing Zone resource's state with the given name, ID, and optional extra
@@ -50,7 +88,7 @@ export class Zone extends pulumi.CustomResource {
      */
     public readonly remark!: pulumi.Output<string | undefined>;
     /**
-     * Tags the private domain when it is created.
+     * It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
      *
      * @deprecated It has been deprecated from version 1.72.4. Use `tags` instead.
      */
@@ -123,7 +161,7 @@ export interface ZoneState {
      */
     remark?: pulumi.Input<string>;
     /**
-     * Tags the private domain when it is created.
+     * It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
      *
      * @deprecated It has been deprecated from version 1.72.4. Use `tags` instead.
      */
@@ -159,7 +197,7 @@ export interface ZoneArgs {
      */
     remark?: pulumi.Input<string>;
     /**
-     * Tags the private domain when it is created.
+     * It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
      *
      * @deprecated It has been deprecated from version 1.72.4. Use `tags` instead.
      */

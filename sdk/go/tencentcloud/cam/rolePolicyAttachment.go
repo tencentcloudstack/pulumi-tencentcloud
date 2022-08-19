@@ -11,11 +11,43 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CAM role policy attachment.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cam.NewRolePolicyAttachment(ctx, "foo", &Cam.RolePolicyAttachmentArgs{
+// 			RoleId:   pulumi.Any(tencentcloud_cam_role.Foo.Id),
+// 			PolicyId: pulumi.Any(tencentcloud_cam_policy.Foo.Id),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CAM role policy attachment can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cam/rolePolicyAttachment:RolePolicyAttachment foo 4611686018427922725#26800353
+// ```
 type RolePolicyAttachment struct {
 	pulumi.CustomResourceState
 
-	// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-	// the others indicate syntax strategy ways.
+	// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
 	CreateMode pulumi.IntOutput `pulumi:"createMode"`
 	// The create time of the CAM role policy attachment.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
@@ -64,8 +96,7 @@ func GetRolePolicyAttachment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering RolePolicyAttachment resources.
 type rolePolicyAttachmentState struct {
-	// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-	// the others indicate syntax strategy ways.
+	// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
 	CreateMode *int `pulumi:"createMode"`
 	// The create time of the CAM role policy attachment.
 	CreateTime *string `pulumi:"createTime"`
@@ -80,8 +111,7 @@ type rolePolicyAttachmentState struct {
 }
 
 type RolePolicyAttachmentState struct {
-	// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-	// the others indicate syntax strategy ways.
+	// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
 	CreateMode pulumi.IntPtrInput
 	// The create time of the CAM role policy attachment.
 	CreateTime pulumi.StringPtrInput
@@ -201,8 +231,7 @@ func (o RolePolicyAttachmentOutput) ToRolePolicyAttachmentOutputWithContext(ctx 
 	return o
 }
 
-// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and
-// the others indicate syntax strategy ways.
+// Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
 func (o RolePolicyAttachmentOutput) CreateMode() pulumi.IntOutput {
 	return o.ApplyT(func(v *RolePolicyAttachment) pulumi.IntOutput { return v.CreateMode }).(pulumi.IntOutput)
 }

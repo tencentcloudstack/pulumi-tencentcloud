@@ -167,7 +167,42 @@ class TargetGroup(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a TargetGroup resource with the given unique name, props, and options.
+        Provides a resource to create a CLB target group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test = tencentcloud.clb.TargetGroup("test",
+            port=33,
+            target_group_name="test")
+        ```
+
+        Create target group
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test = tencentcloud.clb.TargetGroup("test",
+            port=18082,
+            target_group_instances=[tencentcloud.clb.TargetGroupTargetGroupInstanceArgs(
+                bind_ip="10.0.0.4",
+                port=18080,
+            )],
+            target_group_name="hello1")
+        ```
+
+        ## Import
+
+        CLB target group can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] port: The default port of target group, add server after can use it.
@@ -182,7 +217,42 @@ class TargetGroup(pulumi.CustomResource):
                  args: Optional[TargetGroupArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a TargetGroup resource with the given unique name, props, and options.
+        Provides a resource to create a CLB target group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test = tencentcloud.clb.TargetGroup("test",
+            port=33,
+            target_group_name="test")
+        ```
+
+        Create target group
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test = tencentcloud.clb.TargetGroup("test",
+            port=18082,
+            target_group_instances=[tencentcloud.clb.TargetGroupTargetGroupInstanceArgs(
+                bind_ip="10.0.0.4",
+                port=18080,
+            )],
+            target_group_name="hello1")
+        ```
+
+        ## Import
+
+        CLB target group can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
+        ```
+
         :param str resource_name: The name of the resource.
         :param TargetGroupArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

@@ -20,8 +20,7 @@ class BackupConfigArgs:
         The set of arguments for constructing a BackupConfig resource.
         :param pulumi.Input[str] backup_time: Specifys what time the backup action should take place. And the time interval should be one hour.
         :param pulumi.Input[str] redis_id: ID of a redis instance to which the policy will be applied.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] backup_periods: Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-               `Friday`, `Saturday` and `Sunday`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] backup_periods: It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
         """
         pulumi.set(__self__, "backup_time", backup_time)
         pulumi.set(__self__, "redis_id", redis_id)
@@ -59,8 +58,7 @@ class BackupConfigArgs:
     @pulumi.getter(name="backupPeriods")
     def backup_periods(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-        `Friday`, `Saturday` and `Sunday`.
+        It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
         """
         return pulumi.get(self, "backup_periods")
 
@@ -77,8 +75,7 @@ class _BackupConfigState:
                  redis_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering BackupConfig resources.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] backup_periods: Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-               `Friday`, `Saturday` and `Sunday`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] backup_periods: It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
         :param pulumi.Input[str] backup_time: Specifys what time the backup action should take place. And the time interval should be one hour.
         :param pulumi.Input[str] redis_id: ID of a redis instance to which the policy will be applied.
         """
@@ -96,8 +93,7 @@ class _BackupConfigState:
     @pulumi.getter(name="backupPeriods")
     def backup_periods(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-        `Friday`, `Saturday` and `Sunday`.
+        It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
         """
         return pulumi.get(self, "backup_periods")
 
@@ -140,11 +136,33 @@ class BackupConfig(pulumi.CustomResource):
                  redis_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a BackupConfig resource with the given unique name, props, and options.
+        Use this resource to create a backup config of redis.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        redislab = tencentcloud.redis.BackupConfig("redislab",
+            backup_periods=["Monday"],
+            backup_time="04:00-05:00",
+            redis_id="crs-7yl0q0dd")
+        ```
+
+        ## Import
+
+        Redis
+
+        backup config can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig redisconfig redis-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] backup_periods: Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-               `Friday`, `Saturday` and `Sunday`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] backup_periods: It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
         :param pulumi.Input[str] backup_time: Specifys what time the backup action should take place. And the time interval should be one hour.
         :param pulumi.Input[str] redis_id: ID of a redis instance to which the policy will be applied.
         """
@@ -155,7 +173,30 @@ class BackupConfig(pulumi.CustomResource):
                  args: BackupConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a BackupConfig resource with the given unique name, props, and options.
+        Use this resource to create a backup config of redis.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        redislab = tencentcloud.redis.BackupConfig("redislab",
+            backup_periods=["Monday"],
+            backup_time="04:00-05:00",
+            redis_id="crs-7yl0q0dd")
+        ```
+
+        ## Import
+
+        Redis
+
+        backup config can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig redisconfig redis-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param BackupConfigArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -216,8 +257,7 @@ class BackupConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] backup_periods: Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-               `Friday`, `Saturday` and `Sunday`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] backup_periods: It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
         :param pulumi.Input[str] backup_time: Specifys what time the backup action should take place. And the time interval should be one hour.
         :param pulumi.Input[str] redis_id: ID of a redis instance to which the policy will be applied.
         """
@@ -234,8 +274,7 @@ class BackupConfig(pulumi.CustomResource):
     @pulumi.getter(name="backupPeriods")
     def backup_periods(self) -> pulumi.Output[Sequence[str]]:
         """
-        Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`,
-        `Friday`, `Saturday` and `Sunday`.
+        It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
         """
         return pulumi.get(self, "backup_periods")
 

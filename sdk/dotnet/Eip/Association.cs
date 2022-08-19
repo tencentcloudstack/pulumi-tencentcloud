@@ -9,6 +9,60 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Eip
 {
+    /// <summary>
+    /// Provides an eip resource associated with other resource like CVM, ENI and CLB.
+    /// 
+    /// &gt; **NOTE:** Please DO NOT define `allocate_public_ip` in `tencentcloud.Instance.Instance` resource when using `tencentcloud.Eip.Association`.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Eip.Association("foo", new Tencentcloud.Eip.AssociationArgs
+    ///         {
+    ///             EipId = "eip-xxxxxx",
+    ///             InstanceId = "ins-xxxxxx",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// or
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var bar = new Tencentcloud.Eip.Association("bar", new Tencentcloud.Eip.AssociationArgs
+    ///         {
+    ///             EipId = "eip-xxxxxx",
+    ///             NetworkInterfaceId = "eni-xxxxxx",
+    ///             PrivateIp = "10.0.1.22",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Eip association can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-34jwj3
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Eip/association:Association")]
     public partial class Association : Pulumi.CustomResource
     {
@@ -19,8 +73,7 @@ namespace Pulumi.Tencentcloud.Eip
         public Output<string> EipId { get; private set; } = null!;
 
         /// <summary>
-        /// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-        /// `private_ip fields`.
+        /// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and `private_ip fields`.
         /// </summary>
         [Output("instanceId")]
         public Output<string> InstanceId { get; private set; } = null!;
@@ -90,8 +143,7 @@ namespace Pulumi.Tencentcloud.Eip
         public Input<string> EipId { get; set; } = null!;
 
         /// <summary>
-        /// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-        /// `private_ip fields`.
+        /// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and `private_ip fields`.
         /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
@@ -122,8 +174,7 @@ namespace Pulumi.Tencentcloud.Eip
         public Input<string>? EipId { get; set; }
 
         /// <summary>
-        /// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-        /// `private_ip fields`.
+        /// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and `private_ip fields`.
         /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }

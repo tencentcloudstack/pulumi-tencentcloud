@@ -9,6 +9,7 @@ export * from "./config";
 export * from "./configAttachment";
 export * from "./configExtra";
 export * from "./cosShipper";
+export * from "./index_";
 export * from "./logset";
 export * from "./machineGroup";
 export * from "./topic";
@@ -18,6 +19,7 @@ import { Config } from "./config";
 import { ConfigAttachment } from "./configAttachment";
 import { ConfigExtra } from "./configExtra";
 import { CosShipper } from "./cosShipper";
+import { Index } from "./index_";
 import { Logset } from "./logset";
 import { MachineGroup } from "./machineGroup";
 import { Topic } from "./topic";
@@ -34,6 +36,8 @@ const _module = {
                 return new ConfigExtra(name, <any>undefined, { urn })
             case "tencentcloud:Cls/cosShipper:CosShipper":
                 return new CosShipper(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/index:Index":
+                return new Index(name, <any>undefined, { urn })
             case "tencentcloud:Cls/logset:Logset":
                 return new Logset(name, <any>undefined, { urn })
             case "tencentcloud:Cls/machineGroup:MachineGroup":
@@ -49,6 +53,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Cls/config", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/configAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/configExtra", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/cosShipper", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/index", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/logset", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/machineGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/topic", _module)

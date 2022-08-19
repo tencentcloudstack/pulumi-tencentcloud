@@ -9,6 +9,41 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Tcr
 {
+    /// <summary>
+    /// Use this resource to create tcr repository.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var test = Output.Create(Tencentcloud.Tcr.GetInstances.InvokeAsync(new Tencentcloud.Tcr.GetInstancesArgs
+    ///         {
+    ///             Name = "test",
+    ///         }));
+    ///         var foo = new Tencentcloud.Tcr.Repository("foo", new Tencentcloud.Tcr.RepositoryArgs
+    ///         {
+    ///             InstanceId = test.Apply(test =&gt; test.InstanceLists?[0]?.Id),
+    ///             NamespaceName = "exampleNamespace",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// tcr repository can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Tcr/repository:Repository foo cls-cda1iex1#namespace#repository
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/repository:Repository")]
     public partial class Repository : Pulumi.CustomResource
     {
@@ -43,9 +78,7 @@ namespace Pulumi.Tencentcloud.Tcr
         public Output<bool> IsPublic { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-        /// `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-        /// as `sub1/sub2/repo`.
+        /// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
@@ -133,9 +166,7 @@ namespace Pulumi.Tencentcloud.Tcr
         public Input<string> InstanceId { get; set; } = null!;
 
         /// <summary>
-        /// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-        /// `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-        /// as `sub1/sub2/repo`.
+        /// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -184,9 +215,7 @@ namespace Pulumi.Tencentcloud.Tcr
         public Input<bool>? IsPublic { get; set; }
 
         /// <summary>
-        /// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`,
-        /// `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such
-        /// as `sub1/sub2/repo`.
+        /// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }

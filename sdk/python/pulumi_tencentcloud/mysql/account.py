@@ -196,7 +196,20 @@ class Account(pulumi.CustomResource):
                  password: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Account resource with the given unique name, props, and options.
+        Provides a MySQL account resource for database management. A MySQL instance supports multiple database account.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        default = tencentcloud.mysql.Account("default",
+            description="My test account",
+            mysql_id="my-test-database",
+            password="********")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Database description.
@@ -212,7 +225,20 @@ class Account(pulumi.CustomResource):
                  args: AccountArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Account resource with the given unique name, props, and options.
+        Provides a MySQL account resource for database management. A MySQL instance supports multiple database account.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        default = tencentcloud.mysql.Account("default",
+            description="My test account",
+            mysql_id="my-test-database",
+            password="********")
+        ```
+
         :param str resource_name: The name of the resource.
         :param AccountArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

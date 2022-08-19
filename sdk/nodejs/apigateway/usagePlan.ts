@@ -5,6 +5,31 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Use this resource to create API gateway usage plan.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const plan = new tencentcloud.ApiGateway.UsagePlan("plan", {
+ *     maxRequestNum: 100,
+ *     maxRequestNumPreSec: 10,
+ *     usagePlanDesc: "nice plan",
+ *     usagePlanName: "my_plan",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * API gateway usage plan can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:ApiGateway/usagePlan:UsagePlan plan usagePlan-gyeafpab
+ * ```
+ */
 export class UsagePlan extends pulumi.CustomResource {
     /**
      * Get an existing UsagePlan resource's state with the given name, ID, and optional extra
@@ -20,7 +45,7 @@ export class UsagePlan extends pulumi.CustomResource {
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:APIGateway/usagePlan:UsagePlan';
+    public static readonly __pulumiType = 'tencentcloud:ApiGateway/usagePlan:UsagePlan';
 
     /**
      * Returns true if the given object is an instance of UsagePlan.  This is designed to work even
@@ -40,7 +65,7 @@ export class UsagePlan extends pulumi.CustomResource {
     /**
      * Attach service and API list.
      */
-    public /*out*/ readonly attachLists!: pulumi.Output<outputs.APIGateway.UsagePlanAttachList[]>;
+    public /*out*/ readonly attachLists!: pulumi.Output<outputs.ApiGateway.UsagePlanAttachList[]>;
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
@@ -117,7 +142,7 @@ export interface UsagePlanState {
     /**
      * Attach service and API list.
      */
-    attachLists?: pulumi.Input<pulumi.Input<inputs.APIGateway.UsagePlanAttachList>[]>;
+    attachLists?: pulumi.Input<pulumi.Input<inputs.ApiGateway.UsagePlanAttachList>[]>;
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */

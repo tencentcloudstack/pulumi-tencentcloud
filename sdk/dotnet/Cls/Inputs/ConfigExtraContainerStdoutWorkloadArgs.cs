@@ -12,15 +12,27 @@ namespace Pulumi.Tencentcloud.Cls.Inputs
 
     public sealed class ConfigExtraContainerStdoutWorkloadArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// container name.
+        /// </summary>
         [Input("container")]
         public Input<string>? Container { get; set; }
 
+        /// <summary>
+        /// workload type.
+        /// </summary>
         [Input("kind", required: true)]
         public Input<string> Kind { get; set; } = null!;
 
+        /// <summary>
+        /// workload name.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// namespace.
+        /// </summary>
         [Input("namespace")]
         public Input<string>? Namespace { get; set; }
 

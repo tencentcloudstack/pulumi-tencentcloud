@@ -12,15 +12,27 @@ namespace Pulumi.Tencentcloud.Scf.Inputs
 
     public sealed class LayerContentArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zip_file`.
+        /// </summary>
         [Input("cosBucketName")]
         public Input<string>? CosBucketName { get; set; }
 
+        /// <summary>
+        /// Cos bucket region of the SCF layer, conflict with `zip_file`.
+        /// </summary>
         [Input("cosBucketRegion")]
         public Input<string>? CosBucketRegion { get; set; }
 
+        /// <summary>
+        /// Cos object name of the SCF layer, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
+        /// </summary>
         [Input("cosObjectName")]
         public Input<string>? CosObjectName { get; set; }
 
+        /// <summary>
+        /// Zip file of the SCF layer, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
+        /// </summary>
         [Input("zipFile")]
         public Input<string>? ZipFile { get; set; }
 

@@ -165,7 +165,27 @@ class Group(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a Group resource with the given unique name, props, and options.
+        Provides a resource to create security group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        sglab = tencentcloud.security.Group("sglab",
+            description="favourite sg",
+            project_id=0)
+        ```
+
+        ## Import
+
+        Security group can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Security/group:Group tencentcloud_security_group.sglab sg-ey3wmiz1
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Description of the security group.
@@ -180,7 +200,27 @@ class Group(pulumi.CustomResource):
                  args: Optional[GroupArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Group resource with the given unique name, props, and options.
+        Provides a resource to create security group.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        sglab = tencentcloud.security.Group("sglab",
+            description="favourite sg",
+            project_id=0)
+        ```
+
+        ## Import
+
+        Security group can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Security/group:Group tencentcloud_security_group.sglab sg-ey3wmiz1
+        ```
+
         :param str resource_name: The name of the resource.
         :param GroupArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

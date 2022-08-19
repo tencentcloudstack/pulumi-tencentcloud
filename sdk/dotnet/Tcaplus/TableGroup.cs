@@ -9,8 +9,40 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Tcaplus
 {
-    [TencentcloudResourceType("tencentcloud:Tcaplus/tableGroup:TableGroup")]
-    public partial class TableGroup : Pulumi.CustomResource
+    /// <summary>
+    /// Use this resource to create TcaplusDB table group.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var test = new Tencentcloud.Tcaplus.Cluster("test", new Tencentcloud.Tcaplus.ClusterArgs
+    ///         {
+    ///             IdlType = "PROTO",
+    ///             ClusterName = "tf_tcaplus_cluster_test",
+    ///             VpcId = "vpc-7k6gzox6",
+    ///             SubnetId = "subnet-akwgvfa3",
+    ///             Password = "1qaA2k1wgvfa3ZZZ",
+    ///             OldPasswordExpireLast = 3600,
+    ///         });
+    ///         var tablegroup = new Tencentcloud.Tcaplus.Tablegroup("tablegroup", new Tencentcloud.Tcaplus.TablegroupArgs
+    ///         {
+    ///             ClusterId = test.Id,
+    ///             TablegroupName = "tf_test_group_name",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:Tcaplus/tablegroup:Tablegroup")]
+    public partial class Tablegroup : Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the TcaplusDB cluster to which the table group belongs.
@@ -44,19 +76,19 @@ namespace Pulumi.Tencentcloud.Tcaplus
 
 
         /// <summary>
-        /// Create a TableGroup resource with the given unique name, arguments, and options.
+        /// Create a Tablegroup resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public TableGroup(string name, TableGroupArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:Tcaplus/tableGroup:TableGroup", name, args ?? new TableGroupArgs(), MakeResourceOptions(options, ""))
+        public Tablegroup(string name, TablegroupArgs args, CustomResourceOptions? options = null)
+            : base("tencentcloud:Tcaplus/tablegroup:Tablegroup", name, args ?? new TablegroupArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private TableGroup(string name, Input<string> id, TableGroupState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:Tcaplus/tableGroup:TableGroup", name, state, MakeResourceOptions(options, id))
+        private Tablegroup(string name, Input<string> id, TablegroupState? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:Tcaplus/tablegroup:Tablegroup", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -72,7 +104,7 @@ namespace Pulumi.Tencentcloud.Tcaplus
             return merged;
         }
         /// <summary>
-        /// Get an existing TableGroup resource's state with the given name, ID, and optional extra
+        /// Get an existing Tablegroup resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -80,13 +112,13 @@ namespace Pulumi.Tencentcloud.Tcaplus
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static TableGroup Get(string name, Input<string> id, TableGroupState? state = null, CustomResourceOptions? options = null)
+        public static Tablegroup Get(string name, Input<string> id, TablegroupState? state = null, CustomResourceOptions? options = null)
         {
-            return new TableGroup(name, id, state, options);
+            return new Tablegroup(name, id, state, options);
         }
     }
 
-    public sealed class TableGroupArgs : Pulumi.ResourceArgs
+    public sealed class TablegroupArgs : Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the TcaplusDB cluster to which the table group belongs.
@@ -100,12 +132,12 @@ namespace Pulumi.Tencentcloud.Tcaplus
         [Input("tablegroupName", required: true)]
         public Input<string> TablegroupName { get; set; } = null!;
 
-        public TableGroupArgs()
+        public TablegroupArgs()
         {
         }
     }
 
-    public sealed class TableGroupState : Pulumi.ResourceArgs
+    public sealed class TablegroupState : Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the TcaplusDB cluster to which the table group belongs.
@@ -137,7 +169,7 @@ namespace Pulumi.Tencentcloud.Tcaplus
         [Input("totalSize")]
         public Input<int>? TotalSize { get; set; }
 
-        public TableGroupState()
+        public TablegroupState()
         {
         }
     }

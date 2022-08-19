@@ -11,19 +11,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource for an AS (Auto scaling) lifecycle hook.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := As.NewLifecycleHook(ctx, "lifecycleHook", &As.LifecycleHookArgs{
+// 			DefaultResult:          pulumi.String("CONTINUE"),
+// 			HeartbeatTimeout:       pulumi.Int(500),
+// 			LifecycleHookName:      pulumi.String("tf-as-lifecycle-hook"),
+// 			LifecycleTransition:    pulumi.String("INSTANCE_LAUNCHING"),
+// 			NotificationMetadata:   pulumi.String("tf test"),
+// 			NotificationQueueName:  pulumi.String("lifcyclehook"),
+// 			NotificationTargetType: pulumi.String("CMQ_QUEUE"),
+// 			ScalingGroupId:         pulumi.String("sg-12af45"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type LifecycleHook struct {
 	pulumi.CustomResourceState
 
-	// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-	// Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+	// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
 	DefaultResult pulumi.StringPtrOutput `pulumi:"defaultResult"`
-	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-	// (30~7200). and default value is `300`.
+	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
 	HeartbeatTimeout pulumi.IntPtrOutput `pulumi:"heartbeatTimeout"`
 	// The name of the lifecycle hook.
 	LifecycleHookName pulumi.StringOutput `pulumi:"lifecycleHookName"`
-	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-	// `INSTANCE_TERMINATING`.
+	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
 	LifecycleTransition pulumi.StringOutput `pulumi:"lifecycleTransition"`
 	// Contains additional information that you want to include any time AS sends a message to the notification target.
 	NotificationMetadata pulumi.StringPtrOutput `pulumi:"notificationMetadata"`
@@ -75,16 +103,13 @@ func GetLifecycleHook(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering LifecycleHook resources.
 type lifecycleHookState struct {
-	// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-	// Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+	// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
 	DefaultResult *string `pulumi:"defaultResult"`
-	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-	// (30~7200). and default value is `300`.
+	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
 	HeartbeatTimeout *int `pulumi:"heartbeatTimeout"`
 	// The name of the lifecycle hook.
 	LifecycleHookName *string `pulumi:"lifecycleHookName"`
-	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-	// `INSTANCE_TERMINATING`.
+	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
 	LifecycleTransition *string `pulumi:"lifecycleTransition"`
 	// Contains additional information that you want to include any time AS sends a message to the notification target.
 	NotificationMetadata *string `pulumi:"notificationMetadata"`
@@ -99,16 +124,13 @@ type lifecycleHookState struct {
 }
 
 type LifecycleHookState struct {
-	// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-	// Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+	// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
 	DefaultResult pulumi.StringPtrInput
-	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-	// (30~7200). and default value is `300`.
+	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
 	HeartbeatTimeout pulumi.IntPtrInput
 	// The name of the lifecycle hook.
 	LifecycleHookName pulumi.StringPtrInput
-	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-	// `INSTANCE_TERMINATING`.
+	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
 	LifecycleTransition pulumi.StringPtrInput
 	// Contains additional information that you want to include any time AS sends a message to the notification target.
 	NotificationMetadata pulumi.StringPtrInput
@@ -127,16 +149,13 @@ func (LifecycleHookState) ElementType() reflect.Type {
 }
 
 type lifecycleHookArgs struct {
-	// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-	// Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+	// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
 	DefaultResult *string `pulumi:"defaultResult"`
-	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-	// (30~7200). and default value is `300`.
+	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
 	HeartbeatTimeout *int `pulumi:"heartbeatTimeout"`
 	// The name of the lifecycle hook.
 	LifecycleHookName string `pulumi:"lifecycleHookName"`
-	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-	// `INSTANCE_TERMINATING`.
+	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
 	LifecycleTransition string `pulumi:"lifecycleTransition"`
 	// Contains additional information that you want to include any time AS sends a message to the notification target.
 	NotificationMetadata *string `pulumi:"notificationMetadata"`
@@ -152,16 +171,13 @@ type lifecycleHookArgs struct {
 
 // The set of arguments for constructing a LifecycleHook resource.
 type LifecycleHookArgs struct {
-	// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-	// Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+	// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
 	DefaultResult pulumi.StringPtrInput
-	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-	// (30~7200). and default value is `300`.
+	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
 	HeartbeatTimeout pulumi.IntPtrInput
 	// The name of the lifecycle hook.
 	LifecycleHookName pulumi.StringInput
-	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-	// `INSTANCE_TERMINATING`.
+	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
 	LifecycleTransition pulumi.StringInput
 	// Contains additional information that you want to include any time AS sends a message to the notification target.
 	NotificationMetadata pulumi.StringPtrInput
@@ -262,14 +278,12 @@ func (o LifecycleHookOutput) ToLifecycleHookOutputWithContext(ctx context.Contex
 	return o
 }
 
-// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs.
-// Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
+// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
 func (o LifecycleHookOutput) DefaultResult() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LifecycleHook) pulumi.StringPtrOutput { return v.DefaultResult }).(pulumi.StringPtrOutput)
 }
 
-// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges:
-// (30~7200). and default value is `300`.
+// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
 func (o LifecycleHookOutput) HeartbeatTimeout() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *LifecycleHook) pulumi.IntPtrOutput { return v.HeartbeatTimeout }).(pulumi.IntPtrOutput)
 }
@@ -279,8 +293,7 @@ func (o LifecycleHookOutput) LifecycleHookName() pulumi.StringOutput {
 	return o.ApplyT(func(v *LifecycleHook) pulumi.StringOutput { return v.LifecycleHookName }).(pulumi.StringOutput)
 }
 
-// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and
-// `INSTANCE_TERMINATING`.
+// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
 func (o LifecycleHookOutput) LifecycleTransition() pulumi.StringOutput {
 	return o.ApplyT(func(v *LifecycleHook) pulumi.StringOutput { return v.LifecycleTransition }).(pulumi.StringOutput)
 }

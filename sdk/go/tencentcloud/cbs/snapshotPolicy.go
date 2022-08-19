@@ -11,6 +11,46 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a snapshot policy resource.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cbs.NewSnapshotPolicy(ctx, "snapshotPolicy", &Cbs.SnapshotPolicyArgs{
+// 			RepeatHours: pulumi.IntArray{
+// 				pulumi.Int(1),
+// 			},
+// 			RepeatWeekdays: pulumi.IntArray{
+// 				pulumi.Int(1),
+// 				pulumi.Int(4),
+// 			},
+// 			RetentionDays:      pulumi.Int(7),
+// 			SnapshotPolicyName: pulumi.String("mysnapshotpolicyname"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CBS snapshot policy can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+// ```
 type SnapshotPolicy struct {
 	pulumi.CustomResourceState
 

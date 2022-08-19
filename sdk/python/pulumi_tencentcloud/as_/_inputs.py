@@ -22,6 +22,12 @@ class ScalingConfigDataDiskArgs:
                  disk_size: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
                  snapshot_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] delete_with_instance: Indicates whether the disk remove after instance terminated.
+        :param pulumi.Input[int] disk_size: Volume of disk in GB. Default is `0`.
+        :param pulumi.Input[str] disk_type: Types of disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. valid when disk_type_policy is ORIGINAL.
+        :param pulumi.Input[str] snapshot_id: Data disk snapshot ID.
+        """
         if delete_with_instance is not None:
             pulumi.set(__self__, "delete_with_instance", delete_with_instance)
         if disk_size is not None:
@@ -34,6 +40,9 @@ class ScalingConfigDataDiskArgs:
     @property
     @pulumi.getter(name="deleteWithInstance")
     def delete_with_instance(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicates whether the disk remove after instance terminated.
+        """
         return pulumi.get(self, "delete_with_instance")
 
     @delete_with_instance.setter
@@ -43,6 +52,9 @@ class ScalingConfigDataDiskArgs:
     @property
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Volume of disk in GB. Default is `0`.
+        """
         return pulumi.get(self, "disk_size")
 
     @disk_size.setter
@@ -52,6 +64,9 @@ class ScalingConfigDataDiskArgs:
     @property
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Types of disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. valid when disk_type_policy is ORIGINAL.
+        """
         return pulumi.get(self, "disk_type")
 
     @disk_type.setter
@@ -61,6 +76,9 @@ class ScalingConfigDataDiskArgs:
     @property
     @pulumi.getter(name="snapshotId")
     def snapshot_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Data disk snapshot ID.
+        """
         return pulumi.get(self, "snapshot_id")
 
     @snapshot_id.setter
@@ -73,6 +91,10 @@ class ScalingConfigInstanceNameSettingsArgs:
     def __init__(__self__, *,
                  instance_name: pulumi.Input[str],
                  instance_name_style: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] instance_name: CVM instance name.
+        :param pulumi.Input[str] instance_name_style: Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default is `ORIGINAL`.
+        """
         pulumi.set(__self__, "instance_name", instance_name)
         if instance_name_style is not None:
             pulumi.set(__self__, "instance_name_style", instance_name_style)
@@ -80,6 +102,9 @@ class ScalingConfigInstanceNameSettingsArgs:
     @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> pulumi.Input[str]:
+        """
+        CVM instance name.
+        """
         return pulumi.get(self, "instance_name")
 
     @instance_name.setter
@@ -89,6 +114,9 @@ class ScalingConfigInstanceNameSettingsArgs:
     @property
     @pulumi.getter(name="instanceNameStyle")
     def instance_name_style(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default is `ORIGINAL`.
+        """
         return pulumi.get(self, "instance_name_style")
 
     @instance_name_style.setter
@@ -103,6 +131,12 @@ class ScalingGroupForwardBalancerIdArgs:
                  load_balancer_id: pulumi.Input[str],
                  target_attributes: pulumi.Input[Sequence[pulumi.Input['ScalingGroupForwardBalancerIdTargetAttributeArgs']]],
                  rule_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] listener_id: Listener ID for application load balancers.
+        :param pulumi.Input[str] load_balancer_id: ID of available load balancers.
+        :param pulumi.Input[Sequence[pulumi.Input['ScalingGroupForwardBalancerIdTargetAttributeArgs']]] target_attributes: Attribute list of target rules.
+        :param pulumi.Input[str] rule_id: ID of forwarding rules.
+        """
         pulumi.set(__self__, "listener_id", listener_id)
         pulumi.set(__self__, "load_balancer_id", load_balancer_id)
         pulumi.set(__self__, "target_attributes", target_attributes)
@@ -112,6 +146,9 @@ class ScalingGroupForwardBalancerIdArgs:
     @property
     @pulumi.getter(name="listenerId")
     def listener_id(self) -> pulumi.Input[str]:
+        """
+        Listener ID for application load balancers.
+        """
         return pulumi.get(self, "listener_id")
 
     @listener_id.setter
@@ -121,6 +158,9 @@ class ScalingGroupForwardBalancerIdArgs:
     @property
     @pulumi.getter(name="loadBalancerId")
     def load_balancer_id(self) -> pulumi.Input[str]:
+        """
+        ID of available load balancers.
+        """
         return pulumi.get(self, "load_balancer_id")
 
     @load_balancer_id.setter
@@ -130,6 +170,9 @@ class ScalingGroupForwardBalancerIdArgs:
     @property
     @pulumi.getter(name="targetAttributes")
     def target_attributes(self) -> pulumi.Input[Sequence[pulumi.Input['ScalingGroupForwardBalancerIdTargetAttributeArgs']]]:
+        """
+        Attribute list of target rules.
+        """
         return pulumi.get(self, "target_attributes")
 
     @target_attributes.setter
@@ -139,6 +182,9 @@ class ScalingGroupForwardBalancerIdArgs:
     @property
     @pulumi.getter(name="ruleId")
     def rule_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of forwarding rules.
+        """
         return pulumi.get(self, "rule_id")
 
     @rule_id.setter
@@ -151,12 +197,19 @@ class ScalingGroupForwardBalancerIdTargetAttributeArgs:
     def __init__(__self__, *,
                  port: pulumi.Input[int],
                  weight: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] port: Port number.
+        :param pulumi.Input[int] weight: Weight.
+        """
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "weight", weight)
 
     @property
     @pulumi.getter
     def port(self) -> pulumi.Input[int]:
+        """
+        Port number.
+        """
         return pulumi.get(self, "port")
 
     @port.setter
@@ -166,6 +219,9 @@ class ScalingGroupForwardBalancerIdTargetAttributeArgs:
     @property
     @pulumi.getter
     def weight(self) -> pulumi.Input[int]:
+        """
+        Weight.
+        """
         return pulumi.get(self, "weight")
 
     @weight.setter

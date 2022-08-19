@@ -146,7 +146,29 @@ class Logset(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a Logset resource with the given unique name, props, and options.
+        Provides a resource to create a cls logset
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        logset = tencentcloud.cls.Logset("logset",
+            logset_name="logset",
+            tags={
+                "test": "test",
+            })
+        ```
+
+        ## Import
+
+        cls logset can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cls/logset:Logset logset 5cd3a17e-fb0b-418c-afd7-77b365397426
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] logset_name: Logset name, which must be unique.
@@ -159,7 +181,29 @@ class Logset(pulumi.CustomResource):
                  args: LogsetArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Logset resource with the given unique name, props, and options.
+        Provides a resource to create a cls logset
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        logset = tencentcloud.cls.Logset("logset",
+            logset_name="logset",
+            tags={
+                "test": "test",
+            })
+        ```
+
+        ## Import
+
+        cls logset can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cls/logset:Logset logset 5cd3a17e-fb0b-418c-afd7-77b365397426
+        ```
+
         :param str resource_name: The name of the resource.
         :param LogsetArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

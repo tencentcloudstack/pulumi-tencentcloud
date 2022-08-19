@@ -4,6 +4,37 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a cls topic.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const topic = new tencentcloud.Cls.Topic("topic", {
+ *     autoSplit: false,
+ *     logsetId: "5cd3a17e-fb0b-418c-afd7-77b365397426",
+ *     maxSplitPartitions: 20,
+ *     partitionCount: 1,
+ *     period: 10,
+ *     storageType: "hot",
+ *     tags: {
+ *         test: "test",
+ *     },
+ *     topicName: "topic",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * cls topic can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cls/topic:Topic topic 2f5764c1-c833-44c5-84c7-950979b2a278
+ * ```
+ */
 export class Topic extends pulumi.CustomResource {
     /**
      * Get an existing Topic resource's state with the given name, ID, and optional extra
@@ -53,8 +84,7 @@ export class Topic extends pulumi.CustomResource {
      */
     public readonly period!: pulumi.Output<number>;
     /**
-     * Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-     * passed in, please contact the customer service to add the log topic to the allowlist first..
+     * Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
      */
     public readonly storageType!: pulumi.Output<string>;
     /**
@@ -134,8 +164,7 @@ export interface TopicState {
      */
     period?: pulumi.Input<number>;
     /**
-     * Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-     * passed in, please contact the customer service to add the log topic to the allowlist first..
+     * Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
      */
     storageType?: pulumi.Input<string>;
     /**
@@ -173,8 +202,7 @@ export interface TopicArgs {
      */
     period?: pulumi.Input<number>;
     /**
-     * Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is
-     * passed in, please contact the customer service to add the log topic to the allowlist first..
+     * Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
      */
     storageType?: pulumi.Input<string>;
     /**

@@ -9,6 +9,36 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Postgresql
 {
+    /// <summary>
+    /// Use this resource to create postgresql readonly group.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var @group = new Tencentcloud.Postgresql.ReadonlyGroup("group", new Tencentcloud.Postgresql.ReadonlyGroupArgs
+    ///         {
+    ///             MasterDbInstanceId = "postgres-f44wlfdv",
+    ///             MaxReplayLag = 100,
+    ///             MaxReplayLatency = 512,
+    ///             MinDelayEliminateReserve = 1,
+    ///             ProjectId = 0,
+    ///             ReplayLagEliminate = 1,
+    ///             ReplayLatencyEliminate = 1,
+    ///             SubnetId = "subnet-enm92y0m",
+    ///             VpcId = "vpc-86v957zb",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup")]
     public partial class ReadonlyGroup : Pulumi.CustomResource
     {
@@ -55,15 +85,13 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Output<int> ProjectId { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-        /// instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        /// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         /// </summary>
         [Output("replayLagEliminate")]
         public Output<int> ReplayLagEliminate { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-        /// the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        /// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         /// </summary>
         [Output("replayLatencyEliminate")]
         public Output<int> ReplayLatencyEliminate { get; private set; } = null!;
@@ -169,15 +197,13 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Input<int> ProjectId { get; set; } = null!;
 
         /// <summary>
-        /// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-        /// instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        /// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         /// </summary>
         [Input("replayLagEliminate", required: true)]
         public Input<int> ReplayLagEliminate { get; set; } = null!;
 
         /// <summary>
-        /// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-        /// the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        /// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         /// </summary>
         [Input("replayLatencyEliminate", required: true)]
         public Input<int> ReplayLatencyEliminate { get; set; } = null!;
@@ -256,15 +282,13 @@ namespace Pulumi.Tencentcloud.Postgresql
         public Input<int>? ProjectId { get; set; }
 
         /// <summary>
-        /// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary
-        /// instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        /// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         /// </summary>
         [Input("replayLagEliminate")]
         public Input<int>? ReplayLagEliminate { get; set; }
 
         /// <summary>
-        /// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and
-        /// the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
+        /// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
         /// </summary>
         [Input("replayLatencyEliminate")]
         public Input<int>? ReplayLatencyEliminate { get; set; }

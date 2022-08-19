@@ -11,18 +11,56 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a NAT gateway.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Nat.NewGateway(ctx, "foo", &Nat.GatewayArgs{
+// 			AssignedEipSets: pulumi.StringArray{
+// 				pulumi.String("1.1.1.1"),
+// 			},
+// 			Bandwidth:     pulumi.Int(100),
+// 			MaxConcurrent: pulumi.Int(1000000),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf"),
+// 			},
+// 			VpcId: pulumi.String("vpc-4xxr2cy7"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// NAT gateway can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+// ```
 type Gateway struct {
 	pulumi.CustomResourceState
 
 	// EIP IP address set bound to the gateway. The value of at least 1 and at most 10.
 	AssignedEipSets pulumi.StringArrayOutput `pulumi:"assignedEipSets"`
-	// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-	// `1000`, `2000`, `5000`. Default is 100.
+	// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
 	Bandwidth pulumi.IntPtrOutput `pulumi:"bandwidth"`
 	// Create time of the NAT gateway.
 	CreatedTime pulumi.StringOutput `pulumi:"createdTime"`
-	// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-	// `1000000`.
+	// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
 	MaxConcurrent pulumi.IntPtrOutput `pulumi:"maxConcurrent"`
 	// Name of the NAT gateway.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -69,13 +107,11 @@ func GetGateway(ctx *pulumi.Context,
 type gatewayState struct {
 	// EIP IP address set bound to the gateway. The value of at least 1 and at most 10.
 	AssignedEipSets []string `pulumi:"assignedEipSets"`
-	// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-	// `1000`, `2000`, `5000`. Default is 100.
+	// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
 	Bandwidth *int `pulumi:"bandwidth"`
 	// Create time of the NAT gateway.
 	CreatedTime *string `pulumi:"createdTime"`
-	// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-	// `1000000`.
+	// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
 	MaxConcurrent *int `pulumi:"maxConcurrent"`
 	// Name of the NAT gateway.
 	Name *string `pulumi:"name"`
@@ -88,13 +124,11 @@ type gatewayState struct {
 type GatewayState struct {
 	// EIP IP address set bound to the gateway. The value of at least 1 and at most 10.
 	AssignedEipSets pulumi.StringArrayInput
-	// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-	// `1000`, `2000`, `5000`. Default is 100.
+	// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
 	Bandwidth pulumi.IntPtrInput
 	// Create time of the NAT gateway.
 	CreatedTime pulumi.StringPtrInput
-	// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-	// `1000000`.
+	// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
 	MaxConcurrent pulumi.IntPtrInput
 	// Name of the NAT gateway.
 	Name pulumi.StringPtrInput
@@ -111,11 +145,9 @@ func (GatewayState) ElementType() reflect.Type {
 type gatewayArgs struct {
 	// EIP IP address set bound to the gateway. The value of at least 1 and at most 10.
 	AssignedEipSets []string `pulumi:"assignedEipSets"`
-	// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-	// `1000`, `2000`, `5000`. Default is 100.
+	// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
 	Bandwidth *int `pulumi:"bandwidth"`
-	// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-	// `1000000`.
+	// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
 	MaxConcurrent *int `pulumi:"maxConcurrent"`
 	// Name of the NAT gateway.
 	Name *string `pulumi:"name"`
@@ -129,11 +161,9 @@ type gatewayArgs struct {
 type GatewayArgs struct {
 	// EIP IP address set bound to the gateway. The value of at least 1 and at most 10.
 	AssignedEipSets pulumi.StringArrayInput
-	// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-	// `1000`, `2000`, `5000`. Default is 100.
+	// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
 	Bandwidth pulumi.IntPtrInput
-	// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-	// `1000000`.
+	// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
 	MaxConcurrent pulumi.IntPtrInput
 	// Name of the NAT gateway.
 	Name pulumi.StringPtrInput
@@ -235,8 +265,7 @@ func (o GatewayOutput) AssignedEipSets() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.StringArrayOutput { return v.AssignedEipSets }).(pulumi.StringArrayOutput)
 }
 
-// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`,
-// `1000`, `2000`, `5000`. Default is 100.
+// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
 func (o GatewayOutput) Bandwidth() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.IntPtrOutput { return v.Bandwidth }).(pulumi.IntPtrOutput)
 }
@@ -246,8 +275,7 @@ func (o GatewayOutput) CreatedTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.StringOutput { return v.CreatedTime }).(pulumi.StringOutput)
 }
 
-// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is
-// `1000000`.
+// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
 func (o GatewayOutput) MaxConcurrent() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.IntPtrOutput { return v.MaxConcurrent }).(pulumi.IntPtrOutput)
 }

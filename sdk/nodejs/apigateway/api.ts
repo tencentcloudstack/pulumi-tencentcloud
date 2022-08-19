@@ -5,9 +5,63 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
-export class API extends pulumi.CustomResource {
+/**
+ * Use this resource to create API of API gateway.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const service = new tencentcloud.apigateway.Service("service", {
+ *     serviceName: "ck",
+ *     protocol: "http&https",
+ *     serviceDesc: "your nice service",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     ipVersion: "IPv4",
+ * });
+ * const api = new tencentcloud.apigateway.Api("api", {
+ *     serviceId: service.id,
+ *     apiName: "hello",
+ *     apiDesc: "my hello api",
+ *     authType: "NONE",
+ *     protocol: "HTTP",
+ *     enableCors: true,
+ *     requestConfigPath: "/user/info",
+ *     requestConfigMethod: "GET",
+ *     requestParameters: [{
+ *         name: "name",
+ *         position: "QUERY",
+ *         type: "string",
+ *         desc: "who are you?",
+ *         defaultValue: "tom",
+ *         required: true,
+ *     }],
+ *     serviceConfigType: "HTTP",
+ *     serviceConfigTimeout: 15,
+ *     serviceConfigUrl: "http://www.qq.com",
+ *     serviceConfigPath: "/user",
+ *     serviceConfigMethod: "GET",
+ *     responseType: "HTML",
+ *     responseSuccessExample: "success",
+ *     responseFailExample: "fail",
+ *     responseErrorCodes: [{
+ *         code: 100,
+ *         msg: "system error",
+ *         desc: "system error code",
+ *         convertedCode: -100,
+ *         needConvert: true,
+ *     }],
+ * });
+ * ```
+ */
+export class Api extends pulumi.CustomResource {
     /**
-     * Get an existing API resource's state with the given name, ID, and optional extra
+     * Get an existing Api resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -15,22 +69,22 @@ export class API extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: APIState, opts?: pulumi.CustomResourceOptions): API {
-        return new API(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: ApiState, opts?: pulumi.CustomResourceOptions): Api {
+        return new Api(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'tencentcloud:APIGateway/aPI:API';
+    public static readonly __pulumiType = 'tencentcloud:ApiGateway/api:Api';
 
     /**
-     * Returns true if the given object is an instance of API.  This is designed to work even
+     * Returns true if the given object is an instance of Api.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is API {
+    public static isInstance(obj: any): obj is Api {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === API.__pulumiType;
+        return obj['__pulumiType'] === Api.__pulumiType;
     }
 
     /**
@@ -42,8 +96,7 @@ export class API extends pulumi.CustomResource {
      */
     public readonly apiName!: pulumi.Output<string>;
     /**
-     * API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-     * `NONE`.
+     * API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
      */
     public readonly authType!: pulumi.Output<string | undefined>;
     /**
@@ -77,11 +130,11 @@ export class API extends pulumi.CustomResource {
     /**
      * Frontend request parameters.
      */
-    public readonly requestParameters!: pulumi.Output<outputs.APIGateway.APIRequestParameter[] | undefined>;
+    public readonly requestParameters!: pulumi.Output<outputs.ApiGateway.ApiRequestParameter[] | undefined>;
     /**
      * Custom error code configuration. Must keep at least one after set.
      */
-    public readonly responseErrorCodes!: pulumi.Output<outputs.APIGateway.APIResponseErrorCode[] | undefined>;
+    public readonly responseErrorCodes!: pulumi.Output<outputs.ApiGateway.ApiResponseErrorCode[] | undefined>;
     /**
      * Response failure sample of custom response configuration.
      */
@@ -95,17 +148,15 @@ export class API extends pulumi.CustomResource {
      */
     public readonly responseType!: pulumi.Output<string>;
     /**
-     * API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-     * The frontend `request_config_method` and backend method `service_config_method` can be different.
+     * API backend service request method, such as `GET`. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigMethod` and backend method `serviceConfigMethod` can be different.
      */
     public readonly serviceConfigMethod!: pulumi.Output<string | undefined>;
     /**
-     * Returned information of API backend mocking. This parameter is required when `service_config_type` is `MOCK`.
+     * Returned information of API backend mocking. This parameter is required when `serviceConfigType` is `MOCK`.
      */
     public readonly serviceConfigMockReturnMessage!: pulumi.Output<string | undefined>;
     /**
-     * API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-     * frontend `request_config_path` and backend path `service_config_path` can be different.
+     * API backend service path, such as /path. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigPath` and backend path `serviceConfigPath` can be different.
      */
     public readonly serviceConfigPath!: pulumi.Output<string | undefined>;
     /**
@@ -113,15 +164,15 @@ export class API extends pulumi.CustomResource {
      */
     public readonly serviceConfigProduct!: pulumi.Output<string | undefined>;
     /**
-     * SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
+     * SCF function name. This parameter takes effect when `serviceConfigType` is `SCF`.
      */
     public readonly serviceConfigScfFunctionName!: pulumi.Output<string | undefined>;
     /**
-     * SCF function namespace. This parameter takes effect when `service_config_type` is `SCF`.
+     * SCF function namespace. This parameter takes effect when `serviceConfigType` is `SCF`.
      */
     public readonly serviceConfigScfFunctionNamespace!: pulumi.Output<string | undefined>;
     /**
-     * SCF function version. This parameter takes effect when `service_config_type` is `SCF`.
+     * SCF function version. This parameter takes effect when `serviceConfigType` is `SCF`.
      */
     public readonly serviceConfigScfFunctionQualifier!: pulumi.Output<string | undefined>;
     /**
@@ -133,7 +184,7 @@ export class API extends pulumi.CustomResource {
      */
     public readonly serviceConfigType!: pulumi.Output<string | undefined>;
     /**
-     * API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+     * API backend service url. This parameter is required when `serviceConfigType` is `HTTP`.
      */
     public readonly serviceConfigUrl!: pulumi.Output<string | undefined>;
     /**
@@ -141,7 +192,7 @@ export class API extends pulumi.CustomResource {
      */
     public readonly serviceConfigVpcId!: pulumi.Output<string | undefined>;
     /**
-     * Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+     * Which service this API belongs. Refer to resource `tencentcloud.ApiGateway.Service`.
      */
     public readonly serviceId!: pulumi.Output<string>;
     /**
@@ -154,18 +205,18 @@ export class API extends pulumi.CustomResource {
     public /*out*/ readonly updateTime!: pulumi.Output<string>;
 
     /**
-     * Create a API resource with the given unique name, arguments, and options.
+     * Create a Api resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: APIArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: APIArgs | APIState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: ApiArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: ApiArgs | ApiState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as APIState | undefined;
+            const state = argsOrState as ApiState | undefined;
             resourceInputs["apiDesc"] = state ? state.apiDesc : undefined;
             resourceInputs["apiName"] = state ? state.apiName : undefined;
             resourceInputs["authType"] = state ? state.authType : undefined;
@@ -196,7 +247,7 @@ export class API extends pulumi.CustomResource {
             resourceInputs["testLimit"] = state ? state.testLimit : undefined;
             resourceInputs["updateTime"] = state ? state.updateTime : undefined;
         } else {
-            const args = argsOrState as APIArgs | undefined;
+            const args = argsOrState as ApiArgs | undefined;
             if ((!args || args.apiName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'apiName'");
             }
@@ -237,14 +288,14 @@ export class API extends pulumi.CustomResource {
             resourceInputs["updateTime"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(API.__pulumiType, name, resourceInputs, opts);
+        super(Api.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering API resources.
+ * Input properties used for looking up and filtering Api resources.
  */
-export interface APIState {
+export interface ApiState {
     /**
      * Custom API description.
      */
@@ -254,8 +305,7 @@ export interface APIState {
      */
     apiName?: pulumi.Input<string>;
     /**
-     * API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-     * `NONE`.
+     * API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
      */
     authType?: pulumi.Input<string>;
     /**
@@ -289,11 +339,11 @@ export interface APIState {
     /**
      * Frontend request parameters.
      */
-    requestParameters?: pulumi.Input<pulumi.Input<inputs.APIGateway.APIRequestParameter>[]>;
+    requestParameters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ApiRequestParameter>[]>;
     /**
      * Custom error code configuration. Must keep at least one after set.
      */
-    responseErrorCodes?: pulumi.Input<pulumi.Input<inputs.APIGateway.APIResponseErrorCode>[]>;
+    responseErrorCodes?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ApiResponseErrorCode>[]>;
     /**
      * Response failure sample of custom response configuration.
      */
@@ -307,17 +357,15 @@ export interface APIState {
      */
     responseType?: pulumi.Input<string>;
     /**
-     * API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-     * The frontend `request_config_method` and backend method `service_config_method` can be different.
+     * API backend service request method, such as `GET`. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigMethod` and backend method `serviceConfigMethod` can be different.
      */
     serviceConfigMethod?: pulumi.Input<string>;
     /**
-     * Returned information of API backend mocking. This parameter is required when `service_config_type` is `MOCK`.
+     * Returned information of API backend mocking. This parameter is required when `serviceConfigType` is `MOCK`.
      */
     serviceConfigMockReturnMessage?: pulumi.Input<string>;
     /**
-     * API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-     * frontend `request_config_path` and backend path `service_config_path` can be different.
+     * API backend service path, such as /path. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigPath` and backend path `serviceConfigPath` can be different.
      */
     serviceConfigPath?: pulumi.Input<string>;
     /**
@@ -325,15 +373,15 @@ export interface APIState {
      */
     serviceConfigProduct?: pulumi.Input<string>;
     /**
-     * SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
+     * SCF function name. This parameter takes effect when `serviceConfigType` is `SCF`.
      */
     serviceConfigScfFunctionName?: pulumi.Input<string>;
     /**
-     * SCF function namespace. This parameter takes effect when `service_config_type` is `SCF`.
+     * SCF function namespace. This parameter takes effect when `serviceConfigType` is `SCF`.
      */
     serviceConfigScfFunctionNamespace?: pulumi.Input<string>;
     /**
-     * SCF function version. This parameter takes effect when `service_config_type` is `SCF`.
+     * SCF function version. This parameter takes effect when `serviceConfigType` is `SCF`.
      */
     serviceConfigScfFunctionQualifier?: pulumi.Input<string>;
     /**
@@ -345,7 +393,7 @@ export interface APIState {
      */
     serviceConfigType?: pulumi.Input<string>;
     /**
-     * API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+     * API backend service url. This parameter is required when `serviceConfigType` is `HTTP`.
      */
     serviceConfigUrl?: pulumi.Input<string>;
     /**
@@ -353,7 +401,7 @@ export interface APIState {
      */
     serviceConfigVpcId?: pulumi.Input<string>;
     /**
-     * Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+     * Which service this API belongs. Refer to resource `tencentcloud.ApiGateway.Service`.
      */
     serviceId?: pulumi.Input<string>;
     /**
@@ -367,9 +415,9 @@ export interface APIState {
 }
 
 /**
- * The set of arguments for constructing a API resource.
+ * The set of arguments for constructing a Api resource.
  */
-export interface APIArgs {
+export interface ApiArgs {
     /**
      * Custom API description.
      */
@@ -379,8 +427,7 @@ export interface APIArgs {
      */
     apiName: pulumi.Input<string>;
     /**
-     * API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value:
-     * `NONE`.
+     * API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
      */
     authType?: pulumi.Input<string>;
     /**
@@ -410,11 +457,11 @@ export interface APIArgs {
     /**
      * Frontend request parameters.
      */
-    requestParameters?: pulumi.Input<pulumi.Input<inputs.APIGateway.APIRequestParameter>[]>;
+    requestParameters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ApiRequestParameter>[]>;
     /**
      * Custom error code configuration. Must keep at least one after set.
      */
-    responseErrorCodes?: pulumi.Input<pulumi.Input<inputs.APIGateway.APIResponseErrorCode>[]>;
+    responseErrorCodes?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ApiResponseErrorCode>[]>;
     /**
      * Response failure sample of custom response configuration.
      */
@@ -428,17 +475,15 @@ export interface APIArgs {
      */
     responseType?: pulumi.Input<string>;
     /**
-     * API backend service request method, such as `GET`. If `service_config_type` is `HTTP`, this parameter will be required.
-     * The frontend `request_config_method` and backend method `service_config_method` can be different.
+     * API backend service request method, such as `GET`. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigMethod` and backend method `serviceConfigMethod` can be different.
      */
     serviceConfigMethod?: pulumi.Input<string>;
     /**
-     * Returned information of API backend mocking. This parameter is required when `service_config_type` is `MOCK`.
+     * Returned information of API backend mocking. This parameter is required when `serviceConfigType` is `MOCK`.
      */
     serviceConfigMockReturnMessage?: pulumi.Input<string>;
     /**
-     * API backend service path, such as /path. If `service_config_type` is `HTTP`, this parameter will be required. The
-     * frontend `request_config_path` and backend path `service_config_path` can be different.
+     * API backend service path, such as /path. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigPath` and backend path `serviceConfigPath` can be different.
      */
     serviceConfigPath?: pulumi.Input<string>;
     /**
@@ -446,15 +491,15 @@ export interface APIArgs {
      */
     serviceConfigProduct?: pulumi.Input<string>;
     /**
-     * SCF function name. This parameter takes effect when `service_config_type` is `SCF`.
+     * SCF function name. This parameter takes effect when `serviceConfigType` is `SCF`.
      */
     serviceConfigScfFunctionName?: pulumi.Input<string>;
     /**
-     * SCF function namespace. This parameter takes effect when `service_config_type` is `SCF`.
+     * SCF function namespace. This parameter takes effect when `serviceConfigType` is `SCF`.
      */
     serviceConfigScfFunctionNamespace?: pulumi.Input<string>;
     /**
-     * SCF function version. This parameter takes effect when `service_config_type` is `SCF`.
+     * SCF function version. This parameter takes effect when `serviceConfigType` is `SCF`.
      */
     serviceConfigScfFunctionQualifier?: pulumi.Input<string>;
     /**
@@ -466,7 +511,7 @@ export interface APIArgs {
      */
     serviceConfigType?: pulumi.Input<string>;
     /**
-     * API backend service url. This parameter is required when `service_config_type` is `HTTP`.
+     * API backend service url. This parameter is required when `serviceConfigType` is `HTTP`.
      */
     serviceConfigUrl?: pulumi.Input<string>;
     /**
@@ -474,7 +519,7 @@ export interface APIArgs {
      */
     serviceConfigVpcId?: pulumi.Input<string>;
     /**
-     * Which service this API belongs. Refer to resource `tencentcloud_api_gateway_service`.
+     * Which service this API belongs. Refer to resource `tencentcloud.ApiGateway.Service`.
      */
     serviceId: pulumi.Input<string>;
     /**

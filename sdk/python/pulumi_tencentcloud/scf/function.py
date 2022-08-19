@@ -42,19 +42,15 @@ class FunctionArgs:
                  zip_file: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Function resource.
-        :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-               numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-               length is 2-60.
-        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-               `PHP7`, `Golang1`, and `Java8`.
+        :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionCfsConfigArgs']]] cfs_configs: List of CFS configurations.
         :param pulumi.Input[str] cls_logset_id: cls logset id of the SCF function.
         :param pulumi.Input[str] cls_topic_id: cls topic id of the SCF function.
         :param pulumi.Input[str] cos_bucket_name: Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zip_file`.
         :param pulumi.Input[str] cos_bucket_region: Cos bucket region of the SCF function, conflict with `zip_file`.
         :param pulumi.Input[str] cos_object_name: Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
-        :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-               Chinese, the maximum length is 1000.
+        :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
         :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
         :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
@@ -62,15 +58,13 @@ class FunctionArgs:
         :param pulumi.Input[bool] l5_enable: Enable L5 for SCF function, default is `false`.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionLayerArgs']]] layers: The list of association layers.
         :param pulumi.Input[int] mem_size: Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
-        :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-               letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] namespace: Namespace of the SCF function, default is `default`.
         :param pulumi.Input[str] role: Role of the SCF function.
         :param pulumi.Input[str] subnet_id: Subnet ID of the SCF function.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of the SCF function.
         :param pulumi.Input[int] timeout: Timeout of the SCF function, unit is second. Default `3`. Available value is 1-900.
-        :param pulumi.Input[Sequence[pulumi.Input['FunctionTriggerArgs']]] triggers: Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-               then create triggers in the new list. Each element contains the following attributes:
+        :param pulumi.Input[Sequence[pulumi.Input['FunctionTriggerArgs']]] triggers: Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
         :param pulumi.Input[str] vpc_id: VPC ID of the SCF function.
         :param pulumi.Input[str] zip_file: Zip file of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
         """
@@ -127,9 +121,7 @@ class FunctionArgs:
     @pulumi.getter
     def handler(self) -> pulumi.Input[str]:
         """
-        Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-        numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-        length is 2-60.
+        Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         """
         return pulumi.get(self, "handler")
 
@@ -141,8 +133,7 @@ class FunctionArgs:
     @pulumi.getter
     def runtime(self) -> pulumi.Input[str]:
         """
-        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-        `PHP7`, `Golang1`, and `Java8`.
+        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
         """
         return pulumi.get(self, "runtime")
 
@@ -226,8 +217,7 @@ class FunctionArgs:
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
         """
-        Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-        Chinese, the maximum length is 1000.
+        Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
         """
         return pulumi.get(self, "description")
 
@@ -323,8 +313,7 @@ class FunctionArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-        letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         """
         return pulumi.get(self, "name")
 
@@ -396,8 +385,7 @@ class FunctionArgs:
     @pulumi.getter
     def triggers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['FunctionTriggerArgs']]]]:
         """
-        Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-        then create triggers in the new list. Each element contains the following attributes:
+        Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
         """
         return pulumi.get(self, "triggers")
 
@@ -482,38 +470,32 @@ class _FunctionState:
         :param pulumi.Input[str] cos_bucket_name: Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zip_file`.
         :param pulumi.Input[str] cos_bucket_region: Cos bucket region of the SCF function, conflict with `zip_file`.
         :param pulumi.Input[str] cos_object_name: Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
-        :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-               Chinese, the maximum length is 1000.
+        :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
         :param pulumi.Input[bool] eip_fixed: Whether EIP is a fixed IP.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] eips: SCF function EIP list.
         :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
         :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
         :param pulumi.Input[int] err_no: SCF function code error code.
-        :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-               numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-               length is 2-60.
+        :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] host: SCF function domain name.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionImageConfigArgs']]] image_configs: Image of the SCF function, conflict with ``.
         :param pulumi.Input[bool] install_dependency: Whether to automatically install dependencies.
         :param pulumi.Input[bool] l5_enable: Enable L5 for SCF function, default is `false`.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionLayerArgs']]] layers: The list of association layers.
         :param pulumi.Input[int] mem_size: Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
-        :param pulumi.Input[str] modify_time: SCF function last modified time.
-        :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-               letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        :param pulumi.Input[str] modify_time: Modify time of SCF function trigger.
+        :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] namespace: Namespace of the SCF function, default is `default`.
         :param pulumi.Input[str] role: Role of the SCF function.
-        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-               `PHP7`, `Golang1`, and `Java8`.
+        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
         :param pulumi.Input[str] status: SCF function status.
         :param pulumi.Input[str] status_desc: SCF status description.
         :param pulumi.Input[str] subnet_id: Subnet ID of the SCF function.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of the SCF function.
         :param pulumi.Input[int] timeout: Timeout of the SCF function, unit is second. Default `3`. Available value is 1-900.
         :param pulumi.Input[Sequence[pulumi.Input['FunctionTriggerInfoArgs']]] trigger_infos: SCF trigger details list. Each element contains the following attributes:
-        :param pulumi.Input[Sequence[pulumi.Input['FunctionTriggerArgs']]] triggers: Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-               then create triggers in the new list. Each element contains the following attributes:
+        :param pulumi.Input[Sequence[pulumi.Input['FunctionTriggerArgs']]] triggers: Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
         :param pulumi.Input[str] vip: SCF function vip.
         :param pulumi.Input[str] vpc_id: VPC ID of the SCF function.
         :param pulumi.Input[str] zip_file: Zip file of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
@@ -707,8 +689,7 @@ class _FunctionState:
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
         """
-        Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-        Chinese, the maximum length is 1000.
+        Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
         """
         return pulumi.get(self, "description")
 
@@ -792,9 +773,7 @@ class _FunctionState:
     @pulumi.getter
     def handler(self) -> Optional[pulumi.Input[str]]:
         """
-        Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-        numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-        length is 2-60.
+        Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         """
         return pulumi.get(self, "handler")
 
@@ -878,7 +857,7 @@ class _FunctionState:
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> Optional[pulumi.Input[str]]:
         """
-        SCF function last modified time.
+        Modify time of SCF function trigger.
         """
         return pulumi.get(self, "modify_time")
 
@@ -890,8 +869,7 @@ class _FunctionState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-        letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         """
         return pulumi.get(self, "name")
 
@@ -927,8 +905,7 @@ class _FunctionState:
     @pulumi.getter
     def runtime(self) -> Optional[pulumi.Input[str]]:
         """
-        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-        `PHP7`, `Golang1`, and `Java8`.
+        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
         """
         return pulumi.get(self, "runtime")
 
@@ -1012,8 +989,7 @@ class _FunctionState:
     @pulumi.getter
     def triggers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['FunctionTriggerArgs']]]]:
         """
-        Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-        then create triggers in the new list. Each element contains the following attributes:
+        Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
         """
         return pulumi.get(self, "triggers")
 
@@ -1090,7 +1066,49 @@ class Function(pulumi.CustomResource):
                  zip_file: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Function resource with the given unique name, props, and options.
+        Provide a resource to create a SCF function.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.scf.Function("foo",
+            cos_bucket_name="scf-code-1234567890",
+            cos_bucket_region="ap-guangzhou",
+            cos_object_name="code.zip",
+            handler="main.do_it",
+            runtime="Python3.6")
+        ```
+
+        Using CFS config
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.scf.Function("foo",
+            cfs_configs=[tencentcloud.scf.FunctionCfsConfigArgs(
+                cfs_id="cfs-xxxxxxxx",
+                local_mount_dir="/mnt",
+                mount_ins_id="cfs-xxxxxxxx",
+                remote_mount_dir="/",
+                user_group_id="10000",
+                user_id="10000",
+            )],
+            handler="main.do_it",
+            runtime="Python3.6")
+        ```
+
+        ## Import
+
+        SCF function can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Scf/function:Function test default+test
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionCfsConfigArgs']]]] cfs_configs: List of CFS configurations.
@@ -1099,29 +1117,23 @@ class Function(pulumi.CustomResource):
         :param pulumi.Input[str] cos_bucket_name: Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zip_file`.
         :param pulumi.Input[str] cos_bucket_region: Cos bucket region of the SCF function, conflict with `zip_file`.
         :param pulumi.Input[str] cos_object_name: Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
-        :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-               Chinese, the maximum length is 1000.
+        :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
         :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
         :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
-        :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-               numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-               length is 2-60.
+        :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]] image_configs: Image of the SCF function, conflict with ``.
         :param pulumi.Input[bool] l5_enable: Enable L5 for SCF function, default is `false`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionLayerArgs']]]] layers: The list of association layers.
         :param pulumi.Input[int] mem_size: Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
-        :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-               letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] namespace: Namespace of the SCF function, default is `default`.
         :param pulumi.Input[str] role: Role of the SCF function.
-        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-               `PHP7`, `Golang1`, and `Java8`.
+        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
         :param pulumi.Input[str] subnet_id: Subnet ID of the SCF function.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of the SCF function.
         :param pulumi.Input[int] timeout: Timeout of the SCF function, unit is second. Default `3`. Available value is 1-900.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionTriggerArgs']]]] triggers: Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-               then create triggers in the new list. Each element contains the following attributes:
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionTriggerArgs']]]] triggers: Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
         :param pulumi.Input[str] vpc_id: VPC ID of the SCF function.
         :param pulumi.Input[str] zip_file: Zip file of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
         """
@@ -1132,7 +1144,49 @@ class Function(pulumi.CustomResource):
                  args: FunctionArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Function resource with the given unique name, props, and options.
+        Provide a resource to create a SCF function.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.scf.Function("foo",
+            cos_bucket_name="scf-code-1234567890",
+            cos_bucket_region="ap-guangzhou",
+            cos_object_name="code.zip",
+            handler="main.do_it",
+            runtime="Python3.6")
+        ```
+
+        Using CFS config
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.scf.Function("foo",
+            cfs_configs=[tencentcloud.scf.FunctionCfsConfigArgs(
+                cfs_id="cfs-xxxxxxxx",
+                local_mount_dir="/mnt",
+                mount_ins_id="cfs-xxxxxxxx",
+                remote_mount_dir="/",
+                user_group_id="10000",
+                user_id="10000",
+            )],
+            handler="main.do_it",
+            runtime="Python3.6")
+        ```
+
+        ## Import
+
+        SCF function can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Scf/function:Function test default+test
+        ```
+
         :param str resource_name: The name of the resource.
         :param FunctionArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1291,38 +1345,32 @@ class Function(pulumi.CustomResource):
         :param pulumi.Input[str] cos_bucket_name: Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zip_file`.
         :param pulumi.Input[str] cos_bucket_region: Cos bucket region of the SCF function, conflict with `zip_file`.
         :param pulumi.Input[str] cos_object_name: Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
-        :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-               Chinese, the maximum length is 1000.
+        :param pulumi.Input[str] description: Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
         :param pulumi.Input[bool] eip_fixed: Whether EIP is a fixed IP.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] eips: SCF function EIP list.
         :param pulumi.Input[bool] enable_eip_config: Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true.
         :param pulumi.Input[bool] enable_public_net: Indicates whether public net config enabled. NOTE: only `vpc_id` specified can disable public net config.
         :param pulumi.Input[Mapping[str, Any]] environment: Environment of the SCF function.
         :param pulumi.Input[int] err_no: SCF function code error code.
-        :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-               numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-               length is 2-60.
+        :param pulumi.Input[str] handler: Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] host: SCF function domain name.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionImageConfigArgs']]]] image_configs: Image of the SCF function, conflict with ``.
         :param pulumi.Input[bool] install_dependency: Whether to automatically install dependencies.
         :param pulumi.Input[bool] l5_enable: Enable L5 for SCF function, default is `false`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionLayerArgs']]]] layers: The list of association layers.
         :param pulumi.Input[int] mem_size: Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
-        :param pulumi.Input[str] modify_time: SCF function last modified time.
-        :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-               letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        :param pulumi.Input[str] modify_time: Modify time of SCF function trigger.
+        :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[str] namespace: Namespace of the SCF function, default is `default`.
         :param pulumi.Input[str] role: Role of the SCF function.
-        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-               `PHP7`, `Golang1`, and `Java8`.
+        :param pulumi.Input[str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
         :param pulumi.Input[str] status: SCF function status.
         :param pulumi.Input[str] status_desc: SCF status description.
         :param pulumi.Input[str] subnet_id: Subnet ID of the SCF function.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of the SCF function.
         :param pulumi.Input[int] timeout: Timeout of the SCF function, unit is second. Default `3`. Available value is 1-900.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionTriggerInfoArgs']]]] trigger_infos: SCF trigger details list. Each element contains the following attributes:
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionTriggerArgs']]]] triggers: Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-               then create triggers in the new list. Each element contains the following attributes:
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['FunctionTriggerArgs']]]] triggers: Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
         :param pulumi.Input[str] vip: SCF function vip.
         :param pulumi.Input[str] vpc_id: VPC ID of the SCF function.
         :param pulumi.Input[str] zip_file: Zip file of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
@@ -1447,8 +1495,7 @@ class Function(pulumi.CustomResource):
     @pulumi.getter
     def description(self) -> pulumi.Output[Optional[str]]:
         """
-        Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-        Chinese, the maximum length is 1000.
+        Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
         """
         return pulumi.get(self, "description")
 
@@ -1504,9 +1551,7 @@ class Function(pulumi.CustomResource):
     @pulumi.getter
     def handler(self) -> pulumi.Output[str]:
         """
-        Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters,
-        numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-        length is 2-60.
+        Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         """
         return pulumi.get(self, "handler")
 
@@ -1562,7 +1607,7 @@ class Function(pulumi.CustomResource):
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> pulumi.Output[str]:
         """
-        SCF function last modified time.
+        Modify time of SCF function trigger.
         """
         return pulumi.get(self, "modify_time")
 
@@ -1570,8 +1615,7 @@ class Function(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-        letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         """
         return pulumi.get(self, "name")
 
@@ -1595,8 +1639,7 @@ class Function(pulumi.CustomResource):
     @pulumi.getter
     def runtime(self) -> pulumi.Output[str]:
         """
-        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-        `PHP7`, `Golang1`, and `Java8`.
+        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
         """
         return pulumi.get(self, "runtime")
 
@@ -1652,8 +1695,7 @@ class Function(pulumi.CustomResource):
     @pulumi.getter
     def triggers(self) -> pulumi.Output[Optional[Sequence['outputs.FunctionTrigger']]]:
         """
-        Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-        then create triggers in the new list. Each element contains the following attributes:
+        Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
         """
         return pulumi.get(self, "triggers")
 

@@ -23,8 +23,7 @@ class ClusterArgs:
         The set of arguments for constructing a Cluster resource.
         :param pulumi.Input[str] cluster_name: Name of the TcaplusDB cluster. Name length should be between 1 and 30.
         :param pulumi.Input[str] idl_type: IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
-        :param pulumi.Input[str] password: Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-               uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        :param pulumi.Input[str] password: Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
         :param pulumi.Input[str] subnet_id: Subnet id of the TcaplusDB cluster.
         :param pulumi.Input[str] vpc_id: VPC id of the TcaplusDB cluster.
         :param pulumi.Input[int] old_password_expire_last: Expiration time of old password after password update, unit: second.
@@ -65,8 +64,7 @@ class ClusterArgs:
     @pulumi.getter
     def password(self) -> pulumi.Input[str]:
         """
-        Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-        uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
         """
         return pulumi.get(self, "password")
 
@@ -137,12 +135,9 @@ class _ClusterState:
         :param pulumi.Input[str] idl_type: IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
         :param pulumi.Input[str] network_type: Network type of the TcaplusDB cluster.
         :param pulumi.Input[int] old_password_expire_last: Expiration time of old password after password update, unit: second.
-        :param pulumi.Input[str] old_password_expire_time: Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet
-               expired.
-        :param pulumi.Input[str] password: Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-               uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
-        :param pulumi.Input[str] password_status: Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the
-               password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
+        :param pulumi.Input[str] old_password_expire_time: Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet expired.
+        :param pulumi.Input[str] password: Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        :param pulumi.Input[str] password_status: Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
         :param pulumi.Input[str] subnet_id: Subnet id of the TcaplusDB cluster.
         :param pulumi.Input[str] vpc_id: VPC id of the TcaplusDB cluster.
         """
@@ -273,8 +268,7 @@ class _ClusterState:
     @pulumi.getter(name="oldPasswordExpireTime")
     def old_password_expire_time(self) -> Optional[pulumi.Input[str]]:
         """
-        Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet
-        expired.
+        Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet expired.
         """
         return pulumi.get(self, "old_password_expire_time")
 
@@ -286,8 +280,7 @@ class _ClusterState:
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
         """
-        Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-        uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
         """
         return pulumi.get(self, "password")
 
@@ -299,8 +292,7 @@ class _ClusterState:
     @pulumi.getter(name="passwordStatus")
     def password_status(self) -> Optional[pulumi.Input[str]]:
         """
-        Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the
-        password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
+        Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
         """
         return pulumi.get(self, "password_status")
 
@@ -346,14 +338,39 @@ class Cluster(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Cluster resource with the given unique name, props, and options.
+        Use this resource to create TcaplusDB cluster.
+
+        > **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test = tencentcloud.tcaplus.Cluster("test",
+            cluster_name="tf_tcaplus_cluster_test",
+            idl_type="PROTO",
+            old_password_expire_last=3600,
+            password="1qaA2k1wgvfa3ZZZ",
+            subnet_id="subnet-akwgvfa3",
+            vpc_id="vpc-7k6gzox6")
+        ```
+
+        ## Import
+
+        tcaplus cluster can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tcaplus/cluster:Cluster test 26655801
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_name: Name of the TcaplusDB cluster. Name length should be between 1 and 30.
         :param pulumi.Input[str] idl_type: IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
         :param pulumi.Input[int] old_password_expire_last: Expiration time of old password after password update, unit: second.
-        :param pulumi.Input[str] password: Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-               uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        :param pulumi.Input[str] password: Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
         :param pulumi.Input[str] subnet_id: Subnet id of the TcaplusDB cluster.
         :param pulumi.Input[str] vpc_id: VPC id of the TcaplusDB cluster.
         """
@@ -364,7 +381,33 @@ class Cluster(pulumi.CustomResource):
                  args: ClusterArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Cluster resource with the given unique name, props, and options.
+        Use this resource to create TcaplusDB cluster.
+
+        > **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        test = tencentcloud.tcaplus.Cluster("test",
+            cluster_name="tf_tcaplus_cluster_test",
+            idl_type="PROTO",
+            old_password_expire_last=3600,
+            password="1qaA2k1wgvfa3ZZZ",
+            subnet_id="subnet-akwgvfa3",
+            vpc_id="vpc-7k6gzox6")
+        ```
+
+        ## Import
+
+        tcaplus cluster can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tcaplus/cluster:Cluster test 26655801
+        ```
+
         :param str resource_name: The name of the resource.
         :param ClusterArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -459,12 +502,9 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] idl_type: IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
         :param pulumi.Input[str] network_type: Network type of the TcaplusDB cluster.
         :param pulumi.Input[int] old_password_expire_last: Expiration time of old password after password update, unit: second.
-        :param pulumi.Input[str] old_password_expire_time: Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet
-               expired.
-        :param pulumi.Input[str] password: Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-               uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
-        :param pulumi.Input[str] password_status: Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the
-               password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
+        :param pulumi.Input[str] old_password_expire_time: Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet expired.
+        :param pulumi.Input[str] password: Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        :param pulumi.Input[str] password_status: Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
         :param pulumi.Input[str] subnet_id: Subnet id of the TcaplusDB cluster.
         :param pulumi.Input[str] vpc_id: VPC id of the TcaplusDB cluster.
         """
@@ -555,8 +595,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="oldPasswordExpireTime")
     def old_password_expire_time(self) -> pulumi.Output[str]:
         """
-        Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet
-        expired.
+        Expiration time of the old password. If `password_status` is `unmodifiable`, it means the old password has not yet expired.
         """
         return pulumi.get(self, "old_password_expire_time")
 
@@ -564,8 +603,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter
     def password(self) -> pulumi.Output[str]:
         """
-        Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of
-        uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
         """
         return pulumi.get(self, "password")
 
@@ -573,8 +611,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="passwordStatus")
     def password_status(self) -> pulumi.Output[str]:
         """
-        Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the
-        password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
+        Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
         """
         return pulumi.get(self, "password_status")
 

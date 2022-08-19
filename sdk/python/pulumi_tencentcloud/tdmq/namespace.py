@@ -195,7 +195,32 @@ class Namespace(pulumi.CustomResource):
                  retention_policy: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a Namespace resource with the given unique name, props, and options.
+        Provide a resource to create a tdmq namespace.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tdmq.Instance("foo",
+            cluster_name="example",
+            remark="this is description.")
+        bar = tencentcloud.tdmq.Namespace("bar",
+            cluster_id=foo.id,
+            environ_name="example",
+            msg_ttl=300,
+            remark="this is description.")
+        ```
+
+        ## Import
+
+        Tdmq namespace can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: The Dedicated Cluster Id.
@@ -211,7 +236,32 @@ class Namespace(pulumi.CustomResource):
                  args: NamespaceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Namespace resource with the given unique name, props, and options.
+        Provide a resource to create a tdmq namespace.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.tdmq.Instance("foo",
+            cluster_name="example",
+            remark="this is description.")
+        bar = tencentcloud.tdmq.Namespace("bar",
+            cluster_id=foo.id,
+            environ_name="example",
+            msg_ttl=300,
+            remark="this is description.")
+        ```
+
+        ## Import
+
+        Tdmq namespace can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param NamespaceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

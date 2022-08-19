@@ -5,6 +5,64 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a forward rule of layer7 listener.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+ *     bandwidth: 10,
+ *     concurrent: 2,
+ *     accessRegion: "SouthChina",
+ *     realserverRegion: "NorthChina",
+ * });
+ * const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
+ *     protocol: "HTTP",
+ *     port: 80,
+ *     proxyId: fooProxy.id,
+ * });
+ * const fooRealserver = new tencentcloud.gaap.Realserver("fooRealserver", {ip: "1.1.1.1"});
+ * const bar = new tencentcloud.gaap.Realserver("bar", {ip: "8.8.8.8"});
+ * const fooHttpDomain = new tencentcloud.gaap.HttpDomain("fooHttpDomain", {
+ *     listenerId: fooLayer7Listener.id,
+ *     domain: "www.qq.com",
+ * });
+ * const fooHttpRule = new tencentcloud.gaap.HttpRule("fooHttpRule", {
+ *     listenerId: fooLayer7Listener.id,
+ *     domain: fooHttpDomain.domain,
+ *     path: "/",
+ *     realserverType: "IP",
+ *     healthCheck: true,
+ *     healthCheckPath: "/",
+ *     healthCheckMethod: "GET",
+ *     healthCheckStatusCodes: [200],
+ *     realservers: [
+ *         {
+ *             id: fooRealserver.id,
+ *             ip: fooRealserver.ip,
+ *             port: 80,
+ *         },
+ *         {
+ *             id: bar.id,
+ *             ip: bar.ip,
+ *             port: 80,
+ *         },
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * GAAP http rule can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Gaap/httpRule:HttpRule tencentcloud_gaap_http_rule.foo rule-3bsuu01r
+ * ```
+ */
 export class HttpRule extends pulumi.CustomResource {
     /**
      * Get an existing HttpRule resource's state with the given name, ID, and optional extra

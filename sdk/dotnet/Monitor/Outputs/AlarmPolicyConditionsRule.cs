@@ -13,16 +13,49 @@ namespace Pulumi.Tencentcloud.Monitor.Outputs
     [OutputType]
     public sealed class AlarmPolicyConditionsRule
     {
+        /// <summary>
+        /// Number of periods.
+        /// </summary>
         public readonly int? ContinuePeriod;
+        /// <summary>
+        /// Metric display name, which is used in the output parameter.
+        /// </summary>
         public readonly string? Description;
+        /// <summary>
+        /// Filter condition for one single trigger rule. Must set it when create tke-xxx rules.
+        /// </summary>
         public readonly Outputs.AlarmPolicyConditionsRuleFilter? Filter;
+        /// <summary>
+        /// Whether the alarm frequency increases exponentially.
+        /// </summary>
         public readonly int? IsPowerNotice;
+        /// <summary>
+        /// Metric name or event name.
+        /// </summary>
         public readonly string? MetricName;
+        /// <summary>
+        /// Alarm interval in seconds.
+        /// </summary>
         public readonly int? NoticeFrequency;
+        /// <summary>
+        /// Operator.
+        /// </summary>
         public readonly string? Operator;
+        /// <summary>
+        /// Statistical period in seconds.
+        /// </summary>
         public readonly int? Period;
+        /// <summary>
+        /// Trigger condition type.
+        /// </summary>
         public readonly string? RuleType;
+        /// <summary>
+        /// Unit, which is used in the output parameter.
+        /// </summary>
         public readonly string? Unit;
+        /// <summary>
+        /// Threshold.
+        /// </summary>
         public readonly string? Value;
 
         [OutputConstructor]

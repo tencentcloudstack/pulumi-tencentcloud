@@ -97,7 +97,38 @@ class AclAttachment(pulumi.CustomResource):
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a AclAttachment resource with the given unique name, props, and options.
+        Provide a resource to attach an existing subnet to Network ACL.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        id_instances = tencentcloud.Vpc.get_instances()
+        foo = tencentcloud.vpc.Acl("foo",
+            vpc_id=id_instances.instance_lists[0].vpc_id,
+            ingresses=[
+                "ACCEPT#192.168.1.0/24#800#TCP",
+                "ACCEPT#192.168.1.0/24#800-900#TCP",
+            ],
+            egresses=[
+                "ACCEPT#192.168.1.0/24#800#TCP",
+                "ACCEPT#192.168.1.0/24#800-900#TCP",
+            ])
+        attachment = tencentcloud.vpc.AclAttachment("attachment",
+            acl_id=foo.id,
+            subnet_id=id_instances.instance_lists[0].subnet_ids[0])
+        ```
+
+        ## Import
+
+        Acl attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpc/aclAttachment:AclAttachment attachment acl-eotx5qsg#subnet-91x0geu6
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] acl_id: ID of the attached ACL.
@@ -110,7 +141,38 @@ class AclAttachment(pulumi.CustomResource):
                  args: AclAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AclAttachment resource with the given unique name, props, and options.
+        Provide a resource to attach an existing subnet to Network ACL.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        id_instances = tencentcloud.Vpc.get_instances()
+        foo = tencentcloud.vpc.Acl("foo",
+            vpc_id=id_instances.instance_lists[0].vpc_id,
+            ingresses=[
+                "ACCEPT#192.168.1.0/24#800#TCP",
+                "ACCEPT#192.168.1.0/24#800-900#TCP",
+            ],
+            egresses=[
+                "ACCEPT#192.168.1.0/24#800#TCP",
+                "ACCEPT#192.168.1.0/24#800-900#TCP",
+            ])
+        attachment = tencentcloud.vpc.AclAttachment("attachment",
+            acl_id=foo.id,
+            subnet_id=id_instances.instance_lists[0].subnet_ids[0])
+        ```
+
+        ## Import
+
+        Acl attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vpc/aclAttachment:AclAttachment attachment acl-eotx5qsg#subnet-91x0geu6
+        ```
+
         :param str resource_name: The name of the resource.
         :param AclAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

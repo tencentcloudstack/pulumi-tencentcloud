@@ -23,10 +23,8 @@ class AttachmentArgs:
         :param pulumi.Input[str] ccn_id: ID of the CCN.
         :param pulumi.Input[str] instance_id: ID of instance is attached.
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
-        :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-               `VPNGW` type is only for whitelist customer now.
-        :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-               attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+        :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
+        :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         """
         pulumi.set(__self__, "ccn_id", ccn_id)
         pulumi.set(__self__, "instance_id", instance_id)
@@ -75,8 +73,7 @@ class AttachmentArgs:
     @pulumi.getter(name="instanceType")
     def instance_type(self) -> pulumi.Input[str]:
         """
-        Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-        `VPNGW` type is only for whitelist customer now.
+        Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
         """
         return pulumi.get(self, "instance_type")
 
@@ -88,8 +85,7 @@ class AttachmentArgs:
     @pulumi.getter(name="ccnUin")
     def ccn_uin(self) -> Optional[pulumi.Input[str]]:
         """
-        Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-        attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+        Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         """
         return pulumi.get(self, "ccn_uin")
 
@@ -113,16 +109,12 @@ class _AttachmentState:
         Input properties used for looking up and filtering Attachment resources.
         :param pulumi.Input[str] attached_time: Time of attaching.
         :param pulumi.Input[str] ccn_id: ID of the CCN.
-        :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-               attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+        :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] cidr_blocks: A network address block of the instance that is attached.
         :param pulumi.Input[str] instance_id: ID of instance is attached.
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
-        :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-               `VPNGW` type is only for whitelist customer now.
-        :param pulumi.Input[str] state: States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`,
-               `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours.
-               `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
+        :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
+        :param pulumi.Input[str] state: States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
         """
         if attached_time is not None:
             pulumi.set(__self__, "attached_time", attached_time)
@@ -169,8 +161,7 @@ class _AttachmentState:
     @pulumi.getter(name="ccnUin")
     def ccn_uin(self) -> Optional[pulumi.Input[str]]:
         """
-        Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-        attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+        Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         """
         return pulumi.get(self, "ccn_uin")
 
@@ -218,8 +209,7 @@ class _AttachmentState:
     @pulumi.getter(name="instanceType")
     def instance_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-        `VPNGW` type is only for whitelist customer now.
+        Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
         """
         return pulumi.get(self, "instance_type")
 
@@ -231,9 +221,7 @@ class _AttachmentState:
     @pulumi.getter
     def state(self) -> Optional[pulumi.Input[str]]:
         """
-        States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`,
-        `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours.
-        `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
+        States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
         """
         return pulumi.get(self, "state")
 
@@ -254,16 +242,54 @@ class Attachment(pulumi.CustomResource):
                  instance_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Attachment resource with the given unique name, props, and options.
+        Provides a CCN attaching resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        config = pulumi.Config()
+        region = config.get("region")
+        if region is None:
+            region = "ap-guangzhou"
+        otheruin = config.get("otheruin")
+        if otheruin is None:
+            otheruin = "123353"
+        otherccn = config.get("otherccn")
+        if otherccn is None:
+            otherccn = "ccn-151ssaga"
+        vpc = tencentcloud.vpc.Instance("vpc",
+            cidr_block="10.0.0.0/16",
+            dns_servers=[
+                "119.29.29.29",
+                "8.8.8.8",
+            ],
+            is_multicast=False)
+        main = tencentcloud.ccn.Instance("main",
+            description="ci-temp-test-ccn-des",
+            qos="AG")
+        attachment = tencentcloud.ccn.Attachment("attachment",
+            ccn_id=main.id,
+            instance_type="VPC",
+            instance_id=vpc.id,
+            instance_region=region)
+        other_account = tencentcloud.ccn.Attachment("otherAccount",
+            ccn_id=otherccn,
+            instance_type="VPC",
+            instance_id=vpc.id,
+            instance_region=region,
+            ccn_uin=otheruin)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] ccn_id: ID of the CCN.
-        :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-               attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+        :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         :param pulumi.Input[str] instance_id: ID of instance is attached.
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
-        :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-               `VPNGW` type is only for whitelist customer now.
+        :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
         """
         ...
     @overload
@@ -272,7 +298,47 @@ class Attachment(pulumi.CustomResource):
                  args: AttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Attachment resource with the given unique name, props, and options.
+        Provides a CCN attaching resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        config = pulumi.Config()
+        region = config.get("region")
+        if region is None:
+            region = "ap-guangzhou"
+        otheruin = config.get("otheruin")
+        if otheruin is None:
+            otheruin = "123353"
+        otherccn = config.get("otherccn")
+        if otherccn is None:
+            otherccn = "ccn-151ssaga"
+        vpc = tencentcloud.vpc.Instance("vpc",
+            cidr_block="10.0.0.0/16",
+            dns_servers=[
+                "119.29.29.29",
+                "8.8.8.8",
+            ],
+            is_multicast=False)
+        main = tencentcloud.ccn.Instance("main",
+            description="ci-temp-test-ccn-des",
+            qos="AG")
+        attachment = tencentcloud.ccn.Attachment("attachment",
+            ccn_id=main.id,
+            instance_type="VPC",
+            instance_id=vpc.id,
+            instance_region=region)
+        other_account = tencentcloud.ccn.Attachment("otherAccount",
+            ccn_id=otherccn,
+            instance_type="VPC",
+            instance_id=vpc.id,
+            instance_region=region,
+            ccn_uin=otheruin)
+        ```
+
         :param str resource_name: The name of the resource.
         :param AttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -348,16 +414,12 @@ class Attachment(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] attached_time: Time of attaching.
         :param pulumi.Input[str] ccn_id: ID of the CCN.
-        :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-               attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+        :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] cidr_blocks: A network address block of the instance that is attached.
         :param pulumi.Input[str] instance_id: ID of instance is attached.
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
-        :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-               `VPNGW` type is only for whitelist customer now.
-        :param pulumi.Input[str] state: States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`,
-               `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours.
-               `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
+        :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
+        :param pulumi.Input[str] state: States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -393,8 +455,7 @@ class Attachment(pulumi.CustomResource):
     @pulumi.getter(name="ccnUin")
     def ccn_uin(self) -> pulumi.Output[str]:
         """
-        Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when
-        attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
+        Uin of the ccn attached. Default is ``, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         """
         return pulumi.get(self, "ccn_uin")
 
@@ -426,8 +487,7 @@ class Attachment(pulumi.CustomResource):
     @pulumi.getter(name="instanceType")
     def instance_type(self) -> pulumi.Output[str]:
         """
-        Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note:
-        `VPNGW` type is only for whitelist customer now.
+        Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
         """
         return pulumi.get(self, "instance_type")
 
@@ -435,9 +495,7 @@ class Attachment(pulumi.CustomResource):
     @pulumi.getter
     def state(self) -> pulumi.Output[str]:
         """
-        States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`,
-        `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours.
-        `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
+        States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
         """
         return pulumi.get(self, "state")
 

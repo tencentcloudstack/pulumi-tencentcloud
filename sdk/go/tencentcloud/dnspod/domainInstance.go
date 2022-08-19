@@ -11,6 +11,39 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a DnsPod Domain instance.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Dnspod.NewDomainInstance(ctx, "foo", &Dnspod.DomainInstanceArgs{
+// 			Domain: pulumi.String("hello.com"),
+// 			Remark: pulumi.String("this is demo"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// DnsPod Domain instance can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
+// ```
 type DomainInstance struct {
 	pulumi.CustomResourceState
 

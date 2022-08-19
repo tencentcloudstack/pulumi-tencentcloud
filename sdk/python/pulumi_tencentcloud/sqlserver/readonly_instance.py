@@ -32,23 +32,16 @@ class ReadonlyInstanceArgs:
         """
         The set of arguments for constructing a ReadonlyInstance resource.
         :param pulumi.Input[str] master_instance_id: Indicates the master instance ID of recovery instances.
-        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-               provides.
-        :param pulumi.Input[int] readonly_group_type: Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2`
-               for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only
-               `1` and `3` are supported.
-        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-               `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
+        :param pulumi.Input[int] readonly_group_type: Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
+        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[int] auto_voucher: Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
-        :param pulumi.Input[bool] force_upgrade: Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by
-               force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server
-               instance, for it will cause ha_type of the master SQL Server instance change.
+        :param pulumi.Input[bool] force_upgrade: Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server instance, for it will cause ha_type of the master SQL Server instance change.
         :param pulumi.Input[str] name: Name of the SQL Server instance.
         :param pulumi.Input[int] period: Purchase instance period in month. The value does not exceed 48.
-        :param pulumi.Input[str] readonly_group_id: ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with
-               valid value.
+        :param pulumi.Input[str] readonly_group_id: ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with valid value.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security group bound to the instance.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the SQL Server.
@@ -100,8 +93,7 @@ class ReadonlyInstanceArgs:
     @pulumi.getter
     def memory(self) -> pulumi.Input[int]:
         """
-        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-        provides.
+        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         """
         return pulumi.get(self, "memory")
 
@@ -113,9 +105,7 @@ class ReadonlyInstanceArgs:
     @pulumi.getter(name="readonlyGroupType")
     def readonly_group_type(self) -> pulumi.Input[int]:
         """
-        Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2`
-        for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only
-        `1` and `3` are supported.
+        Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
         """
         return pulumi.get(self, "readonly_group_type")
 
@@ -127,8 +117,7 @@ class ReadonlyInstanceArgs:
     @pulumi.getter
     def storage(self) -> pulumi.Input[int]:
         """
-        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         """
         return pulumi.get(self, "storage")
 
@@ -176,9 +165,7 @@ class ReadonlyInstanceArgs:
     @pulumi.getter(name="forceUpgrade")
     def force_upgrade(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by
-        force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server
-        instance, for it will cause ha_type of the master SQL Server instance change.
+        Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server instance, for it will cause ha_type of the master SQL Server instance change.
         """
         return pulumi.get(self, "force_upgrade")
 
@@ -214,8 +201,7 @@ class ReadonlyInstanceArgs:
     @pulumi.getter(name="readonlyGroupId")
     def readonly_group_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with
-        valid value.
+        ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with valid value.
         """
         return pulumi.get(self, "readonly_group_id")
 
@@ -314,27 +300,17 @@ class _ReadonlyInstanceState:
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] create_time: Create time of the SQL Server instance.
-        :param pulumi.Input[bool] force_upgrade: Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by
-               force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server
-               instance, for it will cause ha_type of the master SQL Server instance change.
+        :param pulumi.Input[bool] force_upgrade: Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server instance, for it will cause ha_type of the master SQL Server instance change.
         :param pulumi.Input[str] master_instance_id: Indicates the master instance ID of recovery instances.
-        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-               provides.
+        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[str] name: Name of the SQL Server instance.
         :param pulumi.Input[int] period: Purchase instance period in month. The value does not exceed 48.
-        :param pulumi.Input[str] readonly_group_id: ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with
-               valid value.
-        :param pulumi.Input[int] readonly_group_type: Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2`
-               for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only
-               `1` and `3` are supported.
-        :param pulumi.Input[str] ro_flag: Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-               refers to an instance which is not read-only and has no RO group.
+        :param pulumi.Input[str] readonly_group_id: ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with valid value.
+        :param pulumi.Input[int] readonly_group_type: Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
+        :param pulumi.Input[str] ro_flag: Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security group bound to the instance.
-        :param pulumi.Input[int] status: Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-               recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-               12 for rebooting.
-        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-               `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        :param pulumi.Input[int] status: Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
+        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the SQL Server.
         :param pulumi.Input[str] vip: IP for private access.
@@ -437,9 +413,7 @@ class _ReadonlyInstanceState:
     @pulumi.getter(name="forceUpgrade")
     def force_upgrade(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by
-        force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server
-        instance, for it will cause ha_type of the master SQL Server instance change.
+        Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server instance, for it will cause ha_type of the master SQL Server instance change.
         """
         return pulumi.get(self, "force_upgrade")
 
@@ -463,8 +437,7 @@ class _ReadonlyInstanceState:
     @pulumi.getter
     def memory(self) -> Optional[pulumi.Input[int]]:
         """
-        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-        provides.
+        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         """
         return pulumi.get(self, "memory")
 
@@ -500,8 +473,7 @@ class _ReadonlyInstanceState:
     @pulumi.getter(name="readonlyGroupId")
     def readonly_group_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with
-        valid value.
+        ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with valid value.
         """
         return pulumi.get(self, "readonly_group_id")
 
@@ -513,9 +485,7 @@ class _ReadonlyInstanceState:
     @pulumi.getter(name="readonlyGroupType")
     def readonly_group_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2`
-        for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only
-        `1` and `3` are supported.
+        Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
         """
         return pulumi.get(self, "readonly_group_type")
 
@@ -527,8 +497,7 @@ class _ReadonlyInstanceState:
     @pulumi.getter(name="roFlag")
     def ro_flag(self) -> Optional[pulumi.Input[str]]:
         """
-        Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-        refers to an instance which is not read-only and has no RO group.
+        Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
         """
         return pulumi.get(self, "ro_flag")
 
@@ -552,9 +521,7 @@ class _ReadonlyInstanceState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[int]]:
         """
-        Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-        recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-        12 for rebooting.
+        Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
         """
         return pulumi.get(self, "status")
 
@@ -566,8 +533,7 @@ class _ReadonlyInstanceState:
     @pulumi.getter
     def storage(self) -> Optional[pulumi.Input[int]]:
         """
-        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         """
         return pulumi.get(self, "storage")
 
@@ -671,28 +637,48 @@ class ReadonlyInstance(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a ReadonlyInstance resource with the given unique name, props, and options.
+        Provides a SQL Server instance resource to create read-only database instances.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.sqlserver.ReadonlyInstance("foo",
+            availability_zone="ap-guangzhou-4",
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id="vpc-xxxxxxxx",
+            subnet_id="subnet-xxxxxxxx",
+            memory=2,
+            storage=10,
+            master_instance_id=tencentcloud_sqlserver_instance["test"]["id"],
+            readonly_group_type=1,
+            force_upgrade=True)
+        ```
+
+        ## Import
+
+        SQL Server readonly instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance foo mssqlro-3cdq7kx5
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] auto_voucher: Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
-        :param pulumi.Input[bool] force_upgrade: Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by
-               force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server
-               instance, for it will cause ha_type of the master SQL Server instance change.
+        :param pulumi.Input[bool] force_upgrade: Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server instance, for it will cause ha_type of the master SQL Server instance change.
         :param pulumi.Input[str] master_instance_id: Indicates the master instance ID of recovery instances.
-        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-               provides.
+        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[str] name: Name of the SQL Server instance.
         :param pulumi.Input[int] period: Purchase instance period in month. The value does not exceed 48.
-        :param pulumi.Input[str] readonly_group_id: ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with
-               valid value.
-        :param pulumi.Input[int] readonly_group_type: Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2`
-               for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only
-               `1` and `3` are supported.
+        :param pulumi.Input[str] readonly_group_id: ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with valid value.
+        :param pulumi.Input[int] readonly_group_type: Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security group bound to the instance.
-        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-               `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the SQL Server.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] voucher_ids: An array of voucher IDs, currently only one can be used for a single order.
@@ -705,7 +691,34 @@ class ReadonlyInstance(pulumi.CustomResource):
                  args: ReadonlyInstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ReadonlyInstance resource with the given unique name, props, and options.
+        Provides a SQL Server instance resource to create read-only database instances.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.sqlserver.ReadonlyInstance("foo",
+            availability_zone="ap-guangzhou-4",
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id="vpc-xxxxxxxx",
+            subnet_id="subnet-xxxxxxxx",
+            memory=2,
+            storage=10,
+            master_instance_id=tencentcloud_sqlserver_instance["test"]["id"],
+            readonly_group_type=1,
+            force_upgrade=True)
+        ```
+
+        ## Import
+
+        SQL Server readonly instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Sqlserver/readonlyInstance:ReadonlyInstance foo mssqlro-3cdq7kx5
+        ```
+
         :param str resource_name: The name of the resource.
         :param ReadonlyInstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -820,27 +833,17 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] create_time: Create time of the SQL Server instance.
-        :param pulumi.Input[bool] force_upgrade: Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by
-               force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server
-               instance, for it will cause ha_type of the master SQL Server instance change.
+        :param pulumi.Input[bool] force_upgrade: Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server instance, for it will cause ha_type of the master SQL Server instance change.
         :param pulumi.Input[str] master_instance_id: Indicates the master instance ID of recovery instances.
-        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-               provides.
+        :param pulumi.Input[int] memory: Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[str] name: Name of the SQL Server instance.
         :param pulumi.Input[int] period: Purchase instance period in month. The value does not exceed 48.
-        :param pulumi.Input[str] readonly_group_id: ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with
-               valid value.
-        :param pulumi.Input[int] readonly_group_type: Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2`
-               for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only
-               `1` and `3` are supported.
-        :param pulumi.Input[str] ro_flag: Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-               refers to an instance which is not read-only and has no RO group.
+        :param pulumi.Input[str] readonly_group_id: ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with valid value.
+        :param pulumi.Input[int] readonly_group_type: Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
+        :param pulumi.Input[str] ro_flag: Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security group bound to the instance.
-        :param pulumi.Input[int] status: Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-               recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-               12 for rebooting.
-        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-               `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        :param pulumi.Input[int] status: Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
+        :param pulumi.Input[int] storage: Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         :param pulumi.Input[str] subnet_id: ID of subnet.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the SQL Server.
         :param pulumi.Input[str] vip: IP for private access.
@@ -911,9 +914,7 @@ class ReadonlyInstance(pulumi.CustomResource):
     @pulumi.getter(name="forceUpgrade")
     def force_upgrade(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by
-        force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server
-        instance, for it will cause ha_type of the master SQL Server instance change.
+        Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server instance, for it will cause ha_type of the master SQL Server instance change.
         """
         return pulumi.get(self, "force_upgrade")
 
@@ -929,8 +930,7 @@ class ReadonlyInstance(pulumi.CustomResource):
     @pulumi.getter
     def memory(self) -> pulumi.Output[int]:
         """
-        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos`
-        provides.
+        Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloud_sqlserver_specinfos` provides.
         """
         return pulumi.get(self, "memory")
 
@@ -954,8 +954,7 @@ class ReadonlyInstance(pulumi.CustomResource):
     @pulumi.getter(name="readonlyGroupId")
     def readonly_group_id(self) -> pulumi.Output[str]:
         """
-        ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with
-        valid value.
+        ID of the readonly group that this instance belongs to. When `readonly_group_type` set value `3`, it must be set with valid value.
         """
         return pulumi.get(self, "readonly_group_id")
 
@@ -963,9 +962,7 @@ class ReadonlyInstance(pulumi.CustomResource):
     @pulumi.getter(name="readonlyGroupType")
     def readonly_group_type(self) -> pulumi.Output[int]:
         """
-        Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2`
-        for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only
-        `1` and `3` are supported.
+        Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
         """
         return pulumi.get(self, "readonly_group_type")
 
@@ -973,8 +970,7 @@ class ReadonlyInstance(pulumi.CustomResource):
     @pulumi.getter(name="roFlag")
     def ro_flag(self) -> pulumi.Output[str]:
         """
-        Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it
-        refers to an instance which is not read-only and has no RO group.
+        Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
         """
         return pulumi.get(self, "ro_flag")
 
@@ -990,9 +986,7 @@ class ReadonlyInstance(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[int]:
         """
-        Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for
-        recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly,
-        12 for rebooting.
+        Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
         """
         return pulumi.get(self, "status")
 
@@ -1000,8 +994,7 @@ class ReadonlyInstance(pulumi.CustomResource):
     @pulumi.getter
     def storage(self) -> pulumi.Output[int]:
         """
-        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and
-        `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
+        Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storage_min` and `storage_max` which data source `tencentcloud_sqlserver_specinfos` provides.
         """
         return pulumi.get(self, "storage")
 

@@ -21,12 +21,8 @@ class InstanceArgs:
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Instance resource.
-        :param pulumi.Input[str] bandwidth_limit_type: The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-               regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-               `OUTER_REGION_LIMIT`.
-        :param pulumi.Input[str] charge_type: Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-               `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-               inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+        :param pulumi.Input[str] bandwidth_limit_type: The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
+        :param pulumi.Input[str] charge_type: Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
         :param pulumi.Input[str] description: Description of CCN, and maximum length does not exceed 100 bytes.
         :param pulumi.Input[str] name: Name of the CCN to be queried, and maximum length does not exceed 60 bytes.
         :param pulumi.Input[str] qos: Service quality of CCN. Valid values: `PT`, `AU`, `AG`. The default is `AU`.
@@ -49,9 +45,7 @@ class InstanceArgs:
     @pulumi.getter(name="bandwidthLimitType")
     def bandwidth_limit_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-        regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-        `OUTER_REGION_LIMIT`.
+        The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
         """
         return pulumi.get(self, "bandwidth_limit_type")
 
@@ -63,9 +57,7 @@ class InstanceArgs:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-        `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-        inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+        Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
         """
         return pulumi.get(self, "charge_type")
 
@@ -136,12 +128,8 @@ class _InstanceState:
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering Instance resources.
-        :param pulumi.Input[str] bandwidth_limit_type: The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-               regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-               `OUTER_REGION_LIMIT`.
-        :param pulumi.Input[str] charge_type: Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-               `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-               inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+        :param pulumi.Input[str] bandwidth_limit_type: The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
+        :param pulumi.Input[str] charge_type: Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
         :param pulumi.Input[str] create_time: Creation time of resource.
         :param pulumi.Input[str] description: Description of CCN, and maximum length does not exceed 100 bytes.
         :param pulumi.Input[int] instance_count: Number of attached instances.
@@ -173,9 +161,7 @@ class _InstanceState:
     @pulumi.getter(name="bandwidthLimitType")
     def bandwidth_limit_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-        regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-        `OUTER_REGION_LIMIT`.
+        The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
         """
         return pulumi.get(self, "bandwidth_limit_type")
 
@@ -187,9 +173,7 @@ class _InstanceState:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-        `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-        inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+        Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
         """
         return pulumi.get(self, "charge_type")
 
@@ -295,15 +279,61 @@ class Instance(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a resource to create a CCN instance.
+
+        ## Example Usage
+
+        Create a prepaid CCN
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        main = tencentcloud.ccn.Instance("main",
+            bandwidth_limit_type="INTER_REGION_LIMIT",
+            charge_type="PREPAID",
+            description="ci-temp-test-ccn-des",
+            qos="AG")
+        ```
+
+        Create a post-paid regional export speed limit type CCN
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        main = tencentcloud.ccn.Instance("main",
+            bandwidth_limit_type="OUTER_REGION_LIMIT",
+            charge_type="POSTPAID",
+            description="ci-temp-test-ccn-des",
+            qos="AG")
+        ```
+
+        Create a post-paid inter-regional rate limit type CNN
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        main = tencentcloud.ccn.Instance("main",
+            bandwidth_limit_type="INTER_REGION_LIMIT",
+            charge_type="POSTPAID",
+            description="ci-temp-test-ccn-des",
+            qos="AG")
+        ```
+
+        ## Import
+
+        Ccn instance can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] bandwidth_limit_type: The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-               regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-               `OUTER_REGION_LIMIT`.
-        :param pulumi.Input[str] charge_type: Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-               `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-               inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+        :param pulumi.Input[str] bandwidth_limit_type: The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
+        :param pulumi.Input[str] charge_type: Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
         :param pulumi.Input[str] description: Description of CCN, and maximum length does not exceed 100 bytes.
         :param pulumi.Input[str] name: Name of the CCN to be queried, and maximum length does not exceed 60 bytes.
         :param pulumi.Input[str] qos: Service quality of CCN. Valid values: `PT`, `AU`, `AG`. The default is `AU`.
@@ -316,7 +346,57 @@ class Instance(pulumi.CustomResource):
                  args: Optional[InstanceArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Provides a resource to create a CCN instance.
+
+        ## Example Usage
+
+        Create a prepaid CCN
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        main = tencentcloud.ccn.Instance("main",
+            bandwidth_limit_type="INTER_REGION_LIMIT",
+            charge_type="PREPAID",
+            description="ci-temp-test-ccn-des",
+            qos="AG")
+        ```
+
+        Create a post-paid regional export speed limit type CCN
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        main = tencentcloud.ccn.Instance("main",
+            bandwidth_limit_type="OUTER_REGION_LIMIT",
+            charge_type="POSTPAID",
+            description="ci-temp-test-ccn-des",
+            qos="AG")
+        ```
+
+        Create a post-paid inter-regional rate limit type CNN
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        main = tencentcloud.ccn.Instance("main",
+            bandwidth_limit_type="INTER_REGION_LIMIT",
+            charge_type="POSTPAID",
+            description="ci-temp-test-ccn-des",
+            qos="AG")
+        ```
+
+        ## Import
+
+        Ccn instance can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -385,12 +465,8 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] bandwidth_limit_type: The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-               regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-               `OUTER_REGION_LIMIT`.
-        :param pulumi.Input[str] charge_type: Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-               `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-               inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+        :param pulumi.Input[str] bandwidth_limit_type: The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
+        :param pulumi.Input[str] charge_type: Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
         :param pulumi.Input[str] create_time: Creation time of resource.
         :param pulumi.Input[str] description: Description of CCN, and maximum length does not exceed 100 bytes.
         :param pulumi.Input[int] instance_count: Number of attached instances.
@@ -418,9 +494,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="bandwidthLimitType")
     def bandwidth_limit_type(self) -> pulumi.Output[Optional[str]]:
         """
-        The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the
-        regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is
-        `OUTER_REGION_LIMIT`.
+        The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
         """
         return pulumi.get(self, "bandwidth_limit_type")
 
@@ -428,9 +502,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription,
-        `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports
-        inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
+        Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
         """
         return pulumi.get(self, "charge_type")
 

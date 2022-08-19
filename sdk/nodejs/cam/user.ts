@@ -4,6 +4,39 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to manage CAM user.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Cam.User("foo", {
+ *     consoleLogin: true,
+ *     countryCode: "86",
+ *     email: "hello@test.com",
+ *     forceDelete: true,
+ *     needResetPassword: true,
+ *     password: "Gail@1234",
+ *     phoneNum: "12345678910",
+ *     remark: "test",
+ *     tags: {
+ *         test: "tf-cam-user",
+ *     },
+ *     useApi: true,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CAM user can be imported using the user name, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Cam/user:User foo cam-user-test
+ * ```
+ */
 export class User extends pulumi.CustomResource {
     /**
      * Get an existing User resource's state with the given name, ID, and optional extra
@@ -45,8 +78,7 @@ export class User extends pulumi.CustomResource {
      */
     public readonly email!: pulumi.Output<string | undefined>;
     /**
-     * Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-     * otherwise the user will be deleted directly. Default is false.
+     * Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
      */
     public readonly forceDelete!: pulumi.Output<boolean | undefined>;
     /**
@@ -58,9 +90,7 @@ export class User extends pulumi.CustomResource {
      */
     public readonly needResetPassword!: pulumi.Output<boolean | undefined>;
     /**
-     * The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-     * uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-     * set, a random password will be automatically generated.
+     * The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `consoleLogin` is true. If not set, a random password will be automatically generated.
      */
     public readonly password!: pulumi.Output<string>;
     /**
@@ -164,8 +194,7 @@ export interface UserState {
      */
     email?: pulumi.Input<string>;
     /**
-     * Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-     * otherwise the user will be deleted directly. Default is false.
+     * Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
@@ -177,9 +206,7 @@ export interface UserState {
      */
     needResetPassword?: pulumi.Input<boolean>;
     /**
-     * The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-     * uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-     * set, a random password will be automatically generated.
+     * The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `consoleLogin` is true. If not set, a random password will be automatically generated.
      */
     password?: pulumi.Input<string>;
     /**
@@ -233,8 +260,7 @@ export interface UserArgs {
      */
     email?: pulumi.Input<string>;
     /**
-     * Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists;
-     * otherwise the user will be deleted directly. Default is false.
+     * Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
      */
     forceDelete?: pulumi.Input<boolean>;
     /**
@@ -246,9 +272,7 @@ export interface UserArgs {
      */
     needResetPassword?: pulumi.Input<boolean>;
     /**
-     * The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes
-     * uppercase letters, lowercase letters, numbers and special characters. Only required when `console_login` is true. If not
-     * set, a random password will be automatically generated.
+     * The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `consoleLogin` is true. If not set, a random password will be automatically generated.
      */
     password?: pulumi.Input<string>;
     /**

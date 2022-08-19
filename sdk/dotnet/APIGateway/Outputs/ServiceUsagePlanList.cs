@@ -7,15 +7,27 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway.Outputs
+namespace Pulumi.Tencentcloud.ApiGateway.Outputs
 {
 
     [OutputType]
     public sealed class ServiceUsagePlanList
     {
+        /// <summary>
+        /// ID of the API.
+        /// </summary>
         public readonly string? ApiId;
+        /// <summary>
+        /// Binding type.
+        /// </summary>
         public readonly string? BindType;
+        /// <summary>
+        /// ID of the usage plan.
+        /// </summary>
         public readonly string? UsagePlanId;
+        /// <summary>
+        /// Name of the usage plan.
+        /// </summary>
         public readonly string? UsagePlanName;
 
         [OutputConstructor]

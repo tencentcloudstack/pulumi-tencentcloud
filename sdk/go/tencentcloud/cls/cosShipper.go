@@ -11,6 +11,61 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a cls cos shipper.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"fmt"
+//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cls.NewCosShipper(ctx, "shipper", &Cls.CosShipperArgs{
+// 			Bucket: pulumi.String("preset-scf-bucket-1308919341"),
+// 			Compress: &cls.CosShipperCompressArgs{
+// 				Format: pulumi.String("lzop"),
+// 			},
+// 			Content: &cls.CosShipperContentArgs{
+// 				Format: pulumi.String("json"),
+// 				Json: &cls.CosShipperContentJsonArgs{
+// 					EnableTag: pulumi.Bool(true),
+// 					MetaFields: pulumi.StringArray{
+// 						pulumi.String("__FILENAME__"),
+// 						pulumi.String("__SOURCE__"),
+// 						pulumi.String("__TIMESTAMP__"),
+// 					},
+// 				},
+// 			},
+// 			Interval:    pulumi.Int(300),
+// 			MaxSize:     pulumi.Int(200),
+// 			Partition:   pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v", "/", "%", "Y/", "%", "m/", "%", "d/", "%", "H/")),
+// 			Prefix:      pulumi.String("ap-guangzhou-fffsasad-1649734752"),
+// 			ShipperName: pulumi.String("ap-guangzhou-fffsasad-1649734752"),
+// 			TopicId:     pulumi.String("4d07fba0-b93e-4e0b-9a7f-d58542560bbb"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// cls cos shipper can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c48-bb01-9ee00584d761
+// ```
 type CosShipper struct {
 	pulumi.CustomResourceState
 
@@ -20,8 +75,7 @@ type CosShipper struct {
 	Compress CosShipperCompressPtrOutput `pulumi:"compress"`
 	// Format configuration of shipped log content.
 	Content CosShipperContentPtrOutput `pulumi:"content"`
-	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-	// up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
 	FilterRules CosShipperFilterRuleArrayOutput `pulumi:"filterRules"`
 	// Shipping time interval in seconds. Default value: 300. Value range: 300~900.
 	Interval pulumi.IntPtrOutput `pulumi:"interval"`
@@ -84,8 +138,7 @@ type cosShipperState struct {
 	Compress *CosShipperCompress `pulumi:"compress"`
 	// Format configuration of shipped log content.
 	Content *CosShipperContent `pulumi:"content"`
-	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-	// up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
 	FilterRules []CosShipperFilterRule `pulumi:"filterRules"`
 	// Shipping time interval in seconds. Default value: 300. Value range: 300~900.
 	Interval *int `pulumi:"interval"`
@@ -108,8 +161,7 @@ type CosShipperState struct {
 	Compress CosShipperCompressPtrInput
 	// Format configuration of shipped log content.
 	Content CosShipperContentPtrInput
-	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-	// up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
 	FilterRules CosShipperFilterRuleArrayInput
 	// Shipping time interval in seconds. Default value: 300. Value range: 300~900.
 	Interval pulumi.IntPtrInput
@@ -136,8 +188,7 @@ type cosShipperArgs struct {
 	Compress *CosShipperCompress `pulumi:"compress"`
 	// Format configuration of shipped log content.
 	Content *CosShipperContent `pulumi:"content"`
-	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-	// up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
 	FilterRules []CosShipperFilterRule `pulumi:"filterRules"`
 	// Shipping time interval in seconds. Default value: 300. Value range: 300~900.
 	Interval *int `pulumi:"interval"`
@@ -161,8 +212,7 @@ type CosShipperArgs struct {
 	Compress CosShipperCompressPtrInput
 	// Format configuration of shipped log content.
 	Content CosShipperContentPtrInput
-	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-	// up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
 	FilterRules CosShipperFilterRuleArrayInput
 	// Shipping time interval in seconds. Default value: 300. Value range: 300~900.
 	Interval pulumi.IntPtrInput
@@ -280,8 +330,7 @@ func (o CosShipperOutput) Content() CosShipperContentPtrOutput {
 	return o.ApplyT(func(v *CosShipper) CosShipperContentPtrOutput { return v.Content }).(CosShipperContentPtrOutput)
 }
 
-// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-// up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
 func (o CosShipperOutput) FilterRules() CosShipperFilterRuleArrayOutput {
 	return o.ApplyT(func(v *CosShipper) CosShipperFilterRuleArrayOutput { return v.FilterRules }).(CosShipperFilterRuleArrayOutput)
 }

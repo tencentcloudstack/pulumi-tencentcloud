@@ -13,7 +13,13 @@ namespace Pulumi.Tencentcloud.Monitor.Outputs
     [OutputType]
     public sealed class AlarmPolicyConditions
     {
+        /// <summary>
+        /// The and or relation of indicator alarm rule.
+        /// </summary>
         public readonly int? IsUnionRule;
+        /// <summary>
+        /// A list of metric trigger condition.
+        /// </summary>
         public readonly ImmutableArray<Outputs.AlarmPolicyConditionsRule> Rules;
 
         [OutputConstructor]

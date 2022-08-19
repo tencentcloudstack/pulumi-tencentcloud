@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -23,14 +23,26 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Monitor/alarmPolicy:AlarmPolicy":
 		r = &AlarmPolicy{}
-	case "tencentcloud:Monitor/bindingAlarmReceiver:BindingAlarmReceiver":
-		r = &BindingAlarmReceiver{}
-	case "tencentcloud:Monitor/bindingObject:BindingObject":
-		r = &BindingObject{}
+	case "tencentcloud:Monitor/bindingReceiver:BindingReceiver":
+		r = &BindingReceiver{}
 	case "tencentcloud:Monitor/policyBindingObject:PolicyBindingObject":
 		r = &PolicyBindingObject{}
-	case "tencentcloud:Monitor/policyGroup:PolicyGroup":
-		r = &PolicyGroup{}
+	case "tencentcloud:Monitor/tmpAlertRule:TmpAlertRule":
+		r = &TmpAlertRule{}
+	case "tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent":
+		r = &TmpCvmAgent{}
+	case "tencentcloud:Monitor/tmpExporterIntegration:TmpExporterIntegration":
+		r = &TmpExporterIntegration{}
+	case "tencentcloud:Monitor/tmpInstance:TmpInstance":
+		r = &TmpInstance{}
+	case "tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule":
+		r = &TmpRecordingRule{}
+	case "tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob":
+		r = &TmpScrapeJob{}
+	case "tencentcloud:Monitor/tmpTkeAlertPolicy:TmpTkeAlertPolicy":
+		r = &TmpTkeAlertPolicy{}
+	case "tencentcloud:Monitor/tmpTkeTemplate:TmpTkeTemplate":
+		r = &TmpTkeTemplate{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -51,12 +63,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Monitor/bindingAlarmReceiver",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Monitor/bindingObject",
+		"Monitor/bindingReceiver",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -66,7 +73,42 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Monitor/policyGroup",
+		"Monitor/tmpAlertRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpCvmAgent",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpExporterIntegration",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpRecordingRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpScrapeJob",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpTkeAlertPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpTkeTemplate",
 		&module{version},
 	)
 }

@@ -5,9 +5,9 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
-from .gateway_ccn_route_instance import *
-from .gateway_ccn_routes import *
-from .gateway_instance import *
-from .gateway_instances import *
-from .instances import *
+from .gateway import *
+from .gateway_ccn_route import *
+from .get_gateway_ccn_routes import *
+from .get_gateway_instances import *
+from .get_instances import *
 from . import outputs

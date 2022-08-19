@@ -11,6 +11,56 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a forward domain of layer7 listener.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+// 			Bandwidth:        pulumi.Int(10),
+// 			Concurrent:       pulumi.Int(2),
+// 			AccessRegion:     pulumi.String("SouthChina"),
+// 			RealserverRegion: pulumi.String("NorthChina"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+// 			Protocol: pulumi.String("HTTP"),
+// 			Port:     pulumi.Int(80),
+// 			ProxyId:  fooProxy.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
+// 			ListenerId: fooLayer7Listener.ID(),
+// 			Domain:     pulumi.String("www.qq.com"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// GAAP http domain can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain tencentcloud_gaap_http_domain.foo listener-11112222+HTTP+www.qq.com
+// ```
 type HttpDomain struct {
 	pulumi.CustomResourceState
 
@@ -20,7 +70,7 @@ type HttpDomain struct {
 	BasicAuthId pulumi.StringOutput `pulumi:"basicAuthId"`
 	// ID of the server certificate, default value is `default`.
 	CertificateId pulumi.StringPtrOutput `pulumi:"certificateId"`
-	// ID of the client certificate, default value is `default`.
+	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate, default value is `default`.
 	//
 	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
 	ClientCertificateId pulumi.StringOutput `pulumi:"clientCertificateId"`
@@ -38,7 +88,7 @@ type HttpDomain struct {
 	RealserverAuth pulumi.BoolPtrOutput `pulumi:"realserverAuth"`
 	// CA certificate domain of the realserver. It has been deprecated.
 	RealserverCertificateDomain pulumi.StringOutput `pulumi:"realserverCertificateDomain"`
-	// CA certificate ID of the realserver.
+	// It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead. CA certificate ID of the realserver.
 	//
 	// Deprecated: It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead.
 	RealserverCertificateId pulumi.StringOutput `pulumi:"realserverCertificateId"`
@@ -87,7 +137,7 @@ type httpDomainState struct {
 	BasicAuthId *string `pulumi:"basicAuthId"`
 	// ID of the server certificate, default value is `default`.
 	CertificateId *string `pulumi:"certificateId"`
-	// ID of the client certificate, default value is `default`.
+	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate, default value is `default`.
 	//
 	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
 	ClientCertificateId *string `pulumi:"clientCertificateId"`
@@ -105,7 +155,7 @@ type httpDomainState struct {
 	RealserverAuth *bool `pulumi:"realserverAuth"`
 	// CA certificate domain of the realserver. It has been deprecated.
 	RealserverCertificateDomain *string `pulumi:"realserverCertificateDomain"`
-	// CA certificate ID of the realserver.
+	// It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead. CA certificate ID of the realserver.
 	//
 	// Deprecated: It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead.
 	RealserverCertificateId *string `pulumi:"realserverCertificateId"`
@@ -120,7 +170,7 @@ type HttpDomainState struct {
 	BasicAuthId pulumi.StringPtrInput
 	// ID of the server certificate, default value is `default`.
 	CertificateId pulumi.StringPtrInput
-	// ID of the client certificate, default value is `default`.
+	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate, default value is `default`.
 	//
 	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
 	ClientCertificateId pulumi.StringPtrInput
@@ -138,7 +188,7 @@ type HttpDomainState struct {
 	RealserverAuth pulumi.BoolPtrInput
 	// CA certificate domain of the realserver. It has been deprecated.
 	RealserverCertificateDomain pulumi.StringPtrInput
-	// CA certificate ID of the realserver.
+	// It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead. CA certificate ID of the realserver.
 	//
 	// Deprecated: It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead.
 	RealserverCertificateId pulumi.StringPtrInput
@@ -157,7 +207,7 @@ type httpDomainArgs struct {
 	BasicAuthId *string `pulumi:"basicAuthId"`
 	// ID of the server certificate, default value is `default`.
 	CertificateId *string `pulumi:"certificateId"`
-	// ID of the client certificate, default value is `default`.
+	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate, default value is `default`.
 	//
 	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
 	ClientCertificateId *string `pulumi:"clientCertificateId"`
@@ -175,7 +225,7 @@ type httpDomainArgs struct {
 	RealserverAuth *bool `pulumi:"realserverAuth"`
 	// CA certificate domain of the realserver. It has been deprecated.
 	RealserverCertificateDomain *string `pulumi:"realserverCertificateDomain"`
-	// CA certificate ID of the realserver.
+	// It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead. CA certificate ID of the realserver.
 	//
 	// Deprecated: It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead.
 	RealserverCertificateId *string `pulumi:"realserverCertificateId"`
@@ -191,7 +241,7 @@ type HttpDomainArgs struct {
 	BasicAuthId pulumi.StringPtrInput
 	// ID of the server certificate, default value is `default`.
 	CertificateId pulumi.StringPtrInput
-	// ID of the client certificate, default value is `default`.
+	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate, default value is `default`.
 	//
 	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
 	ClientCertificateId pulumi.StringPtrInput
@@ -209,7 +259,7 @@ type HttpDomainArgs struct {
 	RealserverAuth pulumi.BoolPtrInput
 	// CA certificate domain of the realserver. It has been deprecated.
 	RealserverCertificateDomain pulumi.StringPtrInput
-	// CA certificate ID of the realserver.
+	// It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead. CA certificate ID of the realserver.
 	//
 	// Deprecated: It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead.
 	RealserverCertificateId pulumi.StringPtrInput
@@ -319,7 +369,7 @@ func (o HttpDomainOutput) CertificateId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *HttpDomain) pulumi.StringPtrOutput { return v.CertificateId }).(pulumi.StringPtrOutput)
 }
 
-// ID of the client certificate, default value is `default`.
+// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate, default value is `default`.
 //
 // Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
 func (o HttpDomainOutput) ClientCertificateId() pulumi.StringOutput {
@@ -361,7 +411,7 @@ func (o HttpDomainOutput) RealserverCertificateDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v *HttpDomain) pulumi.StringOutput { return v.RealserverCertificateDomain }).(pulumi.StringOutput)
 }
 
-// CA certificate ID of the realserver.
+// It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead. CA certificate ID of the realserver.
 //
 // Deprecated: It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead.
 func (o HttpDomainOutput) RealserverCertificateId() pulumi.StringOutput {

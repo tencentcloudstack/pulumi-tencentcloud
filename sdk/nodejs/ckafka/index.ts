@@ -6,12 +6,13 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./acl";
-export * from "./acls";
+export * from "./getAcls";
+export * from "./getInstances";
+export * from "./getTopics";
+export * from "./getUsers";
 export * from "./instance";
 export * from "./topic";
-export * from "./topics";
 export * from "./user";
-export * from "./users";
 
 // Import resources to register:
 import { Acl } from "./acl";

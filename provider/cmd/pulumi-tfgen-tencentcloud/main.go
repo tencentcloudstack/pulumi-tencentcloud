@@ -21,6 +21,5 @@ import (
 )
 
 func main() {
-	// Modify the path to point to the new provider
 	tfgen.Main("tencentcloud", version.Version, tencentcloud.Provider())
 }

@@ -26,18 +26,13 @@ class AdaptiveDynamicStreamingTemplateArgs:
         """
         The set of arguments for constructing a AdaptiveDynamicStreamingTemplate resource.
         :param pulumi.Input[str] format: Adaptive bitstream format. Valid values: `HLS`.
-        :param pulumi.Input[Sequence[pulumi.Input['AdaptiveDynamicStreamingTemplateStreamInfoArgs']]] stream_infos: List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-               substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-               first substream will be used as the output frame rate.
+        :param pulumi.Input[Sequence[pulumi.Input['AdaptiveDynamicStreamingTemplateStreamInfoArgs']]] stream_infos: List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
         :param pulumi.Input[str] comment: Template description. Length limit: 256 characters.
-        :param pulumi.Input[bool] disable_higher_video_bitrate: Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-               `true`: yes. Default value: `false`.
-        :param pulumi.Input[bool] disable_higher_video_resolution: Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-               `true`: yes. Default value: `false`.
+        :param pulumi.Input[bool] disable_higher_video_bitrate: Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
+        :param pulumi.Input[bool] disable_higher_video_resolution: Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         :param pulumi.Input[str] drm_type: DRM scheme type. Valid values: `SimpleAES`. If this field is an empty string, DRM will not be performed on the video.
         :param pulumi.Input[str] name: Template name. Length limit: 64 characters.
-        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-               field; otherwise, leave it empty.
+        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         pulumi.set(__self__, "format", format)
         pulumi.set(__self__, "stream_infos", stream_infos)
@@ -70,9 +65,7 @@ class AdaptiveDynamicStreamingTemplateArgs:
     @pulumi.getter(name="streamInfos")
     def stream_infos(self) -> pulumi.Input[Sequence[pulumi.Input['AdaptiveDynamicStreamingTemplateStreamInfoArgs']]]:
         """
-        List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-        substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-        first substream will be used as the output frame rate.
+        List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
         """
         return pulumi.get(self, "stream_infos")
 
@@ -96,8 +89,7 @@ class AdaptiveDynamicStreamingTemplateArgs:
     @pulumi.getter(name="disableHigherVideoBitrate")
     def disable_higher_video_bitrate(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-        `true`: yes. Default value: `false`.
+        Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         """
         return pulumi.get(self, "disable_higher_video_bitrate")
 
@@ -109,8 +101,7 @@ class AdaptiveDynamicStreamingTemplateArgs:
     @pulumi.getter(name="disableHigherVideoResolution")
     def disable_higher_video_resolution(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-        `true`: yes. Default value: `false`.
+        Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         """
         return pulumi.get(self, "disable_higher_video_resolution")
 
@@ -146,8 +137,7 @@ class AdaptiveDynamicStreamingTemplateArgs:
     @pulumi.getter(name="subAppId")
     def sub_app_id(self) -> Optional[pulumi.Input[int]]:
         """
-        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        field; otherwise, leave it empty.
+        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         return pulumi.get(self, "sub_app_id")
 
@@ -173,18 +163,13 @@ class _AdaptiveDynamicStreamingTemplateState:
         Input properties used for looking up and filtering AdaptiveDynamicStreamingTemplate resources.
         :param pulumi.Input[str] comment: Template description. Length limit: 256 characters.
         :param pulumi.Input[str] create_time: Creation time of template in ISO date format.
-        :param pulumi.Input[bool] disable_higher_video_bitrate: Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-               `true`: yes. Default value: `false`.
-        :param pulumi.Input[bool] disable_higher_video_resolution: Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-               `true`: yes. Default value: `false`.
+        :param pulumi.Input[bool] disable_higher_video_bitrate: Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
+        :param pulumi.Input[bool] disable_higher_video_resolution: Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         :param pulumi.Input[str] drm_type: DRM scheme type. Valid values: `SimpleAES`. If this field is an empty string, DRM will not be performed on the video.
         :param pulumi.Input[str] format: Adaptive bitstream format. Valid values: `HLS`.
         :param pulumi.Input[str] name: Template name. Length limit: 64 characters.
-        :param pulumi.Input[Sequence[pulumi.Input['AdaptiveDynamicStreamingTemplateStreamInfoArgs']]] stream_infos: List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-               substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-               first substream will be used as the output frame rate.
-        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-               field; otherwise, leave it empty.
+        :param pulumi.Input[Sequence[pulumi.Input['AdaptiveDynamicStreamingTemplateStreamInfoArgs']]] stream_infos: List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
+        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         :param pulumi.Input[str] update_time: Last modified time of template in ISO date format.
         """
         if comment is not None:
@@ -236,8 +221,7 @@ class _AdaptiveDynamicStreamingTemplateState:
     @pulumi.getter(name="disableHigherVideoBitrate")
     def disable_higher_video_bitrate(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-        `true`: yes. Default value: `false`.
+        Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         """
         return pulumi.get(self, "disable_higher_video_bitrate")
 
@@ -249,8 +233,7 @@ class _AdaptiveDynamicStreamingTemplateState:
     @pulumi.getter(name="disableHigherVideoResolution")
     def disable_higher_video_resolution(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-        `true`: yes. Default value: `false`.
+        Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         """
         return pulumi.get(self, "disable_higher_video_resolution")
 
@@ -298,9 +281,7 @@ class _AdaptiveDynamicStreamingTemplateState:
     @pulumi.getter(name="streamInfos")
     def stream_infos(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AdaptiveDynamicStreamingTemplateStreamInfoArgs']]]]:
         """
-        List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-        substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-        first substream will be used as the output frame rate.
+        List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
         """
         return pulumi.get(self, "stream_infos")
 
@@ -312,8 +293,7 @@ class _AdaptiveDynamicStreamingTemplateState:
     @pulumi.getter(name="subAppId")
     def sub_app_id(self) -> Optional[pulumi.Input[int]]:
         """
-        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        field; otherwise, leave it empty.
+        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         return pulumi.get(self, "sub_app_id")
 
@@ -349,22 +329,73 @@ class AdaptiveDynamicStreamingTemplate(pulumi.CustomResource):
                  sub_app_id: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Create a AdaptiveDynamicStreamingTemplate resource with the given unique name, props, and options.
+        Provide a resource to create a VOD adaptive dynamic streaming template.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.vod.AdaptiveDynamicStreamingTemplate("foo",
+            comment="test",
+            disable_higher_video_bitrate=False,
+            disable_higher_video_resolution=False,
+            drm_type="SimpleAES",
+            format="HLS",
+            stream_infos=[
+                tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs(
+                    audio=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs(
+                        audio_channel="dual",
+                        bitrate=129,
+                        codec="libmp3lame",
+                        sample_rate=44100,
+                    ),
+                    remove_audio=False,
+                    video=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs(
+                        bitrate=129,
+                        codec="libx265",
+                        fill_type="stretch",
+                        fps=4,
+                        height=128,
+                        resolution_adaptive=False,
+                        width=128,
+                    ),
+                ),
+                tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs(
+                    audio=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs(
+                        bitrate=256,
+                        codec="libfdk_aac",
+                        sample_rate=44100,
+                    ),
+                    remove_audio=True,
+                    video=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs(
+                        bitrate=256,
+                        codec="libx264",
+                        fps=4,
+                    ),
+                ),
+            ])
+        ```
+
+        ## Import
+
+        VOD adaptive dynamic streaming template can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate foo 169141
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] comment: Template description. Length limit: 256 characters.
-        :param pulumi.Input[bool] disable_higher_video_bitrate: Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-               `true`: yes. Default value: `false`.
-        :param pulumi.Input[bool] disable_higher_video_resolution: Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-               `true`: yes. Default value: `false`.
+        :param pulumi.Input[bool] disable_higher_video_bitrate: Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
+        :param pulumi.Input[bool] disable_higher_video_resolution: Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         :param pulumi.Input[str] drm_type: DRM scheme type. Valid values: `SimpleAES`. If this field is an empty string, DRM will not be performed on the video.
         :param pulumi.Input[str] format: Adaptive bitstream format. Valid values: `HLS`.
         :param pulumi.Input[str] name: Template name. Length limit: 64 characters.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AdaptiveDynamicStreamingTemplateStreamInfoArgs']]]] stream_infos: List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-               substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-               first substream will be used as the output frame rate.
-        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-               field; otherwise, leave it empty.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AdaptiveDynamicStreamingTemplateStreamInfoArgs']]]] stream_infos: List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
+        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         ...
     @overload
@@ -373,7 +404,63 @@ class AdaptiveDynamicStreamingTemplate(pulumi.CustomResource):
                  args: AdaptiveDynamicStreamingTemplateArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a AdaptiveDynamicStreamingTemplate resource with the given unique name, props, and options.
+        Provide a resource to create a VOD adaptive dynamic streaming template.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.vod.AdaptiveDynamicStreamingTemplate("foo",
+            comment="test",
+            disable_higher_video_bitrate=False,
+            disable_higher_video_resolution=False,
+            drm_type="SimpleAES",
+            format="HLS",
+            stream_infos=[
+                tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs(
+                    audio=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs(
+                        audio_channel="dual",
+                        bitrate=129,
+                        codec="libmp3lame",
+                        sample_rate=44100,
+                    ),
+                    remove_audio=False,
+                    video=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs(
+                        bitrate=129,
+                        codec="libx265",
+                        fill_type="stretch",
+                        fps=4,
+                        height=128,
+                        resolution_adaptive=False,
+                        width=128,
+                    ),
+                ),
+                tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs(
+                    audio=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs(
+                        bitrate=256,
+                        codec="libfdk_aac",
+                        sample_rate=44100,
+                    ),
+                    remove_audio=True,
+                    video=tencentcloud.vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs(
+                        bitrate=256,
+                        codec="libx264",
+                        fps=4,
+                    ),
+                ),
+            ])
+        ```
+
+        ## Import
+
+        VOD adaptive dynamic streaming template can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate foo 169141
+        ```
+
         :param str resource_name: The name of the resource.
         :param AdaptiveDynamicStreamingTemplateArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -452,18 +539,13 @@ class AdaptiveDynamicStreamingTemplate(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] comment: Template description. Length limit: 256 characters.
         :param pulumi.Input[str] create_time: Creation time of template in ISO date format.
-        :param pulumi.Input[bool] disable_higher_video_bitrate: Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-               `true`: yes. Default value: `false`.
-        :param pulumi.Input[bool] disable_higher_video_resolution: Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-               `true`: yes. Default value: `false`.
+        :param pulumi.Input[bool] disable_higher_video_bitrate: Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
+        :param pulumi.Input[bool] disable_higher_video_resolution: Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         :param pulumi.Input[str] drm_type: DRM scheme type. Valid values: `SimpleAES`. If this field is an empty string, DRM will not be performed on the video.
         :param pulumi.Input[str] format: Adaptive bitstream format. Valid values: `HLS`.
         :param pulumi.Input[str] name: Template name. Length limit: 64 characters.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AdaptiveDynamicStreamingTemplateStreamInfoArgs']]]] stream_infos: List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-               substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-               first substream will be used as the output frame rate.
-        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-               field; otherwise, leave it empty.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['AdaptiveDynamicStreamingTemplateStreamInfoArgs']]]] stream_infos: List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
+        :param pulumi.Input[int] sub_app_id: Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         :param pulumi.Input[str] update_time: Last modified time of template in ISO date format.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -502,8 +584,7 @@ class AdaptiveDynamicStreamingTemplate(pulumi.CustomResource):
     @pulumi.getter(name="disableHigherVideoBitrate")
     def disable_higher_video_bitrate(self) -> pulumi.Output[Optional[bool]]:
         """
-        Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no,
-        `true`: yes. Default value: `false`.
+        Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         """
         return pulumi.get(self, "disable_higher_video_bitrate")
 
@@ -511,8 +592,7 @@ class AdaptiveDynamicStreamingTemplate(pulumi.CustomResource):
     @pulumi.getter(name="disableHigherVideoResolution")
     def disable_higher_video_resolution(self) -> pulumi.Output[Optional[bool]]:
         """
-        Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no,
-        `true`: yes. Default value: `false`.
+        Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
         """
         return pulumi.get(self, "disable_higher_video_resolution")
 
@@ -544,9 +624,7 @@ class AdaptiveDynamicStreamingTemplate(pulumi.CustomResource):
     @pulumi.getter(name="streamInfos")
     def stream_infos(self) -> pulumi.Output[Sequence['outputs.AdaptiveDynamicStreamingTemplateStreamInfo']]:
         """
-        List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10
-        substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the
-        first substream will be used as the output frame rate.
+        List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
         """
         return pulumi.get(self, "stream_infos")
 
@@ -554,8 +632,7 @@ class AdaptiveDynamicStreamingTemplate(pulumi.CustomResource):
     @pulumi.getter(name="subAppId")
     def sub_app_id(self) -> pulumi.Output[Optional[int]]:
         """
-        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this
-        field; otherwise, leave it empty.
+        Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
         """
         return pulumi.get(self, "sub_app_id")
 

@@ -11,6 +11,44 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provide a resource to create a Private Dns Record.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := PrivateDns.NewRecord(ctx, "foo", &PrivateDns.RecordArgs{
+// 			Mx:          pulumi.Int(0),
+// 			RecordType:  pulumi.String("A"),
+// 			RecordValue: pulumi.String("192.168.1.2"),
+// 			SubDomain:   pulumi.String("www"),
+// 			Ttl:         pulumi.Int(300),
+// 			Weight:      pulumi.Int(1),
+// 			ZoneId:      pulumi.String("zone-rqndjnki"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Private Dns Record can be imported, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:PrivateDns/record:Record foo zone_id#record_id
+// ```
 type Record struct {
 	pulumi.CustomResourceState
 

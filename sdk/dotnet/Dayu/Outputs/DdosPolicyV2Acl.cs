@@ -13,12 +13,33 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
     [OutputType]
     public sealed class DdosPolicyV2Acl
     {
+        /// <summary>
+        /// Action, optional values: drop, transmit, forward.
+        /// </summary>
         public readonly string Action;
+        /// <summary>
+        /// The destination port ends, and the value range is 0~65535.
+        /// </summary>
         public readonly int DPortEnd;
+        /// <summary>
+        /// The destination port starts, and the value range is 0~65535.
+        /// </summary>
         public readonly int DPortStart;
+        /// <summary>
+        /// Protocol type, desirable values tcp, udp, all.
+        /// </summary>
         public readonly string ForwardProtocol;
+        /// <summary>
+        /// Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.
+        /// </summary>
         public readonly int Priority;
+        /// <summary>
+        /// The source port ends, and the acceptable value ranges from 0 to 65535.
+        /// </summary>
         public readonly int SPortEnd;
+        /// <summary>
+        /// The source port starts, and the value range is 0~65535.
+        /// </summary>
         public readonly int SPortStart;
 
         [OutputConstructor]

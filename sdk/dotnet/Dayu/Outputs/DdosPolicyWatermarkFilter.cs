@@ -13,10 +13,25 @@ namespace Pulumi.Tencentcloud.Dayu.Outputs
     [OutputType]
     public sealed class DdosPolicyWatermarkFilter
     {
+        /// <summary>
+        /// Indicate whether to auto-remove the watermark or not.
+        /// </summary>
         public readonly bool? AutoRemove;
+        /// <summary>
+        /// The offset of watermark. Valid value ranges: (0~1500).
+        /// </summary>
         public readonly int? Offset;
+        /// <summary>
+        /// Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+        /// </summary>
         public readonly bool? OpenSwitch;
+        /// <summary>
+        /// Port range of TCP, the format is like `2000-3000`.
+        /// </summary>
         public readonly ImmutableArray<string> TcpPortLists;
+        /// <summary>
+        /// Port range of TCP, the format is like `2000-3000`.
+        /// </summary>
         public readonly ImmutableArray<string> UdpPortLists;
 
         [OutputConstructor]

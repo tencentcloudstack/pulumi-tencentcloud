@@ -35,17 +35,11 @@ class StandbyInstanceArgs:
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[int] volume: Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
-        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-               `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-               `1` for creation.
-        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-               Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-               delete old instances and create new one with new charge type.
-        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-               36. NOTE: it only works when charge_type is set to `PREPAID`.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
+        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-               supported.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC. The value is required if `vpc_id` is set.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the Mongodb. Key name `project` is system reserved and can't be used.
         :param pulumi.Input[str] vpc_id: ID of the VPC.
@@ -149,9 +143,7 @@ class StandbyInstanceArgs:
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> Optional[pulumi.Input[int]]:
         """
-        Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-        `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-        `1` for creation.
+        Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         """
         return pulumi.get(self, "auto_renew_flag")
 
@@ -163,9 +155,7 @@ class StandbyInstanceArgs:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-        Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-        delete old instances and create new one with new charge type.
+        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         """
         return pulumi.get(self, "charge_type")
 
@@ -177,8 +167,7 @@ class StandbyInstanceArgs:
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> Optional[pulumi.Input[int]]:
         """
-        The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-        36. NOTE: it only works when charge_type is set to `PREPAID`.
+        The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -202,8 +191,7 @@ class StandbyInstanceArgs:
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-        supported.
+        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         """
         return pulumi.get(self, "security_groups")
 
@@ -273,13 +261,9 @@ class _StandbyInstanceState:
                  vport: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering StandbyInstance resources.
-        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-               `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-               `1` for creation.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         :param pulumi.Input[str] available_zone: The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.
-        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-               Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-               delete old instances and create new one with new charge type.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[str] create_time: Creation time of the Mongodb instance.
         :param pulumi.Input[str] engine_version: Version of the standby Mongodb instance and must be same as the version of main instance.
         :param pulumi.Input[str] father_instance_id: Indicates the main instance ID of standby instances.
@@ -287,13 +271,10 @@ class _StandbyInstanceState:
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
         :param pulumi.Input[str] machine_type: Type of standby Mongodb instance and must be same as the type of main instance.
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
-        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-               36. NOTE: it only works when charge_type is set to `PREPAID`.
+        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-               supported.
-        :param pulumi.Input[int] status: Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-               processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
+        :param pulumi.Input[int] status: Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC. The value is required if `vpc_id` is set.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the Mongodb. Key name `project` is system reserved and can't be used.
         :param pulumi.Input[str] vip: IP of the Mongodb instance.
@@ -346,9 +327,7 @@ class _StandbyInstanceState:
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> Optional[pulumi.Input[int]]:
         """
-        Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-        `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-        `1` for creation.
+        Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         """
         return pulumi.get(self, "auto_renew_flag")
 
@@ -372,9 +351,7 @@ class _StandbyInstanceState:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-        Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-        delete old instances and create new one with new charge type.
+        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         """
         return pulumi.get(self, "charge_type")
 
@@ -470,8 +447,7 @@ class _StandbyInstanceState:
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> Optional[pulumi.Input[int]]:
         """
-        The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-        36. NOTE: it only works when charge_type is set to `PREPAID`.
+        The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -495,8 +471,7 @@ class _StandbyInstanceState:
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-        supported.
+        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         """
         return pulumi.get(self, "security_groups")
 
@@ -508,8 +483,7 @@ class _StandbyInstanceState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[int]]:
         """
-        Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-        processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         """
         return pulumi.get(self, "status")
 
@@ -611,25 +585,62 @@ class StandbyInstance(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a StandbyInstance resource with the given unique name, props, and options.
+        Provide a resource to create a Mongodb standby instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_pulumi as pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        shanghai = pulumi.providers.Tencentcloud("shanghai", region="ap-shanghai")
+        mongodb_instance = tencentcloud.mongodb.Instance("mongodbInstance",
+            instance_name="tf-mongodb-test",
+            memory=4,
+            volume=100,
+            engine_version="MONGO_40_WT",
+            machine_type="HIO10G",
+            available_zone=var["availability_zone"],
+            project_id=0,
+            password="test1234",
+            tags={
+                "test": "test",
+            })
+        mongodb_standby_instance = tencentcloud.mongodb.StandbyInstance("mongodbStandbyInstance",
+            instance_name="tf-mongodb-standby-test",
+            memory=4,
+            volume=100,
+            available_zone="ap-shanghai-2",
+            project_id=0,
+            father_instance_id=mongodb_instance.id,
+            father_instance_region="ap-guangzhou",
+            tags={
+                "test": "test",
+            },
+            opts=pulumi.ResourceOptions(provider=tencentcloud["shanghai"]))
+        ```
+
+        ## Import
+
+        Mongodb instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-               `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-               `1` for creation.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         :param pulumi.Input[str] available_zone: The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.
-        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-               Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-               delete old instances and create new one with new charge type.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[str] father_instance_id: Indicates the main instance ID of standby instances.
         :param pulumi.Input[str] father_instance_region: Indicates the region of main instance.
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
-        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-               36. NOTE: it only works when charge_type is set to `PREPAID`.
+        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-               supported.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC. The value is required if `vpc_id` is set.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the Mongodb. Key name `project` is system reserved and can't be used.
         :param pulumi.Input[int] volume: Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
@@ -642,7 +653,50 @@ class StandbyInstance(pulumi.CustomResource):
                  args: StandbyInstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a StandbyInstance resource with the given unique name, props, and options.
+        Provide a resource to create a Mongodb standby instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_pulumi as pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        shanghai = pulumi.providers.Tencentcloud("shanghai", region="ap-shanghai")
+        mongodb_instance = tencentcloud.mongodb.Instance("mongodbInstance",
+            instance_name="tf-mongodb-test",
+            memory=4,
+            volume=100,
+            engine_version="MONGO_40_WT",
+            machine_type="HIO10G",
+            available_zone=var["availability_zone"],
+            project_id=0,
+            password="test1234",
+            tags={
+                "test": "test",
+            })
+        mongodb_standby_instance = tencentcloud.mongodb.StandbyInstance("mongodbStandbyInstance",
+            instance_name="tf-mongodb-standby-test",
+            memory=4,
+            volume=100,
+            available_zone="ap-shanghai-2",
+            project_id=0,
+            father_instance_id=mongodb_instance.id,
+            father_instance_region="ap-guangzhou",
+            tags={
+                "test": "test",
+            },
+            opts=pulumi.ResourceOptions(provider=tencentcloud["shanghai"]))
+        ```
+
+        ## Import
+
+        Mongodb instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
+        ```
+
         :param str resource_name: The name of the resource.
         :param StandbyInstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -753,13 +807,9 @@ class StandbyInstance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-               `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-               `1` for creation.
+        :param pulumi.Input[int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         :param pulumi.Input[str] available_zone: The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.
-        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-               Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-               delete old instances and create new one with new charge type.
+        :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[str] create_time: Creation time of the Mongodb instance.
         :param pulumi.Input[str] engine_version: Version of the standby Mongodb instance and must be same as the version of main instance.
         :param pulumi.Input[str] father_instance_id: Indicates the main instance ID of standby instances.
@@ -767,13 +817,10 @@ class StandbyInstance(pulumi.CustomResource):
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
         :param pulumi.Input[str] machine_type: Type of standby Mongodb instance and must be same as the type of main instance.
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
-        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-               36. NOTE: it only works when charge_type is set to `PREPAID`.
+        :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-               supported.
-        :param pulumi.Input[int] status: Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-               processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
+        :param pulumi.Input[int] status: Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC. The value is required if `vpc_id` is set.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the Mongodb. Key name `project` is system reserved and can't be used.
         :param pulumi.Input[str] vip: IP of the Mongodb instance.
@@ -811,9 +858,7 @@ class StandbyInstance(pulumi.CustomResource):
     @pulumi.getter(name="autoRenewFlag")
     def auto_renew_flag(self) -> pulumi.Output[Optional[int]]:
         """
-        Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and
-        `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and
-        `1` for creation.
+        Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         """
         return pulumi.get(self, "auto_renew_flag")
 
@@ -829,9 +874,7 @@ class StandbyInstance(pulumi.CustomResource):
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> pulumi.Output[Optional[str]]:
         """
-        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`.
-        Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will
-        delete old instances and create new one with new charge type.
+        The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         """
         return pulumi.get(self, "charge_type")
 
@@ -895,8 +938,7 @@ class StandbyInstance(pulumi.CustomResource):
     @pulumi.getter(name="prepaidPeriod")
     def prepaid_period(self) -> pulumi.Output[Optional[int]]:
         """
-        The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24,
-        36. NOTE: it only works when charge_type is set to `PREPAID`.
+        The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         """
         return pulumi.get(self, "prepaid_period")
 
@@ -912,8 +954,7 @@ class StandbyInstance(pulumi.CustomResource):
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not
-        supported.
+        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
         """
         return pulumi.get(self, "security_groups")
 
@@ -921,8 +962,7 @@ class StandbyInstance(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[int]:
         """
-        Status of the Mongodb instance, and available values include pending initialization(expressed with 0),
-        processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
+        Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         """
         return pulumi.get(self, "status")
 

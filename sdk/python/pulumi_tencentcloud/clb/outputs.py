@@ -10,19 +10,93 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'AttachmentTarget',
     'InstanceSnatIp',
-    'InstancesClbListResult',
-    'ListenerRulesRuleListResult',
-    'ListenersListenerListResult',
-    'RedirectionsRedirectionListResult',
-    'ServerAttachmentTarget',
-    'ServerAttachmentsAttachmentListResult',
-    'ServerAttachmentsAttachmentListTargetResult',
+    'SnatIpIp',
     'TargetGroupTargetGroupInstance',
-    'TargetGroupsListResult',
-    'TargetGroupsListAssociatedRuleListResult',
-    'TargetGroupsListTargetGroupInstanceListResult',
+    'GetAttachmentsAttachmentListResult',
+    'GetAttachmentsAttachmentListTargetResult',
+    'GetInstancesClbListResult',
+    'GetListenerRulesRuleListResult',
+    'GetListenersListenerListResult',
+    'GetRedirectionsRedirectionListResult',
+    'GetTargetGroupsListResult',
+    'GetTargetGroupsListAssociatedRuleListResult',
+    'GetTargetGroupsListTargetGroupInstanceListResult',
 ]
+
+@pulumi.output_type
+class AttachmentTarget(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "eniIp":
+            suggest = "eni_ip"
+        elif key == "instanceId":
+            suggest = "instance_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AttachmentTarget. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AttachmentTarget.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AttachmentTarget.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 port: int,
+                 eni_ip: Optional[str] = None,
+                 instance_id: Optional[str] = None,
+                 weight: Optional[int] = None):
+        """
+        :param int port: Port of the backend server. Valid value ranges: (0~65535).
+        :param str eni_ip: Eni IP address of the backend server, conflict with `instance_id` but must specify one of them.
+        :param str instance_id: CVM Instance Id of the backend server, conflict with `eni_ip` but must specify one of them.
+        :param int weight: Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to `10`.
+        """
+        pulumi.set(__self__, "port", port)
+        if eni_ip is not None:
+            pulumi.set(__self__, "eni_ip", eni_ip)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
+        if weight is not None:
+            pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Port of the backend server. Valid value ranges: (0~65535).
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="eniIp")
+    def eni_ip(self) -> Optional[str]:
+        """
+        Eni IP address of the backend server, conflict with `instance_id` but must specify one of them.
+        """
+        return pulumi.get(self, "eni_ip")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[str]:
+        """
+        CVM Instance Id of the backend server, conflict with `eni_ip` but must specify one of them.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> Optional[int]:
+        """
+        Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to `10`.
+        """
+        return pulumi.get(self, "weight")
+
 
 @pulumi.output_type
 class InstanceSnatIp(dict):
@@ -46,6 +120,10 @@ class InstanceSnatIp(dict):
     def __init__(__self__, *,
                  subnet_id: str,
                  ip: Optional[str] = None):
+        """
+        :param str subnet_id: Snat subnet ID.
+        :param str ip: Snat IP address, If set to empty will auto allocated.
+        """
         pulumi.set(__self__, "subnet_id", subnet_id)
         if ip is not None:
             pulumi.set(__self__, "ip", ip)
@@ -53,16 +131,242 @@ class InstanceSnatIp(dict):
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        Snat subnet ID.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter
     def ip(self) -> Optional[str]:
+        """
+        Snat IP address, If set to empty will auto allocated.
+        """
         return pulumi.get(self, "ip")
 
 
 @pulumi.output_type
-class InstancesClbListResult(dict):
+class SnatIpIp(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "subnetId":
+            suggest = "subnet_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SnatIpIp. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SnatIpIp.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SnatIpIp.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 ip: str,
+                 subnet_id: str):
+        """
+        :param str ip: Snat IP.
+        :param str subnet_id: Subnet ID.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        Snat IP.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet ID.
+        """
+        return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class TargetGroupTargetGroupInstance(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "bindIp":
+            suggest = "bind_ip"
+        elif key == "newPort":
+            suggest = "new_port"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TargetGroupTargetGroupInstance. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TargetGroupTargetGroupInstance.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TargetGroupTargetGroupInstance.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 bind_ip: str,
+                 port: int,
+                 new_port: Optional[int] = None,
+                 weight: Optional[int] = None):
+        """
+        :param str bind_ip: The internal ip of target group instance.
+        :param int port: The port of target group instance.
+        :param int new_port: The new port of target group instance.
+        :param int weight: The weight of target group instance.
+        """
+        pulumi.set(__self__, "bind_ip", bind_ip)
+        pulumi.set(__self__, "port", port)
+        if new_port is not None:
+            pulumi.set(__self__, "new_port", new_port)
+        if weight is not None:
+            pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter(name="bindIp")
+    def bind_ip(self) -> str:
+        """
+        The internal ip of target group instance.
+        """
+        return pulumi.get(self, "bind_ip")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        The port of target group instance.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="newPort")
+    def new_port(self) -> Optional[int]:
+        """
+        The new port of target group instance.
+        """
+        return pulumi.get(self, "new_port")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> Optional[int]:
+        """
+        The weight of target group instance.
+        """
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class GetAttachmentsAttachmentListResult(dict):
+    def __init__(__self__, *,
+                 clb_id: str,
+                 listener_id: str,
+                 protocol_type: str,
+                 rule_id: str,
+                 targets: Sequence['outputs.GetAttachmentsAttachmentListTargetResult']):
+        """
+        :param str clb_id: ID of the CLB to be queried.
+        :param str listener_id: ID of the CLB listener to be queried.
+        :param str protocol_type: Type of protocol within the listener, and available values include `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`. NOTES: `TCP_SSL` is testing internally, please apply if you need to use.
+        :param str rule_id: ID of the CLB listener rule. If the protocol of listener is `HTTP`/`HTTPS`, this para is required.
+        :param Sequence['GetAttachmentsAttachmentListTargetArgs'] targets: Information of the backends to be attached.
+        """
+        pulumi.set(__self__, "clb_id", clb_id)
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "protocol_type", protocol_type)
+        pulumi.set(__self__, "rule_id", rule_id)
+        pulumi.set(__self__, "targets", targets)
+
+    @property
+    @pulumi.getter(name="clbId")
+    def clb_id(self) -> str:
+        """
+        ID of the CLB to be queried.
+        """
+        return pulumi.get(self, "clb_id")
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> str:
+        """
+        ID of the CLB listener to be queried.
+        """
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter(name="protocolType")
+    def protocol_type(self) -> str:
+        """
+        Type of protocol within the listener, and available values include `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`. NOTES: `TCP_SSL` is testing internally, please apply if you need to use.
+        """
+        return pulumi.get(self, "protocol_type")
+
+    @property
+    @pulumi.getter(name="ruleId")
+    def rule_id(self) -> str:
+        """
+        ID of the CLB listener rule. If the protocol of listener is `HTTP`/`HTTPS`, this para is required.
+        """
+        return pulumi.get(self, "rule_id")
+
+    @property
+    @pulumi.getter
+    def targets(self) -> Sequence['outputs.GetAttachmentsAttachmentListTargetResult']:
+        """
+        Information of the backends to be attached.
+        """
+        return pulumi.get(self, "targets")
+
+
+@pulumi.output_type
+class GetAttachmentsAttachmentListTargetResult(dict):
+    def __init__(__self__, *,
+                 instance_id: str,
+                 port: int,
+                 weight: int):
+        """
+        :param str instance_id: Id of the backend server.
+        :param int port: Port of the backend server.
+        :param int weight: Forwarding weight of the backend service, the range of [0, 100], defaults to `10`.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Id of the backend server.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        Port of the backend server.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> int:
+        """
+        Forwarding weight of the backend service, the range of [0, 100], defaults to `10`.
+        """
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class GetInstancesClbListResult(dict):
     def __init__(__self__, *,
                  address_ip_version: str,
                  clb_id: str,
@@ -87,6 +391,31 @@ class InstancesClbListResult(dict):
                  zone_id: int,
                  zone_name: str,
                  zone_region: str):
+        """
+        :param str address_ip_version: IP version, only applicable to open CLB. Valid values are `IPV4`, `IPV6` and `IPv6FullChain`.
+        :param str clb_id: ID of the CLB to be queried.
+        :param str clb_name: Name of the CLB to be queried.
+        :param Sequence[str] clb_vips: The virtual service address table of the CLB.
+        :param str create_time: Create time of the CLB.
+        :param int internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
+        :param str internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param bool local_zone: Whether this available zone is local zone, This field maybe null, means cannot get a valid value.
+        :param str network_type: Type of CLB instance, and available values include `OPEN` and `INTERNAL`.
+        :param int project_id: Project ID of the CLB.
+        :param Sequence[str] security_groups: ID set of the security groups.
+        :param int status: The status of CLB.
+        :param str status_time: Latest state transition time of CLB.
+        :param str subnet_id: ID of the subnet.
+        :param Mapping[str, Any] tags: The available tags within this CLB.
+        :param str target_region_info_region: Region information of backend service are attached the CLB.
+        :param str target_region_info_vpc_id: VpcId information of backend service are attached the CLB.
+        :param str vip_isp: Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
+        :param str vpc_id: ID of the VPC.
+        :param str zone: Available zone unique id(string representation), This field maybe null, means cannot get a valid value.
+        :param int zone_id: Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.
+        :param str zone_name: Available zone name, This field maybe null, means cannot get a valid value.
+        :param str zone_region: Region that this available zone belong to, This field maybe null, means cannot get a valid value.
+        """
         pulumi.set(__self__, "address_ip_version", address_ip_version)
         pulumi.set(__self__, "clb_id", clb_id)
         pulumi.set(__self__, "clb_name", clb_name)
@@ -114,121 +443,190 @@ class InstancesClbListResult(dict):
     @property
     @pulumi.getter(name="addressIpVersion")
     def address_ip_version(self) -> str:
+        """
+        IP version, only applicable to open CLB. Valid values are `IPV4`, `IPV6` and `IPv6FullChain`.
+        """
         return pulumi.get(self, "address_ip_version")
 
     @property
     @pulumi.getter(name="clbId")
     def clb_id(self) -> str:
+        """
+        ID of the CLB to be queried.
+        """
         return pulumi.get(self, "clb_id")
 
     @property
     @pulumi.getter(name="clbName")
     def clb_name(self) -> str:
+        """
+        Name of the CLB to be queried.
+        """
         return pulumi.get(self, "clb_name")
 
     @property
     @pulumi.getter(name="clbVips")
     def clb_vips(self) -> Sequence[str]:
+        """
+        The virtual service address table of the CLB.
+        """
         return pulumi.get(self, "clb_vips")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the CLB.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="internetBandwidthMaxOut")
     def internet_bandwidth_max_out(self) -> int:
+        """
+        Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
+        """
         return pulumi.get(self, "internet_bandwidth_max_out")
 
     @property
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> str:
+        """
+        Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        """
         return pulumi.get(self, "internet_charge_type")
 
     @property
     @pulumi.getter(name="localZone")
     def local_zone(self) -> bool:
+        """
+        Whether this available zone is local zone, This field maybe null, means cannot get a valid value.
+        """
         return pulumi.get(self, "local_zone")
 
     @property
     @pulumi.getter(name="networkType")
     def network_type(self) -> str:
+        """
+        Type of CLB instance, and available values include `OPEN` and `INTERNAL`.
+        """
         return pulumi.get(self, "network_type")
 
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> int:
+        """
+        Project ID of the CLB.
+        """
         return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Sequence[str]:
+        """
+        ID set of the security groups.
+        """
         return pulumi.get(self, "security_groups")
 
     @property
     @pulumi.getter
     def status(self) -> int:
+        """
+        The status of CLB.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="statusTime")
     def status_time(self) -> str:
+        """
+        Latest state transition time of CLB.
+        """
         return pulumi.get(self, "status_time")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        ID of the subnet.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter
     def tags(self) -> Mapping[str, Any]:
+        """
+        The available tags within this CLB.
+        """
         return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="targetRegionInfoRegion")
     def target_region_info_region(self) -> str:
+        """
+        Region information of backend service are attached the CLB.
+        """
         return pulumi.get(self, "target_region_info_region")
 
     @property
     @pulumi.getter(name="targetRegionInfoVpcId")
     def target_region_info_vpc_id(self) -> str:
+        """
+        VpcId information of backend service are attached the CLB.
+        """
         return pulumi.get(self, "target_region_info_vpc_id")
 
     @property
     @pulumi.getter(name="vipIsp")
     def vip_isp(self) -> str:
+        """
+        Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
+        """
         return pulumi.get(self, "vip_isp")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        ID of the VPC.
+        """
         return pulumi.get(self, "vpc_id")
 
     @property
     @pulumi.getter
     def zone(self) -> str:
+        """
+        Available zone unique id(string representation), This field maybe null, means cannot get a valid value.
+        """
         return pulumi.get(self, "zone")
 
     @property
     @pulumi.getter(name="zoneId")
     def zone_id(self) -> int:
+        """
+        Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.
+        """
         return pulumi.get(self, "zone_id")
 
     @property
     @pulumi.getter(name="zoneName")
     def zone_name(self) -> str:
+        """
+        Available zone name, This field maybe null, means cannot get a valid value.
+        """
         return pulumi.get(self, "zone_name")
 
     @property
     @pulumi.getter(name="zoneRegion")
     def zone_region(self) -> str:
+        """
+        Region that this available zone belong to, This field maybe null, means cannot get a valid value.
+        """
         return pulumi.get(self, "zone_region")
 
 
 @pulumi.output_type
-class ListenerRulesRuleListResult(dict):
+class GetListenerRulesRuleListResult(dict):
     def __init__(__self__, *,
                  certificate_ca_id: str,
                  certificate_id: str,
@@ -249,6 +647,27 @@ class ListenerRulesRuleListResult(dict):
                  session_expire_time: int,
                  domain: Optional[str] = None,
                  url: Optional[str] = None):
+        """
+        :param str certificate_ca_id: ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.
+        :param str certificate_id: ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.
+        :param str certificate_ssl_mode: Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.
+        :param str clb_id: ID of the CLB to be queried.
+        :param int health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        :param int health_check_http_code: HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
+        :param str health_check_http_domain: Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.
+        :param str health_check_http_method: Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.
+        :param str health_check_http_path: Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.
+        :param int health_check_interval_time: Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        :param bool health_check_switch: Indicates whether health check is enabled.
+        :param int health_check_unhealth_num: Unhealth threshold of health check, and the default is `3`. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        :param bool http2_switch: Indicate to set HTTP2 protocol or not.
+        :param str listener_id: ID of the CLB listener to be queried.
+        :param str rule_id: ID of the forwarding rule to be queried.
+        :param str scheduler: Scheduling method of the forwarding rule of thr CLB listener, and available values include `WRR`, `IP HASH` and `LEAST_CONN`. The default is `WRR`.
+        :param int session_expire_time: Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        :param str domain: Domain name of the forwarding rule to be queried.
+        :param str url: Url of the forwarding rule to be queried.
+        """
         pulumi.set(__self__, "certificate_ca_id", certificate_ca_id)
         pulumi.set(__self__, "certificate_id", certificate_id)
         pulumi.set(__self__, "certificate_ssl_mode", certificate_ssl_mode)
@@ -274,101 +693,158 @@ class ListenerRulesRuleListResult(dict):
     @property
     @pulumi.getter(name="certificateCaId")
     def certificate_ca_id(self) -> str:
+        """
+        ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.
+        """
         return pulumi.get(self, "certificate_ca_id")
 
     @property
     @pulumi.getter(name="certificateId")
     def certificate_id(self) -> str:
+        """
+        ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.
+        """
         return pulumi.get(self, "certificate_id")
 
     @property
     @pulumi.getter(name="certificateSslMode")
     def certificate_ssl_mode(self) -> str:
+        """
+        Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.
+        """
         return pulumi.get(self, "certificate_ssl_mode")
 
     @property
     @pulumi.getter(name="clbId")
     def clb_id(self) -> str:
+        """
+        ID of the CLB to be queried.
+        """
         return pulumi.get(self, "clb_id")
 
     @property
     @pulumi.getter(name="healthCheckHealthNum")
     def health_check_health_num(self) -> int:
+        """
+        Health threshold of health check, and the default is `3`. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        """
         return pulumi.get(self, "health_check_health_num")
 
     @property
     @pulumi.getter(name="healthCheckHttpCode")
     def health_check_http_code(self) -> int:
+        """
+        HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
+        """
         return pulumi.get(self, "health_check_http_code")
 
     @property
     @pulumi.getter(name="healthCheckHttpDomain")
     def health_check_http_domain(self) -> str:
+        """
+        Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.
+        """
         return pulumi.get(self, "health_check_http_domain")
 
     @property
     @pulumi.getter(name="healthCheckHttpMethod")
     def health_check_http_method(self) -> str:
+        """
+        Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.
+        """
         return pulumi.get(self, "health_check_http_method")
 
     @property
     @pulumi.getter(name="healthCheckHttpPath")
     def health_check_http_path(self) -> str:
+        """
+        Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.
+        """
         return pulumi.get(self, "health_check_http_path")
 
     @property
     @pulumi.getter(name="healthCheckIntervalTime")
     def health_check_interval_time(self) -> int:
+        """
+        Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        """
         return pulumi.get(self, "health_check_interval_time")
 
     @property
     @pulumi.getter(name="healthCheckSwitch")
     def health_check_switch(self) -> bool:
+        """
+        Indicates whether health check is enabled.
+        """
         return pulumi.get(self, "health_check_switch")
 
     @property
     @pulumi.getter(name="healthCheckUnhealthNum")
     def health_check_unhealth_num(self) -> int:
+        """
+        Unhealth threshold of health check, and the default is `3`. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        """
         return pulumi.get(self, "health_check_unhealth_num")
 
     @property
     @pulumi.getter(name="http2Switch")
     def http2_switch(self) -> bool:
+        """
+        Indicate to set HTTP2 protocol or not.
+        """
         return pulumi.get(self, "http2_switch")
 
     @property
     @pulumi.getter(name="listenerId")
     def listener_id(self) -> str:
+        """
+        ID of the CLB listener to be queried.
+        """
         return pulumi.get(self, "listener_id")
 
     @property
     @pulumi.getter(name="ruleId")
     def rule_id(self) -> str:
+        """
+        ID of the forwarding rule to be queried.
+        """
         return pulumi.get(self, "rule_id")
 
     @property
     @pulumi.getter
     def scheduler(self) -> str:
+        """
+        Scheduling method of the forwarding rule of thr CLB listener, and available values include `WRR`, `IP HASH` and `LEAST_CONN`. The default is `WRR`.
+        """
         return pulumi.get(self, "scheduler")
 
     @property
     @pulumi.getter(name="sessionExpireTime")
     def session_expire_time(self) -> int:
+        """
+        Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        """
         return pulumi.get(self, "session_expire_time")
 
     @property
     @pulumi.getter
     def domain(self) -> Optional[str]:
+        """
+        Domain name of the forwarding rule to be queried.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter
     def url(self) -> Optional[str]:
+        """
+        Url of the forwarding rule to be queried.
+        """
         return pulumi.get(self, "url")
 
 
 @pulumi.output_type
-class ListenersListenerListResult(dict):
+class GetListenersListenerListResult(dict):
     def __init__(__self__, *,
                  certificate_ca_id: str,
                  certificate_id: str,
@@ -396,6 +872,34 @@ class ListenersListenerListResult(dict):
                  scheduler: str,
                  session_expire_time: int,
                  sni_switch: bool):
+        """
+        :param str certificate_ca_id: Id of the client certificate. It must be set when SSLMode is `mutual`. NOTES: only supported by listeners of `HTTPS` and `TCP_SSL` protocol.
+        :param str certificate_id: Id of the server certificate. It must be set when protocol is `HTTPS` or `TCP_SSL`. NOTES: only supported by listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
+        :param str certificate_ssl_mode: Type of certificate, and available values inclue `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
+        :param str clb_id: Id of the CLB to be queried.
+        :param str health_check_context_type: Health check protocol.
+        :param int health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        :param int health_check_http_code: HTTP health check code of TCP listener.
+        :param str health_check_http_domain: HTTP health check domain of TCP listener.
+        :param str health_check_http_method: HTTP health check method of TCP listener.
+        :param str health_check_http_path: HTTP health check path of TCP listener.
+        :param str health_check_http_version: The HTTP version of the backend service.
+        :param int health_check_interval_time: Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        :param int health_check_port: The health check port is the port of the backend service.
+        :param str health_check_recv_context: It represents the result returned by the health check.
+        :param str health_check_send_context: It represents the content of the request sent by the health check.
+        :param bool health_check_switch: Indicates whether health check is enabled.
+        :param int health_check_time_out: Response timeout of health check. The value range is 2-60 sec, and the default is `2` sec. Response timeout needs to be less than check interval. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration.
+        :param str health_check_type: Protocol used for health check.
+        :param int health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        :param str listener_id: Id of the listener to be queried.
+        :param str listener_name: Name of the CLB listener.
+        :param int port: Port of the CLB listener.
+        :param str protocol: Type of protocol within the listener, and available values are `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+        :param str scheduler: Scheduling method of the CLB listener, and available values are `WRR` and `LEAST_CONN`. The default is `WRR`. NOTES: The listener of 'HTTP' and `HTTPS` protocol additionally supports the `IP HASH` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        :param int session_expire_time: Time of session persistence within the CLB listener. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        :param bool sni_switch: Indicates whether SNI is enabled. NOTES: Only supported by `HTTPS` protocol.
+        """
         pulumi.set(__self__, "certificate_ca_id", certificate_ca_id)
         pulumi.set(__self__, "certificate_id", certificate_id)
         pulumi.set(__self__, "certificate_ssl_mode", certificate_ssl_mode)
@@ -426,142 +930,227 @@ class ListenersListenerListResult(dict):
     @property
     @pulumi.getter(name="certificateCaId")
     def certificate_ca_id(self) -> str:
+        """
+        Id of the client certificate. It must be set when SSLMode is `mutual`. NOTES: only supported by listeners of `HTTPS` and `TCP_SSL` protocol.
+        """
         return pulumi.get(self, "certificate_ca_id")
 
     @property
     @pulumi.getter(name="certificateId")
     def certificate_id(self) -> str:
+        """
+        Id of the server certificate. It must be set when protocol is `HTTPS` or `TCP_SSL`. NOTES: only supported by listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
+        """
         return pulumi.get(self, "certificate_id")
 
     @property
     @pulumi.getter(name="certificateSslMode")
     def certificate_ssl_mode(self) -> str:
+        """
+        Type of certificate, and available values inclue `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
+        """
         return pulumi.get(self, "certificate_ssl_mode")
 
     @property
     @pulumi.getter(name="clbId")
     def clb_id(self) -> str:
+        """
+        Id of the CLB to be queried.
+        """
         return pulumi.get(self, "clb_id")
 
     @property
     @pulumi.getter(name="healthCheckContextType")
     def health_check_context_type(self) -> str:
+        """
+        Health check protocol.
+        """
         return pulumi.get(self, "health_check_context_type")
 
     @property
     @pulumi.getter(name="healthCheckHealthNum")
     def health_check_health_num(self) -> int:
+        """
+        Health threshold of health check, and the default is `3`. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        """
         return pulumi.get(self, "health_check_health_num")
 
     @property
     @pulumi.getter(name="healthCheckHttpCode")
     def health_check_http_code(self) -> int:
+        """
+        HTTP health check code of TCP listener.
+        """
         return pulumi.get(self, "health_check_http_code")
 
     @property
     @pulumi.getter(name="healthCheckHttpDomain")
     def health_check_http_domain(self) -> str:
+        """
+        HTTP health check domain of TCP listener.
+        """
         return pulumi.get(self, "health_check_http_domain")
 
     @property
     @pulumi.getter(name="healthCheckHttpMethod")
     def health_check_http_method(self) -> str:
+        """
+        HTTP health check method of TCP listener.
+        """
         return pulumi.get(self, "health_check_http_method")
 
     @property
     @pulumi.getter(name="healthCheckHttpPath")
     def health_check_http_path(self) -> str:
+        """
+        HTTP health check path of TCP listener.
+        """
         return pulumi.get(self, "health_check_http_path")
 
     @property
     @pulumi.getter(name="healthCheckHttpVersion")
     def health_check_http_version(self) -> str:
+        """
+        The HTTP version of the backend service.
+        """
         return pulumi.get(self, "health_check_http_version")
 
     @property
     @pulumi.getter(name="healthCheckIntervalTime")
     def health_check_interval_time(self) -> int:
+        """
+        Interval time of health check. The value range is 5-300 sec, and the default is `5` sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        """
         return pulumi.get(self, "health_check_interval_time")
 
     @property
     @pulumi.getter(name="healthCheckPort")
     def health_check_port(self) -> int:
+        """
+        The health check port is the port of the backend service.
+        """
         return pulumi.get(self, "health_check_port")
 
     @property
     @pulumi.getter(name="healthCheckRecvContext")
     def health_check_recv_context(self) -> str:
+        """
+        It represents the result returned by the health check.
+        """
         return pulumi.get(self, "health_check_recv_context")
 
     @property
     @pulumi.getter(name="healthCheckSendContext")
     def health_check_send_context(self) -> str:
+        """
+        It represents the content of the request sent by the health check.
+        """
         return pulumi.get(self, "health_check_send_context")
 
     @property
     @pulumi.getter(name="healthCheckSwitch")
     def health_check_switch(self) -> bool:
+        """
+        Indicates whether health check is enabled.
+        """
         return pulumi.get(self, "health_check_switch")
 
     @property
     @pulumi.getter(name="healthCheckTimeOut")
     def health_check_time_out(self) -> int:
+        """
+        Response timeout of health check. The value range is 2-60 sec, and the default is `2` sec. Response timeout needs to be less than check interval. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration.
+        """
         return pulumi.get(self, "health_check_time_out")
 
     @property
     @pulumi.getter(name="healthCheckType")
     def health_check_type(self) -> str:
+        """
+        Protocol used for health check.
+        """
         return pulumi.get(self, "health_check_type")
 
     @property
     @pulumi.getter(name="healthCheckUnhealthNum")
     def health_check_unhealth_num(self) -> int:
+        """
+        Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        """
         return pulumi.get(self, "health_check_unhealth_num")
 
     @property
     @pulumi.getter(name="listenerId")
     def listener_id(self) -> str:
+        """
+        Id of the listener to be queried.
+        """
         return pulumi.get(self, "listener_id")
 
     @property
     @pulumi.getter(name="listenerName")
     def listener_name(self) -> str:
+        """
+        Name of the CLB listener.
+        """
         return pulumi.get(self, "listener_name")
 
     @property
     @pulumi.getter
     def port(self) -> int:
+        """
+        Port of the CLB listener.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Type of protocol within the listener, and available values are `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter
     def scheduler(self) -> str:
+        """
+        Scheduling method of the CLB listener, and available values are `WRR` and `LEAST_CONN`. The default is `WRR`. NOTES: The listener of 'HTTP' and `HTTPS` protocol additionally supports the `IP HASH` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        """
         return pulumi.get(self, "scheduler")
 
     @property
     @pulumi.getter(name="sessionExpireTime")
     def session_expire_time(self) -> int:
+        """
+        Time of session persistence within the CLB listener. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        """
         return pulumi.get(self, "session_expire_time")
 
     @property
     @pulumi.getter(name="sniSwitch")
     def sni_switch(self) -> bool:
+        """
+        Indicates whether SNI is enabled. NOTES: Only supported by `HTTPS` protocol.
+        """
         return pulumi.get(self, "sni_switch")
 
 
 @pulumi.output_type
-class RedirectionsRedirectionListResult(dict):
+class GetRedirectionsRedirectionListResult(dict):
     def __init__(__self__, *,
                  clb_id: str,
                  source_listener_id: str,
                  source_rule_id: str,
                  target_listener_id: str,
                  target_rule_id: str):
+        """
+        :param str clb_id: ID of the CLB to be queried.
+        :param str source_listener_id: ID of source listener to be queried.
+        :param str source_rule_id: Rule ID of source listener to be queried.
+        :param str target_listener_id: ID of target listener to be queried.
+        :param str target_rule_id: Rule ID of target listener to be queried.
+        """
         pulumi.set(__self__, "clb_id", clb_id)
         pulumi.set(__self__, "source_listener_id", source_listener_id)
         pulumi.set(__self__, "source_rule_id", source_rule_id)
@@ -571,215 +1160,65 @@ class RedirectionsRedirectionListResult(dict):
     @property
     @pulumi.getter(name="clbId")
     def clb_id(self) -> str:
+        """
+        ID of the CLB to be queried.
+        """
         return pulumi.get(self, "clb_id")
 
     @property
     @pulumi.getter(name="sourceListenerId")
     def source_listener_id(self) -> str:
+        """
+        ID of source listener to be queried.
+        """
         return pulumi.get(self, "source_listener_id")
 
     @property
     @pulumi.getter(name="sourceRuleId")
     def source_rule_id(self) -> str:
+        """
+        Rule ID of source listener to be queried.
+        """
         return pulumi.get(self, "source_rule_id")
 
     @property
     @pulumi.getter(name="targetListenerId")
     def target_listener_id(self) -> str:
+        """
+        ID of target listener to be queried.
+        """
         return pulumi.get(self, "target_listener_id")
 
     @property
     @pulumi.getter(name="targetRuleId")
     def target_rule_id(self) -> str:
+        """
+        Rule ID of target listener to be queried.
+        """
         return pulumi.get(self, "target_rule_id")
 
 
 @pulumi.output_type
-class ServerAttachmentTarget(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "eniIp":
-            suggest = "eni_ip"
-        elif key == "instanceId":
-            suggest = "instance_id"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ServerAttachmentTarget. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        ServerAttachmentTarget.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        ServerAttachmentTarget.__key_warning(key)
-        return super().get(key, default)
-
+class GetTargetGroupsListResult(dict):
     def __init__(__self__, *,
-                 port: int,
-                 eni_ip: Optional[str] = None,
-                 instance_id: Optional[str] = None,
-                 weight: Optional[int] = None):
-        pulumi.set(__self__, "port", port)
-        if eni_ip is not None:
-            pulumi.set(__self__, "eni_ip", eni_ip)
-        if instance_id is not None:
-            pulumi.set(__self__, "instance_id", instance_id)
-        if weight is not None:
-            pulumi.set(__self__, "weight", weight)
-
-    @property
-    @pulumi.getter
-    def port(self) -> int:
-        return pulumi.get(self, "port")
-
-    @property
-    @pulumi.getter(name="eniIp")
-    def eni_ip(self) -> Optional[str]:
-        return pulumi.get(self, "eni_ip")
-
-    @property
-    @pulumi.getter(name="instanceId")
-    def instance_id(self) -> Optional[str]:
-        return pulumi.get(self, "instance_id")
-
-    @property
-    @pulumi.getter
-    def weight(self) -> Optional[int]:
-        return pulumi.get(self, "weight")
-
-
-@pulumi.output_type
-class ServerAttachmentsAttachmentListResult(dict):
-    def __init__(__self__, *,
-                 clb_id: str,
-                 listener_id: str,
-                 protocol_type: str,
-                 rule_id: str,
-                 targets: Sequence['outputs.ServerAttachmentsAttachmentListTargetResult']):
-        pulumi.set(__self__, "clb_id", clb_id)
-        pulumi.set(__self__, "listener_id", listener_id)
-        pulumi.set(__self__, "protocol_type", protocol_type)
-        pulumi.set(__self__, "rule_id", rule_id)
-        pulumi.set(__self__, "targets", targets)
-
-    @property
-    @pulumi.getter(name="clbId")
-    def clb_id(self) -> str:
-        return pulumi.get(self, "clb_id")
-
-    @property
-    @pulumi.getter(name="listenerId")
-    def listener_id(self) -> str:
-        return pulumi.get(self, "listener_id")
-
-    @property
-    @pulumi.getter(name="protocolType")
-    def protocol_type(self) -> str:
-        return pulumi.get(self, "protocol_type")
-
-    @property
-    @pulumi.getter(name="ruleId")
-    def rule_id(self) -> str:
-        return pulumi.get(self, "rule_id")
-
-    @property
-    @pulumi.getter
-    def targets(self) -> Sequence['outputs.ServerAttachmentsAttachmentListTargetResult']:
-        return pulumi.get(self, "targets")
-
-
-@pulumi.output_type
-class ServerAttachmentsAttachmentListTargetResult(dict):
-    def __init__(__self__, *,
-                 instance_id: str,
-                 port: int,
-                 weight: int):
-        pulumi.set(__self__, "instance_id", instance_id)
-        pulumi.set(__self__, "port", port)
-        pulumi.set(__self__, "weight", weight)
-
-    @property
-    @pulumi.getter(name="instanceId")
-    def instance_id(self) -> str:
-        return pulumi.get(self, "instance_id")
-
-    @property
-    @pulumi.getter
-    def port(self) -> int:
-        return pulumi.get(self, "port")
-
-    @property
-    @pulumi.getter
-    def weight(self) -> int:
-        return pulumi.get(self, "weight")
-
-
-@pulumi.output_type
-class TargetGroupTargetGroupInstance(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "bindIp":
-            suggest = "bind_ip"
-        elif key == "newPort":
-            suggest = "new_port"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in TargetGroupTargetGroupInstance. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        TargetGroupTargetGroupInstance.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        TargetGroupTargetGroupInstance.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 bind_ip: str,
-                 port: int,
-                 new_port: Optional[int] = None,
-                 weight: Optional[int] = None):
-        pulumi.set(__self__, "bind_ip", bind_ip)
-        pulumi.set(__self__, "port", port)
-        if new_port is not None:
-            pulumi.set(__self__, "new_port", new_port)
-        if weight is not None:
-            pulumi.set(__self__, "weight", weight)
-
-    @property
-    @pulumi.getter(name="bindIp")
-    def bind_ip(self) -> str:
-        return pulumi.get(self, "bind_ip")
-
-    @property
-    @pulumi.getter
-    def port(self) -> int:
-        return pulumi.get(self, "port")
-
-    @property
-    @pulumi.getter(name="newPort")
-    def new_port(self) -> Optional[int]:
-        return pulumi.get(self, "new_port")
-
-    @property
-    @pulumi.getter
-    def weight(self) -> Optional[int]:
-        return pulumi.get(self, "weight")
-
-
-@pulumi.output_type
-class TargetGroupsListResult(dict):
-    def __init__(__self__, *,
-                 associated_rule_lists: Sequence['outputs.TargetGroupsListAssociatedRuleListResult'],
+                 associated_rule_lists: Sequence['outputs.GetTargetGroupsListAssociatedRuleListResult'],
                  create_time: str,
                  port: int,
                  target_group_id: str,
-                 target_group_instance_lists: Sequence['outputs.TargetGroupsListTargetGroupInstanceListResult'],
+                 target_group_instance_lists: Sequence['outputs.GetTargetGroupsListTargetGroupInstanceListResult'],
                  target_group_name: str,
                  update_time: str,
                  vpc_id: str):
+        """
+        :param Sequence['GetTargetGroupsListAssociatedRuleListArgs'] associated_rule_lists: List of associated rules.
+        :param str create_time: Creation time of the target group.
+        :param int port: Port of target group.
+        :param str target_group_id: ID of Target group. Mutually exclusive with `vpc_id` and `target_group_name`. `target_group_id` is preferred.
+        :param Sequence['GetTargetGroupsListTargetGroupInstanceListArgs'] target_group_instance_lists: List of backend servers bound to the target group.
+        :param str target_group_name: Name of target group. Mutually exclusive with `target_group_id`. `target_group_id` is preferred.
+        :param str update_time: Modification time of the target group.
+        :param str vpc_id: Target group VPC ID. Mutually exclusive with `target_group_id`. `target_group_id` is preferred.
+        """
         pulumi.set(__self__, "associated_rule_lists", associated_rule_lists)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "port", port)
@@ -791,47 +1230,71 @@ class TargetGroupsListResult(dict):
 
     @property
     @pulumi.getter(name="associatedRuleLists")
-    def associated_rule_lists(self) -> Sequence['outputs.TargetGroupsListAssociatedRuleListResult']:
+    def associated_rule_lists(self) -> Sequence['outputs.GetTargetGroupsListAssociatedRuleListResult']:
+        """
+        List of associated rules.
+        """
         return pulumi.get(self, "associated_rule_lists")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Creation time of the target group.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def port(self) -> int:
+        """
+        Port of target group.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter(name="targetGroupId")
     def target_group_id(self) -> str:
+        """
+        ID of Target group. Mutually exclusive with `vpc_id` and `target_group_name`. `target_group_id` is preferred.
+        """
         return pulumi.get(self, "target_group_id")
 
     @property
     @pulumi.getter(name="targetGroupInstanceLists")
-    def target_group_instance_lists(self) -> Sequence['outputs.TargetGroupsListTargetGroupInstanceListResult']:
+    def target_group_instance_lists(self) -> Sequence['outputs.GetTargetGroupsListTargetGroupInstanceListResult']:
+        """
+        List of backend servers bound to the target group.
+        """
         return pulumi.get(self, "target_group_instance_lists")
 
     @property
     @pulumi.getter(name="targetGroupName")
     def target_group_name(self) -> str:
+        """
+        Name of target group. Mutually exclusive with `target_group_id`. `target_group_id` is preferred.
+        """
         return pulumi.get(self, "target_group_name")
 
     @property
     @pulumi.getter(name="updateTime")
     def update_time(self) -> str:
+        """
+        Modification time of the target group.
+        """
         return pulumi.get(self, "update_time")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        Target group VPC ID. Mutually exclusive with `target_group_id`. `target_group_id` is preferred.
+        """
         return pulumi.get(self, "vpc_id")
 
 
 @pulumi.output_type
-class TargetGroupsListAssociatedRuleListResult(dict):
+class GetTargetGroupsListAssociatedRuleListResult(dict):
     def __init__(__self__, *,
                  domain: str,
                  listener_id: str,
@@ -842,6 +1305,17 @@ class TargetGroupsListAssociatedRuleListResult(dict):
                  location_id: str,
                  protocol: str,
                  url: str):
+        """
+        :param str domain: Forwarding rule domain.
+        :param str listener_id: Listener ID.
+        :param str listener_name: Listener name.
+        :param int listener_port: Listener port.
+        :param str load_balancer_id: Load balance ID.
+        :param str load_balancer_name: Load balance name.
+        :param str location_id: Forwarding rule ID.
+        :param str protocol: Listener protocol type.
+        :param str url: Forwarding rule URL.
+        """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "listener_id", listener_id)
         pulumi.set(__self__, "listener_name", listener_name)
@@ -855,51 +1329,78 @@ class TargetGroupsListAssociatedRuleListResult(dict):
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        Forwarding rule domain.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter(name="listenerId")
     def listener_id(self) -> str:
+        """
+        Listener ID.
+        """
         return pulumi.get(self, "listener_id")
 
     @property
     @pulumi.getter(name="listenerName")
     def listener_name(self) -> str:
+        """
+        Listener name.
+        """
         return pulumi.get(self, "listener_name")
 
     @property
     @pulumi.getter(name="listenerPort")
     def listener_port(self) -> int:
+        """
+        Listener port.
+        """
         return pulumi.get(self, "listener_port")
 
     @property
     @pulumi.getter(name="loadBalancerId")
     def load_balancer_id(self) -> str:
+        """
+        Load balance ID.
+        """
         return pulumi.get(self, "load_balancer_id")
 
     @property
     @pulumi.getter(name="loadBalancerName")
     def load_balancer_name(self) -> str:
+        """
+        Load balance name.
+        """
         return pulumi.get(self, "load_balancer_name")
 
     @property
     @pulumi.getter(name="locationId")
     def location_id(self) -> str:
+        """
+        Forwarding rule ID.
+        """
         return pulumi.get(self, "location_id")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Listener protocol type.
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter
     def url(self) -> str:
+        """
+        Forwarding rule URL.
+        """
         return pulumi.get(self, "url")
 
 
 @pulumi.output_type
-class TargetGroupsListTargetGroupInstanceListResult(dict):
+class GetTargetGroupsListTargetGroupInstanceListResult(dict):
     def __init__(__self__, *,
                  eni_id: str,
                  instance_id: str,
@@ -910,6 +1411,17 @@ class TargetGroupsListTargetGroupInstanceListResult(dict):
                  server_port: int,
                  server_type: str,
                  weight: int):
+        """
+        :param str eni_id: ID of Elastic Network Interface.
+        :param str instance_id: ID of backend service.
+        :param str instance_name: The instance name of the backend service.
+        :param Sequence[Any] private_ip_addresses: Intranet IP list of back-end services.
+        :param Sequence[Any] public_ip_addresses: List of external network IP of back-end services.
+        :param str registered_time: The time the backend service was bound.
+        :param int server_port: Port of backend service.
+        :param str server_type: Type of backend service.
+        :param int weight: Forwarding weight of back-end services.
+        """
         pulumi.set(__self__, "eni_id", eni_id)
         pulumi.set(__self__, "instance_id", instance_id)
         pulumi.set(__self__, "instance_name", instance_name)
@@ -923,46 +1435,73 @@ class TargetGroupsListTargetGroupInstanceListResult(dict):
     @property
     @pulumi.getter(name="eniId")
     def eni_id(self) -> str:
+        """
+        ID of Elastic Network Interface.
+        """
         return pulumi.get(self, "eni_id")
 
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> str:
+        """
+        ID of backend service.
+        """
         return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter(name="instanceName")
     def instance_name(self) -> str:
+        """
+        The instance name of the backend service.
+        """
         return pulumi.get(self, "instance_name")
 
     @property
     @pulumi.getter(name="privateIpAddresses")
     def private_ip_addresses(self) -> Sequence[Any]:
+        """
+        Intranet IP list of back-end services.
+        """
         return pulumi.get(self, "private_ip_addresses")
 
     @property
     @pulumi.getter(name="publicIpAddresses")
     def public_ip_addresses(self) -> Sequence[Any]:
+        """
+        List of external network IP of back-end services.
+        """
         return pulumi.get(self, "public_ip_addresses")
 
     @property
     @pulumi.getter(name="registeredTime")
     def registered_time(self) -> str:
+        """
+        The time the backend service was bound.
+        """
         return pulumi.get(self, "registered_time")
 
     @property
     @pulumi.getter(name="serverPort")
     def server_port(self) -> int:
+        """
+        Port of backend service.
+        """
         return pulumi.get(self, "server_port")
 
     @property
     @pulumi.getter(name="serverType")
     def server_type(self) -> str:
+        """
+        Type of backend service.
+        """
         return pulumi.get(self, "server_type")
 
     @property
     @pulumi.getter
     def weight(self) -> int:
+        """
+        Forwarding weight of back-end services.
+        """
         return pulumi.get(self, "weight")
 
 

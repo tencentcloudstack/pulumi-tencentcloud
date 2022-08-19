@@ -11,17 +11,76 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides an eip resource associated with other resource like CVM, ENI and CLB.
+//
+// > **NOTE:** Please DO NOT define `allocatePublicIp` in `Instance.Instance` resource when using `Eip.Association`.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Eip.NewAssociation(ctx, "foo", &Eip.AssociationArgs{
+// 			EipId:      pulumi.String("eip-xxxxxx"),
+// 			InstanceId: pulumi.String("ins-xxxxxx"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// or
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Eip.NewAssociation(ctx, "bar", &Eip.AssociationArgs{
+// 			EipId:              pulumi.String("eip-xxxxxx"),
+// 			NetworkInterfaceId: pulumi.String("eni-xxxxxx"),
+// 			PrivateIp:          pulumi.String("10.0.1.22"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Eip association can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-34jwj3
+// ```
 type Association struct {
 	pulumi.CustomResourceState
 
 	// The ID of EIP.
 	EipId pulumi.StringOutput `pulumi:"eipId"`
-	// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-	// `private_ip fields`.
+	// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `networkInterfaceId` and `privateIp fields`.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
-	// Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
+	// Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instanceId`.
 	NetworkInterfaceId pulumi.StringOutput `pulumi:"networkInterfaceId"`
-	// Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
+	// Indicates an IP belongs to the `networkInterfaceId`. This field is conflict with `instanceId`.
 	PrivateIp pulumi.StringOutput `pulumi:"privateIp"`
 }
 
@@ -59,24 +118,22 @@ func GetAssociation(ctx *pulumi.Context,
 type associationState struct {
 	// The ID of EIP.
 	EipId *string `pulumi:"eipId"`
-	// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-	// `private_ip fields`.
+	// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `networkInterfaceId` and `privateIp fields`.
 	InstanceId *string `pulumi:"instanceId"`
-	// Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
+	// Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instanceId`.
 	NetworkInterfaceId *string `pulumi:"networkInterfaceId"`
-	// Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
+	// Indicates an IP belongs to the `networkInterfaceId`. This field is conflict with `instanceId`.
 	PrivateIp *string `pulumi:"privateIp"`
 }
 
 type AssociationState struct {
 	// The ID of EIP.
 	EipId pulumi.StringPtrInput
-	// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-	// `private_ip fields`.
+	// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `networkInterfaceId` and `privateIp fields`.
 	InstanceId pulumi.StringPtrInput
-	// Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
+	// Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instanceId`.
 	NetworkInterfaceId pulumi.StringPtrInput
-	// Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
+	// Indicates an IP belongs to the `networkInterfaceId`. This field is conflict with `instanceId`.
 	PrivateIp pulumi.StringPtrInput
 }
 
@@ -87,12 +144,11 @@ func (AssociationState) ElementType() reflect.Type {
 type associationArgs struct {
 	// The ID of EIP.
 	EipId string `pulumi:"eipId"`
-	// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-	// `private_ip fields`.
+	// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `networkInterfaceId` and `privateIp fields`.
 	InstanceId *string `pulumi:"instanceId"`
-	// Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
+	// Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instanceId`.
 	NetworkInterfaceId *string `pulumi:"networkInterfaceId"`
-	// Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
+	// Indicates an IP belongs to the `networkInterfaceId`. This field is conflict with `instanceId`.
 	PrivateIp *string `pulumi:"privateIp"`
 }
 
@@ -100,12 +156,11 @@ type associationArgs struct {
 type AssociationArgs struct {
 	// The ID of EIP.
 	EipId pulumi.StringInput
-	// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-	// `private_ip fields`.
+	// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `networkInterfaceId` and `privateIp fields`.
 	InstanceId pulumi.StringPtrInput
-	// Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
+	// Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instanceId`.
 	NetworkInterfaceId pulumi.StringPtrInput
-	// Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
+	// Indicates an IP belongs to the `networkInterfaceId`. This field is conflict with `instanceId`.
 	PrivateIp pulumi.StringPtrInput
 }
 
@@ -201,18 +256,17 @@ func (o AssociationOutput) EipId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Association) pulumi.StringOutput { return v.EipId }).(pulumi.StringOutput)
 }
 
-// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `network_interface_id` and
-// `private_ip fields`.
+// The CVM or CLB instance id going to bind with the EIP. This field is conflict with `networkInterfaceId` and `privateIp fields`.
 func (o AssociationOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Association) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
 }
 
-// Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instance_id`.
+// Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instanceId`.
 func (o AssociationOutput) NetworkInterfaceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Association) pulumi.StringOutput { return v.NetworkInterfaceId }).(pulumi.StringOutput)
 }
 
-// Indicates an IP belongs to the `network_interface_id`. This field is conflict with `instance_id`.
+// Indicates an IP belongs to the `networkInterfaceId`. This field is conflict with `instanceId`.
 func (o AssociationOutput) PrivateIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *Association) pulumi.StringOutput { return v.PrivateIp }).(pulumi.StringOutput)
 }

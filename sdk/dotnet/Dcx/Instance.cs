@@ -9,6 +9,56 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dcx
 {
+    /// <summary>
+    /// Provides a resource to creating dedicated tunnels instances.
+    /// 
+    /// &gt; **NOTE:** 1. ID of the DC is queried, can only apply for this resource offline.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var dcId = config.Get("dcId") ?? "dc-kax48sg7";
+    ///         var dcgId = config.Get("dcgId") ?? "dcg-dmbhf7jf";
+    ///         var vpcId = config.Get("vpcId") ?? "vpc-4h9v4mo3";
+    ///         var bgpMain = new Tencentcloud.Dcx.Instance("bgpMain", new Tencentcloud.Dcx.InstanceArgs
+    ///         {
+    ///             Bandwidth = 900,
+    ///             DcId = dcId,
+    ///             DcgId = dcgId,
+    ///             NetworkType = "VPC",
+    ///             RouteType = "BGP",
+    ///             Vlan = 306,
+    ///             VpcId = vpcId,
+    ///         });
+    ///         var staticMain = new Tencentcloud.Dcx.Instance("staticMain", new Tencentcloud.Dcx.InstanceArgs
+    ///         {
+    ///             Bandwidth = 900,
+    ///             DcId = dcId,
+    ///             DcgId = dcgId,
+    ///             NetworkType = "VPC",
+    ///             RouteType = "STATIC",
+    ///             Vlan = 301,
+    ///             VpcId = vpcId,
+    ///             RouteFilterPrefixes = 
+    ///             {
+    ///                 "10.10.10.101/32",
+    ///             },
+    ///             TencentAddress = "100.93.46.1/30",
+    ///             CustomerAddress = "100.93.46.2/30",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcx/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
@@ -67,8 +117,7 @@ namespace Pulumi.Tencentcloud.Dcx
         public Output<string?> NetworkType { get; private set; } = null!;
 
         /// <summary>
-        /// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-        /// field within BGP.
+        /// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         /// </summary>
         [Output("routeFilterPrefixes")]
         public Output<ImmutableArray<string>> RouteFilterPrefixes { get; private set; } = null!;
@@ -80,8 +129,7 @@ namespace Pulumi.Tencentcloud.Dcx
         public Output<string?> RouteType { get; private set; } = null!;
 
         /// <summary>
-        /// State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`,
-        /// `COMFIRMING` and `REJECTED`.
+        /// State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
         /// </summary>
         [Output("state")]
         public Output<string> State { get; private set; } = null!;
@@ -93,8 +141,7 @@ namespace Pulumi.Tencentcloud.Dcx
         public Output<string> TencentAddress { get; private set; } = null!;
 
         /// <summary>
-        /// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-        /// physical connect.
+        /// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
         /// </summary>
         [Output("vlan")]
         public Output<int?> Vlan { get; private set; } = null!;
@@ -203,8 +250,7 @@ namespace Pulumi.Tencentcloud.Dcx
         private InputList<string>? _routeFilterPrefixes;
 
         /// <summary>
-        /// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-        /// field within BGP.
+        /// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         /// </summary>
         public InputList<string> RouteFilterPrefixes
         {
@@ -225,8 +271,7 @@ namespace Pulumi.Tencentcloud.Dcx
         public Input<string>? TencentAddress { get; set; }
 
         /// <summary>
-        /// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-        /// physical connect.
+        /// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
         /// </summary>
         [Input("vlan")]
         public Input<int>? Vlan { get; set; }
@@ -302,8 +347,7 @@ namespace Pulumi.Tencentcloud.Dcx
         private InputList<string>? _routeFilterPrefixes;
 
         /// <summary>
-        /// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-        /// field within BGP.
+        /// Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         /// </summary>
         public InputList<string> RouteFilterPrefixes
         {
@@ -318,8 +362,7 @@ namespace Pulumi.Tencentcloud.Dcx
         public Input<string>? RouteType { get; set; }
 
         /// <summary>
-        /// State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`,
-        /// `COMFIRMING` and `REJECTED`.
+        /// State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
         /// </summary>
         [Input("state")]
         public Input<string>? State { get; set; }
@@ -331,8 +374,7 @@ namespace Pulumi.Tencentcloud.Dcx
         public Input<string>? TencentAddress { get; set; }
 
         /// <summary>
-        /// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-        /// physical connect.
+        /// Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
         /// </summary>
         [Input("vlan")]
         public Input<int>? Vlan { get; set; }

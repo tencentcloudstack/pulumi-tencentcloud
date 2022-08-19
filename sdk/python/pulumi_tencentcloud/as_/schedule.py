@@ -30,8 +30,7 @@ class ScheduleArgs:
         :param pulumi.Input[str] schedule_action_name: The name of this scaling action.
         :param pulumi.Input[str] start_time: The time for this action to start, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
         :param pulumi.Input[str] end_time: The time for this action to end, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
-        :param pulumi.Input[str] recurrence: The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-               format. And this argument should be set with end_time together.
+        :param pulumi.Input[str] recurrence: The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.
         """
         pulumi.set(__self__, "desired_capacity", desired_capacity)
         pulumi.set(__self__, "max_size", max_size)
@@ -132,8 +131,7 @@ class ScheduleArgs:
     @pulumi.getter
     def recurrence(self) -> Optional[pulumi.Input[str]]:
         """
-        The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-        format. And this argument should be set with end_time together.
+        The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.
         """
         return pulumi.get(self, "recurrence")
 
@@ -159,8 +157,7 @@ class _ScheduleState:
         :param pulumi.Input[str] end_time: The time for this action to end, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
         :param pulumi.Input[int] max_size: The maximum size for the Auto Scaling group.
         :param pulumi.Input[int] min_size: The minimum size for the Auto Scaling group.
-        :param pulumi.Input[str] recurrence: The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-               format. And this argument should be set with end_time together.
+        :param pulumi.Input[str] recurrence: The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
         :param pulumi.Input[str] schedule_action_name: The name of this scaling action.
         :param pulumi.Input[str] start_time: The time for this action to start, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
@@ -234,8 +231,7 @@ class _ScheduleState:
     @pulumi.getter
     def recurrence(self) -> Optional[pulumi.Input[str]]:
         """
-        The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-        format. And this argument should be set with end_time together.
+        The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.
         """
         return pulumi.get(self, "recurrence")
 
@@ -295,15 +291,32 @@ class Schedule(pulumi.CustomResource):
                  start_time: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Schedule resource with the given unique name, props, and options.
+        Provides a resource for an AS (Auto scaling) schedule.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        schedule = tencentcloud.as_.Schedule("schedule",
+            desired_capacity=0,
+            end_time="2019-12-01T00:00:00+08:00",
+            max_size=10,
+            min_size=0,
+            recurrence="0 0 * * *",
+            scaling_group_id="sg-12af45",
+            schedule_action_name="tf-as-schedule",
+            start_time="2019-01-01T00:00:00+08:00")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] desired_capacity: The desired number of CVM instances that should be running in the group.
         :param pulumi.Input[str] end_time: The time for this action to end, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
         :param pulumi.Input[int] max_size: The maximum size for the Auto Scaling group.
         :param pulumi.Input[int] min_size: The minimum size for the Auto Scaling group.
-        :param pulumi.Input[str] recurrence: The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-               format. And this argument should be set with end_time together.
+        :param pulumi.Input[str] recurrence: The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
         :param pulumi.Input[str] schedule_action_name: The name of this scaling action.
         :param pulumi.Input[str] start_time: The time for this action to start, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
@@ -315,7 +328,25 @@ class Schedule(pulumi.CustomResource):
                  args: ScheduleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Schedule resource with the given unique name, props, and options.
+        Provides a resource for an AS (Auto scaling) schedule.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        schedule = tencentcloud.as_.Schedule("schedule",
+            desired_capacity=0,
+            end_time="2019-12-01T00:00:00+08:00",
+            max_size=10,
+            min_size=0,
+            recurrence="0 0 * * *",
+            scaling_group_id="sg-12af45",
+            schedule_action_name="tf-as-schedule",
+            start_time="2019-01-01T00:00:00+08:00")
+        ```
+
         :param str resource_name: The name of the resource.
         :param ScheduleArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -400,8 +431,7 @@ class Schedule(pulumi.CustomResource):
         :param pulumi.Input[str] end_time: The time for this action to end, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
         :param pulumi.Input[int] max_size: The maximum size for the Auto Scaling group.
         :param pulumi.Input[int] min_size: The minimum size for the Auto Scaling group.
-        :param pulumi.Input[str] recurrence: The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-               format. And this argument should be set with end_time together.
+        :param pulumi.Input[str] recurrence: The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
         :param pulumi.Input[str] schedule_action_name: The name of this scaling action.
         :param pulumi.Input[str] start_time: The time for this action to start, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
@@ -456,8 +486,7 @@ class Schedule(pulumi.CustomResource):
     @pulumi.getter
     def recurrence(self) -> pulumi.Output[Optional[str]]:
         """
-        The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-        format. And this argument should be set with end_time together.
+        The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with end_time together.
         """
         return pulumi.get(self, "recurrence")
 

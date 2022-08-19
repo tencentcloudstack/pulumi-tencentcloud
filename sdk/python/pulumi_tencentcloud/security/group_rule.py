@@ -33,10 +33,8 @@ class GroupRuleArgs:
         :param pulumi.Input['GroupRuleAddressTemplateArgs'] address_template: ID of the address template, and confilicts with `source_sgid` and `cidr_ip`.
         :param pulumi.Input[str] cidr_ip: An IP address network or segment, and conflict with `source_sgid` and `address_template`.
         :param pulumi.Input[str] description: Description of the security group rule.
-        :param pulumi.Input[str] ip_protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-               `protocol_template`.
-        :param pulumi.Input[str] port_range: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-               all ports, and confilicts with `protocol_template`.
+        :param pulumi.Input[str] ip_protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
+        :param pulumi.Input[str] port_range: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         :param pulumi.Input['GroupRuleProtocolTemplateArgs'] protocol_template: ID of the address template, and conflict with `ip_protocol`, `port_range`.
         :param pulumi.Input[str] source_sgid: ID of the nested security group, and conflicts with `cidr_ip` and `address_template`.
         """
@@ -134,8 +132,7 @@ class GroupRuleArgs:
     @pulumi.getter(name="ipProtocol")
     def ip_protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-        `protocol_template`.
+        Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
         """
         return pulumi.get(self, "ip_protocol")
 
@@ -147,8 +144,7 @@ class GroupRuleArgs:
     @pulumi.getter(name="portRange")
     def port_range(self) -> Optional[pulumi.Input[str]]:
         """
-        Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-        all ports, and confilicts with `protocol_template`.
+        Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         """
         return pulumi.get(self, "port_range")
 
@@ -199,11 +195,9 @@ class _GroupRuleState:
         :param pulumi.Input['GroupRuleAddressTemplateArgs'] address_template: ID of the address template, and confilicts with `source_sgid` and `cidr_ip`.
         :param pulumi.Input[str] cidr_ip: An IP address network or segment, and conflict with `source_sgid` and `address_template`.
         :param pulumi.Input[str] description: Description of the security group rule.
-        :param pulumi.Input[str] ip_protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-               `protocol_template`.
+        :param pulumi.Input[str] ip_protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
         :param pulumi.Input[str] policy: Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
-        :param pulumi.Input[str] port_range: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-               all ports, and confilicts with `protocol_template`.
+        :param pulumi.Input[str] port_range: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         :param pulumi.Input['GroupRuleProtocolTemplateArgs'] protocol_template: ID of the address template, and conflict with `ip_protocol`, `port_range`.
         :param pulumi.Input[str] security_group_id: ID of the security group to be queried.
         :param pulumi.Input[str] source_sgid: ID of the nested security group, and conflicts with `cidr_ip` and `address_template`.
@@ -270,8 +264,7 @@ class _GroupRuleState:
     @pulumi.getter(name="ipProtocol")
     def ip_protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-        `protocol_template`.
+        Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
         """
         return pulumi.get(self, "ip_protocol")
 
@@ -295,8 +288,7 @@ class _GroupRuleState:
     @pulumi.getter(name="portRange")
     def port_range(self) -> Optional[pulumi.Input[str]]:
         """
-        Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-        all ports, and confilicts with `protocol_template`.
+        Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         """
         return pulumi.get(self, "port_range")
 
@@ -370,17 +362,59 @@ class GroupRule(pulumi.CustomResource):
                  type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a GroupRule resource with the given unique name, props, and options.
+        Provides a resource to create security group rule.
+
+        ## Example Usage
+
+        Source is CIDR ip
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        sglab1_group = tencentcloud.security.Group("sglab1Group",
+            description="favourite sg_1",
+            project_id=0)
+        sglab1_group_rule = tencentcloud.security.GroupRule("sglab1GroupRule",
+            security_group_id=sglab1_group.id,
+            type="ingress",
+            cidr_ip="10.0.0.0/16",
+            ip_protocol="TCP",
+            port_range="80",
+            policy="ACCEPT",
+            description="favourite sg rule_1")
+        ```
+
+        Source is a security group id
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        sglab2_group = tencentcloud.security.Group("sglab2Group",
+            description="favourite sg_2",
+            project_id=0)
+        sglab3 = tencentcloud.security.Group("sglab3",
+            description="favourite sg_3",
+            project_id=0)
+        sglab2_group_rule = tencentcloud.security.GroupRule("sglab2GroupRule",
+            security_group_id=sglab2_group.id,
+            type="ingress",
+            ip_protocol="TCP",
+            port_range="80",
+            policy="ACCEPT",
+            source_sgid=sglab3.id,
+            description="favourite sg rule_2")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[pulumi.InputType['GroupRuleAddressTemplateArgs']] address_template: ID of the address template, and confilicts with `source_sgid` and `cidr_ip`.
         :param pulumi.Input[str] cidr_ip: An IP address network or segment, and conflict with `source_sgid` and `address_template`.
         :param pulumi.Input[str] description: Description of the security group rule.
-        :param pulumi.Input[str] ip_protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-               `protocol_template`.
+        :param pulumi.Input[str] ip_protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
         :param pulumi.Input[str] policy: Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
-        :param pulumi.Input[str] port_range: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-               all ports, and confilicts with `protocol_template`.
+        :param pulumi.Input[str] port_range: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         :param pulumi.Input[pulumi.InputType['GroupRuleProtocolTemplateArgs']] protocol_template: ID of the address template, and conflict with `ip_protocol`, `port_range`.
         :param pulumi.Input[str] security_group_id: ID of the security group to be queried.
         :param pulumi.Input[str] source_sgid: ID of the nested security group, and conflicts with `cidr_ip` and `address_template`.
@@ -393,7 +427,51 @@ class GroupRule(pulumi.CustomResource):
                  args: GroupRuleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a GroupRule resource with the given unique name, props, and options.
+        Provides a resource to create security group rule.
+
+        ## Example Usage
+
+        Source is CIDR ip
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        sglab1_group = tencentcloud.security.Group("sglab1Group",
+            description="favourite sg_1",
+            project_id=0)
+        sglab1_group_rule = tencentcloud.security.GroupRule("sglab1GroupRule",
+            security_group_id=sglab1_group.id,
+            type="ingress",
+            cidr_ip="10.0.0.0/16",
+            ip_protocol="TCP",
+            port_range="80",
+            policy="ACCEPT",
+            description="favourite sg rule_1")
+        ```
+
+        Source is a security group id
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        sglab2_group = tencentcloud.security.Group("sglab2Group",
+            description="favourite sg_2",
+            project_id=0)
+        sglab3 = tencentcloud.security.Group("sglab3",
+            description="favourite sg_3",
+            project_id=0)
+        sglab2_group_rule = tencentcloud.security.GroupRule("sglab2GroupRule",
+            security_group_id=sglab2_group.id,
+            type="ingress",
+            ip_protocol="TCP",
+            port_range="80",
+            policy="ACCEPT",
+            source_sgid=sglab3.id,
+            description="favourite sg rule_2")
+        ```
+
         :param str resource_name: The name of the resource.
         :param GroupRuleArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -477,11 +555,9 @@ class GroupRule(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['GroupRuleAddressTemplateArgs']] address_template: ID of the address template, and confilicts with `source_sgid` and `cidr_ip`.
         :param pulumi.Input[str] cidr_ip: An IP address network or segment, and conflict with `source_sgid` and `address_template`.
         :param pulumi.Input[str] description: Description of the security group rule.
-        :param pulumi.Input[str] ip_protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-               `protocol_template`.
+        :param pulumi.Input[str] ip_protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
         :param pulumi.Input[str] policy: Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
-        :param pulumi.Input[str] port_range: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-               all ports, and confilicts with `protocol_template`.
+        :param pulumi.Input[str] port_range: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         :param pulumi.Input[pulumi.InputType['GroupRuleProtocolTemplateArgs']] protocol_template: ID of the address template, and conflict with `ip_protocol`, `port_range`.
         :param pulumi.Input[str] security_group_id: ID of the security group to be queried.
         :param pulumi.Input[str] source_sgid: ID of the nested security group, and conflicts with `cidr_ip` and `address_template`.
@@ -531,8 +607,7 @@ class GroupRule(pulumi.CustomResource):
     @pulumi.getter(name="ipProtocol")
     def ip_protocol(self) -> pulumi.Output[str]:
         """
-        Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with
-        `protocol_template`.
+        Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `protocol_template`.
         """
         return pulumi.get(self, "ip_protocol")
 
@@ -548,8 +623,7 @@ class GroupRule(pulumi.CustomResource):
     @pulumi.getter(name="portRange")
     def port_range(self) -> pulumi.Output[str]:
         """
-        Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to
-        all ports, and confilicts with `protocol_template`.
+        Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and confilicts with `protocol_template`.
         """
         return pulumi.get(self, "port_range")
 

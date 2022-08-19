@@ -228,7 +228,37 @@ class SecurityRule(pulumi.CustomResource):
                  protocol: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a SecurityRule resource with the given unique name, props, and options.
+        Provides a resource to create a security policy rule.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+            bandwidth=10,
+            concurrent=2,
+            access_region="SouthChina",
+            realserver_region="NorthChina")
+        foo_security_policy = tencentcloud.gaap.SecurityPolicy("fooSecurityPolicy",
+            proxy_id=foo_proxy.id,
+            action="ACCEPT")
+        foo_security_rule = tencentcloud.gaap.SecurityRule("fooSecurityRule",
+            policy_id=foo_security_policy.id,
+            cidr_ip="1.1.1.1",
+            action="ACCEPT",
+            protocol="TCP")
+        ```
+
+        ## Import
+
+        GAAP security rule can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/securityRule:SecurityRule tencentcloud_gaap_security_rule.foo sr-xxxxxxxx
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] action: Policy of the rule. Valid value: `ACCEPT` and `DROP`.
@@ -245,7 +275,37 @@ class SecurityRule(pulumi.CustomResource):
                  args: SecurityRuleArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a SecurityRule resource with the given unique name, props, and options.
+        Provides a resource to create a security policy rule.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+            bandwidth=10,
+            concurrent=2,
+            access_region="SouthChina",
+            realserver_region="NorthChina")
+        foo_security_policy = tencentcloud.gaap.SecurityPolicy("fooSecurityPolicy",
+            proxy_id=foo_proxy.id,
+            action="ACCEPT")
+        foo_security_rule = tencentcloud.gaap.SecurityRule("fooSecurityRule",
+            policy_id=foo_security_policy.id,
+            cidr_ip="1.1.1.1",
+            action="ACCEPT",
+            protocol="TCP")
+        ```
+
+        ## Import
+
+        GAAP security rule can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Gaap/securityRule:SecurityRule tencentcloud_gaap_security_rule.foo sr-xxxxxxxx
+        ```
+
         :param str resource_name: The name of the resource.
         :param SecurityRuleArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

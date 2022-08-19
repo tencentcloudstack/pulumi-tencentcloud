@@ -11,6 +11,67 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a VPN connection.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpn.NewConnection(ctx, "foo", &Vpn.ConnectionArgs{
+// 			CustomerGatewayId:       pulumi.String("cgw-xfqag"),
+// 			IkeDhGroupName:          pulumi.String("GROUP2"),
+// 			IkeExchangeMode:         pulumi.String("AGGRESSIVE"),
+// 			IkeLocalAddress:         pulumi.String("1.1.1.1"),
+// 			IkeLocalIdentity:        pulumi.String("ADDRESS"),
+// 			IkeProtoAuthenAlgorithm: pulumi.String("SHA"),
+// 			IkeProtoEncryAlgorithm:  pulumi.String("3DES-CBC"),
+// 			IkeRemoteAddress:        pulumi.String("2.2.2.2"),
+// 			IkeRemoteIdentity:       pulumi.String("ADDRESS"),
+// 			IkeSaLifetimeSeconds:    pulumi.Int(86401),
+// 			IpsecEncryptAlgorithm:   pulumi.String("3DES-CBC"),
+// 			IpsecIntegrityAlgorithm: pulumi.String("SHA1"),
+// 			IpsecPfsDhGroup:         pulumi.String("NULL"),
+// 			IpsecSaLifetimeSeconds:  pulumi.Int(7200),
+// 			IpsecSaLifetimeTraffic:  pulumi.Int(2570),
+// 			PreShareKey:             pulumi.String("testt"),
+// 			SecurityGroupPolicies: vpn.ConnectionSecurityGroupPolicyArray{
+// 				&vpn.ConnectionSecurityGroupPolicyArgs{
+// 					LocalCidrBlock: pulumi.String("172.16.0.0/16"),
+// 					RemoteCidrBlocks: pulumi.StringArray{
+// 						pulumi.String("2.2.2.0/26"),
+// 					},
+// 				},
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("testt"),
+// 			},
+// 			VpcId:        pulumi.String("vpc-dk8zmwuf"),
+// 			VpnGatewayId: pulumi.String("vpngw-8ccsnclt"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// VPN connection can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Vpn/connection:Connection foo vpnx-nadifg3s
+// ```
 type Connection struct {
 	pulumi.CustomResourceState
 
@@ -26,52 +87,41 @@ type Connection struct {
 	HealthCheckLocalIp pulumi.StringOutput `pulumi:"healthCheckLocalIp"`
 	// Health check peer address.
 	HealthCheckRemoteIp pulumi.StringOutput `pulumi:"healthCheckRemoteIp"`
-	// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`.
-	// Default value is `GROUP1`.
+	// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
 	IkeDhGroupName pulumi.StringPtrOutput `pulumi:"ikeDhGroupName"`
 	// Exchange mode of the IKE operation specification. Valid values: `AGGRESSIVE`, `MAIN`. Default value is `MAIN`.
 	IkeExchangeMode pulumi.StringPtrOutput `pulumi:"ikeExchangeMode"`
-	// Local address of IKE operation specification, valid when ike_local_identity is `ADDRESS`, generally the value is
-	// `public_ip_address` of the related VPN gateway.
+	// Local address of IKE operation specification, valid when ikeLocalIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related VPN gateway.
 	IkeLocalAddress pulumi.StringPtrOutput `pulumi:"ikeLocalAddress"`
 	// Local FQDN name of the IKE operation specification.
 	IkeLocalFqdnName pulumi.StringPtrOutput `pulumi:"ikeLocalFqdnName"`
 	// Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
 	IkeLocalIdentity pulumi.StringPtrOutput `pulumi:"ikeLocalIdentity"`
-	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is
-	// `MD5`.
+	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
 	IkeProtoAuthenAlgorithm pulumi.StringPtrOutput `pulumi:"ikeProtoAuthenAlgorithm"`
-	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-	// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
 	IkeProtoEncryAlgorithm pulumi.StringPtrOutput `pulumi:"ikeProtoEncryAlgorithm"`
-	// Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is
-	// `public_ip_address` of the related customer gateway.
+	// Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
 	IkeRemoteAddress pulumi.StringPtrOutput `pulumi:"ikeRemoteAddress"`
 	// Remote FQDN name of the IKE operation specification.
 	IkeRemoteFqdnName pulumi.StringPtrOutput `pulumi:"ikeRemoteFqdnName"`
 	// Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
 	IkeRemoteIdentity pulumi.StringPtrOutput `pulumi:"ikeRemoteIdentity"`
-	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is
-	// 86400 seconds.
+	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
 	IkeSaLifetimeSeconds pulumi.IntPtrOutput `pulumi:"ikeSaLifetimeSeconds"`
 	// Version of the IKE operation specification. Default value is `IKEV1`.
 	IkeVersion pulumi.StringPtrOutput `pulumi:"ikeVersion"`
-	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-	// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
 	IpsecEncryptAlgorithm pulumi.StringPtrOutput `pulumi:"ipsecEncryptAlgorithm"`
-	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is
-	// `MD5`.
+	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm pulumi.StringPtrOutput `pulumi:"ipsecIntegrityAlgorithm"`
 	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup pulumi.StringPtrOutput `pulumi:"ipsecPfsDhGroup"`
-	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is
-	// 3600 seconds.
+	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds pulumi.IntPtrOutput `pulumi:"ipsecSaLifetimeSeconds"`
-	// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is
-	// 1843200.
+	// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
 	IpsecSaLifetimeTraffic pulumi.IntPtrOutput `pulumi:"ipsecSaLifetimeTraffic"`
-	// Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpc_id`. If `is_ccn_type` is
-	// true, modification of `vpc_id` will be ignored.
+	// Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpcId`. If `isCcnType` is true, modification of `vpcId` will be ignored.
 	IsCcnType pulumi.BoolOutput `pulumi:"isCcnType"`
 	// Name of the VPN connection. The length of character is limited to 1-60.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -148,52 +198,41 @@ type connectionState struct {
 	HealthCheckLocalIp *string `pulumi:"healthCheckLocalIp"`
 	// Health check peer address.
 	HealthCheckRemoteIp *string `pulumi:"healthCheckRemoteIp"`
-	// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`.
-	// Default value is `GROUP1`.
+	// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
 	IkeDhGroupName *string `pulumi:"ikeDhGroupName"`
 	// Exchange mode of the IKE operation specification. Valid values: `AGGRESSIVE`, `MAIN`. Default value is `MAIN`.
 	IkeExchangeMode *string `pulumi:"ikeExchangeMode"`
-	// Local address of IKE operation specification, valid when ike_local_identity is `ADDRESS`, generally the value is
-	// `public_ip_address` of the related VPN gateway.
+	// Local address of IKE operation specification, valid when ikeLocalIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related VPN gateway.
 	IkeLocalAddress *string `pulumi:"ikeLocalAddress"`
 	// Local FQDN name of the IKE operation specification.
 	IkeLocalFqdnName *string `pulumi:"ikeLocalFqdnName"`
 	// Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
 	IkeLocalIdentity *string `pulumi:"ikeLocalIdentity"`
-	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is
-	// `MD5`.
+	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
 	IkeProtoAuthenAlgorithm *string `pulumi:"ikeProtoAuthenAlgorithm"`
-	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-	// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
 	IkeProtoEncryAlgorithm *string `pulumi:"ikeProtoEncryAlgorithm"`
-	// Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is
-	// `public_ip_address` of the related customer gateway.
+	// Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
 	IkeRemoteAddress *string `pulumi:"ikeRemoteAddress"`
 	// Remote FQDN name of the IKE operation specification.
 	IkeRemoteFqdnName *string `pulumi:"ikeRemoteFqdnName"`
 	// Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
 	IkeRemoteIdentity *string `pulumi:"ikeRemoteIdentity"`
-	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is
-	// 86400 seconds.
+	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
 	IkeSaLifetimeSeconds *int `pulumi:"ikeSaLifetimeSeconds"`
 	// Version of the IKE operation specification. Default value is `IKEV1`.
 	IkeVersion *string `pulumi:"ikeVersion"`
-	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-	// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
 	IpsecEncryptAlgorithm *string `pulumi:"ipsecEncryptAlgorithm"`
-	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is
-	// `MD5`.
+	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm *string `pulumi:"ipsecIntegrityAlgorithm"`
 	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup *string `pulumi:"ipsecPfsDhGroup"`
-	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is
-	// 3600 seconds.
+	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds *int `pulumi:"ipsecSaLifetimeSeconds"`
-	// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is
-	// 1843200.
+	// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
 	IpsecSaLifetimeTraffic *int `pulumi:"ipsecSaLifetimeTraffic"`
-	// Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpc_id`. If `is_ccn_type` is
-	// true, modification of `vpc_id` will be ignored.
+	// Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpcId`. If `isCcnType` is true, modification of `vpcId` will be ignored.
 	IsCcnType *bool `pulumi:"isCcnType"`
 	// Name of the VPN connection. The length of character is limited to 1-60.
 	Name *string `pulumi:"name"`
@@ -230,52 +269,41 @@ type ConnectionState struct {
 	HealthCheckLocalIp pulumi.StringPtrInput
 	// Health check peer address.
 	HealthCheckRemoteIp pulumi.StringPtrInput
-	// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`.
-	// Default value is `GROUP1`.
+	// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
 	IkeDhGroupName pulumi.StringPtrInput
 	// Exchange mode of the IKE operation specification. Valid values: `AGGRESSIVE`, `MAIN`. Default value is `MAIN`.
 	IkeExchangeMode pulumi.StringPtrInput
-	// Local address of IKE operation specification, valid when ike_local_identity is `ADDRESS`, generally the value is
-	// `public_ip_address` of the related VPN gateway.
+	// Local address of IKE operation specification, valid when ikeLocalIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related VPN gateway.
 	IkeLocalAddress pulumi.StringPtrInput
 	// Local FQDN name of the IKE operation specification.
 	IkeLocalFqdnName pulumi.StringPtrInput
 	// Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
 	IkeLocalIdentity pulumi.StringPtrInput
-	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is
-	// `MD5`.
+	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
 	IkeProtoAuthenAlgorithm pulumi.StringPtrInput
-	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-	// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
 	IkeProtoEncryAlgorithm pulumi.StringPtrInput
-	// Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is
-	// `public_ip_address` of the related customer gateway.
+	// Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
 	IkeRemoteAddress pulumi.StringPtrInput
 	// Remote FQDN name of the IKE operation specification.
 	IkeRemoteFqdnName pulumi.StringPtrInput
 	// Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
 	IkeRemoteIdentity pulumi.StringPtrInput
-	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is
-	// 86400 seconds.
+	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
 	IkeSaLifetimeSeconds pulumi.IntPtrInput
 	// Version of the IKE operation specification. Default value is `IKEV1`.
 	IkeVersion pulumi.StringPtrInput
-	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-	// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
 	IpsecEncryptAlgorithm pulumi.StringPtrInput
-	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is
-	// `MD5`.
+	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm pulumi.StringPtrInput
 	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup pulumi.StringPtrInput
-	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is
-	// 3600 seconds.
+	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds pulumi.IntPtrInput
-	// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is
-	// 1843200.
+	// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
 	IpsecSaLifetimeTraffic pulumi.IntPtrInput
-	// Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpc_id`. If `is_ccn_type` is
-	// true, modification of `vpc_id` will be ignored.
+	// Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpcId`. If `isCcnType` is true, modification of `vpcId` will be ignored.
 	IsCcnType pulumi.BoolPtrInput
 	// Name of the VPN connection. The length of character is limited to 1-60.
 	Name pulumi.StringPtrInput
@@ -312,49 +340,39 @@ type connectionArgs struct {
 	HealthCheckLocalIp *string `pulumi:"healthCheckLocalIp"`
 	// Health check peer address.
 	HealthCheckRemoteIp *string `pulumi:"healthCheckRemoteIp"`
-	// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`.
-	// Default value is `GROUP1`.
+	// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
 	IkeDhGroupName *string `pulumi:"ikeDhGroupName"`
 	// Exchange mode of the IKE operation specification. Valid values: `AGGRESSIVE`, `MAIN`. Default value is `MAIN`.
 	IkeExchangeMode *string `pulumi:"ikeExchangeMode"`
-	// Local address of IKE operation specification, valid when ike_local_identity is `ADDRESS`, generally the value is
-	// `public_ip_address` of the related VPN gateway.
+	// Local address of IKE operation specification, valid when ikeLocalIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related VPN gateway.
 	IkeLocalAddress *string `pulumi:"ikeLocalAddress"`
 	// Local FQDN name of the IKE operation specification.
 	IkeLocalFqdnName *string `pulumi:"ikeLocalFqdnName"`
 	// Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
 	IkeLocalIdentity *string `pulumi:"ikeLocalIdentity"`
-	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is
-	// `MD5`.
+	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
 	IkeProtoAuthenAlgorithm *string `pulumi:"ikeProtoAuthenAlgorithm"`
-	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-	// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
 	IkeProtoEncryAlgorithm *string `pulumi:"ikeProtoEncryAlgorithm"`
-	// Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is
-	// `public_ip_address` of the related customer gateway.
+	// Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
 	IkeRemoteAddress *string `pulumi:"ikeRemoteAddress"`
 	// Remote FQDN name of the IKE operation specification.
 	IkeRemoteFqdnName *string `pulumi:"ikeRemoteFqdnName"`
 	// Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
 	IkeRemoteIdentity *string `pulumi:"ikeRemoteIdentity"`
-	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is
-	// 86400 seconds.
+	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
 	IkeSaLifetimeSeconds *int `pulumi:"ikeSaLifetimeSeconds"`
 	// Version of the IKE operation specification. Default value is `IKEV1`.
 	IkeVersion *string `pulumi:"ikeVersion"`
-	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-	// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
 	IpsecEncryptAlgorithm *string `pulumi:"ipsecEncryptAlgorithm"`
-	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is
-	// `MD5`.
+	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm *string `pulumi:"ipsecIntegrityAlgorithm"`
 	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup *string `pulumi:"ipsecPfsDhGroup"`
-	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is
-	// 3600 seconds.
+	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds *int `pulumi:"ipsecSaLifetimeSeconds"`
-	// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is
-	// 1843200.
+	// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
 	IpsecSaLifetimeTraffic *int `pulumi:"ipsecSaLifetimeTraffic"`
 	// Name of the VPN connection. The length of character is limited to 1-60.
 	Name *string `pulumi:"name"`
@@ -380,49 +398,39 @@ type ConnectionArgs struct {
 	HealthCheckLocalIp pulumi.StringPtrInput
 	// Health check peer address.
 	HealthCheckRemoteIp pulumi.StringPtrInput
-	// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`.
-	// Default value is `GROUP1`.
+	// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
 	IkeDhGroupName pulumi.StringPtrInput
 	// Exchange mode of the IKE operation specification. Valid values: `AGGRESSIVE`, `MAIN`. Default value is `MAIN`.
 	IkeExchangeMode pulumi.StringPtrInput
-	// Local address of IKE operation specification, valid when ike_local_identity is `ADDRESS`, generally the value is
-	// `public_ip_address` of the related VPN gateway.
+	// Local address of IKE operation specification, valid when ikeLocalIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related VPN gateway.
 	IkeLocalAddress pulumi.StringPtrInput
 	// Local FQDN name of the IKE operation specification.
 	IkeLocalFqdnName pulumi.StringPtrInput
 	// Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
 	IkeLocalIdentity pulumi.StringPtrInput
-	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is
-	// `MD5`.
+	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
 	IkeProtoAuthenAlgorithm pulumi.StringPtrInput
-	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-	// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
 	IkeProtoEncryAlgorithm pulumi.StringPtrInput
-	// Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is
-	// `public_ip_address` of the related customer gateway.
+	// Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
 	IkeRemoteAddress pulumi.StringPtrInput
 	// Remote FQDN name of the IKE operation specification.
 	IkeRemoteFqdnName pulumi.StringPtrInput
 	// Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
 	IkeRemoteIdentity pulumi.StringPtrInput
-	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is
-	// 86400 seconds.
+	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
 	IkeSaLifetimeSeconds pulumi.IntPtrInput
 	// Version of the IKE operation specification. Default value is `IKEV1`.
 	IkeVersion pulumi.StringPtrInput
-	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-	// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+	// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
 	IpsecEncryptAlgorithm pulumi.StringPtrInput
-	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is
-	// `MD5`.
+	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm pulumi.StringPtrInput
 	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup pulumi.StringPtrInput
-	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is
-	// 3600 seconds.
+	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds pulumi.IntPtrInput
-	// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is
-	// 1843200.
+	// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
 	IpsecSaLifetimeTraffic pulumi.IntPtrInput
 	// Name of the VPN connection. The length of character is limited to 1-60.
 	Name pulumi.StringPtrInput
@@ -555,8 +563,7 @@ func (o ConnectionOutput) HealthCheckRemoteIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.HealthCheckRemoteIp }).(pulumi.StringOutput)
 }
 
-// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`.
-// Default value is `GROUP1`.
+// DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
 func (o ConnectionOutput) IkeDhGroupName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeDhGroupName }).(pulumi.StringPtrOutput)
 }
@@ -566,8 +573,7 @@ func (o ConnectionOutput) IkeExchangeMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeExchangeMode }).(pulumi.StringPtrOutput)
 }
 
-// Local address of IKE operation specification, valid when ike_local_identity is `ADDRESS`, generally the value is
-// `public_ip_address` of the related VPN gateway.
+// Local address of IKE operation specification, valid when ikeLocalIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related VPN gateway.
 func (o ConnectionOutput) IkeLocalAddress() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeLocalAddress }).(pulumi.StringPtrOutput)
 }
@@ -582,20 +588,17 @@ func (o ConnectionOutput) IkeLocalIdentity() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeLocalIdentity }).(pulumi.StringPtrOutput)
 }
 
-// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is
-// `MD5`.
+// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
 func (o ConnectionOutput) IkeProtoAuthenAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeProtoAuthenAlgorithm }).(pulumi.StringPtrOutput)
 }
 
-// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+// Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
 func (o ConnectionOutput) IkeProtoEncryAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeProtoEncryAlgorithm }).(pulumi.StringPtrOutput)
 }
 
-// Remote address of IKE operation specification, valid when ike_remote_identity is `ADDRESS`, generally the value is
-// `public_ip_address` of the related customer gateway.
+// Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
 func (o ConnectionOutput) IkeRemoteAddress() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeRemoteAddress }).(pulumi.StringPtrOutput)
 }
@@ -610,8 +613,7 @@ func (o ConnectionOutput) IkeRemoteIdentity() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeRemoteIdentity }).(pulumi.StringPtrOutput)
 }
 
-// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is
-// 86400 seconds.
+// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
 func (o ConnectionOutput) IkeSaLifetimeSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.IntPtrOutput { return v.IkeSaLifetimeSeconds }).(pulumi.IntPtrOutput)
 }
@@ -621,14 +623,12 @@ func (o ConnectionOutput) IkeVersion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeVersion }).(pulumi.StringPtrOutput)
 }
 
-// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`,
-// `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
+// Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-128`, `AES-CBC-256`, `DES-CBC`. Default value is `3DES-CBC`.
 func (o ConnectionOutput) IpsecEncryptAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IpsecEncryptAlgorithm }).(pulumi.StringPtrOutput)
 }
 
-// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is
-// `MD5`.
+// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 func (o ConnectionOutput) IpsecIntegrityAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IpsecIntegrityAlgorithm }).(pulumi.StringPtrOutput)
 }
@@ -638,20 +638,17 @@ func (o ConnectionOutput) IpsecPfsDhGroup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IpsecPfsDhGroup }).(pulumi.StringPtrOutput)
 }
 
-// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is
-// 3600 seconds.
+// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 func (o ConnectionOutput) IpsecSaLifetimeSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.IntPtrOutput { return v.IpsecSaLifetimeSeconds }).(pulumi.IntPtrOutput)
 }
 
-// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is
-// 1843200.
+// SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
 func (o ConnectionOutput) IpsecSaLifetimeTraffic() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.IntPtrOutput { return v.IpsecSaLifetimeTraffic }).(pulumi.IntPtrOutput)
 }
 
-// Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpc_id`. If `is_ccn_type` is
-// true, modification of `vpc_id` will be ignored.
+// Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpcId`. If `isCcnType` is true, modification of `vpcId` will be ignored.
 func (o ConnectionOutput) IsCcnType() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Connection) pulumi.BoolOutput { return v.IsCcnType }).(pulumi.BoolOutput)
 }

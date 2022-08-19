@@ -12,18 +12,33 @@ namespace Pulumi.Tencentcloud.Dayu.Inputs
 
     public sealed class DdosPolicyPortFilterGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Action of port to take. Valid values: `drop`, `transmit`.
+        /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
+        /// <summary>
+        /// End port. Valid value ranges: (0~65535). It must be greater than `start_port`.
+        /// </summary>
         [Input("endPort")]
         public Input<int>? EndPort { get; set; }
 
+        /// <summary>
+        /// The type of forbidden port. Valid values: `0`, `1`, `2`. `0` for destination ports make effect, `1` for source ports make effect. `2` for both destination and source ports.
+        /// </summary>
         [Input("kind")]
         public Input<int>? Kind { get; set; }
 
+        /// <summary>
+        /// Protocol. Valid values are `tcp`, `udp`, `icmp`, `all`.
+        /// </summary>
         [Input("protocol")]
         public Input<string>? Protocol { get; set; }
 
+        /// <summary>
+        /// Start port. Valid value ranges: (0~65535).
+        /// </summary>
         [Input("startPort")]
         public Input<int>? StartPort { get; set; }
 

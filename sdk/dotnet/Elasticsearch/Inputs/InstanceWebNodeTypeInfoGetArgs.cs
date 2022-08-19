@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Elasticsearch.Inputs
 
     public sealed class InstanceWebNodeTypeInfoGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Visual node number.
+        /// </summary>
         [Input("nodeNum", required: true)]
         public Input<int> NodeNum { get; set; } = null!;
 
+        /// <summary>
+        /// Visual node specifications.
+        /// </summary>
         [Input("nodeType", required: true)]
         public Input<string> NodeType { get; set; } = null!;
 

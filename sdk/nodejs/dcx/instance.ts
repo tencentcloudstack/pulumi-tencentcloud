@@ -4,6 +4,44 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to creating dedicated tunnels instances.
+ *
+ * > **NOTE:** 1. ID of the DC is queried, can only apply for this resource offline.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const config = new pulumi.Config();
+ * const dcId = config.get("dcId") || "dc-kax48sg7";
+ * const dcgId = config.get("dcgId") || "dcg-dmbhf7jf";
+ * const vpcId = config.get("vpcId") || "vpc-4h9v4mo3";
+ * const bgpMain = new tencentcloud.dcx.Instance("bgpMain", {
+ *     bandwidth: 900,
+ *     dcId: dcId,
+ *     dcgId: dcgId,
+ *     networkType: "VPC",
+ *     routeType: "BGP",
+ *     vlan: 306,
+ *     vpcId: vpcId,
+ * });
+ * const staticMain = new tencentcloud.dcx.Instance("staticMain", {
+ *     bandwidth: 900,
+ *     dcId: dcId,
+ *     dcgId: dcgId,
+ *     networkType: "VPC",
+ *     routeType: "STATIC",
+ *     vlan: 301,
+ *     vpcId: vpcId,
+ *     routeFilterPrefixes: ["10.10.10.101/32"],
+ *     tencentAddress: "100.93.46.1/30",
+ *     customerAddress: "100.93.46.2/30",
+ * });
+ * ```
+ */
 export class Instance extends pulumi.CustomResource {
     /**
      * Get an existing Instance resource's state with the given name, ID, and optional extra
@@ -69,8 +107,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly networkType!: pulumi.Output<string | undefined>;
     /**
-     * Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-     * field within BGP.
+     * Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
      */
     public readonly routeFilterPrefixes!: pulumi.Output<string[] | undefined>;
     /**
@@ -78,8 +115,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly routeType!: pulumi.Output<string | undefined>;
     /**
-     * State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`,
-     * `COMFIRMING` and `REJECTED`.
+     * State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
      */
     public /*out*/ readonly state!: pulumi.Output<string>;
     /**
@@ -87,8 +123,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly tencentAddress!: pulumi.Output<string>;
     /**
-     * Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-     * physical connect.
+     * Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
      */
     public readonly vlan!: pulumi.Output<number | undefined>;
     /**
@@ -197,8 +232,7 @@ export interface InstanceState {
      */
     networkType?: pulumi.Input<string>;
     /**
-     * Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-     * field within BGP.
+     * Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
      */
     routeFilterPrefixes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -206,8 +240,7 @@ export interface InstanceState {
      */
     routeType?: pulumi.Input<string>;
     /**
-     * State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`,
-     * `COMFIRMING` and `REJECTED`.
+     * State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
      */
     state?: pulumi.Input<string>;
     /**
@@ -215,8 +248,7 @@ export interface InstanceState {
      */
     tencentAddress?: pulumi.Input<string>;
     /**
-     * Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-     * physical connect.
+     * Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
      */
     vlan?: pulumi.Input<number>;
     /**
@@ -262,8 +294,7 @@ export interface InstanceArgs {
      */
     networkType?: pulumi.Input<string>;
     /**
-     * Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable
-     * field within BGP.
+     * Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
      */
     routeFilterPrefixes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -275,8 +306,7 @@ export interface InstanceArgs {
      */
     tencentAddress?: pulumi.Input<string>;
     /**
-     * Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the
-     * physical connect.
+     * Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
      */
     vlan?: pulumi.Input<number>;
     /**

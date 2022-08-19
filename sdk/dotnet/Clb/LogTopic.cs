@@ -9,6 +9,37 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Clb
 {
+    /// <summary>
+    /// Provides a resource to create a CLB instance topic.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var topic = new Tencentcloud.Clb.LogTopic("topic", new Tencentcloud.Clb.LogTopicArgs
+    ///         {
+    ///             LogSetId = tencentcloud_clb_log_set.Set.Id,
+    ///             TopicName = "clb-topic",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CLB log topic can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Clb/logTopic:LogTopic topic lb-7a0t6zqb
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/logTopic:LogTopic")]
     public partial class LogTopic : Pulumi.CustomResource
     {

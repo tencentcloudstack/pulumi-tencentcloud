@@ -6,12 +6,14 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./certificate";
-export * from "./certificates";
-export * from "./instance";
+export * from "./freeCertificate";
+export * from "./getCertificates";
+export * from "./payCertificate";
 
 // Import resources to register:
 import { Certificate } from "./certificate";
-import { Instance } from "./instance";
+import { FreeCertificate } from "./freeCertificate";
+import { PayCertificate } from "./payCertificate";
 
 const _module = {
     version: utilities.getVersion(),
@@ -19,12 +21,15 @@ const _module = {
         switch (type) {
             case "tencentcloud:Ssl/certificate:Certificate":
                 return new Certificate(name, <any>undefined, { urn })
-            case "tencentcloud:Ssl/instance:Instance":
-                return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Ssl/freeCertificate:FreeCertificate":
+                return new FreeCertificate(name, <any>undefined, { urn })
+            case "tencentcloud:Ssl/payCertificate:PayCertificate":
+                return new PayCertificate(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssl/certificate", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Ssl/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ssl/freeCertificate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ssl/payCertificate", _module)

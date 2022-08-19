@@ -12,9 +12,15 @@ namespace Pulumi.Tencentcloud.Eks.Inputs
 
     public sealed class ContainerInstanceCbsVolumeArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// ID of CBS.
+        /// </summary>
         [Input("diskId", required: true)]
         public Input<string> DiskId { get; set; } = null!;
 
+        /// <summary>
+        /// Name of CBS volume.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 

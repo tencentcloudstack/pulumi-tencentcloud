@@ -4,6 +4,29 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provide a resource to create a DnsPod Domain instance.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Dnspod.DomainInstance("foo", {
+ *     domain: "hello.com",
+ *     remark: "this is demo",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * DnsPod Domain instance can be imported, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
+ * ```
+ */
 export class DomainInstance extends pulumi.CustomResource {
     /**
      * Get an existing DomainInstance resource's state with the given name, ID, and optional extra

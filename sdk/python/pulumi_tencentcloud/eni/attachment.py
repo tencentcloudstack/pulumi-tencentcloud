@@ -97,7 +97,16 @@ class Attachment(pulumi.CustomResource):
                  instance_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Attachment resource with the given unique name, props, and options.
+        Provides a resource to detailed information of attached backend server to an ENI.
+
+        ## Import
+
+        ENI attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Eni/attachment:Attachment tencentcloud_eni_attachment.foo eni-gtlvkjvz+ins-0h3a5new
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] eni_id: ID of the ENI.
@@ -110,7 +119,16 @@ class Attachment(pulumi.CustomResource):
                  args: AttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Attachment resource with the given unique name, props, and options.
+        Provides a resource to detailed information of attached backend server to an ENI.
+
+        ## Import
+
+        ENI attachment can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Eni/attachment:Attachment tencentcloud_eni_attachment.foo eni-gtlvkjvz+ins-0h3a5new
+        ```
+
         :param str resource_name: The name of the resource.
         :param AttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

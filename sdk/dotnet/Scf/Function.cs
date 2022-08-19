@@ -9,6 +9,72 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Scf
 {
+    /// <summary>
+    /// Provide a resource to create a SCF function.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Scf.Function("foo", new Tencentcloud.Scf.FunctionArgs
+    ///         {
+    ///             CosBucketName = "scf-code-1234567890",
+    ///             CosBucketRegion = "ap-guangzhou",
+    ///             CosObjectName = "code.zip",
+    ///             Handler = "main.do_it",
+    ///             Runtime = "Python3.6",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// Using CFS config
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Scf.Function("foo", new Tencentcloud.Scf.FunctionArgs
+    ///         {
+    ///             CfsConfigs = 
+    ///             {
+    ///                 new Tencentcloud.Scf.Inputs.FunctionCfsConfigArgs
+    ///                 {
+    ///                     CfsId = "cfs-xxxxxxxx",
+    ///                     LocalMountDir = "/mnt",
+    ///                     MountInsId = "cfs-xxxxxxxx",
+    ///                     RemoteMountDir = "/",
+    ///                     UserGroupId = "10000",
+    ///                     UserId = "10000",
+    ///                 },
+    ///             },
+    ///             Handler = "main.do_it",
+    ///             Runtime = "Python3.6",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// SCF function can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Scf/function:Function test default+test
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/function:Function")]
     public partial class Function : Pulumi.CustomResource
     {
@@ -67,8 +133,7 @@ namespace Pulumi.Tencentcloud.Scf
         public Output<string?> CosObjectName { get; private set; } = null!;
 
         /// <summary>
-        /// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-        /// Chinese, the maximum length is 1000.
+        /// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
@@ -110,9 +175,7 @@ namespace Pulumi.Tencentcloud.Scf
         public Output<int> ErrNo { get; private set; } = null!;
 
         /// <summary>
-        /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters,
-        /// numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-        /// length is 2-60.
+        /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         /// </summary>
         [Output("handler")]
         public Output<string> Handler { get; private set; } = null!;
@@ -154,14 +217,13 @@ namespace Pulumi.Tencentcloud.Scf
         public Output<int?> MemSize { get; private set; } = null!;
 
         /// <summary>
-        /// SCF function last modified time.
+        /// Modify time of SCF function trigger.
         /// </summary>
         [Output("modifyTime")]
         public Output<string> ModifyTime { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-        /// letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        /// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
@@ -179,8 +241,7 @@ namespace Pulumi.Tencentcloud.Scf
         public Output<string?> Role { get; private set; } = null!;
 
         /// <summary>
-        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-        /// `PHP7`, `Golang1`, and `Java8`.
+        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
         /// </summary>
         [Output("runtime")]
         public Output<string> Runtime { get; private set; } = null!;
@@ -222,8 +283,7 @@ namespace Pulumi.Tencentcloud.Scf
         public Output<ImmutableArray<Outputs.FunctionTriggerInfo>> TriggerInfos { get; private set; } = null!;
 
         /// <summary>
-        /// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-        /// then create triggers in the new list. Each element contains the following attributes:
+        /// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
         /// </summary>
         [Output("triggers")]
         public Output<ImmutableArray<Outputs.FunctionTrigger>> Triggers { get; private set; } = null!;
@@ -335,8 +395,7 @@ namespace Pulumi.Tencentcloud.Scf
         public Input<string>? CosObjectName { get; set; }
 
         /// <summary>
-        /// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-        /// Chinese, the maximum length is 1000.
+        /// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
@@ -366,9 +425,7 @@ namespace Pulumi.Tencentcloud.Scf
         }
 
         /// <summary>
-        /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters,
-        /// numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-        /// length is 2-60.
+        /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         /// </summary>
         [Input("handler", required: true)]
         public Input<string> Handler { get; set; } = null!;
@@ -410,8 +467,7 @@ namespace Pulumi.Tencentcloud.Scf
         public Input<int>? MemSize { get; set; }
 
         /// <summary>
-        /// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-        /// letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        /// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -429,8 +485,7 @@ namespace Pulumi.Tencentcloud.Scf
         public Input<string>? Role { get; set; }
 
         /// <summary>
-        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-        /// `PHP7`, `Golang1`, and `Java8`.
+        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
         /// </summary>
         [Input("runtime", required: true)]
         public Input<string> Runtime { get; set; } = null!;
@@ -463,8 +518,7 @@ namespace Pulumi.Tencentcloud.Scf
         private InputList<Inputs.FunctionTriggerArgs>? _triggers;
 
         /// <summary>
-        /// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-        /// then create triggers in the new list. Each element contains the following attributes:
+        /// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
         /// </summary>
         public InputList<Inputs.FunctionTriggerArgs> Triggers
         {
@@ -552,8 +606,7 @@ namespace Pulumi.Tencentcloud.Scf
         public Input<string>? CosObjectName { get; set; }
 
         /// <summary>
-        /// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and
-        /// Chinese, the maximum length is 1000.
+        /// Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
@@ -607,9 +660,7 @@ namespace Pulumi.Tencentcloud.Scf
         public Input<int>? ErrNo { get; set; }
 
         /// <summary>
-        /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters,
-        /// numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available
-        /// length is 2-60.
+        /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         /// </summary>
         [Input("handler")]
         public Input<string>? Handler { get; set; }
@@ -663,14 +714,13 @@ namespace Pulumi.Tencentcloud.Scf
         public Input<int>? MemSize { get; set; }
 
         /// <summary>
-        /// SCF function last modified time.
+        /// Modify time of SCF function trigger.
         /// </summary>
         [Input("modifyTime")]
         public Input<string>? ModifyTime { get; set; }
 
         /// <summary>
-        /// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a
-        /// letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        /// Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -688,8 +738,7 @@ namespace Pulumi.Tencentcloud.Scf
         public Input<string>? Role { get; set; }
 
         /// <summary>
-        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`,
-        /// `PHP7`, `Golang1`, and `Java8`.
+        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
         /// </summary>
         [Input("runtime")]
         public Input<string>? Runtime { get; set; }
@@ -746,8 +795,7 @@ namespace Pulumi.Tencentcloud.Scf
         private InputList<Inputs.FunctionTriggerGetArgs>? _triggers;
 
         /// <summary>
-        /// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and
-        /// then create triggers in the new list. Each element contains the following attributes:
+        /// Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
         /// </summary>
         public InputList<Inputs.FunctionTriggerGetArgs> Triggers
         {

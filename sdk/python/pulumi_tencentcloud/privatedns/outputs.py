@@ -40,6 +40,12 @@ class ZoneAccountVpcSet(dict):
                  uin: str,
                  uniq_vpc_id: str,
                  vpc_name: str):
+        """
+        :param str region: Region.
+        :param str uin: UIN of the VPC account.
+        :param str uniq_vpc_id: VPC ID.
+        :param str vpc_name: VPC NAME.
+        """
         pulumi.set(__self__, "region", region)
         pulumi.set(__self__, "uin", uin)
         pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
@@ -48,21 +54,33 @@ class ZoneAccountVpcSet(dict):
     @property
     @pulumi.getter
     def region(self) -> str:
+        """
+        Region.
+        """
         return pulumi.get(self, "region")
 
     @property
     @pulumi.getter
     def uin(self) -> str:
+        """
+        UIN of the VPC account.
+        """
         return pulumi.get(self, "uin")
 
     @property
     @pulumi.getter(name="uniqVpcId")
     def uniq_vpc_id(self) -> str:
+        """
+        VPC ID.
+        """
         return pulumi.get(self, "uniq_vpc_id")
 
     @property
     @pulumi.getter(name="vpcName")
     def vpc_name(self) -> str:
+        """
+        VPC NAME.
+        """
         return pulumi.get(self, "vpc_name")
 
 
@@ -90,17 +108,27 @@ class ZoneTagSet(dict):
     def __init__(__self__, *,
                  tag_key: str,
                  tag_value: str):
+        """
+        :param str tag_key: Key of Tag.
+        :param str tag_value: Value of Tag.
+        """
         pulumi.set(__self__, "tag_key", tag_key)
         pulumi.set(__self__, "tag_value", tag_value)
 
     @property
     @pulumi.getter(name="tagKey")
     def tag_key(self) -> str:
+        """
+        Key of Tag.
+        """
         return pulumi.get(self, "tag_key")
 
     @property
     @pulumi.getter(name="tagValue")
     def tag_value(self) -> str:
+        """
+        Value of Tag.
+        """
         return pulumi.get(self, "tag_value")
 
 
@@ -126,17 +154,27 @@ class ZoneVpcSet(dict):
     def __init__(__self__, *,
                  region: str,
                  uniq_vpc_id: str):
+        """
+        :param str region: VPC REGION.
+        :param str uniq_vpc_id: VPC ID.
+        """
         pulumi.set(__self__, "region", region)
         pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
 
     @property
     @pulumi.getter
     def region(self) -> str:
+        """
+        VPC REGION.
+        """
         return pulumi.get(self, "region")
 
     @property
     @pulumi.getter(name="uniqVpcId")
     def uniq_vpc_id(self) -> str:
+        """
+        VPC ID.
+        """
         return pulumi.get(self, "uniq_vpc_id")
 
 

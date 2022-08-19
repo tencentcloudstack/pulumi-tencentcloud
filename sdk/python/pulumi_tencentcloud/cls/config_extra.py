@@ -34,9 +34,7 @@ class ConfigExtraArgs:
         """
         The set of arguments for constructing a ConfigExtra resource.
         :param pulumi.Input[str] config_flag: Collection configuration flag.
-        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-               minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-               Default value: minimalist_log.
+        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         :param pulumi.Input[str] logset_id: Logset Id.
         :param pulumi.Input[str] logset_name: Logset Name.
         :param pulumi.Input[str] topic_id: Log topic ID (TopicId) of collection configuration.
@@ -94,9 +92,7 @@ class ConfigExtraArgs:
     @pulumi.getter(name="logType")
     def log_type(self) -> pulumi.Input[str]:
         """
-        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-        minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-        Default value: minimalist_log.
+        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         """
         return pulumi.get(self, "log_type")
 
@@ -302,9 +298,7 @@ class _ConfigExtraState:
         :param pulumi.Input[str] group_id: Binding group id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] group_ids: Binding group ids.
         :param pulumi.Input['ConfigExtraHostFileArgs'] host_file: Node file config info.
-        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-               minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-               Default value: minimalist_log.
+        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         :param pulumi.Input[str] logset_id: Logset Id.
         :param pulumi.Input[str] logset_name: Logset Name.
         :param pulumi.Input[str] name: Collection configuration name.
@@ -446,9 +440,7 @@ class _ConfigExtraState:
     @pulumi.getter(name="logType")
     def log_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-        minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-        Default value: minimalist_log.
+        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         """
         return pulumi.get(self, "log_type")
 
@@ -564,7 +556,37 @@ class ConfigExtra(pulumi.CustomResource):
                  user_define_rule: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a ConfigExtra resource with the given unique name, props, and options.
+        Provides a resource to create a cls config extra
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        extra = tencentcloud.cls.ConfigExtra("extra",
+            topic_id=tencentcloud_cls_topic["topic"]["id"],
+            type="container_file",
+            log_type="json_log",
+            config_flag="label_k8s",
+            logset_id=tencentcloud_cls_logset["logset"]["id"],
+            logset_name=tencentcloud_cls_logset["logset"]["logset_name"],
+            topic_name=tencentcloud_cls_topic["topic"]["topic_name"],
+            container_file=tencentcloud.cls.ConfigExtraContainerFileArgs(
+                container="nginx",
+                file_pattern="log",
+                log_path="/nginx",
+                namespace="default",
+                workload=tencentcloud.cls.ConfigExtraContainerFileWorkloadArgs(
+                    container="nginx",
+                    kind="deployment",
+                    name="nginx",
+                    namespace="default",
+                ),
+            ),
+            group_id="27752a9b-9918-440a-8ee7-9c84a14a47ed")
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] config_flag: Collection configuration flag.
@@ -575,9 +597,7 @@ class ConfigExtra(pulumi.CustomResource):
         :param pulumi.Input[str] group_id: Binding group id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] group_ids: Binding group ids.
         :param pulumi.Input[pulumi.InputType['ConfigExtraHostFileArgs']] host_file: Node file config info.
-        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-               minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-               Default value: minimalist_log.
+        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         :param pulumi.Input[str] logset_id: Logset Id.
         :param pulumi.Input[str] logset_name: Logset Name.
         :param pulumi.Input[str] name: Collection configuration name.
@@ -593,7 +613,37 @@ class ConfigExtra(pulumi.CustomResource):
                  args: ConfigExtraArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ConfigExtra resource with the given unique name, props, and options.
+        Provides a resource to create a cls config extra
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        extra = tencentcloud.cls.ConfigExtra("extra",
+            topic_id=tencentcloud_cls_topic["topic"]["id"],
+            type="container_file",
+            log_type="json_log",
+            config_flag="label_k8s",
+            logset_id=tencentcloud_cls_logset["logset"]["id"],
+            logset_name=tencentcloud_cls_logset["logset"]["logset_name"],
+            topic_name=tencentcloud_cls_topic["topic"]["topic_name"],
+            container_file=tencentcloud.cls.ConfigExtraContainerFileArgs(
+                container="nginx",
+                file_pattern="log",
+                log_path="/nginx",
+                namespace="default",
+                workload=tencentcloud.cls.ConfigExtraContainerFileWorkloadArgs(
+                    container="nginx",
+                    kind="deployment",
+                    name="nginx",
+                    namespace="default",
+                ),
+            ),
+            group_id="27752a9b-9918-440a-8ee7-9c84a14a47ed")
+        ```
+
         :param str resource_name: The name of the resource.
         :param ConfigExtraArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -708,9 +758,7 @@ class ConfigExtra(pulumi.CustomResource):
         :param pulumi.Input[str] group_id: Binding group id.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] group_ids: Binding group ids.
         :param pulumi.Input[pulumi.InputType['ConfigExtraHostFileArgs']] host_file: Node file config info.
-        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-               minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-               Default value: minimalist_log.
+        :param pulumi.Input[str] log_type: Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         :param pulumi.Input[str] logset_id: Logset Id.
         :param pulumi.Input[str] logset_name: Logset Name.
         :param pulumi.Input[str] name: Collection configuration name.
@@ -809,9 +857,7 @@ class ConfigExtra(pulumi.CustomResource):
     @pulumi.getter(name="logType")
     def log_type(self) -> pulumi.Output[str]:
         """
-        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format;
-        minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format.
-        Default value: minimalist_log.
+        Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         """
         return pulumi.get(self, "log_type")
 

@@ -13,8 +13,17 @@ namespace Pulumi.Tencentcloud.Cls.Outputs
     [OutputType]
     public sealed class CosShipperFilterRule
     {
+        /// <summary>
+        /// Filter rule key.
+        /// </summary>
         public readonly string Key;
+        /// <summary>
+        /// Filter rule.
+        /// </summary>
         public readonly string Regex;
+        /// <summary>
+        /// Filter rule value.
+        /// </summary>
         public readonly string Value;
 
         [OutputConstructor]

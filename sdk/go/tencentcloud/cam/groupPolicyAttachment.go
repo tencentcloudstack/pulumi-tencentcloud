@@ -11,11 +11,43 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CAM group policy attachment.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cam.NewGroupPolicyAttachment(ctx, "foo", &Cam.GroupPolicyAttachmentArgs{
+// 			GroupId:  pulumi.Any(tencentcloud_cam_group.Foo.Id),
+// 			PolicyId: pulumi.Any(tencentcloud_cam_policy.Foo.Id),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CAM group policy attachment can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment foo 12515263#26800353
+// ```
 type GroupPolicyAttachment struct {
 	pulumi.CustomResourceState
 
-	// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and
-	// the others indicate syntax strategy ways.
+	// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
 	CreateMode pulumi.IntOutput `pulumi:"createMode"`
 	// Create time of the CAM group policy attachment.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
@@ -64,8 +96,7 @@ func GetGroupPolicyAttachment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering GroupPolicyAttachment resources.
 type groupPolicyAttachmentState struct {
-	// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and
-	// the others indicate syntax strategy ways.
+	// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
 	CreateMode *int `pulumi:"createMode"`
 	// Create time of the CAM group policy attachment.
 	CreateTime *string `pulumi:"createTime"`
@@ -80,8 +111,7 @@ type groupPolicyAttachmentState struct {
 }
 
 type GroupPolicyAttachmentState struct {
-	// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and
-	// the others indicate syntax strategy ways.
+	// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
 	CreateMode pulumi.IntPtrInput
 	// Create time of the CAM group policy attachment.
 	CreateTime pulumi.StringPtrInput
@@ -201,8 +231,7 @@ func (o GroupPolicyAttachmentOutput) ToGroupPolicyAttachmentOutputWithContext(ct
 	return o
 }
 
-// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and
-// the others indicate syntax strategy ways.
+// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
 func (o GroupPolicyAttachmentOutput) CreateMode() pulumi.IntOutput {
 	return o.ApplyT(func(v *GroupPolicyAttachment) pulumi.IntOutput { return v.CreateMode }).(pulumi.IntOutput)
 }

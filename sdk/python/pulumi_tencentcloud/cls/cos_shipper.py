@@ -33,8 +33,7 @@ class CosShipperArgs:
         :param pulumi.Input[str] topic_id: ID of the log topic to which the shipping rule to be created belongs.
         :param pulumi.Input['CosShipperCompressArgs'] compress: Compression configuration of shipped log.
         :param pulumi.Input['CosShipperContentArgs'] content: Format configuration of shipped log content.
-        :param pulumi.Input[Sequence[pulumi.Input['CosShipperFilterRuleArgs']]] filter_rules: Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-               up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+        :param pulumi.Input[Sequence[pulumi.Input['CosShipperFilterRuleArgs']]] filter_rules: Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
         :param pulumi.Input[int] interval: Shipping time interval in seconds. Default value: 300. Value range: 300~900.
         :param pulumi.Input[int] max_size: Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.
         :param pulumi.Input[str] partition: Partition rule of shipped log, which can be represented in strftime time format.
@@ -132,8 +131,7 @@ class CosShipperArgs:
     @pulumi.getter(name="filterRules")
     def filter_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CosShipperFilterRuleArgs']]]]:
         """
-        Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-        up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+        Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
         """
         return pulumi.get(self, "filter_rules")
 
@@ -196,8 +194,7 @@ class _CosShipperState:
         :param pulumi.Input[str] bucket: Destination bucket in the shipping rule to be created.
         :param pulumi.Input['CosShipperCompressArgs'] compress: Compression configuration of shipped log.
         :param pulumi.Input['CosShipperContentArgs'] content: Format configuration of shipped log content.
-        :param pulumi.Input[Sequence[pulumi.Input['CosShipperFilterRuleArgs']]] filter_rules: Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-               up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+        :param pulumi.Input[Sequence[pulumi.Input['CosShipperFilterRuleArgs']]] filter_rules: Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
         :param pulumi.Input[int] interval: Shipping time interval in seconds. Default value: 300. Value range: 300~900.
         :param pulumi.Input[int] max_size: Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.
         :param pulumi.Input[str] partition: Partition rule of shipped log, which can be represented in strftime time format.
@@ -266,8 +263,7 @@ class _CosShipperState:
     @pulumi.getter(name="filterRules")
     def filter_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CosShipperFilterRuleArgs']]]]:
         """
-        Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-        up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+        Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
         """
         return pulumi.get(self, "filter_rules")
 
@@ -365,14 +361,52 @@ class CosShipper(pulumi.CustomResource):
                  topic_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a CosShipper resource with the given unique name, props, and options.
+        Provides a resource to create a cls cos shipper.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        shipper = tencentcloud.cls.CosShipper("shipper",
+            bucket="preset-scf-bucket-1308919341",
+            compress=tencentcloud.cls.CosShipperCompressArgs(
+                format="lzop",
+            ),
+            content=tencentcloud.cls.CosShipperContentArgs(
+                format="json",
+                json=tencentcloud.cls.CosShipperContentJsonArgs(
+                    enable_tag=True,
+                    meta_fields=[
+                        "__FILENAME__",
+                        "__SOURCE__",
+                        "__TIMESTAMP__",
+                    ],
+                ),
+            ),
+            interval=300,
+            max_size=200,
+            partition="/%Y/%m/%d/%H/",
+            prefix="ap-guangzhou-fffsasad-1649734752",
+            shipper_name="ap-guangzhou-fffsasad-1649734752",
+            topic_id="4d07fba0-b93e-4e0b-9a7f-d58542560bbb")
+        ```
+
+        ## Import
+
+        cls cos shipper can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c48-bb01-9ee00584d761
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bucket: Destination bucket in the shipping rule to be created.
         :param pulumi.Input[pulumi.InputType['CosShipperCompressArgs']] compress: Compression configuration of shipped log.
         :param pulumi.Input[pulumi.InputType['CosShipperContentArgs']] content: Format configuration of shipped log content.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CosShipperFilterRuleArgs']]]] filter_rules: Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-               up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CosShipperFilterRuleArgs']]]] filter_rules: Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
         :param pulumi.Input[int] interval: Shipping time interval in seconds. Default value: 300. Value range: 300~900.
         :param pulumi.Input[int] max_size: Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.
         :param pulumi.Input[str] partition: Partition rule of shipped log, which can be represented in strftime time format.
@@ -387,7 +421,46 @@ class CosShipper(pulumi.CustomResource):
                  args: CosShipperArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a CosShipper resource with the given unique name, props, and options.
+        Provides a resource to create a cls cos shipper.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        shipper = tencentcloud.cls.CosShipper("shipper",
+            bucket="preset-scf-bucket-1308919341",
+            compress=tencentcloud.cls.CosShipperCompressArgs(
+                format="lzop",
+            ),
+            content=tencentcloud.cls.CosShipperContentArgs(
+                format="json",
+                json=tencentcloud.cls.CosShipperContentJsonArgs(
+                    enable_tag=True,
+                    meta_fields=[
+                        "__FILENAME__",
+                        "__SOURCE__",
+                        "__TIMESTAMP__",
+                    ],
+                ),
+            ),
+            interval=300,
+            max_size=200,
+            partition="/%Y/%m/%d/%H/",
+            prefix="ap-guangzhou-fffsasad-1649734752",
+            shipper_name="ap-guangzhou-fffsasad-1649734752",
+            topic_id="4d07fba0-b93e-4e0b-9a7f-d58542560bbb")
+        ```
+
+        ## Import
+
+        cls cos shipper can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c48-bb01-9ee00584d761
+        ```
+
         :param str resource_name: The name of the resource.
         :param CosShipperArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -473,8 +546,7 @@ class CosShipper(pulumi.CustomResource):
         :param pulumi.Input[str] bucket: Destination bucket in the shipping rule to be created.
         :param pulumi.Input[pulumi.InputType['CosShipperCompressArgs']] compress: Compression configuration of shipped log.
         :param pulumi.Input[pulumi.InputType['CosShipperContentArgs']] content: Format configuration of shipped log content.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CosShipperFilterRuleArgs']]]] filter_rules: Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-               up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CosShipperFilterRuleArgs']]]] filter_rules: Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
         :param pulumi.Input[int] interval: Shipping time interval in seconds. Default value: 300. Value range: 300~900.
         :param pulumi.Input[int] max_size: Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.
         :param pulumi.Input[str] partition: Partition rule of shipped log, which can be represented in strftime time format.
@@ -526,8 +598,7 @@ class CosShipper(pulumi.CustomResource):
     @pulumi.getter(name="filterRules")
     def filter_rules(self) -> pulumi.Output[Optional[Sequence['outputs.CosShipperFilterRule']]]:
         """
-        Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and
-        up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+        Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
         """
         return pulumi.get(self, "filter_rules")
 

@@ -42,21 +42,17 @@ class InstanceArgs:
         :param pulumi.Input[int] zone_id: Available zone id.
         :param pulumi.Input[int] band_width: Instance bandwidth in MBps.
         :param pulumi.Input['InstanceConfigArgs'] config: Instance configuration.
-        :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-               the control. If it is not within the interval, the plan will cause a change when first created.
+        :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[str] disk_type: Type of disk.
         :param pulumi.Input['InstanceDynamicRetentionConfigArgs'] dynamic_retention_config: Dynamic message retention policy configuration.
         :param pulumi.Input[str] kafka_version: Kafka version (0.10.2/1.1.1/2.4.1).
-        :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-               default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+        :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         :param pulumi.Input[bool] multi_zone_flag: Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
-        :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-               through the control. If it is not within the interval, the plan will cause a change when first created.
+        :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[int] period: Prepaid purchase time, such as 1, is one month.
         :param pulumi.Input[int] public_network: Timestamp.
         :param pulumi.Input[int] rebalance_time: Modification of the rebalancing time after upgrade.
-        :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-               no automatic renewal (user setting).
+        :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         :param pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]] tags: Partition size, the professional version does not need tag.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] zone_ids: List of available zone id. NOTE: this argument must set together with `multi_zone_flag`.
         """
@@ -171,8 +167,7 @@ class InstanceArgs:
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> Optional[pulumi.Input[int]]:
         """
-        Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-        the control. If it is not within the interval, the plan will cause a change when first created.
+        Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         """
         return pulumi.get(self, "disk_size")
 
@@ -220,8 +215,7 @@ class InstanceArgs:
     @pulumi.getter(name="msgRetentionTime")
     def msg_retention_time(self) -> Optional[pulumi.Input[int]]:
         """
-        The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-        default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+        The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         """
         return pulumi.get(self, "msg_retention_time")
 
@@ -245,8 +239,7 @@ class InstanceArgs:
     @pulumi.getter
     def partition(self) -> Optional[pulumi.Input[int]]:
         """
-        Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-        through the control. If it is not within the interval, the plan will cause a change when first created.
+        Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         """
         return pulumi.get(self, "partition")
 
@@ -294,8 +287,7 @@ class InstanceArgs:
     @pulumi.getter(name="renewFlag")
     def renew_flag(self) -> Optional[pulumi.Input[int]]:
         """
-        Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-        no automatic renewal (user setting).
+        Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         """
         return pulumi.get(self, "renew_flag")
 
@@ -356,22 +348,18 @@ class _InstanceState:
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[int] band_width: Instance bandwidth in MBps.
         :param pulumi.Input['InstanceConfigArgs'] config: Instance configuration.
-        :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-               the control. If it is not within the interval, the plan will cause a change when first created.
+        :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[str] disk_type: Type of disk.
         :param pulumi.Input['InstanceDynamicRetentionConfigArgs'] dynamic_retention_config: Dynamic message retention policy configuration.
         :param pulumi.Input[str] instance_name: Instance name.
         :param pulumi.Input[str] kafka_version: Kafka version (0.10.2/1.1.1/2.4.1).
-        :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-               default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+        :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         :param pulumi.Input[bool] multi_zone_flag: Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
-        :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-               through the control. If it is not within the interval, the plan will cause a change when first created.
+        :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[int] period: Prepaid purchase time, such as 1, is one month.
         :param pulumi.Input[int] public_network: Timestamp.
         :param pulumi.Input[int] rebalance_time: Modification of the rebalancing time after upgrade.
-        :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-               no automatic renewal (user setting).
+        :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         :param pulumi.Input[str] subnet_id: Subnet id.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceTagArgs']]] tags: Partition size, the professional version does not need tag.
         :param pulumi.Input[str] vip: Vip of instance.
@@ -451,8 +439,7 @@ class _InstanceState:
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> Optional[pulumi.Input[int]]:
         """
-        Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-        the control. If it is not within the interval, the plan will cause a change when first created.
+        Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         """
         return pulumi.get(self, "disk_size")
 
@@ -512,8 +499,7 @@ class _InstanceState:
     @pulumi.getter(name="msgRetentionTime")
     def msg_retention_time(self) -> Optional[pulumi.Input[int]]:
         """
-        The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-        default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+        The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         """
         return pulumi.get(self, "msg_retention_time")
 
@@ -537,8 +523,7 @@ class _InstanceState:
     @pulumi.getter
     def partition(self) -> Optional[pulumi.Input[int]]:
         """
-        Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-        through the control. If it is not within the interval, the plan will cause a change when first created.
+        Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         """
         return pulumi.get(self, "partition")
 
@@ -586,8 +571,7 @@ class _InstanceState:
     @pulumi.getter(name="renewFlag")
     def renew_flag(self) -> Optional[pulumi.Input[int]]:
         """
-        Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-        no automatic renewal (user setting).
+        Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         """
         return pulumi.get(self, "renew_flag")
 
@@ -706,27 +690,72 @@ class Instance(pulumi.CustomResource):
                  zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
                  __props__=None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Use this resource to create ckafka instance.
+
+        > **NOTE:** It only support create profession ckafka instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ckafka.Instance("foo",
+            band_width=40,
+            config=tencentcloud.ckafka.InstanceConfigArgs(
+                auto_create_topic_enable=True,
+                default_num_partitions=3,
+                default_replication_factor=3,
+            ),
+            disk_size=500,
+            disk_type="CLOUD_BASIC",
+            dynamic_retention_config=tencentcloud.ckafka.InstanceDynamicRetentionConfigArgs(
+                bottom_retention=0,
+                disk_quota_percentage=0,
+                enable=1,
+                step_forward_percentage=0,
+            ),
+            instance_name="ckafka-instance-tf-test",
+            kafka_version="1.1.1",
+            msg_retention_time=1300,
+            multi_zone_flag=True,
+            partition=800,
+            period=1,
+            public_network=3,
+            renew_flag=0,
+            subnet_id="subnet-4vwihrzk",
+            vpc_id="vpc-82p1t1nv",
+            zone_id=100006,
+            zone_ids=[
+                100006,
+                100007,
+            ])
+        ```
+
+        ## Import
+
+        ckafka instance can be imported using the instance_id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] band_width: Instance bandwidth in MBps.
         :param pulumi.Input[pulumi.InputType['InstanceConfigArgs']] config: Instance configuration.
-        :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-               the control. If it is not within the interval, the plan will cause a change when first created.
+        :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[str] disk_type: Type of disk.
         :param pulumi.Input[pulumi.InputType['InstanceDynamicRetentionConfigArgs']] dynamic_retention_config: Dynamic message retention policy configuration.
         :param pulumi.Input[str] instance_name: Instance name.
         :param pulumi.Input[str] kafka_version: Kafka version (0.10.2/1.1.1/2.4.1).
-        :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-               default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+        :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         :param pulumi.Input[bool] multi_zone_flag: Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
-        :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-               through the control. If it is not within the interval, the plan will cause a change when first created.
+        :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[int] period: Prepaid purchase time, such as 1, is one month.
         :param pulumi.Input[int] public_network: Timestamp.
         :param pulumi.Input[int] rebalance_time: Modification of the rebalancing time after upgrade.
-        :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-               no automatic renewal (user setting).
+        :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         :param pulumi.Input[str] subnet_id: Subnet id.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]] tags: Partition size, the professional version does not need tag.
         :param pulumi.Input[str] vpc_id: Vpc id.
@@ -740,7 +769,56 @@ class Instance(pulumi.CustomResource):
                  args: InstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Instance resource with the given unique name, props, and options.
+        Use this resource to create ckafka instance.
+
+        > **NOTE:** It only support create profession ckafka instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ckafka.Instance("foo",
+            band_width=40,
+            config=tencentcloud.ckafka.InstanceConfigArgs(
+                auto_create_topic_enable=True,
+                default_num_partitions=3,
+                default_replication_factor=3,
+            ),
+            disk_size=500,
+            disk_type="CLOUD_BASIC",
+            dynamic_retention_config=tencentcloud.ckafka.InstanceDynamicRetentionConfigArgs(
+                bottom_retention=0,
+                disk_quota_percentage=0,
+                enable=1,
+                step_forward_percentage=0,
+            ),
+            instance_name="ckafka-instance-tf-test",
+            kafka_version="1.1.1",
+            msg_retention_time=1300,
+            multi_zone_flag=True,
+            partition=800,
+            period=1,
+            public_network=3,
+            renew_flag=0,
+            subnet_id="subnet-4vwihrzk",
+            vpc_id="vpc-82p1t1nv",
+            zone_id=100006,
+            zone_ids=[
+                100006,
+                100007,
+            ])
+        ```
+
+        ## Import
+
+        ckafka instance can be imported using the instance_id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -856,22 +934,18 @@ class Instance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] band_width: Instance bandwidth in MBps.
         :param pulumi.Input[pulumi.InputType['InstanceConfigArgs']] config: Instance configuration.
-        :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-               the control. If it is not within the interval, the plan will cause a change when first created.
+        :param pulumi.Input[int] disk_size: Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[str] disk_type: Type of disk.
         :param pulumi.Input[pulumi.InputType['InstanceDynamicRetentionConfigArgs']] dynamic_retention_config: Dynamic message retention policy configuration.
         :param pulumi.Input[str] instance_name: Instance name.
         :param pulumi.Input[str] kafka_version: Kafka version (0.10.2/1.1.1/2.4.1).
-        :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-               default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+        :param pulumi.Input[int] msg_retention_time: The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         :param pulumi.Input[bool] multi_zone_flag: Indicates whether the instance is multi zones. NOTE: if set to `true`, `zone_ids` must set together.
-        :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-               through the control. If it is not within the interval, the plan will cause a change when first created.
+        :param pulumi.Input[int] partition: Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         :param pulumi.Input[int] period: Prepaid purchase time, such as 1, is one month.
         :param pulumi.Input[int] public_network: Timestamp.
         :param pulumi.Input[int] rebalance_time: Modification of the rebalancing time after upgrade.
-        :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-               no automatic renewal (user setting).
+        :param pulumi.Input[int] renew_flag: Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         :param pulumi.Input[str] subnet_id: Subnet id.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceTagArgs']]]] tags: Partition size, the professional version does not need tag.
         :param pulumi.Input[str] vip: Vip of instance.
@@ -927,8 +1001,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> pulumi.Output[int]:
         """
-        Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through
-        the control. If it is not within the interval, the plan will cause a change when first created.
+        Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         """
         return pulumi.get(self, "disk_size")
 
@@ -968,8 +1041,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="msgRetentionTime")
     def msg_retention_time(self) -> pulumi.Output[int]:
         """
-        The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the
-        default 0 is not filled, which means that the log retention time recovery policy is not enabled.
+        The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
         """
         return pulumi.get(self, "msg_retention_time")
 
@@ -985,8 +1057,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter
     def partition(self) -> pulumi.Output[int]:
         """
-        Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed
-        through the control. If it is not within the interval, the plan will cause a change when first created.
+        Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         """
         return pulumi.get(self, "partition")
 
@@ -1018,8 +1089,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="renewFlag")
     def renew_flag(self) -> pulumi.Output[int]:
         """
-        Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear
-        no automatic renewal (user setting).
+        Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
         """
         return pulumi.get(self, "renew_flag")
 

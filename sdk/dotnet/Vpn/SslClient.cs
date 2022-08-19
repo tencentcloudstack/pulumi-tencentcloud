@@ -9,6 +9,37 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Vpn
 {
+    /// <summary>
+    /// Provide a resource to create a VPN SSL Client.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var client = new Tencentcloud.Vpn.SslClient("client", new Tencentcloud.Vpn.SslClientArgs
+    ///         {
+    ///             SslVpnClientName = "hello",
+    ///             SslVpnServerId = "vpns-aog5xcjj",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// VPN SSL Client can be imported, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Vpn/sslClient:SslClient client vpn-client-id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/sslClient:SslClient")]
     public partial class SslClient : Pulumi.CustomResource
     {

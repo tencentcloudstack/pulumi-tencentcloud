@@ -11,6 +11,37 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource for an AS (Auto scaling) schedule.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := As.NewSchedule(ctx, "schedule", &As.ScheduleArgs{
+// 			DesiredCapacity:    pulumi.Int(0),
+// 			EndTime:            pulumi.String("2019-12-01T00:00:00+08:00"),
+// 			MaxSize:            pulumi.Int(10),
+// 			MinSize:            pulumi.Int(0),
+// 			Recurrence:         pulumi.String("0 0 * * *"),
+// 			ScalingGroupId:     pulumi.String("sg-12af45"),
+// 			ScheduleActionName: pulumi.String("tf-as-schedule"),
+// 			StartTime:          pulumi.String("2019-01-01T00:00:00+08:00"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type Schedule struct {
 	pulumi.CustomResourceState
 
@@ -22,8 +53,7 @@ type Schedule struct {
 	MaxSize pulumi.IntOutput `pulumi:"maxSize"`
 	// The minimum size for the Auto Scaling group.
 	MinSize pulumi.IntOutput `pulumi:"minSize"`
-	// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-	// format. And this argument should be set with end_time together.
+	// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.
 	Recurrence pulumi.StringPtrOutput `pulumi:"recurrence"`
 	// ID of a scaling group.
 	ScalingGroupId pulumi.StringOutput `pulumi:"scalingGroupId"`
@@ -88,8 +118,7 @@ type scheduleState struct {
 	MaxSize *int `pulumi:"maxSize"`
 	// The minimum size for the Auto Scaling group.
 	MinSize *int `pulumi:"minSize"`
-	// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-	// format. And this argument should be set with end_time together.
+	// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.
 	Recurrence *string `pulumi:"recurrence"`
 	// ID of a scaling group.
 	ScalingGroupId *string `pulumi:"scalingGroupId"`
@@ -108,8 +137,7 @@ type ScheduleState struct {
 	MaxSize pulumi.IntPtrInput
 	// The minimum size for the Auto Scaling group.
 	MinSize pulumi.IntPtrInput
-	// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-	// format. And this argument should be set with end_time together.
+	// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.
 	Recurrence pulumi.StringPtrInput
 	// ID of a scaling group.
 	ScalingGroupId pulumi.StringPtrInput
@@ -132,8 +160,7 @@ type scheduleArgs struct {
 	MaxSize int `pulumi:"maxSize"`
 	// The minimum size for the Auto Scaling group.
 	MinSize int `pulumi:"minSize"`
-	// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-	// format. And this argument should be set with end_time together.
+	// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.
 	Recurrence *string `pulumi:"recurrence"`
 	// ID of a scaling group.
 	ScalingGroupId string `pulumi:"scalingGroupId"`
@@ -153,8 +180,7 @@ type ScheduleArgs struct {
 	MaxSize pulumi.IntInput
 	// The minimum size for the Auto Scaling group.
 	MinSize pulumi.IntInput
-	// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-	// format. And this argument should be set with end_time together.
+	// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.
 	Recurrence pulumi.StringPtrInput
 	// ID of a scaling group.
 	ScalingGroupId pulumi.StringInput
@@ -271,8 +297,7 @@ func (o ScheduleOutput) MinSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *Schedule) pulumi.IntOutput { return v.MinSize }).(pulumi.IntOutput)
 }
 
-// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax
-// format. And this argument should be set with end_time together.
+// The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.
 func (o ScheduleOutput) Recurrence() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Schedule) pulumi.StringPtrOutput { return v.Recurrence }).(pulumi.StringPtrOutput)
 }

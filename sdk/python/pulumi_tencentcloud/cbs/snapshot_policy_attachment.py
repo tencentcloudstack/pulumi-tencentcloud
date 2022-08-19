@@ -97,7 +97,19 @@ class SnapshotPolicyAttachment(pulumi.CustomResource):
                  storage_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a SnapshotPolicyAttachment resource with the given unique name, props, and options.
+        Provides a CBS snapshot policy attachment resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cbs.SnapshotPolicyAttachment("foo",
+            storage_id=tencentcloud_cbs_storage["foo"]["id"],
+            snapshot_policy_id=tencentcloud_cbs_snapshot_policy["policy"]["id"])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] snapshot_policy_id: ID of CBS snapshot policy.
@@ -110,7 +122,19 @@ class SnapshotPolicyAttachment(pulumi.CustomResource):
                  args: SnapshotPolicyAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a SnapshotPolicyAttachment resource with the given unique name, props, and options.
+        Provides a CBS snapshot policy attachment resource.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.cbs.SnapshotPolicyAttachment("foo",
+            storage_id=tencentcloud_cbs_storage["foo"]["id"],
+            snapshot_policy_id=tencentcloud_cbs_snapshot_policy["policy"]["id"])
+        ```
+
         :param str resource_name: The name of the resource.
         :param SnapshotPolicyAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

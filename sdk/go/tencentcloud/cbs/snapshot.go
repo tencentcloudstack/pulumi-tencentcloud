@@ -11,6 +11,39 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to create a CBS snapshot.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Cbs.NewSnapshot(ctx, "snapshot", &Cbs.SnapshotArgs{
+// 			SnapshotName: pulumi.String("unnamed"),
+// 			StorageId:    pulumi.String("disk-kdt0sq6m"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// CBS snapshot can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Cbs/snapshot:Snapshot snapshot snap-3sa3f39b
+// ```
 type Snapshot struct {
 	pulumi.CustomResourceState
 

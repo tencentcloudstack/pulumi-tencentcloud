@@ -12,6 +12,9 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
     public sealed class ProcedureTemplateMediaProcessTaskImageSpriteTaskListGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Image sprite generating template ID.
+        /// </summary>
         [Input("definition", required: true)]
         public Input<string> Definition { get; set; } = null!;
 

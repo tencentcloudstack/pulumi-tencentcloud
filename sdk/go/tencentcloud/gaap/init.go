@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
 )
 
 type module struct {
@@ -23,8 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Gaap/certificate:Certificate":
 		r = &Certificate{}
-	case "tencentcloud:Gaap/domainErrorPageInfo:DomainErrorPageInfo":
-		r = &DomainErrorPageInfo{}
+	case "tencentcloud:Gaap/domainErrorPage:DomainErrorPage":
+		r = &DomainErrorPage{}
 	case "tencentcloud:Gaap/httpDomain:HttpDomain":
 		r = &HttpDomain{}
 	case "tencentcloud:Gaap/httpRule:HttpRule":
@@ -61,7 +61,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Gaap/domainErrorPageInfo",
+		"Gaap/domainErrorPage",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

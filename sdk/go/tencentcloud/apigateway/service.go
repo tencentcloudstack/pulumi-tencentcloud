@@ -11,6 +11,48 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create API gateway service.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
+// 			IpVersion: pulumi.String("IPv4"),
+// 			NetTypes: pulumi.StringArray{
+// 				pulumi.String("INNER"),
+// 				pulumi.String("OUTER"),
+// 			},
+// 			PreLimit:     pulumi.Int(500),
+// 			Protocol:     pulumi.String("http&https"),
+// 			ReleaseLimit: pulumi.Int(500),
+// 			ServiceDesc:  pulumi.String("your nice service"),
+// 			ServiceName:  pulumi.String("niceservice"),
+// 			TestLimit:    pulumi.Int(500),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// API gateway service can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
+// ```
 type Service struct {
 	pulumi.CustomResourceState
 
@@ -30,8 +72,7 @@ type Service struct {
 	IpVersion pulumi.StringPtrOutput `pulumi:"ipVersion"`
 	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	ModifyTime pulumi.StringOutput `pulumi:"modifyTime"`
-	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-	// indicates access over private network, and `OUTER` indicates access over public network.
+	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
 	NetTypes pulumi.StringArrayOutput `pulumi:"netTypes"`
 	// Public network access subdomain name.
 	OuterSubDomain pulumi.StringOutput `pulumi:"outerSubDomain"`
@@ -68,7 +109,7 @@ func NewService(ctx *pulumi.Context,
 		return nil, errors.New("invalid value for required argument 'ServiceName'")
 	}
 	var resource Service
-	err := ctx.RegisterResource("tencentcloud:APIGateway/service:Service", name, args, &resource, opts...)
+	err := ctx.RegisterResource("tencentcloud:ApiGateway/service:Service", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +121,7 @@ func NewService(ctx *pulumi.Context,
 func GetService(ctx *pulumi.Context,
 	name string, id pulumi.IDInput, state *ServiceState, opts ...pulumi.ResourceOption) (*Service, error) {
 	var resource Service
-	err := ctx.ReadResource("tencentcloud:APIGateway/service:Service", name, id, state, &resource, opts...)
+	err := ctx.ReadResource("tencentcloud:ApiGateway/service:Service", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -105,8 +146,7 @@ type serviceState struct {
 	IpVersion *string `pulumi:"ipVersion"`
 	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	ModifyTime *string `pulumi:"modifyTime"`
-	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-	// indicates access over private network, and `OUTER` indicates access over public network.
+	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
 	NetTypes []string `pulumi:"netTypes"`
 	// Public network access subdomain name.
 	OuterSubDomain *string `pulumi:"outerSubDomain"`
@@ -143,8 +183,7 @@ type ServiceState struct {
 	IpVersion pulumi.StringPtrInput
 	// Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
 	ModifyTime pulumi.StringPtrInput
-	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-	// indicates access over private network, and `OUTER` indicates access over public network.
+	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
 	NetTypes pulumi.StringArrayInput
 	// Public network access subdomain name.
 	OuterSubDomain pulumi.StringPtrInput
@@ -173,8 +212,7 @@ type serviceArgs struct {
 	ExclusiveSetName *string `pulumi:"exclusiveSetName"`
 	// IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
 	IpVersion *string `pulumi:"ipVersion"`
-	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-	// indicates access over private network, and `OUTER` indicates access over public network.
+	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
 	NetTypes []string `pulumi:"netTypes"`
 	// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 	PreLimit *int `pulumi:"preLimit"`
@@ -196,8 +234,7 @@ type ServiceArgs struct {
 	ExclusiveSetName pulumi.StringPtrInput
 	// IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
 	IpVersion pulumi.StringPtrInput
-	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-	// indicates access over private network, and `OUTER` indicates access over public network.
+	// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
 	NetTypes pulumi.StringArrayInput
 	// API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
 	PreLimit pulumi.IntPtrInput
@@ -340,8 +377,7 @@ func (o ServiceOutput) ModifyTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Service) pulumi.StringOutput { return v.ModifyTime }).(pulumi.StringOutput)
 }
 
-// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER`
-// indicates access over private network, and `OUTER` indicates access over public network.
+// Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
 func (o ServiceOutput) NetTypes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Service) pulumi.StringArrayOutput { return v.NetTypes }).(pulumi.StringArrayOutput)
 }

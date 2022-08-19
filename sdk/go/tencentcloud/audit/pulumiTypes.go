@@ -10,213 +10,225 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type CosRegionsAuditCosRegionList struct {
-	CosRegion     string `pulumi:"cosRegion"`
+type GetCosRegionsAuditCosRegionList struct {
+	// Cos region.
+	CosRegion string `pulumi:"cosRegion"`
+	// Cos region chinese name.
 	CosRegionName string `pulumi:"cosRegionName"`
 }
 
-// CosRegionsAuditCosRegionListInput is an input type that accepts CosRegionsAuditCosRegionListArgs and CosRegionsAuditCosRegionListOutput values.
-// You can construct a concrete instance of `CosRegionsAuditCosRegionListInput` via:
+// GetCosRegionsAuditCosRegionListInput is an input type that accepts GetCosRegionsAuditCosRegionListArgs and GetCosRegionsAuditCosRegionListOutput values.
+// You can construct a concrete instance of `GetCosRegionsAuditCosRegionListInput` via:
 //
-//          CosRegionsAuditCosRegionListArgs{...}
-type CosRegionsAuditCosRegionListInput interface {
+//          GetCosRegionsAuditCosRegionListArgs{...}
+type GetCosRegionsAuditCosRegionListInput interface {
 	pulumi.Input
 
-	ToCosRegionsAuditCosRegionListOutput() CosRegionsAuditCosRegionListOutput
-	ToCosRegionsAuditCosRegionListOutputWithContext(context.Context) CosRegionsAuditCosRegionListOutput
+	ToGetCosRegionsAuditCosRegionListOutput() GetCosRegionsAuditCosRegionListOutput
+	ToGetCosRegionsAuditCosRegionListOutputWithContext(context.Context) GetCosRegionsAuditCosRegionListOutput
 }
 
-type CosRegionsAuditCosRegionListArgs struct {
-	CosRegion     pulumi.StringInput `pulumi:"cosRegion"`
+type GetCosRegionsAuditCosRegionListArgs struct {
+	// Cos region.
+	CosRegion pulumi.StringInput `pulumi:"cosRegion"`
+	// Cos region chinese name.
 	CosRegionName pulumi.StringInput `pulumi:"cosRegionName"`
 }
 
-func (CosRegionsAuditCosRegionListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosRegionsAuditCosRegionList)(nil)).Elem()
+func (GetCosRegionsAuditCosRegionListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCosRegionsAuditCosRegionList)(nil)).Elem()
 }
 
-func (i CosRegionsAuditCosRegionListArgs) ToCosRegionsAuditCosRegionListOutput() CosRegionsAuditCosRegionListOutput {
-	return i.ToCosRegionsAuditCosRegionListOutputWithContext(context.Background())
+func (i GetCosRegionsAuditCosRegionListArgs) ToGetCosRegionsAuditCosRegionListOutput() GetCosRegionsAuditCosRegionListOutput {
+	return i.ToGetCosRegionsAuditCosRegionListOutputWithContext(context.Background())
 }
 
-func (i CosRegionsAuditCosRegionListArgs) ToCosRegionsAuditCosRegionListOutputWithContext(ctx context.Context) CosRegionsAuditCosRegionListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosRegionsAuditCosRegionListOutput)
+func (i GetCosRegionsAuditCosRegionListArgs) ToGetCosRegionsAuditCosRegionListOutputWithContext(ctx context.Context) GetCosRegionsAuditCosRegionListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCosRegionsAuditCosRegionListOutput)
 }
 
-// CosRegionsAuditCosRegionListArrayInput is an input type that accepts CosRegionsAuditCosRegionListArray and CosRegionsAuditCosRegionListArrayOutput values.
-// You can construct a concrete instance of `CosRegionsAuditCosRegionListArrayInput` via:
+// GetCosRegionsAuditCosRegionListArrayInput is an input type that accepts GetCosRegionsAuditCosRegionListArray and GetCosRegionsAuditCosRegionListArrayOutput values.
+// You can construct a concrete instance of `GetCosRegionsAuditCosRegionListArrayInput` via:
 //
-//          CosRegionsAuditCosRegionListArray{ CosRegionsAuditCosRegionListArgs{...} }
-type CosRegionsAuditCosRegionListArrayInput interface {
+//          GetCosRegionsAuditCosRegionListArray{ GetCosRegionsAuditCosRegionListArgs{...} }
+type GetCosRegionsAuditCosRegionListArrayInput interface {
 	pulumi.Input
 
-	ToCosRegionsAuditCosRegionListArrayOutput() CosRegionsAuditCosRegionListArrayOutput
-	ToCosRegionsAuditCosRegionListArrayOutputWithContext(context.Context) CosRegionsAuditCosRegionListArrayOutput
+	ToGetCosRegionsAuditCosRegionListArrayOutput() GetCosRegionsAuditCosRegionListArrayOutput
+	ToGetCosRegionsAuditCosRegionListArrayOutputWithContext(context.Context) GetCosRegionsAuditCosRegionListArrayOutput
 }
 
-type CosRegionsAuditCosRegionListArray []CosRegionsAuditCosRegionListInput
+type GetCosRegionsAuditCosRegionListArray []GetCosRegionsAuditCosRegionListInput
 
-func (CosRegionsAuditCosRegionListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosRegionsAuditCosRegionList)(nil)).Elem()
+func (GetCosRegionsAuditCosRegionListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCosRegionsAuditCosRegionList)(nil)).Elem()
 }
 
-func (i CosRegionsAuditCosRegionListArray) ToCosRegionsAuditCosRegionListArrayOutput() CosRegionsAuditCosRegionListArrayOutput {
-	return i.ToCosRegionsAuditCosRegionListArrayOutputWithContext(context.Background())
+func (i GetCosRegionsAuditCosRegionListArray) ToGetCosRegionsAuditCosRegionListArrayOutput() GetCosRegionsAuditCosRegionListArrayOutput {
+	return i.ToGetCosRegionsAuditCosRegionListArrayOutputWithContext(context.Background())
 }
 
-func (i CosRegionsAuditCosRegionListArray) ToCosRegionsAuditCosRegionListArrayOutputWithContext(ctx context.Context) CosRegionsAuditCosRegionListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosRegionsAuditCosRegionListArrayOutput)
+func (i GetCosRegionsAuditCosRegionListArray) ToGetCosRegionsAuditCosRegionListArrayOutputWithContext(ctx context.Context) GetCosRegionsAuditCosRegionListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCosRegionsAuditCosRegionListArrayOutput)
 }
 
-type CosRegionsAuditCosRegionListOutput struct{ *pulumi.OutputState }
+type GetCosRegionsAuditCosRegionListOutput struct{ *pulumi.OutputState }
 
-func (CosRegionsAuditCosRegionListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosRegionsAuditCosRegionList)(nil)).Elem()
+func (GetCosRegionsAuditCosRegionListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCosRegionsAuditCosRegionList)(nil)).Elem()
 }
 
-func (o CosRegionsAuditCosRegionListOutput) ToCosRegionsAuditCosRegionListOutput() CosRegionsAuditCosRegionListOutput {
+func (o GetCosRegionsAuditCosRegionListOutput) ToGetCosRegionsAuditCosRegionListOutput() GetCosRegionsAuditCosRegionListOutput {
 	return o
 }
 
-func (o CosRegionsAuditCosRegionListOutput) ToCosRegionsAuditCosRegionListOutputWithContext(ctx context.Context) CosRegionsAuditCosRegionListOutput {
+func (o GetCosRegionsAuditCosRegionListOutput) ToGetCosRegionsAuditCosRegionListOutputWithContext(ctx context.Context) GetCosRegionsAuditCosRegionListOutput {
 	return o
 }
 
-func (o CosRegionsAuditCosRegionListOutput) CosRegion() pulumi.StringOutput {
-	return o.ApplyT(func(v CosRegionsAuditCosRegionList) string { return v.CosRegion }).(pulumi.StringOutput)
+// Cos region.
+func (o GetCosRegionsAuditCosRegionListOutput) CosRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCosRegionsAuditCosRegionList) string { return v.CosRegion }).(pulumi.StringOutput)
 }
 
-func (o CosRegionsAuditCosRegionListOutput) CosRegionName() pulumi.StringOutput {
-	return o.ApplyT(func(v CosRegionsAuditCosRegionList) string { return v.CosRegionName }).(pulumi.StringOutput)
+// Cos region chinese name.
+func (o GetCosRegionsAuditCosRegionListOutput) CosRegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCosRegionsAuditCosRegionList) string { return v.CosRegionName }).(pulumi.StringOutput)
 }
 
-type CosRegionsAuditCosRegionListArrayOutput struct{ *pulumi.OutputState }
+type GetCosRegionsAuditCosRegionListArrayOutput struct{ *pulumi.OutputState }
 
-func (CosRegionsAuditCosRegionListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosRegionsAuditCosRegionList)(nil)).Elem()
+func (GetCosRegionsAuditCosRegionListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCosRegionsAuditCosRegionList)(nil)).Elem()
 }
 
-func (o CosRegionsAuditCosRegionListArrayOutput) ToCosRegionsAuditCosRegionListArrayOutput() CosRegionsAuditCosRegionListArrayOutput {
+func (o GetCosRegionsAuditCosRegionListArrayOutput) ToGetCosRegionsAuditCosRegionListArrayOutput() GetCosRegionsAuditCosRegionListArrayOutput {
 	return o
 }
 
-func (o CosRegionsAuditCosRegionListArrayOutput) ToCosRegionsAuditCosRegionListArrayOutputWithContext(ctx context.Context) CosRegionsAuditCosRegionListArrayOutput {
+func (o GetCosRegionsAuditCosRegionListArrayOutput) ToGetCosRegionsAuditCosRegionListArrayOutputWithContext(ctx context.Context) GetCosRegionsAuditCosRegionListArrayOutput {
 	return o
 }
 
-func (o CosRegionsAuditCosRegionListArrayOutput) Index(i pulumi.IntInput) CosRegionsAuditCosRegionListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CosRegionsAuditCosRegionList {
-		return vs[0].([]CosRegionsAuditCosRegionList)[vs[1].(int)]
-	}).(CosRegionsAuditCosRegionListOutput)
+func (o GetCosRegionsAuditCosRegionListArrayOutput) Index(i pulumi.IntInput) GetCosRegionsAuditCosRegionListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCosRegionsAuditCosRegionList {
+		return vs[0].([]GetCosRegionsAuditCosRegionList)[vs[1].(int)]
+	}).(GetCosRegionsAuditCosRegionListOutput)
 }
 
-type KeyAliasAuditKeyAliasList struct {
+type GetKeyAliasAuditKeyAliasList struct {
+	// Key alias.
 	KeyAlias string `pulumi:"keyAlias"`
-	KeyId    string `pulumi:"keyId"`
+	// Key ID.
+	KeyId string `pulumi:"keyId"`
 }
 
-// KeyAliasAuditKeyAliasListInput is an input type that accepts KeyAliasAuditKeyAliasListArgs and KeyAliasAuditKeyAliasListOutput values.
-// You can construct a concrete instance of `KeyAliasAuditKeyAliasListInput` via:
+// GetKeyAliasAuditKeyAliasListInput is an input type that accepts GetKeyAliasAuditKeyAliasListArgs and GetKeyAliasAuditKeyAliasListOutput values.
+// You can construct a concrete instance of `GetKeyAliasAuditKeyAliasListInput` via:
 //
-//          KeyAliasAuditKeyAliasListArgs{...}
-type KeyAliasAuditKeyAliasListInput interface {
+//          GetKeyAliasAuditKeyAliasListArgs{...}
+type GetKeyAliasAuditKeyAliasListInput interface {
 	pulumi.Input
 
-	ToKeyAliasAuditKeyAliasListOutput() KeyAliasAuditKeyAliasListOutput
-	ToKeyAliasAuditKeyAliasListOutputWithContext(context.Context) KeyAliasAuditKeyAliasListOutput
+	ToGetKeyAliasAuditKeyAliasListOutput() GetKeyAliasAuditKeyAliasListOutput
+	ToGetKeyAliasAuditKeyAliasListOutputWithContext(context.Context) GetKeyAliasAuditKeyAliasListOutput
 }
 
-type KeyAliasAuditKeyAliasListArgs struct {
+type GetKeyAliasAuditKeyAliasListArgs struct {
+	// Key alias.
 	KeyAlias pulumi.StringInput `pulumi:"keyAlias"`
-	KeyId    pulumi.StringInput `pulumi:"keyId"`
+	// Key ID.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
 }
 
-func (KeyAliasAuditKeyAliasListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*KeyAliasAuditKeyAliasList)(nil)).Elem()
+func (GetKeyAliasAuditKeyAliasListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetKeyAliasAuditKeyAliasList)(nil)).Elem()
 }
 
-func (i KeyAliasAuditKeyAliasListArgs) ToKeyAliasAuditKeyAliasListOutput() KeyAliasAuditKeyAliasListOutput {
-	return i.ToKeyAliasAuditKeyAliasListOutputWithContext(context.Background())
+func (i GetKeyAliasAuditKeyAliasListArgs) ToGetKeyAliasAuditKeyAliasListOutput() GetKeyAliasAuditKeyAliasListOutput {
+	return i.ToGetKeyAliasAuditKeyAliasListOutputWithContext(context.Background())
 }
 
-func (i KeyAliasAuditKeyAliasListArgs) ToKeyAliasAuditKeyAliasListOutputWithContext(ctx context.Context) KeyAliasAuditKeyAliasListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(KeyAliasAuditKeyAliasListOutput)
+func (i GetKeyAliasAuditKeyAliasListArgs) ToGetKeyAliasAuditKeyAliasListOutputWithContext(ctx context.Context) GetKeyAliasAuditKeyAliasListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetKeyAliasAuditKeyAliasListOutput)
 }
 
-// KeyAliasAuditKeyAliasListArrayInput is an input type that accepts KeyAliasAuditKeyAliasListArray and KeyAliasAuditKeyAliasListArrayOutput values.
-// You can construct a concrete instance of `KeyAliasAuditKeyAliasListArrayInput` via:
+// GetKeyAliasAuditKeyAliasListArrayInput is an input type that accepts GetKeyAliasAuditKeyAliasListArray and GetKeyAliasAuditKeyAliasListArrayOutput values.
+// You can construct a concrete instance of `GetKeyAliasAuditKeyAliasListArrayInput` via:
 //
-//          KeyAliasAuditKeyAliasListArray{ KeyAliasAuditKeyAliasListArgs{...} }
-type KeyAliasAuditKeyAliasListArrayInput interface {
+//          GetKeyAliasAuditKeyAliasListArray{ GetKeyAliasAuditKeyAliasListArgs{...} }
+type GetKeyAliasAuditKeyAliasListArrayInput interface {
 	pulumi.Input
 
-	ToKeyAliasAuditKeyAliasListArrayOutput() KeyAliasAuditKeyAliasListArrayOutput
-	ToKeyAliasAuditKeyAliasListArrayOutputWithContext(context.Context) KeyAliasAuditKeyAliasListArrayOutput
+	ToGetKeyAliasAuditKeyAliasListArrayOutput() GetKeyAliasAuditKeyAliasListArrayOutput
+	ToGetKeyAliasAuditKeyAliasListArrayOutputWithContext(context.Context) GetKeyAliasAuditKeyAliasListArrayOutput
 }
 
-type KeyAliasAuditKeyAliasListArray []KeyAliasAuditKeyAliasListInput
+type GetKeyAliasAuditKeyAliasListArray []GetKeyAliasAuditKeyAliasListInput
 
-func (KeyAliasAuditKeyAliasListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]KeyAliasAuditKeyAliasList)(nil)).Elem()
+func (GetKeyAliasAuditKeyAliasListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetKeyAliasAuditKeyAliasList)(nil)).Elem()
 }
 
-func (i KeyAliasAuditKeyAliasListArray) ToKeyAliasAuditKeyAliasListArrayOutput() KeyAliasAuditKeyAliasListArrayOutput {
-	return i.ToKeyAliasAuditKeyAliasListArrayOutputWithContext(context.Background())
+func (i GetKeyAliasAuditKeyAliasListArray) ToGetKeyAliasAuditKeyAliasListArrayOutput() GetKeyAliasAuditKeyAliasListArrayOutput {
+	return i.ToGetKeyAliasAuditKeyAliasListArrayOutputWithContext(context.Background())
 }
 
-func (i KeyAliasAuditKeyAliasListArray) ToKeyAliasAuditKeyAliasListArrayOutputWithContext(ctx context.Context) KeyAliasAuditKeyAliasListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(KeyAliasAuditKeyAliasListArrayOutput)
+func (i GetKeyAliasAuditKeyAliasListArray) ToGetKeyAliasAuditKeyAliasListArrayOutputWithContext(ctx context.Context) GetKeyAliasAuditKeyAliasListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetKeyAliasAuditKeyAliasListArrayOutput)
 }
 
-type KeyAliasAuditKeyAliasListOutput struct{ *pulumi.OutputState }
+type GetKeyAliasAuditKeyAliasListOutput struct{ *pulumi.OutputState }
 
-func (KeyAliasAuditKeyAliasListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*KeyAliasAuditKeyAliasList)(nil)).Elem()
+func (GetKeyAliasAuditKeyAliasListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetKeyAliasAuditKeyAliasList)(nil)).Elem()
 }
 
-func (o KeyAliasAuditKeyAliasListOutput) ToKeyAliasAuditKeyAliasListOutput() KeyAliasAuditKeyAliasListOutput {
+func (o GetKeyAliasAuditKeyAliasListOutput) ToGetKeyAliasAuditKeyAliasListOutput() GetKeyAliasAuditKeyAliasListOutput {
 	return o
 }
 
-func (o KeyAliasAuditKeyAliasListOutput) ToKeyAliasAuditKeyAliasListOutputWithContext(ctx context.Context) KeyAliasAuditKeyAliasListOutput {
+func (o GetKeyAliasAuditKeyAliasListOutput) ToGetKeyAliasAuditKeyAliasListOutputWithContext(ctx context.Context) GetKeyAliasAuditKeyAliasListOutput {
 	return o
 }
 
-func (o KeyAliasAuditKeyAliasListOutput) KeyAlias() pulumi.StringOutput {
-	return o.ApplyT(func(v KeyAliasAuditKeyAliasList) string { return v.KeyAlias }).(pulumi.StringOutput)
+// Key alias.
+func (o GetKeyAliasAuditKeyAliasListOutput) KeyAlias() pulumi.StringOutput {
+	return o.ApplyT(func(v GetKeyAliasAuditKeyAliasList) string { return v.KeyAlias }).(pulumi.StringOutput)
 }
 
-func (o KeyAliasAuditKeyAliasListOutput) KeyId() pulumi.StringOutput {
-	return o.ApplyT(func(v KeyAliasAuditKeyAliasList) string { return v.KeyId }).(pulumi.StringOutput)
+// Key ID.
+func (o GetKeyAliasAuditKeyAliasListOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetKeyAliasAuditKeyAliasList) string { return v.KeyId }).(pulumi.StringOutput)
 }
 
-type KeyAliasAuditKeyAliasListArrayOutput struct{ *pulumi.OutputState }
+type GetKeyAliasAuditKeyAliasListArrayOutput struct{ *pulumi.OutputState }
 
-func (KeyAliasAuditKeyAliasListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]KeyAliasAuditKeyAliasList)(nil)).Elem()
+func (GetKeyAliasAuditKeyAliasListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetKeyAliasAuditKeyAliasList)(nil)).Elem()
 }
 
-func (o KeyAliasAuditKeyAliasListArrayOutput) ToKeyAliasAuditKeyAliasListArrayOutput() KeyAliasAuditKeyAliasListArrayOutput {
+func (o GetKeyAliasAuditKeyAliasListArrayOutput) ToGetKeyAliasAuditKeyAliasListArrayOutput() GetKeyAliasAuditKeyAliasListArrayOutput {
 	return o
 }
 
-func (o KeyAliasAuditKeyAliasListArrayOutput) ToKeyAliasAuditKeyAliasListArrayOutputWithContext(ctx context.Context) KeyAliasAuditKeyAliasListArrayOutput {
+func (o GetKeyAliasAuditKeyAliasListArrayOutput) ToGetKeyAliasAuditKeyAliasListArrayOutputWithContext(ctx context.Context) GetKeyAliasAuditKeyAliasListArrayOutput {
 	return o
 }
 
-func (o KeyAliasAuditKeyAliasListArrayOutput) Index(i pulumi.IntInput) KeyAliasAuditKeyAliasListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) KeyAliasAuditKeyAliasList {
-		return vs[0].([]KeyAliasAuditKeyAliasList)[vs[1].(int)]
-	}).(KeyAliasAuditKeyAliasListOutput)
+func (o GetKeyAliasAuditKeyAliasListArrayOutput) Index(i pulumi.IntInput) GetKeyAliasAuditKeyAliasListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetKeyAliasAuditKeyAliasList {
+		return vs[0].([]GetKeyAliasAuditKeyAliasList)[vs[1].(int)]
+	}).(GetKeyAliasAuditKeyAliasListOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*CosRegionsAuditCosRegionListInput)(nil)).Elem(), CosRegionsAuditCosRegionListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosRegionsAuditCosRegionListArrayInput)(nil)).Elem(), CosRegionsAuditCosRegionListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*KeyAliasAuditKeyAliasListInput)(nil)).Elem(), KeyAliasAuditKeyAliasListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*KeyAliasAuditKeyAliasListArrayInput)(nil)).Elem(), KeyAliasAuditKeyAliasListArray{})
-	pulumi.RegisterOutputType(CosRegionsAuditCosRegionListOutput{})
-	pulumi.RegisterOutputType(CosRegionsAuditCosRegionListArrayOutput{})
-	pulumi.RegisterOutputType(KeyAliasAuditKeyAliasListOutput{})
-	pulumi.RegisterOutputType(KeyAliasAuditKeyAliasListArrayOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCosRegionsAuditCosRegionListInput)(nil)).Elem(), GetCosRegionsAuditCosRegionListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCosRegionsAuditCosRegionListArrayInput)(nil)).Elem(), GetCosRegionsAuditCosRegionListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetKeyAliasAuditKeyAliasListInput)(nil)).Elem(), GetKeyAliasAuditKeyAliasListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetKeyAliasAuditKeyAliasListArrayInput)(nil)).Elem(), GetKeyAliasAuditKeyAliasListArray{})
+	pulumi.RegisterOutputType(GetCosRegionsAuditCosRegionListOutput{})
+	pulumi.RegisterOutputType(GetCosRegionsAuditCosRegionListArrayOutput{})
+	pulumi.RegisterOutputType(GetKeyAliasAuditKeyAliasListOutput{})
+	pulumi.RegisterOutputType(GetKeyAliasAuditKeyAliasListArrayOutput{})
 }

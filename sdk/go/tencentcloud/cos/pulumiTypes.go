@@ -10,1530 +10,429 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-type BucketsBucketList struct {
-	Acl               string                              `pulumi:"acl"`
-	AclBody           string                              `pulumi:"aclBody"`
-	Bucket            string                              `pulumi:"bucket"`
-	CorsRules         []BucketsBucketListCorsRule         `pulumi:"corsRules"`
-	CosBucketUrl      string                              `pulumi:"cosBucketUrl"`
-	LifecycleRules    []BucketsBucketListLifecycleRule    `pulumi:"lifecycleRules"`
-	OriginDomainRules []BucketsBucketListOriginDomainRule `pulumi:"originDomainRules"`
-	OriginPullRules   []BucketsBucketListOriginPullRule   `pulumi:"originPullRules"`
-	Tags              map[string]interface{}              `pulumi:"tags"`
-	Websites          []BucketsBucketListWebsite          `pulumi:"websites"`
-}
-
-// BucketsBucketListInput is an input type that accepts BucketsBucketListArgs and BucketsBucketListOutput values.
-// You can construct a concrete instance of `BucketsBucketListInput` via:
-//
-//          BucketsBucketListArgs{...}
-type BucketsBucketListInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListOutput() BucketsBucketListOutput
-	ToBucketsBucketListOutputWithContext(context.Context) BucketsBucketListOutput
-}
-
-type BucketsBucketListArgs struct {
-	Acl               pulumi.StringInput                          `pulumi:"acl"`
-	AclBody           pulumi.StringInput                          `pulumi:"aclBody"`
-	Bucket            pulumi.StringInput                          `pulumi:"bucket"`
-	CorsRules         BucketsBucketListCorsRuleArrayInput         `pulumi:"corsRules"`
-	CosBucketUrl      pulumi.StringInput                          `pulumi:"cosBucketUrl"`
-	LifecycleRules    BucketsBucketListLifecycleRuleArrayInput    `pulumi:"lifecycleRules"`
-	OriginDomainRules BucketsBucketListOriginDomainRuleArrayInput `pulumi:"originDomainRules"`
-	OriginPullRules   BucketsBucketListOriginPullRuleArrayInput   `pulumi:"originPullRules"`
-	Tags              pulumi.MapInput                             `pulumi:"tags"`
-	Websites          BucketsBucketListWebsiteArrayInput          `pulumi:"websites"`
-}
-
-func (BucketsBucketListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketList)(nil)).Elem()
-}
-
-func (i BucketsBucketListArgs) ToBucketsBucketListOutput() BucketsBucketListOutput {
-	return i.ToBucketsBucketListOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListArgs) ToBucketsBucketListOutputWithContext(ctx context.Context) BucketsBucketListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListOutput)
-}
-
-// BucketsBucketListArrayInput is an input type that accepts BucketsBucketListArray and BucketsBucketListArrayOutput values.
-// You can construct a concrete instance of `BucketsBucketListArrayInput` via:
-//
-//          BucketsBucketListArray{ BucketsBucketListArgs{...} }
-type BucketsBucketListArrayInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListArrayOutput() BucketsBucketListArrayOutput
-	ToBucketsBucketListArrayOutputWithContext(context.Context) BucketsBucketListArrayOutput
-}
-
-type BucketsBucketListArray []BucketsBucketListInput
-
-func (BucketsBucketListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketList)(nil)).Elem()
-}
-
-func (i BucketsBucketListArray) ToBucketsBucketListArrayOutput() BucketsBucketListArrayOutput {
-	return i.ToBucketsBucketListArrayOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListArray) ToBucketsBucketListArrayOutputWithContext(ctx context.Context) BucketsBucketListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListArrayOutput)
-}
-
-type BucketsBucketListOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketList)(nil)).Elem()
-}
-
-func (o BucketsBucketListOutput) ToBucketsBucketListOutput() BucketsBucketListOutput {
-	return o
-}
-
-func (o BucketsBucketListOutput) ToBucketsBucketListOutputWithContext(ctx context.Context) BucketsBucketListOutput {
-	return o
-}
-
-func (o BucketsBucketListOutput) Acl() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketList) string { return v.Acl }).(pulumi.StringOutput)
-}
-
-func (o BucketsBucketListOutput) AclBody() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketList) string { return v.AclBody }).(pulumi.StringOutput)
-}
-
-func (o BucketsBucketListOutput) Bucket() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketList) string { return v.Bucket }).(pulumi.StringOutput)
-}
-
-func (o BucketsBucketListOutput) CorsRules() BucketsBucketListCorsRuleArrayOutput {
-	return o.ApplyT(func(v BucketsBucketList) []BucketsBucketListCorsRule { return v.CorsRules }).(BucketsBucketListCorsRuleArrayOutput)
-}
-
-func (o BucketsBucketListOutput) CosBucketUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketList) string { return v.CosBucketUrl }).(pulumi.StringOutput)
-}
-
-func (o BucketsBucketListOutput) LifecycleRules() BucketsBucketListLifecycleRuleArrayOutput {
-	return o.ApplyT(func(v BucketsBucketList) []BucketsBucketListLifecycleRule { return v.LifecycleRules }).(BucketsBucketListLifecycleRuleArrayOutput)
-}
-
-func (o BucketsBucketListOutput) OriginDomainRules() BucketsBucketListOriginDomainRuleArrayOutput {
-	return o.ApplyT(func(v BucketsBucketList) []BucketsBucketListOriginDomainRule { return v.OriginDomainRules }).(BucketsBucketListOriginDomainRuleArrayOutput)
-}
-
-func (o BucketsBucketListOutput) OriginPullRules() BucketsBucketListOriginPullRuleArrayOutput {
-	return o.ApplyT(func(v BucketsBucketList) []BucketsBucketListOriginPullRule { return v.OriginPullRules }).(BucketsBucketListOriginPullRuleArrayOutput)
-}
-
-func (o BucketsBucketListOutput) Tags() pulumi.MapOutput {
-	return o.ApplyT(func(v BucketsBucketList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
-}
-
-func (o BucketsBucketListOutput) Websites() BucketsBucketListWebsiteArrayOutput {
-	return o.ApplyT(func(v BucketsBucketList) []BucketsBucketListWebsite { return v.Websites }).(BucketsBucketListWebsiteArrayOutput)
-}
-
-type BucketsBucketListArrayOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketList)(nil)).Elem()
-}
-
-func (o BucketsBucketListArrayOutput) ToBucketsBucketListArrayOutput() BucketsBucketListArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListArrayOutput) ToBucketsBucketListArrayOutputWithContext(ctx context.Context) BucketsBucketListArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListArrayOutput) Index(i pulumi.IntInput) BucketsBucketListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketsBucketList {
-		return vs[0].([]BucketsBucketList)[vs[1].(int)]
-	}).(BucketsBucketListOutput)
-}
-
-type BucketsBucketListCorsRule struct {
+type BucketCorsRule struct {
+	// Specifies which headers are allowed.
 	AllowedHeaders []string `pulumi:"allowedHeaders"`
+	// Specifies which methods are allowed. Can be `GET`, `PUT`, `POST`, `DELETE` or `HEAD`.
 	AllowedMethods []string `pulumi:"allowedMethods"`
+	// Specifies which origins are allowed.
 	AllowedOrigins []string `pulumi:"allowedOrigins"`
-	ExposeHeaders  []string `pulumi:"exposeHeaders"`
-	MaxAgeSeconds  int      `pulumi:"maxAgeSeconds"`
+	// Specifies expose header in the response.
+	ExposeHeaders []string `pulumi:"exposeHeaders"`
+	// Specifies time in seconds that browser can cache the response for a preflight request.
+	MaxAgeSeconds *int `pulumi:"maxAgeSeconds"`
 }
 
-// BucketsBucketListCorsRuleInput is an input type that accepts BucketsBucketListCorsRuleArgs and BucketsBucketListCorsRuleOutput values.
-// You can construct a concrete instance of `BucketsBucketListCorsRuleInput` via:
+// BucketCorsRuleInput is an input type that accepts BucketCorsRuleArgs and BucketCorsRuleOutput values.
+// You can construct a concrete instance of `BucketCorsRuleInput` via:
 //
-//          BucketsBucketListCorsRuleArgs{...}
-type BucketsBucketListCorsRuleInput interface {
+//          BucketCorsRuleArgs{...}
+type BucketCorsRuleInput interface {
 	pulumi.Input
 
-	ToBucketsBucketListCorsRuleOutput() BucketsBucketListCorsRuleOutput
-	ToBucketsBucketListCorsRuleOutputWithContext(context.Context) BucketsBucketListCorsRuleOutput
+	ToBucketCorsRuleOutput() BucketCorsRuleOutput
+	ToBucketCorsRuleOutputWithContext(context.Context) BucketCorsRuleOutput
 }
 
-type BucketsBucketListCorsRuleArgs struct {
+type BucketCorsRuleArgs struct {
+	// Specifies which headers are allowed.
 	AllowedHeaders pulumi.StringArrayInput `pulumi:"allowedHeaders"`
+	// Specifies which methods are allowed. Can be `GET`, `PUT`, `POST`, `DELETE` or `HEAD`.
 	AllowedMethods pulumi.StringArrayInput `pulumi:"allowedMethods"`
+	// Specifies which origins are allowed.
 	AllowedOrigins pulumi.StringArrayInput `pulumi:"allowedOrigins"`
-	ExposeHeaders  pulumi.StringArrayInput `pulumi:"exposeHeaders"`
-	MaxAgeSeconds  pulumi.IntInput         `pulumi:"maxAgeSeconds"`
+	// Specifies expose header in the response.
+	ExposeHeaders pulumi.StringArrayInput `pulumi:"exposeHeaders"`
+	// Specifies time in seconds that browser can cache the response for a preflight request.
+	MaxAgeSeconds pulumi.IntPtrInput `pulumi:"maxAgeSeconds"`
 }
 
-func (BucketsBucketListCorsRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListCorsRule)(nil)).Elem()
+func (BucketCorsRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketCorsRule)(nil)).Elem()
 }
 
-func (i BucketsBucketListCorsRuleArgs) ToBucketsBucketListCorsRuleOutput() BucketsBucketListCorsRuleOutput {
-	return i.ToBucketsBucketListCorsRuleOutputWithContext(context.Background())
+func (i BucketCorsRuleArgs) ToBucketCorsRuleOutput() BucketCorsRuleOutput {
+	return i.ToBucketCorsRuleOutputWithContext(context.Background())
 }
 
-func (i BucketsBucketListCorsRuleArgs) ToBucketsBucketListCorsRuleOutputWithContext(ctx context.Context) BucketsBucketListCorsRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListCorsRuleOutput)
+func (i BucketCorsRuleArgs) ToBucketCorsRuleOutputWithContext(ctx context.Context) BucketCorsRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketCorsRuleOutput)
 }
 
-// BucketsBucketListCorsRuleArrayInput is an input type that accepts BucketsBucketListCorsRuleArray and BucketsBucketListCorsRuleArrayOutput values.
-// You can construct a concrete instance of `BucketsBucketListCorsRuleArrayInput` via:
+// BucketCorsRuleArrayInput is an input type that accepts BucketCorsRuleArray and BucketCorsRuleArrayOutput values.
+// You can construct a concrete instance of `BucketCorsRuleArrayInput` via:
 //
-//          BucketsBucketListCorsRuleArray{ BucketsBucketListCorsRuleArgs{...} }
-type BucketsBucketListCorsRuleArrayInput interface {
+//          BucketCorsRuleArray{ BucketCorsRuleArgs{...} }
+type BucketCorsRuleArrayInput interface {
 	pulumi.Input
 
-	ToBucketsBucketListCorsRuleArrayOutput() BucketsBucketListCorsRuleArrayOutput
-	ToBucketsBucketListCorsRuleArrayOutputWithContext(context.Context) BucketsBucketListCorsRuleArrayOutput
+	ToBucketCorsRuleArrayOutput() BucketCorsRuleArrayOutput
+	ToBucketCorsRuleArrayOutputWithContext(context.Context) BucketCorsRuleArrayOutput
 }
 
-type BucketsBucketListCorsRuleArray []BucketsBucketListCorsRuleInput
+type BucketCorsRuleArray []BucketCorsRuleInput
 
-func (BucketsBucketListCorsRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListCorsRule)(nil)).Elem()
+func (BucketCorsRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketCorsRule)(nil)).Elem()
 }
 
-func (i BucketsBucketListCorsRuleArray) ToBucketsBucketListCorsRuleArrayOutput() BucketsBucketListCorsRuleArrayOutput {
-	return i.ToBucketsBucketListCorsRuleArrayOutputWithContext(context.Background())
+func (i BucketCorsRuleArray) ToBucketCorsRuleArrayOutput() BucketCorsRuleArrayOutput {
+	return i.ToBucketCorsRuleArrayOutputWithContext(context.Background())
 }
 
-func (i BucketsBucketListCorsRuleArray) ToBucketsBucketListCorsRuleArrayOutputWithContext(ctx context.Context) BucketsBucketListCorsRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListCorsRuleArrayOutput)
+func (i BucketCorsRuleArray) ToBucketCorsRuleArrayOutputWithContext(ctx context.Context) BucketCorsRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketCorsRuleArrayOutput)
 }
 
-type BucketsBucketListCorsRuleOutput struct{ *pulumi.OutputState }
+type BucketCorsRuleOutput struct{ *pulumi.OutputState }
 
-func (BucketsBucketListCorsRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListCorsRule)(nil)).Elem()
+func (BucketCorsRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketCorsRule)(nil)).Elem()
 }
 
-func (o BucketsBucketListCorsRuleOutput) ToBucketsBucketListCorsRuleOutput() BucketsBucketListCorsRuleOutput {
+func (o BucketCorsRuleOutput) ToBucketCorsRuleOutput() BucketCorsRuleOutput {
 	return o
 }
 
-func (o BucketsBucketListCorsRuleOutput) ToBucketsBucketListCorsRuleOutputWithContext(ctx context.Context) BucketsBucketListCorsRuleOutput {
+func (o BucketCorsRuleOutput) ToBucketCorsRuleOutputWithContext(ctx context.Context) BucketCorsRuleOutput {
 	return o
 }
 
-func (o BucketsBucketListCorsRuleOutput) AllowedHeaders() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v BucketsBucketListCorsRule) []string { return v.AllowedHeaders }).(pulumi.StringArrayOutput)
+// Specifies which headers are allowed.
+func (o BucketCorsRuleOutput) AllowedHeaders() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BucketCorsRule) []string { return v.AllowedHeaders }).(pulumi.StringArrayOutput)
 }
 
-func (o BucketsBucketListCorsRuleOutput) AllowedMethods() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v BucketsBucketListCorsRule) []string { return v.AllowedMethods }).(pulumi.StringArrayOutput)
+// Specifies which methods are allowed. Can be `GET`, `PUT`, `POST`, `DELETE` or `HEAD`.
+func (o BucketCorsRuleOutput) AllowedMethods() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BucketCorsRule) []string { return v.AllowedMethods }).(pulumi.StringArrayOutput)
 }
 
-func (o BucketsBucketListCorsRuleOutput) AllowedOrigins() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v BucketsBucketListCorsRule) []string { return v.AllowedOrigins }).(pulumi.StringArrayOutput)
+// Specifies which origins are allowed.
+func (o BucketCorsRuleOutput) AllowedOrigins() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BucketCorsRule) []string { return v.AllowedOrigins }).(pulumi.StringArrayOutput)
 }
 
-func (o BucketsBucketListCorsRuleOutput) ExposeHeaders() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v BucketsBucketListCorsRule) []string { return v.ExposeHeaders }).(pulumi.StringArrayOutput)
+// Specifies expose header in the response.
+func (o BucketCorsRuleOutput) ExposeHeaders() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BucketCorsRule) []string { return v.ExposeHeaders }).(pulumi.StringArrayOutput)
 }
 
-func (o BucketsBucketListCorsRuleOutput) MaxAgeSeconds() pulumi.IntOutput {
-	return o.ApplyT(func(v BucketsBucketListCorsRule) int { return v.MaxAgeSeconds }).(pulumi.IntOutput)
+// Specifies time in seconds that browser can cache the response for a preflight request.
+func (o BucketCorsRuleOutput) MaxAgeSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BucketCorsRule) *int { return v.MaxAgeSeconds }).(pulumi.IntPtrOutput)
 }
 
-type BucketsBucketListCorsRuleArrayOutput struct{ *pulumi.OutputState }
+type BucketCorsRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (BucketsBucketListCorsRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListCorsRule)(nil)).Elem()
+func (BucketCorsRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketCorsRule)(nil)).Elem()
 }
 
-func (o BucketsBucketListCorsRuleArrayOutput) ToBucketsBucketListCorsRuleArrayOutput() BucketsBucketListCorsRuleArrayOutput {
+func (o BucketCorsRuleArrayOutput) ToBucketCorsRuleArrayOutput() BucketCorsRuleArrayOutput {
 	return o
 }
 
-func (o BucketsBucketListCorsRuleArrayOutput) ToBucketsBucketListCorsRuleArrayOutputWithContext(ctx context.Context) BucketsBucketListCorsRuleArrayOutput {
+func (o BucketCorsRuleArrayOutput) ToBucketCorsRuleArrayOutputWithContext(ctx context.Context) BucketCorsRuleArrayOutput {
 	return o
 }
 
-func (o BucketsBucketListCorsRuleArrayOutput) Index(i pulumi.IntInput) BucketsBucketListCorsRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketsBucketListCorsRule {
-		return vs[0].([]BucketsBucketListCorsRule)[vs[1].(int)]
-	}).(BucketsBucketListCorsRuleOutput)
+func (o BucketCorsRuleArrayOutput) Index(i pulumi.IntInput) BucketCorsRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketCorsRule {
+		return vs[0].([]BucketCorsRule)[vs[1].(int)]
+	}).(BucketCorsRuleOutput)
 }
 
-type BucketsBucketListLifecycleRule struct {
-	Expirations           []BucketsBucketListLifecycleRuleExpiration           `pulumi:"expirations"`
-	FilterPrefix          string                                               `pulumi:"filterPrefix"`
-	NonCurrentExpirations []BucketsBucketListLifecycleRuleNonCurrentExpiration `pulumi:"nonCurrentExpirations"`
-	NonCurrentTransitions []BucketsBucketListLifecycleRuleNonCurrentTransition `pulumi:"nonCurrentTransitions"`
-	Transitions           []BucketsBucketListLifecycleRuleTransition           `pulumi:"transitions"`
+type BucketLifecycleRule struct {
+	// Specifies a period in the object's expire (documented below).
+	Expiration *BucketLifecycleRuleExpiration `pulumi:"expiration"`
+	// Object key prefix identifying one or more objects to which the rule applies.
+	FilterPrefix string `pulumi:"filterPrefix"`
+	// A unique identifier for the rule. It can be up to 255 characters.
+	Id *string `pulumi:"id"`
+	// Specifies when non current object versions shall expire.
+	NonCurrentExpiration *BucketLifecycleRuleNonCurrentExpiration `pulumi:"nonCurrentExpiration"`
+	// Specifies a period in the non current object's transitions.
+	NonCurrentTransitions []BucketLifecycleRuleNonCurrentTransition `pulumi:"nonCurrentTransitions"`
+	// Specifies a period in the object's transitions (documented below).
+	Transitions []BucketLifecycleRuleTransition `pulumi:"transitions"`
 }
 
-// BucketsBucketListLifecycleRuleInput is an input type that accepts BucketsBucketListLifecycleRuleArgs and BucketsBucketListLifecycleRuleOutput values.
-// You can construct a concrete instance of `BucketsBucketListLifecycleRuleInput` via:
+// BucketLifecycleRuleInput is an input type that accepts BucketLifecycleRuleArgs and BucketLifecycleRuleOutput values.
+// You can construct a concrete instance of `BucketLifecycleRuleInput` via:
 //
-//          BucketsBucketListLifecycleRuleArgs{...}
-type BucketsBucketListLifecycleRuleInput interface {
+//          BucketLifecycleRuleArgs{...}
+type BucketLifecycleRuleInput interface {
 	pulumi.Input
 
-	ToBucketsBucketListLifecycleRuleOutput() BucketsBucketListLifecycleRuleOutput
-	ToBucketsBucketListLifecycleRuleOutputWithContext(context.Context) BucketsBucketListLifecycleRuleOutput
+	ToBucketLifecycleRuleOutput() BucketLifecycleRuleOutput
+	ToBucketLifecycleRuleOutputWithContext(context.Context) BucketLifecycleRuleOutput
 }
 
-type BucketsBucketListLifecycleRuleArgs struct {
-	Expirations           BucketsBucketListLifecycleRuleExpirationArrayInput           `pulumi:"expirations"`
-	FilterPrefix          pulumi.StringInput                                           `pulumi:"filterPrefix"`
-	NonCurrentExpirations BucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput `pulumi:"nonCurrentExpirations"`
-	NonCurrentTransitions BucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput `pulumi:"nonCurrentTransitions"`
-	Transitions           BucketsBucketListLifecycleRuleTransitionArrayInput           `pulumi:"transitions"`
+type BucketLifecycleRuleArgs struct {
+	// Specifies a period in the object's expire (documented below).
+	Expiration BucketLifecycleRuleExpirationPtrInput `pulumi:"expiration"`
+	// Object key prefix identifying one or more objects to which the rule applies.
+	FilterPrefix pulumi.StringInput `pulumi:"filterPrefix"`
+	// A unique identifier for the rule. It can be up to 255 characters.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// Specifies when non current object versions shall expire.
+	NonCurrentExpiration BucketLifecycleRuleNonCurrentExpirationPtrInput `pulumi:"nonCurrentExpiration"`
+	// Specifies a period in the non current object's transitions.
+	NonCurrentTransitions BucketLifecycleRuleNonCurrentTransitionArrayInput `pulumi:"nonCurrentTransitions"`
+	// Specifies a period in the object's transitions (documented below).
+	Transitions BucketLifecycleRuleTransitionArrayInput `pulumi:"transitions"`
 }
 
-func (BucketsBucketListLifecycleRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListLifecycleRule)(nil)).Elem()
+func (BucketLifecycleRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketLifecycleRule)(nil)).Elem()
 }
 
-func (i BucketsBucketListLifecycleRuleArgs) ToBucketsBucketListLifecycleRuleOutput() BucketsBucketListLifecycleRuleOutput {
-	return i.ToBucketsBucketListLifecycleRuleOutputWithContext(context.Background())
+func (i BucketLifecycleRuleArgs) ToBucketLifecycleRuleOutput() BucketLifecycleRuleOutput {
+	return i.ToBucketLifecycleRuleOutputWithContext(context.Background())
 }
 
-func (i BucketsBucketListLifecycleRuleArgs) ToBucketsBucketListLifecycleRuleOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListLifecycleRuleOutput)
+func (i BucketLifecycleRuleArgs) ToBucketLifecycleRuleOutputWithContext(ctx context.Context) BucketLifecycleRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleOutput)
 }
 
-// BucketsBucketListLifecycleRuleArrayInput is an input type that accepts BucketsBucketListLifecycleRuleArray and BucketsBucketListLifecycleRuleArrayOutput values.
-// You can construct a concrete instance of `BucketsBucketListLifecycleRuleArrayInput` via:
+// BucketLifecycleRuleArrayInput is an input type that accepts BucketLifecycleRuleArray and BucketLifecycleRuleArrayOutput values.
+// You can construct a concrete instance of `BucketLifecycleRuleArrayInput` via:
 //
-//          BucketsBucketListLifecycleRuleArray{ BucketsBucketListLifecycleRuleArgs{...} }
-type BucketsBucketListLifecycleRuleArrayInput interface {
+//          BucketLifecycleRuleArray{ BucketLifecycleRuleArgs{...} }
+type BucketLifecycleRuleArrayInput interface {
 	pulumi.Input
 
-	ToBucketsBucketListLifecycleRuleArrayOutput() BucketsBucketListLifecycleRuleArrayOutput
-	ToBucketsBucketListLifecycleRuleArrayOutputWithContext(context.Context) BucketsBucketListLifecycleRuleArrayOutput
+	ToBucketLifecycleRuleArrayOutput() BucketLifecycleRuleArrayOutput
+	ToBucketLifecycleRuleArrayOutputWithContext(context.Context) BucketLifecycleRuleArrayOutput
 }
 
-type BucketsBucketListLifecycleRuleArray []BucketsBucketListLifecycleRuleInput
+type BucketLifecycleRuleArray []BucketLifecycleRuleInput
 
-func (BucketsBucketListLifecycleRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListLifecycleRule)(nil)).Elem()
+func (BucketLifecycleRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketLifecycleRule)(nil)).Elem()
 }
 
-func (i BucketsBucketListLifecycleRuleArray) ToBucketsBucketListLifecycleRuleArrayOutput() BucketsBucketListLifecycleRuleArrayOutput {
-	return i.ToBucketsBucketListLifecycleRuleArrayOutputWithContext(context.Background())
+func (i BucketLifecycleRuleArray) ToBucketLifecycleRuleArrayOutput() BucketLifecycleRuleArrayOutput {
+	return i.ToBucketLifecycleRuleArrayOutputWithContext(context.Background())
 }
 
-func (i BucketsBucketListLifecycleRuleArray) ToBucketsBucketListLifecycleRuleArrayOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListLifecycleRuleArrayOutput)
+func (i BucketLifecycleRuleArray) ToBucketLifecycleRuleArrayOutputWithContext(ctx context.Context) BucketLifecycleRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleArrayOutput)
 }
 
-type BucketsBucketListLifecycleRuleOutput struct{ *pulumi.OutputState }
+type BucketLifecycleRuleOutput struct{ *pulumi.OutputState }
 
-func (BucketsBucketListLifecycleRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListLifecycleRule)(nil)).Elem()
+func (BucketLifecycleRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketLifecycleRule)(nil)).Elem()
 }
 
-func (o BucketsBucketListLifecycleRuleOutput) ToBucketsBucketListLifecycleRuleOutput() BucketsBucketListLifecycleRuleOutput {
+func (o BucketLifecycleRuleOutput) ToBucketLifecycleRuleOutput() BucketLifecycleRuleOutput {
 	return o
 }
 
-func (o BucketsBucketListLifecycleRuleOutput) ToBucketsBucketListLifecycleRuleOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleOutput {
+func (o BucketLifecycleRuleOutput) ToBucketLifecycleRuleOutputWithContext(ctx context.Context) BucketLifecycleRuleOutput {
 	return o
 }
 
-func (o BucketsBucketListLifecycleRuleOutput) Expirations() BucketsBucketListLifecycleRuleExpirationArrayOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRule) []BucketsBucketListLifecycleRuleExpiration {
-		return v.Expirations
-	}).(BucketsBucketListLifecycleRuleExpirationArrayOutput)
+// Specifies a period in the object's expire (documented below).
+func (o BucketLifecycleRuleOutput) Expiration() BucketLifecycleRuleExpirationPtrOutput {
+	return o.ApplyT(func(v BucketLifecycleRule) *BucketLifecycleRuleExpiration { return v.Expiration }).(BucketLifecycleRuleExpirationPtrOutput)
 }
 
-func (o BucketsBucketListLifecycleRuleOutput) FilterPrefix() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRule) string { return v.FilterPrefix }).(pulumi.StringOutput)
+// Object key prefix identifying one or more objects to which the rule applies.
+func (o BucketLifecycleRuleOutput) FilterPrefix() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketLifecycleRule) string { return v.FilterPrefix }).(pulumi.StringOutput)
 }
 
-func (o BucketsBucketListLifecycleRuleOutput) NonCurrentExpirations() BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRule) []BucketsBucketListLifecycleRuleNonCurrentExpiration {
-		return v.NonCurrentExpirations
-	}).(BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput)
+// A unique identifier for the rule. It can be up to 255 characters.
+func (o BucketLifecycleRuleOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketLifecycleRule) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
-func (o BucketsBucketListLifecycleRuleOutput) NonCurrentTransitions() BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRule) []BucketsBucketListLifecycleRuleNonCurrentTransition {
-		return v.NonCurrentTransitions
-	}).(BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput)
+// Specifies when non current object versions shall expire.
+func (o BucketLifecycleRuleOutput) NonCurrentExpiration() BucketLifecycleRuleNonCurrentExpirationPtrOutput {
+	return o.ApplyT(func(v BucketLifecycleRule) *BucketLifecycleRuleNonCurrentExpiration { return v.NonCurrentExpiration }).(BucketLifecycleRuleNonCurrentExpirationPtrOutput)
 }
 
-func (o BucketsBucketListLifecycleRuleOutput) Transitions() BucketsBucketListLifecycleRuleTransitionArrayOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRule) []BucketsBucketListLifecycleRuleTransition {
-		return v.Transitions
-	}).(BucketsBucketListLifecycleRuleTransitionArrayOutput)
+// Specifies a period in the non current object's transitions.
+func (o BucketLifecycleRuleOutput) NonCurrentTransitions() BucketLifecycleRuleNonCurrentTransitionArrayOutput {
+	return o.ApplyT(func(v BucketLifecycleRule) []BucketLifecycleRuleNonCurrentTransition { return v.NonCurrentTransitions }).(BucketLifecycleRuleNonCurrentTransitionArrayOutput)
 }
 
-type BucketsBucketListLifecycleRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListLifecycleRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListLifecycleRule)(nil)).Elem()
+// Specifies a period in the object's transitions (documented below).
+func (o BucketLifecycleRuleOutput) Transitions() BucketLifecycleRuleTransitionArrayOutput {
+	return o.ApplyT(func(v BucketLifecycleRule) []BucketLifecycleRuleTransition { return v.Transitions }).(BucketLifecycleRuleTransitionArrayOutput)
 }
 
-func (o BucketsBucketListLifecycleRuleArrayOutput) ToBucketsBucketListLifecycleRuleArrayOutput() BucketsBucketListLifecycleRuleArrayOutput {
+type BucketLifecycleRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (BucketLifecycleRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketLifecycleRule)(nil)).Elem()
+}
+
+func (o BucketLifecycleRuleArrayOutput) ToBucketLifecycleRuleArrayOutput() BucketLifecycleRuleArrayOutput {
 	return o
 }
 
-func (o BucketsBucketListLifecycleRuleArrayOutput) ToBucketsBucketListLifecycleRuleArrayOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleArrayOutput {
+func (o BucketLifecycleRuleArrayOutput) ToBucketLifecycleRuleArrayOutputWithContext(ctx context.Context) BucketLifecycleRuleArrayOutput {
 	return o
 }
 
-func (o BucketsBucketListLifecycleRuleArrayOutput) Index(i pulumi.IntInput) BucketsBucketListLifecycleRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketsBucketListLifecycleRule {
-		return vs[0].([]BucketsBucketListLifecycleRule)[vs[1].(int)]
-	}).(BucketsBucketListLifecycleRuleOutput)
+func (o BucketLifecycleRuleArrayOutput) Index(i pulumi.IntInput) BucketLifecycleRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketLifecycleRule {
+		return vs[0].([]BucketLifecycleRule)[vs[1].(int)]
+	}).(BucketLifecycleRuleOutput)
 }
 
-type BucketsBucketListLifecycleRuleExpiration struct {
-	Date string `pulumi:"date"`
-	Days int    `pulumi:"days"`
+type BucketLifecycleRuleExpiration struct {
+	// Specifies the date after which you want the corresponding action to take effect.
+	Date *string `pulumi:"date"`
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	Days *int `pulumi:"days"`
+	// Indicates whether the delete marker of an expired object will be removed.
+	DeleteMarker *bool `pulumi:"deleteMarker"`
 }
 
-// BucketsBucketListLifecycleRuleExpirationInput is an input type that accepts BucketsBucketListLifecycleRuleExpirationArgs and BucketsBucketListLifecycleRuleExpirationOutput values.
-// You can construct a concrete instance of `BucketsBucketListLifecycleRuleExpirationInput` via:
+// BucketLifecycleRuleExpirationInput is an input type that accepts BucketLifecycleRuleExpirationArgs and BucketLifecycleRuleExpirationOutput values.
+// You can construct a concrete instance of `BucketLifecycleRuleExpirationInput` via:
 //
-//          BucketsBucketListLifecycleRuleExpirationArgs{...}
-type BucketsBucketListLifecycleRuleExpirationInput interface {
+//          BucketLifecycleRuleExpirationArgs{...}
+type BucketLifecycleRuleExpirationInput interface {
 	pulumi.Input
 
-	ToBucketsBucketListLifecycleRuleExpirationOutput() BucketsBucketListLifecycleRuleExpirationOutput
-	ToBucketsBucketListLifecycleRuleExpirationOutputWithContext(context.Context) BucketsBucketListLifecycleRuleExpirationOutput
+	ToBucketLifecycleRuleExpirationOutput() BucketLifecycleRuleExpirationOutput
+	ToBucketLifecycleRuleExpirationOutputWithContext(context.Context) BucketLifecycleRuleExpirationOutput
 }
 
-type BucketsBucketListLifecycleRuleExpirationArgs struct {
-	Date pulumi.StringInput `pulumi:"date"`
-	Days pulumi.IntInput    `pulumi:"days"`
+type BucketLifecycleRuleExpirationArgs struct {
+	// Specifies the date after which you want the corresponding action to take effect.
+	Date pulumi.StringPtrInput `pulumi:"date"`
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	Days pulumi.IntPtrInput `pulumi:"days"`
+	// Indicates whether the delete marker of an expired object will be removed.
+	DeleteMarker pulumi.BoolPtrInput `pulumi:"deleteMarker"`
 }
 
-func (BucketsBucketListLifecycleRuleExpirationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListLifecycleRuleExpiration)(nil)).Elem()
+func (BucketLifecycleRuleExpirationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketLifecycleRuleExpiration)(nil)).Elem()
 }
 
-func (i BucketsBucketListLifecycleRuleExpirationArgs) ToBucketsBucketListLifecycleRuleExpirationOutput() BucketsBucketListLifecycleRuleExpirationOutput {
-	return i.ToBucketsBucketListLifecycleRuleExpirationOutputWithContext(context.Background())
+func (i BucketLifecycleRuleExpirationArgs) ToBucketLifecycleRuleExpirationOutput() BucketLifecycleRuleExpirationOutput {
+	return i.ToBucketLifecycleRuleExpirationOutputWithContext(context.Background())
 }
 
-func (i BucketsBucketListLifecycleRuleExpirationArgs) ToBucketsBucketListLifecycleRuleExpirationOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleExpirationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListLifecycleRuleExpirationOutput)
+func (i BucketLifecycleRuleExpirationArgs) ToBucketLifecycleRuleExpirationOutputWithContext(ctx context.Context) BucketLifecycleRuleExpirationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleExpirationOutput)
 }
 
-// BucketsBucketListLifecycleRuleExpirationArrayInput is an input type that accepts BucketsBucketListLifecycleRuleExpirationArray and BucketsBucketListLifecycleRuleExpirationArrayOutput values.
-// You can construct a concrete instance of `BucketsBucketListLifecycleRuleExpirationArrayInput` via:
+func (i BucketLifecycleRuleExpirationArgs) ToBucketLifecycleRuleExpirationPtrOutput() BucketLifecycleRuleExpirationPtrOutput {
+	return i.ToBucketLifecycleRuleExpirationPtrOutputWithContext(context.Background())
+}
+
+func (i BucketLifecycleRuleExpirationArgs) ToBucketLifecycleRuleExpirationPtrOutputWithContext(ctx context.Context) BucketLifecycleRuleExpirationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleExpirationOutput).ToBucketLifecycleRuleExpirationPtrOutputWithContext(ctx)
+}
+
+// BucketLifecycleRuleExpirationPtrInput is an input type that accepts BucketLifecycleRuleExpirationArgs, BucketLifecycleRuleExpirationPtr and BucketLifecycleRuleExpirationPtrOutput values.
+// You can construct a concrete instance of `BucketLifecycleRuleExpirationPtrInput` via:
 //
-//          BucketsBucketListLifecycleRuleExpirationArray{ BucketsBucketListLifecycleRuleExpirationArgs{...} }
-type BucketsBucketListLifecycleRuleExpirationArrayInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListLifecycleRuleExpirationArrayOutput() BucketsBucketListLifecycleRuleExpirationArrayOutput
-	ToBucketsBucketListLifecycleRuleExpirationArrayOutputWithContext(context.Context) BucketsBucketListLifecycleRuleExpirationArrayOutput
-}
-
-type BucketsBucketListLifecycleRuleExpirationArray []BucketsBucketListLifecycleRuleExpirationInput
-
-func (BucketsBucketListLifecycleRuleExpirationArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListLifecycleRuleExpiration)(nil)).Elem()
-}
-
-func (i BucketsBucketListLifecycleRuleExpirationArray) ToBucketsBucketListLifecycleRuleExpirationArrayOutput() BucketsBucketListLifecycleRuleExpirationArrayOutput {
-	return i.ToBucketsBucketListLifecycleRuleExpirationArrayOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListLifecycleRuleExpirationArray) ToBucketsBucketListLifecycleRuleExpirationArrayOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleExpirationArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListLifecycleRuleExpirationArrayOutput)
-}
-
-type BucketsBucketListLifecycleRuleExpirationOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListLifecycleRuleExpirationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListLifecycleRuleExpiration)(nil)).Elem()
-}
-
-func (o BucketsBucketListLifecycleRuleExpirationOutput) ToBucketsBucketListLifecycleRuleExpirationOutput() BucketsBucketListLifecycleRuleExpirationOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleExpirationOutput) ToBucketsBucketListLifecycleRuleExpirationOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleExpirationOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleExpirationOutput) Date() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRuleExpiration) string { return v.Date }).(pulumi.StringOutput)
-}
-
-func (o BucketsBucketListLifecycleRuleExpirationOutput) Days() pulumi.IntOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRuleExpiration) int { return v.Days }).(pulumi.IntOutput)
-}
-
-type BucketsBucketListLifecycleRuleExpirationArrayOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListLifecycleRuleExpirationArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListLifecycleRuleExpiration)(nil)).Elem()
-}
-
-func (o BucketsBucketListLifecycleRuleExpirationArrayOutput) ToBucketsBucketListLifecycleRuleExpirationArrayOutput() BucketsBucketListLifecycleRuleExpirationArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleExpirationArrayOutput) ToBucketsBucketListLifecycleRuleExpirationArrayOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleExpirationArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleExpirationArrayOutput) Index(i pulumi.IntInput) BucketsBucketListLifecycleRuleExpirationOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketsBucketListLifecycleRuleExpiration {
-		return vs[0].([]BucketsBucketListLifecycleRuleExpiration)[vs[1].(int)]
-	}).(BucketsBucketListLifecycleRuleExpirationOutput)
-}
-
-type BucketsBucketListLifecycleRuleNonCurrentExpiration struct {
-	NonCurrentDays int `pulumi:"nonCurrentDays"`
-}
-
-// BucketsBucketListLifecycleRuleNonCurrentExpirationInput is an input type that accepts BucketsBucketListLifecycleRuleNonCurrentExpirationArgs and BucketsBucketListLifecycleRuleNonCurrentExpirationOutput values.
-// You can construct a concrete instance of `BucketsBucketListLifecycleRuleNonCurrentExpirationInput` via:
-//
-//          BucketsBucketListLifecycleRuleNonCurrentExpirationArgs{...}
-type BucketsBucketListLifecycleRuleNonCurrentExpirationInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListLifecycleRuleNonCurrentExpirationOutput() BucketsBucketListLifecycleRuleNonCurrentExpirationOutput
-	ToBucketsBucketListLifecycleRuleNonCurrentExpirationOutputWithContext(context.Context) BucketsBucketListLifecycleRuleNonCurrentExpirationOutput
-}
-
-type BucketsBucketListLifecycleRuleNonCurrentExpirationArgs struct {
-	NonCurrentDays pulumi.IntInput `pulumi:"nonCurrentDays"`
-}
-
-func (BucketsBucketListLifecycleRuleNonCurrentExpirationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListLifecycleRuleNonCurrentExpiration)(nil)).Elem()
-}
-
-func (i BucketsBucketListLifecycleRuleNonCurrentExpirationArgs) ToBucketsBucketListLifecycleRuleNonCurrentExpirationOutput() BucketsBucketListLifecycleRuleNonCurrentExpirationOutput {
-	return i.ToBucketsBucketListLifecycleRuleNonCurrentExpirationOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListLifecycleRuleNonCurrentExpirationArgs) ToBucketsBucketListLifecycleRuleNonCurrentExpirationOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleNonCurrentExpirationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListLifecycleRuleNonCurrentExpirationOutput)
-}
-
-// BucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput is an input type that accepts BucketsBucketListLifecycleRuleNonCurrentExpirationArray and BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput values.
-// You can construct a concrete instance of `BucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput` via:
-//
-//          BucketsBucketListLifecycleRuleNonCurrentExpirationArray{ BucketsBucketListLifecycleRuleNonCurrentExpirationArgs{...} }
-type BucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput() BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput
-	ToBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutputWithContext(context.Context) BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput
-}
-
-type BucketsBucketListLifecycleRuleNonCurrentExpirationArray []BucketsBucketListLifecycleRuleNonCurrentExpirationInput
-
-func (BucketsBucketListLifecycleRuleNonCurrentExpirationArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListLifecycleRuleNonCurrentExpiration)(nil)).Elem()
-}
-
-func (i BucketsBucketListLifecycleRuleNonCurrentExpirationArray) ToBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput() BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput {
-	return i.ToBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListLifecycleRuleNonCurrentExpirationArray) ToBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput)
-}
-
-type BucketsBucketListLifecycleRuleNonCurrentExpirationOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListLifecycleRuleNonCurrentExpirationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListLifecycleRuleNonCurrentExpiration)(nil)).Elem()
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentExpirationOutput) ToBucketsBucketListLifecycleRuleNonCurrentExpirationOutput() BucketsBucketListLifecycleRuleNonCurrentExpirationOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentExpirationOutput) ToBucketsBucketListLifecycleRuleNonCurrentExpirationOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleNonCurrentExpirationOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentExpirationOutput) NonCurrentDays() pulumi.IntOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRuleNonCurrentExpiration) int { return v.NonCurrentDays }).(pulumi.IntOutput)
-}
-
-type BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListLifecycleRuleNonCurrentExpiration)(nil)).Elem()
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput) ToBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput() BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput) ToBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput) Index(i pulumi.IntInput) BucketsBucketListLifecycleRuleNonCurrentExpirationOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketsBucketListLifecycleRuleNonCurrentExpiration {
-		return vs[0].([]BucketsBucketListLifecycleRuleNonCurrentExpiration)[vs[1].(int)]
-	}).(BucketsBucketListLifecycleRuleNonCurrentExpirationOutput)
-}
-
-type BucketsBucketListLifecycleRuleNonCurrentTransition struct {
-	NonCurrentDays int    `pulumi:"nonCurrentDays"`
-	StorageClass   string `pulumi:"storageClass"`
-}
-
-// BucketsBucketListLifecycleRuleNonCurrentTransitionInput is an input type that accepts BucketsBucketListLifecycleRuleNonCurrentTransitionArgs and BucketsBucketListLifecycleRuleNonCurrentTransitionOutput values.
-// You can construct a concrete instance of `BucketsBucketListLifecycleRuleNonCurrentTransitionInput` via:
-//
-//          BucketsBucketListLifecycleRuleNonCurrentTransitionArgs{...}
-type BucketsBucketListLifecycleRuleNonCurrentTransitionInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListLifecycleRuleNonCurrentTransitionOutput() BucketsBucketListLifecycleRuleNonCurrentTransitionOutput
-	ToBucketsBucketListLifecycleRuleNonCurrentTransitionOutputWithContext(context.Context) BucketsBucketListLifecycleRuleNonCurrentTransitionOutput
-}
-
-type BucketsBucketListLifecycleRuleNonCurrentTransitionArgs struct {
-	NonCurrentDays pulumi.IntInput    `pulumi:"nonCurrentDays"`
-	StorageClass   pulumi.StringInput `pulumi:"storageClass"`
-}
-
-func (BucketsBucketListLifecycleRuleNonCurrentTransitionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListLifecycleRuleNonCurrentTransition)(nil)).Elem()
-}
-
-func (i BucketsBucketListLifecycleRuleNonCurrentTransitionArgs) ToBucketsBucketListLifecycleRuleNonCurrentTransitionOutput() BucketsBucketListLifecycleRuleNonCurrentTransitionOutput {
-	return i.ToBucketsBucketListLifecycleRuleNonCurrentTransitionOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListLifecycleRuleNonCurrentTransitionArgs) ToBucketsBucketListLifecycleRuleNonCurrentTransitionOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleNonCurrentTransitionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListLifecycleRuleNonCurrentTransitionOutput)
-}
-
-// BucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput is an input type that accepts BucketsBucketListLifecycleRuleNonCurrentTransitionArray and BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput values.
-// You can construct a concrete instance of `BucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput` via:
-//
-//          BucketsBucketListLifecycleRuleNonCurrentTransitionArray{ BucketsBucketListLifecycleRuleNonCurrentTransitionArgs{...} }
-type BucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput() BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput
-	ToBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutputWithContext(context.Context) BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput
-}
-
-type BucketsBucketListLifecycleRuleNonCurrentTransitionArray []BucketsBucketListLifecycleRuleNonCurrentTransitionInput
-
-func (BucketsBucketListLifecycleRuleNonCurrentTransitionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListLifecycleRuleNonCurrentTransition)(nil)).Elem()
-}
-
-func (i BucketsBucketListLifecycleRuleNonCurrentTransitionArray) ToBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput() BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput {
-	return i.ToBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListLifecycleRuleNonCurrentTransitionArray) ToBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput)
-}
-
-type BucketsBucketListLifecycleRuleNonCurrentTransitionOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListLifecycleRuleNonCurrentTransitionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListLifecycleRuleNonCurrentTransition)(nil)).Elem()
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentTransitionOutput) ToBucketsBucketListLifecycleRuleNonCurrentTransitionOutput() BucketsBucketListLifecycleRuleNonCurrentTransitionOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentTransitionOutput) ToBucketsBucketListLifecycleRuleNonCurrentTransitionOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleNonCurrentTransitionOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentTransitionOutput) NonCurrentDays() pulumi.IntOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRuleNonCurrentTransition) int { return v.NonCurrentDays }).(pulumi.IntOutput)
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentTransitionOutput) StorageClass() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRuleNonCurrentTransition) string { return v.StorageClass }).(pulumi.StringOutput)
-}
-
-type BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListLifecycleRuleNonCurrentTransition)(nil)).Elem()
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput) ToBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput() BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput) ToBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput) Index(i pulumi.IntInput) BucketsBucketListLifecycleRuleNonCurrentTransitionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketsBucketListLifecycleRuleNonCurrentTransition {
-		return vs[0].([]BucketsBucketListLifecycleRuleNonCurrentTransition)[vs[1].(int)]
-	}).(BucketsBucketListLifecycleRuleNonCurrentTransitionOutput)
-}
-
-type BucketsBucketListLifecycleRuleTransition struct {
-	Date         string `pulumi:"date"`
-	Days         int    `pulumi:"days"`
-	StorageClass string `pulumi:"storageClass"`
-}
-
-// BucketsBucketListLifecycleRuleTransitionInput is an input type that accepts BucketsBucketListLifecycleRuleTransitionArgs and BucketsBucketListLifecycleRuleTransitionOutput values.
-// You can construct a concrete instance of `BucketsBucketListLifecycleRuleTransitionInput` via:
-//
-//          BucketsBucketListLifecycleRuleTransitionArgs{...}
-type BucketsBucketListLifecycleRuleTransitionInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListLifecycleRuleTransitionOutput() BucketsBucketListLifecycleRuleTransitionOutput
-	ToBucketsBucketListLifecycleRuleTransitionOutputWithContext(context.Context) BucketsBucketListLifecycleRuleTransitionOutput
-}
-
-type BucketsBucketListLifecycleRuleTransitionArgs struct {
-	Date         pulumi.StringInput `pulumi:"date"`
-	Days         pulumi.IntInput    `pulumi:"days"`
-	StorageClass pulumi.StringInput `pulumi:"storageClass"`
-}
-
-func (BucketsBucketListLifecycleRuleTransitionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListLifecycleRuleTransition)(nil)).Elem()
-}
-
-func (i BucketsBucketListLifecycleRuleTransitionArgs) ToBucketsBucketListLifecycleRuleTransitionOutput() BucketsBucketListLifecycleRuleTransitionOutput {
-	return i.ToBucketsBucketListLifecycleRuleTransitionOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListLifecycleRuleTransitionArgs) ToBucketsBucketListLifecycleRuleTransitionOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleTransitionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListLifecycleRuleTransitionOutput)
-}
-
-// BucketsBucketListLifecycleRuleTransitionArrayInput is an input type that accepts BucketsBucketListLifecycleRuleTransitionArray and BucketsBucketListLifecycleRuleTransitionArrayOutput values.
-// You can construct a concrete instance of `BucketsBucketListLifecycleRuleTransitionArrayInput` via:
-//
-//          BucketsBucketListLifecycleRuleTransitionArray{ BucketsBucketListLifecycleRuleTransitionArgs{...} }
-type BucketsBucketListLifecycleRuleTransitionArrayInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListLifecycleRuleTransitionArrayOutput() BucketsBucketListLifecycleRuleTransitionArrayOutput
-	ToBucketsBucketListLifecycleRuleTransitionArrayOutputWithContext(context.Context) BucketsBucketListLifecycleRuleTransitionArrayOutput
-}
-
-type BucketsBucketListLifecycleRuleTransitionArray []BucketsBucketListLifecycleRuleTransitionInput
-
-func (BucketsBucketListLifecycleRuleTransitionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListLifecycleRuleTransition)(nil)).Elem()
-}
-
-func (i BucketsBucketListLifecycleRuleTransitionArray) ToBucketsBucketListLifecycleRuleTransitionArrayOutput() BucketsBucketListLifecycleRuleTransitionArrayOutput {
-	return i.ToBucketsBucketListLifecycleRuleTransitionArrayOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListLifecycleRuleTransitionArray) ToBucketsBucketListLifecycleRuleTransitionArrayOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleTransitionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListLifecycleRuleTransitionArrayOutput)
-}
-
-type BucketsBucketListLifecycleRuleTransitionOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListLifecycleRuleTransitionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListLifecycleRuleTransition)(nil)).Elem()
-}
-
-func (o BucketsBucketListLifecycleRuleTransitionOutput) ToBucketsBucketListLifecycleRuleTransitionOutput() BucketsBucketListLifecycleRuleTransitionOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleTransitionOutput) ToBucketsBucketListLifecycleRuleTransitionOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleTransitionOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleTransitionOutput) Date() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRuleTransition) string { return v.Date }).(pulumi.StringOutput)
-}
-
-func (o BucketsBucketListLifecycleRuleTransitionOutput) Days() pulumi.IntOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRuleTransition) int { return v.Days }).(pulumi.IntOutput)
-}
-
-func (o BucketsBucketListLifecycleRuleTransitionOutput) StorageClass() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketListLifecycleRuleTransition) string { return v.StorageClass }).(pulumi.StringOutput)
-}
-
-type BucketsBucketListLifecycleRuleTransitionArrayOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListLifecycleRuleTransitionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListLifecycleRuleTransition)(nil)).Elem()
-}
-
-func (o BucketsBucketListLifecycleRuleTransitionArrayOutput) ToBucketsBucketListLifecycleRuleTransitionArrayOutput() BucketsBucketListLifecycleRuleTransitionArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleTransitionArrayOutput) ToBucketsBucketListLifecycleRuleTransitionArrayOutputWithContext(ctx context.Context) BucketsBucketListLifecycleRuleTransitionArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListLifecycleRuleTransitionArrayOutput) Index(i pulumi.IntInput) BucketsBucketListLifecycleRuleTransitionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketsBucketListLifecycleRuleTransition {
-		return vs[0].([]BucketsBucketListLifecycleRuleTransition)[vs[1].(int)]
-	}).(BucketsBucketListLifecycleRuleTransitionOutput)
-}
-
-type BucketsBucketListOriginDomainRule struct {
-	Domain string  `pulumi:"domain"`
-	Status *string `pulumi:"status"`
-	Type   *string `pulumi:"type"`
-}
-
-// BucketsBucketListOriginDomainRuleInput is an input type that accepts BucketsBucketListOriginDomainRuleArgs and BucketsBucketListOriginDomainRuleOutput values.
-// You can construct a concrete instance of `BucketsBucketListOriginDomainRuleInput` via:
-//
-//          BucketsBucketListOriginDomainRuleArgs{...}
-type BucketsBucketListOriginDomainRuleInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListOriginDomainRuleOutput() BucketsBucketListOriginDomainRuleOutput
-	ToBucketsBucketListOriginDomainRuleOutputWithContext(context.Context) BucketsBucketListOriginDomainRuleOutput
-}
-
-type BucketsBucketListOriginDomainRuleArgs struct {
-	Domain pulumi.StringInput    `pulumi:"domain"`
-	Status pulumi.StringPtrInput `pulumi:"status"`
-	Type   pulumi.StringPtrInput `pulumi:"type"`
-}
-
-func (BucketsBucketListOriginDomainRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListOriginDomainRule)(nil)).Elem()
-}
-
-func (i BucketsBucketListOriginDomainRuleArgs) ToBucketsBucketListOriginDomainRuleOutput() BucketsBucketListOriginDomainRuleOutput {
-	return i.ToBucketsBucketListOriginDomainRuleOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListOriginDomainRuleArgs) ToBucketsBucketListOriginDomainRuleOutputWithContext(ctx context.Context) BucketsBucketListOriginDomainRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListOriginDomainRuleOutput)
-}
-
-// BucketsBucketListOriginDomainRuleArrayInput is an input type that accepts BucketsBucketListOriginDomainRuleArray and BucketsBucketListOriginDomainRuleArrayOutput values.
-// You can construct a concrete instance of `BucketsBucketListOriginDomainRuleArrayInput` via:
-//
-//          BucketsBucketListOriginDomainRuleArray{ BucketsBucketListOriginDomainRuleArgs{...} }
-type BucketsBucketListOriginDomainRuleArrayInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListOriginDomainRuleArrayOutput() BucketsBucketListOriginDomainRuleArrayOutput
-	ToBucketsBucketListOriginDomainRuleArrayOutputWithContext(context.Context) BucketsBucketListOriginDomainRuleArrayOutput
-}
-
-type BucketsBucketListOriginDomainRuleArray []BucketsBucketListOriginDomainRuleInput
-
-func (BucketsBucketListOriginDomainRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListOriginDomainRule)(nil)).Elem()
-}
-
-func (i BucketsBucketListOriginDomainRuleArray) ToBucketsBucketListOriginDomainRuleArrayOutput() BucketsBucketListOriginDomainRuleArrayOutput {
-	return i.ToBucketsBucketListOriginDomainRuleArrayOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListOriginDomainRuleArray) ToBucketsBucketListOriginDomainRuleArrayOutputWithContext(ctx context.Context) BucketsBucketListOriginDomainRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListOriginDomainRuleArrayOutput)
-}
-
-type BucketsBucketListOriginDomainRuleOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListOriginDomainRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListOriginDomainRule)(nil)).Elem()
-}
-
-func (o BucketsBucketListOriginDomainRuleOutput) ToBucketsBucketListOriginDomainRuleOutput() BucketsBucketListOriginDomainRuleOutput {
-	return o
-}
-
-func (o BucketsBucketListOriginDomainRuleOutput) ToBucketsBucketListOriginDomainRuleOutputWithContext(ctx context.Context) BucketsBucketListOriginDomainRuleOutput {
-	return o
-}
-
-func (o BucketsBucketListOriginDomainRuleOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketListOriginDomainRule) string { return v.Domain }).(pulumi.StringOutput)
-}
-
-func (o BucketsBucketListOriginDomainRuleOutput) Status() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v BucketsBucketListOriginDomainRule) *string { return v.Status }).(pulumi.StringPtrOutput)
-}
-
-func (o BucketsBucketListOriginDomainRuleOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v BucketsBucketListOriginDomainRule) *string { return v.Type }).(pulumi.StringPtrOutput)
-}
-
-type BucketsBucketListOriginDomainRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListOriginDomainRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListOriginDomainRule)(nil)).Elem()
-}
-
-func (o BucketsBucketListOriginDomainRuleArrayOutput) ToBucketsBucketListOriginDomainRuleArrayOutput() BucketsBucketListOriginDomainRuleArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListOriginDomainRuleArrayOutput) ToBucketsBucketListOriginDomainRuleArrayOutputWithContext(ctx context.Context) BucketsBucketListOriginDomainRuleArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListOriginDomainRuleArrayOutput) Index(i pulumi.IntInput) BucketsBucketListOriginDomainRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketsBucketListOriginDomainRule {
-		return vs[0].([]BucketsBucketListOriginDomainRule)[vs[1].(int)]
-	}).(BucketsBucketListOriginDomainRuleOutput)
-}
-
-type BucketsBucketListOriginPullRule struct {
-	CustomHttpHeaders map[string]interface{} `pulumi:"customHttpHeaders"`
-	FollowHttpHeaders []string               `pulumi:"followHttpHeaders"`
-	FollowQueryString *bool                  `pulumi:"followQueryString"`
-	FollowRedirection *bool                  `pulumi:"followRedirection"`
-	Host              string                 `pulumi:"host"`
-	Prefix            *string                `pulumi:"prefix"`
-	Priority          int                    `pulumi:"priority"`
-	Protocol          *string                `pulumi:"protocol"`
-	SyncBackToSource  *bool                  `pulumi:"syncBackToSource"`
-}
-
-// BucketsBucketListOriginPullRuleInput is an input type that accepts BucketsBucketListOriginPullRuleArgs and BucketsBucketListOriginPullRuleOutput values.
-// You can construct a concrete instance of `BucketsBucketListOriginPullRuleInput` via:
-//
-//          BucketsBucketListOriginPullRuleArgs{...}
-type BucketsBucketListOriginPullRuleInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListOriginPullRuleOutput() BucketsBucketListOriginPullRuleOutput
-	ToBucketsBucketListOriginPullRuleOutputWithContext(context.Context) BucketsBucketListOriginPullRuleOutput
-}
-
-type BucketsBucketListOriginPullRuleArgs struct {
-	CustomHttpHeaders pulumi.MapInput         `pulumi:"customHttpHeaders"`
-	FollowHttpHeaders pulumi.StringArrayInput `pulumi:"followHttpHeaders"`
-	FollowQueryString pulumi.BoolPtrInput     `pulumi:"followQueryString"`
-	FollowRedirection pulumi.BoolPtrInput     `pulumi:"followRedirection"`
-	Host              pulumi.StringInput      `pulumi:"host"`
-	Prefix            pulumi.StringPtrInput   `pulumi:"prefix"`
-	Priority          pulumi.IntInput         `pulumi:"priority"`
-	Protocol          pulumi.StringPtrInput   `pulumi:"protocol"`
-	SyncBackToSource  pulumi.BoolPtrInput     `pulumi:"syncBackToSource"`
-}
-
-func (BucketsBucketListOriginPullRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListOriginPullRule)(nil)).Elem()
-}
-
-func (i BucketsBucketListOriginPullRuleArgs) ToBucketsBucketListOriginPullRuleOutput() BucketsBucketListOriginPullRuleOutput {
-	return i.ToBucketsBucketListOriginPullRuleOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListOriginPullRuleArgs) ToBucketsBucketListOriginPullRuleOutputWithContext(ctx context.Context) BucketsBucketListOriginPullRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListOriginPullRuleOutput)
-}
-
-// BucketsBucketListOriginPullRuleArrayInput is an input type that accepts BucketsBucketListOriginPullRuleArray and BucketsBucketListOriginPullRuleArrayOutput values.
-// You can construct a concrete instance of `BucketsBucketListOriginPullRuleArrayInput` via:
-//
-//          BucketsBucketListOriginPullRuleArray{ BucketsBucketListOriginPullRuleArgs{...} }
-type BucketsBucketListOriginPullRuleArrayInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListOriginPullRuleArrayOutput() BucketsBucketListOriginPullRuleArrayOutput
-	ToBucketsBucketListOriginPullRuleArrayOutputWithContext(context.Context) BucketsBucketListOriginPullRuleArrayOutput
-}
-
-type BucketsBucketListOriginPullRuleArray []BucketsBucketListOriginPullRuleInput
-
-func (BucketsBucketListOriginPullRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListOriginPullRule)(nil)).Elem()
-}
-
-func (i BucketsBucketListOriginPullRuleArray) ToBucketsBucketListOriginPullRuleArrayOutput() BucketsBucketListOriginPullRuleArrayOutput {
-	return i.ToBucketsBucketListOriginPullRuleArrayOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListOriginPullRuleArray) ToBucketsBucketListOriginPullRuleArrayOutputWithContext(ctx context.Context) BucketsBucketListOriginPullRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListOriginPullRuleArrayOutput)
-}
-
-type BucketsBucketListOriginPullRuleOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListOriginPullRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListOriginPullRule)(nil)).Elem()
-}
-
-func (o BucketsBucketListOriginPullRuleOutput) ToBucketsBucketListOriginPullRuleOutput() BucketsBucketListOriginPullRuleOutput {
-	return o
-}
-
-func (o BucketsBucketListOriginPullRuleOutput) ToBucketsBucketListOriginPullRuleOutputWithContext(ctx context.Context) BucketsBucketListOriginPullRuleOutput {
-	return o
-}
-
-func (o BucketsBucketListOriginPullRuleOutput) CustomHttpHeaders() pulumi.MapOutput {
-	return o.ApplyT(func(v BucketsBucketListOriginPullRule) map[string]interface{} { return v.CustomHttpHeaders }).(pulumi.MapOutput)
-}
-
-func (o BucketsBucketListOriginPullRuleOutput) FollowHttpHeaders() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v BucketsBucketListOriginPullRule) []string { return v.FollowHttpHeaders }).(pulumi.StringArrayOutput)
-}
-
-func (o BucketsBucketListOriginPullRuleOutput) FollowQueryString() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v BucketsBucketListOriginPullRule) *bool { return v.FollowQueryString }).(pulumi.BoolPtrOutput)
-}
-
-func (o BucketsBucketListOriginPullRuleOutput) FollowRedirection() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v BucketsBucketListOriginPullRule) *bool { return v.FollowRedirection }).(pulumi.BoolPtrOutput)
-}
-
-func (o BucketsBucketListOriginPullRuleOutput) Host() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketListOriginPullRule) string { return v.Host }).(pulumi.StringOutput)
-}
-
-func (o BucketsBucketListOriginPullRuleOutput) Prefix() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v BucketsBucketListOriginPullRule) *string { return v.Prefix }).(pulumi.StringPtrOutput)
-}
-
-func (o BucketsBucketListOriginPullRuleOutput) Priority() pulumi.IntOutput {
-	return o.ApplyT(func(v BucketsBucketListOriginPullRule) int { return v.Priority }).(pulumi.IntOutput)
-}
-
-func (o BucketsBucketListOriginPullRuleOutput) Protocol() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v BucketsBucketListOriginPullRule) *string { return v.Protocol }).(pulumi.StringPtrOutput)
-}
-
-func (o BucketsBucketListOriginPullRuleOutput) SyncBackToSource() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v BucketsBucketListOriginPullRule) *bool { return v.SyncBackToSource }).(pulumi.BoolPtrOutput)
-}
-
-type BucketsBucketListOriginPullRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListOriginPullRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListOriginPullRule)(nil)).Elem()
-}
-
-func (o BucketsBucketListOriginPullRuleArrayOutput) ToBucketsBucketListOriginPullRuleArrayOutput() BucketsBucketListOriginPullRuleArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListOriginPullRuleArrayOutput) ToBucketsBucketListOriginPullRuleArrayOutputWithContext(ctx context.Context) BucketsBucketListOriginPullRuleArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListOriginPullRuleArrayOutput) Index(i pulumi.IntInput) BucketsBucketListOriginPullRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketsBucketListOriginPullRule {
-		return vs[0].([]BucketsBucketListOriginPullRule)[vs[1].(int)]
-	}).(BucketsBucketListOriginPullRuleOutput)
-}
-
-type BucketsBucketListWebsite struct {
-	ErrorDocument string `pulumi:"errorDocument"`
-	IndexDocument string `pulumi:"indexDocument"`
-}
-
-// BucketsBucketListWebsiteInput is an input type that accepts BucketsBucketListWebsiteArgs and BucketsBucketListWebsiteOutput values.
-// You can construct a concrete instance of `BucketsBucketListWebsiteInput` via:
-//
-//          BucketsBucketListWebsiteArgs{...}
-type BucketsBucketListWebsiteInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListWebsiteOutput() BucketsBucketListWebsiteOutput
-	ToBucketsBucketListWebsiteOutputWithContext(context.Context) BucketsBucketListWebsiteOutput
-}
-
-type BucketsBucketListWebsiteArgs struct {
-	ErrorDocument pulumi.StringInput `pulumi:"errorDocument"`
-	IndexDocument pulumi.StringInput `pulumi:"indexDocument"`
-}
-
-func (BucketsBucketListWebsiteArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListWebsite)(nil)).Elem()
-}
-
-func (i BucketsBucketListWebsiteArgs) ToBucketsBucketListWebsiteOutput() BucketsBucketListWebsiteOutput {
-	return i.ToBucketsBucketListWebsiteOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListWebsiteArgs) ToBucketsBucketListWebsiteOutputWithContext(ctx context.Context) BucketsBucketListWebsiteOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListWebsiteOutput)
-}
-
-// BucketsBucketListWebsiteArrayInput is an input type that accepts BucketsBucketListWebsiteArray and BucketsBucketListWebsiteArrayOutput values.
-// You can construct a concrete instance of `BucketsBucketListWebsiteArrayInput` via:
-//
-//          BucketsBucketListWebsiteArray{ BucketsBucketListWebsiteArgs{...} }
-type BucketsBucketListWebsiteArrayInput interface {
-	pulumi.Input
-
-	ToBucketsBucketListWebsiteArrayOutput() BucketsBucketListWebsiteArrayOutput
-	ToBucketsBucketListWebsiteArrayOutputWithContext(context.Context) BucketsBucketListWebsiteArrayOutput
-}
-
-type BucketsBucketListWebsiteArray []BucketsBucketListWebsiteInput
-
-func (BucketsBucketListWebsiteArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListWebsite)(nil)).Elem()
-}
-
-func (i BucketsBucketListWebsiteArray) ToBucketsBucketListWebsiteArrayOutput() BucketsBucketListWebsiteArrayOutput {
-	return i.ToBucketsBucketListWebsiteArrayOutputWithContext(context.Background())
-}
-
-func (i BucketsBucketListWebsiteArray) ToBucketsBucketListWebsiteArrayOutputWithContext(ctx context.Context) BucketsBucketListWebsiteArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(BucketsBucketListWebsiteArrayOutput)
-}
-
-type BucketsBucketListWebsiteOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListWebsiteOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*BucketsBucketListWebsite)(nil)).Elem()
-}
-
-func (o BucketsBucketListWebsiteOutput) ToBucketsBucketListWebsiteOutput() BucketsBucketListWebsiteOutput {
-	return o
-}
-
-func (o BucketsBucketListWebsiteOutput) ToBucketsBucketListWebsiteOutputWithContext(ctx context.Context) BucketsBucketListWebsiteOutput {
-	return o
-}
-
-func (o BucketsBucketListWebsiteOutput) ErrorDocument() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketListWebsite) string { return v.ErrorDocument }).(pulumi.StringOutput)
-}
-
-func (o BucketsBucketListWebsiteOutput) IndexDocument() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketsBucketListWebsite) string { return v.IndexDocument }).(pulumi.StringOutput)
-}
-
-type BucketsBucketListWebsiteArrayOutput struct{ *pulumi.OutputState }
-
-func (BucketsBucketListWebsiteArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]BucketsBucketListWebsite)(nil)).Elem()
-}
-
-func (o BucketsBucketListWebsiteArrayOutput) ToBucketsBucketListWebsiteArrayOutput() BucketsBucketListWebsiteArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListWebsiteArrayOutput) ToBucketsBucketListWebsiteArrayOutputWithContext(ctx context.Context) BucketsBucketListWebsiteArrayOutput {
-	return o
-}
-
-func (o BucketsBucketListWebsiteArrayOutput) Index(i pulumi.IntInput) BucketsBucketListWebsiteOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketsBucketListWebsite {
-		return vs[0].([]BucketsBucketListWebsite)[vs[1].(int)]
-	}).(BucketsBucketListWebsiteOutput)
-}
-
-type CosBucketCorsRule struct {
-	AllowedHeaders []string `pulumi:"allowedHeaders"`
-	AllowedMethods []string `pulumi:"allowedMethods"`
-	AllowedOrigins []string `pulumi:"allowedOrigins"`
-	ExposeHeaders  []string `pulumi:"exposeHeaders"`
-	MaxAgeSeconds  *int     `pulumi:"maxAgeSeconds"`
-}
-
-// CosBucketCorsRuleInput is an input type that accepts CosBucketCorsRuleArgs and CosBucketCorsRuleOutput values.
-// You can construct a concrete instance of `CosBucketCorsRuleInput` via:
-//
-//          CosBucketCorsRuleArgs{...}
-type CosBucketCorsRuleInput interface {
-	pulumi.Input
-
-	ToCosBucketCorsRuleOutput() CosBucketCorsRuleOutput
-	ToCosBucketCorsRuleOutputWithContext(context.Context) CosBucketCorsRuleOutput
-}
-
-type CosBucketCorsRuleArgs struct {
-	AllowedHeaders pulumi.StringArrayInput `pulumi:"allowedHeaders"`
-	AllowedMethods pulumi.StringArrayInput `pulumi:"allowedMethods"`
-	AllowedOrigins pulumi.StringArrayInput `pulumi:"allowedOrigins"`
-	ExposeHeaders  pulumi.StringArrayInput `pulumi:"exposeHeaders"`
-	MaxAgeSeconds  pulumi.IntPtrInput      `pulumi:"maxAgeSeconds"`
-}
-
-func (CosBucketCorsRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketCorsRule)(nil)).Elem()
-}
-
-func (i CosBucketCorsRuleArgs) ToCosBucketCorsRuleOutput() CosBucketCorsRuleOutput {
-	return i.ToCosBucketCorsRuleOutputWithContext(context.Background())
-}
-
-func (i CosBucketCorsRuleArgs) ToCosBucketCorsRuleOutputWithContext(ctx context.Context) CosBucketCorsRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketCorsRuleOutput)
-}
-
-// CosBucketCorsRuleArrayInput is an input type that accepts CosBucketCorsRuleArray and CosBucketCorsRuleArrayOutput values.
-// You can construct a concrete instance of `CosBucketCorsRuleArrayInput` via:
-//
-//          CosBucketCorsRuleArray{ CosBucketCorsRuleArgs{...} }
-type CosBucketCorsRuleArrayInput interface {
-	pulumi.Input
-
-	ToCosBucketCorsRuleArrayOutput() CosBucketCorsRuleArrayOutput
-	ToCosBucketCorsRuleArrayOutputWithContext(context.Context) CosBucketCorsRuleArrayOutput
-}
-
-type CosBucketCorsRuleArray []CosBucketCorsRuleInput
-
-func (CosBucketCorsRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketCorsRule)(nil)).Elem()
-}
-
-func (i CosBucketCorsRuleArray) ToCosBucketCorsRuleArrayOutput() CosBucketCorsRuleArrayOutput {
-	return i.ToCosBucketCorsRuleArrayOutputWithContext(context.Background())
-}
-
-func (i CosBucketCorsRuleArray) ToCosBucketCorsRuleArrayOutputWithContext(ctx context.Context) CosBucketCorsRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketCorsRuleArrayOutput)
-}
-
-type CosBucketCorsRuleOutput struct{ *pulumi.OutputState }
-
-func (CosBucketCorsRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketCorsRule)(nil)).Elem()
-}
-
-func (o CosBucketCorsRuleOutput) ToCosBucketCorsRuleOutput() CosBucketCorsRuleOutput {
-	return o
-}
-
-func (o CosBucketCorsRuleOutput) ToCosBucketCorsRuleOutputWithContext(ctx context.Context) CosBucketCorsRuleOutput {
-	return o
-}
-
-func (o CosBucketCorsRuleOutput) AllowedHeaders() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CosBucketCorsRule) []string { return v.AllowedHeaders }).(pulumi.StringArrayOutput)
-}
-
-func (o CosBucketCorsRuleOutput) AllowedMethods() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CosBucketCorsRule) []string { return v.AllowedMethods }).(pulumi.StringArrayOutput)
-}
-
-func (o CosBucketCorsRuleOutput) AllowedOrigins() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CosBucketCorsRule) []string { return v.AllowedOrigins }).(pulumi.StringArrayOutput)
-}
-
-func (o CosBucketCorsRuleOutput) ExposeHeaders() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CosBucketCorsRule) []string { return v.ExposeHeaders }).(pulumi.StringArrayOutput)
-}
-
-func (o CosBucketCorsRuleOutput) MaxAgeSeconds() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CosBucketCorsRule) *int { return v.MaxAgeSeconds }).(pulumi.IntPtrOutput)
-}
-
-type CosBucketCorsRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (CosBucketCorsRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketCorsRule)(nil)).Elem()
-}
-
-func (o CosBucketCorsRuleArrayOutput) ToCosBucketCorsRuleArrayOutput() CosBucketCorsRuleArrayOutput {
-	return o
-}
-
-func (o CosBucketCorsRuleArrayOutput) ToCosBucketCorsRuleArrayOutputWithContext(ctx context.Context) CosBucketCorsRuleArrayOutput {
-	return o
-}
-
-func (o CosBucketCorsRuleArrayOutput) Index(i pulumi.IntInput) CosBucketCorsRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CosBucketCorsRule {
-		return vs[0].([]CosBucketCorsRule)[vs[1].(int)]
-	}).(CosBucketCorsRuleOutput)
-}
-
-type CosBucketLifecycleRule struct {
-	Expiration            *CosBucketLifecycleRuleExpiration            `pulumi:"expiration"`
-	FilterPrefix          string                                       `pulumi:"filterPrefix"`
-	Id                    *string                                      `pulumi:"id"`
-	NonCurrentExpiration  *CosBucketLifecycleRuleNonCurrentExpiration  `pulumi:"nonCurrentExpiration"`
-	NonCurrentTransitions []CosBucketLifecycleRuleNonCurrentTransition `pulumi:"nonCurrentTransitions"`
-	Transitions           []CosBucketLifecycleRuleTransition           `pulumi:"transitions"`
-}
-
-// CosBucketLifecycleRuleInput is an input type that accepts CosBucketLifecycleRuleArgs and CosBucketLifecycleRuleOutput values.
-// You can construct a concrete instance of `CosBucketLifecycleRuleInput` via:
-//
-//          CosBucketLifecycleRuleArgs{...}
-type CosBucketLifecycleRuleInput interface {
-	pulumi.Input
-
-	ToCosBucketLifecycleRuleOutput() CosBucketLifecycleRuleOutput
-	ToCosBucketLifecycleRuleOutputWithContext(context.Context) CosBucketLifecycleRuleOutput
-}
-
-type CosBucketLifecycleRuleArgs struct {
-	Expiration            CosBucketLifecycleRuleExpirationPtrInput             `pulumi:"expiration"`
-	FilterPrefix          pulumi.StringInput                                   `pulumi:"filterPrefix"`
-	Id                    pulumi.StringPtrInput                                `pulumi:"id"`
-	NonCurrentExpiration  CosBucketLifecycleRuleNonCurrentExpirationPtrInput   `pulumi:"nonCurrentExpiration"`
-	NonCurrentTransitions CosBucketLifecycleRuleNonCurrentTransitionArrayInput `pulumi:"nonCurrentTransitions"`
-	Transitions           CosBucketLifecycleRuleTransitionArrayInput           `pulumi:"transitions"`
-}
-
-func (CosBucketLifecycleRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketLifecycleRule)(nil)).Elem()
-}
-
-func (i CosBucketLifecycleRuleArgs) ToCosBucketLifecycleRuleOutput() CosBucketLifecycleRuleOutput {
-	return i.ToCosBucketLifecycleRuleOutputWithContext(context.Background())
-}
-
-func (i CosBucketLifecycleRuleArgs) ToCosBucketLifecycleRuleOutputWithContext(ctx context.Context) CosBucketLifecycleRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketLifecycleRuleOutput)
-}
-
-// CosBucketLifecycleRuleArrayInput is an input type that accepts CosBucketLifecycleRuleArray and CosBucketLifecycleRuleArrayOutput values.
-// You can construct a concrete instance of `CosBucketLifecycleRuleArrayInput` via:
-//
-//          CosBucketLifecycleRuleArray{ CosBucketLifecycleRuleArgs{...} }
-type CosBucketLifecycleRuleArrayInput interface {
-	pulumi.Input
-
-	ToCosBucketLifecycleRuleArrayOutput() CosBucketLifecycleRuleArrayOutput
-	ToCosBucketLifecycleRuleArrayOutputWithContext(context.Context) CosBucketLifecycleRuleArrayOutput
-}
-
-type CosBucketLifecycleRuleArray []CosBucketLifecycleRuleInput
-
-func (CosBucketLifecycleRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketLifecycleRule)(nil)).Elem()
-}
-
-func (i CosBucketLifecycleRuleArray) ToCosBucketLifecycleRuleArrayOutput() CosBucketLifecycleRuleArrayOutput {
-	return i.ToCosBucketLifecycleRuleArrayOutputWithContext(context.Background())
-}
-
-func (i CosBucketLifecycleRuleArray) ToCosBucketLifecycleRuleArrayOutputWithContext(ctx context.Context) CosBucketLifecycleRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketLifecycleRuleArrayOutput)
-}
-
-type CosBucketLifecycleRuleOutput struct{ *pulumi.OutputState }
-
-func (CosBucketLifecycleRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketLifecycleRule)(nil)).Elem()
-}
-
-func (o CosBucketLifecycleRuleOutput) ToCosBucketLifecycleRuleOutput() CosBucketLifecycleRuleOutput {
-	return o
-}
-
-func (o CosBucketLifecycleRuleOutput) ToCosBucketLifecycleRuleOutputWithContext(ctx context.Context) CosBucketLifecycleRuleOutput {
-	return o
-}
-
-func (o CosBucketLifecycleRuleOutput) Expiration() CosBucketLifecycleRuleExpirationPtrOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRule) *CosBucketLifecycleRuleExpiration { return v.Expiration }).(CosBucketLifecycleRuleExpirationPtrOutput)
-}
-
-func (o CosBucketLifecycleRuleOutput) FilterPrefix() pulumi.StringOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRule) string { return v.FilterPrefix }).(pulumi.StringOutput)
-}
-
-func (o CosBucketLifecycleRuleOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRule) *string { return v.Id }).(pulumi.StringPtrOutput)
-}
-
-func (o CosBucketLifecycleRuleOutput) NonCurrentExpiration() CosBucketLifecycleRuleNonCurrentExpirationPtrOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRule) *CosBucketLifecycleRuleNonCurrentExpiration {
-		return v.NonCurrentExpiration
-	}).(CosBucketLifecycleRuleNonCurrentExpirationPtrOutput)
-}
-
-func (o CosBucketLifecycleRuleOutput) NonCurrentTransitions() CosBucketLifecycleRuleNonCurrentTransitionArrayOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRule) []CosBucketLifecycleRuleNonCurrentTransition {
-		return v.NonCurrentTransitions
-	}).(CosBucketLifecycleRuleNonCurrentTransitionArrayOutput)
-}
-
-func (o CosBucketLifecycleRuleOutput) Transitions() CosBucketLifecycleRuleTransitionArrayOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRule) []CosBucketLifecycleRuleTransition { return v.Transitions }).(CosBucketLifecycleRuleTransitionArrayOutput)
-}
-
-type CosBucketLifecycleRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (CosBucketLifecycleRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketLifecycleRule)(nil)).Elem()
-}
-
-func (o CosBucketLifecycleRuleArrayOutput) ToCosBucketLifecycleRuleArrayOutput() CosBucketLifecycleRuleArrayOutput {
-	return o
-}
-
-func (o CosBucketLifecycleRuleArrayOutput) ToCosBucketLifecycleRuleArrayOutputWithContext(ctx context.Context) CosBucketLifecycleRuleArrayOutput {
-	return o
-}
-
-func (o CosBucketLifecycleRuleArrayOutput) Index(i pulumi.IntInput) CosBucketLifecycleRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CosBucketLifecycleRule {
-		return vs[0].([]CosBucketLifecycleRule)[vs[1].(int)]
-	}).(CosBucketLifecycleRuleOutput)
-}
-
-type CosBucketLifecycleRuleExpiration struct {
-	Date         *string `pulumi:"date"`
-	Days         *int    `pulumi:"days"`
-	DeleteMarker *bool   `pulumi:"deleteMarker"`
-}
-
-// CosBucketLifecycleRuleExpirationInput is an input type that accepts CosBucketLifecycleRuleExpirationArgs and CosBucketLifecycleRuleExpirationOutput values.
-// You can construct a concrete instance of `CosBucketLifecycleRuleExpirationInput` via:
-//
-//          CosBucketLifecycleRuleExpirationArgs{...}
-type CosBucketLifecycleRuleExpirationInput interface {
-	pulumi.Input
-
-	ToCosBucketLifecycleRuleExpirationOutput() CosBucketLifecycleRuleExpirationOutput
-	ToCosBucketLifecycleRuleExpirationOutputWithContext(context.Context) CosBucketLifecycleRuleExpirationOutput
-}
-
-type CosBucketLifecycleRuleExpirationArgs struct {
-	Date         pulumi.StringPtrInput `pulumi:"date"`
-	Days         pulumi.IntPtrInput    `pulumi:"days"`
-	DeleteMarker pulumi.BoolPtrInput   `pulumi:"deleteMarker"`
-}
-
-func (CosBucketLifecycleRuleExpirationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketLifecycleRuleExpiration)(nil)).Elem()
-}
-
-func (i CosBucketLifecycleRuleExpirationArgs) ToCosBucketLifecycleRuleExpirationOutput() CosBucketLifecycleRuleExpirationOutput {
-	return i.ToCosBucketLifecycleRuleExpirationOutputWithContext(context.Background())
-}
-
-func (i CosBucketLifecycleRuleExpirationArgs) ToCosBucketLifecycleRuleExpirationOutputWithContext(ctx context.Context) CosBucketLifecycleRuleExpirationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketLifecycleRuleExpirationOutput)
-}
-
-func (i CosBucketLifecycleRuleExpirationArgs) ToCosBucketLifecycleRuleExpirationPtrOutput() CosBucketLifecycleRuleExpirationPtrOutput {
-	return i.ToCosBucketLifecycleRuleExpirationPtrOutputWithContext(context.Background())
-}
-
-func (i CosBucketLifecycleRuleExpirationArgs) ToCosBucketLifecycleRuleExpirationPtrOutputWithContext(ctx context.Context) CosBucketLifecycleRuleExpirationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketLifecycleRuleExpirationOutput).ToCosBucketLifecycleRuleExpirationPtrOutputWithContext(ctx)
-}
-
-// CosBucketLifecycleRuleExpirationPtrInput is an input type that accepts CosBucketLifecycleRuleExpirationArgs, CosBucketLifecycleRuleExpirationPtr and CosBucketLifecycleRuleExpirationPtrOutput values.
-// You can construct a concrete instance of `CosBucketLifecycleRuleExpirationPtrInput` via:
-//
-//          CosBucketLifecycleRuleExpirationArgs{...}
+//          BucketLifecycleRuleExpirationArgs{...}
 //
 //  or:
 //
 //          nil
-type CosBucketLifecycleRuleExpirationPtrInput interface {
+type BucketLifecycleRuleExpirationPtrInput interface {
 	pulumi.Input
 
-	ToCosBucketLifecycleRuleExpirationPtrOutput() CosBucketLifecycleRuleExpirationPtrOutput
-	ToCosBucketLifecycleRuleExpirationPtrOutputWithContext(context.Context) CosBucketLifecycleRuleExpirationPtrOutput
+	ToBucketLifecycleRuleExpirationPtrOutput() BucketLifecycleRuleExpirationPtrOutput
+	ToBucketLifecycleRuleExpirationPtrOutputWithContext(context.Context) BucketLifecycleRuleExpirationPtrOutput
 }
 
-type cosBucketLifecycleRuleExpirationPtrType CosBucketLifecycleRuleExpirationArgs
+type bucketLifecycleRuleExpirationPtrType BucketLifecycleRuleExpirationArgs
 
-func CosBucketLifecycleRuleExpirationPtr(v *CosBucketLifecycleRuleExpirationArgs) CosBucketLifecycleRuleExpirationPtrInput {
-	return (*cosBucketLifecycleRuleExpirationPtrType)(v)
+func BucketLifecycleRuleExpirationPtr(v *BucketLifecycleRuleExpirationArgs) BucketLifecycleRuleExpirationPtrInput {
+	return (*bucketLifecycleRuleExpirationPtrType)(v)
 }
 
-func (*cosBucketLifecycleRuleExpirationPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CosBucketLifecycleRuleExpiration)(nil)).Elem()
+func (*bucketLifecycleRuleExpirationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketLifecycleRuleExpiration)(nil)).Elem()
 }
 
-func (i *cosBucketLifecycleRuleExpirationPtrType) ToCosBucketLifecycleRuleExpirationPtrOutput() CosBucketLifecycleRuleExpirationPtrOutput {
-	return i.ToCosBucketLifecycleRuleExpirationPtrOutputWithContext(context.Background())
+func (i *bucketLifecycleRuleExpirationPtrType) ToBucketLifecycleRuleExpirationPtrOutput() BucketLifecycleRuleExpirationPtrOutput {
+	return i.ToBucketLifecycleRuleExpirationPtrOutputWithContext(context.Background())
 }
 
-func (i *cosBucketLifecycleRuleExpirationPtrType) ToCosBucketLifecycleRuleExpirationPtrOutputWithContext(ctx context.Context) CosBucketLifecycleRuleExpirationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketLifecycleRuleExpirationPtrOutput)
+func (i *bucketLifecycleRuleExpirationPtrType) ToBucketLifecycleRuleExpirationPtrOutputWithContext(ctx context.Context) BucketLifecycleRuleExpirationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleExpirationPtrOutput)
 }
 
-type CosBucketLifecycleRuleExpirationOutput struct{ *pulumi.OutputState }
+type BucketLifecycleRuleExpirationOutput struct{ *pulumi.OutputState }
 
-func (CosBucketLifecycleRuleExpirationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketLifecycleRuleExpiration)(nil)).Elem()
+func (BucketLifecycleRuleExpirationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketLifecycleRuleExpiration)(nil)).Elem()
 }
 
-func (o CosBucketLifecycleRuleExpirationOutput) ToCosBucketLifecycleRuleExpirationOutput() CosBucketLifecycleRuleExpirationOutput {
+func (o BucketLifecycleRuleExpirationOutput) ToBucketLifecycleRuleExpirationOutput() BucketLifecycleRuleExpirationOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleExpirationOutput) ToCosBucketLifecycleRuleExpirationOutputWithContext(ctx context.Context) CosBucketLifecycleRuleExpirationOutput {
+func (o BucketLifecycleRuleExpirationOutput) ToBucketLifecycleRuleExpirationOutputWithContext(ctx context.Context) BucketLifecycleRuleExpirationOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleExpirationOutput) ToCosBucketLifecycleRuleExpirationPtrOutput() CosBucketLifecycleRuleExpirationPtrOutput {
-	return o.ToCosBucketLifecycleRuleExpirationPtrOutputWithContext(context.Background())
+func (o BucketLifecycleRuleExpirationOutput) ToBucketLifecycleRuleExpirationPtrOutput() BucketLifecycleRuleExpirationPtrOutput {
+	return o.ToBucketLifecycleRuleExpirationPtrOutputWithContext(context.Background())
 }
 
-func (o CosBucketLifecycleRuleExpirationOutput) ToCosBucketLifecycleRuleExpirationPtrOutputWithContext(ctx context.Context) CosBucketLifecycleRuleExpirationPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CosBucketLifecycleRuleExpiration) *CosBucketLifecycleRuleExpiration {
+func (o BucketLifecycleRuleExpirationOutput) ToBucketLifecycleRuleExpirationPtrOutputWithContext(ctx context.Context) BucketLifecycleRuleExpirationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketLifecycleRuleExpiration) *BucketLifecycleRuleExpiration {
 		return &v
-	}).(CosBucketLifecycleRuleExpirationPtrOutput)
+	}).(BucketLifecycleRuleExpirationPtrOutput)
 }
 
-func (o CosBucketLifecycleRuleExpirationOutput) Date() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRuleExpiration) *string { return v.Date }).(pulumi.StringPtrOutput)
+// Specifies the date after which you want the corresponding action to take effect.
+func (o BucketLifecycleRuleExpirationOutput) Date() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketLifecycleRuleExpiration) *string { return v.Date }).(pulumi.StringPtrOutput)
 }
 
-func (o CosBucketLifecycleRuleExpirationOutput) Days() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRuleExpiration) *int { return v.Days }).(pulumi.IntPtrOutput)
+// Specifies the number of days after object creation when the specific rule action takes effect.
+func (o BucketLifecycleRuleExpirationOutput) Days() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BucketLifecycleRuleExpiration) *int { return v.Days }).(pulumi.IntPtrOutput)
 }
 
-func (o CosBucketLifecycleRuleExpirationOutput) DeleteMarker() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRuleExpiration) *bool { return v.DeleteMarker }).(pulumi.BoolPtrOutput)
+// Indicates whether the delete marker of an expired object will be removed.
+func (o BucketLifecycleRuleExpirationOutput) DeleteMarker() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v BucketLifecycleRuleExpiration) *bool { return v.DeleteMarker }).(pulumi.BoolPtrOutput)
 }
 
-type CosBucketLifecycleRuleExpirationPtrOutput struct{ *pulumi.OutputState }
+type BucketLifecycleRuleExpirationPtrOutput struct{ *pulumi.OutputState }
 
-func (CosBucketLifecycleRuleExpirationPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CosBucketLifecycleRuleExpiration)(nil)).Elem()
+func (BucketLifecycleRuleExpirationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketLifecycleRuleExpiration)(nil)).Elem()
 }
 
-func (o CosBucketLifecycleRuleExpirationPtrOutput) ToCosBucketLifecycleRuleExpirationPtrOutput() CosBucketLifecycleRuleExpirationPtrOutput {
+func (o BucketLifecycleRuleExpirationPtrOutput) ToBucketLifecycleRuleExpirationPtrOutput() BucketLifecycleRuleExpirationPtrOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleExpirationPtrOutput) ToCosBucketLifecycleRuleExpirationPtrOutputWithContext(ctx context.Context) CosBucketLifecycleRuleExpirationPtrOutput {
+func (o BucketLifecycleRuleExpirationPtrOutput) ToBucketLifecycleRuleExpirationPtrOutputWithContext(ctx context.Context) BucketLifecycleRuleExpirationPtrOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleExpirationPtrOutput) Elem() CosBucketLifecycleRuleExpirationOutput {
-	return o.ApplyT(func(v *CosBucketLifecycleRuleExpiration) CosBucketLifecycleRuleExpiration {
+func (o BucketLifecycleRuleExpirationPtrOutput) Elem() BucketLifecycleRuleExpirationOutput {
+	return o.ApplyT(func(v *BucketLifecycleRuleExpiration) BucketLifecycleRuleExpiration {
 		if v != nil {
 			return *v
 		}
-		var ret CosBucketLifecycleRuleExpiration
+		var ret BucketLifecycleRuleExpiration
 		return ret
-	}).(CosBucketLifecycleRuleExpirationOutput)
+	}).(BucketLifecycleRuleExpirationOutput)
 }
 
-func (o CosBucketLifecycleRuleExpirationPtrOutput) Date() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CosBucketLifecycleRuleExpiration) *string {
+// Specifies the date after which you want the corresponding action to take effect.
+func (o BucketLifecycleRuleExpirationPtrOutput) Date() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketLifecycleRuleExpiration) *string {
 		if v == nil {
 			return nil
 		}
@@ -1541,8 +440,9 @@ func (o CosBucketLifecycleRuleExpirationPtrOutput) Date() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o CosBucketLifecycleRuleExpirationPtrOutput) Days() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CosBucketLifecycleRuleExpiration) *int {
+// Specifies the number of days after object creation when the specific rule action takes effect.
+func (o BucketLifecycleRuleExpirationPtrOutput) Days() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BucketLifecycleRuleExpiration) *int {
 		if v == nil {
 			return nil
 		}
@@ -1550,8 +450,9 @@ func (o CosBucketLifecycleRuleExpirationPtrOutput) Days() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-func (o CosBucketLifecycleRuleExpirationPtrOutput) DeleteMarker() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *CosBucketLifecycleRuleExpiration) *bool {
+// Indicates whether the delete marker of an expired object will be removed.
+func (o BucketLifecycleRuleExpirationPtrOutput) DeleteMarker() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *BucketLifecycleRuleExpiration) *bool {
 		if v == nil {
 			return nil
 		}
@@ -1559,132 +460,136 @@ func (o CosBucketLifecycleRuleExpirationPtrOutput) DeleteMarker() pulumi.BoolPtr
 	}).(pulumi.BoolPtrOutput)
 }
 
-type CosBucketLifecycleRuleNonCurrentExpiration struct {
+type BucketLifecycleRuleNonCurrentExpiration struct {
+	// Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.
 	NonCurrentDays *int `pulumi:"nonCurrentDays"`
 }
 
-// CosBucketLifecycleRuleNonCurrentExpirationInput is an input type that accepts CosBucketLifecycleRuleNonCurrentExpirationArgs and CosBucketLifecycleRuleNonCurrentExpirationOutput values.
-// You can construct a concrete instance of `CosBucketLifecycleRuleNonCurrentExpirationInput` via:
+// BucketLifecycleRuleNonCurrentExpirationInput is an input type that accepts BucketLifecycleRuleNonCurrentExpirationArgs and BucketLifecycleRuleNonCurrentExpirationOutput values.
+// You can construct a concrete instance of `BucketLifecycleRuleNonCurrentExpirationInput` via:
 //
-//          CosBucketLifecycleRuleNonCurrentExpirationArgs{...}
-type CosBucketLifecycleRuleNonCurrentExpirationInput interface {
+//          BucketLifecycleRuleNonCurrentExpirationArgs{...}
+type BucketLifecycleRuleNonCurrentExpirationInput interface {
 	pulumi.Input
 
-	ToCosBucketLifecycleRuleNonCurrentExpirationOutput() CosBucketLifecycleRuleNonCurrentExpirationOutput
-	ToCosBucketLifecycleRuleNonCurrentExpirationOutputWithContext(context.Context) CosBucketLifecycleRuleNonCurrentExpirationOutput
+	ToBucketLifecycleRuleNonCurrentExpirationOutput() BucketLifecycleRuleNonCurrentExpirationOutput
+	ToBucketLifecycleRuleNonCurrentExpirationOutputWithContext(context.Context) BucketLifecycleRuleNonCurrentExpirationOutput
 }
 
-type CosBucketLifecycleRuleNonCurrentExpirationArgs struct {
+type BucketLifecycleRuleNonCurrentExpirationArgs struct {
+	// Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.
 	NonCurrentDays pulumi.IntPtrInput `pulumi:"nonCurrentDays"`
 }
 
-func (CosBucketLifecycleRuleNonCurrentExpirationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketLifecycleRuleNonCurrentExpiration)(nil)).Elem()
+func (BucketLifecycleRuleNonCurrentExpirationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketLifecycleRuleNonCurrentExpiration)(nil)).Elem()
 }
 
-func (i CosBucketLifecycleRuleNonCurrentExpirationArgs) ToCosBucketLifecycleRuleNonCurrentExpirationOutput() CosBucketLifecycleRuleNonCurrentExpirationOutput {
-	return i.ToCosBucketLifecycleRuleNonCurrentExpirationOutputWithContext(context.Background())
+func (i BucketLifecycleRuleNonCurrentExpirationArgs) ToBucketLifecycleRuleNonCurrentExpirationOutput() BucketLifecycleRuleNonCurrentExpirationOutput {
+	return i.ToBucketLifecycleRuleNonCurrentExpirationOutputWithContext(context.Background())
 }
 
-func (i CosBucketLifecycleRuleNonCurrentExpirationArgs) ToCosBucketLifecycleRuleNonCurrentExpirationOutputWithContext(ctx context.Context) CosBucketLifecycleRuleNonCurrentExpirationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketLifecycleRuleNonCurrentExpirationOutput)
+func (i BucketLifecycleRuleNonCurrentExpirationArgs) ToBucketLifecycleRuleNonCurrentExpirationOutputWithContext(ctx context.Context) BucketLifecycleRuleNonCurrentExpirationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleNonCurrentExpirationOutput)
 }
 
-func (i CosBucketLifecycleRuleNonCurrentExpirationArgs) ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutput() CosBucketLifecycleRuleNonCurrentExpirationPtrOutput {
-	return i.ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(context.Background())
+func (i BucketLifecycleRuleNonCurrentExpirationArgs) ToBucketLifecycleRuleNonCurrentExpirationPtrOutput() BucketLifecycleRuleNonCurrentExpirationPtrOutput {
+	return i.ToBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(context.Background())
 }
 
-func (i CosBucketLifecycleRuleNonCurrentExpirationArgs) ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(ctx context.Context) CosBucketLifecycleRuleNonCurrentExpirationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketLifecycleRuleNonCurrentExpirationOutput).ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(ctx)
+func (i BucketLifecycleRuleNonCurrentExpirationArgs) ToBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(ctx context.Context) BucketLifecycleRuleNonCurrentExpirationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleNonCurrentExpirationOutput).ToBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(ctx)
 }
 
-// CosBucketLifecycleRuleNonCurrentExpirationPtrInput is an input type that accepts CosBucketLifecycleRuleNonCurrentExpirationArgs, CosBucketLifecycleRuleNonCurrentExpirationPtr and CosBucketLifecycleRuleNonCurrentExpirationPtrOutput values.
-// You can construct a concrete instance of `CosBucketLifecycleRuleNonCurrentExpirationPtrInput` via:
+// BucketLifecycleRuleNonCurrentExpirationPtrInput is an input type that accepts BucketLifecycleRuleNonCurrentExpirationArgs, BucketLifecycleRuleNonCurrentExpirationPtr and BucketLifecycleRuleNonCurrentExpirationPtrOutput values.
+// You can construct a concrete instance of `BucketLifecycleRuleNonCurrentExpirationPtrInput` via:
 //
-//          CosBucketLifecycleRuleNonCurrentExpirationArgs{...}
+//          BucketLifecycleRuleNonCurrentExpirationArgs{...}
 //
 //  or:
 //
 //          nil
-type CosBucketLifecycleRuleNonCurrentExpirationPtrInput interface {
+type BucketLifecycleRuleNonCurrentExpirationPtrInput interface {
 	pulumi.Input
 
-	ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutput() CosBucketLifecycleRuleNonCurrentExpirationPtrOutput
-	ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(context.Context) CosBucketLifecycleRuleNonCurrentExpirationPtrOutput
+	ToBucketLifecycleRuleNonCurrentExpirationPtrOutput() BucketLifecycleRuleNonCurrentExpirationPtrOutput
+	ToBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(context.Context) BucketLifecycleRuleNonCurrentExpirationPtrOutput
 }
 
-type cosBucketLifecycleRuleNonCurrentExpirationPtrType CosBucketLifecycleRuleNonCurrentExpirationArgs
+type bucketLifecycleRuleNonCurrentExpirationPtrType BucketLifecycleRuleNonCurrentExpirationArgs
 
-func CosBucketLifecycleRuleNonCurrentExpirationPtr(v *CosBucketLifecycleRuleNonCurrentExpirationArgs) CosBucketLifecycleRuleNonCurrentExpirationPtrInput {
-	return (*cosBucketLifecycleRuleNonCurrentExpirationPtrType)(v)
+func BucketLifecycleRuleNonCurrentExpirationPtr(v *BucketLifecycleRuleNonCurrentExpirationArgs) BucketLifecycleRuleNonCurrentExpirationPtrInput {
+	return (*bucketLifecycleRuleNonCurrentExpirationPtrType)(v)
 }
 
-func (*cosBucketLifecycleRuleNonCurrentExpirationPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CosBucketLifecycleRuleNonCurrentExpiration)(nil)).Elem()
+func (*bucketLifecycleRuleNonCurrentExpirationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketLifecycleRuleNonCurrentExpiration)(nil)).Elem()
 }
 
-func (i *cosBucketLifecycleRuleNonCurrentExpirationPtrType) ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutput() CosBucketLifecycleRuleNonCurrentExpirationPtrOutput {
-	return i.ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(context.Background())
+func (i *bucketLifecycleRuleNonCurrentExpirationPtrType) ToBucketLifecycleRuleNonCurrentExpirationPtrOutput() BucketLifecycleRuleNonCurrentExpirationPtrOutput {
+	return i.ToBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(context.Background())
 }
 
-func (i *cosBucketLifecycleRuleNonCurrentExpirationPtrType) ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(ctx context.Context) CosBucketLifecycleRuleNonCurrentExpirationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketLifecycleRuleNonCurrentExpirationPtrOutput)
+func (i *bucketLifecycleRuleNonCurrentExpirationPtrType) ToBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(ctx context.Context) BucketLifecycleRuleNonCurrentExpirationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleNonCurrentExpirationPtrOutput)
 }
 
-type CosBucketLifecycleRuleNonCurrentExpirationOutput struct{ *pulumi.OutputState }
+type BucketLifecycleRuleNonCurrentExpirationOutput struct{ *pulumi.OutputState }
 
-func (CosBucketLifecycleRuleNonCurrentExpirationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketLifecycleRuleNonCurrentExpiration)(nil)).Elem()
+func (BucketLifecycleRuleNonCurrentExpirationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketLifecycleRuleNonCurrentExpiration)(nil)).Elem()
 }
 
-func (o CosBucketLifecycleRuleNonCurrentExpirationOutput) ToCosBucketLifecycleRuleNonCurrentExpirationOutput() CosBucketLifecycleRuleNonCurrentExpirationOutput {
+func (o BucketLifecycleRuleNonCurrentExpirationOutput) ToBucketLifecycleRuleNonCurrentExpirationOutput() BucketLifecycleRuleNonCurrentExpirationOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleNonCurrentExpirationOutput) ToCosBucketLifecycleRuleNonCurrentExpirationOutputWithContext(ctx context.Context) CosBucketLifecycleRuleNonCurrentExpirationOutput {
+func (o BucketLifecycleRuleNonCurrentExpirationOutput) ToBucketLifecycleRuleNonCurrentExpirationOutputWithContext(ctx context.Context) BucketLifecycleRuleNonCurrentExpirationOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleNonCurrentExpirationOutput) ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutput() CosBucketLifecycleRuleNonCurrentExpirationPtrOutput {
-	return o.ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(context.Background())
+func (o BucketLifecycleRuleNonCurrentExpirationOutput) ToBucketLifecycleRuleNonCurrentExpirationPtrOutput() BucketLifecycleRuleNonCurrentExpirationPtrOutput {
+	return o.ToBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(context.Background())
 }
 
-func (o CosBucketLifecycleRuleNonCurrentExpirationOutput) ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(ctx context.Context) CosBucketLifecycleRuleNonCurrentExpirationPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CosBucketLifecycleRuleNonCurrentExpiration) *CosBucketLifecycleRuleNonCurrentExpiration {
+func (o BucketLifecycleRuleNonCurrentExpirationOutput) ToBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(ctx context.Context) BucketLifecycleRuleNonCurrentExpirationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketLifecycleRuleNonCurrentExpiration) *BucketLifecycleRuleNonCurrentExpiration {
 		return &v
-	}).(CosBucketLifecycleRuleNonCurrentExpirationPtrOutput)
+	}).(BucketLifecycleRuleNonCurrentExpirationPtrOutput)
 }
 
-func (o CosBucketLifecycleRuleNonCurrentExpirationOutput) NonCurrentDays() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRuleNonCurrentExpiration) *int { return v.NonCurrentDays }).(pulumi.IntPtrOutput)
+// Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.
+func (o BucketLifecycleRuleNonCurrentExpirationOutput) NonCurrentDays() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BucketLifecycleRuleNonCurrentExpiration) *int { return v.NonCurrentDays }).(pulumi.IntPtrOutput)
 }
 
-type CosBucketLifecycleRuleNonCurrentExpirationPtrOutput struct{ *pulumi.OutputState }
+type BucketLifecycleRuleNonCurrentExpirationPtrOutput struct{ *pulumi.OutputState }
 
-func (CosBucketLifecycleRuleNonCurrentExpirationPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CosBucketLifecycleRuleNonCurrentExpiration)(nil)).Elem()
+func (BucketLifecycleRuleNonCurrentExpirationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketLifecycleRuleNonCurrentExpiration)(nil)).Elem()
 }
 
-func (o CosBucketLifecycleRuleNonCurrentExpirationPtrOutput) ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutput() CosBucketLifecycleRuleNonCurrentExpirationPtrOutput {
+func (o BucketLifecycleRuleNonCurrentExpirationPtrOutput) ToBucketLifecycleRuleNonCurrentExpirationPtrOutput() BucketLifecycleRuleNonCurrentExpirationPtrOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleNonCurrentExpirationPtrOutput) ToCosBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(ctx context.Context) CosBucketLifecycleRuleNonCurrentExpirationPtrOutput {
+func (o BucketLifecycleRuleNonCurrentExpirationPtrOutput) ToBucketLifecycleRuleNonCurrentExpirationPtrOutputWithContext(ctx context.Context) BucketLifecycleRuleNonCurrentExpirationPtrOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleNonCurrentExpirationPtrOutput) Elem() CosBucketLifecycleRuleNonCurrentExpirationOutput {
-	return o.ApplyT(func(v *CosBucketLifecycleRuleNonCurrentExpiration) CosBucketLifecycleRuleNonCurrentExpiration {
+func (o BucketLifecycleRuleNonCurrentExpirationPtrOutput) Elem() BucketLifecycleRuleNonCurrentExpirationOutput {
+	return o.ApplyT(func(v *BucketLifecycleRuleNonCurrentExpiration) BucketLifecycleRuleNonCurrentExpiration {
 		if v != nil {
 			return *v
 		}
-		var ret CosBucketLifecycleRuleNonCurrentExpiration
+		var ret BucketLifecycleRuleNonCurrentExpiration
 		return ret
-	}).(CosBucketLifecycleRuleNonCurrentExpirationOutput)
+	}).(BucketLifecycleRuleNonCurrentExpirationOutput)
 }
 
-func (o CosBucketLifecycleRuleNonCurrentExpirationPtrOutput) NonCurrentDays() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CosBucketLifecycleRuleNonCurrentExpiration) *int {
+// Number of days after non current object creation when the specific rule action takes effect. The maximum value is 3650.
+func (o BucketLifecycleRuleNonCurrentExpirationPtrOutput) NonCurrentDays() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BucketLifecycleRuleNonCurrentExpiration) *int {
 		if v == nil {
 			return nil
 		}
@@ -1692,319 +597,1783 @@ func (o CosBucketLifecycleRuleNonCurrentExpirationPtrOutput) NonCurrentDays() pu
 	}).(pulumi.IntPtrOutput)
 }
 
-type CosBucketLifecycleRuleNonCurrentTransition struct {
-	NonCurrentDays *int   `pulumi:"nonCurrentDays"`
-	StorageClass   string `pulumi:"storageClass"`
+type BucketLifecycleRuleNonCurrentTransition struct {
+	// Number of days after non current object creation when the specific rule action takes effect.
+	NonCurrentDays *int `pulumi:"nonCurrentDays"`
+	// Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	StorageClass string `pulumi:"storageClass"`
 }
 
-// CosBucketLifecycleRuleNonCurrentTransitionInput is an input type that accepts CosBucketLifecycleRuleNonCurrentTransitionArgs and CosBucketLifecycleRuleNonCurrentTransitionOutput values.
-// You can construct a concrete instance of `CosBucketLifecycleRuleNonCurrentTransitionInput` via:
+// BucketLifecycleRuleNonCurrentTransitionInput is an input type that accepts BucketLifecycleRuleNonCurrentTransitionArgs and BucketLifecycleRuleNonCurrentTransitionOutput values.
+// You can construct a concrete instance of `BucketLifecycleRuleNonCurrentTransitionInput` via:
 //
-//          CosBucketLifecycleRuleNonCurrentTransitionArgs{...}
-type CosBucketLifecycleRuleNonCurrentTransitionInput interface {
+//          BucketLifecycleRuleNonCurrentTransitionArgs{...}
+type BucketLifecycleRuleNonCurrentTransitionInput interface {
 	pulumi.Input
 
-	ToCosBucketLifecycleRuleNonCurrentTransitionOutput() CosBucketLifecycleRuleNonCurrentTransitionOutput
-	ToCosBucketLifecycleRuleNonCurrentTransitionOutputWithContext(context.Context) CosBucketLifecycleRuleNonCurrentTransitionOutput
+	ToBucketLifecycleRuleNonCurrentTransitionOutput() BucketLifecycleRuleNonCurrentTransitionOutput
+	ToBucketLifecycleRuleNonCurrentTransitionOutputWithContext(context.Context) BucketLifecycleRuleNonCurrentTransitionOutput
 }
 
-type CosBucketLifecycleRuleNonCurrentTransitionArgs struct {
+type BucketLifecycleRuleNonCurrentTransitionArgs struct {
+	// Number of days after non current object creation when the specific rule action takes effect.
 	NonCurrentDays pulumi.IntPtrInput `pulumi:"nonCurrentDays"`
-	StorageClass   pulumi.StringInput `pulumi:"storageClass"`
+	// Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	StorageClass pulumi.StringInput `pulumi:"storageClass"`
 }
 
-func (CosBucketLifecycleRuleNonCurrentTransitionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketLifecycleRuleNonCurrentTransition)(nil)).Elem()
+func (BucketLifecycleRuleNonCurrentTransitionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketLifecycleRuleNonCurrentTransition)(nil)).Elem()
 }
 
-func (i CosBucketLifecycleRuleNonCurrentTransitionArgs) ToCosBucketLifecycleRuleNonCurrentTransitionOutput() CosBucketLifecycleRuleNonCurrentTransitionOutput {
-	return i.ToCosBucketLifecycleRuleNonCurrentTransitionOutputWithContext(context.Background())
+func (i BucketLifecycleRuleNonCurrentTransitionArgs) ToBucketLifecycleRuleNonCurrentTransitionOutput() BucketLifecycleRuleNonCurrentTransitionOutput {
+	return i.ToBucketLifecycleRuleNonCurrentTransitionOutputWithContext(context.Background())
 }
 
-func (i CosBucketLifecycleRuleNonCurrentTransitionArgs) ToCosBucketLifecycleRuleNonCurrentTransitionOutputWithContext(ctx context.Context) CosBucketLifecycleRuleNonCurrentTransitionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketLifecycleRuleNonCurrentTransitionOutput)
+func (i BucketLifecycleRuleNonCurrentTransitionArgs) ToBucketLifecycleRuleNonCurrentTransitionOutputWithContext(ctx context.Context) BucketLifecycleRuleNonCurrentTransitionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleNonCurrentTransitionOutput)
 }
 
-// CosBucketLifecycleRuleNonCurrentTransitionArrayInput is an input type that accepts CosBucketLifecycleRuleNonCurrentTransitionArray and CosBucketLifecycleRuleNonCurrentTransitionArrayOutput values.
-// You can construct a concrete instance of `CosBucketLifecycleRuleNonCurrentTransitionArrayInput` via:
+// BucketLifecycleRuleNonCurrentTransitionArrayInput is an input type that accepts BucketLifecycleRuleNonCurrentTransitionArray and BucketLifecycleRuleNonCurrentTransitionArrayOutput values.
+// You can construct a concrete instance of `BucketLifecycleRuleNonCurrentTransitionArrayInput` via:
 //
-//          CosBucketLifecycleRuleNonCurrentTransitionArray{ CosBucketLifecycleRuleNonCurrentTransitionArgs{...} }
-type CosBucketLifecycleRuleNonCurrentTransitionArrayInput interface {
+//          BucketLifecycleRuleNonCurrentTransitionArray{ BucketLifecycleRuleNonCurrentTransitionArgs{...} }
+type BucketLifecycleRuleNonCurrentTransitionArrayInput interface {
 	pulumi.Input
 
-	ToCosBucketLifecycleRuleNonCurrentTransitionArrayOutput() CosBucketLifecycleRuleNonCurrentTransitionArrayOutput
-	ToCosBucketLifecycleRuleNonCurrentTransitionArrayOutputWithContext(context.Context) CosBucketLifecycleRuleNonCurrentTransitionArrayOutput
+	ToBucketLifecycleRuleNonCurrentTransitionArrayOutput() BucketLifecycleRuleNonCurrentTransitionArrayOutput
+	ToBucketLifecycleRuleNonCurrentTransitionArrayOutputWithContext(context.Context) BucketLifecycleRuleNonCurrentTransitionArrayOutput
 }
 
-type CosBucketLifecycleRuleNonCurrentTransitionArray []CosBucketLifecycleRuleNonCurrentTransitionInput
+type BucketLifecycleRuleNonCurrentTransitionArray []BucketLifecycleRuleNonCurrentTransitionInput
 
-func (CosBucketLifecycleRuleNonCurrentTransitionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketLifecycleRuleNonCurrentTransition)(nil)).Elem()
+func (BucketLifecycleRuleNonCurrentTransitionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketLifecycleRuleNonCurrentTransition)(nil)).Elem()
 }
 
-func (i CosBucketLifecycleRuleNonCurrentTransitionArray) ToCosBucketLifecycleRuleNonCurrentTransitionArrayOutput() CosBucketLifecycleRuleNonCurrentTransitionArrayOutput {
-	return i.ToCosBucketLifecycleRuleNonCurrentTransitionArrayOutputWithContext(context.Background())
+func (i BucketLifecycleRuleNonCurrentTransitionArray) ToBucketLifecycleRuleNonCurrentTransitionArrayOutput() BucketLifecycleRuleNonCurrentTransitionArrayOutput {
+	return i.ToBucketLifecycleRuleNonCurrentTransitionArrayOutputWithContext(context.Background())
 }
 
-func (i CosBucketLifecycleRuleNonCurrentTransitionArray) ToCosBucketLifecycleRuleNonCurrentTransitionArrayOutputWithContext(ctx context.Context) CosBucketLifecycleRuleNonCurrentTransitionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketLifecycleRuleNonCurrentTransitionArrayOutput)
+func (i BucketLifecycleRuleNonCurrentTransitionArray) ToBucketLifecycleRuleNonCurrentTransitionArrayOutputWithContext(ctx context.Context) BucketLifecycleRuleNonCurrentTransitionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleNonCurrentTransitionArrayOutput)
 }
 
-type CosBucketLifecycleRuleNonCurrentTransitionOutput struct{ *pulumi.OutputState }
+type BucketLifecycleRuleNonCurrentTransitionOutput struct{ *pulumi.OutputState }
 
-func (CosBucketLifecycleRuleNonCurrentTransitionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketLifecycleRuleNonCurrentTransition)(nil)).Elem()
+func (BucketLifecycleRuleNonCurrentTransitionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketLifecycleRuleNonCurrentTransition)(nil)).Elem()
 }
 
-func (o CosBucketLifecycleRuleNonCurrentTransitionOutput) ToCosBucketLifecycleRuleNonCurrentTransitionOutput() CosBucketLifecycleRuleNonCurrentTransitionOutput {
+func (o BucketLifecycleRuleNonCurrentTransitionOutput) ToBucketLifecycleRuleNonCurrentTransitionOutput() BucketLifecycleRuleNonCurrentTransitionOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleNonCurrentTransitionOutput) ToCosBucketLifecycleRuleNonCurrentTransitionOutputWithContext(ctx context.Context) CosBucketLifecycleRuleNonCurrentTransitionOutput {
+func (o BucketLifecycleRuleNonCurrentTransitionOutput) ToBucketLifecycleRuleNonCurrentTransitionOutputWithContext(ctx context.Context) BucketLifecycleRuleNonCurrentTransitionOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleNonCurrentTransitionOutput) NonCurrentDays() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRuleNonCurrentTransition) *int { return v.NonCurrentDays }).(pulumi.IntPtrOutput)
+// Number of days after non current object creation when the specific rule action takes effect.
+func (o BucketLifecycleRuleNonCurrentTransitionOutput) NonCurrentDays() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BucketLifecycleRuleNonCurrentTransition) *int { return v.NonCurrentDays }).(pulumi.IntPtrOutput)
 }
 
-func (o CosBucketLifecycleRuleNonCurrentTransitionOutput) StorageClass() pulumi.StringOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRuleNonCurrentTransition) string { return v.StorageClass }).(pulumi.StringOutput)
+// Specifies the storage class to which you want the non current object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+func (o BucketLifecycleRuleNonCurrentTransitionOutput) StorageClass() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketLifecycleRuleNonCurrentTransition) string { return v.StorageClass }).(pulumi.StringOutput)
 }
 
-type CosBucketLifecycleRuleNonCurrentTransitionArrayOutput struct{ *pulumi.OutputState }
+type BucketLifecycleRuleNonCurrentTransitionArrayOutput struct{ *pulumi.OutputState }
 
-func (CosBucketLifecycleRuleNonCurrentTransitionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketLifecycleRuleNonCurrentTransition)(nil)).Elem()
+func (BucketLifecycleRuleNonCurrentTransitionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketLifecycleRuleNonCurrentTransition)(nil)).Elem()
 }
 
-func (o CosBucketLifecycleRuleNonCurrentTransitionArrayOutput) ToCosBucketLifecycleRuleNonCurrentTransitionArrayOutput() CosBucketLifecycleRuleNonCurrentTransitionArrayOutput {
+func (o BucketLifecycleRuleNonCurrentTransitionArrayOutput) ToBucketLifecycleRuleNonCurrentTransitionArrayOutput() BucketLifecycleRuleNonCurrentTransitionArrayOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleNonCurrentTransitionArrayOutput) ToCosBucketLifecycleRuleNonCurrentTransitionArrayOutputWithContext(ctx context.Context) CosBucketLifecycleRuleNonCurrentTransitionArrayOutput {
+func (o BucketLifecycleRuleNonCurrentTransitionArrayOutput) ToBucketLifecycleRuleNonCurrentTransitionArrayOutputWithContext(ctx context.Context) BucketLifecycleRuleNonCurrentTransitionArrayOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleNonCurrentTransitionArrayOutput) Index(i pulumi.IntInput) CosBucketLifecycleRuleNonCurrentTransitionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CosBucketLifecycleRuleNonCurrentTransition {
-		return vs[0].([]CosBucketLifecycleRuleNonCurrentTransition)[vs[1].(int)]
-	}).(CosBucketLifecycleRuleNonCurrentTransitionOutput)
+func (o BucketLifecycleRuleNonCurrentTransitionArrayOutput) Index(i pulumi.IntInput) BucketLifecycleRuleNonCurrentTransitionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketLifecycleRuleNonCurrentTransition {
+		return vs[0].([]BucketLifecycleRuleNonCurrentTransition)[vs[1].(int)]
+	}).(BucketLifecycleRuleNonCurrentTransitionOutput)
 }
 
-type CosBucketLifecycleRuleTransition struct {
-	Date         *string `pulumi:"date"`
-	Days         *int    `pulumi:"days"`
-	StorageClass string  `pulumi:"storageClass"`
+type BucketLifecycleRuleTransition struct {
+	// Specifies the date after which you want the corresponding action to take effect.
+	Date *string `pulumi:"date"`
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	Days *int `pulumi:"days"`
+	// Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	StorageClass string `pulumi:"storageClass"`
 }
 
-// CosBucketLifecycleRuleTransitionInput is an input type that accepts CosBucketLifecycleRuleTransitionArgs and CosBucketLifecycleRuleTransitionOutput values.
-// You can construct a concrete instance of `CosBucketLifecycleRuleTransitionInput` via:
+// BucketLifecycleRuleTransitionInput is an input type that accepts BucketLifecycleRuleTransitionArgs and BucketLifecycleRuleTransitionOutput values.
+// You can construct a concrete instance of `BucketLifecycleRuleTransitionInput` via:
 //
-//          CosBucketLifecycleRuleTransitionArgs{...}
-type CosBucketLifecycleRuleTransitionInput interface {
+//          BucketLifecycleRuleTransitionArgs{...}
+type BucketLifecycleRuleTransitionInput interface {
 	pulumi.Input
 
-	ToCosBucketLifecycleRuleTransitionOutput() CosBucketLifecycleRuleTransitionOutput
-	ToCosBucketLifecycleRuleTransitionOutputWithContext(context.Context) CosBucketLifecycleRuleTransitionOutput
+	ToBucketLifecycleRuleTransitionOutput() BucketLifecycleRuleTransitionOutput
+	ToBucketLifecycleRuleTransitionOutputWithContext(context.Context) BucketLifecycleRuleTransitionOutput
 }
 
-type CosBucketLifecycleRuleTransitionArgs struct {
-	Date         pulumi.StringPtrInput `pulumi:"date"`
-	Days         pulumi.IntPtrInput    `pulumi:"days"`
-	StorageClass pulumi.StringInput    `pulumi:"storageClass"`
+type BucketLifecycleRuleTransitionArgs struct {
+	// Specifies the date after which you want the corresponding action to take effect.
+	Date pulumi.StringPtrInput `pulumi:"date"`
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	Days pulumi.IntPtrInput `pulumi:"days"`
+	// Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+	StorageClass pulumi.StringInput `pulumi:"storageClass"`
 }
 
-func (CosBucketLifecycleRuleTransitionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketLifecycleRuleTransition)(nil)).Elem()
+func (BucketLifecycleRuleTransitionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketLifecycleRuleTransition)(nil)).Elem()
 }
 
-func (i CosBucketLifecycleRuleTransitionArgs) ToCosBucketLifecycleRuleTransitionOutput() CosBucketLifecycleRuleTransitionOutput {
-	return i.ToCosBucketLifecycleRuleTransitionOutputWithContext(context.Background())
+func (i BucketLifecycleRuleTransitionArgs) ToBucketLifecycleRuleTransitionOutput() BucketLifecycleRuleTransitionOutput {
+	return i.ToBucketLifecycleRuleTransitionOutputWithContext(context.Background())
 }
 
-func (i CosBucketLifecycleRuleTransitionArgs) ToCosBucketLifecycleRuleTransitionOutputWithContext(ctx context.Context) CosBucketLifecycleRuleTransitionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketLifecycleRuleTransitionOutput)
+func (i BucketLifecycleRuleTransitionArgs) ToBucketLifecycleRuleTransitionOutputWithContext(ctx context.Context) BucketLifecycleRuleTransitionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleTransitionOutput)
 }
 
-// CosBucketLifecycleRuleTransitionArrayInput is an input type that accepts CosBucketLifecycleRuleTransitionArray and CosBucketLifecycleRuleTransitionArrayOutput values.
-// You can construct a concrete instance of `CosBucketLifecycleRuleTransitionArrayInput` via:
+// BucketLifecycleRuleTransitionArrayInput is an input type that accepts BucketLifecycleRuleTransitionArray and BucketLifecycleRuleTransitionArrayOutput values.
+// You can construct a concrete instance of `BucketLifecycleRuleTransitionArrayInput` via:
 //
-//          CosBucketLifecycleRuleTransitionArray{ CosBucketLifecycleRuleTransitionArgs{...} }
-type CosBucketLifecycleRuleTransitionArrayInput interface {
+//          BucketLifecycleRuleTransitionArray{ BucketLifecycleRuleTransitionArgs{...} }
+type BucketLifecycleRuleTransitionArrayInput interface {
 	pulumi.Input
 
-	ToCosBucketLifecycleRuleTransitionArrayOutput() CosBucketLifecycleRuleTransitionArrayOutput
-	ToCosBucketLifecycleRuleTransitionArrayOutputWithContext(context.Context) CosBucketLifecycleRuleTransitionArrayOutput
+	ToBucketLifecycleRuleTransitionArrayOutput() BucketLifecycleRuleTransitionArrayOutput
+	ToBucketLifecycleRuleTransitionArrayOutputWithContext(context.Context) BucketLifecycleRuleTransitionArrayOutput
 }
 
-type CosBucketLifecycleRuleTransitionArray []CosBucketLifecycleRuleTransitionInput
+type BucketLifecycleRuleTransitionArray []BucketLifecycleRuleTransitionInput
 
-func (CosBucketLifecycleRuleTransitionArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketLifecycleRuleTransition)(nil)).Elem()
+func (BucketLifecycleRuleTransitionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketLifecycleRuleTransition)(nil)).Elem()
 }
 
-func (i CosBucketLifecycleRuleTransitionArray) ToCosBucketLifecycleRuleTransitionArrayOutput() CosBucketLifecycleRuleTransitionArrayOutput {
-	return i.ToCosBucketLifecycleRuleTransitionArrayOutputWithContext(context.Background())
+func (i BucketLifecycleRuleTransitionArray) ToBucketLifecycleRuleTransitionArrayOutput() BucketLifecycleRuleTransitionArrayOutput {
+	return i.ToBucketLifecycleRuleTransitionArrayOutputWithContext(context.Background())
 }
 
-func (i CosBucketLifecycleRuleTransitionArray) ToCosBucketLifecycleRuleTransitionArrayOutputWithContext(ctx context.Context) CosBucketLifecycleRuleTransitionArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketLifecycleRuleTransitionArrayOutput)
+func (i BucketLifecycleRuleTransitionArray) ToBucketLifecycleRuleTransitionArrayOutputWithContext(ctx context.Context) BucketLifecycleRuleTransitionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketLifecycleRuleTransitionArrayOutput)
 }
 
-type CosBucketLifecycleRuleTransitionOutput struct{ *pulumi.OutputState }
+type BucketLifecycleRuleTransitionOutput struct{ *pulumi.OutputState }
 
-func (CosBucketLifecycleRuleTransitionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketLifecycleRuleTransition)(nil)).Elem()
+func (BucketLifecycleRuleTransitionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketLifecycleRuleTransition)(nil)).Elem()
 }
 
-func (o CosBucketLifecycleRuleTransitionOutput) ToCosBucketLifecycleRuleTransitionOutput() CosBucketLifecycleRuleTransitionOutput {
+func (o BucketLifecycleRuleTransitionOutput) ToBucketLifecycleRuleTransitionOutput() BucketLifecycleRuleTransitionOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleTransitionOutput) ToCosBucketLifecycleRuleTransitionOutputWithContext(ctx context.Context) CosBucketLifecycleRuleTransitionOutput {
+func (o BucketLifecycleRuleTransitionOutput) ToBucketLifecycleRuleTransitionOutputWithContext(ctx context.Context) BucketLifecycleRuleTransitionOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleTransitionOutput) Date() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRuleTransition) *string { return v.Date }).(pulumi.StringPtrOutput)
+// Specifies the date after which you want the corresponding action to take effect.
+func (o BucketLifecycleRuleTransitionOutput) Date() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketLifecycleRuleTransition) *string { return v.Date }).(pulumi.StringPtrOutput)
 }
 
-func (o CosBucketLifecycleRuleTransitionOutput) Days() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRuleTransition) *int { return v.Days }).(pulumi.IntPtrOutput)
+// Specifies the number of days after object creation when the specific rule action takes effect.
+func (o BucketLifecycleRuleTransitionOutput) Days() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BucketLifecycleRuleTransition) *int { return v.Days }).(pulumi.IntPtrOutput)
 }
 
-func (o CosBucketLifecycleRuleTransitionOutput) StorageClass() pulumi.StringOutput {
-	return o.ApplyT(func(v CosBucketLifecycleRuleTransition) string { return v.StorageClass }).(pulumi.StringOutput)
+// Specifies the storage class to which you want the object to transition. Available values include `STANDARD`, `STANDARD_IA` and `ARCHIVE`.
+func (o BucketLifecycleRuleTransitionOutput) StorageClass() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketLifecycleRuleTransition) string { return v.StorageClass }).(pulumi.StringOutput)
 }
 
-type CosBucketLifecycleRuleTransitionArrayOutput struct{ *pulumi.OutputState }
+type BucketLifecycleRuleTransitionArrayOutput struct{ *pulumi.OutputState }
 
-func (CosBucketLifecycleRuleTransitionArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketLifecycleRuleTransition)(nil)).Elem()
+func (BucketLifecycleRuleTransitionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketLifecycleRuleTransition)(nil)).Elem()
 }
 
-func (o CosBucketLifecycleRuleTransitionArrayOutput) ToCosBucketLifecycleRuleTransitionArrayOutput() CosBucketLifecycleRuleTransitionArrayOutput {
+func (o BucketLifecycleRuleTransitionArrayOutput) ToBucketLifecycleRuleTransitionArrayOutput() BucketLifecycleRuleTransitionArrayOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleTransitionArrayOutput) ToCosBucketLifecycleRuleTransitionArrayOutputWithContext(ctx context.Context) CosBucketLifecycleRuleTransitionArrayOutput {
+func (o BucketLifecycleRuleTransitionArrayOutput) ToBucketLifecycleRuleTransitionArrayOutputWithContext(ctx context.Context) BucketLifecycleRuleTransitionArrayOutput {
 	return o
 }
 
-func (o CosBucketLifecycleRuleTransitionArrayOutput) Index(i pulumi.IntInput) CosBucketLifecycleRuleTransitionOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CosBucketLifecycleRuleTransition {
-		return vs[0].([]CosBucketLifecycleRuleTransition)[vs[1].(int)]
-	}).(CosBucketLifecycleRuleTransitionOutput)
+func (o BucketLifecycleRuleTransitionArrayOutput) Index(i pulumi.IntInput) BucketLifecycleRuleTransitionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketLifecycleRuleTransition {
+		return vs[0].([]BucketLifecycleRuleTransition)[vs[1].(int)]
+	}).(BucketLifecycleRuleTransitionOutput)
 }
 
-type CosBucketOriginDomainRule struct {
+type BucketOriginDomainRule struct {
+	// Specify domain host.
+	Domain string `pulumi:"domain"`
+	// Domain status, default: `ENABLED`.
+	Status *string `pulumi:"status"`
+	// Specify origin domain type, available values: `REST`, `WEBSITE`, `ACCELERATE`, default: `REST`.
+	Type *string `pulumi:"type"`
+}
+
+// BucketOriginDomainRuleInput is an input type that accepts BucketOriginDomainRuleArgs and BucketOriginDomainRuleOutput values.
+// You can construct a concrete instance of `BucketOriginDomainRuleInput` via:
+//
+//          BucketOriginDomainRuleArgs{...}
+type BucketOriginDomainRuleInput interface {
+	pulumi.Input
+
+	ToBucketOriginDomainRuleOutput() BucketOriginDomainRuleOutput
+	ToBucketOriginDomainRuleOutputWithContext(context.Context) BucketOriginDomainRuleOutput
+}
+
+type BucketOriginDomainRuleArgs struct {
+	// Specify domain host.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Domain status, default: `ENABLED`.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+	// Specify origin domain type, available values: `REST`, `WEBSITE`, `ACCELERATE`, default: `REST`.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+}
+
+func (BucketOriginDomainRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketOriginDomainRule)(nil)).Elem()
+}
+
+func (i BucketOriginDomainRuleArgs) ToBucketOriginDomainRuleOutput() BucketOriginDomainRuleOutput {
+	return i.ToBucketOriginDomainRuleOutputWithContext(context.Background())
+}
+
+func (i BucketOriginDomainRuleArgs) ToBucketOriginDomainRuleOutputWithContext(ctx context.Context) BucketOriginDomainRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketOriginDomainRuleOutput)
+}
+
+// BucketOriginDomainRuleArrayInput is an input type that accepts BucketOriginDomainRuleArray and BucketOriginDomainRuleArrayOutput values.
+// You can construct a concrete instance of `BucketOriginDomainRuleArrayInput` via:
+//
+//          BucketOriginDomainRuleArray{ BucketOriginDomainRuleArgs{...} }
+type BucketOriginDomainRuleArrayInput interface {
+	pulumi.Input
+
+	ToBucketOriginDomainRuleArrayOutput() BucketOriginDomainRuleArrayOutput
+	ToBucketOriginDomainRuleArrayOutputWithContext(context.Context) BucketOriginDomainRuleArrayOutput
+}
+
+type BucketOriginDomainRuleArray []BucketOriginDomainRuleInput
+
+func (BucketOriginDomainRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketOriginDomainRule)(nil)).Elem()
+}
+
+func (i BucketOriginDomainRuleArray) ToBucketOriginDomainRuleArrayOutput() BucketOriginDomainRuleArrayOutput {
+	return i.ToBucketOriginDomainRuleArrayOutputWithContext(context.Background())
+}
+
+func (i BucketOriginDomainRuleArray) ToBucketOriginDomainRuleArrayOutputWithContext(ctx context.Context) BucketOriginDomainRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketOriginDomainRuleArrayOutput)
+}
+
+type BucketOriginDomainRuleOutput struct{ *pulumi.OutputState }
+
+func (BucketOriginDomainRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketOriginDomainRule)(nil)).Elem()
+}
+
+func (o BucketOriginDomainRuleOutput) ToBucketOriginDomainRuleOutput() BucketOriginDomainRuleOutput {
+	return o
+}
+
+func (o BucketOriginDomainRuleOutput) ToBucketOriginDomainRuleOutputWithContext(ctx context.Context) BucketOriginDomainRuleOutput {
+	return o
+}
+
+// Specify domain host.
+func (o BucketOriginDomainRuleOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketOriginDomainRule) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Domain status, default: `ENABLED`.
+func (o BucketOriginDomainRuleOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketOriginDomainRule) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+// Specify origin domain type, available values: `REST`, `WEBSITE`, `ACCELERATE`, default: `REST`.
+func (o BucketOriginDomainRuleOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketOriginDomainRule) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+type BucketOriginDomainRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (BucketOriginDomainRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketOriginDomainRule)(nil)).Elem()
+}
+
+func (o BucketOriginDomainRuleArrayOutput) ToBucketOriginDomainRuleArrayOutput() BucketOriginDomainRuleArrayOutput {
+	return o
+}
+
+func (o BucketOriginDomainRuleArrayOutput) ToBucketOriginDomainRuleArrayOutputWithContext(ctx context.Context) BucketOriginDomainRuleArrayOutput {
+	return o
+}
+
+func (o BucketOriginDomainRuleArrayOutput) Index(i pulumi.IntInput) BucketOriginDomainRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketOriginDomainRule {
+		return vs[0].([]BucketOriginDomainRule)[vs[1].(int)]
+	}).(BucketOriginDomainRuleOutput)
+}
+
+type BucketOriginPullRule struct {
+	// Specifies the custom headers that you can add for COS to access your origin server.
+	CustomHttpHeaders map[string]interface{} `pulumi:"customHttpHeaders"`
+	// Specifies the pass through headers when accessing the origin server.
+	FollowHttpHeaders []string `pulumi:"followHttpHeaders"`
+	// Specifies whether to pass through COS request query string when accessing the origin server.
+	FollowQueryString *bool `pulumi:"followQueryString"`
+	// Specifies whether to follow 3XX redirect to another origin server to pull data from.
+	FollowRedirection *bool `pulumi:"followRedirection"`
+	// Allows only a domain name or IP address. You can optionally append a port number to the address.
+	Host string `pulumi:"host"`
+	// Triggers the origin-pull rule when the requested file name matches this prefix.
+	Prefix *string `pulumi:"prefix"`
+	// Priority of origin-pull rules, do not set the same value for multiple rules.
+	Priority int `pulumi:"priority"`
+	// the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
+	Protocol *string `pulumi:"protocol"`
+	// If `true`, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
+	SyncBackToSource *bool `pulumi:"syncBackToSource"`
+}
+
+// BucketOriginPullRuleInput is an input type that accepts BucketOriginPullRuleArgs and BucketOriginPullRuleOutput values.
+// You can construct a concrete instance of `BucketOriginPullRuleInput` via:
+//
+//          BucketOriginPullRuleArgs{...}
+type BucketOriginPullRuleInput interface {
+	pulumi.Input
+
+	ToBucketOriginPullRuleOutput() BucketOriginPullRuleOutput
+	ToBucketOriginPullRuleOutputWithContext(context.Context) BucketOriginPullRuleOutput
+}
+
+type BucketOriginPullRuleArgs struct {
+	// Specifies the custom headers that you can add for COS to access your origin server.
+	CustomHttpHeaders pulumi.MapInput `pulumi:"customHttpHeaders"`
+	// Specifies the pass through headers when accessing the origin server.
+	FollowHttpHeaders pulumi.StringArrayInput `pulumi:"followHttpHeaders"`
+	// Specifies whether to pass through COS request query string when accessing the origin server.
+	FollowQueryString pulumi.BoolPtrInput `pulumi:"followQueryString"`
+	// Specifies whether to follow 3XX redirect to another origin server to pull data from.
+	FollowRedirection pulumi.BoolPtrInput `pulumi:"followRedirection"`
+	// Allows only a domain name or IP address. You can optionally append a port number to the address.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Triggers the origin-pull rule when the requested file name matches this prefix.
+	Prefix pulumi.StringPtrInput `pulumi:"prefix"`
+	// Priority of origin-pull rules, do not set the same value for multiple rules.
+	Priority pulumi.IntInput `pulumi:"priority"`
+	// the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// If `true`, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
+	SyncBackToSource pulumi.BoolPtrInput `pulumi:"syncBackToSource"`
+}
+
+func (BucketOriginPullRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketOriginPullRule)(nil)).Elem()
+}
+
+func (i BucketOriginPullRuleArgs) ToBucketOriginPullRuleOutput() BucketOriginPullRuleOutput {
+	return i.ToBucketOriginPullRuleOutputWithContext(context.Background())
+}
+
+func (i BucketOriginPullRuleArgs) ToBucketOriginPullRuleOutputWithContext(ctx context.Context) BucketOriginPullRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketOriginPullRuleOutput)
+}
+
+// BucketOriginPullRuleArrayInput is an input type that accepts BucketOriginPullRuleArray and BucketOriginPullRuleArrayOutput values.
+// You can construct a concrete instance of `BucketOriginPullRuleArrayInput` via:
+//
+//          BucketOriginPullRuleArray{ BucketOriginPullRuleArgs{...} }
+type BucketOriginPullRuleArrayInput interface {
+	pulumi.Input
+
+	ToBucketOriginPullRuleArrayOutput() BucketOriginPullRuleArrayOutput
+	ToBucketOriginPullRuleArrayOutputWithContext(context.Context) BucketOriginPullRuleArrayOutput
+}
+
+type BucketOriginPullRuleArray []BucketOriginPullRuleInput
+
+func (BucketOriginPullRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketOriginPullRule)(nil)).Elem()
+}
+
+func (i BucketOriginPullRuleArray) ToBucketOriginPullRuleArrayOutput() BucketOriginPullRuleArrayOutput {
+	return i.ToBucketOriginPullRuleArrayOutputWithContext(context.Background())
+}
+
+func (i BucketOriginPullRuleArray) ToBucketOriginPullRuleArrayOutputWithContext(ctx context.Context) BucketOriginPullRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketOriginPullRuleArrayOutput)
+}
+
+type BucketOriginPullRuleOutput struct{ *pulumi.OutputState }
+
+func (BucketOriginPullRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketOriginPullRule)(nil)).Elem()
+}
+
+func (o BucketOriginPullRuleOutput) ToBucketOriginPullRuleOutput() BucketOriginPullRuleOutput {
+	return o
+}
+
+func (o BucketOriginPullRuleOutput) ToBucketOriginPullRuleOutputWithContext(ctx context.Context) BucketOriginPullRuleOutput {
+	return o
+}
+
+// Specifies the custom headers that you can add for COS to access your origin server.
+func (o BucketOriginPullRuleOutput) CustomHttpHeaders() pulumi.MapOutput {
+	return o.ApplyT(func(v BucketOriginPullRule) map[string]interface{} { return v.CustomHttpHeaders }).(pulumi.MapOutput)
+}
+
+// Specifies the pass through headers when accessing the origin server.
+func (o BucketOriginPullRuleOutput) FollowHttpHeaders() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BucketOriginPullRule) []string { return v.FollowHttpHeaders }).(pulumi.StringArrayOutput)
+}
+
+// Specifies whether to pass through COS request query string when accessing the origin server.
+func (o BucketOriginPullRuleOutput) FollowQueryString() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v BucketOriginPullRule) *bool { return v.FollowQueryString }).(pulumi.BoolPtrOutput)
+}
+
+// Specifies whether to follow 3XX redirect to another origin server to pull data from.
+func (o BucketOriginPullRuleOutput) FollowRedirection() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v BucketOriginPullRule) *bool { return v.FollowRedirection }).(pulumi.BoolPtrOutput)
+}
+
+// Allows only a domain name or IP address. You can optionally append a port number to the address.
+func (o BucketOriginPullRuleOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketOriginPullRule) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Triggers the origin-pull rule when the requested file name matches this prefix.
+func (o BucketOriginPullRuleOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketOriginPullRule) *string { return v.Prefix }).(pulumi.StringPtrOutput)
+}
+
+// Priority of origin-pull rules, do not set the same value for multiple rules.
+func (o BucketOriginPullRuleOutput) Priority() pulumi.IntOutput {
+	return o.ApplyT(func(v BucketOriginPullRule) int { return v.Priority }).(pulumi.IntOutput)
+}
+
+// the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
+func (o BucketOriginPullRuleOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketOriginPullRule) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+// If `true`, COS will not return 3XX status code when pulling data from an origin server. Current available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
+func (o BucketOriginPullRuleOutput) SyncBackToSource() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v BucketOriginPullRule) *bool { return v.SyncBackToSource }).(pulumi.BoolPtrOutput)
+}
+
+type BucketOriginPullRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (BucketOriginPullRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketOriginPullRule)(nil)).Elem()
+}
+
+func (o BucketOriginPullRuleArrayOutput) ToBucketOriginPullRuleArrayOutput() BucketOriginPullRuleArrayOutput {
+	return o
+}
+
+func (o BucketOriginPullRuleArrayOutput) ToBucketOriginPullRuleArrayOutputWithContext(ctx context.Context) BucketOriginPullRuleArrayOutput {
+	return o
+}
+
+func (o BucketOriginPullRuleArrayOutput) Index(i pulumi.IntInput) BucketOriginPullRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketOriginPullRule {
+		return vs[0].([]BucketOriginPullRule)[vs[1].(int)]
+	}).(BucketOriginPullRuleOutput)
+}
+
+type BucketReplicaRule struct {
+	// Destination bucket identifier, format: `qcs::cos:<region>::<bucketname-appid>`. NOTE: destination bucket must enable versioning.
+	DestinationBucket string `pulumi:"destinationBucket"`
+	// Storage class of destination, available values: `STANDARD`, `INTELLIGENT_TIERING`, `STANDARD_IA`. default is following current class of destination.
+	DestinationStorageClass *string `pulumi:"destinationStorageClass"`
+	// Name of a specific rule.
+	Id *string `pulumi:"id"`
+	// Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.
+	Prefix *string `pulumi:"prefix"`
+	// Status identifier, available values: `Enabled`, `Disabled`.
+	Status string `pulumi:"status"`
+}
+
+// BucketReplicaRuleInput is an input type that accepts BucketReplicaRuleArgs and BucketReplicaRuleOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleInput` via:
+//
+//          BucketReplicaRuleArgs{...}
+type BucketReplicaRuleInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleOutput() BucketReplicaRuleOutput
+	ToBucketReplicaRuleOutputWithContext(context.Context) BucketReplicaRuleOutput
+}
+
+type BucketReplicaRuleArgs struct {
+	// Destination bucket identifier, format: `qcs::cos:<region>::<bucketname-appid>`. NOTE: destination bucket must enable versioning.
+	DestinationBucket pulumi.StringInput `pulumi:"destinationBucket"`
+	// Storage class of destination, available values: `STANDARD`, `INTELLIGENT_TIERING`, `STANDARD_IA`. default is following current class of destination.
+	DestinationStorageClass pulumi.StringPtrInput `pulumi:"destinationStorageClass"`
+	// Name of a specific rule.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.
+	Prefix pulumi.StringPtrInput `pulumi:"prefix"`
+	// Status identifier, available values: `Enabled`, `Disabled`.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (BucketReplicaRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRule)(nil)).Elem()
+}
+
+func (i BucketReplicaRuleArgs) ToBucketReplicaRuleOutput() BucketReplicaRuleOutput {
+	return i.ToBucketReplicaRuleOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleArgs) ToBucketReplicaRuleOutputWithContext(ctx context.Context) BucketReplicaRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleOutput)
+}
+
+// BucketReplicaRuleArrayInput is an input type that accepts BucketReplicaRuleArray and BucketReplicaRuleArrayOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleArrayInput` via:
+//
+//          BucketReplicaRuleArray{ BucketReplicaRuleArgs{...} }
+type BucketReplicaRuleArrayInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleArrayOutput() BucketReplicaRuleArrayOutput
+	ToBucketReplicaRuleArrayOutputWithContext(context.Context) BucketReplicaRuleArrayOutput
+}
+
+type BucketReplicaRuleArray []BucketReplicaRuleInput
+
+func (BucketReplicaRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketReplicaRule)(nil)).Elem()
+}
+
+func (i BucketReplicaRuleArray) ToBucketReplicaRuleArrayOutput() BucketReplicaRuleArrayOutput {
+	return i.ToBucketReplicaRuleArrayOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleArray) ToBucketReplicaRuleArrayOutputWithContext(ctx context.Context) BucketReplicaRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleArrayOutput)
+}
+
+type BucketReplicaRuleOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRule)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleOutput) ToBucketReplicaRuleOutput() BucketReplicaRuleOutput {
+	return o
+}
+
+func (o BucketReplicaRuleOutput) ToBucketReplicaRuleOutputWithContext(ctx context.Context) BucketReplicaRuleOutput {
+	return o
+}
+
+// Destination bucket identifier, format: `qcs::cos:<region>::<bucketname-appid>`. NOTE: destination bucket must enable versioning.
+func (o BucketReplicaRuleOutput) DestinationBucket() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketReplicaRule) string { return v.DestinationBucket }).(pulumi.StringOutput)
+}
+
+// Storage class of destination, available values: `STANDARD`, `INTELLIGENT_TIERING`, `STANDARD_IA`. default is following current class of destination.
+func (o BucketReplicaRuleOutput) DestinationStorageClass() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRule) *string { return v.DestinationStorageClass }).(pulumi.StringPtrOutput)
+}
+
+// Name of a specific rule.
+func (o BucketReplicaRuleOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRule) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.
+func (o BucketReplicaRuleOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRule) *string { return v.Prefix }).(pulumi.StringPtrOutput)
+}
+
+// Status identifier, available values: `Enabled`, `Disabled`.
+func (o BucketReplicaRuleOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketReplicaRule) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type BucketReplicaRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketReplicaRule)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleArrayOutput) ToBucketReplicaRuleArrayOutput() BucketReplicaRuleArrayOutput {
+	return o
+}
+
+func (o BucketReplicaRuleArrayOutput) ToBucketReplicaRuleArrayOutputWithContext(ctx context.Context) BucketReplicaRuleArrayOutput {
+	return o
+}
+
+func (o BucketReplicaRuleArrayOutput) Index(i pulumi.IntInput) BucketReplicaRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketReplicaRule {
+		return vs[0].([]BucketReplicaRule)[vs[1].(int)]
+	}).(BucketReplicaRuleOutput)
+}
+
+type BucketWebsite struct {
+	// An absolute path to the document to return in case of a 4XX error.
+	ErrorDocument *string `pulumi:"errorDocument"`
+	// COS returns this index document when requests are made to the root domain or any of the subfolders.
+	IndexDocument *string `pulumi:"indexDocument"`
+}
+
+// BucketWebsiteInput is an input type that accepts BucketWebsiteArgs and BucketWebsiteOutput values.
+// You can construct a concrete instance of `BucketWebsiteInput` via:
+//
+//          BucketWebsiteArgs{...}
+type BucketWebsiteInput interface {
+	pulumi.Input
+
+	ToBucketWebsiteOutput() BucketWebsiteOutput
+	ToBucketWebsiteOutputWithContext(context.Context) BucketWebsiteOutput
+}
+
+type BucketWebsiteArgs struct {
+	// An absolute path to the document to return in case of a 4XX error.
+	ErrorDocument pulumi.StringPtrInput `pulumi:"errorDocument"`
+	// COS returns this index document when requests are made to the root domain or any of the subfolders.
+	IndexDocument pulumi.StringPtrInput `pulumi:"indexDocument"`
+}
+
+func (BucketWebsiteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketWebsite)(nil)).Elem()
+}
+
+func (i BucketWebsiteArgs) ToBucketWebsiteOutput() BucketWebsiteOutput {
+	return i.ToBucketWebsiteOutputWithContext(context.Background())
+}
+
+func (i BucketWebsiteArgs) ToBucketWebsiteOutputWithContext(ctx context.Context) BucketWebsiteOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketWebsiteOutput)
+}
+
+func (i BucketWebsiteArgs) ToBucketWebsitePtrOutput() BucketWebsitePtrOutput {
+	return i.ToBucketWebsitePtrOutputWithContext(context.Background())
+}
+
+func (i BucketWebsiteArgs) ToBucketWebsitePtrOutputWithContext(ctx context.Context) BucketWebsitePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketWebsiteOutput).ToBucketWebsitePtrOutputWithContext(ctx)
+}
+
+// BucketWebsitePtrInput is an input type that accepts BucketWebsiteArgs, BucketWebsitePtr and BucketWebsitePtrOutput values.
+// You can construct a concrete instance of `BucketWebsitePtrInput` via:
+//
+//          BucketWebsiteArgs{...}
+//
+//  or:
+//
+//          nil
+type BucketWebsitePtrInput interface {
+	pulumi.Input
+
+	ToBucketWebsitePtrOutput() BucketWebsitePtrOutput
+	ToBucketWebsitePtrOutputWithContext(context.Context) BucketWebsitePtrOutput
+}
+
+type bucketWebsitePtrType BucketWebsiteArgs
+
+func BucketWebsitePtr(v *BucketWebsiteArgs) BucketWebsitePtrInput {
+	return (*bucketWebsitePtrType)(v)
+}
+
+func (*bucketWebsitePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketWebsite)(nil)).Elem()
+}
+
+func (i *bucketWebsitePtrType) ToBucketWebsitePtrOutput() BucketWebsitePtrOutput {
+	return i.ToBucketWebsitePtrOutputWithContext(context.Background())
+}
+
+func (i *bucketWebsitePtrType) ToBucketWebsitePtrOutputWithContext(ctx context.Context) BucketWebsitePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketWebsitePtrOutput)
+}
+
+type BucketWebsiteOutput struct{ *pulumi.OutputState }
+
+func (BucketWebsiteOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketWebsite)(nil)).Elem()
+}
+
+func (o BucketWebsiteOutput) ToBucketWebsiteOutput() BucketWebsiteOutput {
+	return o
+}
+
+func (o BucketWebsiteOutput) ToBucketWebsiteOutputWithContext(ctx context.Context) BucketWebsiteOutput {
+	return o
+}
+
+func (o BucketWebsiteOutput) ToBucketWebsitePtrOutput() BucketWebsitePtrOutput {
+	return o.ToBucketWebsitePtrOutputWithContext(context.Background())
+}
+
+func (o BucketWebsiteOutput) ToBucketWebsitePtrOutputWithContext(ctx context.Context) BucketWebsitePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketWebsite) *BucketWebsite {
+		return &v
+	}).(BucketWebsitePtrOutput)
+}
+
+// An absolute path to the document to return in case of a 4XX error.
+func (o BucketWebsiteOutput) ErrorDocument() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketWebsite) *string { return v.ErrorDocument }).(pulumi.StringPtrOutput)
+}
+
+// COS returns this index document when requests are made to the root domain or any of the subfolders.
+func (o BucketWebsiteOutput) IndexDocument() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketWebsite) *string { return v.IndexDocument }).(pulumi.StringPtrOutput)
+}
+
+type BucketWebsitePtrOutput struct{ *pulumi.OutputState }
+
+func (BucketWebsitePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketWebsite)(nil)).Elem()
+}
+
+func (o BucketWebsitePtrOutput) ToBucketWebsitePtrOutput() BucketWebsitePtrOutput {
+	return o
+}
+
+func (o BucketWebsitePtrOutput) ToBucketWebsitePtrOutputWithContext(ctx context.Context) BucketWebsitePtrOutput {
+	return o
+}
+
+func (o BucketWebsitePtrOutput) Elem() BucketWebsiteOutput {
+	return o.ApplyT(func(v *BucketWebsite) BucketWebsite {
+		if v != nil {
+			return *v
+		}
+		var ret BucketWebsite
+		return ret
+	}).(BucketWebsiteOutput)
+}
+
+// An absolute path to the document to return in case of a 4XX error.
+func (o BucketWebsitePtrOutput) ErrorDocument() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketWebsite) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ErrorDocument
+	}).(pulumi.StringPtrOutput)
+}
+
+// COS returns this index document when requests are made to the root domain or any of the subfolders.
+func (o BucketWebsitePtrOutput) IndexDocument() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketWebsite) *string {
+		if v == nil {
+			return nil
+		}
+		return v.IndexDocument
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetBucketsBucketList struct {
+	// Bucket access control configurations.
+	Acl string `pulumi:"acl"`
+	// Bucket verbose acl configurations.
+	AclBody string `pulumi:"aclBody"`
+	// Bucket name, the format likes `<bucket>-<appid>`.
+	Bucket string `pulumi:"bucket"`
+	// A list of CORS rule configurations.
+	CorsRules []GetBucketsBucketListCorsRule `pulumi:"corsRules"`
+	// The URL of this cos bucket.
+	CosBucketUrl string `pulumi:"cosBucketUrl"`
+	// The lifecycle configuration of a bucket.
+	LifecycleRules []GetBucketsBucketListLifecycleRule `pulumi:"lifecycleRules"`
+	// Bucket origin domain rules.
+	OriginDomainRules []GetBucketsBucketListOriginDomainRule `pulumi:"originDomainRules"`
+	// Bucket Origin-Pull rules.
+	OriginPullRules []GetBucketsBucketListOriginPullRule `pulumi:"originPullRules"`
+	// Tags to filter bucket.
+	Tags map[string]interface{} `pulumi:"tags"`
+	// A list of one element containing configuration parameters used when the bucket is used as a website.
+	Websites []GetBucketsBucketListWebsite `pulumi:"websites"`
+}
+
+// GetBucketsBucketListInput is an input type that accepts GetBucketsBucketListArgs and GetBucketsBucketListOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListInput` via:
+//
+//          GetBucketsBucketListArgs{...}
+type GetBucketsBucketListInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListOutput() GetBucketsBucketListOutput
+	ToGetBucketsBucketListOutputWithContext(context.Context) GetBucketsBucketListOutput
+}
+
+type GetBucketsBucketListArgs struct {
+	// Bucket access control configurations.
+	Acl pulumi.StringInput `pulumi:"acl"`
+	// Bucket verbose acl configurations.
+	AclBody pulumi.StringInput `pulumi:"aclBody"`
+	// Bucket name, the format likes `<bucket>-<appid>`.
+	Bucket pulumi.StringInput `pulumi:"bucket"`
+	// A list of CORS rule configurations.
+	CorsRules GetBucketsBucketListCorsRuleArrayInput `pulumi:"corsRules"`
+	// The URL of this cos bucket.
+	CosBucketUrl pulumi.StringInput `pulumi:"cosBucketUrl"`
+	// The lifecycle configuration of a bucket.
+	LifecycleRules GetBucketsBucketListLifecycleRuleArrayInput `pulumi:"lifecycleRules"`
+	// Bucket origin domain rules.
+	OriginDomainRules GetBucketsBucketListOriginDomainRuleArrayInput `pulumi:"originDomainRules"`
+	// Bucket Origin-Pull rules.
+	OriginPullRules GetBucketsBucketListOriginPullRuleArrayInput `pulumi:"originPullRules"`
+	// Tags to filter bucket.
+	Tags pulumi.MapInput `pulumi:"tags"`
+	// A list of one element containing configuration parameters used when the bucket is used as a website.
+	Websites GetBucketsBucketListWebsiteArrayInput `pulumi:"websites"`
+}
+
+func (GetBucketsBucketListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketList)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListArgs) ToGetBucketsBucketListOutput() GetBucketsBucketListOutput {
+	return i.ToGetBucketsBucketListOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListArgs) ToGetBucketsBucketListOutputWithContext(ctx context.Context) GetBucketsBucketListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListOutput)
+}
+
+// GetBucketsBucketListArrayInput is an input type that accepts GetBucketsBucketListArray and GetBucketsBucketListArrayOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListArrayInput` via:
+//
+//          GetBucketsBucketListArray{ GetBucketsBucketListArgs{...} }
+type GetBucketsBucketListArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListArrayOutput() GetBucketsBucketListArrayOutput
+	ToGetBucketsBucketListArrayOutputWithContext(context.Context) GetBucketsBucketListArrayOutput
+}
+
+type GetBucketsBucketListArray []GetBucketsBucketListInput
+
+func (GetBucketsBucketListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketList)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListArray) ToGetBucketsBucketListArrayOutput() GetBucketsBucketListArrayOutput {
+	return i.ToGetBucketsBucketListArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListArray) ToGetBucketsBucketListArrayOutputWithContext(ctx context.Context) GetBucketsBucketListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListArrayOutput)
+}
+
+type GetBucketsBucketListOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketList)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListOutput) ToGetBucketsBucketListOutput() GetBucketsBucketListOutput {
+	return o
+}
+
+func (o GetBucketsBucketListOutput) ToGetBucketsBucketListOutputWithContext(ctx context.Context) GetBucketsBucketListOutput {
+	return o
+}
+
+// Bucket access control configurations.
+func (o GetBucketsBucketListOutput) Acl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketList) string { return v.Acl }).(pulumi.StringOutput)
+}
+
+// Bucket verbose acl configurations.
+func (o GetBucketsBucketListOutput) AclBody() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketList) string { return v.AclBody }).(pulumi.StringOutput)
+}
+
+// Bucket name, the format likes `<bucket>-<appid>`.
+func (o GetBucketsBucketListOutput) Bucket() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketList) string { return v.Bucket }).(pulumi.StringOutput)
+}
+
+// A list of CORS rule configurations.
+func (o GetBucketsBucketListOutput) CorsRules() GetBucketsBucketListCorsRuleArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketList) []GetBucketsBucketListCorsRule { return v.CorsRules }).(GetBucketsBucketListCorsRuleArrayOutput)
+}
+
+// The URL of this cos bucket.
+func (o GetBucketsBucketListOutput) CosBucketUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketList) string { return v.CosBucketUrl }).(pulumi.StringOutput)
+}
+
+// The lifecycle configuration of a bucket.
+func (o GetBucketsBucketListOutput) LifecycleRules() GetBucketsBucketListLifecycleRuleArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketList) []GetBucketsBucketListLifecycleRule { return v.LifecycleRules }).(GetBucketsBucketListLifecycleRuleArrayOutput)
+}
+
+// Bucket origin domain rules.
+func (o GetBucketsBucketListOutput) OriginDomainRules() GetBucketsBucketListOriginDomainRuleArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketList) []GetBucketsBucketListOriginDomainRule { return v.OriginDomainRules }).(GetBucketsBucketListOriginDomainRuleArrayOutput)
+}
+
+// Bucket Origin-Pull rules.
+func (o GetBucketsBucketListOutput) OriginPullRules() GetBucketsBucketListOriginPullRuleArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketList) []GetBucketsBucketListOriginPullRule { return v.OriginPullRules }).(GetBucketsBucketListOriginPullRuleArrayOutput)
+}
+
+// Tags to filter bucket.
+func (o GetBucketsBucketListOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v GetBucketsBucketList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+}
+
+// A list of one element containing configuration parameters used when the bucket is used as a website.
+func (o GetBucketsBucketListOutput) Websites() GetBucketsBucketListWebsiteArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketList) []GetBucketsBucketListWebsite { return v.Websites }).(GetBucketsBucketListWebsiteArrayOutput)
+}
+
+type GetBucketsBucketListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketList)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListArrayOutput) ToGetBucketsBucketListArrayOutput() GetBucketsBucketListArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListArrayOutput) ToGetBucketsBucketListArrayOutputWithContext(ctx context.Context) GetBucketsBucketListArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListArrayOutput) Index(i pulumi.IntInput) GetBucketsBucketListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketsBucketList {
+		return vs[0].([]GetBucketsBucketList)[vs[1].(int)]
+	}).(GetBucketsBucketListOutput)
+}
+
+type GetBucketsBucketListCorsRule struct {
+	// Specifies which headers are allowed.
+	AllowedHeaders []string `pulumi:"allowedHeaders"`
+	// Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.
+	AllowedMethods []string `pulumi:"allowedMethods"`
+	// Specifies which origins are allowed.
+	AllowedOrigins []string `pulumi:"allowedOrigins"`
+	// Specifies expose header in the response.
+	ExposeHeaders []string `pulumi:"exposeHeaders"`
+	// Specifies time in seconds that browser can cache the response for a preflight request.
+	MaxAgeSeconds int `pulumi:"maxAgeSeconds"`
+}
+
+// GetBucketsBucketListCorsRuleInput is an input type that accepts GetBucketsBucketListCorsRuleArgs and GetBucketsBucketListCorsRuleOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListCorsRuleInput` via:
+//
+//          GetBucketsBucketListCorsRuleArgs{...}
+type GetBucketsBucketListCorsRuleInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListCorsRuleOutput() GetBucketsBucketListCorsRuleOutput
+	ToGetBucketsBucketListCorsRuleOutputWithContext(context.Context) GetBucketsBucketListCorsRuleOutput
+}
+
+type GetBucketsBucketListCorsRuleArgs struct {
+	// Specifies which headers are allowed.
+	AllowedHeaders pulumi.StringArrayInput `pulumi:"allowedHeaders"`
+	// Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.
+	AllowedMethods pulumi.StringArrayInput `pulumi:"allowedMethods"`
+	// Specifies which origins are allowed.
+	AllowedOrigins pulumi.StringArrayInput `pulumi:"allowedOrigins"`
+	// Specifies expose header in the response.
+	ExposeHeaders pulumi.StringArrayInput `pulumi:"exposeHeaders"`
+	// Specifies time in seconds that browser can cache the response for a preflight request.
+	MaxAgeSeconds pulumi.IntInput `pulumi:"maxAgeSeconds"`
+}
+
+func (GetBucketsBucketListCorsRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListCorsRule)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListCorsRuleArgs) ToGetBucketsBucketListCorsRuleOutput() GetBucketsBucketListCorsRuleOutput {
+	return i.ToGetBucketsBucketListCorsRuleOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListCorsRuleArgs) ToGetBucketsBucketListCorsRuleOutputWithContext(ctx context.Context) GetBucketsBucketListCorsRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListCorsRuleOutput)
+}
+
+// GetBucketsBucketListCorsRuleArrayInput is an input type that accepts GetBucketsBucketListCorsRuleArray and GetBucketsBucketListCorsRuleArrayOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListCorsRuleArrayInput` via:
+//
+//          GetBucketsBucketListCorsRuleArray{ GetBucketsBucketListCorsRuleArgs{...} }
+type GetBucketsBucketListCorsRuleArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListCorsRuleArrayOutput() GetBucketsBucketListCorsRuleArrayOutput
+	ToGetBucketsBucketListCorsRuleArrayOutputWithContext(context.Context) GetBucketsBucketListCorsRuleArrayOutput
+}
+
+type GetBucketsBucketListCorsRuleArray []GetBucketsBucketListCorsRuleInput
+
+func (GetBucketsBucketListCorsRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListCorsRule)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListCorsRuleArray) ToGetBucketsBucketListCorsRuleArrayOutput() GetBucketsBucketListCorsRuleArrayOutput {
+	return i.ToGetBucketsBucketListCorsRuleArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListCorsRuleArray) ToGetBucketsBucketListCorsRuleArrayOutputWithContext(ctx context.Context) GetBucketsBucketListCorsRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListCorsRuleArrayOutput)
+}
+
+type GetBucketsBucketListCorsRuleOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListCorsRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListCorsRule)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListCorsRuleOutput) ToGetBucketsBucketListCorsRuleOutput() GetBucketsBucketListCorsRuleOutput {
+	return o
+}
+
+func (o GetBucketsBucketListCorsRuleOutput) ToGetBucketsBucketListCorsRuleOutputWithContext(ctx context.Context) GetBucketsBucketListCorsRuleOutput {
+	return o
+}
+
+// Specifies which headers are allowed.
+func (o GetBucketsBucketListCorsRuleOutput) AllowedHeaders() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketListCorsRule) []string { return v.AllowedHeaders }).(pulumi.StringArrayOutput)
+}
+
+// Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.
+func (o GetBucketsBucketListCorsRuleOutput) AllowedMethods() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketListCorsRule) []string { return v.AllowedMethods }).(pulumi.StringArrayOutput)
+}
+
+// Specifies which origins are allowed.
+func (o GetBucketsBucketListCorsRuleOutput) AllowedOrigins() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketListCorsRule) []string { return v.AllowedOrigins }).(pulumi.StringArrayOutput)
+}
+
+// Specifies expose header in the response.
+func (o GetBucketsBucketListCorsRuleOutput) ExposeHeaders() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketListCorsRule) []string { return v.ExposeHeaders }).(pulumi.StringArrayOutput)
+}
+
+// Specifies time in seconds that browser can cache the response for a preflight request.
+func (o GetBucketsBucketListCorsRuleOutput) MaxAgeSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBucketsBucketListCorsRule) int { return v.MaxAgeSeconds }).(pulumi.IntOutput)
+}
+
+type GetBucketsBucketListCorsRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListCorsRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListCorsRule)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListCorsRuleArrayOutput) ToGetBucketsBucketListCorsRuleArrayOutput() GetBucketsBucketListCorsRuleArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListCorsRuleArrayOutput) ToGetBucketsBucketListCorsRuleArrayOutputWithContext(ctx context.Context) GetBucketsBucketListCorsRuleArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListCorsRuleArrayOutput) Index(i pulumi.IntInput) GetBucketsBucketListCorsRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketsBucketListCorsRule {
+		return vs[0].([]GetBucketsBucketListCorsRule)[vs[1].(int)]
+	}).(GetBucketsBucketListCorsRuleOutput)
+}
+
+type GetBucketsBucketListLifecycleRule struct {
+	// Specifies a period in the object's expire.
+	Expirations []GetBucketsBucketListLifecycleRuleExpiration `pulumi:"expirations"`
+	// Object key prefix identifying one or more objects to which the rule applies.
+	FilterPrefix string `pulumi:"filterPrefix"`
+	// Specifies when non current object versions shall expire.
+	NonCurrentExpirations []GetBucketsBucketListLifecycleRuleNonCurrentExpiration `pulumi:"nonCurrentExpirations"`
+	// Specifies when to transition objects of non current versions and the target storage class.
+	NonCurrentTransitions []GetBucketsBucketListLifecycleRuleNonCurrentTransition `pulumi:"nonCurrentTransitions"`
+	// Specifies a period in the object's transitions.
+	Transitions []GetBucketsBucketListLifecycleRuleTransition `pulumi:"transitions"`
+}
+
+// GetBucketsBucketListLifecycleRuleInput is an input type that accepts GetBucketsBucketListLifecycleRuleArgs and GetBucketsBucketListLifecycleRuleOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleInput` via:
+//
+//          GetBucketsBucketListLifecycleRuleArgs{...}
+type GetBucketsBucketListLifecycleRuleInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListLifecycleRuleOutput() GetBucketsBucketListLifecycleRuleOutput
+	ToGetBucketsBucketListLifecycleRuleOutputWithContext(context.Context) GetBucketsBucketListLifecycleRuleOutput
+}
+
+type GetBucketsBucketListLifecycleRuleArgs struct {
+	// Specifies a period in the object's expire.
+	Expirations GetBucketsBucketListLifecycleRuleExpirationArrayInput `pulumi:"expirations"`
+	// Object key prefix identifying one or more objects to which the rule applies.
+	FilterPrefix pulumi.StringInput `pulumi:"filterPrefix"`
+	// Specifies when non current object versions shall expire.
+	NonCurrentExpirations GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput `pulumi:"nonCurrentExpirations"`
+	// Specifies when to transition objects of non current versions and the target storage class.
+	NonCurrentTransitions GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput `pulumi:"nonCurrentTransitions"`
+	// Specifies a period in the object's transitions.
+	Transitions GetBucketsBucketListLifecycleRuleTransitionArrayInput `pulumi:"transitions"`
+}
+
+func (GetBucketsBucketListLifecycleRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListLifecycleRule)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListLifecycleRuleArgs) ToGetBucketsBucketListLifecycleRuleOutput() GetBucketsBucketListLifecycleRuleOutput {
+	return i.ToGetBucketsBucketListLifecycleRuleOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListLifecycleRuleArgs) ToGetBucketsBucketListLifecycleRuleOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListLifecycleRuleOutput)
+}
+
+// GetBucketsBucketListLifecycleRuleArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleArray and GetBucketsBucketListLifecycleRuleArrayOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleArrayInput` via:
+//
+//          GetBucketsBucketListLifecycleRuleArray{ GetBucketsBucketListLifecycleRuleArgs{...} }
+type GetBucketsBucketListLifecycleRuleArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListLifecycleRuleArrayOutput() GetBucketsBucketListLifecycleRuleArrayOutput
+	ToGetBucketsBucketListLifecycleRuleArrayOutputWithContext(context.Context) GetBucketsBucketListLifecycleRuleArrayOutput
+}
+
+type GetBucketsBucketListLifecycleRuleArray []GetBucketsBucketListLifecycleRuleInput
+
+func (GetBucketsBucketListLifecycleRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListLifecycleRule)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListLifecycleRuleArray) ToGetBucketsBucketListLifecycleRuleArrayOutput() GetBucketsBucketListLifecycleRuleArrayOutput {
+	return i.ToGetBucketsBucketListLifecycleRuleArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListLifecycleRuleArray) ToGetBucketsBucketListLifecycleRuleArrayOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListLifecycleRuleArrayOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListLifecycleRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListLifecycleRule)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListLifecycleRuleOutput) ToGetBucketsBucketListLifecycleRuleOutput() GetBucketsBucketListLifecycleRuleOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleOutput) ToGetBucketsBucketListLifecycleRuleOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleOutput {
+	return o
+}
+
+// Specifies a period in the object's expire.
+func (o GetBucketsBucketListLifecycleRuleOutput) Expirations() GetBucketsBucketListLifecycleRuleExpirationArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRule) []GetBucketsBucketListLifecycleRuleExpiration {
+		return v.Expirations
+	}).(GetBucketsBucketListLifecycleRuleExpirationArrayOutput)
+}
+
+// Object key prefix identifying one or more objects to which the rule applies.
+func (o GetBucketsBucketListLifecycleRuleOutput) FilterPrefix() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRule) string { return v.FilterPrefix }).(pulumi.StringOutput)
+}
+
+// Specifies when non current object versions shall expire.
+func (o GetBucketsBucketListLifecycleRuleOutput) NonCurrentExpirations() GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRule) []GetBucketsBucketListLifecycleRuleNonCurrentExpiration {
+		return v.NonCurrentExpirations
+	}).(GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput)
+}
+
+// Specifies when to transition objects of non current versions and the target storage class.
+func (o GetBucketsBucketListLifecycleRuleOutput) NonCurrentTransitions() GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRule) []GetBucketsBucketListLifecycleRuleNonCurrentTransition {
+		return v.NonCurrentTransitions
+	}).(GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput)
+}
+
+// Specifies a period in the object's transitions.
+func (o GetBucketsBucketListLifecycleRuleOutput) Transitions() GetBucketsBucketListLifecycleRuleTransitionArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRule) []GetBucketsBucketListLifecycleRuleTransition {
+		return v.Transitions
+	}).(GetBucketsBucketListLifecycleRuleTransitionArrayOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListLifecycleRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListLifecycleRule)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListLifecycleRuleArrayOutput) ToGetBucketsBucketListLifecycleRuleArrayOutput() GetBucketsBucketListLifecycleRuleArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleArrayOutput) ToGetBucketsBucketListLifecycleRuleArrayOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleArrayOutput) Index(i pulumi.IntInput) GetBucketsBucketListLifecycleRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketsBucketListLifecycleRule {
+		return vs[0].([]GetBucketsBucketListLifecycleRule)[vs[1].(int)]
+	}).(GetBucketsBucketListLifecycleRuleOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleExpiration struct {
+	// Specifies the date after which you want the corresponding action to take effect.
+	Date string `pulumi:"date"`
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	Days int `pulumi:"days"`
+}
+
+// GetBucketsBucketListLifecycleRuleExpirationInput is an input type that accepts GetBucketsBucketListLifecycleRuleExpirationArgs and GetBucketsBucketListLifecycleRuleExpirationOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleExpirationInput` via:
+//
+//          GetBucketsBucketListLifecycleRuleExpirationArgs{...}
+type GetBucketsBucketListLifecycleRuleExpirationInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListLifecycleRuleExpirationOutput() GetBucketsBucketListLifecycleRuleExpirationOutput
+	ToGetBucketsBucketListLifecycleRuleExpirationOutputWithContext(context.Context) GetBucketsBucketListLifecycleRuleExpirationOutput
+}
+
+type GetBucketsBucketListLifecycleRuleExpirationArgs struct {
+	// Specifies the date after which you want the corresponding action to take effect.
+	Date pulumi.StringInput `pulumi:"date"`
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	Days pulumi.IntInput `pulumi:"days"`
+}
+
+func (GetBucketsBucketListLifecycleRuleExpirationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListLifecycleRuleExpiration)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListLifecycleRuleExpirationArgs) ToGetBucketsBucketListLifecycleRuleExpirationOutput() GetBucketsBucketListLifecycleRuleExpirationOutput {
+	return i.ToGetBucketsBucketListLifecycleRuleExpirationOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListLifecycleRuleExpirationArgs) ToGetBucketsBucketListLifecycleRuleExpirationOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleExpirationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListLifecycleRuleExpirationOutput)
+}
+
+// GetBucketsBucketListLifecycleRuleExpirationArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleExpirationArray and GetBucketsBucketListLifecycleRuleExpirationArrayOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleExpirationArrayInput` via:
+//
+//          GetBucketsBucketListLifecycleRuleExpirationArray{ GetBucketsBucketListLifecycleRuleExpirationArgs{...} }
+type GetBucketsBucketListLifecycleRuleExpirationArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListLifecycleRuleExpirationArrayOutput() GetBucketsBucketListLifecycleRuleExpirationArrayOutput
+	ToGetBucketsBucketListLifecycleRuleExpirationArrayOutputWithContext(context.Context) GetBucketsBucketListLifecycleRuleExpirationArrayOutput
+}
+
+type GetBucketsBucketListLifecycleRuleExpirationArray []GetBucketsBucketListLifecycleRuleExpirationInput
+
+func (GetBucketsBucketListLifecycleRuleExpirationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListLifecycleRuleExpiration)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListLifecycleRuleExpirationArray) ToGetBucketsBucketListLifecycleRuleExpirationArrayOutput() GetBucketsBucketListLifecycleRuleExpirationArrayOutput {
+	return i.ToGetBucketsBucketListLifecycleRuleExpirationArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListLifecycleRuleExpirationArray) ToGetBucketsBucketListLifecycleRuleExpirationArrayOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleExpirationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListLifecycleRuleExpirationArrayOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleExpirationOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListLifecycleRuleExpirationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListLifecycleRuleExpiration)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListLifecycleRuleExpirationOutput) ToGetBucketsBucketListLifecycleRuleExpirationOutput() GetBucketsBucketListLifecycleRuleExpirationOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleExpirationOutput) ToGetBucketsBucketListLifecycleRuleExpirationOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleExpirationOutput {
+	return o
+}
+
+// Specifies the date after which you want the corresponding action to take effect.
+func (o GetBucketsBucketListLifecycleRuleExpirationOutput) Date() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRuleExpiration) string { return v.Date }).(pulumi.StringOutput)
+}
+
+// Specifies the number of days after object creation when the specific rule action takes effect.
+func (o GetBucketsBucketListLifecycleRuleExpirationOutput) Days() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRuleExpiration) int { return v.Days }).(pulumi.IntOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleExpirationArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListLifecycleRuleExpirationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListLifecycleRuleExpiration)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListLifecycleRuleExpirationArrayOutput) ToGetBucketsBucketListLifecycleRuleExpirationArrayOutput() GetBucketsBucketListLifecycleRuleExpirationArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleExpirationArrayOutput) ToGetBucketsBucketListLifecycleRuleExpirationArrayOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleExpirationArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleExpirationArrayOutput) Index(i pulumi.IntInput) GetBucketsBucketListLifecycleRuleExpirationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketsBucketListLifecycleRuleExpiration {
+		return vs[0].([]GetBucketsBucketListLifecycleRuleExpiration)[vs[1].(int)]
+	}).(GetBucketsBucketListLifecycleRuleExpirationOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleNonCurrentExpiration struct {
+	// Number of days after non current object creation when the specific rule action takes effect.
+	NonCurrentDays int `pulumi:"nonCurrentDays"`
+}
+
+// GetBucketsBucketListLifecycleRuleNonCurrentExpirationInput is an input type that accepts GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs and GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleNonCurrentExpirationInput` via:
+//
+//          GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs{...}
+type GetBucketsBucketListLifecycleRuleNonCurrentExpirationInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput() GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput
+	ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationOutputWithContext(context.Context) GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput
+}
+
+type GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs struct {
+	// Number of days after non current object creation when the specific rule action takes effect.
+	NonCurrentDays pulumi.IntInput `pulumi:"nonCurrentDays"`
+}
+
+func (GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListLifecycleRuleNonCurrentExpiration)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs) ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput() GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput {
+	return i.ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs) ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput)
+}
+
+// GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray and GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput` via:
+//
+//          GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray{ GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs{...} }
+type GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput() GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput
+	ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutputWithContext(context.Context) GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput
+}
+
+type GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray []GetBucketsBucketListLifecycleRuleNonCurrentExpirationInput
+
+func (GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListLifecycleRuleNonCurrentExpiration)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray) ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput() GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput {
+	return i.ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray) ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListLifecycleRuleNonCurrentExpiration)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput) ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput() GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput) ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput {
+	return o
+}
+
+// Number of days after non current object creation when the specific rule action takes effect.
+func (o GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput) NonCurrentDays() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRuleNonCurrentExpiration) int { return v.NonCurrentDays }).(pulumi.IntOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListLifecycleRuleNonCurrentExpiration)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput) ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput() GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput) ToGetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput) Index(i pulumi.IntInput) GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketsBucketListLifecycleRuleNonCurrentExpiration {
+		return vs[0].([]GetBucketsBucketListLifecycleRuleNonCurrentExpiration)[vs[1].(int)]
+	}).(GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleNonCurrentTransition struct {
+	// Number of days after non current object creation when the specific rule action takes effect.
+	NonCurrentDays int `pulumi:"nonCurrentDays"`
+	// Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.
+	StorageClass string `pulumi:"storageClass"`
+}
+
+// GetBucketsBucketListLifecycleRuleNonCurrentTransitionInput is an input type that accepts GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs and GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleNonCurrentTransitionInput` via:
+//
+//          GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs{...}
+type GetBucketsBucketListLifecycleRuleNonCurrentTransitionInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput() GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput
+	ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionOutputWithContext(context.Context) GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput
+}
+
+type GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs struct {
+	// Number of days after non current object creation when the specific rule action takes effect.
+	NonCurrentDays pulumi.IntInput `pulumi:"nonCurrentDays"`
+	// Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.
+	StorageClass pulumi.StringInput `pulumi:"storageClass"`
+}
+
+func (GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListLifecycleRuleNonCurrentTransition)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs) ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput() GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput {
+	return i.ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs) ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput)
+}
+
+// GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray and GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput` via:
+//
+//          GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray{ GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs{...} }
+type GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput() GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput
+	ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutputWithContext(context.Context) GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput
+}
+
+type GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray []GetBucketsBucketListLifecycleRuleNonCurrentTransitionInput
+
+func (GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListLifecycleRuleNonCurrentTransition)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray) ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput() GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput {
+	return i.ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray) ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListLifecycleRuleNonCurrentTransition)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput) ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput() GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput) ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput {
+	return o
+}
+
+// Number of days after non current object creation when the specific rule action takes effect.
+func (o GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput) NonCurrentDays() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRuleNonCurrentTransition) int { return v.NonCurrentDays }).(pulumi.IntOutput)
+}
+
+// Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.
+func (o GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput) StorageClass() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRuleNonCurrentTransition) string { return v.StorageClass }).(pulumi.StringOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListLifecycleRuleNonCurrentTransition)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput) ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput() GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput) ToGetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput) Index(i pulumi.IntInput) GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketsBucketListLifecycleRuleNonCurrentTransition {
+		return vs[0].([]GetBucketsBucketListLifecycleRuleNonCurrentTransition)[vs[1].(int)]
+	}).(GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleTransition struct {
+	// Specifies the date after which you want the corresponding action to take effect.
+	Date string `pulumi:"date"`
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	Days int `pulumi:"days"`
+	// Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.
+	StorageClass string `pulumi:"storageClass"`
+}
+
+// GetBucketsBucketListLifecycleRuleTransitionInput is an input type that accepts GetBucketsBucketListLifecycleRuleTransitionArgs and GetBucketsBucketListLifecycleRuleTransitionOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleTransitionInput` via:
+//
+//          GetBucketsBucketListLifecycleRuleTransitionArgs{...}
+type GetBucketsBucketListLifecycleRuleTransitionInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListLifecycleRuleTransitionOutput() GetBucketsBucketListLifecycleRuleTransitionOutput
+	ToGetBucketsBucketListLifecycleRuleTransitionOutputWithContext(context.Context) GetBucketsBucketListLifecycleRuleTransitionOutput
+}
+
+type GetBucketsBucketListLifecycleRuleTransitionArgs struct {
+	// Specifies the date after which you want the corresponding action to take effect.
+	Date pulumi.StringInput `pulumi:"date"`
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	Days pulumi.IntInput `pulumi:"days"`
+	// Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.
+	StorageClass pulumi.StringInput `pulumi:"storageClass"`
+}
+
+func (GetBucketsBucketListLifecycleRuleTransitionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListLifecycleRuleTransition)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListLifecycleRuleTransitionArgs) ToGetBucketsBucketListLifecycleRuleTransitionOutput() GetBucketsBucketListLifecycleRuleTransitionOutput {
+	return i.ToGetBucketsBucketListLifecycleRuleTransitionOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListLifecycleRuleTransitionArgs) ToGetBucketsBucketListLifecycleRuleTransitionOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleTransitionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListLifecycleRuleTransitionOutput)
+}
+
+// GetBucketsBucketListLifecycleRuleTransitionArrayInput is an input type that accepts GetBucketsBucketListLifecycleRuleTransitionArray and GetBucketsBucketListLifecycleRuleTransitionArrayOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListLifecycleRuleTransitionArrayInput` via:
+//
+//          GetBucketsBucketListLifecycleRuleTransitionArray{ GetBucketsBucketListLifecycleRuleTransitionArgs{...} }
+type GetBucketsBucketListLifecycleRuleTransitionArrayInput interface {
+	pulumi.Input
+
+	ToGetBucketsBucketListLifecycleRuleTransitionArrayOutput() GetBucketsBucketListLifecycleRuleTransitionArrayOutput
+	ToGetBucketsBucketListLifecycleRuleTransitionArrayOutputWithContext(context.Context) GetBucketsBucketListLifecycleRuleTransitionArrayOutput
+}
+
+type GetBucketsBucketListLifecycleRuleTransitionArray []GetBucketsBucketListLifecycleRuleTransitionInput
+
+func (GetBucketsBucketListLifecycleRuleTransitionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListLifecycleRuleTransition)(nil)).Elem()
+}
+
+func (i GetBucketsBucketListLifecycleRuleTransitionArray) ToGetBucketsBucketListLifecycleRuleTransitionArrayOutput() GetBucketsBucketListLifecycleRuleTransitionArrayOutput {
+	return i.ToGetBucketsBucketListLifecycleRuleTransitionArrayOutputWithContext(context.Background())
+}
+
+func (i GetBucketsBucketListLifecycleRuleTransitionArray) ToGetBucketsBucketListLifecycleRuleTransitionArrayOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleTransitionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListLifecycleRuleTransitionArrayOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleTransitionOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListLifecycleRuleTransitionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListLifecycleRuleTransition)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListLifecycleRuleTransitionOutput) ToGetBucketsBucketListLifecycleRuleTransitionOutput() GetBucketsBucketListLifecycleRuleTransitionOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleTransitionOutput) ToGetBucketsBucketListLifecycleRuleTransitionOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleTransitionOutput {
+	return o
+}
+
+// Specifies the date after which you want the corresponding action to take effect.
+func (o GetBucketsBucketListLifecycleRuleTransitionOutput) Date() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRuleTransition) string { return v.Date }).(pulumi.StringOutput)
+}
+
+// Specifies the number of days after object creation when the specific rule action takes effect.
+func (o GetBucketsBucketListLifecycleRuleTransitionOutput) Days() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRuleTransition) int { return v.Days }).(pulumi.IntOutput)
+}
+
+// Specifies the storage class to which you want the object to transition. Available values include STANDARD, STANDARD_IA and ARCHIVE.
+func (o GetBucketsBucketListLifecycleRuleTransitionOutput) StorageClass() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListLifecycleRuleTransition) string { return v.StorageClass }).(pulumi.StringOutput)
+}
+
+type GetBucketsBucketListLifecycleRuleTransitionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListLifecycleRuleTransitionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListLifecycleRuleTransition)(nil)).Elem()
+}
+
+func (o GetBucketsBucketListLifecycleRuleTransitionArrayOutput) ToGetBucketsBucketListLifecycleRuleTransitionArrayOutput() GetBucketsBucketListLifecycleRuleTransitionArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleTransitionArrayOutput) ToGetBucketsBucketListLifecycleRuleTransitionArrayOutputWithContext(ctx context.Context) GetBucketsBucketListLifecycleRuleTransitionArrayOutput {
+	return o
+}
+
+func (o GetBucketsBucketListLifecycleRuleTransitionArrayOutput) Index(i pulumi.IntInput) GetBucketsBucketListLifecycleRuleTransitionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketsBucketListLifecycleRuleTransition {
+		return vs[0].([]GetBucketsBucketListLifecycleRuleTransition)[vs[1].(int)]
+	}).(GetBucketsBucketListLifecycleRuleTransitionOutput)
+}
+
+type GetBucketsBucketListOriginDomainRule struct {
 	Domain string  `pulumi:"domain"`
 	Status *string `pulumi:"status"`
 	Type   *string `pulumi:"type"`
 }
 
-// CosBucketOriginDomainRuleInput is an input type that accepts CosBucketOriginDomainRuleArgs and CosBucketOriginDomainRuleOutput values.
-// You can construct a concrete instance of `CosBucketOriginDomainRuleInput` via:
+// GetBucketsBucketListOriginDomainRuleInput is an input type that accepts GetBucketsBucketListOriginDomainRuleArgs and GetBucketsBucketListOriginDomainRuleOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListOriginDomainRuleInput` via:
 //
-//          CosBucketOriginDomainRuleArgs{...}
-type CosBucketOriginDomainRuleInput interface {
+//          GetBucketsBucketListOriginDomainRuleArgs{...}
+type GetBucketsBucketListOriginDomainRuleInput interface {
 	pulumi.Input
 
-	ToCosBucketOriginDomainRuleOutput() CosBucketOriginDomainRuleOutput
-	ToCosBucketOriginDomainRuleOutputWithContext(context.Context) CosBucketOriginDomainRuleOutput
+	ToGetBucketsBucketListOriginDomainRuleOutput() GetBucketsBucketListOriginDomainRuleOutput
+	ToGetBucketsBucketListOriginDomainRuleOutputWithContext(context.Context) GetBucketsBucketListOriginDomainRuleOutput
 }
 
-type CosBucketOriginDomainRuleArgs struct {
+type GetBucketsBucketListOriginDomainRuleArgs struct {
 	Domain pulumi.StringInput    `pulumi:"domain"`
 	Status pulumi.StringPtrInput `pulumi:"status"`
 	Type   pulumi.StringPtrInput `pulumi:"type"`
 }
 
-func (CosBucketOriginDomainRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketOriginDomainRule)(nil)).Elem()
+func (GetBucketsBucketListOriginDomainRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListOriginDomainRule)(nil)).Elem()
 }
 
-func (i CosBucketOriginDomainRuleArgs) ToCosBucketOriginDomainRuleOutput() CosBucketOriginDomainRuleOutput {
-	return i.ToCosBucketOriginDomainRuleOutputWithContext(context.Background())
+func (i GetBucketsBucketListOriginDomainRuleArgs) ToGetBucketsBucketListOriginDomainRuleOutput() GetBucketsBucketListOriginDomainRuleOutput {
+	return i.ToGetBucketsBucketListOriginDomainRuleOutputWithContext(context.Background())
 }
 
-func (i CosBucketOriginDomainRuleArgs) ToCosBucketOriginDomainRuleOutputWithContext(ctx context.Context) CosBucketOriginDomainRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketOriginDomainRuleOutput)
+func (i GetBucketsBucketListOriginDomainRuleArgs) ToGetBucketsBucketListOriginDomainRuleOutputWithContext(ctx context.Context) GetBucketsBucketListOriginDomainRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListOriginDomainRuleOutput)
 }
 
-// CosBucketOriginDomainRuleArrayInput is an input type that accepts CosBucketOriginDomainRuleArray and CosBucketOriginDomainRuleArrayOutput values.
-// You can construct a concrete instance of `CosBucketOriginDomainRuleArrayInput` via:
+// GetBucketsBucketListOriginDomainRuleArrayInput is an input type that accepts GetBucketsBucketListOriginDomainRuleArray and GetBucketsBucketListOriginDomainRuleArrayOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListOriginDomainRuleArrayInput` via:
 //
-//          CosBucketOriginDomainRuleArray{ CosBucketOriginDomainRuleArgs{...} }
-type CosBucketOriginDomainRuleArrayInput interface {
+//          GetBucketsBucketListOriginDomainRuleArray{ GetBucketsBucketListOriginDomainRuleArgs{...} }
+type GetBucketsBucketListOriginDomainRuleArrayInput interface {
 	pulumi.Input
 
-	ToCosBucketOriginDomainRuleArrayOutput() CosBucketOriginDomainRuleArrayOutput
-	ToCosBucketOriginDomainRuleArrayOutputWithContext(context.Context) CosBucketOriginDomainRuleArrayOutput
+	ToGetBucketsBucketListOriginDomainRuleArrayOutput() GetBucketsBucketListOriginDomainRuleArrayOutput
+	ToGetBucketsBucketListOriginDomainRuleArrayOutputWithContext(context.Context) GetBucketsBucketListOriginDomainRuleArrayOutput
 }
 
-type CosBucketOriginDomainRuleArray []CosBucketOriginDomainRuleInput
+type GetBucketsBucketListOriginDomainRuleArray []GetBucketsBucketListOriginDomainRuleInput
 
-func (CosBucketOriginDomainRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketOriginDomainRule)(nil)).Elem()
+func (GetBucketsBucketListOriginDomainRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListOriginDomainRule)(nil)).Elem()
 }
 
-func (i CosBucketOriginDomainRuleArray) ToCosBucketOriginDomainRuleArrayOutput() CosBucketOriginDomainRuleArrayOutput {
-	return i.ToCosBucketOriginDomainRuleArrayOutputWithContext(context.Background())
+func (i GetBucketsBucketListOriginDomainRuleArray) ToGetBucketsBucketListOriginDomainRuleArrayOutput() GetBucketsBucketListOriginDomainRuleArrayOutput {
+	return i.ToGetBucketsBucketListOriginDomainRuleArrayOutputWithContext(context.Background())
 }
 
-func (i CosBucketOriginDomainRuleArray) ToCosBucketOriginDomainRuleArrayOutputWithContext(ctx context.Context) CosBucketOriginDomainRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketOriginDomainRuleArrayOutput)
+func (i GetBucketsBucketListOriginDomainRuleArray) ToGetBucketsBucketListOriginDomainRuleArrayOutputWithContext(ctx context.Context) GetBucketsBucketListOriginDomainRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListOriginDomainRuleArrayOutput)
 }
 
-type CosBucketOriginDomainRuleOutput struct{ *pulumi.OutputState }
+type GetBucketsBucketListOriginDomainRuleOutput struct{ *pulumi.OutputState }
 
-func (CosBucketOriginDomainRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketOriginDomainRule)(nil)).Elem()
+func (GetBucketsBucketListOriginDomainRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListOriginDomainRule)(nil)).Elem()
 }
 
-func (o CosBucketOriginDomainRuleOutput) ToCosBucketOriginDomainRuleOutput() CosBucketOriginDomainRuleOutput {
+func (o GetBucketsBucketListOriginDomainRuleOutput) ToGetBucketsBucketListOriginDomainRuleOutput() GetBucketsBucketListOriginDomainRuleOutput {
 	return o
 }
 
-func (o CosBucketOriginDomainRuleOutput) ToCosBucketOriginDomainRuleOutputWithContext(ctx context.Context) CosBucketOriginDomainRuleOutput {
+func (o GetBucketsBucketListOriginDomainRuleOutput) ToGetBucketsBucketListOriginDomainRuleOutputWithContext(ctx context.Context) GetBucketsBucketListOriginDomainRuleOutput {
 	return o
 }
 
-func (o CosBucketOriginDomainRuleOutput) Domain() pulumi.StringOutput {
-	return o.ApplyT(func(v CosBucketOriginDomainRule) string { return v.Domain }).(pulumi.StringOutput)
+func (o GetBucketsBucketListOriginDomainRuleOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginDomainRule) string { return v.Domain }).(pulumi.StringOutput)
 }
 
-func (o CosBucketOriginDomainRuleOutput) Status() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CosBucketOriginDomainRule) *string { return v.Status }).(pulumi.StringPtrOutput)
+func (o GetBucketsBucketListOriginDomainRuleOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginDomainRule) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
 
-func (o CosBucketOriginDomainRuleOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CosBucketOriginDomainRule) *string { return v.Type }).(pulumi.StringPtrOutput)
+func (o GetBucketsBucketListOriginDomainRuleOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginDomainRule) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
 
-type CosBucketOriginDomainRuleArrayOutput struct{ *pulumi.OutputState }
+type GetBucketsBucketListOriginDomainRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (CosBucketOriginDomainRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketOriginDomainRule)(nil)).Elem()
+func (GetBucketsBucketListOriginDomainRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListOriginDomainRule)(nil)).Elem()
 }
 
-func (o CosBucketOriginDomainRuleArrayOutput) ToCosBucketOriginDomainRuleArrayOutput() CosBucketOriginDomainRuleArrayOutput {
+func (o GetBucketsBucketListOriginDomainRuleArrayOutput) ToGetBucketsBucketListOriginDomainRuleArrayOutput() GetBucketsBucketListOriginDomainRuleArrayOutput {
 	return o
 }
 
-func (o CosBucketOriginDomainRuleArrayOutput) ToCosBucketOriginDomainRuleArrayOutputWithContext(ctx context.Context) CosBucketOriginDomainRuleArrayOutput {
+func (o GetBucketsBucketListOriginDomainRuleArrayOutput) ToGetBucketsBucketListOriginDomainRuleArrayOutputWithContext(ctx context.Context) GetBucketsBucketListOriginDomainRuleArrayOutput {
 	return o
 }
 
-func (o CosBucketOriginDomainRuleArrayOutput) Index(i pulumi.IntInput) CosBucketOriginDomainRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CosBucketOriginDomainRule {
-		return vs[0].([]CosBucketOriginDomainRule)[vs[1].(int)]
-	}).(CosBucketOriginDomainRuleOutput)
+func (o GetBucketsBucketListOriginDomainRuleArrayOutput) Index(i pulumi.IntInput) GetBucketsBucketListOriginDomainRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketsBucketListOriginDomainRule {
+		return vs[0].([]GetBucketsBucketListOriginDomainRule)[vs[1].(int)]
+	}).(GetBucketsBucketListOriginDomainRuleOutput)
 }
 
-type CosBucketOriginPullRule struct {
+type GetBucketsBucketListOriginPullRule struct {
 	CustomHttpHeaders map[string]interface{} `pulumi:"customHttpHeaders"`
 	FollowHttpHeaders []string               `pulumi:"followHttpHeaders"`
 	FollowQueryString *bool                  `pulumi:"followQueryString"`
@@ -2016,18 +2385,18 @@ type CosBucketOriginPullRule struct {
 	SyncBackToSource  *bool                  `pulumi:"syncBackToSource"`
 }
 
-// CosBucketOriginPullRuleInput is an input type that accepts CosBucketOriginPullRuleArgs and CosBucketOriginPullRuleOutput values.
-// You can construct a concrete instance of `CosBucketOriginPullRuleInput` via:
+// GetBucketsBucketListOriginPullRuleInput is an input type that accepts GetBucketsBucketListOriginPullRuleArgs and GetBucketsBucketListOriginPullRuleOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListOriginPullRuleInput` via:
 //
-//          CosBucketOriginPullRuleArgs{...}
-type CosBucketOriginPullRuleInput interface {
+//          GetBucketsBucketListOriginPullRuleArgs{...}
+type GetBucketsBucketListOriginPullRuleInput interface {
 	pulumi.Input
 
-	ToCosBucketOriginPullRuleOutput() CosBucketOriginPullRuleOutput
-	ToCosBucketOriginPullRuleOutputWithContext(context.Context) CosBucketOriginPullRuleOutput
+	ToGetBucketsBucketListOriginPullRuleOutput() GetBucketsBucketListOriginPullRuleOutput
+	ToGetBucketsBucketListOriginPullRuleOutputWithContext(context.Context) GetBucketsBucketListOriginPullRuleOutput
 }
 
-type CosBucketOriginPullRuleArgs struct {
+type GetBucketsBucketListOriginPullRuleArgs struct {
 	CustomHttpHeaders pulumi.MapInput         `pulumi:"customHttpHeaders"`
 	FollowHttpHeaders pulumi.StringArrayInput `pulumi:"followHttpHeaders"`
 	FollowQueryString pulumi.BoolPtrInput     `pulumi:"followQueryString"`
@@ -2039,458 +2408,298 @@ type CosBucketOriginPullRuleArgs struct {
 	SyncBackToSource  pulumi.BoolPtrInput     `pulumi:"syncBackToSource"`
 }
 
-func (CosBucketOriginPullRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketOriginPullRule)(nil)).Elem()
+func (GetBucketsBucketListOriginPullRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListOriginPullRule)(nil)).Elem()
 }
 
-func (i CosBucketOriginPullRuleArgs) ToCosBucketOriginPullRuleOutput() CosBucketOriginPullRuleOutput {
-	return i.ToCosBucketOriginPullRuleOutputWithContext(context.Background())
+func (i GetBucketsBucketListOriginPullRuleArgs) ToGetBucketsBucketListOriginPullRuleOutput() GetBucketsBucketListOriginPullRuleOutput {
+	return i.ToGetBucketsBucketListOriginPullRuleOutputWithContext(context.Background())
 }
 
-func (i CosBucketOriginPullRuleArgs) ToCosBucketOriginPullRuleOutputWithContext(ctx context.Context) CosBucketOriginPullRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketOriginPullRuleOutput)
+func (i GetBucketsBucketListOriginPullRuleArgs) ToGetBucketsBucketListOriginPullRuleOutputWithContext(ctx context.Context) GetBucketsBucketListOriginPullRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListOriginPullRuleOutput)
 }
 
-// CosBucketOriginPullRuleArrayInput is an input type that accepts CosBucketOriginPullRuleArray and CosBucketOriginPullRuleArrayOutput values.
-// You can construct a concrete instance of `CosBucketOriginPullRuleArrayInput` via:
+// GetBucketsBucketListOriginPullRuleArrayInput is an input type that accepts GetBucketsBucketListOriginPullRuleArray and GetBucketsBucketListOriginPullRuleArrayOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListOriginPullRuleArrayInput` via:
 //
-//          CosBucketOriginPullRuleArray{ CosBucketOriginPullRuleArgs{...} }
-type CosBucketOriginPullRuleArrayInput interface {
+//          GetBucketsBucketListOriginPullRuleArray{ GetBucketsBucketListOriginPullRuleArgs{...} }
+type GetBucketsBucketListOriginPullRuleArrayInput interface {
 	pulumi.Input
 
-	ToCosBucketOriginPullRuleArrayOutput() CosBucketOriginPullRuleArrayOutput
-	ToCosBucketOriginPullRuleArrayOutputWithContext(context.Context) CosBucketOriginPullRuleArrayOutput
+	ToGetBucketsBucketListOriginPullRuleArrayOutput() GetBucketsBucketListOriginPullRuleArrayOutput
+	ToGetBucketsBucketListOriginPullRuleArrayOutputWithContext(context.Context) GetBucketsBucketListOriginPullRuleArrayOutput
 }
 
-type CosBucketOriginPullRuleArray []CosBucketOriginPullRuleInput
+type GetBucketsBucketListOriginPullRuleArray []GetBucketsBucketListOriginPullRuleInput
 
-func (CosBucketOriginPullRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketOriginPullRule)(nil)).Elem()
+func (GetBucketsBucketListOriginPullRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListOriginPullRule)(nil)).Elem()
 }
 
-func (i CosBucketOriginPullRuleArray) ToCosBucketOriginPullRuleArrayOutput() CosBucketOriginPullRuleArrayOutput {
-	return i.ToCosBucketOriginPullRuleArrayOutputWithContext(context.Background())
+func (i GetBucketsBucketListOriginPullRuleArray) ToGetBucketsBucketListOriginPullRuleArrayOutput() GetBucketsBucketListOriginPullRuleArrayOutput {
+	return i.ToGetBucketsBucketListOriginPullRuleArrayOutputWithContext(context.Background())
 }
 
-func (i CosBucketOriginPullRuleArray) ToCosBucketOriginPullRuleArrayOutputWithContext(ctx context.Context) CosBucketOriginPullRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketOriginPullRuleArrayOutput)
+func (i GetBucketsBucketListOriginPullRuleArray) ToGetBucketsBucketListOriginPullRuleArrayOutputWithContext(ctx context.Context) GetBucketsBucketListOriginPullRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListOriginPullRuleArrayOutput)
 }
 
-type CosBucketOriginPullRuleOutput struct{ *pulumi.OutputState }
+type GetBucketsBucketListOriginPullRuleOutput struct{ *pulumi.OutputState }
 
-func (CosBucketOriginPullRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketOriginPullRule)(nil)).Elem()
+func (GetBucketsBucketListOriginPullRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListOriginPullRule)(nil)).Elem()
 }
 
-func (o CosBucketOriginPullRuleOutput) ToCosBucketOriginPullRuleOutput() CosBucketOriginPullRuleOutput {
+func (o GetBucketsBucketListOriginPullRuleOutput) ToGetBucketsBucketListOriginPullRuleOutput() GetBucketsBucketListOriginPullRuleOutput {
 	return o
 }
 
-func (o CosBucketOriginPullRuleOutput) ToCosBucketOriginPullRuleOutputWithContext(ctx context.Context) CosBucketOriginPullRuleOutput {
+func (o GetBucketsBucketListOriginPullRuleOutput) ToGetBucketsBucketListOriginPullRuleOutputWithContext(ctx context.Context) GetBucketsBucketListOriginPullRuleOutput {
 	return o
 }
 
-func (o CosBucketOriginPullRuleOutput) CustomHttpHeaders() pulumi.MapOutput {
-	return o.ApplyT(func(v CosBucketOriginPullRule) map[string]interface{} { return v.CustomHttpHeaders }).(pulumi.MapOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) CustomHttpHeaders() pulumi.MapOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) map[string]interface{} { return v.CustomHttpHeaders }).(pulumi.MapOutput)
 }
 
-func (o CosBucketOriginPullRuleOutput) FollowHttpHeaders() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CosBucketOriginPullRule) []string { return v.FollowHttpHeaders }).(pulumi.StringArrayOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) FollowHttpHeaders() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) []string { return v.FollowHttpHeaders }).(pulumi.StringArrayOutput)
 }
 
-func (o CosBucketOriginPullRuleOutput) FollowQueryString() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v CosBucketOriginPullRule) *bool { return v.FollowQueryString }).(pulumi.BoolPtrOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) FollowQueryString() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) *bool { return v.FollowQueryString }).(pulumi.BoolPtrOutput)
 }
 
-func (o CosBucketOriginPullRuleOutput) FollowRedirection() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v CosBucketOriginPullRule) *bool { return v.FollowRedirection }).(pulumi.BoolPtrOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) FollowRedirection() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) *bool { return v.FollowRedirection }).(pulumi.BoolPtrOutput)
 }
 
-func (o CosBucketOriginPullRuleOutput) Host() pulumi.StringOutput {
-	return o.ApplyT(func(v CosBucketOriginPullRule) string { return v.Host }).(pulumi.StringOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) string { return v.Host }).(pulumi.StringOutput)
 }
 
-func (o CosBucketOriginPullRuleOutput) Prefix() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CosBucketOriginPullRule) *string { return v.Prefix }).(pulumi.StringPtrOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) *string { return v.Prefix }).(pulumi.StringPtrOutput)
 }
 
-func (o CosBucketOriginPullRuleOutput) Priority() pulumi.IntOutput {
-	return o.ApplyT(func(v CosBucketOriginPullRule) int { return v.Priority }).(pulumi.IntOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) Priority() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) int { return v.Priority }).(pulumi.IntOutput)
 }
 
-func (o CosBucketOriginPullRuleOutput) Protocol() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CosBucketOriginPullRule) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
-func (o CosBucketOriginPullRuleOutput) SyncBackToSource() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v CosBucketOriginPullRule) *bool { return v.SyncBackToSource }).(pulumi.BoolPtrOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) SyncBackToSource() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) *bool { return v.SyncBackToSource }).(pulumi.BoolPtrOutput)
 }
 
-type CosBucketOriginPullRuleArrayOutput struct{ *pulumi.OutputState }
+type GetBucketsBucketListOriginPullRuleArrayOutput struct{ *pulumi.OutputState }
 
-func (CosBucketOriginPullRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketOriginPullRule)(nil)).Elem()
+func (GetBucketsBucketListOriginPullRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListOriginPullRule)(nil)).Elem()
 }
 
-func (o CosBucketOriginPullRuleArrayOutput) ToCosBucketOriginPullRuleArrayOutput() CosBucketOriginPullRuleArrayOutput {
+func (o GetBucketsBucketListOriginPullRuleArrayOutput) ToGetBucketsBucketListOriginPullRuleArrayOutput() GetBucketsBucketListOriginPullRuleArrayOutput {
 	return o
 }
 
-func (o CosBucketOriginPullRuleArrayOutput) ToCosBucketOriginPullRuleArrayOutputWithContext(ctx context.Context) CosBucketOriginPullRuleArrayOutput {
+func (o GetBucketsBucketListOriginPullRuleArrayOutput) ToGetBucketsBucketListOriginPullRuleArrayOutputWithContext(ctx context.Context) GetBucketsBucketListOriginPullRuleArrayOutput {
 	return o
 }
 
-func (o CosBucketOriginPullRuleArrayOutput) Index(i pulumi.IntInput) CosBucketOriginPullRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CosBucketOriginPullRule {
-		return vs[0].([]CosBucketOriginPullRule)[vs[1].(int)]
-	}).(CosBucketOriginPullRuleOutput)
+func (o GetBucketsBucketListOriginPullRuleArrayOutput) Index(i pulumi.IntInput) GetBucketsBucketListOriginPullRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketsBucketListOriginPullRule {
+		return vs[0].([]GetBucketsBucketListOriginPullRule)[vs[1].(int)]
+	}).(GetBucketsBucketListOriginPullRuleOutput)
 }
 
-type CosBucketReplicaRule struct {
-	DestinationBucket       string  `pulumi:"destinationBucket"`
-	DestinationStorageClass *string `pulumi:"destinationStorageClass"`
-	Id                      *string `pulumi:"id"`
-	Prefix                  *string `pulumi:"prefix"`
-	Status                  string  `pulumi:"status"`
+type GetBucketsBucketListWebsite struct {
+	// An absolute path to the document to return in case of a 4XX error.
+	ErrorDocument string `pulumi:"errorDocument"`
+	// COS returns this index document when requests are made to the root domain or any of the subfolders.
+	IndexDocument string `pulumi:"indexDocument"`
 }
 
-// CosBucketReplicaRuleInput is an input type that accepts CosBucketReplicaRuleArgs and CosBucketReplicaRuleOutput values.
-// You can construct a concrete instance of `CosBucketReplicaRuleInput` via:
+// GetBucketsBucketListWebsiteInput is an input type that accepts GetBucketsBucketListWebsiteArgs and GetBucketsBucketListWebsiteOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListWebsiteInput` via:
 //
-//          CosBucketReplicaRuleArgs{...}
-type CosBucketReplicaRuleInput interface {
+//          GetBucketsBucketListWebsiteArgs{...}
+type GetBucketsBucketListWebsiteInput interface {
 	pulumi.Input
 
-	ToCosBucketReplicaRuleOutput() CosBucketReplicaRuleOutput
-	ToCosBucketReplicaRuleOutputWithContext(context.Context) CosBucketReplicaRuleOutput
+	ToGetBucketsBucketListWebsiteOutput() GetBucketsBucketListWebsiteOutput
+	ToGetBucketsBucketListWebsiteOutputWithContext(context.Context) GetBucketsBucketListWebsiteOutput
 }
 
-type CosBucketReplicaRuleArgs struct {
-	DestinationBucket       pulumi.StringInput    `pulumi:"destinationBucket"`
-	DestinationStorageClass pulumi.StringPtrInput `pulumi:"destinationStorageClass"`
-	Id                      pulumi.StringPtrInput `pulumi:"id"`
-	Prefix                  pulumi.StringPtrInput `pulumi:"prefix"`
-	Status                  pulumi.StringInput    `pulumi:"status"`
+type GetBucketsBucketListWebsiteArgs struct {
+	// An absolute path to the document to return in case of a 4XX error.
+	ErrorDocument pulumi.StringInput `pulumi:"errorDocument"`
+	// COS returns this index document when requests are made to the root domain or any of the subfolders.
+	IndexDocument pulumi.StringInput `pulumi:"indexDocument"`
 }
 
-func (CosBucketReplicaRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketReplicaRule)(nil)).Elem()
+func (GetBucketsBucketListWebsiteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListWebsite)(nil)).Elem()
 }
 
-func (i CosBucketReplicaRuleArgs) ToCosBucketReplicaRuleOutput() CosBucketReplicaRuleOutput {
-	return i.ToCosBucketReplicaRuleOutputWithContext(context.Background())
+func (i GetBucketsBucketListWebsiteArgs) ToGetBucketsBucketListWebsiteOutput() GetBucketsBucketListWebsiteOutput {
+	return i.ToGetBucketsBucketListWebsiteOutputWithContext(context.Background())
 }
 
-func (i CosBucketReplicaRuleArgs) ToCosBucketReplicaRuleOutputWithContext(ctx context.Context) CosBucketReplicaRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketReplicaRuleOutput)
+func (i GetBucketsBucketListWebsiteArgs) ToGetBucketsBucketListWebsiteOutputWithContext(ctx context.Context) GetBucketsBucketListWebsiteOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListWebsiteOutput)
 }
 
-// CosBucketReplicaRuleArrayInput is an input type that accepts CosBucketReplicaRuleArray and CosBucketReplicaRuleArrayOutput values.
-// You can construct a concrete instance of `CosBucketReplicaRuleArrayInput` via:
+// GetBucketsBucketListWebsiteArrayInput is an input type that accepts GetBucketsBucketListWebsiteArray and GetBucketsBucketListWebsiteArrayOutput values.
+// You can construct a concrete instance of `GetBucketsBucketListWebsiteArrayInput` via:
 //
-//          CosBucketReplicaRuleArray{ CosBucketReplicaRuleArgs{...} }
-type CosBucketReplicaRuleArrayInput interface {
+//          GetBucketsBucketListWebsiteArray{ GetBucketsBucketListWebsiteArgs{...} }
+type GetBucketsBucketListWebsiteArrayInput interface {
 	pulumi.Input
 
-	ToCosBucketReplicaRuleArrayOutput() CosBucketReplicaRuleArrayOutput
-	ToCosBucketReplicaRuleArrayOutputWithContext(context.Context) CosBucketReplicaRuleArrayOutput
+	ToGetBucketsBucketListWebsiteArrayOutput() GetBucketsBucketListWebsiteArrayOutput
+	ToGetBucketsBucketListWebsiteArrayOutputWithContext(context.Context) GetBucketsBucketListWebsiteArrayOutput
 }
 
-type CosBucketReplicaRuleArray []CosBucketReplicaRuleInput
+type GetBucketsBucketListWebsiteArray []GetBucketsBucketListWebsiteInput
 
-func (CosBucketReplicaRuleArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketReplicaRule)(nil)).Elem()
+func (GetBucketsBucketListWebsiteArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListWebsite)(nil)).Elem()
 }
 
-func (i CosBucketReplicaRuleArray) ToCosBucketReplicaRuleArrayOutput() CosBucketReplicaRuleArrayOutput {
-	return i.ToCosBucketReplicaRuleArrayOutputWithContext(context.Background())
+func (i GetBucketsBucketListWebsiteArray) ToGetBucketsBucketListWebsiteArrayOutput() GetBucketsBucketListWebsiteArrayOutput {
+	return i.ToGetBucketsBucketListWebsiteArrayOutputWithContext(context.Background())
 }
 
-func (i CosBucketReplicaRuleArray) ToCosBucketReplicaRuleArrayOutputWithContext(ctx context.Context) CosBucketReplicaRuleArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketReplicaRuleArrayOutput)
+func (i GetBucketsBucketListWebsiteArray) ToGetBucketsBucketListWebsiteArrayOutputWithContext(ctx context.Context) GetBucketsBucketListWebsiteArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBucketsBucketListWebsiteArrayOutput)
 }
 
-type CosBucketReplicaRuleOutput struct{ *pulumi.OutputState }
+type GetBucketsBucketListWebsiteOutput struct{ *pulumi.OutputState }
 
-func (CosBucketReplicaRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketReplicaRule)(nil)).Elem()
+func (GetBucketsBucketListWebsiteOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBucketsBucketListWebsite)(nil)).Elem()
 }
 
-func (o CosBucketReplicaRuleOutput) ToCosBucketReplicaRuleOutput() CosBucketReplicaRuleOutput {
+func (o GetBucketsBucketListWebsiteOutput) ToGetBucketsBucketListWebsiteOutput() GetBucketsBucketListWebsiteOutput {
 	return o
 }
 
-func (o CosBucketReplicaRuleOutput) ToCosBucketReplicaRuleOutputWithContext(ctx context.Context) CosBucketReplicaRuleOutput {
+func (o GetBucketsBucketListWebsiteOutput) ToGetBucketsBucketListWebsiteOutputWithContext(ctx context.Context) GetBucketsBucketListWebsiteOutput {
 	return o
 }
 
-func (o CosBucketReplicaRuleOutput) DestinationBucket() pulumi.StringOutput {
-	return o.ApplyT(func(v CosBucketReplicaRule) string { return v.DestinationBucket }).(pulumi.StringOutput)
+// An absolute path to the document to return in case of a 4XX error.
+func (o GetBucketsBucketListWebsiteOutput) ErrorDocument() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListWebsite) string { return v.ErrorDocument }).(pulumi.StringOutput)
 }
 
-func (o CosBucketReplicaRuleOutput) DestinationStorageClass() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CosBucketReplicaRule) *string { return v.DestinationStorageClass }).(pulumi.StringPtrOutput)
+// COS returns this index document when requests are made to the root domain or any of the subfolders.
+func (o GetBucketsBucketListWebsiteOutput) IndexDocument() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListWebsite) string { return v.IndexDocument }).(pulumi.StringOutput)
 }
 
-func (o CosBucketReplicaRuleOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CosBucketReplicaRule) *string { return v.Id }).(pulumi.StringPtrOutput)
+type GetBucketsBucketListWebsiteArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBucketsBucketListWebsiteArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBucketsBucketListWebsite)(nil)).Elem()
 }
 
-func (o CosBucketReplicaRuleOutput) Prefix() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CosBucketReplicaRule) *string { return v.Prefix }).(pulumi.StringPtrOutput)
-}
-
-func (o CosBucketReplicaRuleOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v CosBucketReplicaRule) string { return v.Status }).(pulumi.StringOutput)
-}
-
-type CosBucketReplicaRuleArrayOutput struct{ *pulumi.OutputState }
-
-func (CosBucketReplicaRuleArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CosBucketReplicaRule)(nil)).Elem()
-}
-
-func (o CosBucketReplicaRuleArrayOutput) ToCosBucketReplicaRuleArrayOutput() CosBucketReplicaRuleArrayOutput {
+func (o GetBucketsBucketListWebsiteArrayOutput) ToGetBucketsBucketListWebsiteArrayOutput() GetBucketsBucketListWebsiteArrayOutput {
 	return o
 }
 
-func (o CosBucketReplicaRuleArrayOutput) ToCosBucketReplicaRuleArrayOutputWithContext(ctx context.Context) CosBucketReplicaRuleArrayOutput {
+func (o GetBucketsBucketListWebsiteArrayOutput) ToGetBucketsBucketListWebsiteArrayOutputWithContext(ctx context.Context) GetBucketsBucketListWebsiteArrayOutput {
 	return o
 }
 
-func (o CosBucketReplicaRuleArrayOutput) Index(i pulumi.IntInput) CosBucketReplicaRuleOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CosBucketReplicaRule {
-		return vs[0].([]CosBucketReplicaRule)[vs[1].(int)]
-	}).(CosBucketReplicaRuleOutput)
-}
-
-type CosBucketWebsite struct {
-	ErrorDocument *string `pulumi:"errorDocument"`
-	IndexDocument *string `pulumi:"indexDocument"`
-}
-
-// CosBucketWebsiteInput is an input type that accepts CosBucketWebsiteArgs and CosBucketWebsiteOutput values.
-// You can construct a concrete instance of `CosBucketWebsiteInput` via:
-//
-//          CosBucketWebsiteArgs{...}
-type CosBucketWebsiteInput interface {
-	pulumi.Input
-
-	ToCosBucketWebsiteOutput() CosBucketWebsiteOutput
-	ToCosBucketWebsiteOutputWithContext(context.Context) CosBucketWebsiteOutput
-}
-
-type CosBucketWebsiteArgs struct {
-	ErrorDocument pulumi.StringPtrInput `pulumi:"errorDocument"`
-	IndexDocument pulumi.StringPtrInput `pulumi:"indexDocument"`
-}
-
-func (CosBucketWebsiteArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketWebsite)(nil)).Elem()
-}
-
-func (i CosBucketWebsiteArgs) ToCosBucketWebsiteOutput() CosBucketWebsiteOutput {
-	return i.ToCosBucketWebsiteOutputWithContext(context.Background())
-}
-
-func (i CosBucketWebsiteArgs) ToCosBucketWebsiteOutputWithContext(ctx context.Context) CosBucketWebsiteOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketWebsiteOutput)
-}
-
-func (i CosBucketWebsiteArgs) ToCosBucketWebsitePtrOutput() CosBucketWebsitePtrOutput {
-	return i.ToCosBucketWebsitePtrOutputWithContext(context.Background())
-}
-
-func (i CosBucketWebsiteArgs) ToCosBucketWebsitePtrOutputWithContext(ctx context.Context) CosBucketWebsitePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketWebsiteOutput).ToCosBucketWebsitePtrOutputWithContext(ctx)
-}
-
-// CosBucketWebsitePtrInput is an input type that accepts CosBucketWebsiteArgs, CosBucketWebsitePtr and CosBucketWebsitePtrOutput values.
-// You can construct a concrete instance of `CosBucketWebsitePtrInput` via:
-//
-//          CosBucketWebsiteArgs{...}
-//
-//  or:
-//
-//          nil
-type CosBucketWebsitePtrInput interface {
-	pulumi.Input
-
-	ToCosBucketWebsitePtrOutput() CosBucketWebsitePtrOutput
-	ToCosBucketWebsitePtrOutputWithContext(context.Context) CosBucketWebsitePtrOutput
-}
-
-type cosBucketWebsitePtrType CosBucketWebsiteArgs
-
-func CosBucketWebsitePtr(v *CosBucketWebsiteArgs) CosBucketWebsitePtrInput {
-	return (*cosBucketWebsitePtrType)(v)
-}
-
-func (*cosBucketWebsitePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CosBucketWebsite)(nil)).Elem()
-}
-
-func (i *cosBucketWebsitePtrType) ToCosBucketWebsitePtrOutput() CosBucketWebsitePtrOutput {
-	return i.ToCosBucketWebsitePtrOutputWithContext(context.Background())
-}
-
-func (i *cosBucketWebsitePtrType) ToCosBucketWebsitePtrOutputWithContext(ctx context.Context) CosBucketWebsitePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CosBucketWebsitePtrOutput)
-}
-
-type CosBucketWebsiteOutput struct{ *pulumi.OutputState }
-
-func (CosBucketWebsiteOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CosBucketWebsite)(nil)).Elem()
-}
-
-func (o CosBucketWebsiteOutput) ToCosBucketWebsiteOutput() CosBucketWebsiteOutput {
-	return o
-}
-
-func (o CosBucketWebsiteOutput) ToCosBucketWebsiteOutputWithContext(ctx context.Context) CosBucketWebsiteOutput {
-	return o
-}
-
-func (o CosBucketWebsiteOutput) ToCosBucketWebsitePtrOutput() CosBucketWebsitePtrOutput {
-	return o.ToCosBucketWebsitePtrOutputWithContext(context.Background())
-}
-
-func (o CosBucketWebsiteOutput) ToCosBucketWebsitePtrOutputWithContext(ctx context.Context) CosBucketWebsitePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CosBucketWebsite) *CosBucketWebsite {
-		return &v
-	}).(CosBucketWebsitePtrOutput)
-}
-
-func (o CosBucketWebsiteOutput) ErrorDocument() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CosBucketWebsite) *string { return v.ErrorDocument }).(pulumi.StringPtrOutput)
-}
-
-func (o CosBucketWebsiteOutput) IndexDocument() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CosBucketWebsite) *string { return v.IndexDocument }).(pulumi.StringPtrOutput)
-}
-
-type CosBucketWebsitePtrOutput struct{ *pulumi.OutputState }
-
-func (CosBucketWebsitePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CosBucketWebsite)(nil)).Elem()
-}
-
-func (o CosBucketWebsitePtrOutput) ToCosBucketWebsitePtrOutput() CosBucketWebsitePtrOutput {
-	return o
-}
-
-func (o CosBucketWebsitePtrOutput) ToCosBucketWebsitePtrOutputWithContext(ctx context.Context) CosBucketWebsitePtrOutput {
-	return o
-}
-
-func (o CosBucketWebsitePtrOutput) Elem() CosBucketWebsiteOutput {
-	return o.ApplyT(func(v *CosBucketWebsite) CosBucketWebsite {
-		if v != nil {
-			return *v
-		}
-		var ret CosBucketWebsite
-		return ret
-	}).(CosBucketWebsiteOutput)
-}
-
-func (o CosBucketWebsitePtrOutput) ErrorDocument() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CosBucketWebsite) *string {
-		if v == nil {
-			return nil
-		}
-		return v.ErrorDocument
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o CosBucketWebsitePtrOutput) IndexDocument() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CosBucketWebsite) *string {
-		if v == nil {
-			return nil
-		}
-		return v.IndexDocument
-	}).(pulumi.StringPtrOutput)
+func (o GetBucketsBucketListWebsiteArrayOutput) Index(i pulumi.IntInput) GetBucketsBucketListWebsiteOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBucketsBucketListWebsite {
+		return vs[0].([]GetBucketsBucketListWebsite)[vs[1].(int)]
+	}).(GetBucketsBucketListWebsiteOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListInput)(nil)).Elem(), BucketsBucketListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListArrayInput)(nil)).Elem(), BucketsBucketListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListCorsRuleInput)(nil)).Elem(), BucketsBucketListCorsRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListCorsRuleArrayInput)(nil)).Elem(), BucketsBucketListCorsRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListLifecycleRuleInput)(nil)).Elem(), BucketsBucketListLifecycleRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListLifecycleRuleArrayInput)(nil)).Elem(), BucketsBucketListLifecycleRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListLifecycleRuleExpirationInput)(nil)).Elem(), BucketsBucketListLifecycleRuleExpirationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListLifecycleRuleExpirationArrayInput)(nil)).Elem(), BucketsBucketListLifecycleRuleExpirationArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListLifecycleRuleNonCurrentExpirationInput)(nil)).Elem(), BucketsBucketListLifecycleRuleNonCurrentExpirationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput)(nil)).Elem(), BucketsBucketListLifecycleRuleNonCurrentExpirationArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListLifecycleRuleNonCurrentTransitionInput)(nil)).Elem(), BucketsBucketListLifecycleRuleNonCurrentTransitionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput)(nil)).Elem(), BucketsBucketListLifecycleRuleNonCurrentTransitionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListLifecycleRuleTransitionInput)(nil)).Elem(), BucketsBucketListLifecycleRuleTransitionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListLifecycleRuleTransitionArrayInput)(nil)).Elem(), BucketsBucketListLifecycleRuleTransitionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListOriginDomainRuleInput)(nil)).Elem(), BucketsBucketListOriginDomainRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListOriginDomainRuleArrayInput)(nil)).Elem(), BucketsBucketListOriginDomainRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListOriginPullRuleInput)(nil)).Elem(), BucketsBucketListOriginPullRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListOriginPullRuleArrayInput)(nil)).Elem(), BucketsBucketListOriginPullRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListWebsiteInput)(nil)).Elem(), BucketsBucketListWebsiteArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*BucketsBucketListWebsiteArrayInput)(nil)).Elem(), BucketsBucketListWebsiteArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketCorsRuleInput)(nil)).Elem(), CosBucketCorsRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketCorsRuleArrayInput)(nil)).Elem(), CosBucketCorsRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketLifecycleRuleInput)(nil)).Elem(), CosBucketLifecycleRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketLifecycleRuleArrayInput)(nil)).Elem(), CosBucketLifecycleRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketLifecycleRuleExpirationInput)(nil)).Elem(), CosBucketLifecycleRuleExpirationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketLifecycleRuleExpirationPtrInput)(nil)).Elem(), CosBucketLifecycleRuleExpirationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketLifecycleRuleNonCurrentExpirationInput)(nil)).Elem(), CosBucketLifecycleRuleNonCurrentExpirationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketLifecycleRuleNonCurrentExpirationPtrInput)(nil)).Elem(), CosBucketLifecycleRuleNonCurrentExpirationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketLifecycleRuleNonCurrentTransitionInput)(nil)).Elem(), CosBucketLifecycleRuleNonCurrentTransitionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketLifecycleRuleNonCurrentTransitionArrayInput)(nil)).Elem(), CosBucketLifecycleRuleNonCurrentTransitionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketLifecycleRuleTransitionInput)(nil)).Elem(), CosBucketLifecycleRuleTransitionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketLifecycleRuleTransitionArrayInput)(nil)).Elem(), CosBucketLifecycleRuleTransitionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketOriginDomainRuleInput)(nil)).Elem(), CosBucketOriginDomainRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketOriginDomainRuleArrayInput)(nil)).Elem(), CosBucketOriginDomainRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketOriginPullRuleInput)(nil)).Elem(), CosBucketOriginPullRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketOriginPullRuleArrayInput)(nil)).Elem(), CosBucketOriginPullRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketReplicaRuleInput)(nil)).Elem(), CosBucketReplicaRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketReplicaRuleArrayInput)(nil)).Elem(), CosBucketReplicaRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketWebsiteInput)(nil)).Elem(), CosBucketWebsiteArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CosBucketWebsitePtrInput)(nil)).Elem(), CosBucketWebsiteArgs{})
-	pulumi.RegisterOutputType(BucketsBucketListOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListArrayOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListCorsRuleOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListCorsRuleArrayOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListLifecycleRuleOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListLifecycleRuleArrayOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListLifecycleRuleExpirationOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListLifecycleRuleExpirationArrayOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListLifecycleRuleNonCurrentExpirationOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListLifecycleRuleNonCurrentTransitionOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListLifecycleRuleTransitionOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListLifecycleRuleTransitionArrayOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListOriginDomainRuleOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListOriginDomainRuleArrayOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListOriginPullRuleOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListOriginPullRuleArrayOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListWebsiteOutput{})
-	pulumi.RegisterOutputType(BucketsBucketListWebsiteArrayOutput{})
-	pulumi.RegisterOutputType(CosBucketCorsRuleOutput{})
-	pulumi.RegisterOutputType(CosBucketCorsRuleArrayOutput{})
-	pulumi.RegisterOutputType(CosBucketLifecycleRuleOutput{})
-	pulumi.RegisterOutputType(CosBucketLifecycleRuleArrayOutput{})
-	pulumi.RegisterOutputType(CosBucketLifecycleRuleExpirationOutput{})
-	pulumi.RegisterOutputType(CosBucketLifecycleRuleExpirationPtrOutput{})
-	pulumi.RegisterOutputType(CosBucketLifecycleRuleNonCurrentExpirationOutput{})
-	pulumi.RegisterOutputType(CosBucketLifecycleRuleNonCurrentExpirationPtrOutput{})
-	pulumi.RegisterOutputType(CosBucketLifecycleRuleNonCurrentTransitionOutput{})
-	pulumi.RegisterOutputType(CosBucketLifecycleRuleNonCurrentTransitionArrayOutput{})
-	pulumi.RegisterOutputType(CosBucketLifecycleRuleTransitionOutput{})
-	pulumi.RegisterOutputType(CosBucketLifecycleRuleTransitionArrayOutput{})
-	pulumi.RegisterOutputType(CosBucketOriginDomainRuleOutput{})
-	pulumi.RegisterOutputType(CosBucketOriginDomainRuleArrayOutput{})
-	pulumi.RegisterOutputType(CosBucketOriginPullRuleOutput{})
-	pulumi.RegisterOutputType(CosBucketOriginPullRuleArrayOutput{})
-	pulumi.RegisterOutputType(CosBucketReplicaRuleOutput{})
-	pulumi.RegisterOutputType(CosBucketReplicaRuleArrayOutput{})
-	pulumi.RegisterOutputType(CosBucketWebsiteOutput{})
-	pulumi.RegisterOutputType(CosBucketWebsitePtrOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketCorsRuleInput)(nil)).Elem(), BucketCorsRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketCorsRuleArrayInput)(nil)).Elem(), BucketCorsRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleInput)(nil)).Elem(), BucketLifecycleRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleArrayInput)(nil)).Elem(), BucketLifecycleRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleExpirationInput)(nil)).Elem(), BucketLifecycleRuleExpirationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleExpirationPtrInput)(nil)).Elem(), BucketLifecycleRuleExpirationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleNonCurrentExpirationInput)(nil)).Elem(), BucketLifecycleRuleNonCurrentExpirationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleNonCurrentExpirationPtrInput)(nil)).Elem(), BucketLifecycleRuleNonCurrentExpirationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleNonCurrentTransitionInput)(nil)).Elem(), BucketLifecycleRuleNonCurrentTransitionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleNonCurrentTransitionArrayInput)(nil)).Elem(), BucketLifecycleRuleNonCurrentTransitionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleTransitionInput)(nil)).Elem(), BucketLifecycleRuleTransitionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleTransitionArrayInput)(nil)).Elem(), BucketLifecycleRuleTransitionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketOriginDomainRuleInput)(nil)).Elem(), BucketOriginDomainRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketOriginDomainRuleArrayInput)(nil)).Elem(), BucketOriginDomainRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketOriginPullRuleInput)(nil)).Elem(), BucketOriginPullRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketOriginPullRuleArrayInput)(nil)).Elem(), BucketOriginPullRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleInput)(nil)).Elem(), BucketReplicaRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleArrayInput)(nil)).Elem(), BucketReplicaRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketWebsiteInput)(nil)).Elem(), BucketWebsiteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketWebsitePtrInput)(nil)).Elem(), BucketWebsiteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListInput)(nil)).Elem(), GetBucketsBucketListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListArrayInput)(nil)).Elem(), GetBucketsBucketListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListCorsRuleInput)(nil)).Elem(), GetBucketsBucketListCorsRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListCorsRuleArrayInput)(nil)).Elem(), GetBucketsBucketListCorsRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleArrayInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleExpirationInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleExpirationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleExpirationArrayInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleExpirationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleNonCurrentExpirationInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleNonCurrentExpirationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleNonCurrentExpirationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleNonCurrentTransitionInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleNonCurrentTransitionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleNonCurrentTransitionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleTransitionInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleTransitionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListLifecycleRuleTransitionArrayInput)(nil)).Elem(), GetBucketsBucketListLifecycleRuleTransitionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListOriginDomainRuleInput)(nil)).Elem(), GetBucketsBucketListOriginDomainRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListOriginDomainRuleArrayInput)(nil)).Elem(), GetBucketsBucketListOriginDomainRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListOriginPullRuleInput)(nil)).Elem(), GetBucketsBucketListOriginPullRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListOriginPullRuleArrayInput)(nil)).Elem(), GetBucketsBucketListOriginPullRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListWebsiteInput)(nil)).Elem(), GetBucketsBucketListWebsiteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBucketsBucketListWebsiteArrayInput)(nil)).Elem(), GetBucketsBucketListWebsiteArray{})
+	pulumi.RegisterOutputType(BucketCorsRuleOutput{})
+	pulumi.RegisterOutputType(BucketCorsRuleArrayOutput{})
+	pulumi.RegisterOutputType(BucketLifecycleRuleOutput{})
+	pulumi.RegisterOutputType(BucketLifecycleRuleArrayOutput{})
+	pulumi.RegisterOutputType(BucketLifecycleRuleExpirationOutput{})
+	pulumi.RegisterOutputType(BucketLifecycleRuleExpirationPtrOutput{})
+	pulumi.RegisterOutputType(BucketLifecycleRuleNonCurrentExpirationOutput{})
+	pulumi.RegisterOutputType(BucketLifecycleRuleNonCurrentExpirationPtrOutput{})
+	pulumi.RegisterOutputType(BucketLifecycleRuleNonCurrentTransitionOutput{})
+	pulumi.RegisterOutputType(BucketLifecycleRuleNonCurrentTransitionArrayOutput{})
+	pulumi.RegisterOutputType(BucketLifecycleRuleTransitionOutput{})
+	pulumi.RegisterOutputType(BucketLifecycleRuleTransitionArrayOutput{})
+	pulumi.RegisterOutputType(BucketOriginDomainRuleOutput{})
+	pulumi.RegisterOutputType(BucketOriginDomainRuleArrayOutput{})
+	pulumi.RegisterOutputType(BucketOriginPullRuleOutput{})
+	pulumi.RegisterOutputType(BucketOriginPullRuleArrayOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleArrayOutput{})
+	pulumi.RegisterOutputType(BucketWebsiteOutput{})
+	pulumi.RegisterOutputType(BucketWebsitePtrOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListCorsRuleOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListCorsRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleExpirationOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleExpirationArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleNonCurrentExpirationOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleNonCurrentExpirationArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleNonCurrentTransitionOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleNonCurrentTransitionArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleTransitionOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListLifecycleRuleTransitionArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListOriginDomainRuleOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListOriginDomainRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListOriginPullRuleOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListOriginPullRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListWebsiteOutput{})
+	pulumi.RegisterOutputType(GetBucketsBucketListWebsiteArrayOutput{})
 }

@@ -9,8 +9,95 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Dayu
 {
-    [TencentcloudResourceType("tencentcloud:Dayu/cCHttpPolicy:CCHttpPolicy")]
-    public partial class CCHttpPolicy : Pulumi.CustomResource
+    /// <summary>
+    /// Use this resource to create a dayu CC self-define http policy
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var testBgpip = new Tencentcloud.Dayu.CcHttpPolicy("testBgpip", new Tencentcloud.Dayu.CcHttpPolicyArgs
+    ///         {
+    ///             Action = "drop",
+    ///             ResourceId = "bgpip-00000294",
+    ///             ResourceType = "bgpip",
+    ///             RuleLists = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
+    ///                 {
+    ///                     Operator = "include",
+    ///                     Skey = "host",
+    ///                     Value = "123",
+    ///                 },
+    ///             },
+    ///             Smode = "matching",
+    ///             Switch = true,
+    ///         });
+    ///         var testNet = new Tencentcloud.Dayu.CcHttpPolicy("testNet", new Tencentcloud.Dayu.CcHttpPolicyArgs
+    ///         {
+    ///             Action = "drop",
+    ///             ResourceId = "net-0000007e",
+    ///             ResourceType = "net",
+    ///             RuleLists = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
+    ///                 {
+    ///                     Operator = "equal",
+    ///                     Skey = "cgi",
+    ///                     Value = "123",
+    ///                 },
+    ///             },
+    ///             Smode = "matching",
+    ///             Switch = true,
+    ///         });
+    ///         var testBgpmultip = new Tencentcloud.Dayu.CcHttpPolicy("testBgpmultip", new Tencentcloud.Dayu.CcHttpPolicyArgs
+    ///         {
+    ///             Action = "alg",
+    ///             Ip = "111.230.178.25",
+    ///             ResourceId = "bgp-0000008o",
+    ///             ResourceType = "bgp-multip",
+    ///             RuleLists = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
+    ///                 {
+    ///                     Operator = "not_include",
+    ///                     Skey = "referer",
+    ///                     Value = "123",
+    ///                 },
+    ///             },
+    ///             Smode = "matching",
+    ///             Switch = true,
+    ///         });
+    ///         var testBgp = new Tencentcloud.Dayu.CcHttpPolicy("testBgp", new Tencentcloud.Dayu.CcHttpPolicyArgs
+    ///         {
+    ///             Action = "alg",
+    ///             ResourceId = "bgp-000006mq",
+    ///             ResourceType = "bgp",
+    ///             RuleLists = 
+    ///             {
+    ///                 new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
+    ///                 {
+    ///                     Operator = "not_include",
+    ///                     Skey = "ua",
+    ///                     Value = "123",
+    ///                 },
+    ///             },
+    ///             Smode = "matching",
+    ///             Switch = true,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [TencentcloudResourceType("tencentcloud:Dayu/ccHttpPolicy:CcHttpPolicy")]
+    public partial class CcHttpPolicy : Pulumi.CustomResource
     {
         /// <summary>
         /// Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
@@ -31,8 +118,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<int> Frequency { get; private set; } = null!;
 
         /// <summary>
-        /// Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-        /// set one.
+        /// Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be set one.
         /// </summary>
         [Output("ip")]
         public Output<string> Ip { get; private set; } = null!;
@@ -56,21 +142,19 @@ namespace Pulumi.Tencentcloud.Dayu
         public Output<string> ResourceId { get; private set; } = null!;
 
         /// <summary>
-        /// Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-        /// `net`.
+        /// Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
         /// </summary>
         [Output("resourceType")]
         public Output<string> ResourceType { get; private set; } = null!;
 
         /// <summary>
-        /// Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
+        /// Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
         /// </summary>
         [Output("ruleLists")]
-        public Output<ImmutableArray<Outputs.CCHttpPolicyRuleList>> RuleLists { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.CcHttpPolicyRuleList>> RuleLists { get; private set; } = null!;
 
         /// <summary>
-        /// Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-        /// one.
+        /// Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
         /// </summary>
         [Output("smode")]
         public Output<string?> Smode { get; private set; } = null!;
@@ -83,19 +167,19 @@ namespace Pulumi.Tencentcloud.Dayu
 
 
         /// <summary>
-        /// Create a CCHttpPolicy resource with the given unique name, arguments, and options.
+        /// Create a CcHttpPolicy resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public CCHttpPolicy(string name, CCHttpPolicyArgs args, CustomResourceOptions? options = null)
-            : base("tencentcloud:Dayu/cCHttpPolicy:CCHttpPolicy", name, args ?? new CCHttpPolicyArgs(), MakeResourceOptions(options, ""))
+        public CcHttpPolicy(string name, CcHttpPolicyArgs args, CustomResourceOptions? options = null)
+            : base("tencentcloud:Dayu/ccHttpPolicy:CcHttpPolicy", name, args ?? new CcHttpPolicyArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private CCHttpPolicy(string name, Input<string> id, CCHttpPolicyState? state = null, CustomResourceOptions? options = null)
-            : base("tencentcloud:Dayu/cCHttpPolicy:CCHttpPolicy", name, state, MakeResourceOptions(options, id))
+        private CcHttpPolicy(string name, Input<string> id, CcHttpPolicyState? state = null, CustomResourceOptions? options = null)
+            : base("tencentcloud:Dayu/ccHttpPolicy:CcHttpPolicy", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -111,7 +195,7 @@ namespace Pulumi.Tencentcloud.Dayu
             return merged;
         }
         /// <summary>
-        /// Get an existing CCHttpPolicy resource's state with the given name, ID, and optional extra
+        /// Get an existing CcHttpPolicy resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -119,13 +203,13 @@ namespace Pulumi.Tencentcloud.Dayu
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static CCHttpPolicy Get(string name, Input<string> id, CCHttpPolicyState? state = null, CustomResourceOptions? options = null)
+        public static CcHttpPolicy Get(string name, Input<string> id, CcHttpPolicyState? state = null, CustomResourceOptions? options = null)
         {
-            return new CCHttpPolicy(name, id, state, options);
+            return new CcHttpPolicy(name, id, state, options);
         }
     }
 
-    public sealed class CCHttpPolicyArgs : Pulumi.ResourceArgs
+    public sealed class CcHttpPolicyArgs : Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
@@ -140,8 +224,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<int>? Frequency { get; set; }
 
         /// <summary>
-        /// Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-        /// set one.
+        /// Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be set one.
         /// </summary>
         [Input("ip")]
         public Input<string>? Ip { get; set; }
@@ -159,27 +242,25 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string> ResourceId { get; set; } = null!;
 
         /// <summary>
-        /// Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-        /// `net`.
+        /// Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
         /// </summary>
         [Input("resourceType", required: true)]
         public Input<string> ResourceType { get; set; } = null!;
 
         [Input("ruleLists")]
-        private InputList<Inputs.CCHttpPolicyRuleListArgs>? _ruleLists;
+        private InputList<Inputs.CcHttpPolicyRuleListArgs>? _ruleLists;
 
         /// <summary>
-        /// Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
+        /// Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
         /// </summary>
-        public InputList<Inputs.CCHttpPolicyRuleListArgs> RuleLists
+        public InputList<Inputs.CcHttpPolicyRuleListArgs> RuleLists
         {
-            get => _ruleLists ?? (_ruleLists = new InputList<Inputs.CCHttpPolicyRuleListArgs>());
+            get => _ruleLists ?? (_ruleLists = new InputList<Inputs.CcHttpPolicyRuleListArgs>());
             set => _ruleLists = value;
         }
 
         /// <summary>
-        /// Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-        /// one.
+        /// Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
         /// </summary>
         [Input("smode")]
         public Input<string>? Smode { get; set; }
@@ -190,12 +271,12 @@ namespace Pulumi.Tencentcloud.Dayu
         [Input("switch")]
         public Input<bool>? Switch { get; set; }
 
-        public CCHttpPolicyArgs()
+        public CcHttpPolicyArgs()
         {
         }
     }
 
-    public sealed class CCHttpPolicyState : Pulumi.ResourceArgs
+    public sealed class CcHttpPolicyState : Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
@@ -216,8 +297,7 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<int>? Frequency { get; set; }
 
         /// <summary>
-        /// Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be
-        /// set one.
+        /// Ip of the CC self-define http policy, only valid when `resource_type` is `bgp-multip`. The num of list items can only be set one.
         /// </summary>
         [Input("ip")]
         public Input<string>? Ip { get; set; }
@@ -241,27 +321,25 @@ namespace Pulumi.Tencentcloud.Dayu
         public Input<string>? ResourceId { get; set; }
 
         /// <summary>
-        /// Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and
-        /// `net`.
+        /// Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
         /// </summary>
         [Input("resourceType")]
         public Input<string>? ResourceType { get; set; }
 
         [Input("ruleLists")]
-        private InputList<Inputs.CCHttpPolicyRuleListGetArgs>? _ruleLists;
+        private InputList<Inputs.CcHttpPolicyRuleListGetArgs>? _ruleLists;
 
         /// <summary>
-        /// Rule list of the CC self-define http policy, only valid when `smode` is `matching`.
+        /// Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
         /// </summary>
-        public InputList<Inputs.CCHttpPolicyRuleListGetArgs> RuleLists
+        public InputList<Inputs.CcHttpPolicyRuleListGetArgs> RuleLists
         {
-            get => _ruleLists ?? (_ruleLists = new InputList<Inputs.CCHttpPolicyRuleListGetArgs>());
+            get => _ruleLists ?? (_ruleLists = new InputList<Inputs.CcHttpPolicyRuleListGetArgs>());
             set => _ruleLists = value;
         }
 
         /// <summary>
-        /// Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set
-        /// one.
+        /// Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
         /// </summary>
         [Input("smode")]
         public Input<string>? Smode { get; set; }
@@ -272,7 +350,7 @@ namespace Pulumi.Tencentcloud.Dayu
         [Input("switch")]
         public Input<bool>? Switch { get; set; }
 
-        public CCHttpPolicyState()
+        public CcHttpPolicyState()
         {
         }
     }

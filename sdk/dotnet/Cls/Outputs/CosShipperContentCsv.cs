@@ -13,10 +13,25 @@ namespace Pulumi.Tencentcloud.Cls.Outputs
     [OutputType]
     public sealed class CosShipperContentCsv
     {
+        /// <summary>
+        /// Field delimiter.
+        /// </summary>
         public readonly string Delimiter;
+        /// <summary>
+        /// Field delimiter.
+        /// </summary>
         public readonly string EscapeChar;
+        /// <summary>
+        /// Names of keys.Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly ImmutableArray<string> Keys;
+        /// <summary>
+        /// Content used to populate non-existing fields.
+        /// </summary>
         public readonly string NonExistingField;
+        /// <summary>
+        /// Whether to print key on the first row of the CSV file.
+        /// </summary>
         public readonly bool PrintKey;
 
         [OutputConstructor]

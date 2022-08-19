@@ -11,7 +11,9 @@ import (
 )
 
 type ConfigExcludePath struct {
-	Type  *string `pulumi:"type"`
+	// Type. Valid values: File, Path.
+	Type *string `pulumi:"type"`
+	// Specific content corresponding to Type.
 	Value *string `pulumi:"value"`
 }
 
@@ -27,7 +29,9 @@ type ConfigExcludePathInput interface {
 }
 
 type ConfigExcludePathArgs struct {
-	Type  pulumi.StringPtrInput `pulumi:"type"`
+	// Type. Valid values: File, Path.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// Specific content corresponding to Type.
 	Value pulumi.StringPtrInput `pulumi:"value"`
 }
 
@@ -82,10 +86,12 @@ func (o ConfigExcludePathOutput) ToConfigExcludePathOutputWithContext(ctx contex
 	return o
 }
 
+// Type. Valid values: File, Path.
 func (o ConfigExcludePathOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExcludePath) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
 
+// Specific content corresponding to Type.
 func (o ConfigExcludePathOutput) Value() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExcludePath) *string { return v.Value }).(pulumi.StringPtrOutput)
 }
@@ -111,14 +117,22 @@ func (o ConfigExcludePathArrayOutput) Index(i pulumi.IntInput) ConfigExcludePath
 }
 
 type ConfigExtraContainerFile struct {
-	Container        string                            `pulumi:"container"`
-	ExcludeLabels    []string                          `pulumi:"excludeLabels"`
-	ExcludeNamespace *string                           `pulumi:"excludeNamespace"`
-	FilePattern      string                            `pulumi:"filePattern"`
-	IncludeLabels    []string                          `pulumi:"includeLabels"`
-	LogPath          string                            `pulumi:"logPath"`
-	Namespace        string                            `pulumi:"namespace"`
-	Workload         *ConfigExtraContainerFileWorkload `pulumi:"workload"`
+	// Container name.
+	Container string `pulumi:"container"`
+	// Pod label to be excluded.
+	ExcludeLabels []string `pulumi:"excludeLabels"`
+	// Namespaces to be excluded, separated by separators, such as A, B.
+	ExcludeNamespace *string `pulumi:"excludeNamespace"`
+	// log name.
+	FilePattern string `pulumi:"filePattern"`
+	// Pod label info.
+	IncludeLabels []string `pulumi:"includeLabels"`
+	// Log Path.
+	LogPath string `pulumi:"logPath"`
+	// Namespace. There can be multiple namespaces, separated by separators, such as A, B.
+	Namespace string `pulumi:"namespace"`
+	// Workload info.
+	Workload *ConfigExtraContainerFileWorkload `pulumi:"workload"`
 }
 
 // ConfigExtraContainerFileInput is an input type that accepts ConfigExtraContainerFileArgs and ConfigExtraContainerFileOutput values.
@@ -133,14 +147,22 @@ type ConfigExtraContainerFileInput interface {
 }
 
 type ConfigExtraContainerFileArgs struct {
-	Container        pulumi.StringInput                       `pulumi:"container"`
-	ExcludeLabels    pulumi.StringArrayInput                  `pulumi:"excludeLabels"`
-	ExcludeNamespace pulumi.StringPtrInput                    `pulumi:"excludeNamespace"`
-	FilePattern      pulumi.StringInput                       `pulumi:"filePattern"`
-	IncludeLabels    pulumi.StringArrayInput                  `pulumi:"includeLabels"`
-	LogPath          pulumi.StringInput                       `pulumi:"logPath"`
-	Namespace        pulumi.StringInput                       `pulumi:"namespace"`
-	Workload         ConfigExtraContainerFileWorkloadPtrInput `pulumi:"workload"`
+	// Container name.
+	Container pulumi.StringInput `pulumi:"container"`
+	// Pod label to be excluded.
+	ExcludeLabels pulumi.StringArrayInput `pulumi:"excludeLabels"`
+	// Namespaces to be excluded, separated by separators, such as A, B.
+	ExcludeNamespace pulumi.StringPtrInput `pulumi:"excludeNamespace"`
+	// log name.
+	FilePattern pulumi.StringInput `pulumi:"filePattern"`
+	// Pod label info.
+	IncludeLabels pulumi.StringArrayInput `pulumi:"includeLabels"`
+	// Log Path.
+	LogPath pulumi.StringInput `pulumi:"logPath"`
+	// Namespace. There can be multiple namespaces, separated by separators, such as A, B.
+	Namespace pulumi.StringInput `pulumi:"namespace"`
+	// Workload info.
+	Workload ConfigExtraContainerFileWorkloadPtrInput `pulumi:"workload"`
 }
 
 func (ConfigExtraContainerFileArgs) ElementType() reflect.Type {
@@ -220,34 +242,42 @@ func (o ConfigExtraContainerFileOutput) ToConfigExtraContainerFilePtrOutputWithC
 	}).(ConfigExtraContainerFilePtrOutput)
 }
 
+// Container name.
 func (o ConfigExtraContainerFileOutput) Container() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigExtraContainerFile) string { return v.Container }).(pulumi.StringOutput)
 }
 
+// Pod label to be excluded.
 func (o ConfigExtraContainerFileOutput) ExcludeLabels() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ConfigExtraContainerFile) []string { return v.ExcludeLabels }).(pulumi.StringArrayOutput)
 }
 
+// Namespaces to be excluded, separated by separators, such as A, B.
 func (o ConfigExtraContainerFileOutput) ExcludeNamespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraContainerFile) *string { return v.ExcludeNamespace }).(pulumi.StringPtrOutput)
 }
 
+// log name.
 func (o ConfigExtraContainerFileOutput) FilePattern() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigExtraContainerFile) string { return v.FilePattern }).(pulumi.StringOutput)
 }
 
+// Pod label info.
 func (o ConfigExtraContainerFileOutput) IncludeLabels() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ConfigExtraContainerFile) []string { return v.IncludeLabels }).(pulumi.StringArrayOutput)
 }
 
+// Log Path.
 func (o ConfigExtraContainerFileOutput) LogPath() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigExtraContainerFile) string { return v.LogPath }).(pulumi.StringOutput)
 }
 
+// Namespace. There can be multiple namespaces, separated by separators, such as A, B.
 func (o ConfigExtraContainerFileOutput) Namespace() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigExtraContainerFile) string { return v.Namespace }).(pulumi.StringOutput)
 }
 
+// Workload info.
 func (o ConfigExtraContainerFileOutput) Workload() ConfigExtraContainerFileWorkloadPtrOutput {
 	return o.ApplyT(func(v ConfigExtraContainerFile) *ConfigExtraContainerFileWorkload { return v.Workload }).(ConfigExtraContainerFileWorkloadPtrOutput)
 }
@@ -276,6 +306,7 @@ func (o ConfigExtraContainerFilePtrOutput) Elem() ConfigExtraContainerFileOutput
 	}).(ConfigExtraContainerFileOutput)
 }
 
+// Container name.
 func (o ConfigExtraContainerFilePtrOutput) Container() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerFile) *string {
 		if v == nil {
@@ -285,6 +316,7 @@ func (o ConfigExtraContainerFilePtrOutput) Container() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Pod label to be excluded.
 func (o ConfigExtraContainerFilePtrOutput) ExcludeLabels() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerFile) []string {
 		if v == nil {
@@ -294,6 +326,7 @@ func (o ConfigExtraContainerFilePtrOutput) ExcludeLabels() pulumi.StringArrayOut
 	}).(pulumi.StringArrayOutput)
 }
 
+// Namespaces to be excluded, separated by separators, such as A, B.
 func (o ConfigExtraContainerFilePtrOutput) ExcludeNamespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerFile) *string {
 		if v == nil {
@@ -303,6 +336,7 @@ func (o ConfigExtraContainerFilePtrOutput) ExcludeNamespace() pulumi.StringPtrOu
 	}).(pulumi.StringPtrOutput)
 }
 
+// log name.
 func (o ConfigExtraContainerFilePtrOutput) FilePattern() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerFile) *string {
 		if v == nil {
@@ -312,6 +346,7 @@ func (o ConfigExtraContainerFilePtrOutput) FilePattern() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
+// Pod label info.
 func (o ConfigExtraContainerFilePtrOutput) IncludeLabels() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerFile) []string {
 		if v == nil {
@@ -321,6 +356,7 @@ func (o ConfigExtraContainerFilePtrOutput) IncludeLabels() pulumi.StringArrayOut
 	}).(pulumi.StringArrayOutput)
 }
 
+// Log Path.
 func (o ConfigExtraContainerFilePtrOutput) LogPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerFile) *string {
 		if v == nil {
@@ -330,6 +366,7 @@ func (o ConfigExtraContainerFilePtrOutput) LogPath() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Namespace. There can be multiple namespaces, separated by separators, such as A, B.
 func (o ConfigExtraContainerFilePtrOutput) Namespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerFile) *string {
 		if v == nil {
@@ -339,6 +376,7 @@ func (o ConfigExtraContainerFilePtrOutput) Namespace() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Workload info.
 func (o ConfigExtraContainerFilePtrOutput) Workload() ConfigExtraContainerFileWorkloadPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerFile) *ConfigExtraContainerFileWorkload {
 		if v == nil {
@@ -349,9 +387,13 @@ func (o ConfigExtraContainerFilePtrOutput) Workload() ConfigExtraContainerFileWo
 }
 
 type ConfigExtraContainerFileWorkload struct {
+	// container name.
 	Container *string `pulumi:"container"`
-	Kind      string  `pulumi:"kind"`
-	Name      string  `pulumi:"name"`
+	// workload type.
+	Kind string `pulumi:"kind"`
+	// workload name.
+	Name string `pulumi:"name"`
+	// namespace.
 	Namespace *string `pulumi:"namespace"`
 }
 
@@ -367,9 +409,13 @@ type ConfigExtraContainerFileWorkloadInput interface {
 }
 
 type ConfigExtraContainerFileWorkloadArgs struct {
+	// container name.
 	Container pulumi.StringPtrInput `pulumi:"container"`
-	Kind      pulumi.StringInput    `pulumi:"kind"`
-	Name      pulumi.StringInput    `pulumi:"name"`
+	// workload type.
+	Kind pulumi.StringInput `pulumi:"kind"`
+	// workload name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// namespace.
 	Namespace pulumi.StringPtrInput `pulumi:"namespace"`
 }
 
@@ -450,18 +496,22 @@ func (o ConfigExtraContainerFileWorkloadOutput) ToConfigExtraContainerFileWorklo
 	}).(ConfigExtraContainerFileWorkloadPtrOutput)
 }
 
+// container name.
 func (o ConfigExtraContainerFileWorkloadOutput) Container() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraContainerFileWorkload) *string { return v.Container }).(pulumi.StringPtrOutput)
 }
 
+// workload type.
 func (o ConfigExtraContainerFileWorkloadOutput) Kind() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigExtraContainerFileWorkload) string { return v.Kind }).(pulumi.StringOutput)
 }
 
+// workload name.
 func (o ConfigExtraContainerFileWorkloadOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigExtraContainerFileWorkload) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// namespace.
 func (o ConfigExtraContainerFileWorkloadOutput) Namespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraContainerFileWorkload) *string { return v.Namespace }).(pulumi.StringPtrOutput)
 }
@@ -490,6 +540,7 @@ func (o ConfigExtraContainerFileWorkloadPtrOutput) Elem() ConfigExtraContainerFi
 	}).(ConfigExtraContainerFileWorkloadOutput)
 }
 
+// container name.
 func (o ConfigExtraContainerFileWorkloadPtrOutput) Container() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerFileWorkload) *string {
 		if v == nil {
@@ -499,6 +550,7 @@ func (o ConfigExtraContainerFileWorkloadPtrOutput) Container() pulumi.StringPtrO
 	}).(pulumi.StringPtrOutput)
 }
 
+// workload type.
 func (o ConfigExtraContainerFileWorkloadPtrOutput) Kind() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerFileWorkload) *string {
 		if v == nil {
@@ -508,6 +560,7 @@ func (o ConfigExtraContainerFileWorkloadPtrOutput) Kind() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
+// workload name.
 func (o ConfigExtraContainerFileWorkloadPtrOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerFileWorkload) *string {
 		if v == nil {
@@ -517,6 +570,7 @@ func (o ConfigExtraContainerFileWorkloadPtrOutput) Name() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
+// namespace.
 func (o ConfigExtraContainerFileWorkloadPtrOutput) Namespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerFileWorkload) *string {
 		if v == nil {
@@ -527,12 +581,18 @@ func (o ConfigExtraContainerFileWorkloadPtrOutput) Namespace() pulumi.StringPtrO
 }
 
 type ConfigExtraContainerStdout struct {
-	AllContainers    bool                                 `pulumi:"allContainers"`
-	ExcludeLabels    []string                             `pulumi:"excludeLabels"`
-	ExcludeNamespace *string                              `pulumi:"excludeNamespace"`
-	IncludeLabels    []string                             `pulumi:"includeLabels"`
-	Namespace        *string                              `pulumi:"namespace"`
-	Workloads        []ConfigExtraContainerStdoutWorkload `pulumi:"workloads"`
+	// Is all containers.
+	AllContainers bool `pulumi:"allContainers"`
+	// Pod label to be excluded.
+	ExcludeLabels []string `pulumi:"excludeLabels"`
+	// Namespaces to be excluded, separated by separators, such as A, B.
+	ExcludeNamespace *string `pulumi:"excludeNamespace"`
+	// Pod label info.
+	IncludeLabels []string `pulumi:"includeLabels"`
+	// Namespace. There can be multiple namespaces, separated by separators, such as A, B.
+	Namespace *string `pulumi:"namespace"`
+	// Workload info.
+	Workloads []ConfigExtraContainerStdoutWorkload `pulumi:"workloads"`
 }
 
 // ConfigExtraContainerStdoutInput is an input type that accepts ConfigExtraContainerStdoutArgs and ConfigExtraContainerStdoutOutput values.
@@ -547,12 +607,18 @@ type ConfigExtraContainerStdoutInput interface {
 }
 
 type ConfigExtraContainerStdoutArgs struct {
-	AllContainers    pulumi.BoolInput                             `pulumi:"allContainers"`
-	ExcludeLabels    pulumi.StringArrayInput                      `pulumi:"excludeLabels"`
-	ExcludeNamespace pulumi.StringPtrInput                        `pulumi:"excludeNamespace"`
-	IncludeLabels    pulumi.StringArrayInput                      `pulumi:"includeLabels"`
-	Namespace        pulumi.StringPtrInput                        `pulumi:"namespace"`
-	Workloads        ConfigExtraContainerStdoutWorkloadArrayInput `pulumi:"workloads"`
+	// Is all containers.
+	AllContainers pulumi.BoolInput `pulumi:"allContainers"`
+	// Pod label to be excluded.
+	ExcludeLabels pulumi.StringArrayInput `pulumi:"excludeLabels"`
+	// Namespaces to be excluded, separated by separators, such as A, B.
+	ExcludeNamespace pulumi.StringPtrInput `pulumi:"excludeNamespace"`
+	// Pod label info.
+	IncludeLabels pulumi.StringArrayInput `pulumi:"includeLabels"`
+	// Namespace. There can be multiple namespaces, separated by separators, such as A, B.
+	Namespace pulumi.StringPtrInput `pulumi:"namespace"`
+	// Workload info.
+	Workloads ConfigExtraContainerStdoutWorkloadArrayInput `pulumi:"workloads"`
 }
 
 func (ConfigExtraContainerStdoutArgs) ElementType() reflect.Type {
@@ -632,26 +698,32 @@ func (o ConfigExtraContainerStdoutOutput) ToConfigExtraContainerStdoutPtrOutputW
 	}).(ConfigExtraContainerStdoutPtrOutput)
 }
 
+// Is all containers.
 func (o ConfigExtraContainerStdoutOutput) AllContainers() pulumi.BoolOutput {
 	return o.ApplyT(func(v ConfigExtraContainerStdout) bool { return v.AllContainers }).(pulumi.BoolOutput)
 }
 
+// Pod label to be excluded.
 func (o ConfigExtraContainerStdoutOutput) ExcludeLabels() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ConfigExtraContainerStdout) []string { return v.ExcludeLabels }).(pulumi.StringArrayOutput)
 }
 
+// Namespaces to be excluded, separated by separators, such as A, B.
 func (o ConfigExtraContainerStdoutOutput) ExcludeNamespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraContainerStdout) *string { return v.ExcludeNamespace }).(pulumi.StringPtrOutput)
 }
 
+// Pod label info.
 func (o ConfigExtraContainerStdoutOutput) IncludeLabels() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ConfigExtraContainerStdout) []string { return v.IncludeLabels }).(pulumi.StringArrayOutput)
 }
 
+// Namespace. There can be multiple namespaces, separated by separators, such as A, B.
 func (o ConfigExtraContainerStdoutOutput) Namespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraContainerStdout) *string { return v.Namespace }).(pulumi.StringPtrOutput)
 }
 
+// Workload info.
 func (o ConfigExtraContainerStdoutOutput) Workloads() ConfigExtraContainerStdoutWorkloadArrayOutput {
 	return o.ApplyT(func(v ConfigExtraContainerStdout) []ConfigExtraContainerStdoutWorkload { return v.Workloads }).(ConfigExtraContainerStdoutWorkloadArrayOutput)
 }
@@ -680,6 +752,7 @@ func (o ConfigExtraContainerStdoutPtrOutput) Elem() ConfigExtraContainerStdoutOu
 	}).(ConfigExtraContainerStdoutOutput)
 }
 
+// Is all containers.
 func (o ConfigExtraContainerStdoutPtrOutput) AllContainers() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerStdout) *bool {
 		if v == nil {
@@ -689,6 +762,7 @@ func (o ConfigExtraContainerStdoutPtrOutput) AllContainers() pulumi.BoolPtrOutpu
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Pod label to be excluded.
 func (o ConfigExtraContainerStdoutPtrOutput) ExcludeLabels() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerStdout) []string {
 		if v == nil {
@@ -698,6 +772,7 @@ func (o ConfigExtraContainerStdoutPtrOutput) ExcludeLabels() pulumi.StringArrayO
 	}).(pulumi.StringArrayOutput)
 }
 
+// Namespaces to be excluded, separated by separators, such as A, B.
 func (o ConfigExtraContainerStdoutPtrOutput) ExcludeNamespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerStdout) *string {
 		if v == nil {
@@ -707,6 +782,7 @@ func (o ConfigExtraContainerStdoutPtrOutput) ExcludeNamespace() pulumi.StringPtr
 	}).(pulumi.StringPtrOutput)
 }
 
+// Pod label info.
 func (o ConfigExtraContainerStdoutPtrOutput) IncludeLabels() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerStdout) []string {
 		if v == nil {
@@ -716,6 +792,7 @@ func (o ConfigExtraContainerStdoutPtrOutput) IncludeLabels() pulumi.StringArrayO
 	}).(pulumi.StringArrayOutput)
 }
 
+// Namespace. There can be multiple namespaces, separated by separators, such as A, B.
 func (o ConfigExtraContainerStdoutPtrOutput) Namespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerStdout) *string {
 		if v == nil {
@@ -725,6 +802,7 @@ func (o ConfigExtraContainerStdoutPtrOutput) Namespace() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
+// Workload info.
 func (o ConfigExtraContainerStdoutPtrOutput) Workloads() ConfigExtraContainerStdoutWorkloadArrayOutput {
 	return o.ApplyT(func(v *ConfigExtraContainerStdout) []ConfigExtraContainerStdoutWorkload {
 		if v == nil {
@@ -735,9 +813,13 @@ func (o ConfigExtraContainerStdoutPtrOutput) Workloads() ConfigExtraContainerStd
 }
 
 type ConfigExtraContainerStdoutWorkload struct {
+	// container name.
 	Container *string `pulumi:"container"`
-	Kind      string  `pulumi:"kind"`
-	Name      string  `pulumi:"name"`
+	// workload type.
+	Kind string `pulumi:"kind"`
+	// workload name.
+	Name string `pulumi:"name"`
+	// namespace.
 	Namespace *string `pulumi:"namespace"`
 }
 
@@ -753,9 +835,13 @@ type ConfigExtraContainerStdoutWorkloadInput interface {
 }
 
 type ConfigExtraContainerStdoutWorkloadArgs struct {
+	// container name.
 	Container pulumi.StringPtrInput `pulumi:"container"`
-	Kind      pulumi.StringInput    `pulumi:"kind"`
-	Name      pulumi.StringInput    `pulumi:"name"`
+	// workload type.
+	Kind pulumi.StringInput `pulumi:"kind"`
+	// workload name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// namespace.
 	Namespace pulumi.StringPtrInput `pulumi:"namespace"`
 }
 
@@ -810,18 +896,22 @@ func (o ConfigExtraContainerStdoutWorkloadOutput) ToConfigExtraContainerStdoutWo
 	return o
 }
 
+// container name.
 func (o ConfigExtraContainerStdoutWorkloadOutput) Container() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraContainerStdoutWorkload) *string { return v.Container }).(pulumi.StringPtrOutput)
 }
 
+// workload type.
 func (o ConfigExtraContainerStdoutWorkloadOutput) Kind() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigExtraContainerStdoutWorkload) string { return v.Kind }).(pulumi.StringOutput)
 }
 
+// workload name.
 func (o ConfigExtraContainerStdoutWorkloadOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigExtraContainerStdoutWorkload) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// namespace.
 func (o ConfigExtraContainerStdoutWorkloadOutput) Namespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraContainerStdoutWorkload) *string { return v.Namespace }).(pulumi.StringPtrOutput)
 }
@@ -847,7 +937,9 @@ func (o ConfigExtraContainerStdoutWorkloadArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type ConfigExtraExcludePath struct {
-	Type  *string `pulumi:"type"`
+	// Type. Valid values: File, Path.
+	Type *string `pulumi:"type"`
+	// Specific content corresponding to Type.
 	Value *string `pulumi:"value"`
 }
 
@@ -863,7 +955,9 @@ type ConfigExtraExcludePathInput interface {
 }
 
 type ConfigExtraExcludePathArgs struct {
-	Type  pulumi.StringPtrInput `pulumi:"type"`
+	// Type. Valid values: File, Path.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// Specific content corresponding to Type.
 	Value pulumi.StringPtrInput `pulumi:"value"`
 }
 
@@ -918,10 +1012,12 @@ func (o ConfigExtraExcludePathOutput) ToConfigExtraExcludePathOutputWithContext(
 	return o
 }
 
+// Type. Valid values: File, Path.
 func (o ConfigExtraExcludePathOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraExcludePath) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
 
+// Specific content corresponding to Type.
 func (o ConfigExtraExcludePathOutput) Value() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraExcludePath) *string { return v.Value }).(pulumi.StringPtrOutput)
 }
@@ -947,16 +1043,26 @@ func (o ConfigExtraExcludePathArrayOutput) Index(i pulumi.IntInput) ConfigExtraE
 }
 
 type ConfigExtraExtractRule struct {
-	Backtracking        *int                                   `pulumi:"backtracking"`
-	BeginRegex          *string                                `pulumi:"beginRegex"`
-	Delimiter           *string                                `pulumi:"delimiter"`
-	FilterKeyRegexes    []ConfigExtraExtractRuleFilterKeyRegex `pulumi:"filterKeyRegexes"`
-	Keys                []string                               `pulumi:"keys"`
-	LogRegex            *string                                `pulumi:"logRegex"`
-	TimeFormat          *string                                `pulumi:"timeFormat"`
-	TimeKey             *string                                `pulumi:"timeKey"`
-	UnMatchLogKey       *string                                `pulumi:"unMatchLogKey"`
-	UnMatchUpLoadSwitch *bool                                  `pulumi:"unMatchUpLoadSwitch"`
+	// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+	Backtracking *int `pulumi:"backtracking"`
+	// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
+	BeginRegex *string `pulumi:"beginRegex"`
+	// Delimiter for delimited log, which is valid only if logType is delimiter_log.
+	Delimiter *string `pulumi:"delimiter"`
+	// Log keys to be filtered and the corresponding regex.
+	FilterKeyRegexes []ConfigExtraExtractRuleFilterKeyRegex `pulumi:"filterKeyRegexes"`
+	// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
+	Keys []string `pulumi:"keys"`
+	// Full log matching rule, which is valid only if logType is fullregex_log.
+	LogRegex *string `pulumi:"logRegex"`
+	// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+	TimeFormat *string `pulumi:"timeFormat"`
+	// Time field key name. timeKey and timeFormat must appear in pair.
+	TimeKey *string `pulumi:"timeKey"`
+	// Unmatched log key.
+	UnMatchLogKey *string `pulumi:"unMatchLogKey"`
+	// Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+	UnMatchUpLoadSwitch *bool `pulumi:"unMatchUpLoadSwitch"`
 }
 
 // ConfigExtraExtractRuleInput is an input type that accepts ConfigExtraExtractRuleArgs and ConfigExtraExtractRuleOutput values.
@@ -971,16 +1077,26 @@ type ConfigExtraExtractRuleInput interface {
 }
 
 type ConfigExtraExtractRuleArgs struct {
-	Backtracking        pulumi.IntPtrInput                             `pulumi:"backtracking"`
-	BeginRegex          pulumi.StringPtrInput                          `pulumi:"beginRegex"`
-	Delimiter           pulumi.StringPtrInput                          `pulumi:"delimiter"`
-	FilterKeyRegexes    ConfigExtraExtractRuleFilterKeyRegexArrayInput `pulumi:"filterKeyRegexes"`
-	Keys                pulumi.StringArrayInput                        `pulumi:"keys"`
-	LogRegex            pulumi.StringPtrInput                          `pulumi:"logRegex"`
-	TimeFormat          pulumi.StringPtrInput                          `pulumi:"timeFormat"`
-	TimeKey             pulumi.StringPtrInput                          `pulumi:"timeKey"`
-	UnMatchLogKey       pulumi.StringPtrInput                          `pulumi:"unMatchLogKey"`
-	UnMatchUpLoadSwitch pulumi.BoolPtrInput                            `pulumi:"unMatchUpLoadSwitch"`
+	// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+	Backtracking pulumi.IntPtrInput `pulumi:"backtracking"`
+	// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
+	BeginRegex pulumi.StringPtrInput `pulumi:"beginRegex"`
+	// Delimiter for delimited log, which is valid only if logType is delimiter_log.
+	Delimiter pulumi.StringPtrInput `pulumi:"delimiter"`
+	// Log keys to be filtered and the corresponding regex.
+	FilterKeyRegexes ConfigExtraExtractRuleFilterKeyRegexArrayInput `pulumi:"filterKeyRegexes"`
+	// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
+	Keys pulumi.StringArrayInput `pulumi:"keys"`
+	// Full log matching rule, which is valid only if logType is fullregex_log.
+	LogRegex pulumi.StringPtrInput `pulumi:"logRegex"`
+	// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+	TimeFormat pulumi.StringPtrInput `pulumi:"timeFormat"`
+	// Time field key name. timeKey and timeFormat must appear in pair.
+	TimeKey pulumi.StringPtrInput `pulumi:"timeKey"`
+	// Unmatched log key.
+	UnMatchLogKey pulumi.StringPtrInput `pulumi:"unMatchLogKey"`
+	// Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+	UnMatchUpLoadSwitch pulumi.BoolPtrInput `pulumi:"unMatchUpLoadSwitch"`
 }
 
 func (ConfigExtraExtractRuleArgs) ElementType() reflect.Type {
@@ -1060,42 +1176,52 @@ func (o ConfigExtraExtractRuleOutput) ToConfigExtraExtractRulePtrOutputWithConte
 	}).(ConfigExtraExtractRulePtrOutput)
 }
 
+// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
 func (o ConfigExtraExtractRuleOutput) Backtracking() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ConfigExtraExtractRule) *int { return v.Backtracking }).(pulumi.IntPtrOutput)
 }
 
+// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
 func (o ConfigExtraExtractRuleOutput) BeginRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraExtractRule) *string { return v.BeginRegex }).(pulumi.StringPtrOutput)
 }
 
+// Delimiter for delimited log, which is valid only if logType is delimiter_log.
 func (o ConfigExtraExtractRuleOutput) Delimiter() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraExtractRule) *string { return v.Delimiter }).(pulumi.StringPtrOutput)
 }
 
+// Log keys to be filtered and the corresponding regex.
 func (o ConfigExtraExtractRuleOutput) FilterKeyRegexes() ConfigExtraExtractRuleFilterKeyRegexArrayOutput {
 	return o.ApplyT(func(v ConfigExtraExtractRule) []ConfigExtraExtractRuleFilterKeyRegex { return v.FilterKeyRegexes }).(ConfigExtraExtractRuleFilterKeyRegexArrayOutput)
 }
 
+// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
 func (o ConfigExtraExtractRuleOutput) Keys() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ConfigExtraExtractRule) []string { return v.Keys }).(pulumi.StringArrayOutput)
 }
 
+// Full log matching rule, which is valid only if logType is fullregex_log.
 func (o ConfigExtraExtractRuleOutput) LogRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraExtractRule) *string { return v.LogRegex }).(pulumi.StringPtrOutput)
 }
 
+// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
 func (o ConfigExtraExtractRuleOutput) TimeFormat() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraExtractRule) *string { return v.TimeFormat }).(pulumi.StringPtrOutput)
 }
 
+// Time field key name. timeKey and timeFormat must appear in pair.
 func (o ConfigExtraExtractRuleOutput) TimeKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraExtractRule) *string { return v.TimeKey }).(pulumi.StringPtrOutput)
 }
 
+// Unmatched log key.
 func (o ConfigExtraExtractRuleOutput) UnMatchLogKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraExtractRule) *string { return v.UnMatchLogKey }).(pulumi.StringPtrOutput)
 }
 
+// Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
 func (o ConfigExtraExtractRuleOutput) UnMatchUpLoadSwitch() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ConfigExtraExtractRule) *bool { return v.UnMatchUpLoadSwitch }).(pulumi.BoolPtrOutput)
 }
@@ -1124,6 +1250,7 @@ func (o ConfigExtraExtractRulePtrOutput) Elem() ConfigExtraExtractRuleOutput {
 	}).(ConfigExtraExtractRuleOutput)
 }
 
+// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
 func (o ConfigExtraExtractRulePtrOutput) Backtracking() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraExtractRule) *int {
 		if v == nil {
@@ -1133,6 +1260,7 @@ func (o ConfigExtraExtractRulePtrOutput) Backtracking() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
 func (o ConfigExtraExtractRulePtrOutput) BeginRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraExtractRule) *string {
 		if v == nil {
@@ -1142,6 +1270,7 @@ func (o ConfigExtraExtractRulePtrOutput) BeginRegex() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Delimiter for delimited log, which is valid only if logType is delimiter_log.
 func (o ConfigExtraExtractRulePtrOutput) Delimiter() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraExtractRule) *string {
 		if v == nil {
@@ -1151,6 +1280,7 @@ func (o ConfigExtraExtractRulePtrOutput) Delimiter() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Log keys to be filtered and the corresponding regex.
 func (o ConfigExtraExtractRulePtrOutput) FilterKeyRegexes() ConfigExtraExtractRuleFilterKeyRegexArrayOutput {
 	return o.ApplyT(func(v *ConfigExtraExtractRule) []ConfigExtraExtractRuleFilterKeyRegex {
 		if v == nil {
@@ -1160,6 +1290,7 @@ func (o ConfigExtraExtractRulePtrOutput) FilterKeyRegexes() ConfigExtraExtractRu
 	}).(ConfigExtraExtractRuleFilterKeyRegexArrayOutput)
 }
 
+// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
 func (o ConfigExtraExtractRulePtrOutput) Keys() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ConfigExtraExtractRule) []string {
 		if v == nil {
@@ -1169,6 +1300,7 @@ func (o ConfigExtraExtractRulePtrOutput) Keys() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
+// Full log matching rule, which is valid only if logType is fullregex_log.
 func (o ConfigExtraExtractRulePtrOutput) LogRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraExtractRule) *string {
 		if v == nil {
@@ -1178,6 +1310,7 @@ func (o ConfigExtraExtractRulePtrOutput) LogRegex() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
 func (o ConfigExtraExtractRulePtrOutput) TimeFormat() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraExtractRule) *string {
 		if v == nil {
@@ -1187,6 +1320,7 @@ func (o ConfigExtraExtractRulePtrOutput) TimeFormat() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Time field key name. timeKey and timeFormat must appear in pair.
 func (o ConfigExtraExtractRulePtrOutput) TimeKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraExtractRule) *string {
 		if v == nil {
@@ -1196,6 +1330,7 @@ func (o ConfigExtraExtractRulePtrOutput) TimeKey() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Unmatched log key.
 func (o ConfigExtraExtractRulePtrOutput) UnMatchLogKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraExtractRule) *string {
 		if v == nil {
@@ -1205,6 +1340,7 @@ func (o ConfigExtraExtractRulePtrOutput) UnMatchLogKey() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
 func (o ConfigExtraExtractRulePtrOutput) UnMatchUpLoadSwitch() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraExtractRule) *bool {
 		if v == nil {
@@ -1215,7 +1351,9 @@ func (o ConfigExtraExtractRulePtrOutput) UnMatchUpLoadSwitch() pulumi.BoolPtrOut
 }
 
 type ConfigExtraExtractRuleFilterKeyRegex struct {
-	Key   *string `pulumi:"key"`
+	// Log key to be filtered.
+	Key *string `pulumi:"key"`
+	// Filter rule regex corresponding to key.
 	Regex *string `pulumi:"regex"`
 }
 
@@ -1231,7 +1369,9 @@ type ConfigExtraExtractRuleFilterKeyRegexInput interface {
 }
 
 type ConfigExtraExtractRuleFilterKeyRegexArgs struct {
-	Key   pulumi.StringPtrInput `pulumi:"key"`
+	// Log key to be filtered.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Filter rule regex corresponding to key.
 	Regex pulumi.StringPtrInput `pulumi:"regex"`
 }
 
@@ -1286,10 +1426,12 @@ func (o ConfigExtraExtractRuleFilterKeyRegexOutput) ToConfigExtraExtractRuleFilt
 	return o
 }
 
+// Log key to be filtered.
 func (o ConfigExtraExtractRuleFilterKeyRegexOutput) Key() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraExtractRuleFilterKeyRegex) *string { return v.Key }).(pulumi.StringPtrOutput)
 }
 
+// Filter rule regex corresponding to key.
 func (o ConfigExtraExtractRuleFilterKeyRegexOutput) Regex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtraExtractRuleFilterKeyRegex) *string { return v.Regex }).(pulumi.StringPtrOutput)
 }
@@ -1315,9 +1457,12 @@ func (o ConfigExtraExtractRuleFilterKeyRegexArrayOutput) Index(i pulumi.IntInput
 }
 
 type ConfigExtraHostFile struct {
+	// Metadata info.
 	CustomLabels []string `pulumi:"customLabels"`
-	FilePattern  string   `pulumi:"filePattern"`
-	LogPath      string   `pulumi:"logPath"`
+	// Log file name.
+	FilePattern string `pulumi:"filePattern"`
+	// Log file dir.
+	LogPath string `pulumi:"logPath"`
 }
 
 // ConfigExtraHostFileInput is an input type that accepts ConfigExtraHostFileArgs and ConfigExtraHostFileOutput values.
@@ -1332,9 +1477,12 @@ type ConfigExtraHostFileInput interface {
 }
 
 type ConfigExtraHostFileArgs struct {
+	// Metadata info.
 	CustomLabels pulumi.StringArrayInput `pulumi:"customLabels"`
-	FilePattern  pulumi.StringInput      `pulumi:"filePattern"`
-	LogPath      pulumi.StringInput      `pulumi:"logPath"`
+	// Log file name.
+	FilePattern pulumi.StringInput `pulumi:"filePattern"`
+	// Log file dir.
+	LogPath pulumi.StringInput `pulumi:"logPath"`
 }
 
 func (ConfigExtraHostFileArgs) ElementType() reflect.Type {
@@ -1414,14 +1562,17 @@ func (o ConfigExtraHostFileOutput) ToConfigExtraHostFilePtrOutputWithContext(ctx
 	}).(ConfigExtraHostFilePtrOutput)
 }
 
+// Metadata info.
 func (o ConfigExtraHostFileOutput) CustomLabels() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ConfigExtraHostFile) []string { return v.CustomLabels }).(pulumi.StringArrayOutput)
 }
 
+// Log file name.
 func (o ConfigExtraHostFileOutput) FilePattern() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigExtraHostFile) string { return v.FilePattern }).(pulumi.StringOutput)
 }
 
+// Log file dir.
 func (o ConfigExtraHostFileOutput) LogPath() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigExtraHostFile) string { return v.LogPath }).(pulumi.StringOutput)
 }
@@ -1450,6 +1601,7 @@ func (o ConfigExtraHostFilePtrOutput) Elem() ConfigExtraHostFileOutput {
 	}).(ConfigExtraHostFileOutput)
 }
 
+// Metadata info.
 func (o ConfigExtraHostFilePtrOutput) CustomLabels() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ConfigExtraHostFile) []string {
 		if v == nil {
@@ -1459,6 +1611,7 @@ func (o ConfigExtraHostFilePtrOutput) CustomLabels() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
+// Log file name.
 func (o ConfigExtraHostFilePtrOutput) FilePattern() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraHostFile) *string {
 		if v == nil {
@@ -1468,6 +1621,7 @@ func (o ConfigExtraHostFilePtrOutput) FilePattern() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Log file dir.
 func (o ConfigExtraHostFilePtrOutput) LogPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtraHostFile) *string {
 		if v == nil {
@@ -1478,16 +1632,26 @@ func (o ConfigExtraHostFilePtrOutput) LogPath() pulumi.StringPtrOutput {
 }
 
 type ConfigExtractRule struct {
-	Backtracking        *int                              `pulumi:"backtracking"`
-	BeginRegex          *string                           `pulumi:"beginRegex"`
-	Delimiter           *string                           `pulumi:"delimiter"`
-	FilterKeyRegexes    []ConfigExtractRuleFilterKeyRegex `pulumi:"filterKeyRegexes"`
-	Keys                []string                          `pulumi:"keys"`
-	LogRegex            *string                           `pulumi:"logRegex"`
-	TimeFormat          *string                           `pulumi:"timeFormat"`
-	TimeKey             *string                           `pulumi:"timeKey"`
-	UnMatchLogKey       *string                           `pulumi:"unMatchLogKey"`
-	UnMatchUpLoadSwitch *bool                             `pulumi:"unMatchUpLoadSwitch"`
+	// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+	Backtracking *int `pulumi:"backtracking"`
+	// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
+	BeginRegex *string `pulumi:"beginRegex"`
+	// Delimiter for delimited log, which is valid only if logType is delimiter_log.
+	Delimiter *string `pulumi:"delimiter"`
+	// Log keys to be filtered and the corresponding regex.
+	FilterKeyRegexes []ConfigExtractRuleFilterKeyRegex `pulumi:"filterKeyRegexes"`
+	// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
+	Keys []string `pulumi:"keys"`
+	// Full log matching rule, which is valid only if logType is fullregex_log.
+	LogRegex *string `pulumi:"logRegex"`
+	// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+	TimeFormat *string `pulumi:"timeFormat"`
+	// Time field key name. timeKey and timeFormat must appear in pair.
+	TimeKey *string `pulumi:"timeKey"`
+	// Unmatched log key.
+	UnMatchLogKey *string `pulumi:"unMatchLogKey"`
+	// Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+	UnMatchUpLoadSwitch *bool `pulumi:"unMatchUpLoadSwitch"`
 }
 
 // ConfigExtractRuleInput is an input type that accepts ConfigExtractRuleArgs and ConfigExtractRuleOutput values.
@@ -1502,16 +1666,26 @@ type ConfigExtractRuleInput interface {
 }
 
 type ConfigExtractRuleArgs struct {
-	Backtracking        pulumi.IntPtrInput                        `pulumi:"backtracking"`
-	BeginRegex          pulumi.StringPtrInput                     `pulumi:"beginRegex"`
-	Delimiter           pulumi.StringPtrInput                     `pulumi:"delimiter"`
-	FilterKeyRegexes    ConfigExtractRuleFilterKeyRegexArrayInput `pulumi:"filterKeyRegexes"`
-	Keys                pulumi.StringArrayInput                   `pulumi:"keys"`
-	LogRegex            pulumi.StringPtrInput                     `pulumi:"logRegex"`
-	TimeFormat          pulumi.StringPtrInput                     `pulumi:"timeFormat"`
-	TimeKey             pulumi.StringPtrInput                     `pulumi:"timeKey"`
-	UnMatchLogKey       pulumi.StringPtrInput                     `pulumi:"unMatchLogKey"`
-	UnMatchUpLoadSwitch pulumi.BoolPtrInput                       `pulumi:"unMatchUpLoadSwitch"`
+	// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
+	Backtracking pulumi.IntPtrInput `pulumi:"backtracking"`
+	// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
+	BeginRegex pulumi.StringPtrInput `pulumi:"beginRegex"`
+	// Delimiter for delimited log, which is valid only if logType is delimiter_log.
+	Delimiter pulumi.StringPtrInput `pulumi:"delimiter"`
+	// Log keys to be filtered and the corresponding regex.
+	FilterKeyRegexes ConfigExtractRuleFilterKeyRegexArrayInput `pulumi:"filterKeyRegexes"`
+	// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
+	Keys pulumi.StringArrayInput `pulumi:"keys"`
+	// Full log matching rule, which is valid only if logType is fullregex_log.
+	LogRegex pulumi.StringPtrInput `pulumi:"logRegex"`
+	// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
+	TimeFormat pulumi.StringPtrInput `pulumi:"timeFormat"`
+	// Time field key name. timeKey and timeFormat must appear in pair.
+	TimeKey pulumi.StringPtrInput `pulumi:"timeKey"`
+	// Unmatched log key.
+	UnMatchLogKey pulumi.StringPtrInput `pulumi:"unMatchLogKey"`
+	// Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
+	UnMatchUpLoadSwitch pulumi.BoolPtrInput `pulumi:"unMatchUpLoadSwitch"`
 }
 
 func (ConfigExtractRuleArgs) ElementType() reflect.Type {
@@ -1591,42 +1765,52 @@ func (o ConfigExtractRuleOutput) ToConfigExtractRulePtrOutputWithContext(ctx con
 	}).(ConfigExtractRulePtrOutput)
 }
 
+// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
 func (o ConfigExtractRuleOutput) Backtracking() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ConfigExtractRule) *int { return v.Backtracking }).(pulumi.IntPtrOutput)
 }
 
+// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
 func (o ConfigExtractRuleOutput) BeginRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtractRule) *string { return v.BeginRegex }).(pulumi.StringPtrOutput)
 }
 
+// Delimiter for delimited log, which is valid only if logType is delimiter_log.
 func (o ConfigExtractRuleOutput) Delimiter() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtractRule) *string { return v.Delimiter }).(pulumi.StringPtrOutput)
 }
 
+// Log keys to be filtered and the corresponding regex.
 func (o ConfigExtractRuleOutput) FilterKeyRegexes() ConfigExtractRuleFilterKeyRegexArrayOutput {
 	return o.ApplyT(func(v ConfigExtractRule) []ConfigExtractRuleFilterKeyRegex { return v.FilterKeyRegexes }).(ConfigExtractRuleFilterKeyRegexArrayOutput)
 }
 
+// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
 func (o ConfigExtractRuleOutput) Keys() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ConfigExtractRule) []string { return v.Keys }).(pulumi.StringArrayOutput)
 }
 
+// Full log matching rule, which is valid only if logType is fullregex_log.
 func (o ConfigExtractRuleOutput) LogRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtractRule) *string { return v.LogRegex }).(pulumi.StringPtrOutput)
 }
 
+// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
 func (o ConfigExtractRuleOutput) TimeFormat() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtractRule) *string { return v.TimeFormat }).(pulumi.StringPtrOutput)
 }
 
+// Time field key name. timeKey and timeFormat must appear in pair.
 func (o ConfigExtractRuleOutput) TimeKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtractRule) *string { return v.TimeKey }).(pulumi.StringPtrOutput)
 }
 
+// Unmatched log key.
 func (o ConfigExtractRuleOutput) UnMatchLogKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtractRule) *string { return v.UnMatchLogKey }).(pulumi.StringPtrOutput)
 }
 
+// Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
 func (o ConfigExtractRuleOutput) UnMatchUpLoadSwitch() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ConfigExtractRule) *bool { return v.UnMatchUpLoadSwitch }).(pulumi.BoolPtrOutput)
 }
@@ -1655,6 +1839,7 @@ func (o ConfigExtractRulePtrOutput) Elem() ConfigExtractRuleOutput {
 	}).(ConfigExtractRuleOutput)
 }
 
+// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
 func (o ConfigExtractRulePtrOutput) Backtracking() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ConfigExtractRule) *int {
 		if v == nil {
@@ -1664,6 +1849,7 @@ func (o ConfigExtractRulePtrOutput) Backtracking() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.
 func (o ConfigExtractRulePtrOutput) BeginRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtractRule) *string {
 		if v == nil {
@@ -1673,6 +1859,7 @@ func (o ConfigExtractRulePtrOutput) BeginRegex() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Delimiter for delimited log, which is valid only if logType is delimiter_log.
 func (o ConfigExtractRulePtrOutput) Delimiter() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtractRule) *string {
 		if v == nil {
@@ -1682,6 +1869,7 @@ func (o ConfigExtractRulePtrOutput) Delimiter() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Log keys to be filtered and the corresponding regex.
 func (o ConfigExtractRulePtrOutput) FilterKeyRegexes() ConfigExtractRuleFilterKeyRegexArrayOutput {
 	return o.ApplyT(func(v *ConfigExtractRule) []ConfigExtractRuleFilterKeyRegex {
 		if v == nil {
@@ -1691,6 +1879,7 @@ func (o ConfigExtractRulePtrOutput) FilterKeyRegexes() ConfigExtractRuleFilterKe
 	}).(ConfigExtractRuleFilterKeyRegexArrayOutput)
 }
 
+// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.
 func (o ConfigExtractRulePtrOutput) Keys() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ConfigExtractRule) []string {
 		if v == nil {
@@ -1700,6 +1889,7 @@ func (o ConfigExtractRulePtrOutput) Keys() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
+// Full log matching rule, which is valid only if logType is fullregex_log.
 func (o ConfigExtractRulePtrOutput) LogRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtractRule) *string {
 		if v == nil {
@@ -1709,6 +1899,7 @@ func (o ConfigExtractRulePtrOutput) LogRegex() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.
 func (o ConfigExtractRulePtrOutput) TimeFormat() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtractRule) *string {
 		if v == nil {
@@ -1718,6 +1909,7 @@ func (o ConfigExtractRulePtrOutput) TimeFormat() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Time field key name. timeKey and timeFormat must appear in pair.
 func (o ConfigExtractRulePtrOutput) TimeKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtractRule) *string {
 		if v == nil {
@@ -1727,6 +1919,7 @@ func (o ConfigExtractRulePtrOutput) TimeKey() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Unmatched log key.
 func (o ConfigExtractRulePtrOutput) UnMatchLogKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConfigExtractRule) *string {
 		if v == nil {
@@ -1736,6 +1929,7 @@ func (o ConfigExtractRulePtrOutput) UnMatchLogKey() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.
 func (o ConfigExtractRulePtrOutput) UnMatchUpLoadSwitch() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ConfigExtractRule) *bool {
 		if v == nil {
@@ -1746,7 +1940,9 @@ func (o ConfigExtractRulePtrOutput) UnMatchUpLoadSwitch() pulumi.BoolPtrOutput {
 }
 
 type ConfigExtractRuleFilterKeyRegex struct {
-	Key   *string `pulumi:"key"`
+	// Log key to be filtered.
+	Key *string `pulumi:"key"`
+	// Filter rule regex corresponding to key.
 	Regex *string `pulumi:"regex"`
 }
 
@@ -1762,7 +1958,9 @@ type ConfigExtractRuleFilterKeyRegexInput interface {
 }
 
 type ConfigExtractRuleFilterKeyRegexArgs struct {
-	Key   pulumi.StringPtrInput `pulumi:"key"`
+	// Log key to be filtered.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Filter rule regex corresponding to key.
 	Regex pulumi.StringPtrInput `pulumi:"regex"`
 }
 
@@ -1817,10 +2015,12 @@ func (o ConfigExtractRuleFilterKeyRegexOutput) ToConfigExtractRuleFilterKeyRegex
 	return o
 }
 
+// Log key to be filtered.
 func (o ConfigExtractRuleFilterKeyRegexOutput) Key() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtractRuleFilterKeyRegex) *string { return v.Key }).(pulumi.StringPtrOutput)
 }
 
+// Filter rule regex corresponding to key.
 func (o ConfigExtractRuleFilterKeyRegexOutput) Regex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigExtractRuleFilterKeyRegex) *string { return v.Regex }).(pulumi.StringPtrOutput)
 }
@@ -1846,6 +2046,7 @@ func (o ConfigExtractRuleFilterKeyRegexArrayOutput) Index(i pulumi.IntInput) Con
 }
 
 type CosShipperCompress struct {
+	// Compression format. Valid values: gzip, lzop, none (no compression).
 	Format string `pulumi:"format"`
 }
 
@@ -1861,6 +2062,7 @@ type CosShipperCompressInput interface {
 }
 
 type CosShipperCompressArgs struct {
+	// Compression format. Valid values: gzip, lzop, none (no compression).
 	Format pulumi.StringInput `pulumi:"format"`
 }
 
@@ -1941,6 +2143,7 @@ func (o CosShipperCompressOutput) ToCosShipperCompressPtrOutputWithContext(ctx c
 	}).(CosShipperCompressPtrOutput)
 }
 
+// Compression format. Valid values: gzip, lzop, none (no compression).
 func (o CosShipperCompressOutput) Format() pulumi.StringOutput {
 	return o.ApplyT(func(v CosShipperCompress) string { return v.Format }).(pulumi.StringOutput)
 }
@@ -1969,6 +2172,7 @@ func (o CosShipperCompressPtrOutput) Elem() CosShipperCompressOutput {
 	}).(CosShipperCompressOutput)
 }
 
+// Compression format. Valid values: gzip, lzop, none (no compression).
 func (o CosShipperCompressPtrOutput) Format() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CosShipperCompress) *string {
 		if v == nil {
@@ -1979,9 +2183,12 @@ func (o CosShipperCompressPtrOutput) Format() pulumi.StringPtrOutput {
 }
 
 type CosShipperContent struct {
-	Csv    *CosShipperContentCsv  `pulumi:"csv"`
-	Format string                 `pulumi:"format"`
-	Json   *CosShipperContentJson `pulumi:"json"`
+	// CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.
+	Csv *CosShipperContentCsv `pulumi:"csv"`
+	// Content format. Valid values: json, csv.
+	Format string `pulumi:"format"`
+	// JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.
+	Json *CosShipperContentJson `pulumi:"json"`
 }
 
 // CosShipperContentInput is an input type that accepts CosShipperContentArgs and CosShipperContentOutput values.
@@ -1996,9 +2203,12 @@ type CosShipperContentInput interface {
 }
 
 type CosShipperContentArgs struct {
-	Csv    CosShipperContentCsvPtrInput  `pulumi:"csv"`
-	Format pulumi.StringInput            `pulumi:"format"`
-	Json   CosShipperContentJsonPtrInput `pulumi:"json"`
+	// CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.
+	Csv CosShipperContentCsvPtrInput `pulumi:"csv"`
+	// Content format. Valid values: json, csv.
+	Format pulumi.StringInput `pulumi:"format"`
+	// JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.
+	Json CosShipperContentJsonPtrInput `pulumi:"json"`
 }
 
 func (CosShipperContentArgs) ElementType() reflect.Type {
@@ -2078,14 +2288,17 @@ func (o CosShipperContentOutput) ToCosShipperContentPtrOutputWithContext(ctx con
 	}).(CosShipperContentPtrOutput)
 }
 
+// CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.
 func (o CosShipperContentOutput) Csv() CosShipperContentCsvPtrOutput {
 	return o.ApplyT(func(v CosShipperContent) *CosShipperContentCsv { return v.Csv }).(CosShipperContentCsvPtrOutput)
 }
 
+// Content format. Valid values: json, csv.
 func (o CosShipperContentOutput) Format() pulumi.StringOutput {
 	return o.ApplyT(func(v CosShipperContent) string { return v.Format }).(pulumi.StringOutput)
 }
 
+// JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.
 func (o CosShipperContentOutput) Json() CosShipperContentJsonPtrOutput {
 	return o.ApplyT(func(v CosShipperContent) *CosShipperContentJson { return v.Json }).(CosShipperContentJsonPtrOutput)
 }
@@ -2114,6 +2327,7 @@ func (o CosShipperContentPtrOutput) Elem() CosShipperContentOutput {
 	}).(CosShipperContentOutput)
 }
 
+// CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.
 func (o CosShipperContentPtrOutput) Csv() CosShipperContentCsvPtrOutput {
 	return o.ApplyT(func(v *CosShipperContent) *CosShipperContentCsv {
 		if v == nil {
@@ -2123,6 +2337,7 @@ func (o CosShipperContentPtrOutput) Csv() CosShipperContentCsvPtrOutput {
 	}).(CosShipperContentCsvPtrOutput)
 }
 
+// Content format. Valid values: json, csv.
 func (o CosShipperContentPtrOutput) Format() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CosShipperContent) *string {
 		if v == nil {
@@ -2132,6 +2347,7 @@ func (o CosShipperContentPtrOutput) Format() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.
 func (o CosShipperContentPtrOutput) Json() CosShipperContentJsonPtrOutput {
 	return o.ApplyT(func(v *CosShipperContent) *CosShipperContentJson {
 		if v == nil {
@@ -2142,11 +2358,16 @@ func (o CosShipperContentPtrOutput) Json() CosShipperContentJsonPtrOutput {
 }
 
 type CosShipperContentCsv struct {
-	Delimiter        string   `pulumi:"delimiter"`
-	EscapeChar       string   `pulumi:"escapeChar"`
-	Keys             []string `pulumi:"keys"`
-	NonExistingField string   `pulumi:"nonExistingField"`
-	PrintKey         bool     `pulumi:"printKey"`
+	// Field delimiter.
+	Delimiter string `pulumi:"delimiter"`
+	// Field delimiter.
+	EscapeChar string `pulumi:"escapeChar"`
+	// Names of keys.Note: this field may return null, indicating that no valid values can be obtained.
+	Keys []string `pulumi:"keys"`
+	// Content used to populate non-existing fields.
+	NonExistingField string `pulumi:"nonExistingField"`
+	// Whether to print key on the first row of the CSV file.
+	PrintKey bool `pulumi:"printKey"`
 }
 
 // CosShipperContentCsvInput is an input type that accepts CosShipperContentCsvArgs and CosShipperContentCsvOutput values.
@@ -2161,11 +2382,16 @@ type CosShipperContentCsvInput interface {
 }
 
 type CosShipperContentCsvArgs struct {
-	Delimiter        pulumi.StringInput      `pulumi:"delimiter"`
-	EscapeChar       pulumi.StringInput      `pulumi:"escapeChar"`
-	Keys             pulumi.StringArrayInput `pulumi:"keys"`
-	NonExistingField pulumi.StringInput      `pulumi:"nonExistingField"`
-	PrintKey         pulumi.BoolInput        `pulumi:"printKey"`
+	// Field delimiter.
+	Delimiter pulumi.StringInput `pulumi:"delimiter"`
+	// Field delimiter.
+	EscapeChar pulumi.StringInput `pulumi:"escapeChar"`
+	// Names of keys.Note: this field may return null, indicating that no valid values can be obtained.
+	Keys pulumi.StringArrayInput `pulumi:"keys"`
+	// Content used to populate non-existing fields.
+	NonExistingField pulumi.StringInput `pulumi:"nonExistingField"`
+	// Whether to print key on the first row of the CSV file.
+	PrintKey pulumi.BoolInput `pulumi:"printKey"`
 }
 
 func (CosShipperContentCsvArgs) ElementType() reflect.Type {
@@ -2245,22 +2471,27 @@ func (o CosShipperContentCsvOutput) ToCosShipperContentCsvPtrOutputWithContext(c
 	}).(CosShipperContentCsvPtrOutput)
 }
 
+// Field delimiter.
 func (o CosShipperContentCsvOutput) Delimiter() pulumi.StringOutput {
 	return o.ApplyT(func(v CosShipperContentCsv) string { return v.Delimiter }).(pulumi.StringOutput)
 }
 
+// Field delimiter.
 func (o CosShipperContentCsvOutput) EscapeChar() pulumi.StringOutput {
 	return o.ApplyT(func(v CosShipperContentCsv) string { return v.EscapeChar }).(pulumi.StringOutput)
 }
 
+// Names of keys.Note: this field may return null, indicating that no valid values can be obtained.
 func (o CosShipperContentCsvOutput) Keys() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v CosShipperContentCsv) []string { return v.Keys }).(pulumi.StringArrayOutput)
 }
 
+// Content used to populate non-existing fields.
 func (o CosShipperContentCsvOutput) NonExistingField() pulumi.StringOutput {
 	return o.ApplyT(func(v CosShipperContentCsv) string { return v.NonExistingField }).(pulumi.StringOutput)
 }
 
+// Whether to print key on the first row of the CSV file.
 func (o CosShipperContentCsvOutput) PrintKey() pulumi.BoolOutput {
 	return o.ApplyT(func(v CosShipperContentCsv) bool { return v.PrintKey }).(pulumi.BoolOutput)
 }
@@ -2289,6 +2520,7 @@ func (o CosShipperContentCsvPtrOutput) Elem() CosShipperContentCsvOutput {
 	}).(CosShipperContentCsvOutput)
 }
 
+// Field delimiter.
 func (o CosShipperContentCsvPtrOutput) Delimiter() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CosShipperContentCsv) *string {
 		if v == nil {
@@ -2298,6 +2530,7 @@ func (o CosShipperContentCsvPtrOutput) Delimiter() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Field delimiter.
 func (o CosShipperContentCsvPtrOutput) EscapeChar() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CosShipperContentCsv) *string {
 		if v == nil {
@@ -2307,6 +2540,7 @@ func (o CosShipperContentCsvPtrOutput) EscapeChar() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Names of keys.Note: this field may return null, indicating that no valid values can be obtained.
 func (o CosShipperContentCsvPtrOutput) Keys() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *CosShipperContentCsv) []string {
 		if v == nil {
@@ -2316,6 +2550,7 @@ func (o CosShipperContentCsvPtrOutput) Keys() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
+// Content used to populate non-existing fields.
 func (o CosShipperContentCsvPtrOutput) NonExistingField() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CosShipperContentCsv) *string {
 		if v == nil {
@@ -2325,6 +2560,7 @@ func (o CosShipperContentCsvPtrOutput) NonExistingField() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to print key on the first row of the CSV file.
 func (o CosShipperContentCsvPtrOutput) PrintKey() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CosShipperContentCsv) *bool {
 		if v == nil {
@@ -2335,7 +2571,10 @@ func (o CosShipperContentCsvPtrOutput) PrintKey() pulumi.BoolPtrOutput {
 }
 
 type CosShipperContentJson struct {
-	EnableTag  bool     `pulumi:"enableTag"`
+	// Enablement flag.
+	EnableTag bool `pulumi:"enableTag"`
+	// Metadata information list
+	// Note: this field may return null, indicating that no valid values can be obtained..
 	MetaFields []string `pulumi:"metaFields"`
 }
 
@@ -2351,7 +2590,10 @@ type CosShipperContentJsonInput interface {
 }
 
 type CosShipperContentJsonArgs struct {
-	EnableTag  pulumi.BoolInput        `pulumi:"enableTag"`
+	// Enablement flag.
+	EnableTag pulumi.BoolInput `pulumi:"enableTag"`
+	// Metadata information list
+	// Note: this field may return null, indicating that no valid values can be obtained..
 	MetaFields pulumi.StringArrayInput `pulumi:"metaFields"`
 }
 
@@ -2432,10 +2674,13 @@ func (o CosShipperContentJsonOutput) ToCosShipperContentJsonPtrOutputWithContext
 	}).(CosShipperContentJsonPtrOutput)
 }
 
+// Enablement flag.
 func (o CosShipperContentJsonOutput) EnableTag() pulumi.BoolOutput {
 	return o.ApplyT(func(v CosShipperContentJson) bool { return v.EnableTag }).(pulumi.BoolOutput)
 }
 
+// Metadata information list
+// Note: this field may return null, indicating that no valid values can be obtained..
 func (o CosShipperContentJsonOutput) MetaFields() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v CosShipperContentJson) []string { return v.MetaFields }).(pulumi.StringArrayOutput)
 }
@@ -2464,6 +2709,7 @@ func (o CosShipperContentJsonPtrOutput) Elem() CosShipperContentJsonOutput {
 	}).(CosShipperContentJsonOutput)
 }
 
+// Enablement flag.
 func (o CosShipperContentJsonPtrOutput) EnableTag() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CosShipperContentJson) *bool {
 		if v == nil {
@@ -2473,6 +2719,8 @@ func (o CosShipperContentJsonPtrOutput) EnableTag() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Metadata information list
+// Note: this field may return null, indicating that no valid values can be obtained..
 func (o CosShipperContentJsonPtrOutput) MetaFields() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *CosShipperContentJson) []string {
 		if v == nil {
@@ -2483,8 +2731,11 @@ func (o CosShipperContentJsonPtrOutput) MetaFields() pulumi.StringArrayOutput {
 }
 
 type CosShipperFilterRule struct {
-	Key   string `pulumi:"key"`
+	// Filter rule key.
+	Key string `pulumi:"key"`
+	// Filter rule.
 	Regex string `pulumi:"regex"`
+	// Filter rule value.
 	Value string `pulumi:"value"`
 }
 
@@ -2500,8 +2751,11 @@ type CosShipperFilterRuleInput interface {
 }
 
 type CosShipperFilterRuleArgs struct {
-	Key   pulumi.StringInput `pulumi:"key"`
+	// Filter rule key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Filter rule.
 	Regex pulumi.StringInput `pulumi:"regex"`
+	// Filter rule value.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
@@ -2556,14 +2810,17 @@ func (o CosShipperFilterRuleOutput) ToCosShipperFilterRuleOutputWithContext(ctx 
 	return o
 }
 
+// Filter rule key.
 func (o CosShipperFilterRuleOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v CosShipperFilterRule) string { return v.Key }).(pulumi.StringOutput)
 }
 
+// Filter rule.
 func (o CosShipperFilterRuleOutput) Regex() pulumi.StringOutput {
 	return o.ApplyT(func(v CosShipperFilterRule) string { return v.Regex }).(pulumi.StringOutput)
 }
 
+// Filter rule value.
 func (o CosShipperFilterRuleOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v CosShipperFilterRule) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -2588,8 +2845,1272 @@ func (o CosShipperFilterRuleArrayOutput) Index(i pulumi.IntInput) CosShipperFilt
 	}).(CosShipperFilterRuleOutput)
 }
 
+type IndexRule struct {
+	// Full-Text index configuration.
+	FullText *IndexRuleFullText `pulumi:"fullText"`
+	// Key-Value index configuration.
+	KeyValue *IndexRuleKeyValue `pulumi:"keyValue"`
+	// Metafield index configuration.
+	Tag *IndexRuleTag `pulumi:"tag"`
+}
+
+// IndexRuleInput is an input type that accepts IndexRuleArgs and IndexRuleOutput values.
+// You can construct a concrete instance of `IndexRuleInput` via:
+//
+//          IndexRuleArgs{...}
+type IndexRuleInput interface {
+	pulumi.Input
+
+	ToIndexRuleOutput() IndexRuleOutput
+	ToIndexRuleOutputWithContext(context.Context) IndexRuleOutput
+}
+
+type IndexRuleArgs struct {
+	// Full-Text index configuration.
+	FullText IndexRuleFullTextPtrInput `pulumi:"fullText"`
+	// Key-Value index configuration.
+	KeyValue IndexRuleKeyValuePtrInput `pulumi:"keyValue"`
+	// Metafield index configuration.
+	Tag IndexRuleTagPtrInput `pulumi:"tag"`
+}
+
+func (IndexRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRule)(nil)).Elem()
+}
+
+func (i IndexRuleArgs) ToIndexRuleOutput() IndexRuleOutput {
+	return i.ToIndexRuleOutputWithContext(context.Background())
+}
+
+func (i IndexRuleArgs) ToIndexRuleOutputWithContext(ctx context.Context) IndexRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleOutput)
+}
+
+func (i IndexRuleArgs) ToIndexRulePtrOutput() IndexRulePtrOutput {
+	return i.ToIndexRulePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleArgs) ToIndexRulePtrOutputWithContext(ctx context.Context) IndexRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleOutput).ToIndexRulePtrOutputWithContext(ctx)
+}
+
+// IndexRulePtrInput is an input type that accepts IndexRuleArgs, IndexRulePtr and IndexRulePtrOutput values.
+// You can construct a concrete instance of `IndexRulePtrInput` via:
+//
+//          IndexRuleArgs{...}
+//
+//  or:
+//
+//          nil
+type IndexRulePtrInput interface {
+	pulumi.Input
+
+	ToIndexRulePtrOutput() IndexRulePtrOutput
+	ToIndexRulePtrOutputWithContext(context.Context) IndexRulePtrOutput
+}
+
+type indexRulePtrType IndexRuleArgs
+
+func IndexRulePtr(v *IndexRuleArgs) IndexRulePtrInput {
+	return (*indexRulePtrType)(v)
+}
+
+func (*indexRulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRule)(nil)).Elem()
+}
+
+func (i *indexRulePtrType) ToIndexRulePtrOutput() IndexRulePtrOutput {
+	return i.ToIndexRulePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRulePtrType) ToIndexRulePtrOutputWithContext(ctx context.Context) IndexRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRulePtrOutput)
+}
+
+type IndexRuleOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRule)(nil)).Elem()
+}
+
+func (o IndexRuleOutput) ToIndexRuleOutput() IndexRuleOutput {
+	return o
+}
+
+func (o IndexRuleOutput) ToIndexRuleOutputWithContext(ctx context.Context) IndexRuleOutput {
+	return o
+}
+
+func (o IndexRuleOutput) ToIndexRulePtrOutput() IndexRulePtrOutput {
+	return o.ToIndexRulePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleOutput) ToIndexRulePtrOutputWithContext(ctx context.Context) IndexRulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRule) *IndexRule {
+		return &v
+	}).(IndexRulePtrOutput)
+}
+
+// Full-Text index configuration.
+func (o IndexRuleOutput) FullText() IndexRuleFullTextPtrOutput {
+	return o.ApplyT(func(v IndexRule) *IndexRuleFullText { return v.FullText }).(IndexRuleFullTextPtrOutput)
+}
+
+// Key-Value index configuration.
+func (o IndexRuleOutput) KeyValue() IndexRuleKeyValuePtrOutput {
+	return o.ApplyT(func(v IndexRule) *IndexRuleKeyValue { return v.KeyValue }).(IndexRuleKeyValuePtrOutput)
+}
+
+// Metafield index configuration.
+func (o IndexRuleOutput) Tag() IndexRuleTagPtrOutput {
+	return o.ApplyT(func(v IndexRule) *IndexRuleTag { return v.Tag }).(IndexRuleTagPtrOutput)
+}
+
+type IndexRulePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRule)(nil)).Elem()
+}
+
+func (o IndexRulePtrOutput) ToIndexRulePtrOutput() IndexRulePtrOutput {
+	return o
+}
+
+func (o IndexRulePtrOutput) ToIndexRulePtrOutputWithContext(ctx context.Context) IndexRulePtrOutput {
+	return o
+}
+
+func (o IndexRulePtrOutput) Elem() IndexRuleOutput {
+	return o.ApplyT(func(v *IndexRule) IndexRule {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRule
+		return ret
+	}).(IndexRuleOutput)
+}
+
+// Full-Text index configuration.
+func (o IndexRulePtrOutput) FullText() IndexRuleFullTextPtrOutput {
+	return o.ApplyT(func(v *IndexRule) *IndexRuleFullText {
+		if v == nil {
+			return nil
+		}
+		return v.FullText
+	}).(IndexRuleFullTextPtrOutput)
+}
+
+// Key-Value index configuration.
+func (o IndexRulePtrOutput) KeyValue() IndexRuleKeyValuePtrOutput {
+	return o.ApplyT(func(v *IndexRule) *IndexRuleKeyValue {
+		if v == nil {
+			return nil
+		}
+		return v.KeyValue
+	}).(IndexRuleKeyValuePtrOutput)
+}
+
+// Metafield index configuration.
+func (o IndexRulePtrOutput) Tag() IndexRuleTagPtrOutput {
+	return o.ApplyT(func(v *IndexRule) *IndexRuleTag {
+		if v == nil {
+			return nil
+		}
+		return v.Tag
+	}).(IndexRuleTagPtrOutput)
+}
+
+type IndexRuleFullText struct {
+	// Case sensitivity.
+	CaseSensitive bool `pulumi:"caseSensitive"`
+	// Whether Chinese characters are contained.
+	ContainZH bool `pulumi:"containZH"`
+	// Full-Text index delimiter. Each character in the string represents a delimiter.
+	Tokenizer string `pulumi:"tokenizer"`
+}
+
+// IndexRuleFullTextInput is an input type that accepts IndexRuleFullTextArgs and IndexRuleFullTextOutput values.
+// You can construct a concrete instance of `IndexRuleFullTextInput` via:
+//
+//          IndexRuleFullTextArgs{...}
+type IndexRuleFullTextInput interface {
+	pulumi.Input
+
+	ToIndexRuleFullTextOutput() IndexRuleFullTextOutput
+	ToIndexRuleFullTextOutputWithContext(context.Context) IndexRuleFullTextOutput
+}
+
+type IndexRuleFullTextArgs struct {
+	// Case sensitivity.
+	CaseSensitive pulumi.BoolInput `pulumi:"caseSensitive"`
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolInput `pulumi:"containZH"`
+	// Full-Text index delimiter. Each character in the string represents a delimiter.
+	Tokenizer pulumi.StringInput `pulumi:"tokenizer"`
+}
+
+func (IndexRuleFullTextArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleFullText)(nil)).Elem()
+}
+
+func (i IndexRuleFullTextArgs) ToIndexRuleFullTextOutput() IndexRuleFullTextOutput {
+	return i.ToIndexRuleFullTextOutputWithContext(context.Background())
+}
+
+func (i IndexRuleFullTextArgs) ToIndexRuleFullTextOutputWithContext(ctx context.Context) IndexRuleFullTextOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleFullTextOutput)
+}
+
+func (i IndexRuleFullTextArgs) ToIndexRuleFullTextPtrOutput() IndexRuleFullTextPtrOutput {
+	return i.ToIndexRuleFullTextPtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleFullTextArgs) ToIndexRuleFullTextPtrOutputWithContext(ctx context.Context) IndexRuleFullTextPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleFullTextOutput).ToIndexRuleFullTextPtrOutputWithContext(ctx)
+}
+
+// IndexRuleFullTextPtrInput is an input type that accepts IndexRuleFullTextArgs, IndexRuleFullTextPtr and IndexRuleFullTextPtrOutput values.
+// You can construct a concrete instance of `IndexRuleFullTextPtrInput` via:
+//
+//          IndexRuleFullTextArgs{...}
+//
+//  or:
+//
+//          nil
+type IndexRuleFullTextPtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleFullTextPtrOutput() IndexRuleFullTextPtrOutput
+	ToIndexRuleFullTextPtrOutputWithContext(context.Context) IndexRuleFullTextPtrOutput
+}
+
+type indexRuleFullTextPtrType IndexRuleFullTextArgs
+
+func IndexRuleFullTextPtr(v *IndexRuleFullTextArgs) IndexRuleFullTextPtrInput {
+	return (*indexRuleFullTextPtrType)(v)
+}
+
+func (*indexRuleFullTextPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleFullText)(nil)).Elem()
+}
+
+func (i *indexRuleFullTextPtrType) ToIndexRuleFullTextPtrOutput() IndexRuleFullTextPtrOutput {
+	return i.ToIndexRuleFullTextPtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleFullTextPtrType) ToIndexRuleFullTextPtrOutputWithContext(ctx context.Context) IndexRuleFullTextPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleFullTextPtrOutput)
+}
+
+type IndexRuleFullTextOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleFullTextOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleFullText)(nil)).Elem()
+}
+
+func (o IndexRuleFullTextOutput) ToIndexRuleFullTextOutput() IndexRuleFullTextOutput {
+	return o
+}
+
+func (o IndexRuleFullTextOutput) ToIndexRuleFullTextOutputWithContext(ctx context.Context) IndexRuleFullTextOutput {
+	return o
+}
+
+func (o IndexRuleFullTextOutput) ToIndexRuleFullTextPtrOutput() IndexRuleFullTextPtrOutput {
+	return o.ToIndexRuleFullTextPtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleFullTextOutput) ToIndexRuleFullTextPtrOutputWithContext(ctx context.Context) IndexRuleFullTextPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleFullText) *IndexRuleFullText {
+		return &v
+	}).(IndexRuleFullTextPtrOutput)
+}
+
+// Case sensitivity.
+func (o IndexRuleFullTextOutput) CaseSensitive() pulumi.BoolOutput {
+	return o.ApplyT(func(v IndexRuleFullText) bool { return v.CaseSensitive }).(pulumi.BoolOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleFullTextOutput) ContainZH() pulumi.BoolOutput {
+	return o.ApplyT(func(v IndexRuleFullText) bool { return v.ContainZH }).(pulumi.BoolOutput)
+}
+
+// Full-Text index delimiter. Each character in the string represents a delimiter.
+func (o IndexRuleFullTextOutput) Tokenizer() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleFullText) string { return v.Tokenizer }).(pulumi.StringOutput)
+}
+
+type IndexRuleFullTextPtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleFullTextPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleFullText)(nil)).Elem()
+}
+
+func (o IndexRuleFullTextPtrOutput) ToIndexRuleFullTextPtrOutput() IndexRuleFullTextPtrOutput {
+	return o
+}
+
+func (o IndexRuleFullTextPtrOutput) ToIndexRuleFullTextPtrOutputWithContext(ctx context.Context) IndexRuleFullTextPtrOutput {
+	return o
+}
+
+func (o IndexRuleFullTextPtrOutput) Elem() IndexRuleFullTextOutput {
+	return o.ApplyT(func(v *IndexRuleFullText) IndexRuleFullText {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleFullText
+		return ret
+	}).(IndexRuleFullTextOutput)
+}
+
+// Case sensitivity.
+func (o IndexRuleFullTextPtrOutput) CaseSensitive() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleFullText) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.CaseSensitive
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleFullTextPtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleFullText) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Full-Text index delimiter. Each character in the string represents a delimiter.
+func (o IndexRuleFullTextPtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleFullText) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleKeyValue struct {
+	// Case sensitivity.
+	CaseSensitive bool `pulumi:"caseSensitive"`
+	// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+	KeyValues []IndexRuleKeyValueKeyValue `pulumi:"keyValues"`
+}
+
+// IndexRuleKeyValueInput is an input type that accepts IndexRuleKeyValueArgs and IndexRuleKeyValueOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueInput` via:
+//
+//          IndexRuleKeyValueArgs{...}
+type IndexRuleKeyValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueOutput() IndexRuleKeyValueOutput
+	ToIndexRuleKeyValueOutputWithContext(context.Context) IndexRuleKeyValueOutput
+}
+
+type IndexRuleKeyValueArgs struct {
+	// Case sensitivity.
+	CaseSensitive pulumi.BoolInput `pulumi:"caseSensitive"`
+	// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+	KeyValues IndexRuleKeyValueKeyValueArrayInput `pulumi:"keyValues"`
+}
+
+func (IndexRuleKeyValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueArgs) ToIndexRuleKeyValueOutput() IndexRuleKeyValueOutput {
+	return i.ToIndexRuleKeyValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueArgs) ToIndexRuleKeyValueOutputWithContext(ctx context.Context) IndexRuleKeyValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueOutput)
+}
+
+func (i IndexRuleKeyValueArgs) ToIndexRuleKeyValuePtrOutput() IndexRuleKeyValuePtrOutput {
+	return i.ToIndexRuleKeyValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueArgs) ToIndexRuleKeyValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueOutput).ToIndexRuleKeyValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleKeyValuePtrInput is an input type that accepts IndexRuleKeyValueArgs, IndexRuleKeyValuePtr and IndexRuleKeyValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValuePtrInput` via:
+//
+//          IndexRuleKeyValueArgs{...}
+//
+//  or:
+//
+//          nil
+type IndexRuleKeyValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValuePtrOutput() IndexRuleKeyValuePtrOutput
+	ToIndexRuleKeyValuePtrOutputWithContext(context.Context) IndexRuleKeyValuePtrOutput
+}
+
+type indexRuleKeyValuePtrType IndexRuleKeyValueArgs
+
+func IndexRuleKeyValuePtr(v *IndexRuleKeyValueArgs) IndexRuleKeyValuePtrInput {
+	return (*indexRuleKeyValuePtrType)(v)
+}
+
+func (*indexRuleKeyValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValue)(nil)).Elem()
+}
+
+func (i *indexRuleKeyValuePtrType) ToIndexRuleKeyValuePtrOutput() IndexRuleKeyValuePtrOutput {
+	return i.ToIndexRuleKeyValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleKeyValuePtrType) ToIndexRuleKeyValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValuePtrOutput)
+}
+
+type IndexRuleKeyValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueOutput) ToIndexRuleKeyValueOutput() IndexRuleKeyValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueOutput) ToIndexRuleKeyValueOutputWithContext(ctx context.Context) IndexRuleKeyValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueOutput) ToIndexRuleKeyValuePtrOutput() IndexRuleKeyValuePtrOutput {
+	return o.ToIndexRuleKeyValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleKeyValueOutput) ToIndexRuleKeyValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleKeyValue) *IndexRuleKeyValue {
+		return &v
+	}).(IndexRuleKeyValuePtrOutput)
+}
+
+// Case sensitivity.
+func (o IndexRuleKeyValueOutput) CaseSensitive() pulumi.BoolOutput {
+	return o.ApplyT(func(v IndexRuleKeyValue) bool { return v.CaseSensitive }).(pulumi.BoolOutput)
+}
+
+// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+func (o IndexRuleKeyValueOutput) KeyValues() IndexRuleKeyValueKeyValueArrayOutput {
+	return o.ApplyT(func(v IndexRuleKeyValue) []IndexRuleKeyValueKeyValue { return v.KeyValues }).(IndexRuleKeyValueKeyValueArrayOutput)
+}
+
+type IndexRuleKeyValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValuePtrOutput) ToIndexRuleKeyValuePtrOutput() IndexRuleKeyValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValuePtrOutput) ToIndexRuleKeyValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValuePtrOutput) Elem() IndexRuleKeyValueOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValue) IndexRuleKeyValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleKeyValue
+		return ret
+	}).(IndexRuleKeyValueOutput)
+}
+
+// Case sensitivity.
+func (o IndexRuleKeyValuePtrOutput) CaseSensitive() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.CaseSensitive
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+func (o IndexRuleKeyValuePtrOutput) KeyValues() IndexRuleKeyValueKeyValueArrayOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValue) []IndexRuleKeyValueKeyValue {
+		if v == nil {
+			return nil
+		}
+		return v.KeyValues
+	}).(IndexRuleKeyValueKeyValueArrayOutput)
+}
+
+type IndexRuleKeyValueKeyValue struct {
+	// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+	Key string `pulumi:"key"`
+	// Field index description information.
+	Value *IndexRuleKeyValueKeyValueValue `pulumi:"value"`
+}
+
+// IndexRuleKeyValueKeyValueInput is an input type that accepts IndexRuleKeyValueKeyValueArgs and IndexRuleKeyValueKeyValueOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueInput` via:
+//
+//          IndexRuleKeyValueKeyValueArgs{...}
+type IndexRuleKeyValueKeyValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueOutput() IndexRuleKeyValueKeyValueOutput
+	ToIndexRuleKeyValueKeyValueOutputWithContext(context.Context) IndexRuleKeyValueKeyValueOutput
+}
+
+type IndexRuleKeyValueKeyValueArgs struct {
+	// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+	Key pulumi.StringInput `pulumi:"key"`
+	// Field index description information.
+	Value IndexRuleKeyValueKeyValueValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleKeyValueKeyValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueArgs) ToIndexRuleKeyValueKeyValueOutput() IndexRuleKeyValueKeyValueOutput {
+	return i.ToIndexRuleKeyValueKeyValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueArgs) ToIndexRuleKeyValueKeyValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueOutput)
+}
+
+// IndexRuleKeyValueKeyValueArrayInput is an input type that accepts IndexRuleKeyValueKeyValueArray and IndexRuleKeyValueKeyValueArrayOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueArrayInput` via:
+//
+//          IndexRuleKeyValueKeyValueArray{ IndexRuleKeyValueKeyValueArgs{...} }
+type IndexRuleKeyValueKeyValueArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueArrayOutput() IndexRuleKeyValueKeyValueArrayOutput
+	ToIndexRuleKeyValueKeyValueArrayOutputWithContext(context.Context) IndexRuleKeyValueKeyValueArrayOutput
+}
+
+type IndexRuleKeyValueKeyValueArray []IndexRuleKeyValueKeyValueInput
+
+func (IndexRuleKeyValueKeyValueArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueArray) ToIndexRuleKeyValueKeyValueArrayOutput() IndexRuleKeyValueKeyValueArrayOutput {
+	return i.ToIndexRuleKeyValueKeyValueArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueArray) ToIndexRuleKeyValueKeyValueArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueArrayOutput)
+}
+
+type IndexRuleKeyValueKeyValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueOutput) ToIndexRuleKeyValueKeyValueOutput() IndexRuleKeyValueKeyValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueOutput) ToIndexRuleKeyValueKeyValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueOutput {
+	return o
+}
+
+// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+func (o IndexRuleKeyValueKeyValueOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValue) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Field index description information.
+func (o IndexRuleKeyValueKeyValueOutput) Value() IndexRuleKeyValueKeyValueValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValue) *IndexRuleKeyValueKeyValueValue { return v.Value }).(IndexRuleKeyValueKeyValueValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueArrayOutput) ToIndexRuleKeyValueKeyValueArrayOutput() IndexRuleKeyValueKeyValueArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueArrayOutput) ToIndexRuleKeyValueKeyValueArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueArrayOutput) Index(i pulumi.IntInput) IndexRuleKeyValueKeyValueOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleKeyValueKeyValue {
+		return vs[0].([]IndexRuleKeyValueKeyValue)[vs[1].(int)]
+	}).(IndexRuleKeyValueKeyValueOutput)
+}
+
+type IndexRuleKeyValueKeyValueValue struct {
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleKeyValueKeyValueValueInput is an input type that accepts IndexRuleKeyValueKeyValueValueArgs and IndexRuleKeyValueKeyValueValueOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueInput` via:
+//
+//          IndexRuleKeyValueKeyValueValueArgs{...}
+type IndexRuleKeyValueKeyValueValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueOutput() IndexRuleKeyValueKeyValueValueOutput
+	ToIndexRuleKeyValueKeyValueValueOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueOutput
+}
+
+type IndexRuleKeyValueKeyValueValueArgs struct {
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleKeyValueKeyValueValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueArgs) ToIndexRuleKeyValueKeyValueValueOutput() IndexRuleKeyValueKeyValueValueOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueArgs) ToIndexRuleKeyValueKeyValueValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueOutput)
+}
+
+func (i IndexRuleKeyValueKeyValueValueArgs) ToIndexRuleKeyValueKeyValueValuePtrOutput() IndexRuleKeyValueKeyValueValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueArgs) ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueOutput).ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleKeyValueKeyValueValuePtrInput is an input type that accepts IndexRuleKeyValueKeyValueValueArgs, IndexRuleKeyValueKeyValueValuePtr and IndexRuleKeyValueKeyValueValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValuePtrInput` via:
+//
+//          IndexRuleKeyValueKeyValueValueArgs{...}
+//
+//  or:
+//
+//          nil
+type IndexRuleKeyValueKeyValueValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValuePtrOutput() IndexRuleKeyValueKeyValueValuePtrOutput
+	ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValuePtrOutput
+}
+
+type indexRuleKeyValueKeyValueValuePtrType IndexRuleKeyValueKeyValueValueArgs
+
+func IndexRuleKeyValueKeyValueValuePtr(v *IndexRuleKeyValueKeyValueValueArgs) IndexRuleKeyValueKeyValueValuePtrInput {
+	return (*indexRuleKeyValueKeyValueValuePtrType)(v)
+}
+
+func (*indexRuleKeyValueKeyValueValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValue)(nil)).Elem()
+}
+
+func (i *indexRuleKeyValueKeyValueValuePtrType) ToIndexRuleKeyValueKeyValueValuePtrOutput() IndexRuleKeyValueKeyValueValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleKeyValueKeyValueValuePtrType) ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueOutput) ToIndexRuleKeyValueKeyValueValueOutput() IndexRuleKeyValueKeyValueValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueOutput) ToIndexRuleKeyValueKeyValueValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueOutput) ToIndexRuleKeyValueKeyValueValuePtrOutput() IndexRuleKeyValueKeyValueValuePtrOutput {
+	return o.ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleKeyValueKeyValueValueOutput) ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleKeyValueKeyValueValue) *IndexRuleKeyValueKeyValueValue {
+		return &v
+	}).(IndexRuleKeyValueKeyValueValuePtrOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValue) *bool { return v.ContainZH }).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValue) *bool { return v.SqlFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValue) *string { return v.Tokenizer }).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type IndexRuleKeyValueKeyValueValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) ToIndexRuleKeyValueKeyValueValuePtrOutput() IndexRuleKeyValueKeyValueValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) ToIndexRuleKeyValueKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) Elem() IndexRuleKeyValueKeyValueValueOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) IndexRuleKeyValueKeyValueValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleKeyValueKeyValueValue
+		return ret
+	}).(IndexRuleKeyValueKeyValueValueOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleTag struct {
+	// Case sensitivity.
+	CaseSensitive bool `pulumi:"caseSensitive"`
+	// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+	KeyValues []IndexRuleTagKeyValue `pulumi:"keyValues"`
+}
+
+// IndexRuleTagInput is an input type that accepts IndexRuleTagArgs and IndexRuleTagOutput values.
+// You can construct a concrete instance of `IndexRuleTagInput` via:
+//
+//          IndexRuleTagArgs{...}
+type IndexRuleTagInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagOutput() IndexRuleTagOutput
+	ToIndexRuleTagOutputWithContext(context.Context) IndexRuleTagOutput
+}
+
+type IndexRuleTagArgs struct {
+	// Case sensitivity.
+	CaseSensitive pulumi.BoolInput `pulumi:"caseSensitive"`
+	// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+	KeyValues IndexRuleTagKeyValueArrayInput `pulumi:"keyValues"`
+}
+
+func (IndexRuleTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTag)(nil)).Elem()
+}
+
+func (i IndexRuleTagArgs) ToIndexRuleTagOutput() IndexRuleTagOutput {
+	return i.ToIndexRuleTagOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagArgs) ToIndexRuleTagOutputWithContext(ctx context.Context) IndexRuleTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagOutput)
+}
+
+func (i IndexRuleTagArgs) ToIndexRuleTagPtrOutput() IndexRuleTagPtrOutput {
+	return i.ToIndexRuleTagPtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagArgs) ToIndexRuleTagPtrOutputWithContext(ctx context.Context) IndexRuleTagPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagOutput).ToIndexRuleTagPtrOutputWithContext(ctx)
+}
+
+// IndexRuleTagPtrInput is an input type that accepts IndexRuleTagArgs, IndexRuleTagPtr and IndexRuleTagPtrOutput values.
+// You can construct a concrete instance of `IndexRuleTagPtrInput` via:
+//
+//          IndexRuleTagArgs{...}
+//
+//  or:
+//
+//          nil
+type IndexRuleTagPtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagPtrOutput() IndexRuleTagPtrOutput
+	ToIndexRuleTagPtrOutputWithContext(context.Context) IndexRuleTagPtrOutput
+}
+
+type indexRuleTagPtrType IndexRuleTagArgs
+
+func IndexRuleTagPtr(v *IndexRuleTagArgs) IndexRuleTagPtrInput {
+	return (*indexRuleTagPtrType)(v)
+}
+
+func (*indexRuleTagPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTag)(nil)).Elem()
+}
+
+func (i *indexRuleTagPtrType) ToIndexRuleTagPtrOutput() IndexRuleTagPtrOutput {
+	return i.ToIndexRuleTagPtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleTagPtrType) ToIndexRuleTagPtrOutputWithContext(ctx context.Context) IndexRuleTagPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagPtrOutput)
+}
+
+type IndexRuleTagOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTag)(nil)).Elem()
+}
+
+func (o IndexRuleTagOutput) ToIndexRuleTagOutput() IndexRuleTagOutput {
+	return o
+}
+
+func (o IndexRuleTagOutput) ToIndexRuleTagOutputWithContext(ctx context.Context) IndexRuleTagOutput {
+	return o
+}
+
+func (o IndexRuleTagOutput) ToIndexRuleTagPtrOutput() IndexRuleTagPtrOutput {
+	return o.ToIndexRuleTagPtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleTagOutput) ToIndexRuleTagPtrOutputWithContext(ctx context.Context) IndexRuleTagPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleTag) *IndexRuleTag {
+		return &v
+	}).(IndexRuleTagPtrOutput)
+}
+
+// Case sensitivity.
+func (o IndexRuleTagOutput) CaseSensitive() pulumi.BoolOutput {
+	return o.ApplyT(func(v IndexRuleTag) bool { return v.CaseSensitive }).(pulumi.BoolOutput)
+}
+
+// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+func (o IndexRuleTagOutput) KeyValues() IndexRuleTagKeyValueArrayOutput {
+	return o.ApplyT(func(v IndexRuleTag) []IndexRuleTagKeyValue { return v.KeyValues }).(IndexRuleTagKeyValueArrayOutput)
+}
+
+type IndexRuleTagPtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTag)(nil)).Elem()
+}
+
+func (o IndexRuleTagPtrOutput) ToIndexRuleTagPtrOutput() IndexRuleTagPtrOutput {
+	return o
+}
+
+func (o IndexRuleTagPtrOutput) ToIndexRuleTagPtrOutputWithContext(ctx context.Context) IndexRuleTagPtrOutput {
+	return o
+}
+
+func (o IndexRuleTagPtrOutput) Elem() IndexRuleTagOutput {
+	return o.ApplyT(func(v *IndexRuleTag) IndexRuleTag {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleTag
+		return ret
+	}).(IndexRuleTagOutput)
+}
+
+// Case sensitivity.
+func (o IndexRuleTagPtrOutput) CaseSensitive() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTag) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.CaseSensitive
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+func (o IndexRuleTagPtrOutput) KeyValues() IndexRuleTagKeyValueArrayOutput {
+	return o.ApplyT(func(v *IndexRuleTag) []IndexRuleTagKeyValue {
+		if v == nil {
+			return nil
+		}
+		return v.KeyValues
+	}).(IndexRuleTagKeyValueArrayOutput)
+}
+
+type IndexRuleTagKeyValue struct {
+	// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+	Key string `pulumi:"key"`
+	// Field index description information.
+	Value *IndexRuleTagKeyValueValue `pulumi:"value"`
+}
+
+// IndexRuleTagKeyValueInput is an input type that accepts IndexRuleTagKeyValueArgs and IndexRuleTagKeyValueOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueInput` via:
+//
+//          IndexRuleTagKeyValueArgs{...}
+type IndexRuleTagKeyValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueOutput() IndexRuleTagKeyValueOutput
+	ToIndexRuleTagKeyValueOutputWithContext(context.Context) IndexRuleTagKeyValueOutput
+}
+
+type IndexRuleTagKeyValueArgs struct {
+	// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+	Key pulumi.StringInput `pulumi:"key"`
+	// Field index description information.
+	Value IndexRuleTagKeyValueValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleTagKeyValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValue)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueArgs) ToIndexRuleTagKeyValueOutput() IndexRuleTagKeyValueOutput {
+	return i.ToIndexRuleTagKeyValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueArgs) ToIndexRuleTagKeyValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueOutput)
+}
+
+// IndexRuleTagKeyValueArrayInput is an input type that accepts IndexRuleTagKeyValueArray and IndexRuleTagKeyValueArrayOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueArrayInput` via:
+//
+//          IndexRuleTagKeyValueArray{ IndexRuleTagKeyValueArgs{...} }
+type IndexRuleTagKeyValueArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueArrayOutput() IndexRuleTagKeyValueArrayOutput
+	ToIndexRuleTagKeyValueArrayOutputWithContext(context.Context) IndexRuleTagKeyValueArrayOutput
+}
+
+type IndexRuleTagKeyValueArray []IndexRuleTagKeyValueInput
+
+func (IndexRuleTagKeyValueArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValue)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueArray) ToIndexRuleTagKeyValueArrayOutput() IndexRuleTagKeyValueArrayOutput {
+	return i.ToIndexRuleTagKeyValueArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueArray) ToIndexRuleTagKeyValueArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueArrayOutput)
+}
+
+type IndexRuleTagKeyValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueOutput) ToIndexRuleTagKeyValueOutput() IndexRuleTagKeyValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueOutput) ToIndexRuleTagKeyValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueOutput {
+	return o
+}
+
+// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
+func (o IndexRuleTagKeyValueOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValue) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Field index description information.
+func (o IndexRuleTagKeyValueOutput) Value() IndexRuleTagKeyValueValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValue) *IndexRuleTagKeyValueValue { return v.Value }).(IndexRuleTagKeyValueValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueArrayOutput) ToIndexRuleTagKeyValueArrayOutput() IndexRuleTagKeyValueArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueArrayOutput) ToIndexRuleTagKeyValueArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueArrayOutput) Index(i pulumi.IntInput) IndexRuleTagKeyValueOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleTagKeyValue {
+		return vs[0].([]IndexRuleTagKeyValue)[vs[1].(int)]
+	}).(IndexRuleTagKeyValueOutput)
+}
+
+type IndexRuleTagKeyValueValue struct {
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleTagKeyValueValueInput is an input type that accepts IndexRuleTagKeyValueValueArgs and IndexRuleTagKeyValueValueOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueInput` via:
+//
+//          IndexRuleTagKeyValueValueArgs{...}
+type IndexRuleTagKeyValueValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueOutput() IndexRuleTagKeyValueValueOutput
+	ToIndexRuleTagKeyValueValueOutputWithContext(context.Context) IndexRuleTagKeyValueValueOutput
+}
+
+type IndexRuleTagKeyValueValueArgs struct {
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleTagKeyValueValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValue)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueArgs) ToIndexRuleTagKeyValueValueOutput() IndexRuleTagKeyValueValueOutput {
+	return i.ToIndexRuleTagKeyValueValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueArgs) ToIndexRuleTagKeyValueValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueOutput)
+}
+
+func (i IndexRuleTagKeyValueValueArgs) ToIndexRuleTagKeyValueValuePtrOutput() IndexRuleTagKeyValueValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueArgs) ToIndexRuleTagKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueOutput).ToIndexRuleTagKeyValueValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleTagKeyValueValuePtrInput is an input type that accepts IndexRuleTagKeyValueValueArgs, IndexRuleTagKeyValueValuePtr and IndexRuleTagKeyValueValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValuePtrInput` via:
+//
+//          IndexRuleTagKeyValueValueArgs{...}
+//
+//  or:
+//
+//          nil
+type IndexRuleTagKeyValueValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValuePtrOutput() IndexRuleTagKeyValueValuePtrOutput
+	ToIndexRuleTagKeyValueValuePtrOutputWithContext(context.Context) IndexRuleTagKeyValueValuePtrOutput
+}
+
+type indexRuleTagKeyValueValuePtrType IndexRuleTagKeyValueValueArgs
+
+func IndexRuleTagKeyValueValuePtr(v *IndexRuleTagKeyValueValueArgs) IndexRuleTagKeyValueValuePtrInput {
+	return (*indexRuleTagKeyValueValuePtrType)(v)
+}
+
+func (*indexRuleTagKeyValueValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValue)(nil)).Elem()
+}
+
+func (i *indexRuleTagKeyValueValuePtrType) ToIndexRuleTagKeyValueValuePtrOutput() IndexRuleTagKeyValueValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleTagKeyValueValuePtrType) ToIndexRuleTagKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueOutput) ToIndexRuleTagKeyValueValueOutput() IndexRuleTagKeyValueValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueOutput) ToIndexRuleTagKeyValueValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueOutput) ToIndexRuleTagKeyValueValuePtrOutput() IndexRuleTagKeyValueValuePtrOutput {
+	return o.ToIndexRuleTagKeyValueValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleTagKeyValueValueOutput) ToIndexRuleTagKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleTagKeyValueValue) *IndexRuleTagKeyValueValue {
+		return &v
+	}).(IndexRuleTagKeyValueValuePtrOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValue) *bool { return v.ContainZH }).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValue) *bool { return v.SqlFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValue) *string { return v.Tokenizer }).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type IndexRuleTagKeyValueValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValuePtrOutput) ToIndexRuleTagKeyValueValuePtrOutput() IndexRuleTagKeyValueValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValuePtrOutput) ToIndexRuleTagKeyValueValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValuePtrOutput) Elem() IndexRuleTagKeyValueValueOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) IndexRuleTagKeyValueValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleTagKeyValueValue
+		return ret
+	}).(IndexRuleTagKeyValueValueOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
 type MachineGroupMachineGroupType struct {
-	Type   string   `pulumi:"type"`
+	// Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
+	Type string `pulumi:"type"`
+	// Machine description list.
 	Values []string `pulumi:"values"`
 }
 
@@ -2605,7 +4126,9 @@ type MachineGroupMachineGroupTypeInput interface {
 }
 
 type MachineGroupMachineGroupTypeArgs struct {
-	Type   pulumi.StringInput      `pulumi:"type"`
+	// Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Machine description list.
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -2686,10 +4209,12 @@ func (o MachineGroupMachineGroupTypeOutput) ToMachineGroupMachineGroupTypePtrOut
 	}).(MachineGroupMachineGroupTypePtrOutput)
 }
 
+// Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
 func (o MachineGroupMachineGroupTypeOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v MachineGroupMachineGroupType) string { return v.Type }).(pulumi.StringOutput)
 }
 
+// Machine description list.
 func (o MachineGroupMachineGroupTypeOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v MachineGroupMachineGroupType) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
@@ -2718,6 +4243,7 @@ func (o MachineGroupMachineGroupTypePtrOutput) Elem() MachineGroupMachineGroupTy
 	}).(MachineGroupMachineGroupTypeOutput)
 }
 
+// Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
 func (o MachineGroupMachineGroupTypePtrOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *MachineGroupMachineGroupType) *string {
 		if v == nil {
@@ -2727,6 +4253,7 @@ func (o MachineGroupMachineGroupTypePtrOutput) Type() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Machine description list.
 func (o MachineGroupMachineGroupTypePtrOutput) Values() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *MachineGroupMachineGroupType) []string {
 		if v == nil {
@@ -2769,6 +4296,22 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperContentJsonPtrInput)(nil)).Elem(), CosShipperContentJsonArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperFilterRuleInput)(nil)).Elem(), CosShipperFilterRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperFilterRuleArrayInput)(nil)).Elem(), CosShipperFilterRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleInput)(nil)).Elem(), IndexRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRulePtrInput)(nil)).Elem(), IndexRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleFullTextInput)(nil)).Elem(), IndexRuleFullTextArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleFullTextPtrInput)(nil)).Elem(), IndexRuleFullTextArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueInput)(nil)).Elem(), IndexRuleKeyValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValuePtrInput)(nil)).Elem(), IndexRuleKeyValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueInput)(nil)).Elem(), IndexRuleKeyValueKeyValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueArrayInput)(nil)).Elem(), IndexRuleKeyValueKeyValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValuePtrInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagInput)(nil)).Elem(), IndexRuleTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagPtrInput)(nil)).Elem(), IndexRuleTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueInput)(nil)).Elem(), IndexRuleTagKeyValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueArrayInput)(nil)).Elem(), IndexRuleTagKeyValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueInput)(nil)).Elem(), IndexRuleTagKeyValueValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValuePtrInput)(nil)).Elem(), IndexRuleTagKeyValueValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypeInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypePtrInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
 	pulumi.RegisterOutputType(ConfigExcludePathOutput{})
@@ -2803,6 +4346,22 @@ func init() {
 	pulumi.RegisterOutputType(CosShipperContentJsonPtrOutput{})
 	pulumi.RegisterOutputType(CosShipperFilterRuleOutput{})
 	pulumi.RegisterOutputType(CosShipperFilterRuleArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleOutput{})
+	pulumi.RegisterOutputType(IndexRulePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleFullTextOutput{})
+	pulumi.RegisterOutputType(IndexRuleFullTextPtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagPtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValuePtrOutput{})
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypeOutput{})
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypePtrOutput{})
 }

@@ -11,6 +11,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use this resource to create API gateway service release.
+//
+// ## Import
+//
+// API gateway service release can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:ApiGateway/serviceRelease:ServiceRelease service service-jjt3fs3s#release#20201015121916d85fb161-eaec-4dda-a7e0-659aa5f401be
+// ```
 type ServiceRelease struct {
 	pulumi.CustomResourceState
 
@@ -41,7 +50,7 @@ func NewServiceRelease(ctx *pulumi.Context,
 		return nil, errors.New("invalid value for required argument 'ServiceId'")
 	}
 	var resource ServiceRelease
-	err := ctx.RegisterResource("tencentcloud:APIGateway/serviceRelease:ServiceRelease", name, args, &resource, opts...)
+	err := ctx.RegisterResource("tencentcloud:ApiGateway/serviceRelease:ServiceRelease", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +62,7 @@ func NewServiceRelease(ctx *pulumi.Context,
 func GetServiceRelease(ctx *pulumi.Context,
 	name string, id pulumi.IDInput, state *ServiceReleaseState, opts ...pulumi.ResourceOption) (*ServiceRelease, error) {
 	var resource ServiceRelease
-	err := ctx.ReadResource("tencentcloud:APIGateway/serviceRelease:ServiceRelease", name, id, state, &resource, opts...)
+	err := ctx.ReadResource("tencentcloud:ApiGateway/serviceRelease:ServiceRelease", name, id, state, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}

@@ -5,8 +5,8 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .get_template_groups import *
+from .get_templates import *
 from .template import *
 from .template_group import *
-from .template_groups import *
-from .templates import *
 from . import outputs

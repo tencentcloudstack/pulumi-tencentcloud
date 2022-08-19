@@ -129,7 +129,20 @@ class DdosPolicyAttachment(pulumi.CustomResource):
                  resource_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a DdosPolicyAttachment resource with the given unique name, props, and options.
+        Provides a resource to create a dayu DDoS policy attachment.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        dayu_ddos_policy_attachment_basic = tencentcloud.dayu.DdosPolicyAttachment("dayuDdosPolicyAttachmentBasic",
+            resource_type=tencentcloud_dayu_ddos_policy["test_policy"]["resource_type"],
+            resource_id="bgpip-00000294",
+            policy_id=tencentcloud_dayu_ddos_policy["test_policy"]["policy_id"])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] policy_id: ID of the policy.
@@ -143,7 +156,20 @@ class DdosPolicyAttachment(pulumi.CustomResource):
                  args: DdosPolicyAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a DdosPolicyAttachment resource with the given unique name, props, and options.
+        Provides a resource to create a dayu DDoS policy attachment.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        dayu_ddos_policy_attachment_basic = tencentcloud.dayu.DdosPolicyAttachment("dayuDdosPolicyAttachmentBasic",
+            resource_type=tencentcloud_dayu_ddos_policy["test_policy"]["resource_type"],
+            resource_id="bgpip-00000294",
+            policy_id=tencentcloud_dayu_ddos_policy["test_policy"]["policy_id"])
+        ```
+
         :param str resource_name: The name of the resource.
         :param DdosPolicyAttachmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

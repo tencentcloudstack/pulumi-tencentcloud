@@ -11,6 +11,41 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Provides a resource to manage address template group.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Address"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Address.NewTemplateGroup(ctx, "foo", &Address.TemplateGroupArgs{
+// 			TemplateIds: pulumi.StringArray{
+// 				pulumi.String("ipl-axaf24151"),
+// 				pulumi.String("ipl-axaf24152"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// Address template group can be imported using the id, e.g.
+//
+// ```sh
+//  $ pulumi import tencentcloud:Address/templateGroup:TemplateGroup foo ipmg-0np3u974
+// ```
 type TemplateGroup struct {
 	pulumi.CustomResourceState
 

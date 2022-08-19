@@ -213,7 +213,27 @@ class DomainInstance(pulumi.CustomResource):
                  status: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a DomainInstance resource with the given unique name, props, and options.
+        Provide a resource to create a DnsPod Domain instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.dnspod.DomainInstance("foo",
+            domain="hello.com",
+            remark="this is demo")
+        ```
+
+        ## Import
+
+        DnsPod Domain instance can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] domain: The Domain.
@@ -229,7 +249,27 @@ class DomainInstance(pulumi.CustomResource):
                  args: DomainInstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a DomainInstance resource with the given unique name, props, and options.
+        Provide a resource to create a DnsPod Domain instance.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.dnspod.DomainInstance("foo",
+            domain="hello.com",
+            remark="this is demo")
+        ```
+
+        ## Import
+
+        DnsPod Domain instance can be imported, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
+        ```
+
         :param str resource_name: The name of the resource.
         :param DomainInstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

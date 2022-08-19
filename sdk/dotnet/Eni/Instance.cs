@@ -9,6 +9,50 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Eni
 {
+    /// <summary>
+    /// Provides a resource to create an ENI.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var fooSubnet_instanceInstance = new Tencentcloud.Subnet.Instance("fooSubnet/instanceInstance", new Tencentcloud.Subnet.InstanceArgs
+    ///         {
+    ///             AvailabilityZone = "ap-guangzhou-3",
+    ///             VpcId = fooInstance.Id,
+    ///             CidrBlock = "10.0.0.0/16",
+    ///             IsMulticast = false,
+    ///         });
+    ///         var fooEni_instanceInstance = new Tencentcloud.Eni.Instance("fooEni/instanceInstance", new Tencentcloud.Eni.InstanceArgs
+    ///         {
+    ///             VpcId = fooInstance.Id,
+    ///             SubnetId = fooSubnet / instanceInstance.Id,
+    ///             Description = "eni desc",
+    ///             Ipv4Count = 1,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// ENI can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Eni/instance:Instance tencentcloud_eni.foo eni-qka182br
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Eni/instance:Instance")]
     public partial class Instance : Pulumi.CustomResource
     {
@@ -19,14 +63,13 @@ namespace Pulumi.Tencentcloud.Eni
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Description of the ENI, maximum length 60.
+        /// Description of the IP, maximum length 25.
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-        /// intranet IPs, which conflict with `ipv4s`.
+        /// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
         /// </summary>
         [Output("ipv4Count")]
         public Output<int?> Ipv4Count { get; private set; } = null!;
@@ -38,8 +81,7 @@ namespace Pulumi.Tencentcloud.Eni
         public Output<ImmutableArray<Outputs.InstanceIpv4Info>> Ipv4Infos { get; private set; } = null!;
 
         /// <summary>
-        /// Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-        /// primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+        /// Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
         /// </summary>
         [Output("ipv4s")]
         public Output<ImmutableArray<Outputs.InstanceIpv4>> Ipv4s { get; private set; } = null!;
@@ -139,14 +181,13 @@ namespace Pulumi.Tencentcloud.Eni
     public sealed class InstanceArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Description of the ENI, maximum length 60.
+        /// Description of the IP, maximum length 25.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-        /// intranet IPs, which conflict with `ipv4s`.
+        /// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
         /// </summary>
         [Input("ipv4Count")]
         public Input<int>? Ipv4Count { get; set; }
@@ -155,8 +196,7 @@ namespace Pulumi.Tencentcloud.Eni
         private InputList<Inputs.InstanceIpv4Args>? _ipv4s;
 
         /// <summary>
-        /// Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-        /// primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+        /// Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
         /// </summary>
         public InputList<Inputs.InstanceIpv4Args> Ipv4s
         {
@@ -220,14 +260,13 @@ namespace Pulumi.Tencentcloud.Eni
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// Description of the ENI, maximum length 60.
+        /// Description of the IP, maximum length 25.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary
-        /// intranet IPs, which conflict with `ipv4s`.
+        /// The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
         /// </summary>
         [Input("ipv4Count")]
         public Input<int>? Ipv4Count { get; set; }
@@ -248,8 +287,7 @@ namespace Pulumi.Tencentcloud.Eni
         private InputList<Inputs.InstanceIpv4GetArgs>? _ipv4s;
 
         /// <summary>
-        /// Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one
-        /// primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
+        /// Applying for intranet IPv4s collection, conflict with `ipv4_count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
         /// </summary>
         public InputList<Inputs.InstanceIpv4GetArgs> Ipv4s
         {

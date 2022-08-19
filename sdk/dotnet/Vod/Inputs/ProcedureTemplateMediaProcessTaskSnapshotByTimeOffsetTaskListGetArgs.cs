@@ -12,11 +12,18 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
     public sealed class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Time point screen capturing template ID.
+        /// </summary>
         [Input("definition", required: true)]
         public Input<string> Definition { get; set; } = null!;
 
         [Input("extTimeOffsetLists")]
         private InputList<string>? _extTimeOffsetLists;
+
+        /// <summary>
+        /// The list of screenshot time points. `s` and `%` formats are supported: When a time point string ends with `s`, its unit is second. For example, `3.5s` means the 3.5th second of the video; When a time point string ends with `%`, it is marked with corresponding percentage of the video duration. For example, `10%` means that the time point is at the 10% of the video entire duration.
+        /// </summary>
         public InputList<string> ExtTimeOffsetLists
         {
             get => _extTimeOffsetLists ?? (_extTimeOffsetLists = new InputList<string>());
@@ -25,6 +32,10 @@ namespace Pulumi.Tencentcloud.Vod.Inputs
 
         [Input("watermarkLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListGetArgs>? _watermarkLists;
+
+        /// <summary>
+        /// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public InputList<Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListGetArgs> WatermarkLists
         {
             get => _watermarkLists ?? (_watermarkLists = new InputList<Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListGetArgs>());

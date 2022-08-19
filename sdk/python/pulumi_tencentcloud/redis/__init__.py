@@ -6,7 +6,7 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .backup_config import *
+from .get_instances import *
+from .get_zone_config import *
 from .instance import *
-from .instances import *
-from .zone_config import *
 from . import outputs

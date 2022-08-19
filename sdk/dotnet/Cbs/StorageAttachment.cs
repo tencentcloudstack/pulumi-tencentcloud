@@ -9,6 +9,37 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tencentcloud.Cbs
 {
+    /// <summary>
+    /// Provides a CBS storage attachment resource.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var attachment = new Tencentcloud.Cbs.StorageAttachment("attachment", new Tencentcloud.Cbs.StorageAttachmentArgs
+    ///         {
+    ///             InstanceId = "ins-jqlegd42",
+    ///             StorageId = "disk-kdt0sq6m",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CBS storage attachment can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Cbs/storageAttachment:StorageAttachment attachment disk-41s6jwy4
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/storageAttachment:StorageAttachment")]
     public partial class StorageAttachment : Pulumi.CustomResource
     {

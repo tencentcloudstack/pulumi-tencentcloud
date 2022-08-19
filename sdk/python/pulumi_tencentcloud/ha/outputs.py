@@ -9,31 +9,41 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
-    'VipEipAttachmentsHaVipEipAttachmentListResult',
-    'VipsHaVipListResult',
+    'GetVipEipAttachmentsHaVipEipAttachmentListResult',
+    'GetVipsHaVipListResult',
 ]
 
 @pulumi.output_type
-class VipEipAttachmentsHaVipEipAttachmentListResult(dict):
+class GetVipEipAttachmentsHaVipEipAttachmentListResult(dict):
     def __init__(__self__, *,
                  address_ip: str,
                  havip_id: str):
+        """
+        :param str address_ip: Public IP address of EIP to be queried.
+        :param str havip_id: ID of the attached HA VIP to be queried.
+        """
         pulumi.set(__self__, "address_ip", address_ip)
         pulumi.set(__self__, "havip_id", havip_id)
 
     @property
     @pulumi.getter(name="addressIp")
     def address_ip(self) -> str:
+        """
+        Public IP address of EIP to be queried.
+        """
         return pulumi.get(self, "address_ip")
 
     @property
     @pulumi.getter(name="havipId")
     def havip_id(self) -> str:
+        """
+        ID of the attached HA VIP to be queried.
+        """
         return pulumi.get(self, "havip_id")
 
 
 @pulumi.output_type
-class VipsHaVipListResult(dict):
+class GetVipsHaVipListResult(dict):
     def __init__(__self__, *,
                  address_ip: str,
                  create_time: str,
@@ -45,6 +55,18 @@ class VipsHaVipListResult(dict):
                  subnet_id: str,
                  vip: str,
                  vpc_id: str):
+        """
+        :param str address_ip: EIP of the HA VIP to be queried.
+        :param str create_time: Create time of the HA VIP.
+        :param str id: ID of the HA VIP to be queried.
+        :param str instance_id: Instance id that is associated.
+        :param str name: Name of the HA VIP. The length of character is limited to 1-60.
+        :param str network_interface_id: Network interface id that is associated.
+        :param str state: State of the HA VIP. Valid values: `AVAILABLE`, `UNBIND`.
+        :param str subnet_id: Subnet id of the HA VIP to be queried.
+        :param str vip: Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.
+        :param str vpc_id: VPC id of the HA VIP to be queried.
+        """
         pulumi.set(__self__, "address_ip", address_ip)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "id", id)
@@ -59,51 +81,81 @@ class VipsHaVipListResult(dict):
     @property
     @pulumi.getter(name="addressIp")
     def address_ip(self) -> str:
+        """
+        EIP of the HA VIP to be queried.
+        """
         return pulumi.get(self, "address_ip")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> str:
+        """
+        Create time of the HA VIP.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        ID of the HA VIP to be queried.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="instanceId")
     def instance_id(self) -> str:
+        """
+        Instance id that is associated.
+        """
         return pulumi.get(self, "instance_id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the HA VIP. The length of character is limited to 1-60.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="networkInterfaceId")
     def network_interface_id(self) -> str:
+        """
+        Network interface id that is associated.
+        """
         return pulumi.get(self, "network_interface_id")
 
     @property
     @pulumi.getter
     def state(self) -> str:
+        """
+        State of the HA VIP. Valid values: `AVAILABLE`, `UNBIND`.
+        """
         return pulumi.get(self, "state")
 
     @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> str:
+        """
+        Subnet id of the HA VIP to be queried.
+        """
         return pulumi.get(self, "subnet_id")
 
     @property
     @pulumi.getter
     def vip(self) -> str:
+        """
+        Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.
+        """
         return pulumi.get(self, "vip")
 
     @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> str:
+        """
+        VPC id of the HA VIP to be queried.
+        """
         return pulumi.get(self, "vpc_id")
 
 

@@ -29,6 +29,14 @@ class FunctionCfsConfigArgs:
                  ip_address: Optional[pulumi.Input[str]] = None,
                  mount_subnet_id: Optional[pulumi.Input[str]] = None,
                  mount_vpc_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cfs_id: File system instance ID.
+        :param pulumi.Input[str] local_mount_dir: Local mount directory.
+        :param pulumi.Input[str] mount_ins_id: File system mount instance ID.
+        :param pulumi.Input[str] remote_mount_dir: Remote mount directory.
+        :param pulumi.Input[str] user_group_id: ID of user group.
+        :param pulumi.Input[str] user_id: ID of user.
+        """
         pulumi.set(__self__, "cfs_id", cfs_id)
         pulumi.set(__self__, "local_mount_dir", local_mount_dir)
         pulumi.set(__self__, "mount_ins_id", mount_ins_id)
@@ -45,6 +53,9 @@ class FunctionCfsConfigArgs:
     @property
     @pulumi.getter(name="cfsId")
     def cfs_id(self) -> pulumi.Input[str]:
+        """
+        File system instance ID.
+        """
         return pulumi.get(self, "cfs_id")
 
     @cfs_id.setter
@@ -54,6 +65,9 @@ class FunctionCfsConfigArgs:
     @property
     @pulumi.getter(name="localMountDir")
     def local_mount_dir(self) -> pulumi.Input[str]:
+        """
+        Local mount directory.
+        """
         return pulumi.get(self, "local_mount_dir")
 
     @local_mount_dir.setter
@@ -63,6 +77,9 @@ class FunctionCfsConfigArgs:
     @property
     @pulumi.getter(name="mountInsId")
     def mount_ins_id(self) -> pulumi.Input[str]:
+        """
+        File system mount instance ID.
+        """
         return pulumi.get(self, "mount_ins_id")
 
     @mount_ins_id.setter
@@ -72,6 +89,9 @@ class FunctionCfsConfigArgs:
     @property
     @pulumi.getter(name="remoteMountDir")
     def remote_mount_dir(self) -> pulumi.Input[str]:
+        """
+        Remote mount directory.
+        """
         return pulumi.get(self, "remote_mount_dir")
 
     @remote_mount_dir.setter
@@ -81,6 +101,9 @@ class FunctionCfsConfigArgs:
     @property
     @pulumi.getter(name="userGroupId")
     def user_group_id(self) -> pulumi.Input[str]:
+        """
+        ID of user group.
+        """
         return pulumi.get(self, "user_group_id")
 
     @user_group_id.setter
@@ -90,6 +113,9 @@ class FunctionCfsConfigArgs:
     @property
     @pulumi.getter(name="userId")
     def user_id(self) -> pulumi.Input[str]:
+        """
+        ID of user.
+        """
         return pulumi.get(self, "user_id")
 
     @user_id.setter
@@ -133,6 +159,14 @@ class FunctionImageConfigArgs:
                  command: Optional[pulumi.Input[str]] = None,
                  entry_point: Optional[pulumi.Input[str]] = None,
                  registry_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] image_type: The image type. personal or enterprise.
+        :param pulumi.Input[str] image_uri: The uri of image.
+        :param pulumi.Input[str] args: the parameters of command.
+        :param pulumi.Input[str] command: The command of entrypoint.
+        :param pulumi.Input[str] entry_point: The entrypoint of app.
+        :param pulumi.Input[str] registry_id: The registry id of TCR. When image type is enterprise, it must be set.
+        """
         pulumi.set(__self__, "image_type", image_type)
         pulumi.set(__self__, "image_uri", image_uri)
         if args is not None:
@@ -147,6 +181,9 @@ class FunctionImageConfigArgs:
     @property
     @pulumi.getter(name="imageType")
     def image_type(self) -> pulumi.Input[str]:
+        """
+        The image type. personal or enterprise.
+        """
         return pulumi.get(self, "image_type")
 
     @image_type.setter
@@ -156,6 +193,9 @@ class FunctionImageConfigArgs:
     @property
     @pulumi.getter(name="imageUri")
     def image_uri(self) -> pulumi.Input[str]:
+        """
+        The uri of image.
+        """
         return pulumi.get(self, "image_uri")
 
     @image_uri.setter
@@ -165,6 +205,9 @@ class FunctionImageConfigArgs:
     @property
     @pulumi.getter
     def args(self) -> Optional[pulumi.Input[str]]:
+        """
+        the parameters of command.
+        """
         return pulumi.get(self, "args")
 
     @args.setter
@@ -174,6 +217,9 @@ class FunctionImageConfigArgs:
     @property
     @pulumi.getter
     def command(self) -> Optional[pulumi.Input[str]]:
+        """
+        The command of entrypoint.
+        """
         return pulumi.get(self, "command")
 
     @command.setter
@@ -183,6 +229,9 @@ class FunctionImageConfigArgs:
     @property
     @pulumi.getter(name="entryPoint")
     def entry_point(self) -> Optional[pulumi.Input[str]]:
+        """
+        The entrypoint of app.
+        """
         return pulumi.get(self, "entry_point")
 
     @entry_point.setter
@@ -192,6 +241,9 @@ class FunctionImageConfigArgs:
     @property
     @pulumi.getter(name="registryId")
     def registry_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The registry id of TCR. When image type is enterprise, it must be set.
+        """
         return pulumi.get(self, "registry_id")
 
     @registry_id.setter
@@ -204,12 +256,19 @@ class FunctionLayerArgs:
     def __init__(__self__, *,
                  layer_name: pulumi.Input[str],
                  layer_version: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] layer_name: The name of Layer.
+        :param pulumi.Input[int] layer_version: The version of layer.
+        """
         pulumi.set(__self__, "layer_name", layer_name)
         pulumi.set(__self__, "layer_version", layer_version)
 
     @property
     @pulumi.getter(name="layerName")
     def layer_name(self) -> pulumi.Input[str]:
+        """
+        The name of Layer.
+        """
         return pulumi.get(self, "layer_name")
 
     @layer_name.setter
@@ -219,6 +278,9 @@ class FunctionLayerArgs:
     @property
     @pulumi.getter(name="layerVersion")
     def layer_version(self) -> pulumi.Input[int]:
+        """
+        The version of layer.
+        """
         return pulumi.get(self, "layer_version")
 
     @layer_version.setter
@@ -233,6 +295,12 @@ class FunctionTriggerArgs:
                  trigger_desc: pulumi.Input[str],
                  type: pulumi.Input[str],
                  cos_region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: Name of the SCF function trigger, if `type` is `ckafka`, the format of name must be `<ckafkaInstanceId>-<topicId>`; if `type` is `cos`, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.
+        :param pulumi.Input[str] trigger_desc: TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
+        :param pulumi.Input[str] type: Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        :param pulumi.Input[str] cos_region: Region of cos bucket. if `type` is `cos`, `cos_region` is required.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "trigger_desc", trigger_desc)
         pulumi.set(__self__, "type", type)
@@ -242,6 +310,9 @@ class FunctionTriggerArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        Name of the SCF function trigger, if `type` is `ckafka`, the format of name must be `<ckafkaInstanceId>-<topicId>`; if `type` is `cos`, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -251,6 +322,9 @@ class FunctionTriggerArgs:
     @property
     @pulumi.getter(name="triggerDesc")
     def trigger_desc(self) -> pulumi.Input[str]:
+        """
+        TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
+        """
         return pulumi.get(self, "trigger_desc")
 
     @trigger_desc.setter
@@ -260,6 +334,9 @@ class FunctionTriggerArgs:
     @property
     @pulumi.getter
     def type(self) -> pulumi.Input[str]:
+        """
+        Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -269,6 +346,9 @@ class FunctionTriggerArgs:
     @property
     @pulumi.getter(name="cosRegion")
     def cos_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        Region of cos bucket. if `type` is `cos`, `cos_region` is required.
+        """
         return pulumi.get(self, "cos_region")
 
     @cos_region.setter
@@ -286,6 +366,15 @@ class FunctionTriggerInfoArgs:
                  name: Optional[pulumi.Input[str]] = None,
                  trigger_desc: Optional[pulumi.Input[str]] = None,
                  type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] create_time: Create time of SCF function trigger.
+        :param pulumi.Input[str] custom_argument: User-defined parameters of SCF function trigger.
+        :param pulumi.Input[bool] enable: Whether SCF function trigger is enable.
+        :param pulumi.Input[str] modify_time: Modify time of SCF function trigger.
+        :param pulumi.Input[str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        :param pulumi.Input[str] trigger_desc: TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
+        :param pulumi.Input[str] type: Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        """
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
         if custom_argument is not None:
@@ -304,6 +393,9 @@ class FunctionTriggerInfoArgs:
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Create time of SCF function trigger.
+        """
         return pulumi.get(self, "create_time")
 
     @create_time.setter
@@ -313,6 +405,9 @@ class FunctionTriggerInfoArgs:
     @property
     @pulumi.getter(name="customArgument")
     def custom_argument(self) -> Optional[pulumi.Input[str]]:
+        """
+        User-defined parameters of SCF function trigger.
+        """
         return pulumi.get(self, "custom_argument")
 
     @custom_argument.setter
@@ -322,6 +417,9 @@ class FunctionTriggerInfoArgs:
     @property
     @pulumi.getter
     def enable(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether SCF function trigger is enable.
+        """
         return pulumi.get(self, "enable")
 
     @enable.setter
@@ -331,6 +429,9 @@ class FunctionTriggerInfoArgs:
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Modify time of SCF function trigger.
+        """
         return pulumi.get(self, "modify_time")
 
     @modify_time.setter
@@ -340,6 +441,9 @@ class FunctionTriggerInfoArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -349,6 +453,9 @@ class FunctionTriggerInfoArgs:
     @property
     @pulumi.getter(name="triggerDesc")
     def trigger_desc(self) -> Optional[pulumi.Input[str]]:
+        """
+        TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
+        """
         return pulumi.get(self, "trigger_desc")
 
     @trigger_desc.setter
@@ -358,6 +465,9 @@ class FunctionTriggerInfoArgs:
     @property
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -372,6 +482,12 @@ class LayerContentArgs:
                  cos_bucket_region: Optional[pulumi.Input[str]] = None,
                  cos_object_name: Optional[pulumi.Input[str]] = None,
                  zip_file: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cos_bucket_name: Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zip_file`.
+        :param pulumi.Input[str] cos_bucket_region: Cos bucket region of the SCF layer, conflict with `zip_file`.
+        :param pulumi.Input[str] cos_object_name: Cos object name of the SCF layer, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
+        :param pulumi.Input[str] zip_file: Zip file of the SCF layer, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
+        """
         if cos_bucket_name is not None:
             pulumi.set(__self__, "cos_bucket_name", cos_bucket_name)
         if cos_bucket_region is not None:
@@ -384,6 +500,9 @@ class LayerContentArgs:
     @property
     @pulumi.getter(name="cosBucketName")
     def cos_bucket_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zip_file`.
+        """
         return pulumi.get(self, "cos_bucket_name")
 
     @cos_bucket_name.setter
@@ -393,6 +512,9 @@ class LayerContentArgs:
     @property
     @pulumi.getter(name="cosBucketRegion")
     def cos_bucket_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cos bucket region of the SCF layer, conflict with `zip_file`.
+        """
         return pulumi.get(self, "cos_bucket_region")
 
     @cos_bucket_region.setter
@@ -402,6 +524,9 @@ class LayerContentArgs:
     @property
     @pulumi.getter(name="cosObjectName")
     def cos_object_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cos object name of the SCF layer, should have suffix `.zip` or `.jar`, conflict with `zip_file`.
+        """
         return pulumi.get(self, "cos_object_name")
 
     @cos_object_name.setter
@@ -411,6 +536,9 @@ class LayerContentArgs:
     @property
     @pulumi.getter(name="zipFile")
     def zip_file(self) -> Optional[pulumi.Input[str]]:
+        """
+        Zip file of the SCF layer, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`.
+        """
         return pulumi.get(self, "zip_file")
 
     @zip_file.setter

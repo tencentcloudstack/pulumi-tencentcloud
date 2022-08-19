@@ -10,27 +10,15 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
-    'CCHttpPoliciesListResult',
-    'CCHttpPoliciesListRuleListResult',
-    'CCHttpPolicyRuleList',
-    'CCHttpsPoliciesListResult',
-    'CCHttpsPoliciesListRuleListResult',
-    'CCHttpsPolicyRuleList',
-    'CCPolicyV2CcBlackWhiteIp',
-    'CCPolicyV2CcGeoIpPolicy',
-    'CCPolicyV2CcPrecisionPolicy',
-    'CCPolicyV2CcPrecisionPolicyPolicy',
-    'CCPolicyV2CcPrecisionReqLimit',
-    'CCPolicyV2CcPrecisionReqLimitPolicy',
-    'CCPolicyV2Threshold',
-    'DdosPoliciesListResult',
-    'DdosPoliciesListDropOptionResult',
-    'DdosPoliciesListPacketFilterResult',
-    'DdosPoliciesListPortFilterResult',
-    'DdosPoliciesListWatermarkFilterResult',
-    'DdosPoliciesListWatermarkKeyResult',
-    'DdosPolicyAttachmentsDayuDdosPolicyAttachmentListResult',
-    'DdosPolicyCasesListResult',
+    'CcHttpPolicyRuleList',
+    'CcHttpsPolicyRuleList',
+    'CcPolicyV2CcBlackWhiteIp',
+    'CcPolicyV2CcGeoIpPolicy',
+    'CcPolicyV2CcPrecisionPolicy',
+    'CcPolicyV2CcPrecisionPolicyPolicy',
+    'CcPolicyV2CcPrecisionReqLimit',
+    'CcPolicyV2CcPrecisionReqLimitPolicy',
+    'CcPolicyV2Threshold',
     'DdosPolicyDropOption',
     'DdosPolicyPacketFilter',
     'DdosPolicyPortFilter',
@@ -46,131 +34,41 @@ __all__ = [
     'L4RuleSourceList',
     'L4RuleV2Rules',
     'L4RuleV2RulesSourceList',
-    'L4RulesListResult',
-    'L4RulesListSourceListResult',
-    'L4RulesV2ListResult',
-    'L4RulesV2ListSourceListResult',
     'L7RuleV2Rule',
     'L7RuleV2RuleSourceList',
-    'L7RulesListResult',
-    'L7RulesV2ListResult',
-    'L7RulesV2ListSourceListResult',
+    'GetCcHttpPoliciesListResult',
+    'GetCcHttpPoliciesListRuleListResult',
+    'GetCcHttpsPoliciesListResult',
+    'GetCcHttpsPoliciesListRuleListResult',
+    'GetDdosPoliciesListResult',
+    'GetDdosPoliciesListDropOptionResult',
+    'GetDdosPoliciesListPacketFilterResult',
+    'GetDdosPoliciesListPortFilterResult',
+    'GetDdosPoliciesListWatermarkFilterResult',
+    'GetDdosPoliciesListWatermarkKeyResult',
+    'GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListResult',
+    'GetDdosPolicyCasesListResult',
+    'GetEipListResult',
+    'GetL4RulesListResult',
+    'GetL4RulesListSourceListResult',
+    'GetL4RulesV2ListResult',
+    'GetL4RulesV2ListSourceListResult',
+    'GetL7RulesListResult',
+    'GetL7RulesV2ListResult',
+    'GetL7RulesV2ListSourceListResult',
 ]
 
 @pulumi.output_type
-class CCHttpPoliciesListResult(dict):
-    def __init__(__self__, *,
-                 action: str,
-                 create_time: str,
-                 frequency: int,
-                 ip_lists: Sequence[str],
-                 name: str,
-                 policy_id: str,
-                 resource_id: str,
-                 resource_type: str,
-                 rule_lists: Sequence['outputs.CCHttpPoliciesListRuleListResult'],
-                 smode: str,
-                 switch: bool):
-        pulumi.set(__self__, "action", action)
-        pulumi.set(__self__, "create_time", create_time)
-        pulumi.set(__self__, "frequency", frequency)
-        pulumi.set(__self__, "ip_lists", ip_lists)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "policy_id", policy_id)
-        pulumi.set(__self__, "resource_id", resource_id)
-        pulumi.set(__self__, "resource_type", resource_type)
-        pulumi.set(__self__, "rule_lists", rule_lists)
-        pulumi.set(__self__, "smode", smode)
-        pulumi.set(__self__, "switch", switch)
-
-    @property
-    @pulumi.getter
-    def action(self) -> str:
-        return pulumi.get(self, "action")
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> str:
-        return pulumi.get(self, "create_time")
-
-    @property
-    @pulumi.getter
-    def frequency(self) -> int:
-        return pulumi.get(self, "frequency")
-
-    @property
-    @pulumi.getter(name="ipLists")
-    def ip_lists(self) -> Sequence[str]:
-        return pulumi.get(self, "ip_lists")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter(name="policyId")
-    def policy_id(self) -> str:
-        return pulumi.get(self, "policy_id")
-
-    @property
-    @pulumi.getter(name="resourceId")
-    def resource_id(self) -> str:
-        return pulumi.get(self, "resource_id")
-
-    @property
-    @pulumi.getter(name="resourceType")
-    def resource_type(self) -> str:
-        return pulumi.get(self, "resource_type")
-
-    @property
-    @pulumi.getter(name="ruleLists")
-    def rule_lists(self) -> Sequence['outputs.CCHttpPoliciesListRuleListResult']:
-        return pulumi.get(self, "rule_lists")
-
-    @property
-    @pulumi.getter
-    def smode(self) -> str:
-        return pulumi.get(self, "smode")
-
-    @property
-    @pulumi.getter
-    def switch(self) -> bool:
-        return pulumi.get(self, "switch")
-
-
-@pulumi.output_type
-class CCHttpPoliciesListRuleListResult(dict):
-    def __init__(__self__, *,
-                 operator: str,
-                 skey: str,
-                 value: str):
-        pulumi.set(__self__, "operator", operator)
-        pulumi.set(__self__, "skey", skey)
-        pulumi.set(__self__, "value", value)
-
-    @property
-    @pulumi.getter
-    def operator(self) -> str:
-        return pulumi.get(self, "operator")
-
-    @property
-    @pulumi.getter
-    def skey(self) -> str:
-        return pulumi.get(self, "skey")
-
-    @property
-    @pulumi.getter
-    def value(self) -> str:
-        return pulumi.get(self, "value")
-
-
-@pulumi.output_type
-class CCHttpPolicyRuleList(dict):
+class CcHttpPolicyRuleList(dict):
     def __init__(__self__, *,
                  operator: Optional[str] = None,
                  skey: Optional[str] = None,
                  value: Optional[str] = None):
+        """
+        :param str operator: Operator of the rule. Valid values: `include`, `not_include`, `equal`.
+        :param str skey: Key of the rule. Valid values: `host`, `cgi`, `ua`, `referer`.
+        :param str value: Rule value, then length should be less than 31 bytes.
+        """
         if operator is not None:
             pulumi.set(__self__, "operator", operator)
         if skey is not None:
@@ -181,107 +79,39 @@ class CCHttpPolicyRuleList(dict):
     @property
     @pulumi.getter
     def operator(self) -> Optional[str]:
+        """
+        Operator of the rule. Valid values: `include`, `not_include`, `equal`.
+        """
         return pulumi.get(self, "operator")
 
     @property
     @pulumi.getter
     def skey(self) -> Optional[str]:
+        """
+        Key of the rule. Valid values: `host`, `cgi`, `ua`, `referer`.
+        """
         return pulumi.get(self, "skey")
 
     @property
     @pulumi.getter
     def value(self) -> Optional[str]:
+        """
+        Rule value, then length should be less than 31 bytes.
+        """
         return pulumi.get(self, "value")
 
 
 @pulumi.output_type
-class CCHttpsPoliciesListResult(dict):
-    def __init__(__self__, *,
-                 action: str,
-                 create_time: str,
-                 domain: str,
-                 ip_lists: Sequence[str],
-                 name: str,
-                 policy_id: str,
-                 resource_id: str,
-                 resource_type: str,
-                 rule_id: str,
-                 rule_lists: Sequence['outputs.CCHttpsPoliciesListRuleListResult'],
-                 switch: bool):
-        pulumi.set(__self__, "action", action)
-        pulumi.set(__self__, "create_time", create_time)
-        pulumi.set(__self__, "domain", domain)
-        pulumi.set(__self__, "ip_lists", ip_lists)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "policy_id", policy_id)
-        pulumi.set(__self__, "resource_id", resource_id)
-        pulumi.set(__self__, "resource_type", resource_type)
-        pulumi.set(__self__, "rule_id", rule_id)
-        pulumi.set(__self__, "rule_lists", rule_lists)
-        pulumi.set(__self__, "switch", switch)
-
-    @property
-    @pulumi.getter
-    def action(self) -> str:
-        return pulumi.get(self, "action")
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> str:
-        return pulumi.get(self, "create_time")
-
-    @property
-    @pulumi.getter
-    def domain(self) -> str:
-        return pulumi.get(self, "domain")
-
-    @property
-    @pulumi.getter(name="ipLists")
-    def ip_lists(self) -> Sequence[str]:
-        return pulumi.get(self, "ip_lists")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter(name="policyId")
-    def policy_id(self) -> str:
-        return pulumi.get(self, "policy_id")
-
-    @property
-    @pulumi.getter(name="resourceId")
-    def resource_id(self) -> str:
-        return pulumi.get(self, "resource_id")
-
-    @property
-    @pulumi.getter(name="resourceType")
-    def resource_type(self) -> str:
-        return pulumi.get(self, "resource_type")
-
-    @property
-    @pulumi.getter(name="ruleId")
-    def rule_id(self) -> str:
-        return pulumi.get(self, "rule_id")
-
-    @property
-    @pulumi.getter(name="ruleLists")
-    def rule_lists(self) -> Sequence['outputs.CCHttpsPoliciesListRuleListResult']:
-        return pulumi.get(self, "rule_lists")
-
-    @property
-    @pulumi.getter
-    def switch(self) -> bool:
-        return pulumi.get(self, "switch")
-
-
-@pulumi.output_type
-class CCHttpsPoliciesListRuleListResult(dict):
+class CcHttpsPolicyRuleList(dict):
     def __init__(__self__, *,
                  operator: str,
                  skey: str,
                  value: str):
+        """
+        :param str operator: Operator of the rule. Valid values are `include` and `equal`.
+        :param str skey: Key of the rule. Valid values are `cgi`, `ua` and `referer`.
+        :param str value: Rule value, then length should be less than 31 bytes.
+        """
         pulumi.set(__self__, "operator", operator)
         pulumi.set(__self__, "skey", skey)
         pulumi.set(__self__, "value", value)
@@ -289,47 +119,30 @@ class CCHttpsPoliciesListRuleListResult(dict):
     @property
     @pulumi.getter
     def operator(self) -> str:
+        """
+        Operator of the rule. Valid values are `include` and `equal`.
+        """
         return pulumi.get(self, "operator")
 
     @property
     @pulumi.getter
     def skey(self) -> str:
+        """
+        Key of the rule. Valid values are `cgi`, `ua` and `referer`.
+        """
         return pulumi.get(self, "skey")
 
     @property
     @pulumi.getter
     def value(self) -> str:
+        """
+        Rule value, then length should be less than 31 bytes.
+        """
         return pulumi.get(self, "value")
 
 
 @pulumi.output_type
-class CCHttpsPolicyRuleList(dict):
-    def __init__(__self__, *,
-                 operator: str,
-                 skey: str,
-                 value: str):
-        pulumi.set(__self__, "operator", operator)
-        pulumi.set(__self__, "skey", skey)
-        pulumi.set(__self__, "value", value)
-
-    @property
-    @pulumi.getter
-    def operator(self) -> str:
-        return pulumi.get(self, "operator")
-
-    @property
-    @pulumi.getter
-    def skey(self) -> str:
-        return pulumi.get(self, "skey")
-
-    @property
-    @pulumi.getter
-    def value(self) -> str:
-        return pulumi.get(self, "value")
-
-
-@pulumi.output_type
-class CCPolicyV2CcBlackWhiteIp(dict):
+class CcPolicyV2CcBlackWhiteIp(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -341,14 +154,14 @@ class CCPolicyV2CcBlackWhiteIp(dict):
             suggest = "modify_time"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CCPolicyV2CcBlackWhiteIp. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in CcPolicyV2CcBlackWhiteIp. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        CCPolicyV2CcBlackWhiteIp.__key_warning(key)
+        CcPolicyV2CcBlackWhiteIp.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        CCPolicyV2CcBlackWhiteIp.__key_warning(key)
+        CcPolicyV2CcBlackWhiteIp.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -358,6 +171,14 @@ class CCPolicyV2CcBlackWhiteIp(dict):
                  type: str,
                  create_time: Optional[str] = None,
                  modify_time: Optional[str] = None):
+        """
+        :param str black_white_ip: Blacklist and whitelist IP addresses.
+        :param str domain: Domain.
+        :param str protocol: Protocol.
+        :param str type: IP type, value [black(blacklist IP), white (whitelist IP)].
+        :param str create_time: Create time.
+        :param str modify_time: Modify time.
+        """
         pulumi.set(__self__, "black_white_ip", black_white_ip)
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "protocol", protocol)
@@ -370,36 +191,54 @@ class CCPolicyV2CcBlackWhiteIp(dict):
     @property
     @pulumi.getter(name="blackWhiteIp")
     def black_white_ip(self) -> str:
+        """
+        Blacklist and whitelist IP addresses.
+        """
         return pulumi.get(self, "black_white_ip")
 
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        Domain.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Protocol.
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        IP type, value [black(blacklist IP), white (whitelist IP)].
+        """
         return pulumi.get(self, "type")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> Optional[str]:
+        """
+        Create time.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> Optional[str]:
+        """
+        Modify time.
+        """
         return pulumi.get(self, "modify_time")
 
 
 @pulumi.output_type
-class CCPolicyV2CcGeoIpPolicy(dict):
+class CcPolicyV2CcGeoIpPolicy(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -413,14 +252,14 @@ class CCPolicyV2CcGeoIpPolicy(dict):
             suggest = "modify_time"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CCPolicyV2CcGeoIpPolicy. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in CcPolicyV2CcGeoIpPolicy. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        CCPolicyV2CcGeoIpPolicy.__key_warning(key)
+        CcPolicyV2CcGeoIpPolicy.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        CCPolicyV2CcGeoIpPolicy.__key_warning(key)
+        CcPolicyV2CcGeoIpPolicy.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -431,6 +270,15 @@ class CCPolicyV2CcGeoIpPolicy(dict):
                  area_lists: Optional[Sequence[int]] = None,
                  create_time: Optional[str] = None,
                  modify_time: Optional[str] = None):
+        """
+        :param str action: User action, drop or arg.
+        :param str domain: domain.
+        :param str protocol: Protocol, preferably HTTP, HTTPS.
+        :param str region_type: Regional types, divided into china, oversea and customized.
+        :param Sequence[int] area_lists: The list of region IDs that the user selects to block.
+        :param str create_time: Create time.
+        :param str modify_time: Modify time.
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "protocol", protocol)
@@ -445,41 +293,62 @@ class CCPolicyV2CcGeoIpPolicy(dict):
     @property
     @pulumi.getter
     def action(self) -> str:
+        """
+        User action, drop or arg.
+        """
         return pulumi.get(self, "action")
 
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        domain.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Protocol, preferably HTTP, HTTPS.
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter(name="regionType")
     def region_type(self) -> str:
+        """
+        Regional types, divided into china, oversea and customized.
+        """
         return pulumi.get(self, "region_type")
 
     @property
     @pulumi.getter(name="areaLists")
     def area_lists(self) -> Optional[Sequence[int]]:
+        """
+        The list of region IDs that the user selects to block.
+        """
         return pulumi.get(self, "area_lists")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> Optional[str]:
+        """
+        Create time.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> Optional[str]:
+        """
+        Modify time.
+        """
         return pulumi.get(self, "modify_time")
 
 
 @pulumi.output_type
-class CCPolicyV2CcPrecisionPolicy(dict):
+class CcPolicyV2CcPrecisionPolicy(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -489,23 +358,30 @@ class CCPolicyV2CcPrecisionPolicy(dict):
             suggest = "policy_id"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CCPolicyV2CcPrecisionPolicy. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in CcPolicyV2CcPrecisionPolicy. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        CCPolicyV2CcPrecisionPolicy.__key_warning(key)
+        CcPolicyV2CcPrecisionPolicy.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        CCPolicyV2CcPrecisionPolicy.__key_warning(key)
+        CcPolicyV2CcPrecisionPolicy.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
                  domain: str,
                  ip: str,
                  policy_action: str,
-                 policys: Sequence['outputs.CCPolicyV2CcPrecisionPolicyPolicy'],
+                 policys: Sequence['outputs.CcPolicyV2CcPrecisionPolicyPolicy'],
                  protocol: str,
                  policy_id: Optional[str] = None):
+        """
+        :param str domain: Domain.
+        :param str ip: Ip address.
+        :param str policy_action: Policy mode (discard or captcha).
+        :param Sequence['CcPolicyV2CcPrecisionPolicyPolicyArgs'] policys: A list of policies.
+        :param str protocol: Protocol.
+        """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "ip", ip)
         pulumi.set(__self__, "policy_action", policy_action)
@@ -517,26 +393,41 @@ class CCPolicyV2CcPrecisionPolicy(dict):
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        Domain.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter
     def ip(self) -> str:
+        """
+        Ip address.
+        """
         return pulumi.get(self, "ip")
 
     @property
     @pulumi.getter(name="policyAction")
     def policy_action(self) -> str:
+        """
+        Policy mode (discard or captcha).
+        """
         return pulumi.get(self, "policy_action")
 
     @property
     @pulumi.getter
-    def policys(self) -> Sequence['outputs.CCPolicyV2CcPrecisionPolicyPolicy']:
+    def policys(self) -> Sequence['outputs.CcPolicyV2CcPrecisionPolicyPolicy']:
+        """
+        A list of policies.
+        """
         return pulumi.get(self, "policys")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Protocol.
+        """
         return pulumi.get(self, "protocol")
 
     @property
@@ -546,7 +437,7 @@ class CCPolicyV2CcPrecisionPolicy(dict):
 
 
 @pulumi.output_type
-class CCPolicyV2CcPrecisionPolicyPolicy(dict):
+class CcPolicyV2CcPrecisionPolicyPolicy(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -558,14 +449,14 @@ class CCPolicyV2CcPrecisionPolicyPolicy(dict):
             suggest = "value_operator"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CCPolicyV2CcPrecisionPolicyPolicy. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in CcPolicyV2CcPrecisionPolicyPolicy. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        CCPolicyV2CcPrecisionPolicyPolicy.__key_warning(key)
+        CcPolicyV2CcPrecisionPolicyPolicy.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        CCPolicyV2CcPrecisionPolicyPolicy.__key_warning(key)
+        CcPolicyV2CcPrecisionPolicyPolicy.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -573,6 +464,12 @@ class CCPolicyV2CcPrecisionPolicyPolicy(dict):
                  field_type: str,
                  value: str,
                  value_operator: str):
+        """
+        :param str field_name: Configuration item types, currently only support value.
+        :param str field_type: Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.
+        :param str value: Configure the value.
+        :param str value_operator: Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.
+        """
         pulumi.set(__self__, "field_name", field_name)
         pulumi.set(__self__, "field_type", field_type)
         pulumi.set(__self__, "value", value)
@@ -581,26 +478,38 @@ class CCPolicyV2CcPrecisionPolicyPolicy(dict):
     @property
     @pulumi.getter(name="fieldName")
     def field_name(self) -> str:
+        """
+        Configuration item types, currently only support value.
+        """
         return pulumi.get(self, "field_name")
 
     @property
     @pulumi.getter(name="fieldType")
     def field_type(self) -> str:
+        """
+        Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.
+        """
         return pulumi.get(self, "field_type")
 
     @property
     @pulumi.getter
     def value(self) -> str:
+        """
+        Configure the value.
+        """
         return pulumi.get(self, "value")
 
     @property
     @pulumi.getter(name="valueOperator")
     def value_operator(self) -> str:
+        """
+        Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.
+        """
         return pulumi.get(self, "value_operator")
 
 
 @pulumi.output_type
-class CCPolicyV2CcPrecisionReqLimit(dict):
+class CcPolicyV2CcPrecisionReqLimit(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -608,23 +517,30 @@ class CCPolicyV2CcPrecisionReqLimit(dict):
             suggest = "instance_id"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CCPolicyV2CcPrecisionReqLimit. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in CcPolicyV2CcPrecisionReqLimit. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        CCPolicyV2CcPrecisionReqLimit.__key_warning(key)
+        CcPolicyV2CcPrecisionReqLimit.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        CCPolicyV2CcPrecisionReqLimit.__key_warning(key)
+        CcPolicyV2CcPrecisionReqLimit.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
                  domain: str,
                  level: str,
-                 policys: Sequence['outputs.CCPolicyV2CcPrecisionReqLimitPolicy'],
+                 policys: Sequence['outputs.CcPolicyV2CcPrecisionReqLimitPolicy'],
                  protocol: str,
                  instance_id: Optional[str] = None,
                  ip: Optional[str] = None):
+        """
+        :param str domain: Domain.
+        :param str level: Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.
+        :param Sequence['CcPolicyV2CcPrecisionReqLimitPolicyArgs'] policys: The CC Frequency Limit Policy Item field.
+        :param str protocol: Protocol, preferably HTTP, HTTPS.
+        :param str ip: Ip address.
+        """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "level", level)
         pulumi.set(__self__, "policys", policys)
@@ -637,21 +553,33 @@ class CCPolicyV2CcPrecisionReqLimit(dict):
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        Domain.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter
     def level(self) -> str:
+        """
+        Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.
+        """
         return pulumi.get(self, "level")
 
     @property
     @pulumi.getter
-    def policys(self) -> Sequence['outputs.CCPolicyV2CcPrecisionReqLimitPolicy']:
+    def policys(self) -> Sequence['outputs.CcPolicyV2CcPrecisionReqLimitPolicy']:
+        """
+        The CC Frequency Limit Policy Item field.
+        """
         return pulumi.get(self, "policys")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Protocol, preferably HTTP, HTTPS.
+        """
         return pulumi.get(self, "protocol")
 
     @property
@@ -662,11 +590,14 @@ class CCPolicyV2CcPrecisionReqLimit(dict):
     @property
     @pulumi.getter
     def ip(self) -> Optional[str]:
+        """
+        Ip address.
+        """
         return pulumi.get(self, "ip")
 
 
 @pulumi.output_type
-class CCPolicyV2CcPrecisionReqLimitPolicy(dict):
+class CcPolicyV2CcPrecisionReqLimitPolicy(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -678,14 +609,14 @@ class CCPolicyV2CcPrecisionReqLimitPolicy(dict):
             suggest = "user_agent"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CCPolicyV2CcPrecisionReqLimitPolicy. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in CcPolicyV2CcPrecisionReqLimitPolicy. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        CCPolicyV2CcPrecisionReqLimitPolicy.__key_warning(key)
+        CcPolicyV2CcPrecisionReqLimitPolicy.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        CCPolicyV2CcPrecisionReqLimitPolicy.__key_warning(key)
+        CcPolicyV2CcPrecisionReqLimitPolicy.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -697,6 +628,16 @@ class CCPolicyV2CcPrecisionReqLimitPolicy(dict):
                  cookie: Optional[str] = None,
                  uri: Optional[str] = None,
                  user_agent: Optional[str] = None):
+        """
+        :param str action: The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.
+        :param int execute_duration: The duration of the frequency limit policy can be taken from 1 to 86400 per second.
+        :param str mode: The policy item is compared, and the optional value include indicates inclusion, and equal means equal.
+        :param int period: Statistical period, take values 1, 10, 30, 60, in seconds.
+        :param int request_num: The number of requests, the value is 1 to 20000.
+        :param str cookie: Cookies, one of the three policy entries can only be filled in.
+        :param str uri: Uri, one of the three policy entries can only be filled in.
+        :param str user_agent: User-Agent, only one of the three policy entries can be filled in.
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "execute_duration", execute_duration)
         pulumi.set(__self__, "mode", mode)
@@ -712,699 +653,95 @@ class CCPolicyV2CcPrecisionReqLimitPolicy(dict):
     @property
     @pulumi.getter
     def action(self) -> str:
+        """
+        The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.
+        """
         return pulumi.get(self, "action")
 
     @property
     @pulumi.getter(name="executeDuration")
     def execute_duration(self) -> int:
+        """
+        The duration of the frequency limit policy can be taken from 1 to 86400 per second.
+        """
         return pulumi.get(self, "execute_duration")
 
     @property
     @pulumi.getter
     def mode(self) -> str:
+        """
+        The policy item is compared, and the optional value include indicates inclusion, and equal means equal.
+        """
         return pulumi.get(self, "mode")
 
     @property
     @pulumi.getter
     def period(self) -> int:
+        """
+        Statistical period, take values 1, 10, 30, 60, in seconds.
+        """
         return pulumi.get(self, "period")
 
     @property
     @pulumi.getter(name="requestNum")
     def request_num(self) -> int:
+        """
+        The number of requests, the value is 1 to 20000.
+        """
         return pulumi.get(self, "request_num")
 
     @property
     @pulumi.getter
     def cookie(self) -> Optional[str]:
+        """
+        Cookies, one of the three policy entries can only be filled in.
+        """
         return pulumi.get(self, "cookie")
 
     @property
     @pulumi.getter
     def uri(self) -> Optional[str]:
+        """
+        Uri, one of the three policy entries can only be filled in.
+        """
         return pulumi.get(self, "uri")
 
     @property
     @pulumi.getter(name="userAgent")
     def user_agent(self) -> Optional[str]:
+        """
+        User-Agent, only one of the three policy entries can be filled in.
+        """
         return pulumi.get(self, "user_agent")
 
 
 @pulumi.output_type
-class CCPolicyV2Threshold(dict):
+class CcPolicyV2Threshold(dict):
     def __init__(__self__, *,
                  domain: str,
                  threshold: int):
+        """
+        :param str domain: domain.
+        :param int threshold: Cleaning threshold, -1 indicates that the `default` mode is turned on.
+        """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "threshold", threshold)
 
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        domain.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter
     def threshold(self) -> int:
+        """
+        Cleaning threshold, -1 indicates that the `default` mode is turned on.
+        """
         return pulumi.get(self, "threshold")
-
-
-@pulumi.output_type
-class DdosPoliciesListResult(dict):
-    def __init__(__self__, *,
-                 create_time: str,
-                 drop_options: Sequence['outputs.DdosPoliciesListDropOptionResult'],
-                 name: str,
-                 packet_filters: Sequence['outputs.DdosPoliciesListPacketFilterResult'],
-                 policy_id: str,
-                 port_filters: Sequence['outputs.DdosPoliciesListPortFilterResult'],
-                 scene_id: str,
-                 watermark_filters: Sequence['outputs.DdosPoliciesListWatermarkFilterResult'],
-                 watermark_keys: Sequence['outputs.DdosPoliciesListWatermarkKeyResult'],
-                 black_ips: Optional[Sequence[str]] = None,
-                 white_ips: Optional[Sequence[str]] = None):
-        pulumi.set(__self__, "create_time", create_time)
-        pulumi.set(__self__, "drop_options", drop_options)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "packet_filters", packet_filters)
-        pulumi.set(__self__, "policy_id", policy_id)
-        pulumi.set(__self__, "port_filters", port_filters)
-        pulumi.set(__self__, "scene_id", scene_id)
-        pulumi.set(__self__, "watermark_filters", watermark_filters)
-        pulumi.set(__self__, "watermark_keys", watermark_keys)
-        if black_ips is not None:
-            pulumi.set(__self__, "black_ips", black_ips)
-        if white_ips is not None:
-            pulumi.set(__self__, "white_ips", white_ips)
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> str:
-        return pulumi.get(self, "create_time")
-
-    @property
-    @pulumi.getter(name="dropOptions")
-    def drop_options(self) -> Sequence['outputs.DdosPoliciesListDropOptionResult']:
-        return pulumi.get(self, "drop_options")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter(name="packetFilters")
-    def packet_filters(self) -> Sequence['outputs.DdosPoliciesListPacketFilterResult']:
-        return pulumi.get(self, "packet_filters")
-
-    @property
-    @pulumi.getter(name="policyId")
-    def policy_id(self) -> str:
-        return pulumi.get(self, "policy_id")
-
-    @property
-    @pulumi.getter(name="portFilters")
-    def port_filters(self) -> Sequence['outputs.DdosPoliciesListPortFilterResult']:
-        return pulumi.get(self, "port_filters")
-
-    @property
-    @pulumi.getter(name="sceneId")
-    def scene_id(self) -> str:
-        return pulumi.get(self, "scene_id")
-
-    @property
-    @pulumi.getter(name="watermarkFilters")
-    def watermark_filters(self) -> Sequence['outputs.DdosPoliciesListWatermarkFilterResult']:
-        return pulumi.get(self, "watermark_filters")
-
-    @property
-    @pulumi.getter(name="watermarkKeys")
-    def watermark_keys(self) -> Sequence['outputs.DdosPoliciesListWatermarkKeyResult']:
-        return pulumi.get(self, "watermark_keys")
-
-    @property
-    @pulumi.getter(name="blackIps")
-    def black_ips(self) -> Optional[Sequence[str]]:
-        return pulumi.get(self, "black_ips")
-
-    @property
-    @pulumi.getter(name="whiteIps")
-    def white_ips(self) -> Optional[Sequence[str]]:
-        return pulumi.get(self, "white_ips")
-
-
-@pulumi.output_type
-class DdosPoliciesListDropOptionResult(dict):
-    def __init__(__self__, *,
-                 bad_conn_threshold: int,
-                 check_sync_conn: bool,
-                 conn_timeout: int,
-                 d_conn_limit: int,
-                 d_new_limit: int,
-                 drop_abroad: bool,
-                 drop_icmp: bool,
-                 drop_other: bool,
-                 drop_tcp: bool,
-                 drop_udp: bool,
-                 icmp_mbps_limit: int,
-                 null_conn_enable: bool,
-                 other_mbps_limit: int,
-                 s_conn_limit: int,
-                 s_new_limit: int,
-                 syn_limit: int,
-                 syn_rate: int,
-                 tcp_mbps_limit: int,
-                 udp_mbps_limit: int):
-        pulumi.set(__self__, "bad_conn_threshold", bad_conn_threshold)
-        pulumi.set(__self__, "check_sync_conn", check_sync_conn)
-        pulumi.set(__self__, "conn_timeout", conn_timeout)
-        pulumi.set(__self__, "d_conn_limit", d_conn_limit)
-        pulumi.set(__self__, "d_new_limit", d_new_limit)
-        pulumi.set(__self__, "drop_abroad", drop_abroad)
-        pulumi.set(__self__, "drop_icmp", drop_icmp)
-        pulumi.set(__self__, "drop_other", drop_other)
-        pulumi.set(__self__, "drop_tcp", drop_tcp)
-        pulumi.set(__self__, "drop_udp", drop_udp)
-        pulumi.set(__self__, "icmp_mbps_limit", icmp_mbps_limit)
-        pulumi.set(__self__, "null_conn_enable", null_conn_enable)
-        pulumi.set(__self__, "other_mbps_limit", other_mbps_limit)
-        pulumi.set(__self__, "s_conn_limit", s_conn_limit)
-        pulumi.set(__self__, "s_new_limit", s_new_limit)
-        pulumi.set(__self__, "syn_limit", syn_limit)
-        pulumi.set(__self__, "syn_rate", syn_rate)
-        pulumi.set(__self__, "tcp_mbps_limit", tcp_mbps_limit)
-        pulumi.set(__self__, "udp_mbps_limit", udp_mbps_limit)
-
-    @property
-    @pulumi.getter(name="badConnThreshold")
-    def bad_conn_threshold(self) -> int:
-        return pulumi.get(self, "bad_conn_threshold")
-
-    @property
-    @pulumi.getter(name="checkSyncConn")
-    def check_sync_conn(self) -> bool:
-        return pulumi.get(self, "check_sync_conn")
-
-    @property
-    @pulumi.getter(name="connTimeout")
-    def conn_timeout(self) -> int:
-        return pulumi.get(self, "conn_timeout")
-
-    @property
-    @pulumi.getter(name="dConnLimit")
-    def d_conn_limit(self) -> int:
-        return pulumi.get(self, "d_conn_limit")
-
-    @property
-    @pulumi.getter(name="dNewLimit")
-    def d_new_limit(self) -> int:
-        return pulumi.get(self, "d_new_limit")
-
-    @property
-    @pulumi.getter(name="dropAbroad")
-    def drop_abroad(self) -> bool:
-        return pulumi.get(self, "drop_abroad")
-
-    @property
-    @pulumi.getter(name="dropIcmp")
-    def drop_icmp(self) -> bool:
-        return pulumi.get(self, "drop_icmp")
-
-    @property
-    @pulumi.getter(name="dropOther")
-    def drop_other(self) -> bool:
-        return pulumi.get(self, "drop_other")
-
-    @property
-    @pulumi.getter(name="dropTcp")
-    def drop_tcp(self) -> bool:
-        return pulumi.get(self, "drop_tcp")
-
-    @property
-    @pulumi.getter(name="dropUdp")
-    def drop_udp(self) -> bool:
-        return pulumi.get(self, "drop_udp")
-
-    @property
-    @pulumi.getter(name="icmpMbpsLimit")
-    def icmp_mbps_limit(self) -> int:
-        return pulumi.get(self, "icmp_mbps_limit")
-
-    @property
-    @pulumi.getter(name="nullConnEnable")
-    def null_conn_enable(self) -> bool:
-        return pulumi.get(self, "null_conn_enable")
-
-    @property
-    @pulumi.getter(name="otherMbpsLimit")
-    def other_mbps_limit(self) -> int:
-        return pulumi.get(self, "other_mbps_limit")
-
-    @property
-    @pulumi.getter(name="sConnLimit")
-    def s_conn_limit(self) -> int:
-        return pulumi.get(self, "s_conn_limit")
-
-    @property
-    @pulumi.getter(name="sNewLimit")
-    def s_new_limit(self) -> int:
-        return pulumi.get(self, "s_new_limit")
-
-    @property
-    @pulumi.getter(name="synLimit")
-    def syn_limit(self) -> int:
-        return pulumi.get(self, "syn_limit")
-
-    @property
-    @pulumi.getter(name="synRate")
-    def syn_rate(self) -> int:
-        return pulumi.get(self, "syn_rate")
-
-    @property
-    @pulumi.getter(name="tcpMbpsLimit")
-    def tcp_mbps_limit(self) -> int:
-        return pulumi.get(self, "tcp_mbps_limit")
-
-    @property
-    @pulumi.getter(name="udpMbpsLimit")
-    def udp_mbps_limit(self) -> int:
-        return pulumi.get(self, "udp_mbps_limit")
-
-
-@pulumi.output_type
-class DdosPoliciesListPacketFilterResult(dict):
-    def __init__(__self__, *,
-                 action: str,
-                 d_end_port: int,
-                 d_start_port: int,
-                 depth: int,
-                 is_include: bool,
-                 match_begin: str,
-                 match_str: str,
-                 match_type: str,
-                 offset: int,
-                 pkt_length_max: int,
-                 pkt_length_min: int,
-                 protocol: str,
-                 s_end_port: int,
-                 s_start_port: int):
-        pulumi.set(__self__, "action", action)
-        pulumi.set(__self__, "d_end_port", d_end_port)
-        pulumi.set(__self__, "d_start_port", d_start_port)
-        pulumi.set(__self__, "depth", depth)
-        pulumi.set(__self__, "is_include", is_include)
-        pulumi.set(__self__, "match_begin", match_begin)
-        pulumi.set(__self__, "match_str", match_str)
-        pulumi.set(__self__, "match_type", match_type)
-        pulumi.set(__self__, "offset", offset)
-        pulumi.set(__self__, "pkt_length_max", pkt_length_max)
-        pulumi.set(__self__, "pkt_length_min", pkt_length_min)
-        pulumi.set(__self__, "protocol", protocol)
-        pulumi.set(__self__, "s_end_port", s_end_port)
-        pulumi.set(__self__, "s_start_port", s_start_port)
-
-    @property
-    @pulumi.getter
-    def action(self) -> str:
-        return pulumi.get(self, "action")
-
-    @property
-    @pulumi.getter(name="dEndPort")
-    def d_end_port(self) -> int:
-        return pulumi.get(self, "d_end_port")
-
-    @property
-    @pulumi.getter(name="dStartPort")
-    def d_start_port(self) -> int:
-        return pulumi.get(self, "d_start_port")
-
-    @property
-    @pulumi.getter
-    def depth(self) -> int:
-        return pulumi.get(self, "depth")
-
-    @property
-    @pulumi.getter(name="isInclude")
-    def is_include(self) -> bool:
-        return pulumi.get(self, "is_include")
-
-    @property
-    @pulumi.getter(name="matchBegin")
-    def match_begin(self) -> str:
-        return pulumi.get(self, "match_begin")
-
-    @property
-    @pulumi.getter(name="matchStr")
-    def match_str(self) -> str:
-        return pulumi.get(self, "match_str")
-
-    @property
-    @pulumi.getter(name="matchType")
-    def match_type(self) -> str:
-        return pulumi.get(self, "match_type")
-
-    @property
-    @pulumi.getter
-    def offset(self) -> int:
-        return pulumi.get(self, "offset")
-
-    @property
-    @pulumi.getter(name="pktLengthMax")
-    def pkt_length_max(self) -> int:
-        return pulumi.get(self, "pkt_length_max")
-
-    @property
-    @pulumi.getter(name="pktLengthMin")
-    def pkt_length_min(self) -> int:
-        return pulumi.get(self, "pkt_length_min")
-
-    @property
-    @pulumi.getter
-    def protocol(self) -> str:
-        return pulumi.get(self, "protocol")
-
-    @property
-    @pulumi.getter(name="sEndPort")
-    def s_end_port(self) -> int:
-        return pulumi.get(self, "s_end_port")
-
-    @property
-    @pulumi.getter(name="sStartPort")
-    def s_start_port(self) -> int:
-        return pulumi.get(self, "s_start_port")
-
-
-@pulumi.output_type
-class DdosPoliciesListPortFilterResult(dict):
-    def __init__(__self__, *,
-                 action: str,
-                 end_port: int,
-                 kind: int,
-                 protocol: str,
-                 start_port: int):
-        pulumi.set(__self__, "action", action)
-        pulumi.set(__self__, "end_port", end_port)
-        pulumi.set(__self__, "kind", kind)
-        pulumi.set(__self__, "protocol", protocol)
-        pulumi.set(__self__, "start_port", start_port)
-
-    @property
-    @pulumi.getter
-    def action(self) -> str:
-        return pulumi.get(self, "action")
-
-    @property
-    @pulumi.getter(name="endPort")
-    def end_port(self) -> int:
-        return pulumi.get(self, "end_port")
-
-    @property
-    @pulumi.getter
-    def kind(self) -> int:
-        return pulumi.get(self, "kind")
-
-    @property
-    @pulumi.getter
-    def protocol(self) -> str:
-        return pulumi.get(self, "protocol")
-
-    @property
-    @pulumi.getter(name="startPort")
-    def start_port(self) -> int:
-        return pulumi.get(self, "start_port")
-
-
-@pulumi.output_type
-class DdosPoliciesListWatermarkFilterResult(dict):
-    def __init__(__self__, *,
-                 auto_remove: bool,
-                 offset: int,
-                 open_switch: bool,
-                 tcp_port_lists: Sequence[str],
-                 udp_port_lists: Sequence[str]):
-        pulumi.set(__self__, "auto_remove", auto_remove)
-        pulumi.set(__self__, "offset", offset)
-        pulumi.set(__self__, "open_switch", open_switch)
-        pulumi.set(__self__, "tcp_port_lists", tcp_port_lists)
-        pulumi.set(__self__, "udp_port_lists", udp_port_lists)
-
-    @property
-    @pulumi.getter(name="autoRemove")
-    def auto_remove(self) -> bool:
-        return pulumi.get(self, "auto_remove")
-
-    @property
-    @pulumi.getter
-    def offset(self) -> int:
-        return pulumi.get(self, "offset")
-
-    @property
-    @pulumi.getter(name="openSwitch")
-    def open_switch(self) -> bool:
-        return pulumi.get(self, "open_switch")
-
-    @property
-    @pulumi.getter(name="tcpPortLists")
-    def tcp_port_lists(self) -> Sequence[str]:
-        return pulumi.get(self, "tcp_port_lists")
-
-    @property
-    @pulumi.getter(name="udpPortLists")
-    def udp_port_lists(self) -> Sequence[str]:
-        return pulumi.get(self, "udp_port_lists")
-
-
-@pulumi.output_type
-class DdosPoliciesListWatermarkKeyResult(dict):
-    def __init__(__self__, *,
-                 content: str,
-                 id: str,
-                 open_switch: bool,
-                 create_time: Optional[str] = None):
-        pulumi.set(__self__, "content", content)
-        pulumi.set(__self__, "id", id)
-        pulumi.set(__self__, "open_switch", open_switch)
-        if create_time is not None:
-            pulumi.set(__self__, "create_time", create_time)
-
-    @property
-    @pulumi.getter
-    def content(self) -> str:
-        return pulumi.get(self, "content")
-
-    @property
-    @pulumi.getter
-    def id(self) -> str:
-        return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="openSwitch")
-    def open_switch(self) -> bool:
-        return pulumi.get(self, "open_switch")
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> Optional[str]:
-        return pulumi.get(self, "create_time")
-
-
-@pulumi.output_type
-class DdosPolicyAttachmentsDayuDdosPolicyAttachmentListResult(dict):
-    def __init__(__self__, *,
-                 policy_id: str,
-                 resource_id: str,
-                 resource_type: str):
-        pulumi.set(__self__, "policy_id", policy_id)
-        pulumi.set(__self__, "resource_id", resource_id)
-        pulumi.set(__self__, "resource_type", resource_type)
-
-    @property
-    @pulumi.getter(name="policyId")
-    def policy_id(self) -> str:
-        return pulumi.get(self, "policy_id")
-
-    @property
-    @pulumi.getter(name="resourceId")
-    def resource_id(self) -> str:
-        return pulumi.get(self, "resource_id")
-
-    @property
-    @pulumi.getter(name="resourceType")
-    def resource_type(self) -> str:
-        return pulumi.get(self, "resource_type")
-
-
-@pulumi.output_type
-class DdosPolicyCasesListResult(dict):
-    def __init__(__self__, *,
-                 app_protocols: Sequence[str],
-                 app_type: str,
-                 create_time: str,
-                 has_abroad: str,
-                 has_initiate_tcp: str,
-                 has_initiate_udp: str,
-                 has_vpn: str,
-                 max_tcp_package_len: str,
-                 max_udp_package_len: str,
-                 min_tcp_package_len: str,
-                 min_udp_package_len: str,
-                 name: str,
-                 peer_tcp_port: str,
-                 peer_udp_port: str,
-                 platform_types: Sequence[str],
-                 resource_type: str,
-                 scene_id: str,
-                 tcp_end_port: str,
-                 tcp_footprint: str,
-                 tcp_start_port: str,
-                 udp_end_port: str,
-                 udp_footprint: str,
-                 udp_start_port: str,
-                 web_api_urls: Sequence[str]):
-        pulumi.set(__self__, "app_protocols", app_protocols)
-        pulumi.set(__self__, "app_type", app_type)
-        pulumi.set(__self__, "create_time", create_time)
-        pulumi.set(__self__, "has_abroad", has_abroad)
-        pulumi.set(__self__, "has_initiate_tcp", has_initiate_tcp)
-        pulumi.set(__self__, "has_initiate_udp", has_initiate_udp)
-        pulumi.set(__self__, "has_vpn", has_vpn)
-        pulumi.set(__self__, "max_tcp_package_len", max_tcp_package_len)
-        pulumi.set(__self__, "max_udp_package_len", max_udp_package_len)
-        pulumi.set(__self__, "min_tcp_package_len", min_tcp_package_len)
-        pulumi.set(__self__, "min_udp_package_len", min_udp_package_len)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "peer_tcp_port", peer_tcp_port)
-        pulumi.set(__self__, "peer_udp_port", peer_udp_port)
-        pulumi.set(__self__, "platform_types", platform_types)
-        pulumi.set(__self__, "resource_type", resource_type)
-        pulumi.set(__self__, "scene_id", scene_id)
-        pulumi.set(__self__, "tcp_end_port", tcp_end_port)
-        pulumi.set(__self__, "tcp_footprint", tcp_footprint)
-        pulumi.set(__self__, "tcp_start_port", tcp_start_port)
-        pulumi.set(__self__, "udp_end_port", udp_end_port)
-        pulumi.set(__self__, "udp_footprint", udp_footprint)
-        pulumi.set(__self__, "udp_start_port", udp_start_port)
-        pulumi.set(__self__, "web_api_urls", web_api_urls)
-
-    @property
-    @pulumi.getter(name="appProtocols")
-    def app_protocols(self) -> Sequence[str]:
-        return pulumi.get(self, "app_protocols")
-
-    @property
-    @pulumi.getter(name="appType")
-    def app_type(self) -> str:
-        return pulumi.get(self, "app_type")
-
-    @property
-    @pulumi.getter(name="createTime")
-    def create_time(self) -> str:
-        return pulumi.get(self, "create_time")
-
-    @property
-    @pulumi.getter(name="hasAbroad")
-    def has_abroad(self) -> str:
-        return pulumi.get(self, "has_abroad")
-
-    @property
-    @pulumi.getter(name="hasInitiateTcp")
-    def has_initiate_tcp(self) -> str:
-        return pulumi.get(self, "has_initiate_tcp")
-
-    @property
-    @pulumi.getter(name="hasInitiateUdp")
-    def has_initiate_udp(self) -> str:
-        return pulumi.get(self, "has_initiate_udp")
-
-    @property
-    @pulumi.getter(name="hasVpn")
-    def has_vpn(self) -> str:
-        return pulumi.get(self, "has_vpn")
-
-    @property
-    @pulumi.getter(name="maxTcpPackageLen")
-    def max_tcp_package_len(self) -> str:
-        return pulumi.get(self, "max_tcp_package_len")
-
-    @property
-    @pulumi.getter(name="maxUdpPackageLen")
-    def max_udp_package_len(self) -> str:
-        return pulumi.get(self, "max_udp_package_len")
-
-    @property
-    @pulumi.getter(name="minTcpPackageLen")
-    def min_tcp_package_len(self) -> str:
-        return pulumi.get(self, "min_tcp_package_len")
-
-    @property
-    @pulumi.getter(name="minUdpPackageLen")
-    def min_udp_package_len(self) -> str:
-        return pulumi.get(self, "min_udp_package_len")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter(name="peerTcpPort")
-    def peer_tcp_port(self) -> str:
-        return pulumi.get(self, "peer_tcp_port")
-
-    @property
-    @pulumi.getter(name="peerUdpPort")
-    def peer_udp_port(self) -> str:
-        return pulumi.get(self, "peer_udp_port")
-
-    @property
-    @pulumi.getter(name="platformTypes")
-    def platform_types(self) -> Sequence[str]:
-        return pulumi.get(self, "platform_types")
-
-    @property
-    @pulumi.getter(name="resourceType")
-    def resource_type(self) -> str:
-        return pulumi.get(self, "resource_type")
-
-    @property
-    @pulumi.getter(name="sceneId")
-    def scene_id(self) -> str:
-        return pulumi.get(self, "scene_id")
-
-    @property
-    @pulumi.getter(name="tcpEndPort")
-    def tcp_end_port(self) -> str:
-        return pulumi.get(self, "tcp_end_port")
-
-    @property
-    @pulumi.getter(name="tcpFootprint")
-    def tcp_footprint(self) -> str:
-        return pulumi.get(self, "tcp_footprint")
-
-    @property
-    @pulumi.getter(name="tcpStartPort")
-    def tcp_start_port(self) -> str:
-        return pulumi.get(self, "tcp_start_port")
-
-    @property
-    @pulumi.getter(name="udpEndPort")
-    def udp_end_port(self) -> str:
-        return pulumi.get(self, "udp_end_port")
-
-    @property
-    @pulumi.getter(name="udpFootprint")
-    def udp_footprint(self) -> str:
-        return pulumi.get(self, "udp_footprint")
-
-    @property
-    @pulumi.getter(name="udpStartPort")
-    def udp_start_port(self) -> str:
-        return pulumi.get(self, "udp_start_port")
-
-    @property
-    @pulumi.getter(name="webApiUrls")
-    def web_api_urls(self) -> Sequence[str]:
-        return pulumi.get(self, "web_api_urls")
 
 
 @pulumi.output_type
@@ -1482,6 +819,27 @@ class DdosPolicyDropOption(dict):
                  tcp_mbps_limit: int,
                  udp_mbps_limit: int,
                  syn_rate: Optional[int] = None):
+        """
+        :param int bad_conn_threshold: The number of new connections based on destination IP that trigger suppression of connections. Valid value ranges: (0~4294967295).
+        :param bool check_sync_conn: Indicate whether to check null connection or not.
+        :param int conn_timeout: Connection timeout of abnormal connection check. Valid value ranges: (0~65535).
+        :param int d_conn_limit: The limit of concurrent connections based on destination IP. Valid value ranges: (0~4294967295).
+        :param int d_new_limit: The limit of new connections based on destination IP. Valid value ranges: (0~4294967295).
+        :param bool drop_abroad: Indicate whether to drop abroad traffic or not.
+        :param bool drop_icmp: Indicate whether to drop ICMP protocol or not.
+        :param bool drop_other: Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
+        :param bool drop_tcp: Indicate whether to drop TCP protocol or not.
+        :param bool drop_udp: Indicate to drop UDP protocol or not.
+        :param int icmp_mbps_limit: The limit of ICMP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        :param bool null_conn_enable: Indicate to enable null connection or not.
+        :param int other_mbps_limit: The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        :param int s_conn_limit: The limit of concurrent connections based on source IP. Valid value ranges: (0~4294967295).
+        :param int s_new_limit: The limit of new connections based on source IP. Valid value ranges: (0~4294967295).
+        :param int syn_limit: The limit of syn of abnormal connection check. Valid value ranges: (0~100).
+        :param int tcp_mbps_limit: The limit of TCP traffic. Valid value ranges: (0~4294967295)(Mbps).
+        :param int udp_mbps_limit: The limit of UDP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        :param int syn_rate: The percentage of syn in ack of abnormal connection check. Valid value ranges: (0~100).
+        """
         pulumi.set(__self__, "bad_conn_threshold", bad_conn_threshold)
         pulumi.set(__self__, "check_sync_conn", check_sync_conn)
         pulumi.set(__self__, "conn_timeout", conn_timeout)
@@ -1506,96 +864,153 @@ class DdosPolicyDropOption(dict):
     @property
     @pulumi.getter(name="badConnThreshold")
     def bad_conn_threshold(self) -> int:
+        """
+        The number of new connections based on destination IP that trigger suppression of connections. Valid value ranges: (0~4294967295).
+        """
         return pulumi.get(self, "bad_conn_threshold")
 
     @property
     @pulumi.getter(name="checkSyncConn")
     def check_sync_conn(self) -> bool:
+        """
+        Indicate whether to check null connection or not.
+        """
         return pulumi.get(self, "check_sync_conn")
 
     @property
     @pulumi.getter(name="connTimeout")
     def conn_timeout(self) -> int:
+        """
+        Connection timeout of abnormal connection check. Valid value ranges: (0~65535).
+        """
         return pulumi.get(self, "conn_timeout")
 
     @property
     @pulumi.getter(name="dConnLimit")
     def d_conn_limit(self) -> int:
+        """
+        The limit of concurrent connections based on destination IP. Valid value ranges: (0~4294967295).
+        """
         return pulumi.get(self, "d_conn_limit")
 
     @property
     @pulumi.getter(name="dNewLimit")
     def d_new_limit(self) -> int:
+        """
+        The limit of new connections based on destination IP. Valid value ranges: (0~4294967295).
+        """
         return pulumi.get(self, "d_new_limit")
 
     @property
     @pulumi.getter(name="dropAbroad")
     def drop_abroad(self) -> bool:
+        """
+        Indicate whether to drop abroad traffic or not.
+        """
         return pulumi.get(self, "drop_abroad")
 
     @property
     @pulumi.getter(name="dropIcmp")
     def drop_icmp(self) -> bool:
+        """
+        Indicate whether to drop ICMP protocol or not.
+        """
         return pulumi.get(self, "drop_icmp")
 
     @property
     @pulumi.getter(name="dropOther")
     def drop_other(self) -> bool:
+        """
+        Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
+        """
         return pulumi.get(self, "drop_other")
 
     @property
     @pulumi.getter(name="dropTcp")
     def drop_tcp(self) -> bool:
+        """
+        Indicate whether to drop TCP protocol or not.
+        """
         return pulumi.get(self, "drop_tcp")
 
     @property
     @pulumi.getter(name="dropUdp")
     def drop_udp(self) -> bool:
+        """
+        Indicate to drop UDP protocol or not.
+        """
         return pulumi.get(self, "drop_udp")
 
     @property
     @pulumi.getter(name="icmpMbpsLimit")
     def icmp_mbps_limit(self) -> int:
+        """
+        The limit of ICMP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        """
         return pulumi.get(self, "icmp_mbps_limit")
 
     @property
     @pulumi.getter(name="nullConnEnable")
     def null_conn_enable(self) -> bool:
+        """
+        Indicate to enable null connection or not.
+        """
         return pulumi.get(self, "null_conn_enable")
 
     @property
     @pulumi.getter(name="otherMbpsLimit")
     def other_mbps_limit(self) -> int:
+        """
+        The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        """
         return pulumi.get(self, "other_mbps_limit")
 
     @property
     @pulumi.getter(name="sConnLimit")
     def s_conn_limit(self) -> int:
+        """
+        The limit of concurrent connections based on source IP. Valid value ranges: (0~4294967295).
+        """
         return pulumi.get(self, "s_conn_limit")
 
     @property
     @pulumi.getter(name="sNewLimit")
     def s_new_limit(self) -> int:
+        """
+        The limit of new connections based on source IP. Valid value ranges: (0~4294967295).
+        """
         return pulumi.get(self, "s_new_limit")
 
     @property
     @pulumi.getter(name="synLimit")
     def syn_limit(self) -> int:
+        """
+        The limit of syn of abnormal connection check. Valid value ranges: (0~100).
+        """
         return pulumi.get(self, "syn_limit")
 
     @property
     @pulumi.getter(name="tcpMbpsLimit")
     def tcp_mbps_limit(self) -> int:
+        """
+        The limit of TCP traffic. Valid value ranges: (0~4294967295)(Mbps).
+        """
         return pulumi.get(self, "tcp_mbps_limit")
 
     @property
     @pulumi.getter(name="udpMbpsLimit")
     def udp_mbps_limit(self) -> int:
+        """
+        The limit of UDP traffic rate. Valid value ranges: (0~4294967295)(Mbps).
+        """
         return pulumi.get(self, "udp_mbps_limit")
 
     @property
     @pulumi.getter(name="synRate")
     def syn_rate(self) -> Optional[int]:
+        """
+        The percentage of syn in ack of abnormal connection check. Valid value ranges: (0~100).
+        """
         return pulumi.get(self, "syn_rate")
 
 
@@ -1651,6 +1066,22 @@ class DdosPolicyPacketFilter(dict):
                  protocol: Optional[str] = None,
                  s_end_port: Optional[int] = None,
                  s_start_port: Optional[int] = None):
+        """
+        :param str action: Action of port to take. Valid values: `drop`, `drop_black`,`drop_rst`,`drop_black_rst`,`transmit`.`drop`(drop the packet), `drop_black`(drop the packet and black the ip),`drop_rst`(drop the packet and disconnect),`drop_black_rst`(drop the packet, black the ip and disconnect),`transmit`(transmit the packet).
+        :param int d_end_port: End port of the destination. Valid value ranges: (0~65535). It must be greater than `d_start_port`.
+        :param int d_start_port: Start port of the destination. Valid value ranges: (0~65535).
+        :param int depth: The depth of match. Valid value ranges: (0~1500).
+        :param bool is_include: Indicate whether to include the key word/regular expression or not.
+        :param str match_begin: Indicate whether to check load or not, `begin_l5` means to match and `no_match` means not.
+        :param str match_str: The key word or regular expression.
+        :param str match_type: Match type. Valid values: `sunday` and `pcre`. `sunday` means key word match while `pcre` means regular match.
+        :param int offset: The offset of match. Valid value ranges: (0~1500).
+        :param int pkt_length_max: The max length of the packet. Valid value ranges: (0~1500)(Mbps). It must be greater than `pkt_length_min`.
+        :param int pkt_length_min: The minimum length of the packet. Valid value ranges: (0~1500)(Mbps).
+        :param str protocol: Protocol. Valid values: `tcp`, `udp`, `icmp`, `all`.
+        :param int s_end_port: End port of the source. Valid value ranges: (0~65535). It must be greater than `s_start_port`.
+        :param int s_start_port: Start port of the source. Valid value ranges: (0~65535).
+        """
         if action is not None:
             pulumi.set(__self__, "action", action)
         if d_end_port is not None:
@@ -1683,71 +1114,113 @@ class DdosPolicyPacketFilter(dict):
     @property
     @pulumi.getter
     def action(self) -> Optional[str]:
+        """
+        Action of port to take. Valid values: `drop`, `drop_black`,`drop_rst`,`drop_black_rst`,`transmit`.`drop`(drop the packet), `drop_black`(drop the packet and black the ip),`drop_rst`(drop the packet and disconnect),`drop_black_rst`(drop the packet, black the ip and disconnect),`transmit`(transmit the packet).
+        """
         return pulumi.get(self, "action")
 
     @property
     @pulumi.getter(name="dEndPort")
     def d_end_port(self) -> Optional[int]:
+        """
+        End port of the destination. Valid value ranges: (0~65535). It must be greater than `d_start_port`.
+        """
         return pulumi.get(self, "d_end_port")
 
     @property
     @pulumi.getter(name="dStartPort")
     def d_start_port(self) -> Optional[int]:
+        """
+        Start port of the destination. Valid value ranges: (0~65535).
+        """
         return pulumi.get(self, "d_start_port")
 
     @property
     @pulumi.getter
     def depth(self) -> Optional[int]:
+        """
+        The depth of match. Valid value ranges: (0~1500).
+        """
         return pulumi.get(self, "depth")
 
     @property
     @pulumi.getter(name="isInclude")
     def is_include(self) -> Optional[bool]:
+        """
+        Indicate whether to include the key word/regular expression or not.
+        """
         return pulumi.get(self, "is_include")
 
     @property
     @pulumi.getter(name="matchBegin")
     def match_begin(self) -> Optional[str]:
+        """
+        Indicate whether to check load or not, `begin_l5` means to match and `no_match` means not.
+        """
         return pulumi.get(self, "match_begin")
 
     @property
     @pulumi.getter(name="matchStr")
     def match_str(self) -> Optional[str]:
+        """
+        The key word or regular expression.
+        """
         return pulumi.get(self, "match_str")
 
     @property
     @pulumi.getter(name="matchType")
     def match_type(self) -> Optional[str]:
+        """
+        Match type. Valid values: `sunday` and `pcre`. `sunday` means key word match while `pcre` means regular match.
+        """
         return pulumi.get(self, "match_type")
 
     @property
     @pulumi.getter
     def offset(self) -> Optional[int]:
+        """
+        The offset of match. Valid value ranges: (0~1500).
+        """
         return pulumi.get(self, "offset")
 
     @property
     @pulumi.getter(name="pktLengthMax")
     def pkt_length_max(self) -> Optional[int]:
+        """
+        The max length of the packet. Valid value ranges: (0~1500)(Mbps). It must be greater than `pkt_length_min`.
+        """
         return pulumi.get(self, "pkt_length_max")
 
     @property
     @pulumi.getter(name="pktLengthMin")
     def pkt_length_min(self) -> Optional[int]:
+        """
+        The minimum length of the packet. Valid value ranges: (0~1500)(Mbps).
+        """
         return pulumi.get(self, "pkt_length_min")
 
     @property
     @pulumi.getter
     def protocol(self) -> Optional[str]:
+        """
+        Protocol. Valid values: `tcp`, `udp`, `icmp`, `all`.
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter(name="sEndPort")
     def s_end_port(self) -> Optional[int]:
+        """
+        End port of the source. Valid value ranges: (0~65535). It must be greater than `s_start_port`.
+        """
         return pulumi.get(self, "s_end_port")
 
     @property
     @pulumi.getter(name="sStartPort")
     def s_start_port(self) -> Optional[int]:
+        """
+        Start port of the source. Valid value ranges: (0~65535).
+        """
         return pulumi.get(self, "s_start_port")
 
 
@@ -1778,6 +1251,13 @@ class DdosPolicyPortFilter(dict):
                  kind: Optional[int] = None,
                  protocol: Optional[str] = None,
                  start_port: Optional[int] = None):
+        """
+        :param str action: Action of port to take. Valid values: `drop`, `transmit`.
+        :param int end_port: End port. Valid value ranges: (0~65535). It must be greater than `start_port`.
+        :param int kind: The type of forbidden port. Valid values: `0`, `1`, `2`. `0` for destination ports make effect, `1` for source ports make effect. `2` for both destination and source ports.
+        :param str protocol: Protocol. Valid values are `tcp`, `udp`, `icmp`, `all`.
+        :param int start_port: Start port. Valid value ranges: (0~65535).
+        """
         if action is not None:
             pulumi.set(__self__, "action", action)
         if end_port is not None:
@@ -1792,26 +1272,41 @@ class DdosPolicyPortFilter(dict):
     @property
     @pulumi.getter
     def action(self) -> Optional[str]:
+        """
+        Action of port to take. Valid values: `drop`, `transmit`.
+        """
         return pulumi.get(self, "action")
 
     @property
     @pulumi.getter(name="endPort")
     def end_port(self) -> Optional[int]:
+        """
+        End port. Valid value ranges: (0~65535). It must be greater than `start_port`.
+        """
         return pulumi.get(self, "end_port")
 
     @property
     @pulumi.getter
     def kind(self) -> Optional[int]:
+        """
+        The type of forbidden port. Valid values: `0`, `1`, `2`. `0` for destination ports make effect, `1` for source ports make effect. `2` for both destination and source ports.
+        """
         return pulumi.get(self, "kind")
 
     @property
     @pulumi.getter
     def protocol(self) -> Optional[str]:
+        """
+        Protocol. Valid values are `tcp`, `udp`, `icmp`, `all`.
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter(name="startPort")
     def start_port(self) -> Optional[int]:
+        """
+        Start port. Valid value ranges: (0~65535).
+        """
         return pulumi.get(self, "start_port")
 
 
@@ -1850,6 +1345,15 @@ class DdosPolicyV2Acl(dict):
                  priority: int,
                  s_port_end: int,
                  s_port_start: int):
+        """
+        :param str action: Action, optional values: drop, transmit, forward.
+        :param int d_port_end: The destination port ends, and the value range is 0~65535.
+        :param int d_port_start: The destination port starts, and the value range is 0~65535.
+        :param str forward_protocol: Protocol type, desirable values tcp, udp, all.
+        :param int priority: Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.
+        :param int s_port_end: The source port ends, and the acceptable value ranges from 0 to 65535.
+        :param int s_port_start: The source port starts, and the value range is 0~65535.
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "d_port_end", d_port_end)
         pulumi.set(__self__, "d_port_start", d_port_start)
@@ -1861,36 +1365,57 @@ class DdosPolicyV2Acl(dict):
     @property
     @pulumi.getter
     def action(self) -> str:
+        """
+        Action, optional values: drop, transmit, forward.
+        """
         return pulumi.get(self, "action")
 
     @property
     @pulumi.getter(name="dPortEnd")
     def d_port_end(self) -> int:
+        """
+        The destination port ends, and the value range is 0~65535.
+        """
         return pulumi.get(self, "d_port_end")
 
     @property
     @pulumi.getter(name="dPortStart")
     def d_port_start(self) -> int:
+        """
+        The destination port starts, and the value range is 0~65535.
+        """
         return pulumi.get(self, "d_port_start")
 
     @property
     @pulumi.getter(name="forwardProtocol")
     def forward_protocol(self) -> str:
+        """
+        Protocol type, desirable values tcp, udp, all.
+        """
         return pulumi.get(self, "forward_protocol")
 
     @property
     @pulumi.getter
     def priority(self) -> int:
+        """
+        Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.
+        """
         return pulumi.get(self, "priority")
 
     @property
     @pulumi.getter(name="sPortEnd")
     def s_port_end(self) -> int:
+        """
+        The source port ends, and the acceptable value ranges from 0 to 65535.
+        """
         return pulumi.get(self, "s_port_end")
 
     @property
     @pulumi.getter(name="sPortStart")
     def s_port_start(self) -> int:
+        """
+        The source port starts, and the value range is 0~65535.
+        """
         return pulumi.get(self, "s_port_start")
 
 
@@ -1916,17 +1441,27 @@ class DdosPolicyV2BlackWhiteIp(dict):
     def __init__(__self__, *,
                  ip: str,
                  ip_type: str):
+        """
+        :param str ip: Ip of resource instance.
+        :param str ip_type: IP type, value [`black`(blacklist IP), `white` (whitelist IP)].
+        """
         pulumi.set(__self__, "ip", ip)
         pulumi.set(__self__, "ip_type", ip_type)
 
     @property
     @pulumi.getter
     def ip(self) -> str:
+        """
+        Ip of resource instance.
+        """
         return pulumi.get(self, "ip")
 
     @property
     @pulumi.getter(name="ipType")
     def ip_type(self) -> str:
+        """
+        IP type, value [`black`(blacklist IP), `white` (whitelist IP)].
+        """
         return pulumi.get(self, "ip_type")
 
 
@@ -1975,6 +1510,17 @@ class DdosPolicyV2DdosConnectLimit(dict):
                  sd_new_limit: int,
                  syn_limit: int,
                  syn_rate: int):
+        """
+        :param int bad_conn_threshold: Based on connection suppression trigger threshold, value range [0,4294967295].
+        :param int conn_timeout: Abnormal connection detection condition, connection timeout, value range [0,65535].
+        :param int dst_conn_limit: Concurrent connection control based on destination IP+ destination port.
+        :param int dst_new_limit: Limit on the number of news per second based on the destination IP.
+        :param int null_conn_enable: Abnormal connection detection conditions, empty connection guard switch, value range[0,1].
+        :param int sd_conn_limit: Concurrent connection control based on source IP + destination IP.
+        :param int sd_new_limit: The limit on the number of news per second based on source IP + destination IP.
+        :param int syn_limit: Anomaly connection detection condition, syn threshold, value range [0,100].
+        :param int syn_rate: Anomalous connection detection condition, percentage of syn ack, value range [0,100].
+        """
         pulumi.set(__self__, "bad_conn_threshold", bad_conn_threshold)
         pulumi.set(__self__, "conn_timeout", conn_timeout)
         pulumi.set(__self__, "dst_conn_limit", dst_conn_limit)
@@ -1988,46 +1534,73 @@ class DdosPolicyV2DdosConnectLimit(dict):
     @property
     @pulumi.getter(name="badConnThreshold")
     def bad_conn_threshold(self) -> int:
+        """
+        Based on connection suppression trigger threshold, value range [0,4294967295].
+        """
         return pulumi.get(self, "bad_conn_threshold")
 
     @property
     @pulumi.getter(name="connTimeout")
     def conn_timeout(self) -> int:
+        """
+        Abnormal connection detection condition, connection timeout, value range [0,65535].
+        """
         return pulumi.get(self, "conn_timeout")
 
     @property
     @pulumi.getter(name="dstConnLimit")
     def dst_conn_limit(self) -> int:
+        """
+        Concurrent connection control based on destination IP+ destination port.
+        """
         return pulumi.get(self, "dst_conn_limit")
 
     @property
     @pulumi.getter(name="dstNewLimit")
     def dst_new_limit(self) -> int:
+        """
+        Limit on the number of news per second based on the destination IP.
+        """
         return pulumi.get(self, "dst_new_limit")
 
     @property
     @pulumi.getter(name="nullConnEnable")
     def null_conn_enable(self) -> int:
+        """
+        Abnormal connection detection conditions, empty connection guard switch, value range[0,1].
+        """
         return pulumi.get(self, "null_conn_enable")
 
     @property
     @pulumi.getter(name="sdConnLimit")
     def sd_conn_limit(self) -> int:
+        """
+        Concurrent connection control based on source IP + destination IP.
+        """
         return pulumi.get(self, "sd_conn_limit")
 
     @property
     @pulumi.getter(name="sdNewLimit")
     def sd_new_limit(self) -> int:
+        """
+        The limit on the number of news per second based on source IP + destination IP.
+        """
         return pulumi.get(self, "sd_new_limit")
 
     @property
     @pulumi.getter(name="synLimit")
     def syn_limit(self) -> int:
+        """
+        Anomaly connection detection condition, syn threshold, value range [0,100].
+        """
         return pulumi.get(self, "syn_limit")
 
     @property
     @pulumi.getter(name="synRate")
     def syn_rate(self) -> int:
+        """
+        Anomalous connection detection condition, percentage of syn ack, value range [0,100].
+        """
         return pulumi.get(self, "syn_rate")
 
 
@@ -2056,6 +1629,11 @@ class DdosPolicyV2DdosGeoIpBlockConfig(dict):
                  action: str,
                  area_lists: Sequence[int],
                  region_type: str):
+        """
+        :param str action: Block action, take the value [`drop`, `trans`].
+        :param Sequence[int] area_lists: When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.
+        :param str region_type: Zone type, value [oversea (overseas),china (domestic),customized (custom region)].
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "area_lists", area_lists)
         pulumi.set(__self__, "region_type", region_type)
@@ -2063,16 +1641,25 @@ class DdosPolicyV2DdosGeoIpBlockConfig(dict):
     @property
     @pulumi.getter
     def action(self) -> str:
+        """
+        Block action, take the value [`drop`, `trans`].
+        """
         return pulumi.get(self, "action")
 
     @property
     @pulumi.getter(name="areaLists")
     def area_lists(self) -> Sequence[int]:
+        """
+        When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.
+        """
         return pulumi.get(self, "area_lists")
 
     @property
     @pulumi.getter(name="regionType")
     def region_type(self) -> str:
+        """
+        Zone type, value [oversea (overseas),china (domestic),customized (custom region)].
+        """
         return pulumi.get(self, "region_type")
 
 
@@ -2105,6 +1692,13 @@ class DdosPolicyV2DdosSpeedLimitConfig(dict):
                  mode: int,
                  packet_rate: int,
                  protocol_list: str):
+        """
+        :param int bandwidth: Bandwidth bps.
+        :param str dst_port_list: List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.
+        :param int mode: Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].
+        :param int packet_rate: Packet rate pps.
+        :param str protocol_list: IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].
+        """
         pulumi.set(__self__, "bandwidth", bandwidth)
         pulumi.set(__self__, "dst_port_list", dst_port_list)
         pulumi.set(__self__, "mode", mode)
@@ -2114,26 +1708,41 @@ class DdosPolicyV2DdosSpeedLimitConfig(dict):
     @property
     @pulumi.getter
     def bandwidth(self) -> int:
+        """
+        Bandwidth bps.
+        """
         return pulumi.get(self, "bandwidth")
 
     @property
     @pulumi.getter(name="dstPortList")
     def dst_port_list(self) -> str:
+        """
+        List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.
+        """
         return pulumi.get(self, "dst_port_list")
 
     @property
     @pulumi.getter
     def mode(self) -> int:
+        """
+        Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].
+        """
         return pulumi.get(self, "mode")
 
     @property
     @pulumi.getter(name="packetRate")
     def packet_rate(self) -> int:
+        """
+        Packet rate pps.
+        """
         return pulumi.get(self, "packet_rate")
 
     @property
     @pulumi.getter(name="protocolList")
     def protocol_list(self) -> str:
+        """
+        IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].
+        """
         return pulumi.get(self, "protocol_list")
 
 
@@ -2202,6 +1811,29 @@ class DdosPolicyV2PacketFilter(dict):
                  s_port_start: int,
                  str: str,
                  str2: str):
+        """
+        :param str action: Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].
+        :param int d_port_end: The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.
+        :param int d_port_start: From the destination port, take the value 0~65535.
+        :param int depth: Detection depth from the detection position, value [0,1500].
+        :param int depth2: Second detection depth starting from the second detection position, value [0,1500].
+        :param int is_not: Whether to include the detected value, take the value [0 (included),1 (not included)].
+        :param int is_not2: Whether the second detection contains the detected value, the value [0 (included),1 (not included)].
+        :param str match_begin: Detect position, take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].
+        :param str match_begin2: The second detection position. take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].
+        :param str match_logic: When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].
+        :param str match_type: Detection type, value [sunday (keyword),pcre (regular expression)].
+        :param str match_type2: The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].
+        :param int offset: Offset from detection position, value range [0, Depth].
+        :param int offset2: Offset from the second detection position, value range [0,Depth2].
+        :param int pktlen_max: The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.
+        :param int pktlen_min: Minimum message length, 1-1500.
+        :param str protocol: Protocol, value [tcp udp icmp all].
+        :param int s_port_end: End source port, take the value 1~65535, must be greater than or equal to the starting source port.
+        :param int s_port_start: Start the source port, take the value 0~65535.
+        :param str str: Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
+        :param str str2: The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
+        """
         pulumi.set(__self__, "action", action)
         pulumi.set(__self__, "d_port_end", d_port_end)
         pulumi.set(__self__, "d_port_start", d_port_start)
@@ -2227,106 +1859,169 @@ class DdosPolicyV2PacketFilter(dict):
     @property
     @pulumi.getter
     def action(self) -> str:
+        """
+        Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].
+        """
         return pulumi.get(self, "action")
 
     @property
     @pulumi.getter(name="dPortEnd")
     def d_port_end(self) -> int:
+        """
+        The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.
+        """
         return pulumi.get(self, "d_port_end")
 
     @property
     @pulumi.getter(name="dPortStart")
     def d_port_start(self) -> int:
+        """
+        From the destination port, take the value 0~65535.
+        """
         return pulumi.get(self, "d_port_start")
 
     @property
     @pulumi.getter
     def depth(self) -> int:
+        """
+        Detection depth from the detection position, value [0,1500].
+        """
         return pulumi.get(self, "depth")
 
     @property
     @pulumi.getter
     def depth2(self) -> int:
+        """
+        Second detection depth starting from the second detection position, value [0,1500].
+        """
         return pulumi.get(self, "depth2")
 
     @property
     @pulumi.getter(name="isNot")
     def is_not(self) -> int:
+        """
+        Whether to include the detected value, take the value [0 (included),1 (not included)].
+        """
         return pulumi.get(self, "is_not")
 
     @property
     @pulumi.getter(name="isNot2")
     def is_not2(self) -> int:
+        """
+        Whether the second detection contains the detected value, the value [0 (included),1 (not included)].
+        """
         return pulumi.get(self, "is_not2")
 
     @property
     @pulumi.getter(name="matchBegin")
     def match_begin(self) -> str:
+        """
+        Detect position, take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].
+        """
         return pulumi.get(self, "match_begin")
 
     @property
     @pulumi.getter(name="matchBegin2")
     def match_begin2(self) -> str:
+        """
+        The second detection position. take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].
+        """
         return pulumi.get(self, "match_begin2")
 
     @property
     @pulumi.getter(name="matchLogic")
     def match_logic(self) -> str:
+        """
+        When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].
+        """
         return pulumi.get(self, "match_logic")
 
     @property
     @pulumi.getter(name="matchType")
     def match_type(self) -> str:
+        """
+        Detection type, value [sunday (keyword),pcre (regular expression)].
+        """
         return pulumi.get(self, "match_type")
 
     @property
     @pulumi.getter(name="matchType2")
     def match_type2(self) -> str:
+        """
+        The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].
+        """
         return pulumi.get(self, "match_type2")
 
     @property
     @pulumi.getter
     def offset(self) -> int:
+        """
+        Offset from detection position, value range [0, Depth].
+        """
         return pulumi.get(self, "offset")
 
     @property
     @pulumi.getter
     def offset2(self) -> int:
+        """
+        Offset from the second detection position, value range [0,Depth2].
+        """
         return pulumi.get(self, "offset2")
 
     @property
     @pulumi.getter(name="pktlenMax")
     def pktlen_max(self) -> int:
+        """
+        The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.
+        """
         return pulumi.get(self, "pktlen_max")
 
     @property
     @pulumi.getter(name="pktlenMin")
     def pktlen_min(self) -> int:
+        """
+        Minimum message length, 1-1500.
+        """
         return pulumi.get(self, "pktlen_min")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Protocol, value [tcp udp icmp all].
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter(name="sPortEnd")
     def s_port_end(self) -> int:
+        """
+        End source port, take the value 1~65535, must be greater than or equal to the starting source port.
+        """
         return pulumi.get(self, "s_port_end")
 
     @property
     @pulumi.getter(name="sPortStart")
     def s_port_start(self) -> int:
+        """
+        Start the source port, take the value 0~65535.
+        """
         return pulumi.get(self, "s_port_start")
 
     @property
     @pulumi.getter
     def str(self) -> str:
+        """
+        Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
+        """
         return pulumi.get(self, "str")
 
     @property
     @pulumi.getter
     def str2(self) -> str:
+        """
+        The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string `123`;When the detection type is pcre, please fill in the regular expression string;].
+        """
         return pulumi.get(self, "str2")
 
 
@@ -2360,6 +2055,12 @@ class DdosPolicyV2ProtocolBlockConfig(dict):
                  drop_other: int,
                  drop_tcp: int,
                  drop_udp: int):
+        """
+        :param int drop_icmp: ICMP block, value [0 (block off), 1 (block on)].
+        :param int drop_other: Other block, value [0 (block off), 1 (block on)].
+        :param int drop_tcp: TCP block, value [0 (block off), 1 (block on)].
+        :param int drop_udp: UDP block, value [0 (block off), 1 (block on)].
+        """
         pulumi.set(__self__, "drop_icmp", drop_icmp)
         pulumi.set(__self__, "drop_other", drop_other)
         pulumi.set(__self__, "drop_tcp", drop_tcp)
@@ -2368,21 +2069,33 @@ class DdosPolicyV2ProtocolBlockConfig(dict):
     @property
     @pulumi.getter(name="dropIcmp")
     def drop_icmp(self) -> int:
+        """
+        ICMP block, value [0 (block off), 1 (block on)].
+        """
         return pulumi.get(self, "drop_icmp")
 
     @property
     @pulumi.getter(name="dropOther")
     def drop_other(self) -> int:
+        """
+        Other block, value [0 (block off), 1 (block on)].
+        """
         return pulumi.get(self, "drop_other")
 
     @property
     @pulumi.getter(name="dropTcp")
     def drop_tcp(self) -> int:
+        """
+        TCP block, value [0 (block off), 1 (block on)].
+        """
         return pulumi.get(self, "drop_tcp")
 
     @property
     @pulumi.getter(name="dropUdp")
     def drop_udp(self) -> int:
+        """
+        UDP block, value [0 (block off), 1 (block on)].
+        """
         return pulumi.get(self, "drop_udp")
 
 
@@ -2417,6 +2130,13 @@ class DdosPolicyWatermarkFilter(dict):
                  open_switch: Optional[bool] = None,
                  tcp_port_lists: Optional[Sequence[str]] = None,
                  udp_port_lists: Optional[Sequence[str]] = None):
+        """
+        :param bool auto_remove: Indicate whether to auto-remove the watermark or not.
+        :param int offset: The offset of watermark. Valid value ranges: (0~1500).
+        :param bool open_switch: Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+        :param Sequence[str] tcp_port_lists: Port range of TCP, the format is like `2000-3000`.
+        :param Sequence[str] udp_port_lists: Port range of TCP, the format is like `2000-3000`.
+        """
         if auto_remove is not None:
             pulumi.set(__self__, "auto_remove", auto_remove)
         if offset is not None:
@@ -2431,26 +2151,41 @@ class DdosPolicyWatermarkFilter(dict):
     @property
     @pulumi.getter(name="autoRemove")
     def auto_remove(self) -> Optional[bool]:
+        """
+        Indicate whether to auto-remove the watermark or not.
+        """
         return pulumi.get(self, "auto_remove")
 
     @property
     @pulumi.getter
     def offset(self) -> Optional[int]:
+        """
+        The offset of watermark. Valid value ranges: (0~1500).
+        """
         return pulumi.get(self, "offset")
 
     @property
     @pulumi.getter(name="openSwitch")
     def open_switch(self) -> Optional[bool]:
+        """
+        Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+        """
         return pulumi.get(self, "open_switch")
 
     @property
     @pulumi.getter(name="tcpPortLists")
     def tcp_port_lists(self) -> Optional[Sequence[str]]:
+        """
+        Port range of TCP, the format is like `2000-3000`.
+        """
         return pulumi.get(self, "tcp_port_lists")
 
     @property
     @pulumi.getter(name="udpPortLists")
     def udp_port_lists(self) -> Optional[Sequence[str]]:
+        """
+        Port range of TCP, the format is like `2000-3000`.
+        """
         return pulumi.get(self, "udp_port_lists")
 
 
@@ -2480,6 +2215,12 @@ class DdosPolicyWatermarkKey(dict):
                  create_time: Optional[str] = None,
                  id: Optional[str] = None,
                  open_switch: Optional[bool] = None):
+        """
+        :param str content: Content of the watermark.
+        :param str create_time: Create time of the DDoS policy.
+        :param str id: Id of the watermark.
+        :param bool open_switch: Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+        """
         if content is not None:
             pulumi.set(__self__, "content", content)
         if create_time is not None:
@@ -2492,21 +2233,33 @@ class DdosPolicyWatermarkKey(dict):
     @property
     @pulumi.getter
     def content(self) -> Optional[str]:
+        """
+        Content of the watermark.
+        """
         return pulumi.get(self, "content")
 
     @property
     @pulumi.getter(name="createTime")
     def create_time(self) -> Optional[str]:
+        """
+        Create time of the DDoS policy.
+        """
         return pulumi.get(self, "create_time")
 
     @property
     @pulumi.getter
     def id(self) -> Optional[str]:
+        """
+        Id of the watermark.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="openSwitch")
     def open_switch(self) -> Optional[bool]:
+        """
+        Indicate whether to open watermark or not. It muse be set `true` when any field of watermark was set.
+        """
         return pulumi.get(self, "open_switch")
 
 
@@ -2515,17 +2268,27 @@ class L4RuleSourceList(dict):
     def __init__(__self__, *,
                  source: str,
                  weight: int):
+        """
+        :param str source: Source IP or domain, valid format of ip is like `1.1.1.1` and valid format of host source is like `abc.com`.
+        :param int weight: Weight of the source, the valid value ranges from 0 to 100.
+        """
         pulumi.set(__self__, "source", source)
         pulumi.set(__self__, "weight", weight)
 
     @property
     @pulumi.getter
     def source(self) -> str:
+        """
+        Source IP or domain, valid format of ip is like `1.1.1.1` and valid format of host source is like `abc.com`.
+        """
         return pulumi.get(self, "source")
 
     @property
     @pulumi.getter
     def weight(self) -> int:
+        """
+        Weight of the source, the valid value ranges from 0 to 100.
+        """
         return pulumi.get(self, "weight")
 
 
@@ -2662,264 +2425,6 @@ class L4RuleV2RulesSourceList(dict):
 
 
 @pulumi.output_type
-class L4RulesListResult(dict):
-    def __init__(__self__, *,
-                 d_port: int,
-                 health_check_health_num: int,
-                 health_check_interval: int,
-                 health_check_switch: bool,
-                 health_check_timeout: int,
-                 health_check_unhealth_num: int,
-                 lb_type: int,
-                 name: str,
-                 protocol: str,
-                 rule_id: str,
-                 s_port: int,
-                 session_switch: bool,
-                 session_time: int,
-                 source_lists: Sequence['outputs.L4RulesListSourceListResult'],
-                 source_type: int):
-        pulumi.set(__self__, "d_port", d_port)
-        pulumi.set(__self__, "health_check_health_num", health_check_health_num)
-        pulumi.set(__self__, "health_check_interval", health_check_interval)
-        pulumi.set(__self__, "health_check_switch", health_check_switch)
-        pulumi.set(__self__, "health_check_timeout", health_check_timeout)
-        pulumi.set(__self__, "health_check_unhealth_num", health_check_unhealth_num)
-        pulumi.set(__self__, "lb_type", lb_type)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "protocol", protocol)
-        pulumi.set(__self__, "rule_id", rule_id)
-        pulumi.set(__self__, "s_port", s_port)
-        pulumi.set(__self__, "session_switch", session_switch)
-        pulumi.set(__self__, "session_time", session_time)
-        pulumi.set(__self__, "source_lists", source_lists)
-        pulumi.set(__self__, "source_type", source_type)
-
-    @property
-    @pulumi.getter(name="dPort")
-    def d_port(self) -> int:
-        return pulumi.get(self, "d_port")
-
-    @property
-    @pulumi.getter(name="healthCheckHealthNum")
-    def health_check_health_num(self) -> int:
-        return pulumi.get(self, "health_check_health_num")
-
-    @property
-    @pulumi.getter(name="healthCheckInterval")
-    def health_check_interval(self) -> int:
-        return pulumi.get(self, "health_check_interval")
-
-    @property
-    @pulumi.getter(name="healthCheckSwitch")
-    def health_check_switch(self) -> bool:
-        return pulumi.get(self, "health_check_switch")
-
-    @property
-    @pulumi.getter(name="healthCheckTimeout")
-    def health_check_timeout(self) -> int:
-        return pulumi.get(self, "health_check_timeout")
-
-    @property
-    @pulumi.getter(name="healthCheckUnhealthNum")
-    def health_check_unhealth_num(self) -> int:
-        return pulumi.get(self, "health_check_unhealth_num")
-
-    @property
-    @pulumi.getter(name="lbType")
-    def lb_type(self) -> int:
-        return pulumi.get(self, "lb_type")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter
-    def protocol(self) -> str:
-        return pulumi.get(self, "protocol")
-
-    @property
-    @pulumi.getter(name="ruleId")
-    def rule_id(self) -> str:
-        return pulumi.get(self, "rule_id")
-
-    @property
-    @pulumi.getter(name="sPort")
-    def s_port(self) -> int:
-        return pulumi.get(self, "s_port")
-
-    @property
-    @pulumi.getter(name="sessionSwitch")
-    def session_switch(self) -> bool:
-        return pulumi.get(self, "session_switch")
-
-    @property
-    @pulumi.getter(name="sessionTime")
-    def session_time(self) -> int:
-        return pulumi.get(self, "session_time")
-
-    @property
-    @pulumi.getter(name="sourceLists")
-    def source_lists(self) -> Sequence['outputs.L4RulesListSourceListResult']:
-        return pulumi.get(self, "source_lists")
-
-    @property
-    @pulumi.getter(name="sourceType")
-    def source_type(self) -> int:
-        return pulumi.get(self, "source_type")
-
-
-@pulumi.output_type
-class L4RulesListSourceListResult(dict):
-    def __init__(__self__, *,
-                 source: str,
-                 weight: int):
-        pulumi.set(__self__, "source", source)
-        pulumi.set(__self__, "weight", weight)
-
-    @property
-    @pulumi.getter
-    def source(self) -> str:
-        return pulumi.get(self, "source")
-
-    @property
-    @pulumi.getter
-    def weight(self) -> int:
-        return pulumi.get(self, "weight")
-
-
-@pulumi.output_type
-class L4RulesV2ListResult(dict):
-    def __init__(__self__, *,
-                 id: str,
-                 ip: str,
-                 keep_enable: bool,
-                 keeptime: int,
-                 lb_type: int,
-                 modify_time: str,
-                 protocol: str,
-                 region: int,
-                 remove_switch: bool,
-                 rule_id: str,
-                 rule_name: str,
-                 source_lists: Sequence['outputs.L4RulesV2ListSourceListResult'],
-                 source_port: int,
-                 source_type: int,
-                 virtual_port: int):
-        pulumi.set(__self__, "id", id)
-        pulumi.set(__self__, "ip", ip)
-        pulumi.set(__self__, "keep_enable", keep_enable)
-        pulumi.set(__self__, "keeptime", keeptime)
-        pulumi.set(__self__, "lb_type", lb_type)
-        pulumi.set(__self__, "modify_time", modify_time)
-        pulumi.set(__self__, "protocol", protocol)
-        pulumi.set(__self__, "region", region)
-        pulumi.set(__self__, "remove_switch", remove_switch)
-        pulumi.set(__self__, "rule_id", rule_id)
-        pulumi.set(__self__, "rule_name", rule_name)
-        pulumi.set(__self__, "source_lists", source_lists)
-        pulumi.set(__self__, "source_port", source_port)
-        pulumi.set(__self__, "source_type", source_type)
-        pulumi.set(__self__, "virtual_port", virtual_port)
-
-    @property
-    @pulumi.getter
-    def id(self) -> str:
-        return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter
-    def ip(self) -> str:
-        return pulumi.get(self, "ip")
-
-    @property
-    @pulumi.getter(name="keepEnable")
-    def keep_enable(self) -> bool:
-        return pulumi.get(self, "keep_enable")
-
-    @property
-    @pulumi.getter
-    def keeptime(self) -> int:
-        return pulumi.get(self, "keeptime")
-
-    @property
-    @pulumi.getter(name="lbType")
-    def lb_type(self) -> int:
-        return pulumi.get(self, "lb_type")
-
-    @property
-    @pulumi.getter(name="modifyTime")
-    def modify_time(self) -> str:
-        return pulumi.get(self, "modify_time")
-
-    @property
-    @pulumi.getter
-    def protocol(self) -> str:
-        return pulumi.get(self, "protocol")
-
-    @property
-    @pulumi.getter
-    def region(self) -> int:
-        return pulumi.get(self, "region")
-
-    @property
-    @pulumi.getter(name="removeSwitch")
-    def remove_switch(self) -> bool:
-        return pulumi.get(self, "remove_switch")
-
-    @property
-    @pulumi.getter(name="ruleId")
-    def rule_id(self) -> str:
-        return pulumi.get(self, "rule_id")
-
-    @property
-    @pulumi.getter(name="ruleName")
-    def rule_name(self) -> str:
-        return pulumi.get(self, "rule_name")
-
-    @property
-    @pulumi.getter(name="sourceLists")
-    def source_lists(self) -> Sequence['outputs.L4RulesV2ListSourceListResult']:
-        return pulumi.get(self, "source_lists")
-
-    @property
-    @pulumi.getter(name="sourcePort")
-    def source_port(self) -> int:
-        return pulumi.get(self, "source_port")
-
-    @property
-    @pulumi.getter(name="sourceType")
-    def source_type(self) -> int:
-        return pulumi.get(self, "source_type")
-
-    @property
-    @pulumi.getter(name="virtualPort")
-    def virtual_port(self) -> int:
-        return pulumi.get(self, "virtual_port")
-
-
-@pulumi.output_type
-class L4RulesV2ListSourceListResult(dict):
-    def __init__(__self__, *,
-                 source: str,
-                 weight: int):
-        pulumi.set(__self__, "source", source)
-        pulumi.set(__self__, "weight", weight)
-
-    @property
-    @pulumi.getter
-    def source(self) -> str:
-        return pulumi.get(self, "source")
-
-    @property
-    @pulumi.getter
-    def weight(self) -> int:
-        return pulumi.get(self, "weight")
-
-
-@pulumi.output_type
 class L7RuleV2Rule(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -2964,6 +2469,18 @@ class L7RuleV2Rule(dict):
                  cert_type: Optional[int] = None,
                  https_to_http_enable: Optional[int] = None,
                  ssl_id: Optional[str] = None):
+        """
+        :param str domain: Domain of the rule.
+        :param int keep_enable: session hold switch.
+        :param int keeptime: The keeptime of the layer 4 rule.
+        :param int lb_type: LB type of the rule, `1` for weight cycling and `2` for IP hash.
+        :param str protocol: Protocol of the rule.
+        :param int source_type: Source type, `1` for source of host, `2` for source of IP.
+        :param int cc_enable: HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.
+        :param int cert_type: The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.
+        :param int https_to_http_enable: Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.
+        :param str ssl_id: When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.
+        """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "keep_enable", keep_enable)
         pulumi.set(__self__, "keeptime", keeptime)
@@ -2983,26 +2500,41 @@ class L7RuleV2Rule(dict):
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        Domain of the rule.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter(name="keepEnable")
     def keep_enable(self) -> int:
+        """
+        session hold switch.
+        """
         return pulumi.get(self, "keep_enable")
 
     @property
     @pulumi.getter
     def keeptime(self) -> int:
+        """
+        The keeptime of the layer 4 rule.
+        """
         return pulumi.get(self, "keeptime")
 
     @property
     @pulumi.getter(name="lbType")
     def lb_type(self) -> int:
+        """
+        LB type of the rule, `1` for weight cycling and `2` for IP hash.
+        """
         return pulumi.get(self, "lb_type")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Protocol of the rule.
+        """
         return pulumi.get(self, "protocol")
 
     @property
@@ -3013,26 +2545,41 @@ class L7RuleV2Rule(dict):
     @property
     @pulumi.getter(name="sourceType")
     def source_type(self) -> int:
+        """
+        Source type, `1` for source of host, `2` for source of IP.
+        """
         return pulumi.get(self, "source_type")
 
     @property
     @pulumi.getter(name="ccEnable")
     def cc_enable(self) -> Optional[int]:
+        """
+        HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.
+        """
         return pulumi.get(self, "cc_enable")
 
     @property
     @pulumi.getter(name="certType")
     def cert_type(self) -> Optional[int]:
+        """
+        The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.
+        """
         return pulumi.get(self, "cert_type")
 
     @property
     @pulumi.getter(name="httpsToHttpEnable")
     def https_to_http_enable(self) -> Optional[int]:
+        """
+        Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.
+        """
         return pulumi.get(self, "https_to_http_enable")
 
     @property
     @pulumi.getter(name="sslId")
     def ssl_id(self) -> Optional[str]:
+        """
+        When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.
+        """
         return pulumi.get(self, "ssl_id")
 
 
@@ -3056,7 +2603,1747 @@ class L7RuleV2RuleSourceList(dict):
 
 
 @pulumi.output_type
-class L7RulesListResult(dict):
+class GetCcHttpPoliciesListResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 create_time: str,
+                 frequency: int,
+                 ip_lists: Sequence[str],
+                 name: str,
+                 policy_id: str,
+                 resource_id: str,
+                 resource_type: str,
+                 rule_lists: Sequence['outputs.GetCcHttpPoliciesListRuleListResult'],
+                 smode: str,
+                 switch: bool):
+        """
+        :param str action: Action mode.
+        :param str create_time: Create time of the CC self-define http policy.
+        :param int frequency: Max frequency per minute.
+        :param Sequence[str] ip_lists: IP of the CC self-define http policy.
+        :param str name: Name of the CC http policy to be queried.
+        :param str policy_id: Id of the CC http policy to be queried.
+        :param str resource_id: ID of the resource that the CC http policy works for.
+        :param str resource_type: Type of the resource that the CC http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+        :param str smode: Match mode.
+        :param bool switch: Indicate the CC self-define http policy takes effect or not.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "frequency", frequency)
+        pulumi.set(__self__, "ip_lists", ip_lists)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "policy_id", policy_id)
+        pulumi.set(__self__, "resource_id", resource_id)
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "rule_lists", rule_lists)
+        pulumi.set(__self__, "smode", smode)
+        pulumi.set(__self__, "switch", switch)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Action mode.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time of the CC self-define http policy.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def frequency(self) -> int:
+        """
+        Max frequency per minute.
+        """
+        return pulumi.get(self, "frequency")
+
+    @property
+    @pulumi.getter(name="ipLists")
+    def ip_lists(self) -> Sequence[str]:
+        """
+        IP of the CC self-define http policy.
+        """
+        return pulumi.get(self, "ip_lists")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of the CC http policy to be queried.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="policyId")
+    def policy_id(self) -> str:
+        """
+        Id of the CC http policy to be queried.
+        """
+        return pulumi.get(self, "policy_id")
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> str:
+        """
+        ID of the resource that the CC http policy works for.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        Type of the resource that the CC http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter(name="ruleLists")
+    def rule_lists(self) -> Sequence['outputs.GetCcHttpPoliciesListRuleListResult']:
+        return pulumi.get(self, "rule_lists")
+
+    @property
+    @pulumi.getter
+    def smode(self) -> str:
+        """
+        Match mode.
+        """
+        return pulumi.get(self, "smode")
+
+    @property
+    @pulumi.getter
+    def switch(self) -> bool:
+        """
+        Indicate the CC self-define http policy takes effect or not.
+        """
+        return pulumi.get(self, "switch")
+
+
+@pulumi.output_type
+class GetCcHttpPoliciesListRuleListResult(dict):
+    def __init__(__self__, *,
+                 operator: str,
+                 skey: str,
+                 value: str):
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "skey", skey)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def skey(self) -> str:
+        return pulumi.get(self, "skey")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetCcHttpsPoliciesListResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 create_time: str,
+                 domain: str,
+                 ip_lists: Sequence[str],
+                 name: str,
+                 policy_id: str,
+                 resource_id: str,
+                 resource_type: str,
+                 rule_id: str,
+                 rule_lists: Sequence['outputs.GetCcHttpsPoliciesListRuleListResult'],
+                 switch: bool):
+        """
+        :param str action: Action mode.
+        :param str create_time: Create time of the CC self-define https policy.
+        :param str domain: Domain that the CC self-define https policy works for.
+        :param Sequence[str] ip_lists: Ip of the CC self-define https policy.
+        :param str name: Name of the CC https policy to be queried.
+        :param str policy_id: Id of the CC https policy to be queried.
+        :param str resource_id: Id of the resource that the CC https policy works for.
+        :param str resource_type: Type of the resource that the CC https policy works for, valid value is `bgpip`.
+        :param str rule_id: Rule id of the domain that the CC self-define https policy works for.
+        :param bool switch: Indicate the CC self-define https policy takes effect or not.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "ip_lists", ip_lists)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "policy_id", policy_id)
+        pulumi.set(__self__, "resource_id", resource_id)
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "rule_id", rule_id)
+        pulumi.set(__self__, "rule_lists", rule_lists)
+        pulumi.set(__self__, "switch", switch)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Action mode.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time of the CC self-define https policy.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        Domain that the CC self-define https policy works for.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="ipLists")
+    def ip_lists(self) -> Sequence[str]:
+        """
+        Ip of the CC self-define https policy.
+        """
+        return pulumi.get(self, "ip_lists")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of the CC https policy to be queried.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="policyId")
+    def policy_id(self) -> str:
+        """
+        Id of the CC https policy to be queried.
+        """
+        return pulumi.get(self, "policy_id")
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> str:
+        """
+        Id of the resource that the CC https policy works for.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        Type of the resource that the CC https policy works for, valid value is `bgpip`.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter(name="ruleId")
+    def rule_id(self) -> str:
+        """
+        Rule id of the domain that the CC self-define https policy works for.
+        """
+        return pulumi.get(self, "rule_id")
+
+    @property
+    @pulumi.getter(name="ruleLists")
+    def rule_lists(self) -> Sequence['outputs.GetCcHttpsPoliciesListRuleListResult']:
+        return pulumi.get(self, "rule_lists")
+
+    @property
+    @pulumi.getter
+    def switch(self) -> bool:
+        """
+        Indicate the CC self-define https policy takes effect or not.
+        """
+        return pulumi.get(self, "switch")
+
+
+@pulumi.output_type
+class GetCcHttpsPoliciesListRuleListResult(dict):
+    def __init__(__self__, *,
+                 operator: str,
+                 skey: str,
+                 value: str):
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "skey", skey)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def skey(self) -> str:
+        return pulumi.get(self, "skey")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetDdosPoliciesListResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 drop_options: Sequence['outputs.GetDdosPoliciesListDropOptionResult'],
+                 name: str,
+                 packet_filters: Sequence['outputs.GetDdosPoliciesListPacketFilterResult'],
+                 policy_id: str,
+                 port_filters: Sequence['outputs.GetDdosPoliciesListPortFilterResult'],
+                 scene_id: str,
+                 watermark_filters: Sequence['outputs.GetDdosPoliciesListWatermarkFilterResult'],
+                 watermark_keys: Sequence['outputs.GetDdosPoliciesListWatermarkKeyResult'],
+                 black_ips: Optional[Sequence[str]] = None,
+                 white_ips: Optional[Sequence[str]] = None):
+        """
+        :param str create_time: Create time of the DDoS policy.
+        :param Sequence['GetDdosPoliciesListDropOptionArgs'] drop_options: Option list of abnormal check of the DDoS policy.
+        :param str name: Name of the DDoS policy.
+        :param Sequence['GetDdosPoliciesListPacketFilterArgs'] packet_filters: Message filter options list.
+        :param str policy_id: ID of the DDoS policy to be query.
+        :param Sequence['GetDdosPoliciesListPortFilterArgs'] port_filters: Port limits of abnormal check of the DDoS policy.
+        :param str scene_id: Id of policy case that the DDoS policy works for.
+        :param Sequence['GetDdosPoliciesListWatermarkFilterArgs'] watermark_filters: Watermark policy options, and only support one watermark policy at most.
+        :param Sequence['GetDdosPoliciesListWatermarkKeyArgs'] watermark_keys: Watermark content.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "drop_options", drop_options)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "packet_filters", packet_filters)
+        pulumi.set(__self__, "policy_id", policy_id)
+        pulumi.set(__self__, "port_filters", port_filters)
+        pulumi.set(__self__, "scene_id", scene_id)
+        pulumi.set(__self__, "watermark_filters", watermark_filters)
+        pulumi.set(__self__, "watermark_keys", watermark_keys)
+        if black_ips is not None:
+            pulumi.set(__self__, "black_ips", black_ips)
+        if white_ips is not None:
+            pulumi.set(__self__, "white_ips", white_ips)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time of the DDoS policy.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="dropOptions")
+    def drop_options(self) -> Sequence['outputs.GetDdosPoliciesListDropOptionResult']:
+        """
+        Option list of abnormal check of the DDoS policy.
+        """
+        return pulumi.get(self, "drop_options")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of the DDoS policy.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="packetFilters")
+    def packet_filters(self) -> Sequence['outputs.GetDdosPoliciesListPacketFilterResult']:
+        """
+        Message filter options list.
+        """
+        return pulumi.get(self, "packet_filters")
+
+    @property
+    @pulumi.getter(name="policyId")
+    def policy_id(self) -> str:
+        """
+        ID of the DDoS policy to be query.
+        """
+        return pulumi.get(self, "policy_id")
+
+    @property
+    @pulumi.getter(name="portFilters")
+    def port_filters(self) -> Sequence['outputs.GetDdosPoliciesListPortFilterResult']:
+        """
+        Port limits of abnormal check of the DDoS policy.
+        """
+        return pulumi.get(self, "port_filters")
+
+    @property
+    @pulumi.getter(name="sceneId")
+    def scene_id(self) -> str:
+        """
+        Id of policy case that the DDoS policy works for.
+        """
+        return pulumi.get(self, "scene_id")
+
+    @property
+    @pulumi.getter(name="watermarkFilters")
+    def watermark_filters(self) -> Sequence['outputs.GetDdosPoliciesListWatermarkFilterResult']:
+        """
+        Watermark policy options, and only support one watermark policy at most.
+        """
+        return pulumi.get(self, "watermark_filters")
+
+    @property
+    @pulumi.getter(name="watermarkKeys")
+    def watermark_keys(self) -> Sequence['outputs.GetDdosPoliciesListWatermarkKeyResult']:
+        """
+        Watermark content.
+        """
+        return pulumi.get(self, "watermark_keys")
+
+    @property
+    @pulumi.getter(name="blackIps")
+    def black_ips(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "black_ips")
+
+    @property
+    @pulumi.getter(name="whiteIps")
+    def white_ips(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "white_ips")
+
+
+@pulumi.output_type
+class GetDdosPoliciesListDropOptionResult(dict):
+    def __init__(__self__, *,
+                 bad_conn_threshold: int,
+                 check_sync_conn: bool,
+                 conn_timeout: int,
+                 d_conn_limit: int,
+                 d_new_limit: int,
+                 drop_abroad: bool,
+                 drop_icmp: bool,
+                 drop_other: bool,
+                 drop_tcp: bool,
+                 drop_udp: bool,
+                 icmp_mbps_limit: int,
+                 null_conn_enable: bool,
+                 other_mbps_limit: int,
+                 s_conn_limit: int,
+                 s_new_limit: int,
+                 syn_limit: int,
+                 syn_rate: int,
+                 tcp_mbps_limit: int,
+                 udp_mbps_limit: int):
+        """
+        :param int bad_conn_threshold: The number of new connections based on destination IP that trigger suppression of connections.
+        :param bool check_sync_conn: Indicate whether to check null connection or not.
+        :param int conn_timeout: Connection timeout of abnormal connection check.
+        :param int d_conn_limit: The limit of concurrent connections based on destination IP.
+        :param int d_new_limit: The limit of new connections based on destination IP.
+        :param bool drop_icmp: Indicate whether to drop ICMP protocol or not.
+        :param bool drop_other: Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
+        :param bool drop_tcp: Indicate whether to drop TCP protocol or not.
+        :param bool drop_udp: Indicate to drop UDP protocol or not.
+        :param int icmp_mbps_limit: The limit of ICMP traffic rate.
+        :param bool null_conn_enable: Indicate to enable null connection or not.
+        :param int other_mbps_limit: The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.
+        :param int s_conn_limit: The limit of concurrent connections based on source IP.
+        :param int s_new_limit: The limit of new connections based on source IP.
+        :param int syn_limit: The limit of syn of abnormal connection check.
+        :param int syn_rate: The percentage of syn in ack of abnormal connection check.
+        :param int tcp_mbps_limit: The limit of TCP traffic.
+        :param int udp_mbps_limit: The limit of UDP traffic rate.
+        """
+        pulumi.set(__self__, "bad_conn_threshold", bad_conn_threshold)
+        pulumi.set(__self__, "check_sync_conn", check_sync_conn)
+        pulumi.set(__self__, "conn_timeout", conn_timeout)
+        pulumi.set(__self__, "d_conn_limit", d_conn_limit)
+        pulumi.set(__self__, "d_new_limit", d_new_limit)
+        pulumi.set(__self__, "drop_abroad", drop_abroad)
+        pulumi.set(__self__, "drop_icmp", drop_icmp)
+        pulumi.set(__self__, "drop_other", drop_other)
+        pulumi.set(__self__, "drop_tcp", drop_tcp)
+        pulumi.set(__self__, "drop_udp", drop_udp)
+        pulumi.set(__self__, "icmp_mbps_limit", icmp_mbps_limit)
+        pulumi.set(__self__, "null_conn_enable", null_conn_enable)
+        pulumi.set(__self__, "other_mbps_limit", other_mbps_limit)
+        pulumi.set(__self__, "s_conn_limit", s_conn_limit)
+        pulumi.set(__self__, "s_new_limit", s_new_limit)
+        pulumi.set(__self__, "syn_limit", syn_limit)
+        pulumi.set(__self__, "syn_rate", syn_rate)
+        pulumi.set(__self__, "tcp_mbps_limit", tcp_mbps_limit)
+        pulumi.set(__self__, "udp_mbps_limit", udp_mbps_limit)
+
+    @property
+    @pulumi.getter(name="badConnThreshold")
+    def bad_conn_threshold(self) -> int:
+        """
+        The number of new connections based on destination IP that trigger suppression of connections.
+        """
+        return pulumi.get(self, "bad_conn_threshold")
+
+    @property
+    @pulumi.getter(name="checkSyncConn")
+    def check_sync_conn(self) -> bool:
+        """
+        Indicate whether to check null connection or not.
+        """
+        return pulumi.get(self, "check_sync_conn")
+
+    @property
+    @pulumi.getter(name="connTimeout")
+    def conn_timeout(self) -> int:
+        """
+        Connection timeout of abnormal connection check.
+        """
+        return pulumi.get(self, "conn_timeout")
+
+    @property
+    @pulumi.getter(name="dConnLimit")
+    def d_conn_limit(self) -> int:
+        """
+        The limit of concurrent connections based on destination IP.
+        """
+        return pulumi.get(self, "d_conn_limit")
+
+    @property
+    @pulumi.getter(name="dNewLimit")
+    def d_new_limit(self) -> int:
+        """
+        The limit of new connections based on destination IP.
+        """
+        return pulumi.get(self, "d_new_limit")
+
+    @property
+    @pulumi.getter(name="dropAbroad")
+    def drop_abroad(self) -> bool:
+        return pulumi.get(self, "drop_abroad")
+
+    @property
+    @pulumi.getter(name="dropIcmp")
+    def drop_icmp(self) -> bool:
+        """
+        Indicate whether to drop ICMP protocol or not.
+        """
+        return pulumi.get(self, "drop_icmp")
+
+    @property
+    @pulumi.getter(name="dropOther")
+    def drop_other(self) -> bool:
+        """
+        Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.
+        """
+        return pulumi.get(self, "drop_other")
+
+    @property
+    @pulumi.getter(name="dropTcp")
+    def drop_tcp(self) -> bool:
+        """
+        Indicate whether to drop TCP protocol or not.
+        """
+        return pulumi.get(self, "drop_tcp")
+
+    @property
+    @pulumi.getter(name="dropUdp")
+    def drop_udp(self) -> bool:
+        """
+        Indicate to drop UDP protocol or not.
+        """
+        return pulumi.get(self, "drop_udp")
+
+    @property
+    @pulumi.getter(name="icmpMbpsLimit")
+    def icmp_mbps_limit(self) -> int:
+        """
+        The limit of ICMP traffic rate.
+        """
+        return pulumi.get(self, "icmp_mbps_limit")
+
+    @property
+    @pulumi.getter(name="nullConnEnable")
+    def null_conn_enable(self) -> bool:
+        """
+        Indicate to enable null connection or not.
+        """
+        return pulumi.get(self, "null_conn_enable")
+
+    @property
+    @pulumi.getter(name="otherMbpsLimit")
+    def other_mbps_limit(self) -> int:
+        """
+        The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.
+        """
+        return pulumi.get(self, "other_mbps_limit")
+
+    @property
+    @pulumi.getter(name="sConnLimit")
+    def s_conn_limit(self) -> int:
+        """
+        The limit of concurrent connections based on source IP.
+        """
+        return pulumi.get(self, "s_conn_limit")
+
+    @property
+    @pulumi.getter(name="sNewLimit")
+    def s_new_limit(self) -> int:
+        """
+        The limit of new connections based on source IP.
+        """
+        return pulumi.get(self, "s_new_limit")
+
+    @property
+    @pulumi.getter(name="synLimit")
+    def syn_limit(self) -> int:
+        """
+        The limit of syn of abnormal connection check.
+        """
+        return pulumi.get(self, "syn_limit")
+
+    @property
+    @pulumi.getter(name="synRate")
+    def syn_rate(self) -> int:
+        """
+        The percentage of syn in ack of abnormal connection check.
+        """
+        return pulumi.get(self, "syn_rate")
+
+    @property
+    @pulumi.getter(name="tcpMbpsLimit")
+    def tcp_mbps_limit(self) -> int:
+        """
+        The limit of TCP traffic.
+        """
+        return pulumi.get(self, "tcp_mbps_limit")
+
+    @property
+    @pulumi.getter(name="udpMbpsLimit")
+    def udp_mbps_limit(self) -> int:
+        """
+        The limit of UDP traffic rate.
+        """
+        return pulumi.get(self, "udp_mbps_limit")
+
+
+@pulumi.output_type
+class GetDdosPoliciesListPacketFilterResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 d_end_port: int,
+                 d_start_port: int,
+                 depth: int,
+                 is_include: bool,
+                 match_begin: str,
+                 match_str: str,
+                 match_type: str,
+                 offset: int,
+                 pkt_length_max: int,
+                 pkt_length_min: int,
+                 protocol: str,
+                 s_end_port: int,
+                 s_start_port: int):
+        """
+        :param str action: Action of port to take.
+        :param int d_end_port: End port of the destination.
+        :param int d_start_port: Start port of the destination.
+        :param int depth: The depth of match.
+        :param bool is_include: Indicate whether to include the key word/regular expression or not.
+        :param str match_begin: Indicate whether to check load or not.
+        :param str match_str: The key word or regular expression.
+        :param str match_type: Match type.
+        :param int offset: The offset of watermark.
+        :param int pkt_length_max: The max length of the packet.
+        :param int pkt_length_min: The minimum length of the packet.
+        :param str protocol: Protocol.
+        :param int s_end_port: End port of the source.
+        :param int s_start_port: Start port of the source.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "d_end_port", d_end_port)
+        pulumi.set(__self__, "d_start_port", d_start_port)
+        pulumi.set(__self__, "depth", depth)
+        pulumi.set(__self__, "is_include", is_include)
+        pulumi.set(__self__, "match_begin", match_begin)
+        pulumi.set(__self__, "match_str", match_str)
+        pulumi.set(__self__, "match_type", match_type)
+        pulumi.set(__self__, "offset", offset)
+        pulumi.set(__self__, "pkt_length_max", pkt_length_max)
+        pulumi.set(__self__, "pkt_length_min", pkt_length_min)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "s_end_port", s_end_port)
+        pulumi.set(__self__, "s_start_port", s_start_port)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Action of port to take.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="dEndPort")
+    def d_end_port(self) -> int:
+        """
+        End port of the destination.
+        """
+        return pulumi.get(self, "d_end_port")
+
+    @property
+    @pulumi.getter(name="dStartPort")
+    def d_start_port(self) -> int:
+        """
+        Start port of the destination.
+        """
+        return pulumi.get(self, "d_start_port")
+
+    @property
+    @pulumi.getter
+    def depth(self) -> int:
+        """
+        The depth of match.
+        """
+        return pulumi.get(self, "depth")
+
+    @property
+    @pulumi.getter(name="isInclude")
+    def is_include(self) -> bool:
+        """
+        Indicate whether to include the key word/regular expression or not.
+        """
+        return pulumi.get(self, "is_include")
+
+    @property
+    @pulumi.getter(name="matchBegin")
+    def match_begin(self) -> str:
+        """
+        Indicate whether to check load or not.
+        """
+        return pulumi.get(self, "match_begin")
+
+    @property
+    @pulumi.getter(name="matchStr")
+    def match_str(self) -> str:
+        """
+        The key word or regular expression.
+        """
+        return pulumi.get(self, "match_str")
+
+    @property
+    @pulumi.getter(name="matchType")
+    def match_type(self) -> str:
+        """
+        Match type.
+        """
+        return pulumi.get(self, "match_type")
+
+    @property
+    @pulumi.getter
+    def offset(self) -> int:
+        """
+        The offset of watermark.
+        """
+        return pulumi.get(self, "offset")
+
+    @property
+    @pulumi.getter(name="pktLengthMax")
+    def pkt_length_max(self) -> int:
+        """
+        The max length of the packet.
+        """
+        return pulumi.get(self, "pkt_length_max")
+
+    @property
+    @pulumi.getter(name="pktLengthMin")
+    def pkt_length_min(self) -> int:
+        """
+        The minimum length of the packet.
+        """
+        return pulumi.get(self, "pkt_length_min")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Protocol.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="sEndPort")
+    def s_end_port(self) -> int:
+        """
+        End port of the source.
+        """
+        return pulumi.get(self, "s_end_port")
+
+    @property
+    @pulumi.getter(name="sStartPort")
+    def s_start_port(self) -> int:
+        """
+        Start port of the source.
+        """
+        return pulumi.get(self, "s_start_port")
+
+
+@pulumi.output_type
+class GetDdosPoliciesListPortFilterResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 end_port: int,
+                 kind: int,
+                 protocol: str,
+                 start_port: int):
+        """
+        :param str action: Action of port to take.
+        :param int end_port: End port.
+        :param int kind: The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.
+        :param str protocol: Protocol.
+        :param int start_port: Start port.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "end_port", end_port)
+        pulumi.set(__self__, "kind", kind)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "start_port", start_port)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Action of port to take.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="endPort")
+    def end_port(self) -> int:
+        """
+        End port.
+        """
+        return pulumi.get(self, "end_port")
+
+    @property
+    @pulumi.getter
+    def kind(self) -> int:
+        """
+        The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.
+        """
+        return pulumi.get(self, "kind")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Protocol.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="startPort")
+    def start_port(self) -> int:
+        """
+        Start port.
+        """
+        return pulumi.get(self, "start_port")
+
+
+@pulumi.output_type
+class GetDdosPoliciesListWatermarkFilterResult(dict):
+    def __init__(__self__, *,
+                 auto_remove: bool,
+                 offset: int,
+                 open_switch: bool,
+                 tcp_port_lists: Sequence[str],
+                 udp_port_lists: Sequence[str]):
+        """
+        :param bool auto_remove: Indicate whether to auto-remove the watermark or not.
+        :param int offset: The offset of watermark.
+        :param bool open_switch: Indicate whether to auto-remove the watermark or not.
+        :param Sequence[str] tcp_port_lists: Port range of TCP.
+        :param Sequence[str] udp_port_lists: Port range of TCP.
+        """
+        pulumi.set(__self__, "auto_remove", auto_remove)
+        pulumi.set(__self__, "offset", offset)
+        pulumi.set(__self__, "open_switch", open_switch)
+        pulumi.set(__self__, "tcp_port_lists", tcp_port_lists)
+        pulumi.set(__self__, "udp_port_lists", udp_port_lists)
+
+    @property
+    @pulumi.getter(name="autoRemove")
+    def auto_remove(self) -> bool:
+        """
+        Indicate whether to auto-remove the watermark or not.
+        """
+        return pulumi.get(self, "auto_remove")
+
+    @property
+    @pulumi.getter
+    def offset(self) -> int:
+        """
+        The offset of watermark.
+        """
+        return pulumi.get(self, "offset")
+
+    @property
+    @pulumi.getter(name="openSwitch")
+    def open_switch(self) -> bool:
+        """
+        Indicate whether to auto-remove the watermark or not.
+        """
+        return pulumi.get(self, "open_switch")
+
+    @property
+    @pulumi.getter(name="tcpPortLists")
+    def tcp_port_lists(self) -> Sequence[str]:
+        """
+        Port range of TCP.
+        """
+        return pulumi.get(self, "tcp_port_lists")
+
+    @property
+    @pulumi.getter(name="udpPortLists")
+    def udp_port_lists(self) -> Sequence[str]:
+        """
+        Port range of TCP.
+        """
+        return pulumi.get(self, "udp_port_lists")
+
+
+@pulumi.output_type
+class GetDdosPoliciesListWatermarkKeyResult(dict):
+    def __init__(__self__, *,
+                 content: str,
+                 id: str,
+                 open_switch: bool,
+                 create_time: Optional[str] = None):
+        """
+        :param str content: Content of the watermark.
+        :param str id: Id of the watermark.
+        :param bool open_switch: Indicate whether to auto-remove the watermark or not.
+        :param str create_time: Create time of the DDoS policy.
+        """
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "open_switch", open_switch)
+        if create_time is not None:
+            pulumi.set(__self__, "create_time", create_time)
+
+    @property
+    @pulumi.getter
+    def content(self) -> str:
+        """
+        Content of the watermark.
+        """
+        return pulumi.get(self, "content")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Id of the watermark.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="openSwitch")
+    def open_switch(self) -> bool:
+        """
+        Indicate whether to auto-remove the watermark or not.
+        """
+        return pulumi.get(self, "open_switch")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> Optional[str]:
+        """
+        Create time of the DDoS policy.
+        """
+        return pulumi.get(self, "create_time")
+
+
+@pulumi.output_type
+class GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListResult(dict):
+    def __init__(__self__, *,
+                 policy_id: str,
+                 resource_id: str,
+                 resource_type: str):
+        """
+        :param str policy_id: Id of the policy to be queried.
+        :param str resource_id: ID of the attached resource to be queried.
+        :param str resource_type: Type of the resource that the DDoS policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+        """
+        pulumi.set(__self__, "policy_id", policy_id)
+        pulumi.set(__self__, "resource_id", resource_id)
+        pulumi.set(__self__, "resource_type", resource_type)
+
+    @property
+    @pulumi.getter(name="policyId")
+    def policy_id(self) -> str:
+        """
+        Id of the policy to be queried.
+        """
+        return pulumi.get(self, "policy_id")
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> str:
+        """
+        ID of the attached resource to be queried.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        Type of the resource that the DDoS policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+        """
+        return pulumi.get(self, "resource_type")
+
+
+@pulumi.output_type
+class GetDdosPolicyCasesListResult(dict):
+    def __init__(__self__, *,
+                 app_protocols: Sequence[str],
+                 app_type: str,
+                 create_time: str,
+                 has_abroad: str,
+                 has_initiate_tcp: str,
+                 has_initiate_udp: str,
+                 has_vpn: str,
+                 max_tcp_package_len: str,
+                 max_udp_package_len: str,
+                 min_tcp_package_len: str,
+                 min_udp_package_len: str,
+                 name: str,
+                 peer_tcp_port: str,
+                 peer_udp_port: str,
+                 platform_types: Sequence[str],
+                 resource_type: str,
+                 scene_id: str,
+                 tcp_end_port: str,
+                 tcp_footprint: str,
+                 tcp_start_port: str,
+                 udp_end_port: str,
+                 udp_footprint: str,
+                 udp_start_port: str,
+                 web_api_urls: Sequence[str]):
+        """
+        :param Sequence[str] app_protocols: App protocol set of the DDoS policy case.
+        :param str app_type: App type of the DDoS policy case.
+        :param str create_time: Create time of the DDoS policy case.
+        :param str has_abroad: Indicate whether the service involves overseas or not.
+        :param str has_initiate_tcp: Indicate whether the service actively initiates TCP requests or not.
+        :param str has_initiate_udp: Indicate whether the actively initiate UDP requests or not.
+        :param str has_vpn: Indicate whether the service involves VPN service or not.
+        :param str max_tcp_package_len: The max length of TCP message package.
+        :param str max_udp_package_len: The max length of UDP message package.
+        :param str min_tcp_package_len: The minimum length of TCP message package.
+        :param str min_udp_package_len: The minimum length of UDP message package.
+        :param str name: Name of the DDoS policy case.
+        :param str peer_tcp_port: The port that actively initiates TCP requests.
+        :param str peer_udp_port: The port that actively initiates UDP requests.
+        :param Sequence[str] platform_types: Platform set of the DDoS policy case.
+        :param str resource_type: Type of the resource that the DDoS policy case works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+        :param str scene_id: ID of the DDoS policy case to be query.
+        :param str tcp_end_port: End port of the TCP service.
+        :param str tcp_footprint: The fixed signature of TCP protocol load.
+        :param str tcp_start_port: Start port of the TCP service.
+        :param str udp_end_port: End port of the UDP service.
+        :param str udp_footprint: The fixed signature of TCP protocol load.
+        :param str udp_start_port: Start port of the UDP service.
+        :param Sequence[str] web_api_urls: Web API url set.
+        """
+        pulumi.set(__self__, "app_protocols", app_protocols)
+        pulumi.set(__self__, "app_type", app_type)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "has_abroad", has_abroad)
+        pulumi.set(__self__, "has_initiate_tcp", has_initiate_tcp)
+        pulumi.set(__self__, "has_initiate_udp", has_initiate_udp)
+        pulumi.set(__self__, "has_vpn", has_vpn)
+        pulumi.set(__self__, "max_tcp_package_len", max_tcp_package_len)
+        pulumi.set(__self__, "max_udp_package_len", max_udp_package_len)
+        pulumi.set(__self__, "min_tcp_package_len", min_tcp_package_len)
+        pulumi.set(__self__, "min_udp_package_len", min_udp_package_len)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "peer_tcp_port", peer_tcp_port)
+        pulumi.set(__self__, "peer_udp_port", peer_udp_port)
+        pulumi.set(__self__, "platform_types", platform_types)
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "scene_id", scene_id)
+        pulumi.set(__self__, "tcp_end_port", tcp_end_port)
+        pulumi.set(__self__, "tcp_footprint", tcp_footprint)
+        pulumi.set(__self__, "tcp_start_port", tcp_start_port)
+        pulumi.set(__self__, "udp_end_port", udp_end_port)
+        pulumi.set(__self__, "udp_footprint", udp_footprint)
+        pulumi.set(__self__, "udp_start_port", udp_start_port)
+        pulumi.set(__self__, "web_api_urls", web_api_urls)
+
+    @property
+    @pulumi.getter(name="appProtocols")
+    def app_protocols(self) -> Sequence[str]:
+        """
+        App protocol set of the DDoS policy case.
+        """
+        return pulumi.get(self, "app_protocols")
+
+    @property
+    @pulumi.getter(name="appType")
+    def app_type(self) -> str:
+        """
+        App type of the DDoS policy case.
+        """
+        return pulumi.get(self, "app_type")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time of the DDoS policy case.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="hasAbroad")
+    def has_abroad(self) -> str:
+        """
+        Indicate whether the service involves overseas or not.
+        """
+        return pulumi.get(self, "has_abroad")
+
+    @property
+    @pulumi.getter(name="hasInitiateTcp")
+    def has_initiate_tcp(self) -> str:
+        """
+        Indicate whether the service actively initiates TCP requests or not.
+        """
+        return pulumi.get(self, "has_initiate_tcp")
+
+    @property
+    @pulumi.getter(name="hasInitiateUdp")
+    def has_initiate_udp(self) -> str:
+        """
+        Indicate whether the actively initiate UDP requests or not.
+        """
+        return pulumi.get(self, "has_initiate_udp")
+
+    @property
+    @pulumi.getter(name="hasVpn")
+    def has_vpn(self) -> str:
+        """
+        Indicate whether the service involves VPN service or not.
+        """
+        return pulumi.get(self, "has_vpn")
+
+    @property
+    @pulumi.getter(name="maxTcpPackageLen")
+    def max_tcp_package_len(self) -> str:
+        """
+        The max length of TCP message package.
+        """
+        return pulumi.get(self, "max_tcp_package_len")
+
+    @property
+    @pulumi.getter(name="maxUdpPackageLen")
+    def max_udp_package_len(self) -> str:
+        """
+        The max length of UDP message package.
+        """
+        return pulumi.get(self, "max_udp_package_len")
+
+    @property
+    @pulumi.getter(name="minTcpPackageLen")
+    def min_tcp_package_len(self) -> str:
+        """
+        The minimum length of TCP message package.
+        """
+        return pulumi.get(self, "min_tcp_package_len")
+
+    @property
+    @pulumi.getter(name="minUdpPackageLen")
+    def min_udp_package_len(self) -> str:
+        """
+        The minimum length of UDP message package.
+        """
+        return pulumi.get(self, "min_udp_package_len")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of the DDoS policy case.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="peerTcpPort")
+    def peer_tcp_port(self) -> str:
+        """
+        The port that actively initiates TCP requests.
+        """
+        return pulumi.get(self, "peer_tcp_port")
+
+    @property
+    @pulumi.getter(name="peerUdpPort")
+    def peer_udp_port(self) -> str:
+        """
+        The port that actively initiates UDP requests.
+        """
+        return pulumi.get(self, "peer_udp_port")
+
+    @property
+    @pulumi.getter(name="platformTypes")
+    def platform_types(self) -> Sequence[str]:
+        """
+        Platform set of the DDoS policy case.
+        """
+        return pulumi.get(self, "platform_types")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        Type of the resource that the DDoS policy case works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter(name="sceneId")
+    def scene_id(self) -> str:
+        """
+        ID of the DDoS policy case to be query.
+        """
+        return pulumi.get(self, "scene_id")
+
+    @property
+    @pulumi.getter(name="tcpEndPort")
+    def tcp_end_port(self) -> str:
+        """
+        End port of the TCP service.
+        """
+        return pulumi.get(self, "tcp_end_port")
+
+    @property
+    @pulumi.getter(name="tcpFootprint")
+    def tcp_footprint(self) -> str:
+        """
+        The fixed signature of TCP protocol load.
+        """
+        return pulumi.get(self, "tcp_footprint")
+
+    @property
+    @pulumi.getter(name="tcpStartPort")
+    def tcp_start_port(self) -> str:
+        """
+        Start port of the TCP service.
+        """
+        return pulumi.get(self, "tcp_start_port")
+
+    @property
+    @pulumi.getter(name="udpEndPort")
+    def udp_end_port(self) -> str:
+        """
+        End port of the UDP service.
+        """
+        return pulumi.get(self, "udp_end_port")
+
+    @property
+    @pulumi.getter(name="udpFootprint")
+    def udp_footprint(self) -> str:
+        """
+        The fixed signature of TCP protocol load.
+        """
+        return pulumi.get(self, "udp_footprint")
+
+    @property
+    @pulumi.getter(name="udpStartPort")
+    def udp_start_port(self) -> str:
+        """
+        Start port of the UDP service.
+        """
+        return pulumi.get(self, "udp_start_port")
+
+    @property
+    @pulumi.getter(name="webApiUrls")
+    def web_api_urls(self) -> Sequence[str]:
+        """
+        Web API url set.
+        """
+        return pulumi.get(self, "web_api_urls")
+
+
+@pulumi.output_type
+class GetEipListResult(dict):
+    def __init__(__self__, *,
+                 created_time: str,
+                 eip_address_status: str,
+                 eip_bound_rsc_eni: str,
+                 eip_bound_rsc_vip: str,
+                 eip_lists: Sequence[str],
+                 expired_time: str,
+                 modify_time: str,
+                 protection_status: str,
+                 region: str,
+                 eip_bound_rsc_ins: Optional[str] = None,
+                 instance_id: Optional[str] = None):
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "eip_address_status", eip_address_status)
+        pulumi.set(__self__, "eip_bound_rsc_eni", eip_bound_rsc_eni)
+        pulumi.set(__self__, "eip_bound_rsc_vip", eip_bound_rsc_vip)
+        pulumi.set(__self__, "eip_lists", eip_lists)
+        pulumi.set(__self__, "expired_time", expired_time)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "protection_status", protection_status)
+        pulumi.set(__self__, "region", region)
+        if eip_bound_rsc_ins is not None:
+            pulumi.set(__self__, "eip_bound_rsc_ins", eip_bound_rsc_ins)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter(name="eipAddressStatus")
+    def eip_address_status(self) -> str:
+        return pulumi.get(self, "eip_address_status")
+
+    @property
+    @pulumi.getter(name="eipBoundRscEni")
+    def eip_bound_rsc_eni(self) -> str:
+        return pulumi.get(self, "eip_bound_rsc_eni")
+
+    @property
+    @pulumi.getter(name="eipBoundRscVip")
+    def eip_bound_rsc_vip(self) -> str:
+        return pulumi.get(self, "eip_bound_rsc_vip")
+
+    @property
+    @pulumi.getter(name="eipLists")
+    def eip_lists(self) -> Sequence[str]:
+        return pulumi.get(self, "eip_lists")
+
+    @property
+    @pulumi.getter(name="expiredTime")
+    def expired_time(self) -> str:
+        return pulumi.get(self, "expired_time")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter(name="protectionStatus")
+    def protection_status(self) -> str:
+        return pulumi.get(self, "protection_status")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="eipBoundRscIns")
+    def eip_bound_rsc_ins(self) -> Optional[str]:
+        return pulumi.get(self, "eip_bound_rsc_ins")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[str]:
+        return pulumi.get(self, "instance_id")
+
+
+@pulumi.output_type
+class GetL4RulesListResult(dict):
+    def __init__(__self__, *,
+                 d_port: int,
+                 health_check_health_num: int,
+                 health_check_interval: int,
+                 health_check_switch: bool,
+                 health_check_timeout: int,
+                 health_check_unhealth_num: int,
+                 lb_type: int,
+                 name: str,
+                 protocol: str,
+                 rule_id: str,
+                 s_port: int,
+                 session_switch: bool,
+                 session_time: int,
+                 source_lists: Sequence['outputs.GetL4RulesListSourceListResult'],
+                 source_type: int):
+        """
+        :param int d_port: The destination port of the layer 4 rule.
+        :param int health_check_health_num: Health threshold of health check.
+        :param int health_check_interval: Interval time of health check.
+        :param bool health_check_switch: Indicates whether health check is enabled.
+        :param int health_check_timeout: HTTP Status Code. `1` means the return value `1xx` is health. `2` means the return value `2xx` is health. `4` means the return value `3xx` is health. `8` means the return value `4xx` is health. `16` means the return value `5xx` is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+        :param int health_check_unhealth_num: Unhealthy threshold of health check.
+        :param int lb_type: LB type of the rule, `1` for weight cycling and `2` for IP hash.
+        :param str name: Name of the layer 4 rule to be queried.
+        :param str protocol: Protocol of the rule.
+        :param str rule_id: Id of the layer 4 rule to be queried.
+        :param int s_port: The source port of the layer 4 rule.
+        :param bool session_switch: Indicate that the session will keep or not.
+        :param int session_time: Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
+        :param int source_type: Source type, `1` for source of host, `2` for source of IP.
+        """
+        pulumi.set(__self__, "d_port", d_port)
+        pulumi.set(__self__, "health_check_health_num", health_check_health_num)
+        pulumi.set(__self__, "health_check_interval", health_check_interval)
+        pulumi.set(__self__, "health_check_switch", health_check_switch)
+        pulumi.set(__self__, "health_check_timeout", health_check_timeout)
+        pulumi.set(__self__, "health_check_unhealth_num", health_check_unhealth_num)
+        pulumi.set(__self__, "lb_type", lb_type)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "rule_id", rule_id)
+        pulumi.set(__self__, "s_port", s_port)
+        pulumi.set(__self__, "session_switch", session_switch)
+        pulumi.set(__self__, "session_time", session_time)
+        pulumi.set(__self__, "source_lists", source_lists)
+        pulumi.set(__self__, "source_type", source_type)
+
+    @property
+    @pulumi.getter(name="dPort")
+    def d_port(self) -> int:
+        """
+        The destination port of the layer 4 rule.
+        """
+        return pulumi.get(self, "d_port")
+
+    @property
+    @pulumi.getter(name="healthCheckHealthNum")
+    def health_check_health_num(self) -> int:
+        """
+        Health threshold of health check.
+        """
+        return pulumi.get(self, "health_check_health_num")
+
+    @property
+    @pulumi.getter(name="healthCheckInterval")
+    def health_check_interval(self) -> int:
+        """
+        Interval time of health check.
+        """
+        return pulumi.get(self, "health_check_interval")
+
+    @property
+    @pulumi.getter(name="healthCheckSwitch")
+    def health_check_switch(self) -> bool:
+        """
+        Indicates whether health check is enabled.
+        """
+        return pulumi.get(self, "health_check_switch")
+
+    @property
+    @pulumi.getter(name="healthCheckTimeout")
+    def health_check_timeout(self) -> int:
+        """
+        HTTP Status Code. `1` means the return value `1xx` is health. `2` means the return value `2xx` is health. `4` means the return value `3xx` is health. `8` means the return value `4xx` is health. `16` means the return value `5xx` is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+        """
+        return pulumi.get(self, "health_check_timeout")
+
+    @property
+    @pulumi.getter(name="healthCheckUnhealthNum")
+    def health_check_unhealth_num(self) -> int:
+        """
+        Unhealthy threshold of health check.
+        """
+        return pulumi.get(self, "health_check_unhealth_num")
+
+    @property
+    @pulumi.getter(name="lbType")
+    def lb_type(self) -> int:
+        """
+        LB type of the rule, `1` for weight cycling and `2` for IP hash.
+        """
+        return pulumi.get(self, "lb_type")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name of the layer 4 rule to be queried.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Protocol of the rule.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="ruleId")
+    def rule_id(self) -> str:
+        """
+        Id of the layer 4 rule to be queried.
+        """
+        return pulumi.get(self, "rule_id")
+
+    @property
+    @pulumi.getter(name="sPort")
+    def s_port(self) -> int:
+        """
+        The source port of the layer 4 rule.
+        """
+        return pulumi.get(self, "s_port")
+
+    @property
+    @pulumi.getter(name="sessionSwitch")
+    def session_switch(self) -> bool:
+        """
+        Indicate that the session will keep or not.
+        """
+        return pulumi.get(self, "session_switch")
+
+    @property
+    @pulumi.getter(name="sessionTime")
+    def session_time(self) -> int:
+        """
+        Session keep time, only valid when `session_switch` is true, the available value ranges from 1 to 300 and unit is second.
+        """
+        return pulumi.get(self, "session_time")
+
+    @property
+    @pulumi.getter(name="sourceLists")
+    def source_lists(self) -> Sequence['outputs.GetL4RulesListSourceListResult']:
+        return pulumi.get(self, "source_lists")
+
+    @property
+    @pulumi.getter(name="sourceType")
+    def source_type(self) -> int:
+        """
+        Source type, `1` for source of host, `2` for source of IP.
+        """
+        return pulumi.get(self, "source_type")
+
+
+@pulumi.output_type
+class GetL4RulesListSourceListResult(dict):
+    def __init__(__self__, *,
+                 source: str,
+                 weight: int):
+        pulumi.set(__self__, "source", source)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def source(self) -> str:
+        return pulumi.get(self, "source")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> int:
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class GetL4RulesV2ListResult(dict):
+    def __init__(__self__, *,
+                 id: str,
+                 ip: str,
+                 keep_enable: bool,
+                 keeptime: int,
+                 lb_type: int,
+                 modify_time: str,
+                 protocol: str,
+                 region: int,
+                 remove_switch: bool,
+                 rule_id: str,
+                 rule_name: str,
+                 source_lists: Sequence['outputs.GetL4RulesV2ListSourceListResult'],
+                 source_port: int,
+                 source_type: int,
+                 virtual_port: int):
+        """
+        :param str id: Bind the resource ID information.
+        :param str ip: Ip of the resource.
+        :param bool keep_enable: session hold switch.
+        :param int keeptime: The keeptime of the layer 4 rule.
+        :param int lb_type: LB type of the rule, `1` for weight cycling and `2` for IP hash.
+        :param str modify_time: Rule modification time.
+        :param str protocol: Protocol of the rule.
+        :param int region: Corresponding regional information.
+        :param bool remove_switch: Remove the watermark state.
+        :param str rule_id: ID of the 4 layer rule.
+        :param str rule_name: Name of the rule.
+        :param int source_port: The source port of the layer 4 rule.
+        :param int source_type: Source type, `1` for source of host, `2` for source of IP.
+        :param int virtual_port: Virtual port of resource.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "keep_enable", keep_enable)
+        pulumi.set(__self__, "keeptime", keeptime)
+        pulumi.set(__self__, "lb_type", lb_type)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "remove_switch", remove_switch)
+        pulumi.set(__self__, "rule_id", rule_id)
+        pulumi.set(__self__, "rule_name", rule_name)
+        pulumi.set(__self__, "source_lists", source_lists)
+        pulumi.set(__self__, "source_port", source_port)
+        pulumi.set(__self__, "source_type", source_type)
+        pulumi.set(__self__, "virtual_port", virtual_port)
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Bind the resource ID information.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        Ip of the resource.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="keepEnable")
+    def keep_enable(self) -> bool:
+        """
+        session hold switch.
+        """
+        return pulumi.get(self, "keep_enable")
+
+    @property
+    @pulumi.getter
+    def keeptime(self) -> int:
+        """
+        The keeptime of the layer 4 rule.
+        """
+        return pulumi.get(self, "keeptime")
+
+    @property
+    @pulumi.getter(name="lbType")
+    def lb_type(self) -> int:
+        """
+        LB type of the rule, `1` for weight cycling and `2` for IP hash.
+        """
+        return pulumi.get(self, "lb_type")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        Rule modification time.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Protocol of the rule.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter
+    def region(self) -> int:
+        """
+        Corresponding regional information.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="removeSwitch")
+    def remove_switch(self) -> bool:
+        """
+        Remove the watermark state.
+        """
+        return pulumi.get(self, "remove_switch")
+
+    @property
+    @pulumi.getter(name="ruleId")
+    def rule_id(self) -> str:
+        """
+        ID of the 4 layer rule.
+        """
+        return pulumi.get(self, "rule_id")
+
+    @property
+    @pulumi.getter(name="ruleName")
+    def rule_name(self) -> str:
+        """
+        Name of the rule.
+        """
+        return pulumi.get(self, "rule_name")
+
+    @property
+    @pulumi.getter(name="sourceLists")
+    def source_lists(self) -> Sequence['outputs.GetL4RulesV2ListSourceListResult']:
+        return pulumi.get(self, "source_lists")
+
+    @property
+    @pulumi.getter(name="sourcePort")
+    def source_port(self) -> int:
+        """
+        The source port of the layer 4 rule.
+        """
+        return pulumi.get(self, "source_port")
+
+    @property
+    @pulumi.getter(name="sourceType")
+    def source_type(self) -> int:
+        """
+        Source type, `1` for source of host, `2` for source of IP.
+        """
+        return pulumi.get(self, "source_type")
+
+    @property
+    @pulumi.getter(name="virtualPort")
+    def virtual_port(self) -> int:
+        """
+        Virtual port of resource.
+        """
+        return pulumi.get(self, "virtual_port")
+
+
+@pulumi.output_type
+class GetL4RulesV2ListSourceListResult(dict):
+    def __init__(__self__, *,
+                 source: str,
+                 weight: int):
+        pulumi.set(__self__, "source", source)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter
+    def source(self) -> str:
+        return pulumi.get(self, "source")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> int:
+        return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class GetL7RulesListResult(dict):
     def __init__(__self__, *,
                  domain: str,
                  health_check_code: int,
@@ -3075,6 +4362,25 @@ class L7RulesListResult(dict):
                  status: int,
                  switch: bool,
                  threshold: int):
+        """
+        :param str domain: Domain of the layer 7 rule to be queried.
+        :param int health_check_code: HTTP Status Code. `1` means the return value `1xx` is health. `2` means the return value `2xx` is health. `4` means the return value `3xx` is health. `8` means the return value `4xx` is health. `16` means the return value `5xx` is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+        :param int health_check_health_num: Health threshold of health check.
+        :param int health_check_interval: Interval time of health check.
+        :param str health_check_method: Methods of health check.
+        :param str health_check_path: Path of health check.
+        :param bool health_check_switch: Indicates whether health check is enabled.
+        :param int health_check_unhealth_num: Unhealthy threshold of health check.
+        :param str name: Name of the rule.
+        :param str protocol: Protocol of the rule.
+        :param str rule_id: Id of the layer 7 rule to be queried.
+        :param Sequence[str] source_lists: Source list of the rule.
+        :param int source_type: Source type, 1 for source of host, 2 for source of ip.
+        :param str ssl_id: SSL id.
+        :param int status: Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for waiting to be created/modified, `7` for waiting to be deleted and `8` for waiting to get SSL id.
+        :param bool switch: Indicate the rule will take effect or not.
+        :param int threshold: Threshold of the rule.
+        """
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "health_check_code", health_check_code)
         pulumi.set(__self__, "health_check_health_num", health_check_health_num)
@@ -3096,91 +4402,142 @@ class L7RulesListResult(dict):
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        Domain of the layer 7 rule to be queried.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter(name="healthCheckCode")
     def health_check_code(self) -> int:
+        """
+        HTTP Status Code. `1` means the return value `1xx` is health. `2` means the return value `2xx` is health. `4` means the return value `3xx` is health. `8` means the return value `4xx` is health. `16` means the return value `5xx` is health. If you want multiple return codes to indicate health, need to add the corresponding values.
+        """
         return pulumi.get(self, "health_check_code")
 
     @property
     @pulumi.getter(name="healthCheckHealthNum")
     def health_check_health_num(self) -> int:
+        """
+        Health threshold of health check.
+        """
         return pulumi.get(self, "health_check_health_num")
 
     @property
     @pulumi.getter(name="healthCheckInterval")
     def health_check_interval(self) -> int:
+        """
+        Interval time of health check.
+        """
         return pulumi.get(self, "health_check_interval")
 
     @property
     @pulumi.getter(name="healthCheckMethod")
     def health_check_method(self) -> str:
+        """
+        Methods of health check.
+        """
         return pulumi.get(self, "health_check_method")
 
     @property
     @pulumi.getter(name="healthCheckPath")
     def health_check_path(self) -> str:
+        """
+        Path of health check.
+        """
         return pulumi.get(self, "health_check_path")
 
     @property
     @pulumi.getter(name="healthCheckSwitch")
     def health_check_switch(self) -> bool:
+        """
+        Indicates whether health check is enabled.
+        """
         return pulumi.get(self, "health_check_switch")
 
     @property
     @pulumi.getter(name="healthCheckUnhealthNum")
     def health_check_unhealth_num(self) -> int:
+        """
+        Unhealthy threshold of health check.
+        """
         return pulumi.get(self, "health_check_unhealth_num")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the rule.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Protocol of the rule.
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter(name="ruleId")
     def rule_id(self) -> str:
+        """
+        Id of the layer 7 rule to be queried.
+        """
         return pulumi.get(self, "rule_id")
 
     @property
     @pulumi.getter(name="sourceLists")
     def source_lists(self) -> Sequence[str]:
+        """
+        Source list of the rule.
+        """
         return pulumi.get(self, "source_lists")
 
     @property
     @pulumi.getter(name="sourceType")
     def source_type(self) -> int:
+        """
+        Source type, 1 for source of host, 2 for source of ip.
+        """
         return pulumi.get(self, "source_type")
 
     @property
     @pulumi.getter(name="sslId")
     def ssl_id(self) -> str:
+        """
+        SSL id.
+        """
         return pulumi.get(self, "ssl_id")
 
     @property
     @pulumi.getter
     def status(self) -> int:
+        """
+        Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for waiting to be created/modified, `7` for waiting to be deleted and `8` for waiting to get SSL id.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter
     def switch(self) -> bool:
+        """
+        Indicate the rule will take effect or not.
+        """
         return pulumi.get(self, "switch")
 
     @property
     @pulumi.getter
     def threshold(self) -> int:
+        """
+        Threshold of the rule.
+        """
         return pulumi.get(self, "threshold")
 
 
 @pulumi.output_type
-class L7RulesV2ListResult(dict):
+class GetL7RulesV2ListResult(dict):
     def __init__(__self__, *,
                  cc_enable: int,
                  cc_level: str,
@@ -3198,11 +4555,34 @@ class L7RulesV2ListResult(dict):
                  protocol: str,
                  region: int,
                  rule_name: str,
-                 source_lists: Sequence['outputs.L7RulesV2ListSourceListResult'],
+                 source_lists: Sequence['outputs.GetL7RulesV2ListSourceListResult'],
                  source_type: int,
                  ssl_id: str,
                  status: int,
                  virtual_port: int):
+        """
+        :param int cc_enable: CC protection status of HTTPS protocol, the value is [0 (off), 1 (on)].
+        :param str cc_level: CC protection level of HTTPS protocol.
+        :param int cc_status: CC protection status, value [0(off), 1(on)].
+        :param int cc_threshold: CC protection threshold of HTTPS protocol.
+        :param int cert_type: The source of the certificate.
+        :param str domain: Domain of resource.
+        :param int https_to_http_enable: Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], default is off.
+        :param str id: Id of the resource.
+        :param str ip: Ip of the resource.
+        :param int keep_enable: Session keep switch, value [0 (session keep closed), 1 (session keep open)].
+        :param int keep_time: Session hold time, in seconds.
+        :param int lb_type: Load balancing mode, the value is [1 (weighted round-robin)].
+        :param str modify_time: Modify time of resource.
+        :param str protocol: Protocol of resource, value range [`http`, `https`].
+        :param int region: The area code.
+        :param str rule_name: Rule description.
+        :param Sequence['GetL7RulesV2ListSourceListArgs'] source_lists: Source list of the rule.
+        :param int source_type: Back-to-origin method, value [1 (domain name back-to-source), 2 (IP back-to-source)].
+        :param str ssl_id: SSL id of the resource.
+        :param int status: Rule status, value [0 (rule configuration is successful), 1 (rule configuration is in effect), 2 (rule configuration fails), 3 (rule deletion is in effect), 5 (rule deletion fails), 6 (rule is waiting to be configured), 7 (rule pending deletion), 8 (rule pending configuration certificate)].
+        :param int virtual_port: Virtual port of resource.
+        """
         pulumi.set(__self__, "cc_enable", cc_enable)
         pulumi.set(__self__, "cc_level", cc_level)
         pulumi.set(__self__, "cc_status", cc_status)
@@ -3228,125 +4608,198 @@ class L7RulesV2ListResult(dict):
     @property
     @pulumi.getter(name="ccEnable")
     def cc_enable(self) -> int:
+        """
+        CC protection status of HTTPS protocol, the value is [0 (off), 1 (on)].
+        """
         return pulumi.get(self, "cc_enable")
 
     @property
     @pulumi.getter(name="ccLevel")
     def cc_level(self) -> str:
+        """
+        CC protection level of HTTPS protocol.
+        """
         return pulumi.get(self, "cc_level")
 
     @property
     @pulumi.getter(name="ccStatus")
     def cc_status(self) -> int:
+        """
+        CC protection status, value [0(off), 1(on)].
+        """
         return pulumi.get(self, "cc_status")
 
     @property
     @pulumi.getter(name="ccThreshold")
     def cc_threshold(self) -> int:
+        """
+        CC protection threshold of HTTPS protocol.
+        """
         return pulumi.get(self, "cc_threshold")
 
     @property
     @pulumi.getter(name="certType")
     def cert_type(self) -> int:
+        """
+        The source of the certificate.
+        """
         return pulumi.get(self, "cert_type")
 
     @property
     @pulumi.getter
     def domain(self) -> str:
+        """
+        Domain of resource.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter(name="httpsToHttpEnable")
     def https_to_http_enable(self) -> int:
+        """
+        Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], default is off.
+        """
         return pulumi.get(self, "https_to_http_enable")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        Id of the resource.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def ip(self) -> str:
+        """
+        Ip of the resource.
+        """
         return pulumi.get(self, "ip")
 
     @property
     @pulumi.getter(name="keepEnable")
     def keep_enable(self) -> int:
+        """
+        Session keep switch, value [0 (session keep closed), 1 (session keep open)].
+        """
         return pulumi.get(self, "keep_enable")
 
     @property
     @pulumi.getter(name="keepTime")
     def keep_time(self) -> int:
+        """
+        Session hold time, in seconds.
+        """
         return pulumi.get(self, "keep_time")
 
     @property
     @pulumi.getter(name="lbType")
     def lb_type(self) -> int:
+        """
+        Load balancing mode, the value is [1 (weighted round-robin)].
+        """
         return pulumi.get(self, "lb_type")
 
     @property
     @pulumi.getter(name="modifyTime")
     def modify_time(self) -> str:
+        """
+        Modify time of resource.
+        """
         return pulumi.get(self, "modify_time")
 
     @property
     @pulumi.getter
     def protocol(self) -> str:
+        """
+        Protocol of resource, value range [`http`, `https`].
+        """
         return pulumi.get(self, "protocol")
 
     @property
     @pulumi.getter
     def region(self) -> int:
+        """
+        The area code.
+        """
         return pulumi.get(self, "region")
 
     @property
     @pulumi.getter(name="ruleName")
     def rule_name(self) -> str:
+        """
+        Rule description.
+        """
         return pulumi.get(self, "rule_name")
 
     @property
     @pulumi.getter(name="sourceLists")
-    def source_lists(self) -> Sequence['outputs.L7RulesV2ListSourceListResult']:
+    def source_lists(self) -> Sequence['outputs.GetL7RulesV2ListSourceListResult']:
+        """
+        Source list of the rule.
+        """
         return pulumi.get(self, "source_lists")
 
     @property
     @pulumi.getter(name="sourceType")
     def source_type(self) -> int:
+        """
+        Back-to-origin method, value [1 (domain name back-to-source), 2 (IP back-to-source)].
+        """
         return pulumi.get(self, "source_type")
 
     @property
     @pulumi.getter(name="sslId")
     def ssl_id(self) -> str:
+        """
+        SSL id of the resource.
+        """
         return pulumi.get(self, "ssl_id")
 
     @property
     @pulumi.getter
     def status(self) -> int:
+        """
+        Rule status, value [0 (rule configuration is successful), 1 (rule configuration is in effect), 2 (rule configuration fails), 3 (rule deletion is in effect), 5 (rule deletion fails), 6 (rule is waiting to be configured), 7 (rule pending deletion), 8 (rule pending configuration certificate)].
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="virtualPort")
     def virtual_port(self) -> int:
+        """
+        Virtual port of resource.
+        """
         return pulumi.get(self, "virtual_port")
 
 
 @pulumi.output_type
-class L7RulesV2ListSourceListResult(dict):
+class GetL7RulesV2ListSourceListResult(dict):
     def __init__(__self__, *,
                  source: str,
                  weight: int):
+        """
+        :param str source: Back-to-source IP or domain name.
+        :param int weight: Weight value, take value [0,100].
+        """
         pulumi.set(__self__, "source", source)
         pulumi.set(__self__, "weight", weight)
 
     @property
     @pulumi.getter
     def source(self) -> str:
+        """
+        Back-to-source IP or domain name.
+        """
         return pulumi.get(self, "source")
 
     @property
     @pulumi.getter
     def weight(self) -> int:
+        """
+        Weight value, take value [0,100].
+        """
         return pulumi.get(self, "weight")
 
 

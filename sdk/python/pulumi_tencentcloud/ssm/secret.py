@@ -21,14 +21,11 @@ class SecretArgs:
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a Secret resource.
-        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-               English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         :param pulumi.Input[str] description: Description of secret. The maximum is 2048 bytes.
         :param pulumi.Input[bool] is_enabled: Specify whether to enable secret. Default value is `true`.
-        :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-               encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
-        :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-               days reserved, completely deleted after this date.
+        :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+        :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
         pulumi.set(__self__, "secret_name", secret_name)
@@ -47,8 +44,7 @@ class SecretArgs:
     @pulumi.getter(name="secretName")
     def secret_name(self) -> pulumi.Input[str]:
         """
-        Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-        English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "secret_name")
 
@@ -84,8 +80,7 @@ class SecretArgs:
     @pulumi.getter(name="kmsKeyId")
     def kms_key_id(self) -> Optional[pulumi.Input[str]]:
         """
-        KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-        encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+        KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         """
         return pulumi.get(self, "kms_key_id")
 
@@ -97,8 +92,7 @@ class SecretArgs:
     @pulumi.getter(name="recoveryWindowInDays")
     def recovery_window_in_days(self) -> Optional[pulumi.Input[int]]:
         """
-        Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-        days reserved, completely deleted after this date.
+        Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         """
         return pulumi.get(self, "recovery_window_in_days")
 
@@ -133,12 +127,9 @@ class _SecretState:
         Input properties used for looking up and filtering Secret resources.
         :param pulumi.Input[str] description: Description of secret. The maximum is 2048 bytes.
         :param pulumi.Input[bool] is_enabled: Specify whether to enable secret. Default value is `true`.
-        :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-               encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
-        :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-               days reserved, completely deleted after this date.
-        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-               English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+        :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
+        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         :param pulumi.Input[str] status: Status of secret.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
@@ -185,8 +176,7 @@ class _SecretState:
     @pulumi.getter(name="kmsKeyId")
     def kms_key_id(self) -> Optional[pulumi.Input[str]]:
         """
-        KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-        encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+        KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         """
         return pulumi.get(self, "kms_key_id")
 
@@ -198,8 +188,7 @@ class _SecretState:
     @pulumi.getter(name="recoveryWindowInDays")
     def recovery_window_in_days(self) -> Optional[pulumi.Input[int]]:
         """
-        Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-        days reserved, completely deleted after this date.
+        Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         """
         return pulumi.get(self, "recovery_window_in_days")
 
@@ -211,8 +200,7 @@ class _SecretState:
     @pulumi.getter(name="secretName")
     def secret_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-        English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "secret_name")
 
@@ -258,17 +246,39 @@ class Secret(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a Secret resource with the given unique name, props, and options.
+        Provide a resource to create a SSM secret.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ssm.Secret("foo",
+            description="test secret",
+            is_enabled=True,
+            recovery_window_in_days=0,
+            secret_name="test",
+            tags={
+                "test-tag": "test",
+            })
+        ```
+
+        ## Import
+
+        SSM secret can be imported using the secretName, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ssm/secret:Secret foo test
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Description of secret. The maximum is 2048 bytes.
         :param pulumi.Input[bool] is_enabled: Specify whether to enable secret. Default value is `true`.
-        :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-               encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
-        :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-               days reserved, completely deleted after this date.
-        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-               English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+        :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
+        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
         ...
@@ -278,7 +288,32 @@ class Secret(pulumi.CustomResource):
                  args: SecretArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Secret resource with the given unique name, props, and options.
+        Provide a resource to create a SSM secret.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+
+        foo = tencentcloud.ssm.Secret("foo",
+            description="test secret",
+            is_enabled=True,
+            recovery_window_in_days=0,
+            secret_name="test",
+            tags={
+                "test-tag": "test",
+            })
+        ```
+
+        ## Import
+
+        SSM secret can be imported using the secretName, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Ssm/secret:Secret foo test
+        ```
+
         :param str resource_name: The name of the resource.
         :param SecretArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -347,12 +382,9 @@ class Secret(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Description of secret. The maximum is 2048 bytes.
         :param pulumi.Input[bool] is_enabled: Specify whether to enable secret. Default value is `true`.
-        :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-               encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
-        :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-               days reserved, completely deleted after this date.
-        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-               English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+        :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
+        :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         :param pulumi.Input[str] status: Status of secret.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
@@ -389,8 +421,7 @@ class Secret(pulumi.CustomResource):
     @pulumi.getter(name="kmsKeyId")
     def kms_key_id(self) -> pulumi.Output[str]:
         """
-        KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for
-        encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+        KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         """
         return pulumi.get(self, "kms_key_id")
 
@@ -398,8 +429,7 @@ class Secret(pulumi.CustomResource):
     @pulumi.getter(name="recoveryWindowInDays")
     def recovery_window_in_days(self) -> pulumi.Output[Optional[int]]:
         """
-        Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of
-        days reserved, completely deleted after this date.
+        Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         """
         return pulumi.get(self, "recovery_window_in_days")
 
@@ -407,8 +437,7 @@ class Secret(pulumi.CustomResource):
     @pulumi.getter(name="secretName")
     def secret_name(self) -> pulumi.Output[str]:
         """
-        Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain
-        English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         """
         return pulumi.get(self, "secret_name")
 

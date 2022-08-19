@@ -7,21 +7,39 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Tencentcloud.APIGateway.Outputs
+namespace Pulumi.Tencentcloud.ApiGateway.Outputs
 {
 
     [OutputType]
-    public sealed class APIRequestParameter
+    public sealed class ApiRequestParameter
     {
+        /// <summary>
+        /// Parameter default value.
+        /// </summary>
         public readonly string? DefaultValue;
+        /// <summary>
+        /// Parameter description.
+        /// </summary>
         public readonly string? Desc;
+        /// <summary>
+        /// Parameter name.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Parameter location.
+        /// </summary>
         public readonly string Position;
+        /// <summary>
+        /// If this parameter required. Default value: `false`.
+        /// </summary>
         public readonly bool? Required;
+        /// <summary>
+        /// Parameter type.
+        /// </summary>
         public readonly string Type;
 
         [OutputConstructor]
-        private APIRequestParameter(
+        private ApiRequestParameter(
             string? defaultValue,
 
             string? desc,
